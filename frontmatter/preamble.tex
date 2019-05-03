@@ -1,0 +1,122 @@
+%
+% Preamble
+%
+% https://tex.stackexchange.com/questions/553/what-packages-do-people-load-by-default-in-latex
+
+%
+% Typesetting
+%
+
+% https://tex.stackexchange.com/questions/44694/fontenc-vs-inputenc
+%
+% Use modern font encoding
+% fontenc is oriented to output, that is, what fonts to use for printing characters.
+\usepackage[T1]{fontenc}
+% inputenc allows the user to input accented characters directly from the keyboard
+\usepackage[utf8]{inputenc}
+
+% Correct hyphenation
+% Specify patterns using e.g.  \hyphenation{hy-phen-a-tion MATLAB}
+\usepackage[english]{babel}
+
+% Typographic optimisation
+% It doesn't work with latex, you have to use pdflatex instead.
+\usepackage{microtype}
+
+% Better Computer Modern font
+\usepackage{lmodern}
+
+% Extension package to amsmath
+\usepackage{mathtools}
+% Extended symbol collection
+\usepackage{amssymb}
+% For theorems
+\usepackage{amsthm}
+
+%
+% Figures
+%
+
+\usepackage{graphicx}
+\usepackage[font={footnotesize}]{caption}
+\usepackage[font={footnotesize}]{subcaption} %Allow subfigures
+% Changes the filename algorithm to check for known graphics extensions
+\usepackage{grffile} 
+
+% Nicer tables
+\usepackage{booktabs}
+
+% Pretty-print code
+\usepackage{listings}
+
+% Allow modifications to enumerate lists
+\usepackage{enumitem}
+
+%
+% Formatting
+%
+
+% Format numbers using e.g. \numprint{2.742647826672E-01}
+\usepackage{numprint}
+
+% Format si units
+\usepackage{siunitx}
+
+% Define line spacing
+% Setspace switches off double-spacing at places where even the most die-hard
+% official would doubt its utility (footnotes, figure captions, and so on); it’s
+% very difficult to do this consistently if you’re manipulating \baselinestretch
+% yourself.
+\usepackage{setspace}
+\onehalfspacing
+
+%
+% Navigation
+%
+
+% Automatically generate hypertext links between
+% the acronyms in the text and their definition in the list of acronyms
+\usepackage{acronym}
+
+% Clickable links
+\usepackage{hyperref}
+
+% TO-DO command and list
+\usepackage{todonotes}
+
+%
+% Bibliography
+%
+% https://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib
+%
+% bibtex and biber are external programs that process bibliography information
+% and act (roughly) as the interface between your .bib file and your LaTeX
+% document.
+% natbib and biblatex are LaTeX packages that format citations and
+% bibliographies; natbib works only with bibtex, while biblatex (at the
+% moment) works with both bibtex and biber.)
+
+% https://leesjohn.wordpress.com/2013/04/22/a-latex-bibliography-style-i-like-nature-style-in-biblatex/
+\usepackage[
+	style=nature,
+	maxcitenames=1,
+	maxnames=6,
+	firstinits=true, 
+	uniquename=init,
+	sorting=none,
+	url=false,
+	doi=true,
+	isbn=false,
+	eprint=false,
+	texencoding=utf8,
+	bibencoding=utf8,
+	autocite=superscript,
+	backend=biber
+]{biblatex}
+
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main
+% language.
+\usepackage{csquotes}
+
+\addbibresource{./backmatter/zotero_My-Library_Better-BibLaTeX.bib}

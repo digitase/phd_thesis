@@ -1,0 +1,77 @@
+%
+% PhD Thesis
+%
+\documentclass[12pt,a4paper,twoside,openright]{book}
+
+%
+% Version: 0.0
+%
+% Semantic versioning (aka SemVer) [...] uses a sequence of three digits (Major.Minor.Patch) [...]
+% Breaking changes are indicated by increasing the major number (high risk),
+% new non-breaking features increment the minor number (medium risk) and
+% all other non-breaking changes increment the patch number (lowest risk).
+
+% 
+% Specifications
+%
+% - The thesis for the PhD is not to exceed 60,000 words in length (80,000 by
+%   special permission), exclusive of tables, footnotes, bibliography, and
+%   appendices.
+% - Double-spaced or one-and-a-half spaced.
+% - Single or double-sided printing.
+
+%
+% Preamble
+%
+% \input{filename} imports the commands from filename.tex into the target file;
+% it's equivalent to typing all the commands from filename.tex right into the
+% current file where the \input line is.
+\input{./frontmatter/preamble}
+
+%
+%
+%
+\begin{document}
+
+\title{<title>}
+\author{Benjamin Yu Hang Bai}
+\date{<date>}
+
+\listoftodos
+
+%
+%
+%
+\frontmatter
+
+% \include{filename} essentially does a \clearpage before and after
+% \input{filename}, [...] is primarily useful when you have a big project on a slow
+% computer; changing one of the include targets won't force you to regenerate the
+% outputs of all the rest. [...] but it also can't be nested, can't
+% appear in the preamble, and forces page breaks around the included text.
+\include{./frontmatter/title_page}
+\include{./frontmatter/dedication}
+\include{./frontmatter/abstract}
+\include{./frontmatter/acknowledgements}
+\include{./frontmatter/table_of_contents}
+\include{./frontmatter/symbols_and_notation}
+
+%
+%
+%
+\mainmatter
+\include{./mainmatter/chapter_01/chapter_01}
+
+\appendix
+\include{./mainmatter/appendix/appendix}
+
+%
+%
+%
+\backmatter
+\include{./backmatter/bibliography}
+
+\end{document}
+%
+%
+%
