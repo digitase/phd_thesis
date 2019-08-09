@@ -1,7 +1,7 @@
 %
 % PhD Thesis
 %
-\documentclass[12pt,a4paper,twoside,openright]{book}
+\documentclass[11pt,a4paper,twoside,openright]{book}
 
 %
 % Version: 0.0
@@ -14,11 +14,14 @@
 % 
 % Specifications
 %
+% Ref: https://www.cambridgestudents.cam.ac.uk/your-course/examinations/graduate-exam-information/submitting-and-examination/phd-msc-mlitt/word#biology
+%
 % - The thesis for the PhD is not to exceed 60,000 words in length (80,000 by
 %   special permission), exclusive of tables, footnotes, bibliography, and
 %   appendices.
-% - Double-spaced or one-and-a-half spaced.
-% - Single or double-sided printing.
+% - A4 portrait
+% - Double-spaced or one-and-a-half spaced (one-and-a-half recommended by general Cambridge guidelines).
+% - Single or double-sided printing (double-sided recommended by general Cambridge guidelines).
 
 %
 % Preamble
@@ -37,10 +40,9 @@
 \author{Benjamin Yu Hang Bai}
 \date{<date>}
 
-\listoftodos
-
 %
-%
+% Frontmatter
+% Overall format based on: Mori, L. F. Writing a thesis with LaTeX.
 %
 \frontmatter
 
@@ -54,22 +56,28 @@
 \include{./frontmatter/abstract}
 \include{./frontmatter/acknowledgements}
 \include{./frontmatter/table_of_contents}
-\include{./frontmatter/symbols_and_notation}
+\include{./frontmatter/nomenclature}
 
 %
-%
+% Mainmatter
 %
 \mainmatter
-\include{./mainmatter/chapter_01/chapter_01}
+\include{./mainmatter/chapter_01} % Intro
+\include{./mainmatter/chapter_02} % HIRD transcriptomics
+\include{./mainmatter/chapter_03} % HIRD eQTLs
+\include{./mainmatter/chapter_04} % Vaxcin
+\include{./mainmatter/chapter_05} % multiPANTS
+\include{./mainmatter/chapter_06} % Discussion
 
 \appendix
-\include{./mainmatter/appendix/appendix}
+\include{./mainmatter/appendix}
+\include{./mainmatter/scratch_space}
 
 %
-%
+% Backmatter
 %
 \backmatter
-\include{./backmatter/bibliography}
+% \include{./backmatter/bibliography}
 
 \end{document}
 %
