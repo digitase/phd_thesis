@@ -6,7 +6,9 @@
 
 \section{Introduction}
 
-\subsection{<H1N1 virus and vaccine biology>}
+\subsection{Response to inactivated influenza vaccines}
+
+\subsection{The H1N1 virus, Pandemrix, and Pandemrix response}
 
 Intro to the virus (Characteristics of Swine-Origin 2009 A(H1N1), DOI: 10.1126/science.1176225)
 
@@ -23,9 +25,18 @@ Demonstration in a mouse model: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/P
 
 - more variation will be explained by history of exposure rather than genetics, so may be harder to detect
 
+\subsection{Response to AS03}
+
+\subsection{the narcolepsy controversy}
+
 \section{Methods}
 
 \subsection{The Human Immune Response Dynamics (HIRD) cohort}
+
+\subsection{TRI}
+
+% Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals 2009; 37:216-21; PMID:19268607; http://dx. doi.org/10.1016/j.biologicals.2009.02.002
+In clinical studies seroprotection is normally defined as a specific antibody titer or antibody titer increase (seroconversion).22
 
 \subsection{RNAseq}
 
@@ -46,6 +57,11 @@ But main issue is unbalanced design, which affects even 2-way anova. Rather than
 
 Why combine -7 and 0? See Sobolev:
 (a) Observed values of multivariate statistic t (m.v.t.) quantifying global PBMC gene-expression dissimilarity in comparison of two study days (red dots) to values expected when days are randomly assigned between groups.
+
+Should we meta-analyse?
+
+% https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0059202
+In conclusion, we found that underpowered studies play a very substantial role in meta-analyses reported by Cochrane reviews, since the majority of meta-analyses include no adequately powered studies. In meta-analyses including two or more adequately powered studies, the remaining underpowered studies often contributed little information to the combined results, and could be left out if a rapid review of the evidence is required.
 
 \subsection{Meta-analysis}
 
@@ -74,35 +90,128 @@ also see CBM paper for discussion of difficulties of combinding platform
 cannot acually use CBM, as it operates on expressions, with a binary case vs control, so no covariates
 same limitation for cormotif, although it takes any number of groups
 
-rankprod, mayday seasight
+rankprod (focus on case/control design), mayday seasight
 
 \subsubsection{Choice of meta-analysis method}
 
+Two schools of thought for frequentist meta-analysis: 
+fixed-effect, 
+% Higgins, J. P. T., Thompson, S. G., & Spiegelhalter, D. J. (2009). A re-evaluation of random-effects meta-analysis. Journal of the Royal Statistical Society: Series A (Statistics in Society), 172(1), 137–159. https://doi.org/10.1111/j.1467-985X.2008.00552.x
+or in the presence of het, random-effects.
 
+We have het, so def use random effects.
+
+% Veroniki, A. A., Jackson, D., Viechtbauer, W., Bender, R., Bowden, J., Knapp, G., … Salanti, G. (2016). Methods to estimate the between-study variance and its uncertainty in meta-analysis. Research Synthesis Methods, 7(1), 55–79. https://doi.org/10.1002/jrsm.1164
+How to estimate het?
+Many methods to estimate het, but
 % Gonnermann, A., Framke, T., Großhennig, A., & Koch, A. (2015). No solution yet for combining two independent studies in the presence of heterogeneity: COMMENTARY. Statistics in Medicine, 34(16), 2476–2480. https://doi.org/10.1002/sim.6473
-The problem
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
+% Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
 
-Although expected to differ bt gene,
-Most estimates of tau 0
+The problem: we only have k=2, and MLE estimates of tau are not very good with k=2.
+Highly imprecise, and often:
+% Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
+boundary estimate problems.  
 
-Differs based on scale of paramters
-Differs based on effect
+and We know 0 het is inappropriate.
 
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
+% Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
+Bayesian random-effects meta is attractive.
+But What priors should we use?
+
+Prior for tau.
+
+% Gelman (2006)
+A general rec is:
+Use distribution in the half-t family e.g. Cauchy (df=1) when the number of groups is small and in other settings where a weakly-informative prior is desired.
+In their 3-schools examples, choose a value of scale just higher than expected, this is to weakly constrain the posterior, and not to actually represent prior knowledge.
+- Warn against inverse-gamma(e, e), as it can influence the posterior mean.
+
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
+% Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
+But weak priors are not recommended, as k is small, so there is little information in the data.
+% https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
+% The Gelman (2006) half-cauchy may be too weak for small k.
+
+We can get empirical distribution of many genes.
+    % see this for a justification of why REML over ML
+    % Veroniki, A. A., Jackson, D., Viechtbauer, W., Bender, R., Bowden, J., Knapp, G., … Salanti, G. (2016). Methods to estimate the between-study variance and its uncertainty in meta-analysis. Research Synthesis Methods, 7(1), 55–79. https://doi.org/10.1002/jrsm.1164
+    fit a default reml model, exclude 0 ests.
+    % By default, the starting value is set equal to the value of the Hedges (HE) estimator and the algorithm terminates when the change in the estimated value of  2 is smaller than 105 from one iteration to the next.
+Advantage of getting the correct parameter scale for our data.
+So use Empirical Bayes:
+    aside: empirical bayes is popular for high dim data e.g. edgeR, DESeq2, limma-voom, combat (method of moments)
+
+Papers that fit empirical datasets for tau2: Most of these are inverse-gamma/log-t family
+% Higgins, J. P. T., & Whitehead, A. (1996). Borrowing strength from external trials in a meta-analysis. Statistics in Medicine, 15(24), 2733–2749. https://doi.org/10.1002/(SICI)1097-0258(19961230)15:24<2733::AID-SIM562>3.0.CO;2-0
+Fit inverse gamma distribution on method of moments estimates from 18 gastroenterology trials with similar endpoints.
+% Pullenayegum, E. M. (2011). An informed reference prior for between-study heterogeneity in meta-analyses of binary outcomes: Prior for between-study heterogeneity. Statistics in Medicine, 30(26), 3082–3094. https://doi.org/10.1002/sim.4326
+This paper has described the distribution of the between-study variance amongst Cochrane reviews published between 2008 and 2009, and investigating a binary outcome. A log-normal distribution incorporating the association between the between-study variance and the pooled effect size gave the best fit.
+% Turner, R. M., Davey, J., Clarke, M. J., Thompson, S. G., & Higgins, J. P. (2012). Predicting the extent of heterogeneity in meta-analysis, using empirical data from the Cochrane Database of Systematic Reviews. International Journal of Epidemiology, 41(3), 818–827. https://doi.org/10.1093/ije/dys041
+Predictive distributions are presented for nine different settings, defined by type of outcome and type of intervention comparison. For example, for a planned meta-analysis comparing a pharmacological intervention against placebo or control with a subjectively measured outcome, the predictive distribution for heterogeneity is a log-normal (2.13, 1.582) distribution, which has a median value of 0.12.
+% Rhodes, K. M., Turner, R. M., & Higgins, J. P. T. (2015). Predictive distributions were developed for the extent of heterogeneity in meta-analyses of continuous outcome data. Journal of Clinical Epidemiology, 68(1), 52–60. https://doi.org/10.1016/j.jclinepi.2014.08.012
+Model selection based on the deviance information criterion (DIC) [8] led to the choice of the log-t model for t2. (5df)
+% Turner, R. M., Jackson, D., Wei, Y., Thompson, S. G., & Higgins, J. P. T. (2015). Predictive distributions for between-study heterogeneity and simple methods for their application in Bayesian meta-analysis: R. M. TURNER ET AL. Statistics in Medicine, 34(6), 984–998. https://doi.org/10.1002/sim.6381
+The priors are derived as log-normal distributions for the between-study variance, applicable to meta-analyses of binary outcomes on the log odds-ratio scale.
+%
+
+% Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
+We choose gamma: as Density at tau=0 is 0, but increases linearly from 0, so values close to 0 are still permitted if the data suggests it.
+For lognormal/inverse gamma, they have a derivative of 0 at tau=0, so they rule out small tau no matter what the data suggest.
+For The exponential and half-Cauchy families, for example, do not decline to zero at the boundary, so they do not rule out posterior mode estimates of zero.
+
+% Maximum-likelihood Fitting of Univariate Distributions
+% https://stat.ethz.ch/R-manual/R-devel/library/MASS/html/fitdistr.html
+% For the Normal, log-Normal, geometric, exponential and Poisson distributions the closed-form MLEs (and exact standard errors) are used, and start should not be supplied.
+% For all other distributions, direct optimization of the log-likelihood is performed using optim.
+
+Prior for logFC
+
+Not as much discussion in the lit:
+% Gelman (2006)
+There is Typically enough data to estimate this to use a non informative prior.
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
+% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
+Even Friede Uses noninformative flat.
+
+Two choices in bayesmeta are uniform and normal.
+We know Mean is 0: most genes are not DE.
+so flat prior makes no sense
+
+% Also: general principles point towards weaker priors, but not uniform????
+% https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
+% For example, it is common to expect realistic effect sizes to be of order of magnitude 0.1 on a standardized scale (for example, an educational innovation that might improve test scores by 0.1 standard deviations). In that case, a prior of N(0,1) could be considered very strong, in that it puts most of its mass on parameter values that are unrealistically large in absolute value. When we say this prior is "weakly informative," what we mean is that, if there's a reasonably large amount of data, the likelihood will dominate, and the prior will not be important. If the data are weak, though, this "weakly informative prior" will strongly influence the posterior inference. The phrase "weakly informative" is implicitly in comparison to a default flat prior.
+% Weakly informative prior should contain enough information to regularize: the idea is that the prior rules out unreasonable parameter values but is not so strong as to rule out values that might make sense
+% Weakly informative rather than fully informative: the idea is that the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant. It's been hard for us to formalize this idea.
+% One principle: write down what you think the prior should be, then spread it out. The idea is that the cost of setting the prior too narrow is more severe than the cost of setting it too wide. I've been having trouble formalizing this idea.
+% Don't use uniform priors, or hard constraints more generally, unless the bounds
+% represent true constraints (such as scale parameters being restricted to be
+% positive, or correlations restricted to being between -1 and 1).
+
+To avoid overshrinking, could consider heavy-tailed priors (e.g. cauchy) for mu rather than normal, but this is not possible in bayesmeta.
+% Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
+Cauchy 2.5
+% Zhu, A., Ibrahim, J. G., & Love, M. I. (2018). Heavy-tailed prior distributions for sequence count data: Removing the noise and preserving large differences. BioRxiv. https://doi.org/10.1101/303255
+DEseq/apeglm: prior on logfc, cauchy with scale adapted.
+
+But bayesmeta is normal. So weaken further to place more prior on larger values.
+This means less shrinkage.
+
+Also: we will shrink again with ashr. 
+which can fit a more complicated distr (mixture?)
 
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
-Recommendations from Gelman may be too weak.
+So We use a very weak normal prior, scaled to each coef, as we still want some scaling based on parameter scales.
+Equiv to saying 95pc chance that effect is within log2FC of 20.
+% > qnorm(0.975, 0, 10)
+% [1] 19.59964
 
-
-But we have empirical distribution
-
-% Higgins, J. P. T., Thompson, S. G., & Spiegelhalter, D. J. (2009). A re-evaluation of random-effects meta-analysis. Journal of the Royal Statistical Society: Series A (Statistics in Society), 172(1), 137–159. https://doi.org/10.1111/j.1467-985X.2008.00552.x
-Similar to Higgins: an informative prior distribution fit on observed hets
-
-
-use MLE fitdistr
-    empirical bayes is popular for high dim data. esp EB for sharing e.g. limmavoom, combat(method of moments)
-
-
+% Two examples to demonstrate: the top 2 in RMA meta-analysis.
+% (see section of code at end of 6.0\_de\_meta.R script)
 
 \autocite{Sobolev2016}
 
@@ -112,3 +221,6 @@ use MLE fitdistr
 
 Stuff from 1st year report.
 
+\subsection{modules}
+% https://www.jacionline.org/article/S0091-6749(17)31766-9/fulltext#sec2.4
+The reduced efficacy of vaccination has also been linked to excessive inflammation for influenza,31 yellow fever,32 tuberculosis,33 and hepatitis B34 vaccines.

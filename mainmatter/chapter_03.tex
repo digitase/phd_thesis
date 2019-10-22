@@ -8,19 +8,114 @@
 
 \subsection{<Context-specific QTLs>}
 
-Review of in vitro stimulation condition QTL mapping.
+types of conditinoal QTL
+    ackerman conditional vs dynamic
+
+Review of stimulation condition QTL mapping, invitro and invivo
+what models used? did they use change scores for longitudinal?
+
+ackermann: change scores are prone to increased noise
+
+QTLs can interact with sex and age
+% https://academic.oup.com/hmg/article/23/7/1947/655184/
+
+Mechanisms: 
+% Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
 
 Review of in vivo mapping.
 
+\subsection{genotype qc}
+
+why exclude x chrom?
+% https://www.nature.com/articles/ng.467
+As is standard for imputation, we excluded all X-linked SNPs for the following reasons: (i) the X chromosome has to be treated differently from the autosomes; (ii) it cannot be predicted which allele is active on the X chromosome, (iii) testing males separately from females results in different sample sizes and power. Imputation of SNPs in the HapMap CEU population was performed using either MACH46 or IMPUTE47. All SNPs with a MAF <0.01 were excluded from analysis. In total, up to 2.11 million genotyped or imputed SNPs were analyzed.
+
 \subsection{Mapping quantitative trait loci}
+
+Why not use indicator for rnaseq/array?
+Peer factors get very tricky to put in?
+
+Why not mapping on deltas?
+from franco: "We attempted analyses with an approach similar to that proposed by the reviewers in the course of our work, but found that the approach that was ultimately chosen to explore the day differences was the most powerful. Specifically, utilizing a pairwise comparison (difference) between time points as the substrate for the eQTL analysis would lead to an increase in the technical variance of the phenotype, as the sum of two independent (technical) errors has twice the variance of an individual measurement. "
+
+% Bias due to two‐stage residual‐outcome regression analysis in genetic association studies https://doi.org/10.1002/gepi.20607
+including known covariates: why not a two stage approach?
+
+% https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000770
+expression PCs: if too many, will explain away the signal
+
+why include genetic PCs
+see stegle 2012 PEER paper: if PCs are not included, they can be recapitulated in the factors
+% (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
+
+Rank-based int:
+heavily used in genetics, 
+    Although criticised: "Rank-Based Inverse Normal Transformations are Increasingly Used, But are They Merited?"
+
+Why RANKINT before PEER?
+% Are your covariates under control? How normalization can re-introduce covariate effects
+"Many statistical tests rely on the assumption that the residuals of a model are normally distributed [1]. In genetic analyses of complex traits, the normality of residuals is largely determined by the normality of the dependent variable (phenotype) due to the very small effect size of individual genetic variants [2]. However, many traits do not follow a normal distribution."
+"applying rank-based INT to the dependent variable residuals after regressing out covariates re-introduces a linear correlation between the dependent variable and covariates, increasing type-I errors and reducing power."
+
+PEER:
+% https://doi.org/10.1371/journal.pgen.1002197
+Not a problem with cis-eQTLs, but trans might have more global effects
 
 Simple, mixed models, joint models, multilocus models; Ending with why we chose mashr
 
+lmms: use a kinship matrix to scale the sample-sample genetic covariance
+see: 2018-11-16 notes in log
+
+% also, section 27.2 LMM overview 27.2.1 Background and intuition , from Handbook of Statistical Methods for Case-Control Studies
+this is good background
+% using LMMs is appropriate for controlling for population structure (which is a common
+% problem in human GWAS), as well as for cryptic relatedness, and that LMMs outperform
+% the previously preferred principal component analysis (PCA) approach in addressing these
+% issues (Yang et al., 2014).
+
+Choice of lmm method
+for various methods, see 2018-03-05 and 2018-07-25 in log
+
 for discussion of how lmm implementation doesn't matter (Eu-ahsunthornwattana et al., 2014)
 
-Can refer to previous notes in "2017\_Book\_SystemsGenetics"
+LDAK kinship matrix construction http://dougspeed.com/method-overview/
+
+Note: can be negative
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6157025/
+LDAK version 4.9 [3] and IBDLD version 3.33 [4] were used to derive 2 empirical kinship matrices based on the GAW20 genotype data. For LDAK, in principle, this kernel should correspond to a genetic relationship matrix; in practice, however, we observed that LDAK estimates of self-relatedness were widely spread around their expectation of 1 (Fig. 1a). For IBDLD the estimates of self-relatedness were closer to 1 (Fig. ​(Fig.1b).1b). The empirical kinship estimate matrices from LDAK and IBDLD were postprocessed to remove negative nonzero values and scaled to have a diagonal equal to 1.
+
+Can also refer to previous notes in "2017\_Book\_SystemsGenetics"
 
 mashr beats out stuff it compared to in the paper e.g. metasoft
+
+\subsection{why also cell counts?}
+
+% E.g. Davenport 2018: “observed eQTL interactions could be the consequence of a cellular subpopulation whose frequency is being altered by the environmental perturbagen or variability in cell type proportions between individuals.”
+% “inferred the relative proportions of nine hematopoietic populations from the RNA-seq data using CIBERSORT”
+% After correcting for cell proportions “reduction in significant interactions suggests that some of these interactions may be related to changes in cell proportions”
+
+Why impute for cell counts but not for eQTL?
+expression matricse are mostly complete, and we only exclude genes based on low expression in RNAseq
+we cannot drop whole panels so easily like we can drop genes
+
+\subsection{Meta-analysis}
+
+Restricted to non-full bayesian methods.
+% See last paragraph of discussion in
+% Kontopantelis, E., Springate, D. A., & Reeves, D. (2013). A Re-Analysis of the Cochrane Library Data: The Dangers of Unobserved Heterogeneity in Meta-Analyses. PLoS ONE, 8(7), e69930. https://doi.org/10.1371/journal.pone.0069930
+For small k, Sidik MVa or Ruhkin RBp recommended.
+% metafor manual
+% If, instead of the crude estimate, one wants to use a better apriori estimate, one can do so by passing this value via control=list(tau2.init=value)
+Sidik-Jonkman estimator, also called the ‘model error variance estimator’, is implemented in metafor (SJ method).
+
+Starts with an init estiamte of ri=sigma2i/tau2i i.e. ratio of study-specific and between-studies het variance, then updates.
+
+They recommend using Hedges [1], to init, but this is bad???
+
+We use mode of gamma as an apriori estiamte of tau.
+
+\subsection{Sharing}
+% See notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
 
 \subsection{Colocalization}
 
