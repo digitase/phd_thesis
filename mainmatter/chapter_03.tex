@@ -1,10 +1,18 @@
 %
 % Chapter 3
 %
+% Response eQTL-style paper
 
 \chapter{Genetic contribution to Pandemrix vaccine response}
 
 \section{Introduction}
+
+Utility of genetics:
+allows coloc
+How does common genetic variation affect response to vaccine?
+
+eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
+Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
 
 \subsection{<Context-specific QTLs>}
 
@@ -21,8 +29,20 @@ QTLs can interact with sex and age
 
 Mechanisms: 
 % Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
+% Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
 
 Review of in vivo mapping.
+Franco, Caliskan Rhinovirus, Davenport
+
+decon eqtl
+    requires full data i.e. it's an eqtl mapper
+
+\subsection{condition/Cell-type specific methods}
+
+% Westra, H.-J., Arends, D., Esko, T., Peters, M. J., Schurmann, C., Schramm, K., … Franke, L. (2015). Cell Specific eQTL Analysis without Sorting Cells. PLOS Genetics, 11(5), e1005223. https://doi.org/10.1371/journal.pgen.1005223
+interaction terms
+
+deconvolution
 
 \subsection{genotype qc}
 
@@ -82,7 +102,7 @@ LDAK kinship matrix construction http://dougspeed.com/method-overview/
 
 Note: can be negative
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6157025/
-LDAK version 4.9 [3] and IBDLD version 3.33 [4] were used to derive 2 empirical kinship matrices based on the GAW20 genotype data. For LDAK, in principle, this kernel should correspond to a genetic relationship matrix; in practice, however, we observed that LDAK estimates of self-relatedness were widely spread around their expectation of 1 (Fig. 1a). For IBDLD the estimates of self-relatedness were closer to 1 (Fig. ​(Fig.1b).1b). The empirical kinship estimate matrices from LDAK and IBDLD were postprocessed to remove negative nonzero values and scaled to have a diagonal equal to 1.
+LDAK version 4.9 [3] and IBDLD version 3.33 [4] were used to derive 2 empirical kinship matrices based on the GAW20 genotype data. For LDAK, in principle, this kernel should correspond to a genetic relationship matrix; in practice, however, we observed that LDAK estimates of self-relatedness were widely spread around their expectation of 1 (Fig. 1a). For IBDLD the estimates of self-relatedness were closer to 1 (Fig. (Fig.1b).1b). The empirical kinship estimate matrices from LDAK and IBDLD were postprocessed to remove negative nonzero values and scaled to have a diagonal equal to 1.
 
 Can also refer to previous notes in "2017\_Book\_SystemsGenetics"
 

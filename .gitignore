@@ -1,7 +1,8 @@
 # Misc.
 .DS_Store
 *.swp
-resources/templates/
+resources/templates
+resources/examples
 
 # Core latex/pdflatex auxiliary files:
 *.aux
@@ -32,6 +33,12 @@ resources/templates/
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+
+# Glossaries auxiliary files:
+*.acn
+*.acr
+*.alg
+*.ist
 
 # todonotes
 *.tdo
