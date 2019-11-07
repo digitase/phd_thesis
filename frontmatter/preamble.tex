@@ -83,6 +83,7 @@
 \usepackage{hyperref}
 % Nice colors for clickable links
 \usepackage{xcolor}
+\usepackage{bookmark}
 \hypersetup{
 	colorlinks,
 	linkcolor={red!50!black},
@@ -112,7 +113,7 @@
 	style=nature,
 	maxcitenames=1,
 	maxnames=6,
-	firstinits=true, 
+    giveninits=true,
 	uniquename=init,
 	sorting=none,
 	url=false,
@@ -153,19 +154,18 @@
 %    nomain: remove default main type glossary
 % # NOTE: consider upgrading to glossaries-extra
 \usepackage[
+    % nohypertypes={acronym}
     toc,
-    acronym,
     nomain,
-    automake,
-    nohypertypes={acronym}
+    acronym
 ]{glossaries}
-
+%
 % Set first use of acronym to appear expanded.
 \setacronymstyle{long-short}
-
+%
 % Sorting Option 2: sorting using makeindex
 % makeglossaries must appear before the glossary entries.
-\makeglossaries
+\makenoidxglossaries
 
 % Definitions
 \newacronym[
