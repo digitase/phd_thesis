@@ -55,14 +55,13 @@
 \include{./frontmatter/dedication}
 \include{./frontmatter/abstract}
 \include{./frontmatter/acknowledgements}
-\include{./frontmatter/table_of_contents}
-\include{./frontmatter/nomenclature}
+\include{./frontmatter/toc}
 
 %
-% Mainmatter
+% Mainmatter, including appendix
 %
 \mainmatter
-\include{./mainmatter/chapter_01} % Intro
+\include{./mainmatter/chapter_01} % Introduction
 \include{./mainmatter/chapter_02} % HIRD transcriptomics
 \include{./mainmatter/chapter_03} % HIRD eQTLs
 \include{./mainmatter/chapter_04} % Vaxcin
@@ -71,13 +70,14 @@
 
 \appendix
 \include{./mainmatter/appendix}
-\include{./mainmatter/scratch_space}
 
 %
 % Backmatter
 %
 \backmatter
 \include{./backmatter/bibliography}
+\include{./backmatter/abbreviations}
+\include{./backmatter/TODOs}
 
 \end{document}
 %

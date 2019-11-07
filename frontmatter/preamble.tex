@@ -33,6 +33,21 @@
 % For theorems
 \usepackage{amsthm}
 
+% Context-sensitive quotes, provides \enquote
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main
+% language.
+\usepackage{csquotes}
+
+%
+% Document structure
+%
+
+% Automatically adds the bibliography and/or the index and/or the contents, etc.,
+% to the Table of Contents listing.
+\usepackage[nottoc]{tocbibind}
+
 %
 % Figures and tables
 %
@@ -97,6 +112,11 @@
 \usepackage{todonotes}
 
 %
+% Allow dummy text
+%
+\usepackage{lipsum}
+
+%
 % Bibliography
 %
 % https://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib
@@ -129,15 +149,8 @@
 % NOTE: this is a path relative to main.tex
 \addbibresource{backmatter/zotero_My-Library_phd_Better-BibLaTeX.bib}
 
-% Context-sensitive quotes, provides \enquote
 %
-% When using babel or polyglossia with biblatex, loading csquotes is recommended
-% to ensure that quoted texts are typeset according to the rules of your main
-% language.
-\usepackage{csquotes}
-
-%
-% Nomenclature 
+% Abbreviations
 %
 % NOTE: there are certain packages that must be loaded before glossaries, if
 % they are required: hyperref, babel, polyglossia, inputenc and fontenc.
