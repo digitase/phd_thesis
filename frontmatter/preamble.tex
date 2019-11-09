@@ -33,6 +33,21 @@
 % For theorems
 \usepackage{amsthm}
 
+% Context-sensitive quotes, provides \enquote
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main
+% language.
+\usepackage{csquotes}
+
+%
+% Document structure
+%
+
+% Automatically adds the bibliography and/or the index and/or the contents, etc.,
+% to the Table of Contents listing.
+\usepackage[nottoc]{tocbibind}
+
 %
 % Figures and tables
 %
@@ -97,6 +112,11 @@
 \usepackage{todonotes}
 
 %
+% Allow dummy text
+%
+\usepackage{lipsum}
+
+%
 % Bibliography
 %
 % https://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib
@@ -129,49 +149,22 @@
 % NOTE: this is a path relative to main.tex
 \addbibresource{backmatter/zotero_My-Library_phd_Better-BibLaTeX.bib}
 
-% Context-sensitive quotes, provides \enquote
 %
-% When using babel or polyglossia with biblatex, loading csquotes is recommended
-% to ensure that quoted texts are typeset according to the rules of your main
-% language.
-\usepackage{csquotes}
-
+% Abbreviations
 %
-% Nomenclature 
-%
-
-% Provides table of nomenclature
-% NOTE: https://texblog.org/2012/05/14/list-of-symbols-or-abbreviations-nomenclature/
-% Update (April 2014): This package has not been updated in the past few years.
-% You may want to use the more recent and more flexible glossaries package.
-% \usepackage{nomencl}
-% \makenomenclature
-
-% Glossaries
-% NOTE: there are certain packages that must be loaded before glossaries, if they are required: hyperref, babel, polyglossia, inputenc and fontenc.
-%    toc: add entry to toc
-%    acronym: separate list of acronyms from list of glossary terms
-%    nomain: remove default main type glossary
-% # NOTE: consider upgrading to glossaries-extra
+% NOTE: there are certain packages that must be loaded before glossaries, if
+% they are required: hyperref, babel, polyglossia, inputenc and fontenc.
 \usepackage[
-    % nohypertypes={acronym}
-    toc,
-    nomain,
-    acronym
-]{glossaries}
+    abbreviations,
+    % nohypertypes={abbreviations}
+]{glossaries-extra}
 %
-% Set first use of acronym to appear expanded.
-\setacronymstyle{long-short}
-%
-% Sorting Option 2: sorting using makeindex
-% makeglossaries must appear before the glossary entries.
+% Set first use of abbreviation to appear expanded.
+\setabbreviationstyle{long-short}
+% use TeX to sort
 \makenoidxglossaries
 
 % Definitions
-\newacronym[
-    longplural=genome-wide association studies
-]{GWAS}{GWAS}{genome-wide association study}
-\newacronym[
-    longplural=expression quantitative trait loci
-]{eQTL}{eQTL}{expression quantitative trait locus}
-
+\newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
+\newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
+\newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}

@@ -1,8 +1,11 @@
-# Misc.
+# Resources
+_resources
+
+# Mac
 .DS_Store
+
+# Vim
 *.swp
-resources/templates
-resources/examples
 
 # Core latex/pdflatex auxiliary files:
 *.aux
@@ -16,7 +19,7 @@ resources/examples
 *.fot
 *.cb
 *.cb2
-.*.lb
+*.lb
 
 # Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
@@ -39,6 +42,7 @@ resources/examples
 *.acr
 *.alg
 *.ist
+*.glo-abr
 
 # todonotes
 *.tdo
