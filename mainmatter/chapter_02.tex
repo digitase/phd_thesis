@@ -1,15 +1,56 @@
 %
 % Chapter 2
 %
-% Systems vaccinology-style chapter
+% Systems vaccinology-style paper.
 
-\chapter{Transcriptomic response to pandemic influenza H1N1/09 vaccine (Pandemrix)}
+% The one central and memorable contribution of the paper.
+\chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine (Pandemrix)}
+
+% Chapter 2 HIRD sysvacc abstract
 
 \section{Introduction}
 
-\subsection{Response to inactivated influenza vaccines}
+% Subfield gap
+% context
 
-\subsection{The H1N1 virus, Pandemrix, and Pandemrix response}
+% content
+[The influence of host genetics on vaccines response has also been explored]
+Vaccine-induced antibody response is a complex trait, with heritability estimates ranging from ... [e.g. seaonsal influenza 10.1016/j.vaccine.2008.07.065 Poland e.g. smallpox e.g. measeks 10.1080/21645515.2015.1119345.]
+
+% Paper gap and untested hypotheses\
+% This sets the reader's expectations for the paper.
+A potential mechanism through which genetic variation can affect vaccine response is through altering the expression of nearby genes (cis-eQTLs).
+In the case of inactivated trivalent influenza vaccine, genetic variation in membrane trafficking and antigen processing genes was associated with both transcriptomic and antibody responses in patients after vaccination [Franco].
+[summary of Sobolev findings]
+% [variation observed in response to Pandemrix, e.g R vs. NR trajectories]
+
+% Differences to in vitro models e.g. in immune cells?
+
+In this study, we model the influence of host genetics on longitudinal transcriptomic and antibody responses to Pandemrix, in vivo.
+
+also, we have phenotype data, in vivo
+
+[main aim: how much variation in response is genetic?]
+[other aims: assess differences to seasonal influenza vaccines]
+[summary of main results]
+
+Knowns
+    Sobolev: R vs NR, 
+    inconsistent variation in why people are NR
+
+Prevacc signatures of Tri
+Using larger transcriptomic dataset
+Are they genetic
+
+Good points
+    Repeated measures
+    in vivo perturbation
+
+\subsection{Systems vaccinology of influenza vaccines}
+
+% Review of all influenza specific vacc papers
+
+\subsection{Pandemic influenza and Pandemrix}
 
 Intro to the virus (Characteristics of Swine-Origin 2009 A(H1N1), DOI: 10.1126/science.1176225)
 
@@ -26,28 +67,31 @@ Demonstration in a mouse model: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/P
 
 - more variation will be explained by history of exposure rather than genetics, so may be harder to detect
 
-\subsection{Response to AS03}
+Knowns about AS03
 
-\subsection{the narcolepsy controversy}
+Narcolepsy controversy (evidence for genetics)
 
-Prevacc signatures of Tri
-Using larger transcriptomic dataset
-Are they genetic
+\subsection{The \glsfmtfull{HIRD} study}
+
+% Summarise sobolev
+\url{https://www.nature.com/articles/ni.3372}
 
 \section{Methods}
 
-\subsection{The Human Immune Response Dynamics (HIRD) cohort}
+\subsection{\glsfmtshort{HIRD} cohort}
 
-\subsection{TRI}
+Describe existing data types.
+Extend with RNAseq (disjoint) and genotyping.
 
-% Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals 2009; 37:216-21; PMID:19268607; http://dx. doi.org/10.1016/j.biologicals.2009.02.002
-In clinical studies seroprotection is normally defined as a specific antibody titer or antibody titer increase (seroconversion).22
-
-\subsection{RNAseq}
+\subsection{RNA-seq data generation}
 
 Do we have enough reads for RNAseq analysis? \url{https://www.ncbi.nlm.nih.gov/pubmed/24434847} and doi:10.1093/bioinformatics/btt688
 
-\subsection{DGE}
+\subsection{RNA-seq quality control}
+
+\subsection{Computing \glsfmtshort{TRI}}
+
+\subsection{\glsfmtfull{DGE}}
 
 Batch effect correction (see batch effects tag)
 % Chen, C., Grennan, K., Badner, J., Zhang, D., Gershon, E., Jin, L., & Liu, C. (2011). Removing Batch Effects in Analysis of Expression Microarray Data: An Evaluation of Six Batch Adjustment Methods. PLoS ONE, 6(2), e17238. https://doi.org/10.1371/journal.pone.0017238
@@ -68,7 +112,11 @@ Should we meta-analyse?
 % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0059202
 In conclusion, we found that underpowered studies play a very substantial role in meta-analyses reported by Cochrane reviews, since the majority of meta-analyses include no adequately powered studies. In meta-analyses including two or more adequately powered studies, the remaining underpowered studies often contributed little information to the combined results, and could be left out if a rapid review of the evidence is required.
 
-\subsection{Meta-analysis}
+\subsection{\glsfmtshort{DGE} meta-analysis}
+
+Describe method here, put rest in appendix
+
+\subsubsection{Cross-platform meta-analysis methods}
 
 Whilst there is a slew of literature on metanalyasis of rnaseq adn array (e.g. metaMA), combining platforms is fraught with difficultiy.
 different probes, 
@@ -81,7 +129,6 @@ exmplaes of
 e.g. random effects model of approx 24 datasets: 
 % https://academic.oup.com/nar/article/45/17/9860/4084660#106485896
 e.g. sva: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3617154/
-
 
 Alternative is: CorMotif first applies limma (Smyth, 2004) to each study separately.
 CorMotif for microarray data since it was motivated by the microarray analysis in the SHH study. However, the idea behind CorMotif is general, and it should be straightforward to develop a similar framework for RNA-seq data.
@@ -98,7 +145,7 @@ same limitation for cormotif, although it takes any number of groups
 
 rankprod (focus on case/control design), mayday seasight
 
-\subsubsection{Choice of meta-analysis method}
+\subsubsection{Choice of meta-analysis model}
 
 Two schools of thought for frequentist meta-analysis: 
 fixed-effect, 
@@ -128,6 +175,7 @@ and We know 0 het is inappropriate.
 Bayesian random-effects meta is attractive.
 But What priors should we use?
 
+\subsubsection{Prior for between-studies heterogeneity}
 Prior for tau.
 
 % Gelman (2006)
@@ -175,6 +223,7 @@ For The exponential and half-Cauchy families, for example, do not decline to zer
 % For the Normal, log-Normal, geometric, exponential and Poisson distributions the closed-form MLEs (and exact standard errors) are used, and start should not be supplied.
 % For all other distributions, direct optimization of the log-likelihood is performed using optim.
 
+\subsubsection{Prior for \glsfmtshort{DGE} effect size}
 Prior for logFC
 
 Not as much discussion in the lit:
@@ -219,12 +268,38 @@ Equiv to saying 95pc chance that effect is within log2FC of 20.
 % Two examples to demonstrate: the top 2 in RMA meta-analysis.
 % (see section of code at end of 6.0\_de\_meta.R script)
 
+\section{Gene set enrichment analysis}
+
 \section{Results}
+
+\subsection{Innate and adaptive immune response}
+
+\subsection{Expression associated with antibody response}
+
+% Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals 2009; 37:216-21; PMID:19268607; http://dx. doi.org/10.1016/j.biologicals.2009.02.002
+In clinical studies seroprotection is normally defined as a specific antibody titer or antibody titer increase (seroconversion).22
+
+\subsection{Identifying molecular signatures of response}
+
+\section{Discussion}
+
+% https://www.jacionline.org/article/S0091-6749(17)31766-9/fulltext#sec2.4
+The reduced efficacy of vaccination has also been linked to excessive inflammation for influenza,31 yellow fever,32 tuberculosis,33 and hepatitis B34 vaccines.
 
 \subsection{Comparison to Sobolev R vs. NR}
 
 Stuff from 1st year report.
 
-\subsection{modules}
-% https://www.jacionline.org/article/S0091-6749(17)31766-9/fulltext#sec2.4
-The reduced efficacy of vaccination has also been linked to excessive inflammation for influenza,31 yellow fever,32 tuberculosis,33 and hepatitis B34 vaccines.
+Current limitations
+Confounded by changes in immune cell proportions in bulk PBMCs
+
+No conditional eQTL analysis to disentangle conditional effects
+Unclear connection to vaccine biology e.g. what genesets/pathways/cell types are driving the observed transcriptomic and eQTL response?
+Future work to address limitations
+Colocalisation with known associations
+Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014)
+Here the inverse: coloc is used to understand the biological relevance of observed expression variation
+Prediction of antibody response e.g. using expression of gene modules
+
+adjuvant:
+% "Sobolev et al. identify an early interferon and lymphoid response that can be seen 1 day after vaccination2. These signals have not been detected in other studies, but this might be explained by differences in vaccine formulation. Specifically, the adjuvant might mimic the response pattern found to an attenuated virus6."

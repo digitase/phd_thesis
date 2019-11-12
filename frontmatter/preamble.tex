@@ -48,6 +48,9 @@
 % to the Table of Contents listing.
 \usepackage[nottoc]{tocbibind}
 
+% Extra control of appendices
+% \usepackage[toc]{appendix}
+
 %
 % Figures and tables
 %
@@ -161,10 +164,17 @@
 %
 % Set first use of abbreviation to appear expanded.
 \setabbreviationstyle{long-short}
-% use TeX to sort
+% use TeX to sort (slow)
 \makenoidxglossaries
-
+%
 % Definitions
+%
 \newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
+\newabbreviation[]{HIRD}{HIRD}{Human Immune Response Dynamics}
+\newabbreviation[]{TRI}{TRI}{Titre Response Index}
+\newabbreviation[]{RNAseq}{RNA-seq}{RNA-sequencing}
+\newabbreviation[]{DE}{DE}{differential expression; differentially expressed}
+\newabbreviation[]{DGE}{DGE}{differential gene expression}
+%
