@@ -48,6 +48,13 @@
 % to the Table of Contents listing.
 \usepackage[nottoc]{tocbibind}
 
+% Increase the value of tocdepth and secnumdepth. The tocdepth value determines
+% to which level the sectioning commands are printed in the ToC (they are always
+% included in the .toc file but ignored otherwise). The secnumdepth value
+% determines up to what level the sectioning titles are numbered.
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
 % Extra control of appendices
 % \usepackage[toc]{appendix}
 
@@ -69,11 +76,11 @@
 % Pretty-print code
 \usepackage{listings}
 
-% Allow modifications to enumerate lists
-\usepackage{enumitem}
+% Define box for scaling tables
+\usepackage{adjustbox}
 
 %
-% Formatting
+% Formatting and appearance
 %
 
 % Format numbers using e.g. \numprint{2.742647826672E-01}
@@ -93,6 +100,16 @@
 % 1 space after punctuation
 \frenchspacing
 
+% Extensive control of page headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Allow modifications to enumerate lists
+\usepackage{enumitem}
+
+% Defines an outline environment, which allows outline-style indented lists with freely mixed levels up to four levels deep.
+\usepackage{outlines}
+
 %
 % Navigation
 %
@@ -110,10 +127,12 @@
 }
 
 %
+% Misc
+%
+%
 % TO-DO command and list
 %
 \usepackage{todonotes}
-
 %
 % Allow dummy text
 %
@@ -169,6 +188,7 @@
 %
 % Definitions
 %
+% \newabbreviation[⟨options⟩]{⟨label⟩}{⟨short⟩}{⟨long⟩}
 \newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
@@ -177,4 +197,7 @@
 \newabbreviation[]{RNAseq}{RNA-seq}{RNA-sequencing}
 \newabbreviation[]{DE}{DE}{differential expression; differentially expressed}
 \newabbreviation[]{DGE}{DGE}{differential gene expression}
+\newabbreviation[]{HAI}{HAI}{haemagglutination inhibition}
+\newabbreviation[]{MN}{MN}{microneutralisation}
+\newabbreviation[]{PBMC}{PBMC}{peripheral blood mononuclear cell}
 %

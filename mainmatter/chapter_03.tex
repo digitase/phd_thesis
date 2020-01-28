@@ -7,6 +7,46 @@
 
 \section{Introduction}
 
+% Subfield gap
+% context
+
+% content
+[The influence of host genetics on vaccines response has also been explored]
+Vaccine-induced antibody response is a complex trait, with heritability estimates ranging from ... [e.g. seaonsal influenza 10.1016/j.vaccine.2008.07.065 Poland e.g. smallpox e.g. measeks 10.1080/21645515.2015.1119345.]
+
+Narcolepsy controversy (evidence for genetics)
+
+% Paper gap and untested hypotheses\
+% This sets the reader's expectations for the paper.
+A potential mechanism through which genetic variation can affect vaccine response is through altering the expression of nearby genes (cis-eQTLs).
+In the case of inactivated trivalent influenza vaccine, genetic variation in membrane trafficking and antigen processing genes was associated with both transcriptomic and antibody responses in patients after vaccination [Franco].
+[summary of Sobolev findings]
+% [variation observed in response to Pandemrix, e.g R vs. NR trajectories]
+
+% Differences to in vitro models e.g. in immune cells?
+
+In this study, we model the influence of host genetics on longitudinal transcriptomic and antibody responses to Pandemrix, in vivo.
+
+also, we have phenotype data, in vivo
+
+[main aim: how much variation in response is genetic?]
+[other aims: assess differences to seasonal influenza vaccines]
+[summary of main results]
+Why Sobolev?
+More variation will be explained by history of exposure rather than genetics, so may be harder to detect.
+
+Knowns
+    Sobolev: R vs NR, 
+    inconsistent variation in why people are NR
+
+Prevacc signatures of Tri
+Using larger transcriptomic dataset
+Are they genetic
+
+Good points of our study
+    Repeated measures
+    in vivo perturbation
+
 Utility of genetics:
 allows coloc
 How does common genetic variation affect response to vaccine?
@@ -14,30 +54,14 @@ How does common genetic variation affect response to vaccine?
 eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
 Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
 
-\subsection{Context-specific immune response QTLs}
+\subsection{Context-specific immune response QTLs for flu}
 
-types of conditinoal QTL
-    ackerman conditional vs dynamic
-
-Review of stimulation condition QTL mapping, invitro and invivo
-what models used? did they use change scores for longitudinal?
-
-QTLs can interact with sex and age
-% https://academic.oup.com/hmg/article/23/7/1947/655184/
-
-Mechanisms: 
-% Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
-% Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
-
-\subsection{\textit{in vivo} response QTL mapping}
-
-Review of in vivo mapping.
-Franco
-Lareau smallpox apoptosis
-Caliskan Rhinovirus
-Davenport
+if change in expression vs d0 is under genetic control, we should see change in effect size of eqtl vs d0
 
 \section{Methods}
+
+\subsection{expression norm}
+2018-03-15 in log
 
 \subsection{Genotyping data generation}
 
@@ -72,18 +96,24 @@ Can also refer to previous notes in "2017\_Book\_SystemsGenetics"
 why including known covariates: why not a two stage approach?
 
 Why not mapping on deltas? (if we are interested in the direct question of G on change)
-ackermann: change scores are prone to increased noise
-from franco: "We attempted analyses with an approach similar to that proposed by the reviewers in the course of our work, but found that the approach that was ultimately chosen to explore the day differences was the most powerful. Specifically, utilizing a pairwise comparison (difference) between time points as the substrate for the eQTL analysis would lead to an increase in the technical variance of the phenotype, as the sum of two independent (technical) errors has twice the variance of an individual measurement. "
+    ackermann: change scores are prone to increased noise
+    from franco: "We attempted analyses with an approach similar to that proposed by the reviewers in the course of our work, but found that the approach that was ultimately chosen to explore the day differences was the most powerful. Specifically, utilizing a pairwise comparison (difference) between time points as the substrate for the eQTL analysis would lead to an increase in the technical variance of the phenotype, as the sum of two independent (technical) errors has twice the variance of an individual measurement. "
+
+    NOTE: peer factors would need to be computed on the foldchange phenotype
+
 
 The final model:
 
 \subsubsection{Estimation of cell type abundances}
 
-decon eqtl
-    requires full data i.e. it's an eqtl mapper
+deconv
 
-% Westra, H.-J., Arends, D., Esko, T., Peters, M. J., Schurmann, C., Schramm, K., … Franke, L. (2015). Cell Specific eQTL Analysis without Sorting Cells. PLOS Genetics, 11(5), e1005223. https://doi.org/10.1371/journal.pgen.1005223
-cell type interaction terms
+    decon eqtl
+        decon2 has an interesting method: no genotype main effect
+        requires full data i.e. it's an eqtl mapper
+
+    % Westra, H.-J., Arends, D., Esko, T., Peters, M. J., Schurmann, C., Schramm, K., … Franke, L. (2015). Cell Specific eQTL Analysis without Sorting Cells. PLOS Genetics, 11(5), e1005223. https://doi.org/10.1371/journal.pgen.1005223
+    cell type interaction terms from proxy genes
 
 % E.g. Davenport 2018: “observed eQTL interactions could be the consequence of a cellular subpopulation whose frequency is being altered by the environmental perturbagen or variability in cell type proportions between individuals.”
 % “inferred the relative proportions of nine hematopoietic populations from the RNA-seq data using CIBERSORT”
@@ -93,6 +123,12 @@ Why impute for cell counts but not for eQTL?
 expression matricse are mostly complete, and we only exclude genes based on low expression in RNAseq
 we cannot drop whole panels so easily like we can drop genes
 
+Note, the use of gene signatures for deconv
+    in stimulated samples
+    does not distinguish upreg from prolif either
+    if expression goes up, the method will detect more of the signature
+    i.e. it may correct away some signal of upregulation
+
 \subsubsection{Kinship matrix computation}
 
 LDAK kinship matrix construction http://dougspeed.com/method-overview/
@@ -101,6 +137,15 @@ Note: can be negative
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6157025/
 LDAK version 4.9 [3] and IBDLD version 3.33 [4] were used to derive 2 empirical kinship matrices based on the GAW20 genotype data. For LDAK, in principle, this kernel should correspond to a genetic relationship matrix; in practice, however, we observed that LDAK estimates of self-relatedness were widely spread around their expectation of 1 (Fig. 1a). For IBDLD the estimates of self-relatedness were closer to 1 (Fig. (Fig.1b).1b). The empirical kinship estimate matrices from LDAK and IBDLD were postprocessed to remove negative nonzero values and scaled to have a diagonal equal to 1.
 
+% 1.	Build GRM using LDAK 5
+% 1.1.	Start with pre-imputed genotypes coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc6
+% 1.1.1.	“Estimates of SNP heritability are very sensitive to genotyping errors”, so we can’t use imputed SNPs without filtering for high INFO.
+% 1.2.	Prune to MAF 0.05, autosomes only
+% 1.3.	Compute LDAK SNP weightings
+% 1.4.	Compute kinships for each chromosome
+% 1.5.	Join per-chromosome kinships into genome-wide kinships
+% 1.5.1.	Use the leave-one-chromosome-out strategy
+
 \subsubsection{Expression normalisation}
 
 Rank-based int:
@@ -108,6 +153,32 @@ heavily used in genetics,
     Although criticised: "Rank-Based Inverse Normal Transformations are Increasingly Used, But are They Merited?"
 
 \subsubsection{PEER}
+
+% 2.	Infer global confounders by detecting hidden factors affecting expression with PEER
+% 2.1.	“batch effects and other global confounders reduce the power to find expression quantitative trait loci”
+% 2.1.1.	“We assume that these variables have a broad influence, and thus each of them has an effect size for every gene.”
+% 2.1.2.	“The learned variables can be constrained to affect known sets of genes via a prior connectivity matrix. By default, with no prior connectivity given, they are assumed to be global and to affect large fractions of all genes“
+% 2.1.3.	Note that due to this assumption: “If large trans hotspots are dominating, associations may get erroneously explained away as confounding factors”
+% 2.2.	Round input expression to integer counts
+% 2.2.1.	Input is y: the scaledTPM (TPM's scaled up to library size) from tximport.
+% 2.3.	Normalise for library size and variance stabilize with varianceStabilizingTransformation from DESeq2 (recommended in PEER paper)
+% 2.3.1.	Vst is like a souped up log: “In all cases, the transformation is scaled such that for large counts, it becomes asymptotically (for large values) equal to the logarithm to base 2 of normalized counts.”
+% 2.3.2.	Note we cannot use voom-ed expressions from the DGE pipeline, as there are some samples missing due to lack of Ab titre data
+% 2.3.3.	Do not blind the transformation to experimental design matrix: “If many of genes have large differences in counts due to the experimental design, it is important to set blind=FALSE for downstream analysis.”
+% 2.3.4.	Here we use a simple design matrix of groups defined by all combos of day x R/NR
+% 2.4.	Run PEER by timepoint
+% 2.4.1.	Match GTeX pipeline: https://github.com/broadinstitute/gtex-pipeline/tree/63b13b8ced25cf8ab8e7a26f40a495e523630a9b/qtl , with some modifications.
+% 2.4.1.1.	Note this pipeline uses quantile normalized, rank INT transformed expression, as PEER input
+% 2.4.2.	Quantile normalize the samples with preprocessCore::normalize.quantiles
+% 2.4.2.1.	Causes the expressions of the samples to have the same empirical distribution
+% 2.4.2.2.	i.e. the the highest expression in each sample is set to the mean of the highest values of all samples, and in the case of no tied values, each sample’s expressions becomes a permutation of each other sample’s
+% 2.4.3.	Standardize expression of each gene with Rank-Based Inverse Normal Transformation
+% 2.4.3.1.	i.e. rank the expressions of a gene, then replace with values from the standard normal e.g. > rank.based.INT(1:5, c=3/8): [1] -1.1797611 -0.4972006  0.0000000  0.4972006  1.1797611
+% 2.4.4.	Setup and run PEER
+% 2.4.4.1.	Allow up to 10k iterations, start with n.samples/4 PEER factors
+% 2.4.4.2.	One can include known covariates. We don’t, as it causes weird things like PEER factors not being sorted in descending relevance
+% 2.4.4.2.1.	~ 1 + batch + rna.conc + Gender + Age.at.vaccination..years. + PC1.imputed + PC2.imputed + PC3.imputed + PC4.imputed
+% 2.4.4.2.2.	Note this includes an intercept that represents the mean expression
 
 Why RANKINT before PEER?
 % Are your covariates under control? How normalization can re-introduce covariate effects
@@ -120,11 +191,46 @@ expression PCs: if too many, will explain away the signal
 % https://doi.org/10.1371/journal.pgen.1002197
 Not a problem with cis-eQTLs, but trans might have more global effects
 
+    GWAS on PEER factors would pick up trans fx, cell count QTL effects
+
+Unlike PCs, PEER factors are not constrained to be orthogonal: adding more and more factors will not explain more of the variance
+    Also, they are weighted
+
 why include genetic PCs
 see stegle 2012 PEER paper: if PCs are not included, they can be recapitulated in the factors
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
 
+\subsubsection{Correction for cell type abundances}
+
+\subsection{\glsfmtshort{eQTL} mapping with mixed models}
+
+% 2.5.	Preprocess genotypes for limix
+% 2.5.1.	Convert MAF filtered VCF -> 012 -> hdf5 format
+% 2.5.1.1.	Do this for both strict 012 and continuous dosages
+% 2.5.2.	Also convert 012 -> matrix eqtl SNP matrix format
+% 2.5.2.1.	For eigenMT
+% 2.5.3.	Parse out snpinfo and snplocs from VCFs
+% 2.5.3.1.	Snpinfo for snp ids, for limix
+% 2.5.3.2.	Snplocs for snp positions, and eigenMT
+% 2.6.	Map eQTLs using limix 2.0, per timepoint
+% 2.6.1.	Map cis-eQTLs within +- 1Mb of the gene start
+% 2.6.1.1.	Phenotypes: per timepoint normalised input.expr from PEER script
+% 2.6.1.2.	Covariates: sex, batch, 4 genotype PCs, 4 PEER factors
+% 2.6.1.3.	Genotypes: MAF > 0.10 (in whole 169 individuals)
+% 2.6.1.4.	Kinship: from LDAK, leave-one-chrom-out
+% 2.6.2.	Output results in matrix eqtl-like output format
+
 \subsection{\glsfmtshort{eQTL} meta-analysis}
+
+% 2.7.	Meta-analysis with metafor
+% 2.7.1.	Per day, use rma(‘REML’) to fit random-effects model on association beta and beta_ste, per gene-SNP pair, using all timepoints from array/RNA-seq for that day
+% 2.8.	eigenMT to get number of independent tests per gene
+% 2.8.1.	split previously generated geneloc and snpsloc by chrom
+% 2.8.2.	per chrom, run eigenMT on limix output (arbitrary day, since the set of snps cis to each gene does not vary by day)
+% 2.9.	Compute hierarchical FDR
+% 2.9.1.	Per day
+% 2.9.1.1.	Use eigenMT estimates to apply local Bonferroni per gene
+% 2.9.1.2.	Compute global BH FDR
 
 Restricted to non-full bayesian methods.
 % See last paragraph of discussion in
@@ -140,18 +246,30 @@ They recommend using Hedges [1], to init, but this is bad???
 
 We use mode of gamma as an apriori estiamte of tau.
 
+compuationally challenging
+Note we can't just meta the top eqtls from RNAseq as a shortcut , as there is no guarantee the top would have been the top from a meta analysis in the beginning
+
 \subsubsection{Joint mapping}
+
+% 2.10.	mashr
+% 2.10.1.	Apply mashr to per-day meta-analysis beta/beta_ste results
 
 \subsubsection{mashr smoothing}
 
 review: condition/Cell-type specific methods
+refere to 2019-11-19 Cell-count specific eQTL mapping papers
 
 Simple, mixed models, joint models, multilocus models; Ending with why we chose mashr
 
+normally eqtls use perms for FDR
+
 mashr beats out stuff it compared to in the paper e.g. metasoft
 
-\subsubsection{Definining response eQTLs: Sharing}
+\subsubsection{Defining shared and response eQTLs}
 % See notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
+
+beta-comparison approach from Sarah Kim-Hellmuth 2017
+    note they correct for FDR
 
 \subsection{Colocalization}
 
@@ -180,15 +298,27 @@ Fine mapping
 % eQTL heatmap
 % eQTL PVE
 
-\subsection{Estimation of sharing}
+\subsection{Estimation of eQTL sharing}
 
 % Figure with e.g. reQTL
+
+\subsection{replication of shared eQTLs in whole blood}
 
 \subsection{Colocalisation of re-eQTLs with known context-specific immune QTLs}
 
 % Figure with e.g. reQTL coloc
 
-\subsection{Polygenic score to predict antibody response}
+\subsection{(pathway) Polygenic score to predict antibody response}
 
 \section{Discussion}
+
+Current limitations
+Confounded by changes in immune cell proportions in bulk PBMCs
+
+No conditional eQTL analysis to disentangle conditional effects
+Unclear connection to vaccine biology e.g. what genesets/pathways/cell types are driving the observed transcriptomic and eQTL response?
+Future work to address limitations
+Colocalisation with known associations
+Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014)
+Here the inverse: coloc is used to understand the biological relevance of observed expression variation
 
