@@ -5,179 +5,176 @@
 
 \chapter{Introduction}
 
-Why study human genetics?
-
-Human variation
-[...]
-Nature vs nurture
-[...]
-Causal anchors.
-[...]
-Leveraging natural G variation.
+\begin{outline}
+    \1 Variation between humans exists
+    \1 The eternal debate: nature vs nurture
+    \1 Why study human genetics?
+    \1 The structure of the genome and it's variation
+    \1 Finding causal anchors
+    \1 Leveraging natural G variation.
+\end{outline}
 
 \section{A brief history of complex trait genetics}
 
-Early days, Prior to GWAS
-
-Twin studies and heritability estimates.
-    of complex traits
-
-Mendelian genetics, family and linkage studies
-
-Candidate gene studies (Border et al., 2019)
-% candidate_gene_studies folder in dloads
+\begin{outline}
+    % From R.A. Fisher’s 1918 Paper to GWAS a Century Later
+    \1 Early days, prior to GWAS
+    \1 Mendelian genetics, family and linkage studies
+    \1 Twin studies and heritability estimates of complex traits
+    % candidate_gene_studies folder in dloads
+    \1 Candidate gene studies (Border et al., 2019)
+    \1 Appreciation of polygenicity
+\end{outline}
 
 \subsection{The advent of \glsfmtshort{GWAS}}
 
-Common disease, common variant
+\begin{outline}
 
-X years of GWAS
+    \1 Common disease, common variant hypothesis
+    \1 10 years of GWAS
+    \1 "The case of the missing heritability"
 
-Missing heritability
+    \1 genotyping arrays
+        \2 imputation
 
-comparison: array - WES - WGS
+    \1 WES (about 40Mbp of the genome)
+        \2 covers more of the genome in terms of bp
+        \2 but lower n, so lower power than array genotyping to do single variant associations
+        \2 why 50x? variable coverage due to pulldown 
 
-WES (about 40Mbp)
-        go rarer variation vs WGS
-            due to better coverage in just the exons
+    \1 WGS
+        \2 tradeoff between variant capture (n needed to observe variant) and sequencing depth (gives confidence to call variants)
+        \2 20x ok to call 90\% of singletons
 
-        but lower n,
-            so lower power than array genotyping to do single variant associations
+        \2 rare variants, including in nc regions
+            \3 current discovery biases, finding higher effect size vars first
 
-    WGS
+            \3 burden tests (e.g. SAIGE)
+                \4 to get gene, aggregate based on variant consequence scores e.g. vep scores
 
-        structural variants
+        \2 structural variants
 
-        rare variants
-            uncovered by arrays
-            generally higher effect size
-            often exonic
-
-            burden tests (e.g. SAIGE)
-                aggregate based on variant consequence scores e.g. vep scores
-                to get gene
-
-future outlook
-
-    expanding into global populations, global biobanks
-        Gains from Africa H3Africa
-        % https://twitter.com/skathire/status/1202554709107712001?s=09
-        and Asia
-
-    polygenic scores
-
-        use in the clinic
-            % doi: http://dx.doi.org/10.1101/19013086
-            e.g. polygenic background can modify penetrance 
-
-    pathway prs
-        challenge is variant to gene assignment/mapping
-            e.g. restrictions to fine mapped eQTLs
-
-    Pathway analysis
-        the great hairball gambit
+\end{outline}
 
 \subsection{Post-\glsfmtshort{GWAS}: narrowing the signal}
 
-PheWAS\autocite{verma2017CurrentScopeChallenges}
+\begin{outline}
 
-Fine-mapping
+\1 PheWAS\autocite{verma2017CurrentScopeChallenges}
 
-    as sample sizes get larger, and provided that sequencing or imputation can
-    more exhaustively identify all of the candidate SNPs on the haplotype, rare
-    recombination events will pile up, helping to make the causal SNP stand out
-    above the passenger SNPs that usually travel on its haplotype [Huang 2017].
+\1 Fine-mapping
 
-    tag snps
-    causal snps may not be directly typed, may need to be imputed
+    \2 as sample sizes get larger, and provided that sequencing or imputation can more exhaustively identify all of the candidate SNPs on the haplotype, rare recombination events will pile up, helping to make the causal SNP stand out above the passenger SNPs that usually travel on its haplotype [Huang 2017].
+
+    \2 tag snps: causal snps may not be directly typed, may need to be imputed
+
+\end{outline}
 
 \subsection{Post-\glsfmtshort{GWAS}: interpretation of genetic associations with molecular studies}
 
-Locus to gene mapping problem
-    nc snps
-        Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
+\begin{outline}
 
-Why care?
-    Understand mech. of causal genes
+\1 Locus to gene mapping problem
+    \2 nc snps
+        \3 Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
 
-    Drug target prioritisation for disease traits
+\1 using intermediate/endophenotypes
 
-    how to drug a complex disease with no single 'candidate gene'?
+\1 coloc methods
+    % (that photo on all the coloc methods that all attempt to solve the problem)
 
-        e.g. of successful GWAS -> drug target
-            drug targets with genetic support are more likely
+    \2 coloc
+        \3 Under the assumption that the mechanism by which non-coding associations affect disease risk is through their effect on gene expression, a successful way to link associations to their target gene is by statistical colocalisation with eQTL datasets, to determine if the GWAS and eQTL signal share the same causal variant[Co-localization of Conditional eQTL and GWAS Signatures in Schizophrenia].
 
-        building allelic series
-
-coloc methods
-    (that photo on all the coloc methods that all attempt to solve the problem)
-
-    coloc
-        Under the assumption that the mechanism by which non-coding associations affect disease risk is through their effect on gene expression, a successful way to link associations to their target gene is by statistical colocalisation with eQTL datasets, to determine if the GWAS and eQTL signal share the same causal variant[Co-localization of Conditional eQTL and GWAS Signatures in Schizophrenia].
-
-    TWAS
+    \2 TWAS
     % When a TWAS gene also colocalizes with your trait of interest you have a 19% chance you've found the correct causal gene.
     % https://twitter.com/Eric_Fauman/status/1220885592193499137?s=09
 
-    MR
+    \2 MR
 
-for eqtls, closest gene is not the best
+    \2 a transcriptional risk score (TRS)
+
+\1 for eqtls, closest gene is often not the best candidate
         % https://twitter.com/Eric_Fauman/status/1198595609013489670/photo/1
-    annotation of nc var is functional genomics
-        e.g. gtex, ENCODE
+    \2 annotation of nc var is functional genomics
+        \3 e.g. gtex, ENCODE
         % http://www.cureffi.org/2019/12/04/prnp-gwas-other-traits/
         % Another solution is functional genomics — you ask whether the GWAS hit SNPs are also known, from other datasets, to have functional effects on a gene. See, as one example, a recent study of drug targets for immune-related traits [Fang 2019].
+\end{outline}
 
-\section{Context is key}
+\section{The effects of genetic variation: context is key}
 
-for both gwas, and molQTLs, context is key
+\begin{outline}
 
-contexts
-    tissue
-    cell type
-    stimulation conditions
+\1 the dreaded GxE interaction
+    \2 "In genetics, context matters"
+    % https://www.nature.com/articles/s41588-019-0515-7
+
+    \2 for both gwas, and molQTLs, context is key
+
+\1 envs: 
+    \2 tissue
+    \2 cell type
+    \2 interaction between cells in vivo
+    \2 stimulation conditions
 
     % https://academic.oup.com/hmg/article/23/7/1947/655184/
-    QTLs can interact with sex and age
+\1 QTLs can interact with sex and age
 
-    interaction between cells in vivo
+\1 types of context specific QTL
+    \2 ackerman conditional vs dynamic
 
-    axis:
-        bulk, sorted, sc
-            current sc will only detect highly expressed genes
-
-types of conditinoal QTL
-    ackerman conditional vs dynamic
-
-Review of stimulation condition QTL mapping, invitro and invivo
-what models used? did they use change scores for longitudinal?
-
-Mechanisms: 
+\1 Mechanisms of reQTLs
 % Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
 % Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
 
-\subsection{Context-specific immune response QTLs in vitro}
+\end{outline}
 
-A type of context is cell type
-Confounds actual context of stimulation
+\section{So what?}
 
-Review of cell type specific methods here
+\begin{outline}
 
-\subsection{\textit{in vivo} response QTL mapping}
+\1 Why care?
 
-less popular
+    \2 polygenic scores, prs: marker for diagnosis
 
-in vivo pros
-    whole organism phenotypes
-    more likely to be repeated measures
+        \3 use in the clinic
+            % doi: http://dx.doi.org/10.1101/19013086
+            \4 e.g. polygenic background can modify penetrance 
 
-Review of in vivo mapping.
-Franco
-Lareau smallpox apoptosis
-Caliskan Rhinovirus
-Davenport
+        \3 but challenges from:
+
+            \4 ancestry effects
+            % https://twitter.com/skathire/status/1202554709107712001?s=09
+            \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
+
+            % Variable prediction accuracy of polygenic scores within an ancestry group
+            % https://elifesciences.org/articles/48376
+            \4 non-ancestry effects
+
+    \2 Pathway analysis: "the great hairball gambit"
+    \2 pathway prs
+        \3 challenge is variant to gene assignment/mapping
+            \4 e.g. restrictions to fine mapped eQTLs
+
+    \2 Understand mech. of causal genes: molecular pathogenesis
+
+    \2 Drug target prioritisation for disease traits
+
+    \2 how to drug a complex disease with no single 'candidate gene'?
+
+        \3 e.g. of successful GWAS -> drug target
+            \4 drug targets with genetic support are more likely
+
+        \3 building allelic series
+
+\end{outline}
 
 \section{Immunity is a complex trait}
+
+Is it even plausible that genetic var is important?
+Brodin: most env paper.
+
 Immune-mediated diseases
 Heritability of immune parameters and immune-mediated diseases
     ranges from 
@@ -195,6 +192,31 @@ The need for controlled immune challenge in trials.
 Studies of natural infection are complicated.
 clinical trials as an opportunity: 
     Vaccines and drugs used as controlled immune challenge.
+
+\subsubsection{Context-specific immune response QTLs in vitro}
+
+\begin{outline}
+
+\1 why so many in vitro studies?
+
+\1 reQTLs and DE can be decoupled.
+% Maranville, J. C., Luca, F., Richards, A. L., Wen, X., Witonsky, D. B., Baxter, S., Stephens, M., & Di Rienzo, A. (2011). Interactions between Glucocorticoid Treatment and Cis-Regulatory Polymorphisms Contribute to Cellular Response Phenotypes. PLoS Genetics, 7(7), e1002162. https://doi.org/10.1371/journal.pgen.1002162
+
+\end{outline}
+
+\subsubsection{\textit{in vivo} response QTL mapping}
+
+less popular
+
+in vivo pros
+    whole organism phenotypes
+    more likely to be repeated measures
+
+Review of in vivo mapping.
+Franco
+Lareau smallpox apoptosis
+Caliskan Rhinovirus
+Davenport
 
 \section{Immune response to vaccination}
 
@@ -234,6 +256,11 @@ Overview, including pathogen-side factors
 
 \subsection{Genetics factors affecting vaccine response}
 
+% See protocol paper for references
+
+measles
+% https://www.sciencedaily.com/releases/2011/09/110922134546.htm
+
 Relatively few studies have assessed the impact of human genetic variation on responses[Franco, Lareau 2016].
 
 This is despite evidence from genome-wide association studies suggesting such genetic variation influences immune response to vaccines and susceptibility to disease[Systems immunogenetics of vaccines.].
@@ -251,8 +278,11 @@ Review paper on GWAS for vaccines mooney2013SystemsImmunogeneticsVaccines
 
 \section{Immune response to biologic therapies}
 
+\subsection{Genetics factors affecting biologic responses}
+
+e.g. PANTS immunogenicity 
+
 \section{Thesis overview}
-% TODO
 
 % By chapter CCC overview.
 Chapters 1 and 2.

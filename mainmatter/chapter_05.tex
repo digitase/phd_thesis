@@ -6,12 +6,40 @@
 
 \section{Introduction}
 
+Why do some people not respond?
+
+Explore time series transcriptomic
+Find out optimal spline degree.
+
+Creating composite features to conduct genetic associations on.
+
+Identifying signatures of response.
+
 \section{Methods}
+
+immunomods
+% > pheno %>% filter(RNAseq_Sample_Status == 'Pass') %>% distinct(PANTS.ID, .keep_all=T) %>% select(Primary_Response, Ever_Immunomodulator) %>% table
+%                 Ever_Immunomodulator
+% Primary_Response  NO YES
+%            FALSE  24 129
+%            TRUE   28 159
+% > pheno %>% filter(RNAseq_Sample_Status == 'Pass') %>% distinct(PANTS.ID, .keep_all=T) %>% select(Primary_Response, On_Immunomodulator_At_Baseline) %>% table
+%                 On_Immunomodulator_At_Baseline
+% Primary_Response FALSE TRUE
+%            FALSE    85   68
+%            TRUE     83  104
+% > pheno %>% filter(RNAseq_Sample_Status == 'Pass') %>% distinct(PANTS.ID, .keep_all=T) %>% select(Primary_Response, On_Steroids_At_Baseline) %>% table
+%                 On_Steroids_At_Baseline
+% Primary_Response FALSE TRUE
+%            FALSE    83   70
+%            TRUE    133   54
 
 In the IFX+ADA cohort, 
     DE
     PR vs PNR baseline
     PR vs PNR and w14
+
+n patients with data for each number of visits
 
 \subsection{Covariates to use}
 

@@ -54,24 +54,65 @@ How does common genetic variation affect response to vaccine?
 eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
 Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
 
-\subsection{Context-specific immune response QTLs for flu}
+\subsection{Genetic factors affecting influenza vaccine response}
+
+% 2008
+% Immunogenetics of Seasonal Influenza Vaccine Response*https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
+
+% Summ this review
+Impact of host genetic polymorphisms on vaccine induced antibody response
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4962936/#!po=22.7273
+% Individuals carrying the minor allele in one or both alleles showed an increased seroconversion rate after influenza vaccination.62
+% Further SNPs that influence the humoral immune response to influenza vaccination have been reported (see Table 1):
+
+% 2019
+% Common Genetic Variations Associated with thePersistence of Immunity following ChildhoodImmunization
+% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
+% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
+
+\subsection{Context-specific immune response QTLs for influenza vaccine response}
 
 if change in expression vs d0 is under genetic control, we should see change in effect size of eqtl vs d0
 
+Summarise Franco et al
+
+\subsection{Chapter summary}
+
 \section{Methods}
 
-\subsection{expression norm}
-2018-03-15 in log
-
-\subsection{Genotyping data generation}
-
-\subsection{Genotyping quality control}
-
-\subsection{Imputation}
+\subsection{Genotype imputation}
 
 why exclude x chrom?
 % https://www.nature.com/articles/ng.467
 As is standard for imputation, we excluded all X-linked SNPs for the following reasons: (i) the X chromosome has to be treated differently from the autosomes; (ii) it cannot be predicted which allele is active on the X chromosome, (iii) testing males separately from females results in different sample sizes and power. Imputation of SNPs in the HapMap CEU population was performed using either MACH46 or IMPUTE47. All SNPs with a MAF <0.01 were excluded from analysis. In total, up to 2.11 million genotyped or imputed SNPs were analyzed.
+
+\subsection{Estimation of cell type abundances}
+
+FACS data norm; imputation; scaling
+
+deconv
+
+    decon eqtl
+        decon2 has an interesting method: no genotype main effect
+        requires full data i.e. it's an eqtl mapper
+
+    % Westra, H.-J., Arends, D., Esko, T., Peters, M. J., Schurmann, C., Schramm, K., … Franke, L. (2015). Cell Specific eQTL Analysis without Sorting Cells. PLOS Genetics, 11(5), e1005223. https://doi.org/10.1371/journal.pgen.1005223
+    cell type interaction terms from proxy genes
+
+% E.g. Davenport 2018: “observed eQTL interactions could be the consequence of a cellular subpopulation whose frequency is being altered by the environmental perturbagen or variability in cell type proportions between individuals.”
+% “inferred the relative proportions of nine hematopoietic populations from the RNA-seq data using CIBERSORT”
+% After correcting for cell proportions “reduction in significant interactions suggests that some of these interactions may be related to changes in cell proportions”
+
+Why impute for cell counts but not for eQTL?
+expression matricse are mostly complete, and we only exclude genes based on low expression in RNAseq
+we cannot drop whole panels so easily like we can drop genes
+
+Note, the use of gene signatures for deconv
+    in stimulated samples
+    does not distinguish upreg from prolif either
+    if expression goes up, the method will detect more of the signature
+    i.e. it may correct away some signal of upregulation
+
 
 \subsection{Mapping cis-eQTLs with LMM}
 
@@ -101,58 +142,17 @@ Why not mapping on deltas? (if we are interested in the direct question of G on 
 
     NOTE: peer factors would need to be computed on the foldchange phenotype
 
-
 The final model:
 
-\subsubsection{Estimation of cell type abundances}
-
-deconv
-
-    decon eqtl
-        decon2 has an interesting method: no genotype main effect
-        requires full data i.e. it's an eqtl mapper
-
-    % Westra, H.-J., Arends, D., Esko, T., Peters, M. J., Schurmann, C., Schramm, K., … Franke, L. (2015). Cell Specific eQTL Analysis without Sorting Cells. PLOS Genetics, 11(5), e1005223. https://doi.org/10.1371/journal.pgen.1005223
-    cell type interaction terms from proxy genes
-
-% E.g. Davenport 2018: “observed eQTL interactions could be the consequence of a cellular subpopulation whose frequency is being altered by the environmental perturbagen or variability in cell type proportions between individuals.”
-% “inferred the relative proportions of nine hematopoietic populations from the RNA-seq data using CIBERSORT”
-% After correcting for cell proportions “reduction in significant interactions suggests that some of these interactions may be related to changes in cell proportions”
-
-Why impute for cell counts but not for eQTL?
-expression matricse are mostly complete, and we only exclude genes based on low expression in RNAseq
-we cannot drop whole panels so easily like we can drop genes
-
-Note, the use of gene signatures for deconv
-    in stimulated samples
-    does not distinguish upreg from prolif either
-    if expression goes up, the method will detect more of the signature
-    i.e. it may correct away some signal of upregulation
-
-\subsubsection{Kinship matrix computation}
-
-LDAK kinship matrix construction http://dougspeed.com/method-overview/
-
-Note: can be negative
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6157025/
-LDAK version 4.9 [3] and IBDLD version 3.33 [4] were used to derive 2 empirical kinship matrices based on the GAW20 genotype data. For LDAK, in principle, this kernel should correspond to a genetic relationship matrix; in practice, however, we observed that LDAK estimates of self-relatedness were widely spread around their expectation of 1 (Fig. 1a). For IBDLD the estimates of self-relatedness were closer to 1 (Fig. (Fig.1b).1b). The empirical kinship estimate matrices from LDAK and IBDLD were postprocessed to remove negative nonzero values and scaled to have a diagonal equal to 1.
-
-% 1.	Build GRM using LDAK 5
-% 1.1.	Start with pre-imputed genotypes coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc6
-% 1.1.1.	“Estimates of SNP heritability are very sensitive to genotyping errors”, so we can’t use imputed SNPs without filtering for high INFO.
-% 1.2.	Prune to MAF 0.05, autosomes only
-% 1.3.	Compute LDAK SNP weightings
-% 1.4.	Compute kinships for each chromosome
-% 1.5.	Join per-chromosome kinships into genome-wide kinships
-% 1.5.1.	Use the leave-one-chromosome-out strategy
-
 \subsubsection{Expression normalisation}
+
+2018-03-15 in log
 
 Rank-based int:
 heavily used in genetics, 
     Although criticised: "Rank-Based Inverse Normal Transformations are Increasingly Used, But are They Merited?"
 
-\subsubsection{PEER}
+\subsubsection{Finding hidden confounders with PEER}
 
 % 2.	Infer global confounders by detecting hidden factors affecting expression with PEER
 % 2.1.	“batch effects and other global confounders reduce the power to find expression quantitative trait loci”
@@ -200,8 +200,6 @@ why include genetic PCs
 see stegle 2012 PEER paper: if PCs are not included, they can be recapitulated in the factors
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
 
-\subsubsection{Correction for cell type abundances}
-
 \subsection{\glsfmtshort{eQTL} mapping with mixed models}
 
 % 2.5.	Preprocess genotypes for limix
@@ -219,6 +217,9 @@ see stegle 2012 PEER paper: if PCs are not included, they can be recapitulated i
 % 2.6.1.3.	Genotypes: MAF > 0.10 (in whole 169 individuals)
 % 2.6.1.4.	Kinship: from LDAK, leave-one-chrom-out
 % 2.6.2.	Output results in matrix eqtl-like output format
+
+Sample AC thresh
+    note they are dosages. if they were not, use ac thresh to estimate number of hom minor expected
 
 \subsection{\glsfmtshort{eQTL} meta-analysis}
 
@@ -249,12 +250,10 @@ We use mode of gamma as an apriori estiamte of tau.
 compuationally challenging
 Note we can't just meta the top eqtls from RNAseq as a shortcut , as there is no guarantee the top would have been the top from a meta analysis in the beginning
 
-\subsubsection{Joint mapping}
+\subsubsection{Joint mapping with mashr}
 
 % 2.10.	mashr
 % 2.10.1.	Apply mashr to per-day meta-analysis beta/beta_ste results
-
-\subsubsection{mashr smoothing}
 
 review: condition/Cell-type specific methods
 refere to 2019-11-19 Cell-count specific eQTL mapping papers
@@ -263,62 +262,70 @@ Simple, mixed models, joint models, multilocus models; Ending with why we chose 
 
 normally eqtls use perms for FDR
 
+used for smoothing, info sharing, fdr
+
 mashr beats out stuff it compared to in the paper e.g. metasoft
 
-\subsubsection{Defining shared and response eQTLs}
+lfsr:
+% type s error rates for classical and bayesian single and multiple comparison procedures
+% WhyWe (Usually) Don’t Have to Worry About Multiple Comparisons (2012)
+% Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors (2014)
+% Stephens, M. (2016). False discovery rates: A new deal. Biostatistics, kxw041. https://doi.org/10.1093/biostatistics/kxw041
+
+
+\subsection{Defining shared and response eQTLs}
 % See notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
 
 beta-comparison approach from Sarah Kim-Hellmuth 2017
     note they correct for FDR
 
-\subsection{Colocalization}
-
-% What is coloc and why coloc
-
-% See coloc_comparisons in notes for a summary
-
-Due to the increasingly abundant
-
-For example, ran 
-
-Coloc and assumptions
-
-Hypercoloc and assumptions
-
-large numbers of traits
-
-Confounding by multiple causal
-
-Fine mapping
-
 \section{Results}
 
-\subsection{eQTLs at each timepoint}
+\subsection{Overview of eQTLs at each timepoint}
 
 % eQTL heatmap
+% eQTL distance to TSS
 % eQTL PVE
 
-\subsection{Estimation of eQTL sharing}
+\subsubsection{Estimation of eQTL sharing}
 
 % Figure with e.g. reQTL
 
-\subsection{replication of shared eQTLs in whole blood}
+Look at diff in beta, not multiples, other 0->1 will be inf
 
-\subsection{Colocalisation of re-eQTLs with known context-specific immune QTLs}
+\subsubsection{TODO Replication of shared eQTLs in whole blood}
+
+\subsection{Characterising re-eQTLs at each timepoint}
+
+\subsection{The mechanism of reQTLs}
+
+\subsection{TODO Colocalisation of re-eQTLs with known context-specific immune QTLs}
 
 % Figure with e.g. reQTL coloc
+Colocalisation with known associations;
+Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014);
+Here the inverse: coloc is used to understand the biological relevance of observed expression variation
 
-\subsection{(pathway) Polygenic score to predict antibody response}
+% What is coloc and why coloc
+% See coloc_comparisons in notes for a summary
+Choice of method; 
+Coloc and assumptions; Hypercoloc and assumptions
+
+
+\subsection{TODO Disruption of binding site motifs as a model for re-eQTLs}
+
+See models from Fu et al, Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression
 
 \section{Discussion}
 
-Current limitations
-Confounded by changes in immune cell proportions in bulk PBMCs
+Current limitations;
+Confounded by changes in immune cell proportions in bulk PBMCs;
+Unclear connection to vaccine biology e.g. what genesets/pathways/cell types are driving the observed transcriptomic and eQTL response?;
 
-No conditional eQTL analysis to disentangle conditional effects
-Unclear connection to vaccine biology e.g. what genesets/pathways/cell types are driving the observed transcriptomic and eQTL response?
-Future work to address limitations
-Colocalisation with known associations
-Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014)
-Here the inverse: coloc is used to understand the biological relevance of observed expression variation
+\subsection{limitations: The mechanism of reQTLs}
+
+\subsection{Conditional eQTL effects}
+Confounding by multiple causal variants?;
+No conditional eQTL analysis to disentangle conditional effects;
+Are re qtls more likely to be distal and secondary?
 

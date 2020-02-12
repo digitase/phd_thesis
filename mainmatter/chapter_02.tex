@@ -185,6 +185,7 @@ Quantification
 % 5.1.1.	60675 loci, 223 samples
 % 5.2.	Add gene annotation based on EnsDb.Hsapiens.v86
 % 5.3.	Low-count filtering (>0.5 CPM in 10% of 223 samples i.e. 22 samples)
+% Max zero prop: need to be stringent as limma doesn't account for neg bin
 % 5.3.1.	29138 loci, 223 samples
 % 5.4.	Remove globin genes and short non-coding RNAs
 % 5.4.1.	Human globins: https://en.wikipedia.org/wiki/Globin#Examples
@@ -255,12 +256,16 @@ Filtering
 Batch effect correction (see batch effects Zotero tag)
 % Chen, C., Grennan, K., Badner, J., Zhang, D., Gershon, E., Jin, L., & Liu, C. (2011). Removing Batch Effects in Analysis of Expression Microarray Data: An Evaluation of Six Batch Adjustment Methods. PLoS ONE, 6(2), e17238. https://doi.org/10.1371/journal.pone.0017238
 Combat is best here.
+% ***
 % Espín-Pérez, A., Portier, C., Chadeau-Hyam, M., van Veldhoven, K., Kleinjans, J. C. S., & de Kok, T. M. C. M. (2018). Comparison of statistical methods and the use of quality control samples for batch effect correction in human transcriptome data. PLOS ONE, 13(8), e0202947. https://doi.org/10.1371/journal.pone.0202947
 LM, LMM, Combat were comparable.
+LMM and LM correcting for batch provide a slightly safer option than Combat by identifying stronger relationships between big effect size and gene expression and better true/false positive rates for small effect size.
 % Liu, Q., & Markatou, M. (2016). Evaluation of Methods in Removing Batch Effects on RNA-seq Data. Infectious Diseases and Translational Medicine, 2(1), 3–9. https://doi.org/10.11979/idtm.201601002
 In some cases, Combat overcorrects.
 % Nygaard, V., Rødland, E. A., & Hovig, E. (2015). Methods that remove batch effects while retaining group differences may lead to exaggerated confidence in downstream analyses. Biostatistics, (January), kxv027. https://doi.org/10.1093/biostatistics/kxv027
 Main issue is unbalanced design, which affects even 2-way anova. Rather than 2-step, Safest is to use a covariate, which seems to at least create appropriate conficence intervals (1e).
+% https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2263-6
+Unbalanced batches:  Batch 3 and batch 4 have smaller sample size than the other batches, thus their variance estimates are impacted more by outlying samples.
 
 \begin{figure}
 \includegraphics[width=1.0\textwidth]{example-image}
@@ -484,7 +489,7 @@ Prior for logFC
 
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
 \1 So we use a very weak normal prior, scaled to each coef, as we still want some scaling based on parameter scales.
-    \2 Equiv to saying 95pc chance that effect is within log2FC of 20.
+    \2 Equiv to saying 95pc chance that effect is within 20sds (of what?).
     % > qnorm(0.975, 0, 10)
     % [1] 19.59964
 
@@ -504,6 +509,8 @@ Prior for logFC
     \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
     \caption{Priors for day 1 vs day 0 DGE meta-analysis.}
 \end{figure}
+
+PPI possible, but too slow.
 
 \subsection{Gene set enrichment analysis}
 
