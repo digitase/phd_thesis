@@ -23,26 +23,29 @@
     % http://europepmc.org/article/PMC/3224079
     \2 origins; timeline
 
-\1 Vaccine development process in response to the outbreak
+\1 Vaccine development process in response to the outbreaks
     % \url{https://www.ema.europa.eu/en/human-regulatory/overview/public-health-threats/pandemic-influenza/2009-h1n1-influenza-pandemic/medicines-authorised-during-pandemic}
-    \2 Pandemrix was one of several vaccines licensed
+    \2 Pandemrix was one of several vaccines licensed.
     % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3224079/}
     \2 Efficacy, dosing: \enquote{...a single dose of monovalent 2009 H1N1 vaccine was recommended in adults, but young children were recommended to receive 2 doses (reviewed by [3••]). It is likely that a single dose was sufficient to induce immunity in adults because prior exposure to seasonal H1N1 viruses had immunologically primed the population.}
     % "Seasonal influenza vaccine provides priming for A/H1N1 immunization." \url{https://www.ncbi.nlm.nih.gov/pubmed/20371459}
     % Demonstration in a mouse model: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3024675/}
     \2 Inclusion of H1N1 strains into seasonal vaccines
         % Sobolev sampled in March 2010 to August 2011
-        \3 Later cohorts may have recall response to H1N1 from seasonal vaccination.
+        \3 Later cohorts may have recall response to H1N1 from seasonal vaccination
 
 \end{outline}
 
-\subsection{Systems vaccinology of influenza vaccines}
+\subsection{Response to influenza vaccines}
 
 \begin{outline}
-
-\1 Review influenza vaccine specific sysvacc papers (e.g. Nakaya's papers)
-    \2 inclu. prevaccination signatures paper
-
+    \1 classical immunological response to influenza vaccines
+        \2 differ by type of vaccine
+    \1 correlates of protection
+        \2 mention HAI/MN assays
+    \1 Review influenza vaccine specific sysvacc papers (e.g. Nakaya's papers)
+        \2 mention main timepoints
+        \2 inclu. prevaccination signatures paper, and
 \end{outline}
 
 \subsection{The \glsfmtfull{HIRD} study}
@@ -66,7 +69,7 @@
 
 \begin{outline}
 
-    \1 Rationale for our study
+    \1 Rationale for our study:
         \2 Sobolev uses array transcriptomic data for a subset of individuals; we use RNAseq data for a larger number of individuals, which allows us to look at a larger number of genomic features, and conduct a meta-analysis.
         \2 Instead of the binary definition for responder/NR used by Sobolev, we use a continuous response measure, for increased power. This also lets us normalise for baseline titre and combine HAI and microneutralization assay values.
             \3 can we find consensus, and importantly prevaccination signatures of response?
@@ -74,30 +77,75 @@
         \2 The overall pattern of innate response at d1, adaptive response at d7, agrees with Sobolev.
         \2 Based on our continuous Ab phenotype, we find consensus response signatures
             \3 plasma cells and inflammatory response overall
-            \3 at each timepoint, d0, d1, d7 ... TODO
-                \4 Compare the d7 split to Sobolev TODO 
+            \3 at each timepoint, d0, d1, d7 ... 
+                \4 Compare the d7 split to Sobolev 
+    \1 Finally, turn our focus to prediction, i.e. going from R status as a predictor to a response variable.
 
 \end{outline}
 
 \section{Methods}
 
-\subsection{Pre-existing \glsfmtshort{HIRD} study data and additional sampling}
+\subsection{Existing \glsfmtshort{HIRD} study data and additional data}
 
-Sample demographics: age, sex, self-reported ethnicity
+The design of the \gls{HIRD} study is described in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+In brief, the study enrolled 178 healthy adult volunteers in the UK\todo{ref demographics table}.
+The vaccine dose was administered after blood sampling on day 0; five other longitudinal samples were taken on days -7, 0, 1, 7, 14 and 63.
+Serological responses were medasured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell counts (fluorescence-activated cell sorting, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
+
+In additional to the existing data, we generated array genotype data for 169 individuals; and \gls{RNAseq} data at days 0, 1, and 7, for 75 individuals not included in the microarray subset.
+An overview of all datasets is shown in \autoref{fig:hird_design}.
+
+\missingfigure{Tables of demographics (potential covariates) by dataset: array and rnaseq, including age, sex, self-reported ethnicity}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/graphics/hird_design-crop.pdf}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/hird_design-crop.pdf}
     \caption{Data types, timepoints, and sample sizes. Individuals were vaccinated after day 0 sampling. Vaccine-induced antibodies measured by \gls{HAI} and \gls{MN} assays. Array and \gls{RNAseq} gene expression measured in the \gls{PBMC} compartment.}
     \label{fig:hird_design}
 \end{figure}
 
 \subsection{Genotype data generation}
 
-DNA extraction; genotyping array
+\todo{Add to collab note}
+DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was performed using on the Infinium CoreExome-24 BeadChip (Illumina).
+In total, 192 samples from 176 patients in the HIRD cohort were genotyped at 550601 markers, including replicate samples submitted for patients where extracted DNA concentrations were low.
 
 \subsection{Genotype data preprocessing}
 
-% 1.	QC
+Using PLINK (v1.90b3w), genotype data underwent the following quality control procedures to remove poorly genotyped samples and markers:
+max marker missingness across samples $< 5\%$, 
+max sample missingness across markers $< 1\%$, 
+max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \autoref{fig:hird_genotype_sample_hetRate_missingness}),
+% The HWE threshold should depend on the multi-ethnicity of the cohort
+removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{--hwe} option, $\text{p} < 0.00001$).
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc2.pdf}
+    \caption{Sample filters for missingness vs heterozygosity rate.}
+    \label{fig:hird_genotype_sample_hetRate_missingness}
+\end{figure}
+
+To exclude highly-related individuals and deduplicate replicate samples, pairwise kinship coefficients were computed on \gls{MAF} $< 0.05$ pruned genotypes using KING (v1.4).
+For each pair of samples with pairwise kinship coefficient $< 0.177$ (first-degree relatives or closer), the sample with lower marker missingness was selected.
+
+After filtering, 169 samples and 549414 markers remained.
+
+\subsection{Computing genotype \glsfmtshortpl{PC} as covariates for ancestry}
+
+The \gls{HIRD} cohort is multi-ethnic\todo{ref demographics table}, hence there is potential for confounding by population structure (sample structure due to genetic ancestry) in expression and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount,brown2018ExpressionReflectsPopulation}.
+Treating HapMap 3 samples as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK --indep-pairwise 50 5 0.2}).
+\gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
+For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
+The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as covariates for ancestry downstream.
+\todo{Add Tracy-Widom statistics for PCs}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
+    \caption{HIRD samples (cyan) projected onto \gls{PC}1 and PC2 axes defined by PCA of HapMap samples. The first two PCs separate European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left) populations.}
+    \label{fig:hird_genotype_pca_withHapmap}
+\end{figure}
+
+\subsection{Genotype phasing and imputation}
+
 % 2.	Online imputation service to phase and impute chr 1-22 and X
 % 2.1.	Phase with Eagle v2.4 (version in imputation logs.tar.gz)
 % 2.2.	Impute with PBWT 3.1-v3.1-2-gbf6ebe2+htslib-1.3.2-199-gec1d68e-dirty (version in vcf header)
@@ -106,31 +154,22 @@ DNA extraction; genotyping array
 % 2.2.2.1.	X:1-2699520: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR1.shapeit3.mac5.aa.genotypes
 % 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
 % 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
-% 3.	Liftover with crossmap
+Prior to imputation, 213277 markers with $\text{\gls{MAF}} < 0.001$ (no variation in \gls{HIRD}) were removed.
+Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service\footnote{\url{https://imputation.sanger.ac.uk/}}, which involves pre-phasing with EAGLE2 (v2.4), then imputation with PBWT (v3.1) using the Haplotype Reference Consortium (r1.1) panel.
+Markers were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.	Filtering
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
-% Impute PCs
-Sample and marker QC; phasing and imputation; post-imputation filters; PC projection; PC imputation
+Poorly-imputed markers with ($\text{INFO} < 0.4$) or missingness $> 5\%$ were removed, resulting in 40290981 markers.
 
-\begin{figure}
-    \includegraphics[width=1.0\textwidth,page=2]{./mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc2.pdf}
-    \caption{Sample filters for missingness vs heterozygosity rate.}
-\end{figure}
+\subsection{\glsfmtshort{RNAseq} data generation}
 
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
-    \caption{Samples projected onto HapMap PC axes.}
-\end{figure}
+Total RNA was extracted from \glspl{PBMC} using the Qiagen RNeasy Mini kit, with on-column DNase treatment.
+RNA integrity was checked on the Agilent Bioanalyzer and mRNA libraries were prepared with the KAPA Stranded mRNA-Seq Kit (KK8421), which uses poly(A) selection.
+% 7 lanes x 3 plates
+To avoid confounding of timepoint and batch effects from pooling, samples were pooled by library prep plate, ensuring libraries from all timepoints of an individual were in the same pool, and then sequenced across multiple lanes as technical replicates (HiSeq 4000, 75bp paired-end).
 
-\subsection{RNA-seq data generation}
-
-Do we have enough reads for RNAseq analysis? \url{https://www.ncbi.nlm.nih.gov/pubmed/24434847} and doi:10.1093/bioinformatics/btt688
-
-Summing tech reps: sum of poison is poisson, average is not: https://www.biostars.org/p/304552/
-
-\subsection{RNA-seq data preprocessing}
-
+% To get to cram files:
 % From .cram headers:
 % 1.	The NextSeq, HiSeq, and NovaSeq Sequencing Systems generate raw data files in binary base call (BCL) format.
 % 1.1.	HiSeq Sequencing Control Software (SCS), version HD 3.4.0.38, used for basecalling
@@ -148,18 +187,35 @@ Summing tech reps: sum of poison is poisson, average is not: https://www.biostar
 % 8.1.	/lustre/scratch117/core/sciops_repository/references/Homo_sapiens/GRCh38_15_plus_hs38d1/all/fasta/Homo_sapiens.GRCh38_15_plus_hs38d1.fa
 % 9.	NOTE: Note lots of intermediate biobambam 2.0.76 and scramble processing steps, not all are listed.
 
-\begin{outline}
-QC
-\1 fastqc (sequence quality, GC content, length, duplication, overrepresented sequences incl adapters)
-\1 qualimap
-\1 salmon qc
-\end{outline}
+\todo{Can add other fastqc plots e.g. kmers, overrepresented seqs, seq length}
+% Genomic origin of reads and gene end biases were assessed using Qualimap, after aligning the reads to the human GRCh38_15_plus_hs38d10 reference transciptome using tophat2.
+RNA-seq quality metrics were assessed using FASTQC\footnote{\url{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}} and Qualimap\autocite{okonechnikov2015QualimapAdvancedMultisample}, then visualised with MultiQC\autocite{ewels2016MultiQCSummarizeAnalysis}.
+% See log 2017-11-20 for fastqc discussion
+Sequence quality was high (\autoref{fig:hird_fastqc_seqQual}), and duplication levels were low (\autoref{fig:hird_fastqc_seqDupe}).
+The unimodal GC-content distribution suggested negligible levels of non-human contamination (\autoref{fig:fastqc_gc}).
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/fastqc_Sequence Quality Histograms.png}
-    \caption{The mean quality value across each base position in the read.}
-    \label{fig:fastqc_sequenceQualityHistogram}
+	\centering
+	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_base_sequence_quality_plot_1.pdf}
+    \caption{FastQC sequence quality versus read position for \gls{HIRD} \gls{RNAseq} samples.}
+	\label{fig:hird_fastqc_seqQual}
 \end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_sequence_duplication_levels_plot_1.pdf}
+	\caption{FastQC sequence duplication levels for \gls{HIRD} \gls{RNAseq} samples.}
+	\label{fig:hird_fastqc_seqDupe}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_sequence_gc_content_plot_Counts.pdf}
+	\caption{FastQC GC profile for \gls{HIRD} \gls{RNAseq} samples.}
+	\label{fig:fastqc_gc}
+\end{figure}
+
+\subsection{\glsfmtshort{RNAseq} quantification and filtering}
 
 % 1.	Quantification (Salmon --libType ISR, which is equiv to TopHat -fr-firststrand with paired end data)
 % 1.1.	Used index /lustre/scratch117/core/sciops_repository/transcriptomes/Homo_sapiens/ensembl_83_transcriptome/GRCh38_15_plus_hs38
@@ -177,8 +233,23 @@ QC
 % 3.1.	Length bias only affects RNAseq: somewhat alleviated by Salmon using effective length
 % 3.2.	GC bias affects both technologies: somewhat alleviated by Salmon using effective length (see the salmon paper)
 % 3.3.	Mappability has not been considered
-
-Quantification
+\todo{add software versions}
+Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, which internally accounts for transcript length and GC composition.
+% https://www.biostars.org/p/304552/
+To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
+% Also see:
+%
+% https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8
+% "While some authors will argue that as few as five million mapped reads are sufficient to quantify accurately medium to highly expressed genes in most eukaryotic transcriptomes, others will sequence up to 100 million reads to quantify precisely genes and transcripts that have low expression levels [7]."
+%
+% https://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf
+% 2. Sequencing depth.
+% The amount of sequencing needed for a given sample is determined by the goals of the experiment and the nature of the RNA sample.
+% Experiments whose purpose is to evaluate the similarity between the transcriptional profiles of two polyA+ samples may require only modest depths of sequencing (e.g. 30M pair-end reads of length > 30NT, of which 20-25M are 3mappable to the genome or known transcriptome, Experiments whose purpose is discovery of novel transcribed elements and strong quantification of known transcript isoforms requires more extensive sequencing.
+% The ability to detect reliably low copy number transcripts/isoforms depends upon the depth of sequencing and on a sufficiently complex library.
+% For experiments from a typical mammalian tissue or in which sensitivity of detection is important, a minimum depth of 100-200 M 2 x 76 bp or longer reads is currently recommended.
+The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range 20.24-39.14 million), representing a mean mapping rate of 80.73\% (range 75.57-90.10\%), comfortably within sequencing depth recommendations for \gls{DGE} experiments\autocite{liu2014RNAseqDifferentialExpression}.
+Relative transcript abundances were summarised to Ensembl gene-level count estimates using tximport to improve statistical robustness and interpretability\autocite{soneson2016DifferentialAnalysesRNAseq}.
 
 % 5.	Pre-process RNA-seq expression data
 % 5.1.	Pull in tximport counts
@@ -186,35 +257,43 @@ Quantification
 % 5.2.	Add gene annotation based on EnsDb.Hsapiens.v86
 % 5.3.	Low-count filtering (>0.5 CPM in 10% of 223 samples i.e. 22 samples)
 % Max zero prop: need to be stringent as limma doesn't account for neg bin
-% 5.3.1.	29138 loci, 223 samples
 % 5.4.	Remove globin genes and short non-coding RNAs
 % 5.4.1.	Human globins: https://en.wikipedia.org/wiki/Globin#Examples
 % 5.4.2.	Short non-coding GENEBIOTYPES: https://www.gencodegenes.org/pages/biotypes.html
-% 5.4.3.	26275 loci, 223 samples
 % 5.5.	NOTE: we have not yet removed GENEBIOTYPE=NA. These may be retired ids.
-% 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
-% Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
-% 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
+Genes with short noncoding RNA biotypes \footnote{miRNA, miRNA\_pseudogene, miscRNA, miscRNA pseudogene, Mt rRNA, Mt tRNA, rRNA, scRNA, snlRNA, snoRNA, snRNA, tRNA, tRNA\_pseudogene. \url{https://www.ensembl.org/Help/Faq?id=468}} were removed, as they are generally not polyadenylated, and expression estimates can be biased by misassignment of counts from overlapping protein-coding or lncRNA genes\autocite{zhao2018EvaluationTwoMain}.
+% Also, they can be shorter than the 75 bp read length
+Globin genes, which are highly expressed in erythrocytes and reticulocytes, cell types expected to be depleted in \gls{PBMC} \autocite{min2010VariabilityGeneExpression}, were also removed.
+Given the proportion of removed counts at this stage was low most samples (\autoref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to be efficient.
 
-Filtering
 \begin{figure}
-    \includegraphics[width=1.0\textwidth, page=1]{./mainmatter/figures/chapter_02/rnaseq_data_setup.per_sample.short_ncRNA_globin_levels_hist.pdf}
-    \caption{ncRNA and globin levels.}
+    \centering
+    \includegraphics[width=1.0\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.per_sample.short_ncRNA_globin_levels_hist.pdf}
+    \caption{Distribution of short ncRNA and globin counts as a proportion of total counts in \gls{RNAseq} samples.}
+    \label{fig:hird_shortncRNA_and_globins}
+\end{figure}
+
+Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\autoref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
+Genes were further filtered to require detection (non-zero expression) in at least 95\% of samples, and a minimum of 0.5 \gls{CPM} in at least 20\% of samples.
+The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed \autocite{chen2016ReadsGenesPathways}.
+The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\autoref{fig:hird_rnaseq_cpm_filtering}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.gene_zero_prop.pdf}
+    \caption{Proportion of samples in which genes are detected with non-zero counts. Vertical line shows 5\% threshold.}
+    \label{fig:hird_rnaseq_filtering_zeroProp}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/rnaseq_data_setup.filtering_thresh_contour.pdf}
-    \caption{Number of features retained at different thresholds.}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/rnaseq_data_setup.sample_cpm_density_filtered.pdf}
+    \caption{Distribution of gene expressions for sample before and after filtering low expression genes. Vertical line shown at log(0.5) \gls{CPM}.}
+    \label{fig:hird_rnaseq_cpm_filtering}
 \end{figure}
 
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/rnaseq_data_setup.sample_cpm_density_filtered.pdf}
-    \caption{Choice of cpm filtering threshold.}
-\end{figure}
+After the application of all filters, expression values were available for 21626 genes over 223 samples (75/75 individuals on day 0, 73/75 on day 1, and 75/75 on day 7).
 
 \subsection{Array data preprocessing}
-
-\begin{outline}
 
 % 6.	Pre-process microarray expression data
 % 6.1.	Annotate Entrez and ENS ids using hgug4112a.db
@@ -247,13 +326,80 @@ Filtering
 % 6.4.3.1.	“Each quantile of each column is set to the mean of that quantile across arrays. The intention is to make all the normalized columns have the same empirical distribution. This will be exactly true if there are no missing values and no ties within the columns: the normalized columns are then simply permutations of one another.”
 % 6.4.4.	Also see this “StatQuest: Quantile Normalization” https://www.youtube.com/watch?v=ecjN6Xpv6SE
 % 6.4.5.	This also does a log2 transform, so final units are normalized log2 intensity
+
+Single-channel Agilent 4x44K microarray (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from \url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}.
+VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform background correction for non-specific hybridisation, between-array normalisation, and variance-stabilisation of intensity values.
+
 % 6.5.	Summarise probes (into loci): WGCNA::collapseRows(rowGroup=Ensembl ID, method="MaxMean", connectivityBasedCollapsing=FALSE)
 % 6.5.1.	https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3166942/
 % 6.5.1.1.	“For example, we find that in most microarray experiments performed on brain tissue it is best to choose the probe with the maximum mean expression per gene, whereas when choosing a single gene to represent a co-expression module, the optimal collapsing method depends on the goal of the analysis.”
 % 6.5.1.2.	“In the case of collapsing probes to their respective gene symbols, for example, we find that the 1.max strategy (implemented by setting method = "MaxMean" and connectivityBasedCollapsing = FALSE) produces the most robust results.”
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
+Most genes are covered by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (WGCNA::collapseRows, using the recommended MaxMean method)\autocite{miller2011StrategiesAggregatingGene}.
+While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, in this case there were no samples assayed by both platforms.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.pdf}
+%     \caption{Raw array intensities.}
+%     \label{fig:hird_array_boxplots_raw}
+% \end{figure}
+%
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.MaxMean.pdf}
+%     \caption{Array intensity estimates after VSN normalisation and collapsing of probes to genes.}
+%     \label{fig:hird_array_boxplots_MaxMean}
+% \end{figure}
+
+\subsection{Computing baseline-adjusted measures of antibody response}
+
+% Consequences of dichotomization
+% https://onlinelibrary.wiley.com/doi/epdf/10.1002/pst.331
+
+% \begin{outline}
+% \1 Pre-process phenotypes
+%     \2 Compute responder status (>= 4-fold in HAI or MN)
+%     \2 Compute TRI (based on Bucasas 2009)
+%         \3 “We related the change in titer between pre- and postvaccination measurements (response variable) to the prevaccination titer (explanatory variable) using a simple linear model”
+%         \3 “We next determined the residuals from the above linear regressions and used them as the input values for the individual response scores.”
+%         \3 “we standardized the residuals by dividing by the residual standard deviation for each component”
+%             \4 Based on their axis ranges, it appears they are plotting log2(post)-log2(pre)), equivalently log2(post/pre), a.k.a. log2 fold-change; against log2(pre)
+%             \4 Note that log2(post-pre) does not make sense mathematically, as post-pre may well be negative
+%             \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
+% \end{outline}
+
+We computed TRI for the HIRD dataset (Fig. \ref{fig:tri_vs_fc})
+Relationship between TRI and the clinical responder definition used by Sobolev et al. (Fig. \ref{fig:tri_vs_responder}).
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
+    \caption{How TRI corrects fold changes for baseline titre.}
+    \label{fig:tri_vs_fc}
+\end{figure} 
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison_ASHG.pdf}
+    \caption{TRI correlates with the standard responder definition (colored, 4-fold increase in either assay). An individual's TRI is the mean of their Z-transformed residuals from regressions of day 63 vs. day 0 fold-change against day 0 titre, over the two assays.}
+    \label{fig:tri_vs_responder}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.plots.pdf}
+    \caption{TRI vs platform}
+    \label{fig:tri_by_platform}
+\end{figure}
+
+\subsection{\Glsfmtlong{DGE}}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.plots.pdf}
+    \caption{First 2 expression PCs}
+    \label{fig:expression_pcs}
+\end{figure}
 
 Batch effect correction (see batch effects Zotero tag)
+Major source of variation is batch: (Fig \ref{fig:expression_pcs})
 % Chen, C., Grennan, K., Badner, J., Zhang, D., Gershon, E., Jin, L., & Liu, C. (2011). Removing Batch Effects in Analysis of Expression Microarray Data: An Evaluation of Six Batch Adjustment Methods. PLoS ONE, 6(2), e17238. https://doi.org/10.1371/journal.pone.0017238
 Combat is best here.
 % ***
@@ -267,52 +413,10 @@ Main issue is unbalanced design, which affects even 2-way anova. Rather than 2-s
 % https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2263-6
 Unbalanced batches:  Batch 3 and batch 4 have smaller sample size than the other batches, thus their variance estimates are impacted more by outlying samples.
 
-\begin{figure}
-\includegraphics[width=1.0\textwidth]{example-image}
-\caption{TABLE: Balance of timepoints and R/NR in the two array batches.}
-\end{figure}
 
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.MaxMean.combat.pdf}
-    \caption{Array intensity estimates after normalisation and batch effect correction.}
-\end{figure}
-
-\end{outline}
-
-\subsection{Computing baseline-adjusted measure of antibody response: \glsfmtshort{TRI}}
-
-\begin{outline}
-\1 Pre-process phenotypes
-    \2 Compute responder status (>= 4-fold in HAI or MN)
-    \2 Compute TRI (based on Bucasas 2009)
-        \3 “We related the change in titer between pre- and postvaccination measurements (response variable) to the prevaccination titer (explanatory variable) using a simple linear model”
-        \3 “We next determined the residuals from the above linear regressions and used them as the input values for the individual response scores.”
-        \3 “we standardized the residuals by dividing by the residual standard deviation for each component”
-            \4 Based on their axis ranges, it appears they are plotting log2(post)-log2(pre)), equivalently log2(post/pre), a.k.a. log2 fold-change; against log2(pre)
-            \4 Note that log2(post-pre) does not make sense mathematically, as post-pre may well be negative
-            \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
-\1 We computed TRI for the HIRD dataset (Fig. \ref{fig:tri_vs_fc})
-\1 Relationship between TRI and the clinical responder definition used by Sobolev et al. (Fig. \ref{fig:tri_vs_responder}).
-\end{outline}
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
-    \caption{How TRI corrects fold changes for baseline titre.}
-    \label{fig:tri_vs_fc}
-\end{figure} 
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison_ASHG.pdf}
-    \caption{TRI correlates with the standard responder definition (colored, 4-fold increase in either assay). An individual's TRI is the mean of their Z-transformed residuals from regressions of day 63 vs. day 0 fold-change against day 0 titre, over the two assays.}
-    \label{fig:tri_vs_responder}
-\end{figure}
-
-\subsection{\Glsfmtfull{DGE}}
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/array_data_setup.rnaseqFeatureOverlap.Ensembl.postFiltering.pdf}
-    \caption{Feature overlap between array and RNAseq data post-filtering.}
-\end{figure}
+% 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
+% Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
+% 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
 
 Why limma over edgeR/DESeq2?
 Comparable at sufficient sample sizes, and faster.
@@ -339,7 +443,9 @@ See Sobolev: (a) Observed values of multivariate statistic t (m.v.t.) quantifyin
 
 Equation for linear models used in limma.
 
-\subsection{\glsfmtshort{DGE} meta-analysis}
+\subsection{\glsfmtlong{DGE} meta-analysis}
+
+13945
 
 Should we meta-analyse?
 % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0059202
@@ -501,12 +607,12 @@ Prior for logFC
 \subsubsection{Meta-analysis using bayesmeta}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/meta.rnaseqVsArray.log2FC.beforeBiasCorrection.coefName_d1.vs.d0.pdf}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/meta.rnaseqVsArray.log2FC.beforeBiasCorrection.coefName_d1.vs.d0.pdf}
     \caption{Fold-change comparison between array and RNAseq for day 1 vs day 0.}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
     \caption{Priors for day 1 vs day 0 DGE meta-analysis.}
 \end{figure}
 
@@ -520,15 +626,14 @@ tmod; gprofileR; CAMERA
 
 \subsection{Innate and adaptive immune response to Pandemrix}
 
-% TODO: check out proper way to do figure references
-Overall response clusters into two distinct patterns (Fig. \ref{fig:dge_heatmap}).
+Overall response clusters into two distinct patterns (\autoref{fig:dge_heatmap}).
 
 Day 1 response is characterised by innate response: monocyte genes, inflammatory response, type I interferon response.
 Note type I interferons are alpha/beta, not gamma.
 Day 7 response is characterised by adaptive B cell response: plasma cell genes, immunoglobulins, proliferation (Table \ref{tab:tmod_dge}).
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{./mainmatter/figures/chapter_02/graphics/plot_dge_eqtl.heatmap_dge.annotated-crop.pdf}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/plot_dge_eqtl.heatmap_dge.annotated-crop.pdf}
     \caption{Normalised gene expression for differentially expressed genes ($\text{adj. p} < 0.05$, $\left|\log_2\text{FC}\right| > 1.5$) across 208 RNA-seq samples from days 0, 1, and 7, clustered by gene.}
     \label{fig:dge_heatmap}
 \end{figure}
@@ -573,49 +678,57 @@ Day 7 response is characterised by adaptive B cell response: plasma cell genes, 
 \end{adjustbox}
 \end{table}
 
-\subsubsection{TODO Comparison to Sobolev et al.}
+\subsubsection{Comparison to Sobolev et al.}
 
 \subsection{Expression associated with antibody response}
 
 \begin{outline}
-\1 Overall, B cell module positively associated, inflammatory modules negatively associated with TRI (Table \ref{tab:tmod_tri}).
-\1 TODO: split by day and look for signatures per day
+    \1 Overall, B cell module positively associated, inflammatory modules negatively associated with TRI (Fig ).
+\1 Signatures split by day
 \end{outline}
 
-\begin{table}
-\centering
-\caption{Transcriptomic modules enriched in genes with expression positively and negatively associated with TRI. Blank cells n.s.}
-\label{tab:tmod_tri}
-\sisetup{
-    table-format=1.1e2,
-    scientific-notation=true,
-    round-mode=places,
-    round-precision=1
-}
-\begin{adjustbox}{width=\textwidth, center}
-\begin{tabular}{lSS}  
-    \toprule
-        & 
-        \multicolumn{2}{c}{adj. p value} \\
-    \cmidrule(r){2-3}
-        \multicolumn{1}{l}{Module} &
-        \multicolumn{1}{c}{High TRI} &
-        \multicolumn{1}{c}{Low TRI} \\
-    \midrule
-        plasma cells \& B cells, immunoglobulins & \num{0.0007953038} & \\
+% \begin{table}
+% \centering
+% \caption{Transcriptomic modules enriched in genes with expression positively and negatively associated with TRI. Blank cells n.s.}
+% \label{tab:tmod_tri}
+% \sisetup{
+%     table-format=1.1e2,
+%     scientific-notation=true,
+%     round-mode=places,
+%     round-precision=1
+% }
+% \begin{adjustbox}{width=\textwidth, center}
+% \begin{tabular}{lSS}
+%     \toprule
+%         &
+%         \multicolumn{2}{c}{adj. p value} \\
+%     \cmidrule(r){2-3}
+%         \multicolumn{1}{l}{Module} &
+%         \multicolumn{1}{c}{High TRI} &
+%         \multicolumn{1}{c}{Low TRI} \\
+%     \midrule
+%         plasma cells \& B cells, immunoglobulins & \num{0.0007953038} & \\
         % detect the presence of cytosolic DNA and, in response, trigger expression of inflammatory genes that can lead to senescence[1] or to the activation of defense mechanisms. DNA is normally found in the nucleus of the cell.
-        innate activation by cytosolic DNA sensing & & \num{0.00374710} \\
+%         innate activation by cytosolic DNA sensing & & \num{0.00374710} \\
         % too much inflam is detrimental?
-        proinflammatory cytokines and chemokines & & \num{0.00374710} \\
+%         proinflammatory cytokines and chemokines & & \num{0.00374710} \\
         % transcription factor activator protein 1 (AP‐1) is proving to be an important regulator of nuclear gene expression in leukocytes.
-        AP-1 transcription factor network & & \num{0.01418659} \\
-        enriched in neutrophils & & \num{0.02281710} \\
-    \bottomrule
-\end{tabular}
-\end{adjustbox}
-\end{table}
+%         AP-1 transcription factor network & & \num{0.01418659} \\
+%         enriched in neutrophils & & \num{0.02281710} \\
+%     \bottomrule
+% \end{tabular}
+% \end{adjustbox}
+% \end{table}
 
-\subsubsection{TODO Comparison to Sobolev et al.}
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.png}
+    \caption{Transcriptomic modules enriched in genes with expression positively and negatively associated with TRI. Blank cells n.s.}
+    \label{tab:tri_tmod}
+\end{figure}
+
+\subsubsection{Comparison to Sobolev et al.}
+
+Overlap of day 7 R vs NR DGE genes with original pipeline
 
 \subsection{TODO Identifying molecular signatures for predicting antibody response}
 
@@ -632,15 +745,21 @@ Day 7 response is characterised by adaptive B cell response: plasma cell genes, 
 
 \section{Discussion}
 
-Recap of results with limitations
 \begin{outline}
+\1 Recap of results with limitations
 % "Sobolev et al. identify an early interferon and lymphoid response that can be seen 1 day after vaccination2. These signals have not been detected in other studies, but this might be explained by differences in vaccine formulation. Specifically, the adjuvant might mimic the response pattern found to an attenuated virus6."
 \1 Cannot directly separate adjuvant effect
 \end{outline}
 
 \subsection{Comparison to Sobolev R vs. NR}
 
-Differences between array-only and rnaseq-only DGE results for R/NR comparison (see 1st year report).
+\begin{outline}
+\1 Differences between array-only and rnaseq-only DGE results for R/NR comparison (see 1st year report).
+
+\1 Caveats of the meta analysis
+
+\1 Is the R vs NR bayesmeta -> lfsr method too stringent due to auto reg by prior?
+\end{outline}
 
 \subsection{Inflammatory signatures of non-response}
 

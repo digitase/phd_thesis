@@ -78,6 +78,8 @@ Summarise Franco et al
 
 \subsection{Chapter summary}
 
+Given the large changes in expression in ch2, detect context-specific fx.
+
 \section{Methods}
 
 \subsection{Genotype imputation}
@@ -87,6 +89,8 @@ why exclude x chrom?
 As is standard for imputation, we excluded all X-linked SNPs for the following reasons: (i) the X chromosome has to be treated differently from the autosomes; (ii) it cannot be predicted which allele is active on the X chromosome, (iii) testing males separately from females results in different sample sizes and power. Imputation of SNPs in the HapMap CEU population was performed using either MACH46 or IMPUTE47. All SNPs with a MAF <0.01 were excluded from analysis. In total, up to 2.11 million genotyped or imputed SNPs were analyzed.
 
 \subsection{Estimation of cell type abundances}
+
+% Full notes about pipeline rationale at 2019-10-30 in log
 
 FACS data norm; imputation; scaling
 
@@ -223,6 +227,10 @@ Sample AC thresh
 
 \subsection{\glsfmtshort{eQTL} meta-analysis}
 
+Why not do a mega analysis? 
+Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
+Adding a Gxplatform interaction again leads to diff effect sizes problem.
+
 % 2.7.	Meta-analysis with metafor
 % 2.7.1.	Per day, use rma(‘REML’) to fit random-effects model on association beta and beta_ste, per gene-SNP pair, using all timepoints from array/RNA-seq for that day
 % 2.8.	eigenMT to get number of independent tests per gene
@@ -255,8 +263,13 @@ Note we can't just meta the top eqtls from RNAseq as a shortcut , as there is no
 % 2.10.	mashr
 % 2.10.1.	Apply mashr to per-day meta-analysis beta/beta_ste results
 
+In the same period that condition specific eQTL mapping was getting started (as discussed in section...), tools were being created to identify these locitools were being created to identify these loci
 review: condition/Cell-type specific methods
 refere to 2019-11-19 Cell-count specific eQTL mapping papers
+PANAMA, LIMMI
+
+How much sharing is expected?
+- overestimates of specificity? e.g. (fairfax2014InnateImmuneActivity More than half of cis-eQTLs identified, involving hundreds of genes and associated pathways, are detected specifically in stimulated monocytes.)
 
 Simple, mixed models, joint models, multilocus models; Ending with why we chose mashr
 
@@ -265,6 +278,10 @@ normally eqtls use perms for FDR
 used for smoothing, info sharing, fdr
 
 mashr beats out stuff it compared to in the paper e.g. metasoft
+
+Choice of strong effects
+If there is a particular condition with much greater power, choosing the lowest p value for each gene across all conditions could bias strong effects towards including just condition-specific effects for that particular condition.
+how to ensure condition specific effects are present? look at heatmap of strong subset
 
 lfsr:
 % type s error rates for classical and bayesian single and multiple comparison procedures
@@ -296,6 +313,12 @@ Look at diff in beta, not multiples, other 0->1 will be inf
 \subsubsection{TODO Replication of shared eQTLs in whole blood}
 
 \subsection{Characterising re-eQTLs at each timepoint}
+
+Ranking metrics:
+PVE: prefers large maf and high betas since it squares the beta. even if the beta does not change so much. ignores sign.
+beta: 
+p: ignores sign
+Z score: 
 
 \subsection{The mechanism of reQTLs}
 

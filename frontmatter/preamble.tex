@@ -15,8 +15,8 @@
 % inputenc allows the user to input accented characters directly from the keyboard
 \usepackage[utf8]{inputenc}
 
-% Correct hyphenation
-% Specify patterns using e.g.  \hyphenation{hy-phen-a-tion MATLAB}
+% Culturally-determined typographical (and other) rules for a wide range of languages
+% e.g. Correct hyphenation. Specify patterns using e.g. \hyphenation{hy-phen-a-tion MATLAB}
 \usepackage[english]{babel}
 
 % Typographic optimisation
@@ -39,49 +39,6 @@
 % to ensure that quoted texts are typeset according to the rules of your main
 % language.
 \usepackage{csquotes}
-
-%
-% Document structure
-%
-
-% Automatically adds the bibliography and/or the index and/or the contents, etc.,
-% to the Table of Contents listing.
-\usepackage[nottoc]{tocbibind}
-
-% Increase the value of tocdepth and secnumdepth. The tocdepth value determines
-% to which level the sectioning commands are printed in the ToC (they are always
-% included in the .toc file but ignored otherwise). The secnumdepth value
-% determines up to what level the sectioning titles are numbered.
-\setcounter{tocdepth}{3}
-\setcounter{secnumdepth}{3}
-
-% Extra control of appendices
-% \usepackage[toc]{appendix}
-
-%
-% Figures and tables
-%
-
-\usepackage{graphicx}
-\usepackage[font={footnotesize}]{caption}
-\usepackage[font={footnotesize}]{subcaption}
-% Changes the filename algorithm to check for known graphics extensions
-\usepackage{grffile} 
-% Using \usepackage{flafter} avoids figures floating before they were defined
-\usepackage{flafter}
-
-% Nicer tables
-\usepackage{booktabs}
-
-% Pretty-print code
-\usepackage{listings}
-
-% Define box for scaling tables
-\usepackage{adjustbox}
-
-%
-% Formatting and appearance
-%
 
 % Format numbers using e.g. \numprint{2.742647826672E-01}
 \usepackage{numprint}
@@ -110,30 +67,57 @@
 % Defines an outline environment, which allows outline-style indented lists with freely mixed levels up to four levels deep.
 \usepackage{outlines}
 
+% Allow URL breaks at any alphanumerical character
+\usepackage{xurl}
+
 %
-% Navigation
+% Document structure
 %
 
-% Clickable links
-\usepackage{hyperref}
-% Nice colors for clickable links
-\usepackage{xcolor}
-\usepackage{bookmark}
-\hypersetup{
-	colorlinks,
-	linkcolor={red!50!black},
-	citecolor={blue!70!black},
-	urlcolor={blue!60!black}
-}
+% Automatically adds the bibliography and/or the index and/or the contents, etc.,
+% to the Table of Contents listing.
+\usepackage[nottoc]{tocbibind}
+
+% Increase the value of tocdepth and secnumdepth. The tocdepth value determines
+% to which level the sectioning commands are printed in the ToC (they are always
+% included in the .toc file but ignored otherwise). The secnumdepth value
+% determines up to what level the sectioning titles are numbered.
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+% Extra control of appendices
+% \usepackage[toc]{appendix}
+
+%
+% Figures and tables
+%
+
+% The package builds upon the graphics package, providing a key-value interface for optional arguments to the \includegraphics command.
+\usepackage{graphicx}
+\usepackage[font={footnotesize}]{caption}
+\usepackage[font={footnotesize}]{subcaption}
+% Changes the filename algorithm to check for known graphics extensions
+\usepackage{grffile} 
+% Using \usepackage{flafter} avoids figures floating before they were defined
+\usepackage{flafter}
+
+% Nicer tables
+\usepackage{booktabs}
+
+% Pretty-print code
+\usepackage{listings}
+
+% Define box for scaling tables
+\usepackage{adjustbox}
 
 %
 % Misc
 %
-%
+
 % TO-DO command and list
 %
 \usepackage{todonotes}
-%
+
 % Allow dummy text
 %
 \usepackage{lipsum}
@@ -154,7 +138,7 @@
 \usepackage[
 	style=nature,
 	maxcitenames=1,
-	maxnames=6,
+	maxbibnames=6,
     giveninits=true,
 	uniquename=init,
 	sorting=none,
@@ -164,7 +148,11 @@
 	eprint=false,
 	texencoding=utf8,
 	bibencoding=utf8,
-	autocite=superscript,
+    % https://tex.stackexchange.com/questions/58576/autocite-footnote/58592#58592
+    % [...] the higher-level command \autocite; biblatex will automatically translate it
+    % into the lower-level citation command most appropriate for the style family
+    % (e.g., \parencite for authoryear, \footcite for authortitle).
+    autocite=superscript,
 	backend=biber
 ]{biblatex}
 % 
@@ -172,10 +160,38 @@
 \addbibresource{backmatter/zotero_My-Library_phd_Better-BibLaTeX.bib}
 
 %
+% Navigation
+%
+
+% Clickable links
+% NOTE: hyperref should be loaded relatively late, but should be loaded before glossaries-extra
+\usepackage{hyperref}
+% Redefine contextual label in front of the reference for \autoref
+% Package babel supports many languages, therefore you have to put the redefinition into \extrasenglish.
+\addto\extrasenglish{\renewcommand\figureautorefname{Fig.}}
+
+% Nice colors for clickable links
+\usepackage{xcolor}
+\usepackage{bookmark}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!70!black},
+	urlcolor={blue!60!black}
+}
+
+%
 % Abbreviations
 %
 % NOTE: there are certain packages that must be loaded before glossaries, if
 % they are required: hyperref, babel, polyglossia, inputenc and fontenc.
+%
+% NOTE: https://www.dickimaw-books.com/faq.php?action=view&category=glossaries#pdfbookmark
+% I get the message "Token not allowed in a PDF string (PDFDocEncoding)"
+% As mentioned in Using Glossary Terms Without Links, you can't use
+% non-expandable commands in PDF bookmarks. The command gets ignored (hyperref
+% tells you this in the "removing `\Glsentrytext'" part of the warning) so you
+% end up with just the expandable part (the label) in the bookmark.
 \usepackage[
     abbreviations,
     % nohypertypes={abbreviations}
@@ -186,18 +202,26 @@
 % use TeX to sort (slow)
 \makenoidxglossaries
 %
-% Definitions
+% Abbreviation definitions
 %
 % \newabbreviation[⟨options⟩]{⟨label⟩}{⟨short⟩}{⟨long⟩}
 \newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
+\newabbreviation[longplural=response expression quantitative trait loci]{reQTL}{reQTL}{response expression quantitative trait locus}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
 \newabbreviation[]{HIRD}{HIRD}{Human Immune Response Dynamics}
-\newabbreviation[]{TRI}{TRI}{Titre Response Index}
+\newabbreviation[]{TRI}{TRI}{titre response index}
 \newabbreviation[]{RNAseq}{RNA-seq}{RNA-sequencing}
 \newabbreviation[]{DE}{DE}{differential expression; differentially expressed}
 \newabbreviation[]{DGE}{DGE}{differential gene expression}
 \newabbreviation[]{HAI}{HAI}{haemagglutination inhibition}
 \newabbreviation[]{MN}{MN}{microneutralisation}
 \newabbreviation[]{PBMC}{PBMC}{peripheral blood mononuclear cell}
+\newabbreviation[]{PCA}{PCA}{principal component analysis}
+\newabbreviation[]{PC}{PC}{principal component}
+\newabbreviation[longplural=minor allele frequencies]{MAF}{MAF}{minor allele frequency}
+\newabbreviation[]{LD}{LD}{linkage disequilibrium}
+\newabbreviation[]{CPM}{CPM}{counts per million}
+\newabbreviation[]{TPM}{TPM}{transcripts per million}
 %
+

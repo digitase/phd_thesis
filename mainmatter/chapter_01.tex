@@ -14,12 +14,15 @@
     \1 Leveraging natural G variation.
 \end{outline}
 
-\section{A brief history of complex trait genetics}
+\section{A brief overview of genetic association for complex traits}
+
+\subsection{Early days}
 
 \begin{outline}
     % From R.A. Fisher’s 1918 Paper to GWAS a Century Later
     \1 Early days, prior to GWAS
     \1 Mendelian genetics, family and linkage studies
+    \1 Complex traits and the Common disease, common variant hypothesis
     \1 Twin studies and heritability estimates of complex traits
     % candidate_gene_studies folder in dloads
     \1 Candidate gene studies (Border et al., 2019)
@@ -30,7 +33,6 @@
 
 \begin{outline}
 
-    \1 Common disease, common variant hypothesis
     \1 10 years of GWAS
     \1 "The case of the missing heritability"
 
@@ -56,7 +58,7 @@
 
 \end{outline}
 
-\subsection{Post-\glsfmtshort{GWAS}: narrowing the signal}
+\subsection{Narrowing the signal}
 
 \begin{outline}
 
@@ -70,7 +72,7 @@
 
 \end{outline}
 
-\subsection{Post-\glsfmtshort{GWAS}: interpretation of genetic associations with molecular studies}
+\subsection{Interpretation of genetic associations with molecular studies}
 
 \begin{outline}
 
@@ -79,6 +81,9 @@
         \3 Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
 
 \1 using intermediate/endophenotypes
+    \2 endophenotypes paper
+    \2 expression as an important intermediate
+    \2 theory is that genetic variants manifest their effects through these phenotypes, central dogma based
 
 \1 coloc methods
     % (that photo on all the coloc methods that all attempt to solve the problem)
@@ -102,35 +107,7 @@
         % Another solution is functional genomics — you ask whether the GWAS hit SNPs are also known, from other datasets, to have functional effects on a gene. See, as one example, a recent study of drug targets for immune-related traits [Fang 2019].
 \end{outline}
 
-\section{The effects of genetic variation: context is key}
-
-\begin{outline}
-
-\1 the dreaded GxE interaction
-    \2 "In genetics, context matters"
-    % https://www.nature.com/articles/s41588-019-0515-7
-
-    \2 for both gwas, and molQTLs, context is key
-
-\1 envs: 
-    \2 tissue
-    \2 cell type
-    \2 interaction between cells in vivo
-    \2 stimulation conditions
-
-    % https://academic.oup.com/hmg/article/23/7/1947/655184/
-\1 QTLs can interact with sex and age
-
-\1 types of context specific QTL
-    \2 ackerman conditional vs dynamic
-
-\1 Mechanisms of reQTLs
-% Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
-% Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
-
-\end{outline}
-
-\section{So what?}
+\subsection{So what? Translational directions [can cut this whole section]}
 
 \begin{outline}
 
@@ -152,7 +129,8 @@
             % https://elifesciences.org/articles/48376
             \4 non-ancestry effects
 
-    \2 Pathway analysis: "the great hairball gambit"
+    \2 pathway analysis: "the great hairball gambit"
+
     \2 pathway prs
         \3 challenge is variant to gene assignment/mapping
             \4 e.g. restrictions to fine mapped eQTLs
@@ -167,6 +145,49 @@
             \4 drug targets with genetic support are more likely
 
         \3 building allelic series
+
+% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
+% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
+% - Do many of these common causal variants e.g. converge to hit on the same pathways?
+% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
+
+\end{outline}
+
+\section{The effects of genetic variation on expression: context is key}
+
+\begin{outline}
+
+\1 inthe dreaded GxE interaction
+    \2 "In genetics, context matters"
+    % https://www.nature.com/articles/s41588-019-0515-7
+
+    \2 for both gwas, and molQTLs, context is key
+
+\1 Architecture varies e.g. across cell type and tissues
+% Common regulatory variation impacts gene expression in a cell type–dependent manner
+% The architecture of gene regulatory variation across multiple human tissues: The MuTHER study.
+    \2 tissue
+    \2 cell type
+    \2 interaction between cells in vivo
+    \2 stimulation conditions
+
+    % https://academic.oup.com/hmg/article/23/7/1947/655184/
+\1 QTLs can interact with sex and age
+
+\1 types of context specific QTL
+    \2 ackerman conditional vs dynamic
+
+\1 Mechanisms of reQTLs
+What molecular mechanisms might allow for interaction between \Gls{eQTL} and different environmental conditions?
+% Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
+Four categories of tissue-dependent cis-eQTL effects, and proposed two molecular models.
+
+% Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
+
+% notice that reQTLs and DE can be decoupled.
+% Maranville, J. C., Luca, F., Richards, A. L., Wen, X., Witonsky, D. B., Baxter, S., Stephens, M., & Di Rienzo, A. (2011). Interactions between Glucocorticoid Treatment and Cis-Regulatory Polymorphisms Contribute to Cellular Response Phenotypes. PLoS Genetics, 7(7), e1002162. https://doi.org/10.1371/journal.pgen.1002162
+
+coloc of immune mediated traits is enhanced by context-specific eQTLs
 
 \end{outline}
 
@@ -184,6 +205,10 @@ Heritability of immune parameters and immune-mediated diseases
 Why study health?
 Factors affecting the healthy immune system.
 
+In healthy populations, $\approx$50\% variation in immune system driven by non-genetic factors, $\approx$30–40\% variation is driven by genetic variation (Liston and Goris 2018).
+
+"Such systems  immunology studies in  healthy individuals have  revealed that human immune  systems are incredibly  variable among individuals,  but very stable within  individuals over time (11),  and most of this variation is  attributed to non-heritable  factors (12)."
+
 \subsection{Genetic factors affecting immune response to challenge}
 
 Given the genetic control of the healthy immune system, one can hypothesise that immune response to challenge may also be influenced by genetic factors.
@@ -193,30 +218,45 @@ Studies of natural infection are complicated.
 clinical trials as an opportunity: 
     Vaccines and drugs used as controlled immune challenge.
 
-\subsubsection{Context-specific immune response QTLs in vitro}
+Posit that eQTls where the genetic effect of 
 
-\begin{outline}
+\subsubsection{Context-specific immune response eQTLs in vitro}
 
-\1 why so many in vitro studies?
+The majority of response eQTL mapping experiments to date have been conducted \textit{in vitro}, where one can precisely adjust both the length and intensity of stimulation.
+Environmental variables including cell type composition or tissue type that are expected to interact with the eQTL effect and may confound the interaction effect with stimulation can be controlled.
+The choice of experiment system and stimulation can also be hypothesis-driven, for example, if certain tissues are expected to be more relevant for a specific disease. 
+\todo{add more pros for in vitro reQTLs here, and find citations}.
 
-\1 reQTLs and DE can be decoupled.
-% Maranville, J. C., Luca, F., Richards, A. L., Wen, X., Witonsky, D. B., Baxter, S., Stephens, M., & Di Rienzo, A. (2011). Interactions between Glucocorticoid Treatment and Cis-Regulatory Polymorphisms Contribute to Cellular Response Phenotypes. PLoS Genetics, 7(7), e1002162. https://doi.org/10.1371/journal.pgen.1002162
+One of the first studies to perform \gls{reQTL} mapping for an immune stimulation was \autocite{barreiro2012DecipheringGeneticArchitecture}, where eQTLs were mapped separately in monocyte-derived dendritic cells before and after 18h infection with \textit{Mycobacterium tuberculosis}.
+reQTLs were detected for 198 genes, 102 specific to the uninfected state, and 96 specific to the infected state. 
+These reQTLs were enriched for GWAS SNPs associated with host susceptibility to tuberculosis; this was not observed for eQTLs that were not reQTLs.
 
-\end{outline}
+Since then, \textit{in vitro} immune reQTL studies have been conducted for a variety of experimental systems (e.g. primary CD14+ monocytes\autocite{fairfax2014InnateImmuneActivity}) and stimulations (IFN$\gamma$ and LPS\autocite{fairfax2014GeneticsGeneExpression}).
+
+Take home messages:
+- reQTLs develop trans-effects on stimulation \autocite{fairfax2014InnateImmuneActivity}
+Overall, as the number of experimental systems and stimulations increases, large number of eQTLs are only detected.
 
 \subsubsection{\textit{in vivo} response QTL mapping}
 
 less popular
+A complementary approach.
 
 in vivo pros
+    choice of context 
     whole organism phenotypes
     more likely to be repeated measures
 
 Review of in vivo mapping.
-Franco
-Lareau smallpox apoptosis
-Caliskan Rhinovirus
-Davenport
+What we learn on top of in vitro
+(Franco et al., 2013)
+% Franco
+% Lareau smallpox apoptosis
+% Caliskan Rhinovirus
+% Davenport
+
+Large cohorts: 
+% vQTLs possible: https://advances.sciencemag.org/content/5/8/eaaw3538/tab-pdf
 
 \section{Immune response to vaccination}
 
@@ -240,21 +280,24 @@ For the majority of licensed vaccines, there is a lack of understanding regardin
 Immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood[Immunological mechanisms of vaccination]. 
 
 rational vacc, where the key is sys vacc
+
 Review of systems vaccinology (pull out of self\_viva\_copypasta)
 These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination[Vaccinology in the era of high-throughput biology.].
-
-Cotugno
-- dna meth: DNA methylation [52, 53, 54] events
 
 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
 Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified [http://dx.doi.org/10.1098/rstb.2014.0146].
 Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza], and also to vaccine candidates against [HIV, malaria], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
 
+% Merge in first year report intro
+
+Cotugno
+- dna meth: DNA methylation [52, 53, 54] events
+
 How to use sysvacc to inform better design (A systems framework for vaccine design Mooney2013), and how to move towards personalised vaccinology (https://doi.org/10.1016/j.vaccine.2017.07.062).
 
 Overview, including pathogen-side factors
 
-\subsection{Genetics factors affecting vaccine response}
+\subsection{Genetic factors affecting vaccine response}
 
 % See protocol paper for references
 
@@ -262,6 +305,7 @@ measles
 % https://www.sciencedaily.com/releases/2011/09/110922134546.htm
 
 Relatively few studies have assessed the impact of human genetic variation on responses[Franco, Lareau 2016].
+% Franco to be touched on in chapter 3
 
 This is despite evidence from genome-wide association studies suggesting such genetic variation influences immune response to vaccines and susceptibility to disease[Systems immunogenetics of vaccines.].
 %     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/
@@ -278,9 +322,10 @@ Review paper on GWAS for vaccines mooney2013SystemsImmunogeneticsVaccines
 
 \section{Immune response to biologic therapies}
 
-\subsection{Genetics factors affecting biologic responses}
+\subsection{Genetic factors affecting biologic responses}
 
-e.g. PANTS immunogenicity 
+e.g. PANTS immunogenicity
+% touched on in chapter 3
 
 \section{Thesis overview}
 
