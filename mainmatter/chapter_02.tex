@@ -376,7 +376,7 @@ VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform backgrou
 % 6.5.1.1.	“For example, we find that in most microarray experiments performed on brain tissue it is best to choose the probe with the maximum mean expression per gene, whereas when choosing a single gene to represent a co-expression module, the optimal collapsing method depends on the goal of the analysis.”
 % 6.5.1.2.	“In the case of collapsing probes to their respective gene symbols, for example, we find that the 1.max strategy (implemented by setting method = "MaxMean" and connectivityBasedCollapsing = FALSE) produces the most robust results.”
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
-Most genes are covered by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (WGCNA::collapseRows, using the recommended MaxMean method)\autocite{miller2011StrategiesAggregatingGene}.
+Most genes are covered by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (WGCNA::collapseRows, using the MaxMean method recommended for probe to gene collapsing)\autocite{miller2011StrategiesAggregatingGene}.
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
 
 % \begin{figure}
@@ -396,18 +396,17 @@ While it would be optimal to select a collapsing method to maximise the concorda
 \subsection{\Glsfmtlong{DGE}}
 
 \gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\autoref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation, and a batch effect exists within the array data (\autoref{fig:hird_expression_pcs}a).
+% Also see:
+% Wang, C., Gong, B., Bushel, P. R., Thierry-Mieg, J., Thierry-Mieg, D., Xu, J., Fang, H., Hong, H., Shen, J., Su, Z., Meehan, J., Li, X., Yang, L., Li, H., Łabaj, P. P., Kreil, D. P., Megherbi, D., Gaj, S., Caiment, F., … Tong, W. (2014). The concordance between RNA-seq and microarray data depends on chemical treatment and transcript abundance. Nature Biotechnology, 32(9), 926–932. https://doi.org/10.1038/nbt.3001
+%
+% The CBM paper intro has a good summary too. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5510692/
+The large platform effect likely stems from fundamental technological differences in how each platform measures expression.
+For example, arrays suffer from ratio compression due to cross-hybridisation\autocite{draghici2006ReliabilityReproducibilityIssues}.
+\gls{RNAseq} has a higher dynamic range, resulting less systematic bias at low expression levels, but estimates are more sensitive to changes in depth than array estimates are to changes in intensity \autocite{robinson2015NestedParallelExperiment}.
+There are also differences in the statistical models behind expression quantification, as described above\todo{cite relevant preprocessing sections}.
 
-Why is there a platform effect
-different tech -> diff statistical models
-
-\gls{RNAseq} has a higher dynamic range, 
-
-\1 Expected heterogeneity:
-    \2 Platform effect (ratio compression, differences in preprocessing to genes). 
-    \2 Different sets of samples (more extreme in array)
-
-
-conclude with using meta
+Despite the shortcomings of array data detailed above, the array dataset tends to contain individuals with more extreme antibody response phenotypes (\autoref{fig:hird_phenotypes_by_platform}), and hence the data should not be excluded.
+Given the magnitude of the platform effect, I concluded that the appropriate approach should be a two-stage approach that integrates per-platform \gls{DGE} effect estimates while accounting for between-platform heterogeneity.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.E_pca.pdf}
@@ -416,10 +415,10 @@ conclude with using meta
 \end{figure}
 
 % Also see: https://support.bioconductor.org/p/72815/
-Regarding the microarray batch effect, a popular adjustment method is ComBat\autocite{johnson2007AdjustingBatchEffects}, which estimates centering and scaling parameters per-gene pooling information across all genes using empirical Bayes.
+Regarding the batch effect within the \gls{HIRD} array data, a popular adjustment method is ComBat\autocite{johnson2007AdjustingBatchEffects}, which estimates centering and scaling parameters per-gene pooling information across all genes using empirical Bayes.
 ComBat is the method used in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
 In comparisons of microarray batch effect adjustment methods, ComBat performs favourably (vs. five other adjustment packages)\autocite{chen2011RemovingBatchEffects} or comparably (vs. batch as a fixed or random effect in the linear model)\autocite{espin-perez2018ComparisonStatisticalMethods}.
-However, where batches are unbalanced in terms of sample size\autoref{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression\autoref{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
+However, where batches are unbalanced in terms of sample size\autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression\autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
 In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\autoref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
 
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
@@ -458,14 +457,21 @@ For each gene, I fit a model (model 1) with expression as the response; and time
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
 
-\subsubsection{\glsfmtlong{DGE} meta-analysis}
+\subsubsection{Choice of \glsfmtlong{DGE} meta-analysis method}
 
-The meta-analysis is restricted to 13945 genes assayed by both the array and \gls{RNAseq} platforms.
-
-\subsubsection{Choice of meta-analysis method}
-
-\begin{outline}
+In the section \todo{add section labels}, I concluded that a two-stage meta-analysis approach would be appropriate.
+This meta-analysis is restricted to 13945 genes assayed by both the array and \gls{RNAseq} platforms.
+% While there is abundant literature on single-plaform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
+%
 % Examples from literature
+%
+% random effects:
+%
+% https://academic.oup.com/nar/article/45/17/9860/4084660#106485896
+% - for example of REM of 24 array datasets
+%
+% Sweeney, T. E., Haynes, W. A., Vallania, F., Ioannidis, J. P., & Khatri, P. (2017). Methods to increase reproducibility in differential gene expression via meta-analysis. Nucleic Acids Research, 45(1), e1–e1. https://doi.org/10.1093/nar/gkw797
+% - DGE random effects models should be possible with around 6-7 studies.
 %
 % SVA:
 % Comparative RNA-Seq and Microarray Analysis of Gene Expression Changes in B-Cell Lymphomas of Canis familiaris
@@ -495,105 +501,49 @@ The meta-analysis is restricted to 13945 genes assayed by both the array and \gl
 % Mayday seasight:
 % - Uses a rank product model internally
 
-combining platforms is fraught with difficulties.
+Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects\autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
+Given k studies, the fixed-effect model assumes a common population effect size shared across all studies, with observed variation explained only by sampling error.
+The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$, representing an additional source of variation termed the between-studies heterogeneity.
+In the \gls{HIRD} data, I have $k=2$ 'studies' (array and \gls{RNAseq}), where the platform differences described in section\todo{add label} contribute to between-studies heterogeneity, hence a random-effects model is appropriate.
 
-\1 Classic models: Two schools of thought for frequentist meta-analysis: 
-    \2 fixed-effect
-    % Higgins, J. P. T., Thompson, S. G., & Spiegelhalter, D. J. (2009). A re-evaluation of random-effects meta-analysis. Journal of the Royal Statistical Society: Series A (Statistics in Society), 172(1), 137–159. https://doi.org/10.1111/j.1467-985X.2008.00552.x
-    \2 or in the presence of het, random-effects.
-        % https://academic.oup.com/nar/article/45/17/9860/4084660#106485896
-        \3 e.g. random effects model of approx 24 datasets
-
-    \2 We have het, so def use random effects.
-
-% Veroniki, A. A., Jackson, D., Viechtbauer, W., Bender, R., Bowden, J., Knapp, G., … Salanti, G. (2016). Methods to estimate the between-study variance and its uncertainty in meta-analysis. Research Synthesis Methods, 7(1), 55–79. https://doi.org/10.1002/jrsm.1164
-\1 How to estimate het?
-    % Gonnermann, A., Framke, T., Großhennig, A., & Koch, A. (2015). Nosolution yet for combining two independent studies in the presence of heterogeneity: COMMENTARY. Statistics in Medicine, 34(16), 2476–2480. https://doi.org/10.1002/sim.6473
-    % Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
-    % Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
-    % Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
-    \2 Many methods and estimators.
-
-    \2 The problem: we only have k=2, and MLE estimates of tau are not very good with k=2.
-        % Sweeny "Methods to increase reproducibility in differential"
-        \3 Sweeny tests the effect of varying k.
-        \3 Highly imprecise, and often boundary estimate problems, and we know 0 het is inappropriate.
-        % Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
-
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
-% Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
-\1 Bayesian random-effects meta is attractive, but what priors should we use?
-
-\end{outline}
+Unfortunately, there is no optimal solution for estimating $\tau^2$ in random-effects meta-analyses with small k\autocite{bender2018MethodsEvidenceSynthesis}, especially when $k=2$\autocite{gonnermann2015NoSolutionCombining}.
+Many estimators are available\autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and can often result in boundary values of $tau^2 = 0$ that are incompatible with the assumed positive heterogeneity\autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
+In such circumstances, a sensible choice may be to incorporate prior information about model parameters in a Bayesian random-effects framework\autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+For this study, I use the implementation in bayesmeta \autocite{rover2017BayesianRandomeffectsMetaanalysis}, which requires priors for both effect size and between-studies heterogeneity.
 
 \subsubsection{Prior for between-studies heterogeneity}
 
-\begin{outline}
-
-Prior for tau.
-
-% Gelman (2006)
-\1 A general rec is: Use distribution in the half-t family e.g. Cauchy (df=1) when the number of groups is small and in other settings where a weakly-informative prior is desired.
-    \2 In their 3-schools examples, choose a value of scale just higher than expected, this is to weakly constrain the posterior, and not to actually represent prior knowledge.
-    \2 Warn against inverse-gamma(e, e), as it can influence the posterior mean.
-
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
-% Seide, S. E., Röver, C., & Friede, T. (2019). Likelihood-based random-effects meta-analysis with few studies: Empirical and simulation studies. BMC Medical Research Methodology, 19(1). https://doi.org/10.1186/s12874-018-0618-3
-\1 But weak priors are not recommended, as k is small, so there is little information in the data.
-% https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
-% The Gelman (2006) half-cauchy may be too weak for small k.
-
-\1 We can get empirical distribution of many genes.
-    % see this for a justification of why REML over ML
-    % Veroniki, A. A., Jackson, D., Viechtbauer, W., Bender, R., Bowden, J., Knapp, G., … Salanti, G. (2016). Methods to estimate the between-study variance and its uncertainty in meta-analysis. Research Synthesis Methods, 7(1), 55–79. https://doi.org/10.1002/jrsm.1164
-    \2 fit a default reml model, exclude 0 ests.
-    % By default, the starting value is set equal to the value of the Hedges (HE) estimator and the algorithm terminates when the change in the estimated value of  2 is smaller than 105 from one iteration to the next.
-\1 Advantage of getting the correct parameter scale for our data.
-\1 So use Empirical Bayes:
-    \2 aside: empirical bayes is popular for high dim data e.g. edgeR, DESeq2, limma-voom, combat (method of moments)
-
-\1 Papers that fit empirical datasets for tau2: Most of these are inverse-gamma/log-t family
-    % Higgins, J. P. T., & Whitehead, A. (1996). Borrowing strength from external trials in a meta-analysis. Statistics in Medicine, 15(24), 2733–2749. https://doi.org/10.1002/(SICI)1097-0258(19961230)15:24<2733::AID-SIM562>3.0.CO;2-0
-    \2 Fit inverse gamma distribution on method of moments estimates from 18 gastroenterology trials with similar endpoints.
-    % Pullenayegum, E. M. (2011). An informed reference prior for between-study heterogeneity in meta-analyses of binary outcomes: Prior for between-study heterogeneity. Statistics in Medicine, 30(26), 3082–3094. https://doi.org/10.1002/sim.4326
-    \2 This paper has described the distribution of the between-study variance amongst Cochrane reviews published between 2008 and 2009, and investigating a binary outcome. A log-normal distribution incorporating the association between the between-study variance and the pooled effect size gave the best fit.
-    % Turner, R. M., Davey, J., Clarke, M. J., Thompson, S. G., & Higgins, J. P. (2012). Predicting the extent of heterogeneity in meta-analysis, using empirical data from the Cochrane Database of Systematic Reviews. International Journal of Epidemiology, 41(3), 818–827. https://doi.org/10.1093/ije/dys041
-    \2 Predictive distributions are presented for nine different settings, defined by type of outcome and type of intervention comparison. For example, for a planned meta-analysis comparing a pharmacological intervention against placebo or control with a subjectively measured outcome, the predictive distribution for heterogeneity is a log-normal (2.13, 1.582) distribution, which has a median value of 0.12.
-    % Rhodes, K. M., Turner, R. M., & Higgins, J. P. T. (2015). Predictive distributions were developed for the extent of heterogeneity in meta-analyses of continuous outcome data. Journal of Clinical Epidemiology, 68(1), 52–60. https://doi.org/10.1016/j.jclinepi.2014.08.012
-    \2 Model selection based on the deviance information criterion (DIC) [8] led to the choice of the log-t model for t2. (5df)
-    % Turner, R. M., Jackson, D., Wei, Y., Thompson, S. G., & Higgins, J. P. T. (2015). Predictive distributions for between-study heterogeneity and simple methods for their application in Bayesian meta-analysis: R. M. TURNER ET AL. Statistics in Medicine, 34(6), 984–998. https://doi.org/10.1002/sim.6381
-    \2 The priors are derived as log-normal distributions for the between-study variance, applicable to meta-analyses of binary outcomes on the log odds-ratio scale.
-
+The choice of prior for between-studies heterogeneity is influential when k is small\autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+\autocite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on large estimates of $\tau$, and recommends a weakly informative prior that acts to constrain the posterior distribution.
+% Gelman 
+% - weak as in deliberately weaker than known knowledge, just serves to constrain
+% - cauchy for the gentle slope in tails
+% - also warns against inverse-gamma(e, e), as it can influence the posterior mean; it is not at all non-informative.
+%
+% Similarly, \autocite{friede2017MetaanalysisFewSmall} consider half-normals.
+%
+% More recent recommendations:
+% \footnote{Documentation for Stan: \url{https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations}.}
+% - Gelman 2006 recommendations can actually be too weak for scale
+% - Recommends Chung gamma(2, 1/A)
+% - With full Bayes the boundary shouldn't be a problem (as long as you have any proper prior).
+% - But with modal estimation, the estimate can be on the boundary, which can create problems in posterior predictions. For example, consider a varying-intercept varying-slope multilevel model which has an intercept and slope for each group. Suppose you fit marginal maximum likelihood and get a modal estimate of 1 for the group-level correlation. Then in your predictions the intercept and slope will be perfectly correlated, which in general will be unrealistic.
 % Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
-\1 We choose gamma: as Density at tau=0 is 0, but increases linearly from 0, so values close to 0 are still permitted if the data suggests it.
-    \2 For lognormal/inverse gamma, they have a derivative of 0 at tau=0, so they rule out small tau no matter what the data suggest.
-    \2 For The exponential and half-Cauchy families, for example, do not decline to zero at the boundary, so they do not rule out posterior mode estimates of zero.
+Since I assumed non-positive values for $tau^2$ are unrealistic, I use a weakly-informative gamma prior recommended by \autocite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$, increasing gently as $\tau$ increases.
+This constrains $\tau$ to be positive, but still permits estimates close to zero if the data support it.
+This is in constrast to log-normal (e.g. \autocite{pullenayegum2011InformedReferencePrior,turner2015PredictiveDistributionsBetweenstudy}) or inverse-gamma priors (e.g. \autocite{higgins1996BorrowingStrengthExternal}) which have derivatives close to zero, and rule out small values of $tau$ no matter what the data suggest; and in contrast to half-t family priors (e.g. \autocite{gelman2006PriorDistributionsVariance,seide2019LikelihoodbasedRandomeffectsMetaanalysis}), which have their mode at zero, and do not rule out $tau=0$.
 
-% Maximum-likelihood Fitting of Univariate Distributions
-% https://stat.ethz.ch/R-manual/R-devel/library/MASS/html/fitdistr.html
-% For the Normal, log-Normal, geometric, exponential and Poisson distributions the closed-form MLEs (and exact standard errors) are used, and start should not be supplied.
-% For all other distributions, direct optimization of the log-likelihood is performed using optim.
-\end{outline}
+% rma.uni function
+% By default, the starting value is set equal to the value of the Hedges (HE) estimator and the algorithm terminates when the change in the estimated value of \tau2 is smaller than 10^-5 from one iteration to the next.
+To estimate the appropriate shape and scale parameters for the gamma empirically, a random-effects model using the \gls{REML} estimator for $\tau$ (recommended for continuous effects\autocite{veroniki2016MethodsEstimateBetweenstudy}) was first for each gene using \texttt{metafor}.
+Genes with small estimates of $\tau < 0.01$ were excluded, and a gamma distribution was fit to the remaining estimates using \texttt{fitdistrplus}.
 
 \subsubsection{Prior for effect size}
 
-\begin{outline}
+While the choice of prior on $\tau$ is influential when k is small, there is usually enough data to estimate the effect size $\mu$ such that any reasonable non-informative prior can be used \autocite{gelman2006PriorDistributionsVariance,friede2017MetaanalysisFewSmall} \todo{why is this? is it having well powered studies? gelman is vague}
+\texttt{bayesmeta} implements both flat and normal priors for $\mu$.
 
-Prior for logFC
 
-\1 Not as much discussion in the lit:
-% Gelman (2006)
-\1 There is Typically enough data to estimate this to use a non informative prior.
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of few small studies in orphan diseases: Meta-Analysis of Few Small Studies. Research Synthesis Methods, 8(1), 79–91. https://doi.org/10.1002/jrsm.1217
-% Friede, T., Röver, C., Wandel, S., & Neuenschwander, B. (2017). Meta-analysis of two studies in the presence of heterogeneity with applications in rare diseases: Meta-analysis of two studies in the presence of heterogeneity. Biometrical Journal, 59(4), 658–671. https://doi.org/10.1002/bimj.201500236
-\1 Even Friede uses noninformative flat.
-
-\1 Two choices in bayesmeta are uniform and normal.
-    \2 We know Mean is 0: most genes are not DE, so flat prior makes no sense
-
-% Also: general principles point towards weaker priors, but not uniform????
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
 % For example, it is common to expect realistic effect sizes to be of order of magnitude 0.1 on a standardized scale (for example, an educational innovation that might improve test scores by 0.1 standard deviations). In that case, a prior of N(0,1) could be considered very strong, in that it puts most of its mass on parameter values that are unrealistically large in absolute value. When we say this prior is "weakly informative," what we mean is that, if there's a reasonably large amount of data, the likelihood will dominate, and the prior will not be important. If the data are weak, though, this "weakly informative prior" will strongly influence the posterior inference. The phrase "weakly informative" is implicitly in comparison to a default flat prior.
 % Weakly informative prior should contain enough information to regularize: the idea is that the prior rules out unreasonable parameter values but is not so strong as to rule out values that might make sense
@@ -602,53 +552,58 @@ Prior for logFC
 % Don't use uniform priors, or hard constraints more generally, unless the bounds
 % represent true constraints (such as scale parameters being restricted to be
 % positive, or correlations restricted to being between -1 and 1).
+Assuming that most genes are not differentially expressed with effect sizes distributed randomly around zero, I choose a very weak normal prior with $\mu=0$ over a flat prior.
 
-\1 To avoid overshrinking, could consider heavy-tailed priors (e.g. cauchy) for mu rather than normal
-    % Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
-    \2 Cauchy 2.5
-    % Zhu, A., Ibrahim, J. G., & Love, M. I. (2018). Heavy-tailed prior distributions for sequence count data: Removing the noise and preserving large differences. BioRxiv. https://doi.org/10.1101/303255
-    \2 DEseq/apeglm: prior on logfc, cauchy with scale adapted.
+As in the section above, to get the appropriate scale, a normal distribution with mean $\mu = 0$ is fit to the distribution of effect sizes from the gene-wise metafor models to empirically estimate the \gls{SD} $\sigma$.
+% Another Cauchy example:
+% Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
+% - Cauchy 2.5
+Heavy-tailed Cauchy priors have been proposed for effect size distributions in \gls{DGE} experiments to avoid over-shrinkage of large effects\autocite{zhu2019HeavytailedPriorDistributions}.
+Since \texttt{bayesmeta} does not implement a Cauchy prior, the normal prior used for meta-analysis is flattened to $N(0, 10\sigma)$ to avoid over-shrinkage in the tails.
+This prior is equivalent to assuming a 95\% probability that effects are less extreme than approximately $20\sigma$.\todo{the derivation here is qnorm(0.975, mean=0, sd=1*10) = 1*19.59964}
 
-\1 But this is not possible in bayesmeta, bayesmeta is normal. So weaken further to place more prior on larger values. This means less shrinkage.
+\subsubsection{FDR}
 
-\1 Also: we will shrink again with ashr, which can fit a more complicated (mixture?) distr
+\todo{ashr}
 
-% https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
-\1 So we use a very weak normal prior, scaled to each coef, as we still want some scaling based on parameter scales.
-    \2 Equiv to saying 95pc chance that effect is within 20sds (of what?).
-    % > qnorm(0.975, 0, 10)
-    % [1] 19.59964
-
-% Two examples to demonstrate: the top 2 in RMA meta-analysis.
-% (see section of code at end of 6.0\_de\_meta.R script)
-
-\end{outline}
-
-\subsubsection{Bayesian meta-analysis model}
-
-bayesmeta model
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/meta.rnaseqVsArray.log2FC.beforeBiasCorrection.coefName_d1.vs.d0.pdf}
-    \caption{Fold-change comparison between array and RNAseq for day 1 vs day 0.}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Priors for day 1 vs day 0 DGE meta-analysis.}
-\end{figure}
-
-PPI possible, but too slow.
+% bayesmeta
+% Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.
+% Do not confuse with ma05$pposterior(mu=0), which is evaluation of the posterior distribution at a particular value.
 
 \subsection{Gene set enrichment analysis}
 
-tmod; gprofileR; CAMERA
+\todo{tmod; gprofileR; CAMERA}
 
 \section{Results}
 
 We conducted differential gene expression (DGE) analysis to detect genes significantly up or downregulated ($\text{log2 fold-change} > 0.5$ at $\text{FDR} < 0.05$) between the three timepoints: pre-vaccination on day 0, and days 1 and 7 post-vaccination; and between vaccine responders and non-responders.
 Few differentially expressed genes were detected between different covariate groups included in the model (library preparation pool, sex, and ethnic background), suggesting that vaccination was the dominant influence on transcriptomic response.
 Overall response clusters into two distinct patterns (\autoref{fig:hird_dge_heatmap}).
+
+\subsubsection{Evaluation of priors}
+
+\autocite{chung2013NondegeneratePenalizedLikelihood} recommends (shape=2, scale=$\lambda$), with small $\lambda$.
+\todo{
+From \autoref{fig:hird_dgeMeta_priors_tau} and \autoref{fig:hird_dgeMeta_priors_mu}, we are similar.
+}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \caption{Fold-change comparison between array and RNAseq for day 1 vs day 0.}
+    \label{fig:hird_dgeMeta_fcComparison}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \caption{Priors for tau for day 1 vs day 0 DGE meta-analysis.}
+    \label{fig:hird_dgeMeta_priors_tau}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \caption{Priors for mu for day 1 vs day 0 DGE meta-analysis.}
+    \label{fig:hird_dgeMeta_priors_mu}
+\end{figure}
 
 \subsubsection{Transient upregulation of interferon, interferon-inducible, and other innate immunity genes observed at day 1 post-vaccination}
 
