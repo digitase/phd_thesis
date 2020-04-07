@@ -71,7 +71,7 @@
 \usepackage{xurl}
 
 %
-% Document structure
+% Document structure and layout
 %
 
 % Automatically adds the bibliography and/or the index and/or the contents, etc.,
@@ -87,6 +87,10 @@
 
 % Extra control of appendices
 % \usepackage[toc]{appendix}
+
+% The package provides an easy and flexible user interface to customize page layout and margins.
+% NOTE: screws with todonotes
+% \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
 
 %
 % Figures and tables
@@ -124,6 +128,10 @@
 % Allow dummy text
 %
 \usepackage{lipsum}
+
+% This package provides commands for formatting dates, times and time zones
+%
+\usepackage{datetime2}
 
 %
 % Bibliography
@@ -228,5 +236,9 @@
 \newabbreviation[]{SD}{SD}{standard deviation}
 \newabbreviation[]{TMM}{TMM}{trimmed mean of M-values}
 \newabbreviation[]{REML}{REML}{restricted maximum likelihood}
+\newabbreviation[]{lfsr}{lfsr}{local false sign rate}
+\newabbreviation[]{DC}{DC}{dendritic cell}
+\newabbreviation[]{FC}{FC}{fold change}
+% \newabbreviation[]{}{}{}
 %
 

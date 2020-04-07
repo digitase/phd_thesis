@@ -166,7 +166,7 @@ removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{--hwe
 \end{figure}
 
 To exclude highly-related individuals and deduplicate replicate samples, pairwise kinship coefficients were computed on \gls{MAF} $< 0.05$ pruned genotypes using KING (v1.4).
-For each pair of samples with pairwise kinship coefficient $< 0.177$ (first-degree relatives or closer), the sample with lower marker missingness was selected.
+For each pair of samples with pairwise kinship coefficient $> 0.177$ (first-degree relatives or closer), the sample with lower marker missingness was selected.
 
 After filtering, 169 samples and 549414 markers remained.
 
@@ -195,7 +195,7 @@ The top \glspl{PC} separate samples of European, African and Asian ancestry (\au
 % 2.2.2.1.	X:1-2699520: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR1.shapeit3.mac5.aa.genotypes
 % 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
 % 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
-Prior to imputation, 213277 markers with $\text{\gls{MAF}} < 0.001$ (no variation in \gls{HIRD}) were removed.
+Prior to imputation, 213277 monomorphic markers that provide no information for imputation were removed.
 Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service\footnote{\url{https://imputation.sanger.ac.uk/}}, which involves pre-phasing with EAGLE2 (v2.4), then imputation with PBWT (v3.1) using the Haplotype Reference Consortium (r1.1) panel.
 Markers were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.	Filtering
@@ -369,6 +369,8 @@ After the application of all filters, expression values were available for 21626
 % 6.4.5.	This also does a log2 transform, so final units are normalized log2 intensity
 
 Single-channel Agilent 4x44K microarray (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from \url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}.
+% Actually uses:
+% The so-called glog2 (short for generalised logarithm) is a function that is like the logarithm (base 2) for large values (large compared to the amplitude of the background noise), but is less steep for smaller values.
 VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform background correction for non-specific hybridisation, between-array normalisation, and variance-stabilisation of intensity values, resulting in expression values on a $\log_2$ scale.
 
 % 6.5.	Summarise probes (into loci): WGCNA::collapseRows(rowGroup=Ensembl ID, method="MaxMean", connectivityBasedCollapsing=FALSE)
@@ -378,6 +380,7 @@ VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform backgrou
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
 Most genes are covered by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (WGCNA::collapseRows, using the MaxMean method recommended for probe to gene collapsing)\autocite{miller2011StrategiesAggregatingGene}.
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
+\todo{standardise form here. final sentence at end of each preprocessing should be n genes x samples x units}
 
 % \begin{figure}
 %     \centering
@@ -428,7 +431,7 @@ In our data, sample size and timepoint groups are fairly balanced between the tw
 % Also used arrayWeights as precision weight inputs to lmFit
 % See: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-261#Bib1
 % The method successfully assigns lower weights to less reproducible arrays from different experiments. Down-weighting the observations from suspect arrays increases the power to detect differential expression.
-As \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} demonstrated no significant global difference in array expression between day -7 and day 0, I likewise treat merge these two timepoints into a single baseline timepoint in the following \gls{DGE} models.
+As \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} demonstrated no significant global difference in array expression between day -7 and day 0, I likewise treat merge these two timepoints into a single baseline timepoint \enquote{day 0} in the following \gls{DGE} models.
 
 % 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
 % Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
@@ -456,11 +459,16 @@ For each gene, I fit a model (model 1) with expression as the response; and time
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
+% https://support.bioconductor.org/p/70175/
+% es <- fit2$coefficients
+% es_se <- sqrt(fit2$s2.post) * fit2$stdev.unscaled
+Coefficients and their standard errors were extracted from the linear models.
+These coefficients represent effect size in units of log2 expression fold-change per unit change in predictor value.
 
 \subsubsection{Choice of \glsfmtlong{DGE} meta-analysis method}
 
 In the section \todo{add section labels}, I concluded that a two-stage meta-analysis approach would be appropriate.
-This meta-analysis is restricted to 13945 genes assayed by both the array and \gls{RNAseq} platforms.
+This meta-analysis is restricted to 13593 genes assayed by both the array and \gls{RNAseq} platforms.
 % While there is abundant literature on single-plaform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
 %
 % Examples from literature
@@ -503,18 +511,19 @@ This meta-analysis is restricted to 13945 genes assayed by both the array and \g
 
 Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects\autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
 Given k studies, the fixed-effect model assumes a common population effect size shared across all studies, with observed variation explained only by sampling error.
-The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$, representing an additional source of variation termed the between-studies heterogeneity.
-In the \gls{HIRD} data, I have $k=2$ 'studies' (array and \gls{RNAseq}), where the platform differences described in section\todo{add label} contribute to between-studies heterogeneity, hence a random-effects model is appropriate.
+The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$ (\gls{SD} $\tau$), representing an additional source of variation termed the between-studies heterogeneity, reducing to the fixed-effect model when $\tau=0$
+In the \gls{HIRD} data, there are $k=2$ 'studies' (array and \gls{RNAseq}), where the platform differences described in section\todo{add label} contribute to between-studies heterogeneity, the assumption of $\tau=0$ is unrealistic, hence a random-effects model is more appropriate.
+\todo{make all the notation in this section consistent with 2.1. The normal-normal hierarchical model, \autocite{rover2017BayesianRandomeffectsMetaanalysis}}
 
-Unfortunately, there is no optimal solution for estimating $\tau^2$ in random-effects meta-analyses with small k\autocite{bender2018MethodsEvidenceSynthesis}, especially when $k=2$\autocite{gonnermann2015NoSolutionCombining}.
-Many estimators are available\autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and can often result in boundary values of $tau^2 = 0$ that are incompatible with the assumed positive heterogeneity\autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
-In such circumstances, a sensible choice may be to incorporate prior information about model parameters in a Bayesian random-effects framework\autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+Unfortunately, there is no optimal solution for directly estimating $\tau$ in random-effects meta-analyses with small k\autocite{bender2018MethodsEvidenceSynthesis}, especially when $k=2$\autocite{gonnermann2015NoSolutionCombining}.
+Many estimators are available\autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and can often result in boundary values of $\tau = 0$ that are incompatible with the assumed positive heterogeneity\autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
+In such circumstances, the most sensible choice may be to incorporate prior information about model hyperparameters in a Bayesian random-effects framework\autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
 For this study, I use the implementation in bayesmeta \autocite{rover2017BayesianRandomeffectsMetaanalysis}, which requires priors for both effect size and between-studies heterogeneity.
 
 \subsubsection{Prior for between-studies heterogeneity}
 
 The choice of prior for between-studies heterogeneity is influential when k is small\autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
-\autocite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on large estimates of $\tau$, and recommends a weakly informative prior that acts to constrain the posterior distribution.
+\textcite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on implausibly large estimates of $\tau$, and recommends a weakly informative prior that acts to regularise the posterior distribution.
 % Gelman 
 % - weak as in deliberately weaker than known knowledge, just serves to constrain
 % - cauchy for the gentle slope in tails
@@ -529,7 +538,7 @@ The choice of prior for between-studies heterogeneity is influential when k is s
 % - With full Bayes the boundary shouldn't be a problem (as long as you have any proper prior).
 % - But with modal estimation, the estimate can be on the boundary, which can create problems in posterior predictions. For example, consider a varying-intercept varying-slope multilevel model which has an intercept and slope for each group. Suppose you fit marginal maximum likelihood and get a modal estimate of 1 for the group-level correlation. Then in your predictions the intercept and slope will be perfectly correlated, which in general will be unrealistic.
 % Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
-Since I assumed non-positive values for $tau^2$ are unrealistic, I use a weakly-informative gamma prior recommended by \autocite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$, increasing gently as $\tau$ increases.
+Since I assumed non-positive values for $tau$ are unrealistic, I use a weakly-informative gamma prior recommended by \autocite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$, increasing gently as $\tau$ increases.
 This constrains $\tau$ to be positive, but still permits estimates close to zero if the data support it.
 This is in constrast to log-normal (e.g. \autocite{pullenayegum2011InformedReferencePrior,turner2015PredictiveDistributionsBetweenstudy}) or inverse-gamma priors (e.g. \autocite{higgins1996BorrowingStrengthExternal}) which have derivatives close to zero, and rule out small values of $tau$ no matter what the data suggest; and in contrast to half-t family priors (e.g. \autocite{gelman2006PriorDistributionsVariance,seide2019LikelihoodbasedRandomeffectsMetaanalysis}), which have their mode at zero, and do not rule out $tau=0$.
 
@@ -562,6 +571,29 @@ Heavy-tailed Cauchy priors have been proposed for effect size distributions in \
 Since \texttt{bayesmeta} does not implement a Cauchy prior, the normal prior used for meta-analysis is flattened to $N(0, 10\sigma)$ to avoid over-shrinkage in the tails.
 This prior is equivalent to assuming a 95\% probability that effects are less extreme than approximately $20\sigma$.\todo{the derivation here is qnorm(0.975, mean=0, sd=1*10) = 1*19.59964}
 
+\subsubsection{Evaluation of priors}
+
+\autocite{chung2013NondegeneratePenalizedLikelihood} recommends (shape=2, scale=$\lambda$), with small $\lambda$.
+\todo{From \autoref{fig:hird_dgeMeta_priors_tau} we are similar.}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/meta.rnaseqVsArray.log2FC.beforeBiasCorrection.coefName_d1.vs.d0.pdf}
+    \caption{Fold-change comparison between array and RNAseq for day 1 vs day 0.}
+    \label{fig:hird_dgeMeta_fcComparison}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \caption{Priors for tau for day 1 vs day 0 DGE meta-analysis.}
+    \label{fig:hird_dgeMeta_priors_tau}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
+    \caption{Priors for mu for day 1 vs day 0 DGE meta-analysis.}
+    \label{fig:hird_dgeMeta_priors_mu}
+\end{figure}
+
 \subsubsection{FDR}
 
 \todo{ashr}
@@ -576,169 +608,83 @@ This prior is equivalent to assuming a 95\% probability that effects are less ex
 
 \section{Results}
 
-We conducted differential gene expression (DGE) analysis to detect genes significantly up or downregulated ($\text{log2 fold-change} > 0.5$ at $\text{FDR} < 0.05$) between the three timepoints: pre-vaccination on day 0, and days 1 and 7 post-vaccination; and between vaccine responders and non-responders.
-Few differentially expressed genes were detected between different covariate groups included in the model (library preparation pool, sex, and ethnic background), suggesting that vaccination was the dominant influence on transcriptomic response.
-Overall response clusters into two distinct patterns (\autoref{fig:hird_dge_heatmap}).
+\subsection{Extensive global changes in expression after vaccination}
 
-\subsubsection{Evaluation of priors}
+To gain an overview of how the transcriptome changes after vaccination, linear models were fit to identify genes differentially expressed at day 1 or day 7 compared to baseline (day -7 and day 0) in the \gls{HIRD} array and \gls{RNAseq} expression data, accounting for covariates such as batch effects, sex, age, \gls{TRI}, and ancestry.
+Models were fit on per-gene, per-platform, then at 13593 genes with expression measured by both platforms, effect sizes were combined using Bayesian random-effects meta-analysis.
 
-\autocite{chung2013NondegeneratePenalizedLikelihood} recommends (shape=2, scale=$\lambda$), with small $\lambda$.
-\todo{
-From \autoref{fig:hird_dgeMeta_priors_tau} and \autoref{fig:hird_dgeMeta_priors_mu}, we are similar.
-}
-
+At a \gls{lfsr}$ < 0.05$ cutoff, 5807/13593 genes were significantly differentially expressed post-vaccination compared to baseline, falling into three groups: 2865 genes upregulated at day 1, 2748 genes downregulated at day 1, and 194 genes upregulated at day 7 (\autoref{fig:hird_dge_heatmap}).
+% At a cutoff of absolute $\text{fold-change} > 0.5$ and \gls{lfsr}$ < 0.05$, 703 genes were DE. Expression of these genes cluster into three main patterns: 580 genes upregulated at day 1, 64 genes downregulated at day 1, and 59 genes upregulated at day 7 (\autoref{fig:hird_dge_heatmap}).
+ 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Fold-change comparison between array and RNAseq for day 1 vs day 0.}
-    \label{fig:hird_dgeMeta_fcComparison}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Priors for tau for day 1 vs day 0 DGE meta-analysis.}
-    \label{fig:hird_dgeMeta_priors_tau}
-\end{figure}
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Priors for mu for day 1 vs day 0 DGE meta-analysis.}
-    \label{fig:hird_dgeMeta_priors_mu}
-\end{figure}
-
-\subsubsection{Transient upregulation of interferon, interferon-inducible, and other innate immunity genes observed at day 1 post-vaccination}
-
-The highest number of upregulated genes (799) was observed at day 1 compared to day 0, and the majority of these genes (757) were then downregulated from day 1 to day 7 (Fig.~\ref{fig-dge-overall}).
-Genes with high fold change (FC) increases at day 1 included ANKRD22 ($\text{log2 FC} = 4.545$, viral defence\autocite{Bin2016}), the interferon gamma-induced cytokine CXCL10 ($\text{log2 FC} = 3.933$) and C1-inhibitor SERPING1 ($\text{log2 FC} = 3.766$, complement system\footnote{\url{https://www.uniprot.org/uniprot/P05155}}).
-Upregulation of interferons and interferon-inducible genes were particularly prominent at day 1 (Fig.~\ref{fig-dge-interferons}).
-We also detected upregulation of non-coding transcripts such as macrophage-associated\autocite{Zhang2017b} lincRNA RP11-10J5.1 ($\text{log2 FC} = 3.747$).
-
-
-Day 1 response is characterised by innate response: monocyte genes, inflammatory response, type I interferon response.
-Note type I interferons are alpha/beta, not gamma.
-
-\subsubsection{Upregulation of plasmablast and cell proliferation genes at day 7 post-vaccination}
-
-A total of 421 genes were upregulated at day 7 compared to day 0, day 1, or both (Fig.~\ref{fig-dge-overall}).
-%grepl(results.tables$d7.vs.d0 %>% head(100) %>% select(GENENAME)%>% unlist, pattern='^IG') %>% sum
-The transcriptomic profile compared to day 0 was dominated by increases in immunoglobulin genes: 68 of the top 100 most significantly DE genes from day 0 to day 7 were immunoglobulins (IGH, IGK or IGL), including IGHV1-69 (log2 FC = 2.365), a known modulator of anti-influenza antibodies\autocite{Avnir2016}.
-Other highly up-regulated genes included the B cell-specific genes MZB1 (log2 FC = 2.014) and TNFRSF17 (log2 FC = 1.837).
-
-The enriched gene sets at day 7 were related to cellular proliferation; the top three MSigDB sets were targets of E2F, targets of MYC, and genes associated with the G2/M check point (Table~\ref{table-camera-timepoints}).
-Overrepresented Gene Ontology categories amongst upregulated genes included ``mitotic cell cycle'' (p = 8.46e-21), ``cell division'' (p = 1.59e-16), and ``chromosome segregation'' (p = 6.80e-15).
-%The overrepresented Gene Ontology categories amongst upreglated genes included "mitotic cell cycle" (p = 8.458339e-21, 2.785339e-22; cell division 1.586245e-16, 2.843928e-19, chromosome segregation, 6.803772e-15, 1.777793e-19".
-
-Day 7 response is characterised by adaptive B cell response: plasma cell genes, immunoglobulins, proliferation (Table \ref{tab:tmod_dge}).
-
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/plot_dge_eqtl.heatmap_dge.annotated-crop.pdf}
-    \caption{Normalised gene expression for differentially expressed genes ($\text{adj. p} < 0.05$, $\left|\log_2\text{FC}\right| > 1.5$) across 208 RNA-seq samples from days 0, 1, and 7, clustered by gene.}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/plot_dge_eqtl.heatmap_dge.pdf}
+    \caption{Normalised gene expression for differentially expressed genes ($\text{lfsr} < 0.05$, $\left|\text{FC}\right| > 1.5$) across \gls{HIRD} samples from baseline, day 1, and day 7, clustered by gene.}
     \label{fig:hird_dge_heatmap}
 \end{figure}
 
-\begin{table}
-\centering
-\caption{Transcriptomic modules enriched in highly up/downregulated genes in each expression cluster, based on ranking of $\log_2\text{FC}$ vs. day 0. Blank cells n.s.}
-\label{tab:tmod_dge}
-\sisetup{
-    table-format=1.1e2,
-    scientific-notation=true,
-    round-mode=places,
-    round-precision=1
-}
-\begin{adjustbox}{width=\textwidth, center}
-\begin{tabular}{lSSS}  
-    \toprule
-        & 
-        \multicolumn{3}{c}{adj. p value} \\
-    \cmidrule(r){2-4}
-        \multicolumn{1}{l}{Module} &
-        \multicolumn{1}{c}{Day 1 $\uparrow$} &
-        \multicolumn{1}{c}{Day 1 $\downarrow$} &
-        \multicolumn{1}{c}{Day 7 $\uparrow$} \\
-    \midrule
-        cell cycle and transcription & \num{2.305733e-36} &  & \num{7.668931e-61} \\
-        %
-        immune activation - generic cluster & \num{1.384615e-32} & & \\
-        enriched in monocytes & \num{2.852435e-90} & & \\
-        TLR and inflammatory signaling & \num{1.734079e-28} & & \\
-        type I interferon response & \num{8.924156e-13} & & \\
-        %
-        cell division stimulated CD4+ T cells & & & \num{3.478934e-18} \\
-        PLK1 signaling events & & & \num{2.719531e-25} \\
-        plasma cells, immunoglobulins & & & \num{5.821306e-12} \\
-        %
-        enriched in NK cells & & \num{4.871453e-50} & \\
-        enriched in T cells & & \num{3.773967e-46} & \\
-        T cell activation & & \num{8.704655e-29} & \\
-    \bottomrule
-\end{tabular}
-\end{adjustbox}
-\end{table}
+\subsection{Innate immune response at day 1 post-vaccination}
 
-\subsubsection{Comparison to Sobolev et al.}
-
-\subsection{Expression associated with antibody response}
-
-\begin{outline}
-    \1 Overall, B cell module positively associated, inflammatory modules negatively associated with TRI (Fig ).
-\1 Signatures split by day
-\end{outline}
-
-% \begin{table}
-% \centering
-% \caption{Transcriptomic modules enriched in genes with expression positively and negatively associated with TRI. Blank cells n.s.}
-% \label{tab:tmod_tri}
-% \sisetup{
-%     table-format=1.1e2,
-%     scientific-notation=true,
-%     round-mode=places,
-%     round-precision=1
-% }
-% \begin{adjustbox}{width=\textwidth, center}
-% \begin{tabular}{lSS}
-%     \toprule
-%         &
-%         \multicolumn{2}{c}{adj. p value} \\
-%     \cmidrule(r){2-3}
-%         \multicolumn{1}{l}{Module} &
-%         \multicolumn{1}{c}{High TRI} &
-%         \multicolumn{1}{c}{Low TRI} \\
-%     \midrule
-%         plasma cells \& B cells, immunoglobulins & \num{0.0007953038} & \\
-        % detect the presence of cytosolic DNA and, in response, trigger expression of inflammatory genes that can lead to senescence[1] or to the activation of defense mechanisms. DNA is normally found in the nucleus of the cell.
-%         innate activation by cytosolic DNA sensing & & \num{0.00374710} \\
-        % too much inflam is detrimental?
-%         proinflammatory cytokines and chemokines & & \num{0.00374710} \\
-        % transcription factor activator protein 1 (AP‐1) is proving to be an important regulator of nuclear gene expression in leukocytes.
-%         AP-1 transcription factor network & & \num{0.01418659} \\
-%         enriched in neutrophils & & \num{0.02281710} \\
-%     \bottomrule
-% \end{tabular}
-% \end{adjustbox}
-% \end{table}
+Consistent with global expression at day 1 being markedly different from expression at other timepoints (\autoref{fig:hird_expression_pcs}), the highest numbers of differentially expressed are observed for the day 1 vs. baseline comparison.
+The gene with the highest \gls{FC} increase at day 1 was \textit{ANKRD22} ($\log_2\text{\gls{FC}} = 4.489150$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
+Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \textit{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \textit{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \textit{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
+\todo{add automatic rounding to x decimal places}
+Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\autoref{fig:hird_tmodDotPlot_day}), confirming that day 1 responses are dominated by signatures of innate immunity.
+\todo{can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets}
+\todo{consider commenting on transience of response i.e. genes are then downreg at day 7. Would need to add another annotation col to heatmap, and tmod dotplot}
+\todo{any point in a table of e.g. top 20 DE genes, or is the gene set analysis already enough?}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.png}
-    \caption{Transcriptomic modules enriched in genes with expression positively and negatively associated with TRI. Blank cells n.s.}
-    \label{tab:tri_tmod}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.day.pdf}
+    \caption{Transcriptomic modules significantly up or downregulated post-vaccination. Size of circle indicates effect size. Color of circle indicates significance and direction of effect (red = upregulation, blue = downregulation).}
+    \label{fig:hird_tmodDotPlot_day}
 \end{figure}
 
-\subsubsection{Comparison to Sobolev et al.}
+\subsection{Adaptive immune response at day 7 post-vaccination}
 
-Overlap of day 7 R vs NR DGE genes with original pipeline
+Expression fold changes were more modest at day 7; the genes with the highest upregulation being the B cell-associated genes \textit{TNFRSF17} ($\log_2\text{\gls{FC}} = 1.7538617$) and \textit{MZB1} ($\log_2\text{\gls{FC}} = 1.7369668$).
+Plasma cell-specific genes including \textit{SDC1} (encodes CD138 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5437827/}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \textit{ELL2} (\url{https://www.nature.com/articles/ni.1786}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
+The enriched gene sets at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\autoref{fig:hird_tmodDotPlot_day}).
+Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of an adaptive immune response at day 7.\todo{add reference to role of CD4s in e.g. class switching of B cells}
 
-\subsection{TODO Identifying molecular signatures for predicting antibody response}
+\subsection{Expression signatures associated with antibody response}
 
-\begin{outline}
+We do not replicate 
+\autoref{fig:hird_DGE_platform_effectSizeComparisons}
 
-\1 For inference, don't dichotimise due to statistical concerns
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/plot_dge_eqtl.effectSizeComparison.pdf}
+    \caption{DGE effect sizes estimated in array vs \gls{RNAseq}.}
+    \label{fig:hird_DGE_platform_effectSizeComparisons}
+\end{figure}
+
+We do find signal at gene set level
+\autoref{fig:hird_tmodDotPlot_TRI}
+
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.R.vs.NR.pdf}
+    \caption{Transcriptomic modules enriched in genes with expression associated with antibody response (\gls{TRI}) at each day. Size of circle indicates effect size. Color of circle indicates significance and direction of effect (red = expression positively correlated with TRI, blue = negative).}
+    \label{fig:hird_tmodDotPlot_TRI}
+\end{figure}
+\todo{x labels here should be TRI, not R.vs.NR}
+
+% \subsection{Comparison to Sobolev}
+
+% - Overlap of day 7 R vs NR DGE genes with original pipeline
+
+\subsection{Identifying expression signatures for predicting antibody response}
+
+\todo{analysis not complete, possibly not required for this chapter}
+
+% \begin{outline}
+
+% \1 For inference, don't dichotimise due to statistical concerns
     % Nauta JJ, Beyer WE, Osterhaus AD. On the relationship between mean antibody level, seroprotection and clinical protection from influenza. Biologicals 2009; 37:216-21; PMID:19268607; http://dx. doi.org/10.1016/j.biologicals.2009.02.002
-    \2 "In clinical studies seroprotection is normally defined as a specific antibody titer or antibody titer increase (seroconversion)."
-    \2 For prediction, what rules can be easily implemented in the clinic?
+    % \2 "In clinical studies seroprotection is normally defined as a specific antibody titer or antibody titer increase (seroconversion)."
+    % \2 For prediction, what rules can be easily implemented in the clinic?
 
-\1 Interpretatability: DAMIP gives rulesets composed of small sets of genes, amenable to rapid qPCR assays.
+% \1 Interpretatability: DAMIP gives rulesets composed of small sets of genes, amenable to rapid qPCR assays.
 
-\end{outline}
+% \end{outline}
 
 \section{Discussion}
 We have measured the transcriptomic response to influenza-H1N1 vaccination in the HIRD cohort, and characterised genes and gene sets differentially expressed between timepoints, and between vaccine responders/non-responders.
@@ -770,7 +716,12 @@ and seroconversion may not correspond well to protection...
 
 \1 Caveats of the meta analysis
 
+magnitudes of these effects are rather small
+given sufficient tau, will not be signif
+
 \1 Is the R vs NR bayesmeta -> lfsr method too stringent due to auto reg by prior?
+% Gene sets are more power
+
 \end{outline}
 
 \subsection{Inflammatory signatures of non-response}
