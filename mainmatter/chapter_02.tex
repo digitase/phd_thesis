@@ -4,106 +4,78 @@
 % Systems vaccinology-style paper.
 
 % The one central and memorable contribution of the paper.
-\chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine (Pandemrix)}
+\chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine}
 
 % Chapter 2 HIRD sysvacc abstract
 
 \section{Introduction}
 
-\subsection{Influenza A (H1N1)pdm09 and Pandemrix}
+\subsection{Seasonal and pandemic influenza}
 
-\begin{outline}
+Influenza is an infectious disease with a seasonal outbreak pattern, caused by the influenza A and influenza B viruses in humans.
+Influenza A viruses circulate not only humans, but also in a variety of other birds and mammals.
+They are classified into antigenically-distinct subtypes by the combination of two surface proteins: \gls{HA} and \gls{NA} (\url{https://www.nature.com/articles/s41572-018-0002-y}).
 
-% Intro to the virus (Characteristics of Swine-Origin 2009 A(H1N1), DOI: 10.1126/science.1176225)
-\1 Basic seasonal flu biology
-\1 Basic H1N1 biology
-    \2 structure and life cycle.
-    \2 relationship to other (seasonal) influenza viruses.
+There are three general classes of seasonal influenza vaccine in use: inactivated, live attenuated, and recombinant HA vaccines.
+These vaccines confer a degree of strain-specific protection, primarily by raising serum antibodies against the \gls{HA} and/or \gls{NA} proteins.
+Antigenic drift, the accumulation of mutations in these surface proteins over time, necessitates the annual reformulation of seasonal influenza vaccines to reflect circulating strains (\autocite{houser2015InfluenzaVaccinesChallenges}, \url{https://virologyj.biomedcentral.com/articles/10.1186/s12985-017-0918-y}).
+On occasion, a novel subtype against which the majority of the population is immunogically naive can arise, often from zoonotic origins.
+A recent example occurred in 2009, when an outbreak of a novel swine-origin strain, eventually termed influenza A (H1N1)pdm09, resulted in a global pandemic, the fourth to occur in the last 100 years (\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2892379/}).
+%
+% Antigenic and Genetic Characteristics of Swine-Origin 2009 A(H1N1) Influenza Viruses Circulating in Humans (\url{https://science.sciencemag.org/content/325/5937/197})
+\todo{add a point that 2009h1n1 is now circulating seasonally}
 
-\1 The 2009 outbreak.
-    % http://europepmc.org/article/PMC/3224079
-    \2 origins; timeline
+\subsection{Quantifying immune response to influenza vaccines}
 
-\1 Vaccine development process in response to the outbreaks
-    % \url{https://www.ema.europa.eu/en/human-regulatory/overview/public-health-threats/pandemic-influenza/2009-h1n1-influenza-pandemic/medicines-authorised-during-pandemic}
-    \2 Pandemrix was one of several vaccines licensed.
-    % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3224079/}
-    \2 Efficacy, dosing: \enquote{...a single dose of monovalent 2009 H1N1 vaccine was recommended in adults, but young children were recommended to receive 2 doses (reviewed by [3••]). It is likely that a single dose was sufficient to induce immunity in adults because prior exposure to seasonal H1N1 viruses had immunologically primed the population.}
-    % "Seasonal influenza vaccine provides priming for A/H1N1 immunization." \url{https://www.ncbi.nlm.nih.gov/pubmed/20371459}
-    % Demonstration in a mouse model: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3024675/}
-    \2 Inclusion of H1N1 strains into seasonal vaccines
-        % Sobolev sampled in March 2010 to August 2011
-        \3 Later cohorts may have recall response to H1N1 from seasonal vaccination
+The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines (\url{https://doi.org/10.1016/j.coviro.2011.08.002}).
+\todo{Add specific section about pandemrix? or maybe in methods}
+Immune response to influenza vaccines in trials is evaluated by assays that measure levels of antibodies specific to the vaccine strain.
+The \gls{HAI} assay measures the levels of serum antibodies specific to the \gls{HA} surface protein (\url{https://www.tandfonline.com/doi/pdf/10.4161/hv.22908?needAccess=true}).
+The related \gls{MN} assay measures levels of antibodies (which may be anti-\gls{HA} or not) that neutralise the infectivity of the virus in cell culture (\url{https://www.researchgate.net/publication/224821022_Influenza_Virus_Titration_Antigenic_Characterization_and_Serological_Methods_for_Antibody_Detection}).
+Values from these assays can compared against thresholds for known correlates of protection: markers that associate with whether an individual is protected from the disease.
+For example, \gls{HAI} titres are regarded as the primary correlate of protection for inactivated influenza vaccines, with regulatory thresholds that include rates of trial individuals achieving \gls{HAI} titres $\ge 40$ and seroconversion ($\ge$ 4-fold increase in titres) (\url{https://www.tandfonline.com/doi/pdf/10.4161/hv.22908?needAccess=true}, \url{https://cvi.asm.org/content/17/7/1055#sec-9}).
 
-\end{outline}
+\subsection{Systems vaccinology of influenza vaccines}
 
-\subsection{Immune response to influenza vaccines}
+Although \gls{HAI} titres are accepted as established correlates for inactivated seasonal influenza vaccines, correlates for \gls{LAIV} and pandemic influenza vaccines are less reliable. Correlates based only on \gls{HAI} titre also fail to account for alternate mechanisms such as T cell-mediated protection\autocite{houser2015InfluenzaVaccinesChallenges}.
+Determining accurate correlates of protection is essential for vaccine development, especially for novel diseases for which there may be no prior knowledge of robust correlates.
+% Preparing for the Next Influenza Pandemic: The Development of a Universal Influenza Vaccine Michelle C Crank, John R Mascola, Barney S Graham The Journal of Infectious Diseases, Volume 219, Issue Supplement_1, 15 April 2019, Pages S107–S109, https://doi.org/10.1093/infdis/jiz043
 
-\begin{outline}
-    \1 classical immunological response to influenza vaccines
-        \2 seasinal flu vaccines are a constnat battle against flu virus antigenic dft
-        \2 differ by type of vaccine
-    \1 correlates of protection
-        \2 mention HAI/MN assays, do they measure igm/igg?
-    \1 Review influenza vaccine specific sysvacc papers (e.g. Nakaya's papers)
-        \2 mention main timepoints
-        \2 inclu. prevaccination signatures paper, and
-\end{outline}
+The last decade has seen the rise of systems vaccinology studies: the analysis of high-dimensional data measured using multiple technologies in vaccinated individuals, in order to characterise response to vaccination measured at multiple levels of the biological system\autocite{pulendran2014SystemsVaccinologyProbing}.
+Such information helps elucidate a vaccine's mode of action, discover \enquote{molecular signatures} predictive of vaccine safety and efficacy,
+and has become an increasingly important part of the modern vaccine development chain\autocite{hagan2015SystemsVaccinologyEnabling,raeven2019SystemsVaccinologyBig}.
 
-\subsection{Systems studies, and the \glsfmtfull{HIRD} study}
+Various systems vaccinology studies of seasonal influenza vaccines have been conducted, taking longitudinal measurements pre-vaccination, and commonly at some subset of days 1, 3, 7, and 28 post-vaccination.
+These measurements can be correlated to changes in antibody titres after vaccination to define signatures of antibody response.
+One of the earliest such studies by Zhu et al.\autocite{zhu2010WholeGenomeTranscriptional} found that expression of type 1 interferon-modulated genes was a signature of early response to live attenuated influenza vaccine.
+An expression signature including \textit{STAT1}, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{bucasas2011EarlyPatternsGene}, and kinase CaMKIV expression is also a strong predictor \autocite{nakaya2011SystemsBiologyVaccination}, as are genes related to B cell proliferation \autocite{tan2014GeneSignaturesRelated}.
 
-\begin{outline}
+\subsection{The \glsfmtfull{HIRD} study}
 
-% Systems vaccinology is the analysis of high-dimensional -omics data measured at multiple levels of the biological system, in order to characterise response to vaccination (Fig.~\ref{fig-sys-vacc-overview}).
+When studying seasonal influenza vaccines in adults, responses tend to be biased by recall from past vaccination or infection\autocite{bucasas2011EarlyPatternsGene, nakaya2012SystemsVaccinologyLearning}.
+There have also been few studies of adjuvanted influenza vaccines, despite their superior efficacy in comparison to non-adjuvanted counterparts (\url{https://www.frontiersin.org/articles/10.3389/fimmu.2017.01760/full}, \url{https://www.tandfonline.com/doi/full/10.1080/21645515.2017.1415684}).
+The \gls{HIRD} study conducted by Sobolev et al.\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived with these limitations in mind.
+The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated influenza A (H1N1)pdm09 vaccine against the 2009 swine flu pandemic strain,against which the majority of the cohort would be unlikely to have immunological memory.
 
-%     The various types of seasonal influenza vaccine have also been well-studied.
-% Zhu et al.\autocite{Zhu2010} found that expression of type 1 interferon-modulated genes was a biomarker of early response to live attenuated influenza vaccine.
-% An expression signature including STAT1, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{Bucasas2011}, and kinase CaMKIV expression is also a strong predictor \autocite{Nakaya2011}, as are genes related to B cell proliferation \autocite{Tan2014}.
+The HIRD cohort consisted of a total of 178 individuals vaccinated with a single dose of Pandemrix, and longitudinal transcriptomic, cellular, antibody
+titres, and adverse event phenotypes were collected.
+Gene expression was profiled using a microarray, and \gls{DGE} analyses detected genes associated with both myeloid and lymphoid effector functions upregulated at day 1, most prominently for genes associated with the interferon-response.
+% \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
+These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, but an interferon gamma associated lymphoid response was unique to this adjuvanted vaccine.
 
-% Summarise sobolev
-    %See references "Importantly, and in contrast to flu vaccines used in US immune-monitoring studies8,13,15–17" from Sobolevs
-% When studying seasonal influenza vaccines in adults, responses tend to include recall from past vaccination or infection\autocite{Bucasas2011,Nakaya2012a}.
-% The Human Immune Response Dynamics (HIRD) study conducted by Sobolev et al.\autocite{Sobolev2016} was designed to monitor response to a strain of H1N1 `swine flu' influenza, against which the majority of the cohort would be unlikely to have immunological memory.
-% The longitudinal study consisted of 178 patients vaccinated with a single dose of AS03-adjuvated influenza-H1N1 vaccine.
-% Gene expression was profiled using a microarray in a subset of 46 individuals.
-% Upregulation of transcripts associated with both myeloid and lymphoid effector functions was observed by day 1, most prominently for transcripts associated with type I and type II interferons.
-% Plasmablast-related differential expression between 23 vaccine responders and 18 non-responders was detected at day 7 post-vaccination.
-% However, due to high variability amongst vaccine non-responders, a predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
-% The only genetic factor measured was HLA haplotype, which did not associate with any other parameters measured.
-
-\1 Systems vaccinology of Pandemrix vaccine: Sobolev et al. 2016
-
-    \2 Sobolev et al 2016 evaluated transcriptomic, cellular, antibody and adverse events after AS03-adjuvanted Pandemrix vaccination.
-        \3 Myeloid response similar to other unadjuvanted flu vaccines
-        % \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
-        \3 Early lymphoid response unlike other unadjuvanted vaccines
-            \4 Knowns about the immune response to AS03
-        \3 Non responders had \enquote{reduced expression of genes associated with plasma cell development and antibody production at day 7}
-        \3 No consensus NR signatures at earlier timepoints day 0 or day 1 \enquote{many routes to failure}. One reason is variable baseline titres leading to variable trajectories of NR.
-
-\end{outline}
+Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
+However, due to high variability among the vaccine non-responders in variables such as baseline antibody titres, a predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
+This is in contrast to several studies of seasonal influenza vaccines, where certain expression signatures are able to predict vaccine response even pre-vaccination\autocite{furman2013ApoptosisOtherImmune, tsang2014GlobalAnalysesHuman, nakaya2015SystemsAnalysisImmunity, hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
 
 \subsection{Chapter summary}
 
-\begin{outline}
+Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number (46/178) of individuals, potentially limiting power to detect a expression signatures associated with antibody response.
+In addition, the responder vs. non-responder phenotype definition used does not account for variation in pre-existing baseline titres, and the use of a binary phenotype can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
 
-    \1 Rationale for our study:
-        % \item Extend the analyses of Sobolev et al.\autocite{Sobolev2016} by conducting RNA-seq on members of the HIRD cohort lacking microarray expression data, then perform differential gene expression analyses between the sampled timepoints, and between vaccine responders and non-responders, in order to characterise the transcriptomic contribution to response.
-    %     \item Apply summary statistic meta-analysis techniques to combine the original microarray data with our RNA-seq data, increasing power for the above analyses.
-    % \item Attempt to build an integrative model that predicts the quality of an individual's antibody response based on genetic, transcriptomic, and other available measures.
-        \2 Sobolev uses array transcriptomic data for a subset of individuals; we use RNAseq data for a larger number of individuals, which allows us to look at a larger number of genomic features, and conduct a meta-analysis.
-        \2 Instead of the binary definition for responder/NR used by Sobolev, we use a continuous response measure, for increased power. This also lets us normalise for baseline titre and combine HAI and microneutralization assay values.
-            \3 can we find consensus, and importantly prevaccination signatures of response?
-        \2 main aims are de between timepoint and r/nr
-    \1 Main conclusions
-        \2 The overall pattern of innate response at d1, adaptive response at d7, agrees with Sobolev.
-        \2 Based on our continuous Ab phenotype, we find consensus response signatures
-            \3 plasma cells and inflammatory response overall
-            \3 at each timepoint, d0, d1, d7 ... 
-                \4 Compare the d7 split to Sobolev 
-    \1 Finally, turn our focus to prediction, i.e. going from R status as a predictor to a response variable.
-
-\end{outline}
+In this chapter, I integrate the original microarray data from \gls{HIRD} with newly generated \gls{RNAseq} dataset on a larger subset (75) of individuals from the same cohort using Bayesian random-effects meta-analysis.
+I compute a baseline-adjusted, continuous measure of antibody response to vaccination, the \gls{TRI}.
+The overall pattern of expression over time from my meta-analysis agrees with the patterns from the original study \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, with transient innate immune response at day 1 post-vaccination, progressing to adaptive immune response by day 7.
+Effect sizes of genes that associate with antibody response can be very dependent on between transcriptomic measurement platform, but leveraging the greater power that rank-based gene set enrichment analyses afford, I find modules of coexpressed genes that correlate with antibody response, the strongest effects observed for adaptive immune modules at day 7, but also in inflammatory modules at baseline.
 
 \section{Methods}
 
@@ -127,6 +99,8 @@ An overview of datasets is shown in \autoref{fig:hird_design}.
 \subsection{Computing baseline-adjusted measures of vaccine-induced antibody response}
 
 In \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, Pandemrix responders were defined, according to clinical convention (e.g. \autocite{foodanddrugadministration2007GuidanceIndustryClinical}), as individuals with $\ge$4-fold titre increases in either the \gls{HAI} or \gls{MN} assays.
+% https://www.sciencedirect.com/science/article/pii/S0264410X15003916?via%3Dihub#bib0730
+% Many studies of influenza vaccination use the FDA criteria of seroconversion [18], [59], [60] (>4 fold increase in HAI titer post-vaccination) to categorize subjects into ‘responders’ and ‘nonresponders’ to vaccination
 The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres available at baseline (day -7) and post-vaccination (day 63) were computed according to this definition.
 
 % \begin{outline}
@@ -142,6 +116,7 @@ The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres
 % \end{outline}
 However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
 Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
+\todo{also 4-fold is one of a variety of thresholds}
 To address these concerns, I also computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
 For each assay, a linear regression was fit with the $\log_2$ fold change $\log_2{\text{day 63}/\text{day -7}}$ as the response, and the $\log_2$ baseline titre $\log_2{\text{day -7}}$ as predictor.
 The residuals from the two regressions were each standardized to mean 0 and \gls{SD} 1, then averaged.
@@ -758,7 +733,8 @@ Over the years, a diverse range of gene sets have been found to be baseline pred
     B cell receptor signalling, inflammatory response, platelet activation \autocite{hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}; 
 several of which I also observe.
 It should be noted that comparisons with these signatures from existing influenza systems vaccinology studies should caveated, as most existing studies are for non-adjuvanted influenza vaccines, whereas Pandemrix is AS03-adjuvanted.
-Adjuvanted influenza vaccines are considerably more immunogenic, and post-vaccination expression patterns differ to those of non-adjuvanted vaccines (\url{https://www.frontiersin.org/articles/10.3389/fimmu.2017.01760/full}).
+Adjuvanted influenza vaccines are considerably more immunogenic, and post-vaccination expression patterns differ to those of non-adjuvanted vaccines (\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, \url{https://www.frontiersin.org/articles/10.3389/fimmu.2017.01760/full}).
+\todo{could comment on phenotype differences too, i.e. HIRD measure antibodies at d63, much later than is popular in the field: d28 usually}
 Hence, it is particularly important that the robustness of these observed baseline expression signatures be validated in an independent cohort for a comparable AS03-adjuvanted influenza vaccine.
 \todo{There is also something to be said about 'prediction is not inference'}
 %
@@ -771,6 +747,9 @@ Hence, it is particularly important that the robustness of these observed baseli
 % \todo{I think i did not mention specifically type II (IFN-g) in the results section. would need to add HALLMARK set CAMERA results to show this}
 %
 % Although it is known that AS03 does induce expression changes related to innate immune response at the injection site (\url{https://www.sciencedirect.com/science/article/pii/S0264410X11000399?via%3Dihub#sec0010}), the mechanism of action is unknown (\url{https://www.frontiersin.org/articles/10.3389/fimmu.2017.01760/full}), and there have been relatively few studies of the effect of AS03 or AS03-adjuvanted vaccines on the \gls{PBMC} immune transcriptome aside from the \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} study itself.
+%
+% https://www.sciencedirect.com/science/article/pii/S1879625711000769?via%3Dihub#bib0180
+% Their mechanism of action remains incompletely understood, however they may amplify immune responses by enhancing antigen presentation and recruiting inflammatory cells to the area of antigen deposition (reviewed in [36]).
 %
 % https://link.springer.com/article/10.1007/s10875-010-9490-6
 % Immune responses to inactivated influenza virus adjuvanted with a different oil-in-water emulsion, MF59, have recently been described [35, 36]. Although a direct comparison between the adjuvants is complicated by the fact that different methodologies may have been used to measure immune responses, our data indicate that AS03A-adjuvanted influenza vaccines induce strong HI responses and CD4 T-cell frequencies relative to those induced with the MF59-adjuvanted product.
@@ -795,6 +774,18 @@ Hence, it is particularly important that the robustness of these observed baseli
 % For prediction, what rules can be easily implemented in the clinic?
 % DAMIP gives rulesets composed of small sets of genes, amenable to rapid qPCR assays.
 % We can model HAI and MN in split models. No change scores required.
+
+% Seasonal can prime for H1N1
+%
+% \2 Efficacy, dosing: \enquote{...a single dose of monovalent 2009 H1N1 vaccine was recommended in adults, but young children were recommended to receive 2 doses (reviewed by [3••]). It is likely that a single dose was sufficient to induce immunity in adults because prior exposure to seasonal H1N1 viruses had immunologically primed the population.}
+%
+% "Seasonal influenza vaccine provides priming for A/H1N1 immunization." \url{https://www.ncbi.nlm.nih.gov/pubmed/20371459}
+%
+% Demonstration in a mouse model: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3024675/}
+%
+% \2 Inclusion of H1N1 strains into seasonal vaccines
+% Sobolev sampled in March 2010 to August 2011
+% \2 Later cohorts may have recall response to H1N1 from seasonal vaccination
 
 % - Overall conclusions.
 In conclusion, Chapter 2 characterises the expansive changes in \gls{PBMC} gene expression that follow vaccination with Pandemrix.
