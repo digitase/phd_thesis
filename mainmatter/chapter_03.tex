@@ -2,88 +2,91 @@
 % Chapter 3
 %
 % Response eQTL-style paper
-% TODO: first thing is to properly re-scaffold everything, including intro and discussion, according to tmp_thesis_plan
-% The logical links must be established per paragraph, otherwise moving things around is too frequent
 
 \chapter{Genetic factors affecting Pandemrix vaccine response}
+\label{chap:hird_reQTL}
 
 \section{Introduction}
 
-% Subfield gap
-% context
+\subsection{Genetic factors affecting influenza vaccine response}
 
-% content
-[The influence of host genetics on vaccines response has also been explored]
-Vaccine-induced antibody response is a complex trait, with heritability estimates ranging from ... [e.g. seaonsal influenza 10.1016/j.vaccine.2008.07.065 Poland e.g. smallpox e.g. measeks 10.1080/21645515.2015.1119345.]
+- Vaccine-induced antibody response is a complex trait.
+% Impact of host genetic polymorphisms on vaccine induced antibody response
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4962936/#!po=22.7273
+% Table 1.
+% Genes with polymorphisms that influence the vaccine induced antibody level (selected studies).
+% Individuals carrying the minor allele in one or both alleles showed an increased seroconversion rate after influenza vaccination.62
+% Further SNPs that influence the humoral immune response to influenza vaccination have been reported (see Table 1):
 
-Narcolepsy controversy (evidence for genetics)
+- Host genetic factors are known to affect seasonal influenza vaccine response.
+% Start here with this review
+% 2019
+% Host Factors Impact Vaccine Efficacy: Implications for Seasonal and Universal Influenza Vaccine Programs
+% https://jvi.asm.org/content/93/21/e00797-19
 
-% Paper gap and untested hypotheses\
-% This sets the reader's expectations for the paper.
+% 2004
+% HLA-DRB1*0701 allele was over represented among persons who fail to mount a neutralizing antibody response.
+% https://www.ncbi.nlm.nih.gov/pubmed/15462607
+
+% 2008
+% Immunogenetics of Seasonal Influenza Vaccine Response
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
+
+% 2019
+% Common Genetic Variations Associated with thePersistence of Immunity following ChildhoodImmunization
+% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
+
+Also
+Prevacc signatures of Tri
+Using larger transcriptomic dataset
+Are they genetic
+
+\subsection{\Glsfmtlongpl{reQTL} for seasonal influenza vaccination}
+
 A potential mechanism through which genetic variation can affect vaccine response is through altering the expression of nearby genes (cis-eQTLs).
+
+eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
+Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
+
+if change in expression vs d0 is under genetic control, we should see change in effect size of eqtl vs d0
+
+in vivo
+Differences to in vitro models e.g. in immune cells?
+    Repeated measures possible
+    in vivo perturbation
+        Given the large changes in expression, detect context-specific fx.
+\todo{impinges on intro chapter}
+
+Summarise Franco et al
 In the case of inactivated trivalent influenza vaccine, genetic variation in membrane trafficking and antigen processing genes was associated with both transcriptomic and antibody responses in patients after vaccination [Franco].
-[summary of Sobolev findings]
-% [variation observed in response to Pandemrix, e.g R vs. NR trajectories]
 
-% Differences to in vitro models e.g. in immune cells?
+\subsection{Chapter summary}
 
-In this study, we model the influence of host genetics on longitudinal transcriptomic and antibody responses to Pandemrix, in vivo.
+% NOTE:
+% Narcolepsy controversy (more evidence for genetic interaction with Pandemrix vaccine response in particular)
 
-also, we have phenotype data, in vivo
+- In \autoref{chap:hird_DGE}, we observed massive changes in gene expression longitudinally after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody responses.
+[variation observed in response to Pandemrix, e.g R vs. NR trajectories]
+- How does host genetics affect response to Pandemrix in the HIRD cohort?
 
-[main aim: how much variation in response is genetic?]
-[other aims: assess differences to seasonal influenza vaccines]
-[summary of main results]
 Why Sobolev?
-More variation will be explained by history of exposure rather than genetics, so may be harder to detect.
+Small effect expected?
+More variation will usually be explained by history of exposure rather than genetics, so may be harder to detect.
+but not here
 
 Knowns
     Sobolev: R vs NR, 
     inconsistent variation in why people are NR
 
-Prevacc signatures of Tri
-Using larger transcriptomic dataset
-Are they genetic
-
-Good points of our study
-    Repeated measures
-    in vivo perturbation
-
-Utility of genetics:
-allows coloc
-How does common genetic variation affect response to vaccine?
-
-eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
-Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
-
-\subsection{Genetic factors affecting influenza vaccine response}
-
-% 2008
-% Immunogenetics of Seasonal Influenza Vaccine Response*https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
-
-% Summ this review
-Impact of host genetic polymorphisms on vaccine induced antibody response
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4962936/#!po=22.7273
-% Individuals carrying the minor allele in one or both alleles showed an increased seroconversion rate after influenza vaccination.62
-% Further SNPs that influence the humoral immune response to influenza vaccination have been reported (see Table 1):
-
-% 2019
-% Common Genetic Variations Associated with thePersistence of Immunity following ChildhoodImmunization
-% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
-% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
-
-\subsection{Context-specific immune response QTLs for influenza vaccine response}
-
-if change in expression vs d0 is under genetic control, we should see change in effect size of eqtl vs d0
-
-Summarise Franco et al
-
-\subsection{Chapter summary}
-
-Given the large changes in expression in ch2, detect context-specific fx.
+In this study, we model the influence of host genetics on longitudinal transcriptomic and antibody responses to Pandemrix, in vivo.
+also, we have phenotype data, in vivo
+[main aim: how much variation in response is genetic?]
+[other aims: assess differences to seasonal influenza vaccines]
+[summary of main results]
+Utility of genetics: allows coloc
 
 \section{Methods}
-
+% TODO: here, work through sub headings and scripts on farm bullet pointing methods in detail
 \subsection{Genotype imputation}
 
 why exclude x chrom?
@@ -364,4 +367,3 @@ Formal Mediation analysis required
 Confounding by multiple causal variants?;
 No conditional eQTL analysis to disentangle conditional effects;
 Are re qtls more likely to be distal and secondary?
-

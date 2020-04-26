@@ -5,8 +5,7 @@
 
 % The one central and memorable contribution of the paper.
 \chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine}
-
-% Chapter 2 HIRD sysvacc abstract
+\label{chap:hird_DGE}
 
 \section{Introduction}
 
@@ -20,17 +19,26 @@ There are three classes of influenza vaccine against seasonal strains in use: in
 \todo{why? for diff groups of people}
 These vaccines confer a degree of strain-specific protection, primarily by raising serum antibodies against the \gls{HA} and/or \gls{NA} proteins.
 Antigenic drift, the accumulation of mutations in these surface proteins over time, necessitates the annual reformulation of seasonal influenza vaccines to reflect circulating strains\autocite{houser2015InfluenzaVaccinesChallenges, sautto2018UniversalInfluenzaVaccine}.
-On occasion, a novel subtype against which the majority of the population is immunogically naive can arise, often from zoonotic origins.
+On occasion, a novel subtype against which the majority of the population is immunogically naive can arise suddenly (antigenic shift), often from zoonotic origins.
 A recent example occurred in 2009, when an outbreak of a novel swine-origin strain, eventually termed influenza A (H1N1)pdm09, resulted in a global pandemic, the fourth to occur in the last 100 years\autocite{krammer2018Influenza}.
 %
 % Describes 2009 H1N1 specifically
 % Antigenic and Genetic Characteristics of Swine-Origin 2009 A(H1N1) Influenza Viruses Circulating in Humans (\url{https://science.sciencemag.org/content/325/5937/197})
-\todo{add a point that 2009h1n1 is now circulating seasonally}
+\todo{add a point that 2009h1n1 is now circulating seasonally, this is a common trend}
 
 \subsection{Quantifying immune response to influenza vaccines}
 
 The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines\autocite{broadbent2011InfluenzaVirusVaccines}.
-\todo{Add specific section about pandemrix? or maybe in methods}
+\todo{Add specific section about pandemrix, it's correlates of protection, it's durability? or maybe in methods}
+\todo{Here, add few points about the immunological response to adjuvanted TIVs i.e. what happens after Pandemrix admin? Involve the innate -> B/CD4T response. Goto plotkins}
+% Efficacy
+% Class and target of abs raised
+% Durability
+% cellular responses
+%
+% 2. Characteristics of human antibodies specific for influenza viruses
+% https://www.sciencedirect.com/science/article/pii/S0264410X17311180?via%3Dihub
+%
 Immune response to influenza vaccines in clinical trials is evaluated by assays that measure levels of antibodies specific to the vaccine strain(s).
 The \gls{HAI} assay measures the levels of serum antibodies specific to the \gls{HA} surface protein.
 The related \gls{MN} assay measures levels of antibodies (which may or may not be anti-\gls{HA}) that neutralise the infectivity of the virus in cell culture \autocite{klimov2012InfluenzaVirusTitration}.
@@ -68,6 +76,7 @@ These early myeloid responses were consistent with studies of unadjuvanted seaso
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
 However, due to high variability among the vaccine non-responders in variables such as baseline antibody titres, a consensus predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
 This is in contrast to several studies of seasonal influenza vaccines, where certain expression signatures are able to predict vaccine response even pre-vaccination\autocite{furman2013ApoptosisOtherImmune, tsang2014GlobalAnalysesHuman, nakaya2015SystemsAnalysisImmunity, hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
+\todo{make sure gap and how it is filled is emphed enough}
 
 \subsection{Chapter summary}
 
@@ -697,6 +706,7 @@ There is extensive transcriptomic response to Pandemrix vaccination in the \gls{
 Upregulation of genes and modules related to the interferon signalling pathway, monocytes, inflammatory response, and other aspects of innate immunity were detected at day 1.
 This response is transient, with most such genes returning to baseline expression by day 7.
 \todo{Not sure if there is a biological interpretion of downreg of T cells and NK cells gene sets at day 1, since it could be due to increase in other cell types in the sample. similar findings in \autocite{nakaya2016SystemsBiologyImmunity} though}
+\todo{lit search for downregulation interpretation paper, and downreg T cell paper}
 Upregulation of cell cycle/proliferation, activated CD4\textsuperscript{+} T cell, and B (plasma) cell genes and modules were detected at day 7.
 This is likely a signature indicating the shift to an adaptive immune response, involving CD4\textsuperscript{+} T cell-supported differention and proliferation of antibody-secreting plasmablasts and plasma cells\autocite{murphy2016JanewayImmunobiology}.
 These patterns of expression change between timepoints in the \gls{RNAseq} data are consistent with the patterns in the array data in the original study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, and with expansions of monocyte and plasma cell populations seen in the \gls{FACS} data at days 1 and 7 respectively in the original \gls{HIRD} study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
