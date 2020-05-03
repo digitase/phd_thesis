@@ -187,6 +187,7 @@ Treating HapMap 3 samples as a reference population where the major axes of vari
 For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
 The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as covariates for ancestry downstream.
 \todo{Add Tracy-Widom statistics for PCs to justify later choice of 4 PCs for covariates}
+\todo{nicer version, copy the peer code, facet the hird and hapmap samples}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
@@ -195,6 +196,7 @@ The top \glspl{PC} separate samples of European, African and Asian ancestry (\au
 \end{figure}
 
 \subsection{Genotype phasing and imputation}
+\label{subsec:hird_DGE_methods_genotypePhasingAndImputation}
 
 % 2.	Online imputation service to phase and impute chr 1-22 and X
 % 2.1.	Phase with Eagle v2.4 (version in imputation logs.tar.gz)
@@ -282,6 +284,7 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 % 3.	GC bias, length bias, mappability
 % 3.1.	Length bias only affects RNAseq: somewhat alleviated by Salmon using effective length
 % 3.2.	GC bias affects both technologies: somewhat alleviated by Salmon using effective length (see the salmon paper)
+% NOTE:
 % 3.3.	Mappability has not been considered
 \todo{add software versions}
 Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, which internally accounts for transcript length and GC composition.
@@ -438,6 +441,7 @@ However, where batches are unbalanced in terms of sample size\autocite{zhang2018
 In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\autoref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
 In practice, results from the \gls{DGE} analysis were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
 \todo{this is not a very precise justification. actually, if I were to color R/NR in the PCA plot, R/NR doesn't really explain a lot of var in global gene expression. that's probably why the results don't change much.}
+\todo{weaken this. combat is used multiple times in ch3}
 
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
 
@@ -613,6 +617,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 
 For the frequentist random-effects meta-analysis, nominal gene-wise p values are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
 For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr}, which are analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
+\todo{add comment on symmetry}
 %
 % bayesmeta
 % Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.

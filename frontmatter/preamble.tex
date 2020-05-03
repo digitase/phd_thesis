@@ -91,6 +91,10 @@
 % The package provides an easy and flexible user interface to customize page layout and margins.
 % NOTE: screws with todonotes
 % \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
+% \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
+
+% Show margins
+\usepackage{showframe}
 
 %
 % Figures and tables
@@ -98,7 +102,9 @@
 
 % The package builds upon the graphics package, providing a key-value interface for optional arguments to the \includegraphics command.
 \usepackage{graphicx}
+% The caption package provides many ways to customise the captions in floating environments like figure and table, and cooperates with many other packages.
 \usepackage[font={footnotesize}]{caption}
+% The package provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
 \usepackage[font={footnotesize}]{subcaption}
 % Changes the filename algorithm to check for known graphics extensions
 \usepackage{grffile} 
@@ -257,6 +263,8 @@
 \newabbreviation[]{BH}{BH}{Benjamini-Hochberg}
 \newabbreviation[]{BTM}{BTM}{blood transcription module}
 \newabbreviation[]{NK}{NK}{natural killer}
+\newabbreviation[]{LMM}{LMM}{linear mixed model}
+\newabbreviation[]{LOCO}{LOCO}{leave-one-chromosome-out}
 % \newabbreviation[]{}{}{}
 %
 
