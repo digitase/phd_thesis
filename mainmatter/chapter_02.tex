@@ -99,6 +99,7 @@ The design of the \gls{HIRD} study is described in \autocite{sobolev2016Adjuvant
 In brief, the study enrolled 178 healthy adult volunteers in the UK.
 The vaccine dose was administered after blood sampling on day 0; five other longitudinal blood samples were taken on days -7, 0, 1, 7, 14 and 63.
 Serological responses were medasured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell subset counts (\gls{FACS} panels, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
+The gene expression microarrays were performed in two batches.
 
 In addition to the existing data, array genotypes were generated for 169 individuals; and \gls{RNAseq} data for 75 individuals at days 0, 1, and 7.
 The sets of individuals with gene expression assayed by microarray and \gls{RNAseq} is disjoint, as no biological material for RNA extraction remained for the microarray individuals.
@@ -194,25 +195,6 @@ The top \glspl{PC} separate samples of European, African and Asian ancestry (\au
     \caption{\gls{HIRD} samples (cyan) projected onto \gls{PC}1 and \gls{PC}2 axes defined by \gls{PCA} of HapMap 3 samples. The first two \glspl{PC} separate European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left) individuals.}
     \label{fig:hird_genotype_pca_withHapmap}
 \end{figure}
-
-\subsection{Genotype phasing and imputation}
-\label{subsec:hird_DGE_methods_genotypePhasingAndImputation}
-
-% 2.	Online imputation service to phase and impute chr 1-22 and X
-% 2.1.	Phase with Eagle v2.4 (version in imputation logs.tar.gz)
-% 2.2.	Impute with PBWT 3.1-v3.1-2-gbf6ebe2+htslib-1.3.2-199-gec1d68e-dirty (version in vcf header)
-% 2.2.1.	Reference fa is human_g1k_v37.fasta (1000 genomes)
-% 2.2.2.	X chrom is done in 3 chunks
-% 2.2.2.1.	X:1-2699520: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR1.shapeit3.mac5.aa.genotypes
-% 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
-% 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
-Prior to imputation, 213277 monomorphic markers that provide no information for imputation were removed.
-Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service\footnote{\url{https://imputation.sanger.ac.uk/}}, which involves pre-phasing with EAGLE2 (v2.4), then imputation with PBWT (v3.1) using the Haplotype Reference Consortium (r1.1) panel.
-Markers were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
-% 4.	Filtering
-% 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
-% 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
-Poorly-imputed markers with $\text{INFO} < 0.4$ or missingness $> 5\%$ were removed, resulting in 40290981 markers.
 
 \subsection{\glsfmtshort{RNAseq} data generation}
 
@@ -442,6 +424,7 @@ In our data, sample size and timepoint groups are fairly balanced between the tw
 In practice, results from the \gls{DGE} analysis were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
 \todo{this is not a very precise justification. actually, if I were to color R/NR in the PCA plot, R/NR doesn't really explain a lot of var in global gene expression. that's probably why the results don't change much.}
 \todo{weaken this. combat is used multiple times in ch3}
+\todo{be more specific about how combat works i.e. estimates factors per gene per batch?}
 
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
 

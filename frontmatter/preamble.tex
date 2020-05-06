@@ -14,6 +14,8 @@
 \usepackage[T1]{fontenc}
 % inputenc allows the user to input accented characters directly from the keyboard
 \usepackage[utf8]{inputenc}
+% provide additional commands e.g. \texteuro; fixes errors like "Command * unavailable in encoding T1."
+\usepackage{textcomp}
 
 % Culturally-determined typographical (and other) rules for a wide range of languages
 % e.g. Correct hyphenation. Specify patterns using e.g. \hyphenation{hy-phen-a-tion MATLAB}
@@ -265,6 +267,17 @@
 \newabbreviation[]{NK}{NK}{natural killer}
 \newabbreviation[]{LMM}{LMM}{linear mixed model}
 \newabbreviation[]{LOCO}{LOCO}{leave-one-chromosome-out}
+\newabbreviation[]{MANOVA}{MANOVA}{multivariate analysis of variance}
+\newabbreviation[]{INT}{INT}{inverse normal transformation}
+\newabbreviation[]{AC}{AC}{allele count}
+\newabbreviation[]{TSS}{TSS}{transcription start site}
 % \newabbreviation[]{}{}{}
 %
+
+%
+% Custom commands
+%
+
+% Format software package names
+\newcommand{\software}[1]{\texttt{#1}}
 
