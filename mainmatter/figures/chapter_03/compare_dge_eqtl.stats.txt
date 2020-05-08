@@ -1,0 +1,315 @@
+[1] "DGE (all):"
+              beta.dge
+coef.name.dge     -1     1
+  age             33    36
+  ancestry.PCs   204   237
+  d0R.vs.d0NR     75   240
+  d1.vs.d0     11610 11052
+  d1R.vs.d1NR     12    15
+  d7.vs.d0       870  2412
+  d7.vs.d1     10548 11853
+  d7R.vs.d7NR     21   318
+  R.vs.NR        126   282
+  sex           1479  1791
+[1] "DGE (filtered):"
+log2fc.thresh: 0.5849625 
+              beta.dge
+coef.name.dge    -1    1
+  ancestry.PCs  204  237
+  d1.vs.d0      330 1995
+  d7.vs.d0        0  228
+  d7.vs.d1     2310  654
+  sex            60   45
+[1] "At lfsr <"
+[1] 1
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 1
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+d0 d1 d7 
+ 1  1  1 
+[1] "At lfsr <"
+[1] 0.1
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 0.7795873
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+       d0        d1        d7 
+0.7369934 0.5253500 0.5587325 
+[1] "At lfsr <"
+[1] 0.05
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 0.5075166
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+       d0        d1        d7 
+0.4863670 0.3727340 0.3856301 
+[1] "At lfsr <"
+[1] 0.01
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 0.2322771
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+       d0        d1        d7 
+0.2285188 0.2072218 0.2072955 
+[1] "At lfsr <"
+[1] 0.001
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 0.1365512
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+       d0        d1        d7 
+0.1351511 0.1271186 0.1260870 
+[1] "At lfsr <"
+[1] 1e-04
+[1] "Proportion of genes with an eQTL at any timepoint:"
+[1] 0.09661017
+[1] "Proportion of genes with an eQTL at each timepoint:"
+
+        d0         d1         d7 
+0.09491525 0.09056743 0.09005158 
+
+[1] "Number of eGenes post-vacc:"
+[1] 5460
+[1] "Number of response eGenes post-vacc:"
+[1] 349
+[1] "Independence of DGE and eQTL proportions"
+[1] "d1 or d7:"
+          signif.eqtl
+signif.dge FALSE TRUE
+     FALSE  2950 2609
+     TRUE   3733 4278
+
+	Fisher's Exact Test for Count Data
+
+data:  dge_eqtl_table
+p-value = 1.314e-13
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 1.209161 1.388599
+sample estimates:
+odds ratio 
+  1.295739 
+
+[1] "d1 only:"
+          signif.eqtl
+signif.dge FALSE TRUE
+     FALSE  4102 1914
+     TRUE   4410 3144
+
+	Fisher's Exact Test for Count Data
+
+data:  dge_eqtl_table
+p-value < 2.2e-16
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 1.422356 1.641433
+sample estimates:
+odds ratio 
+  1.527836 
+
+[1] "d1 reQTL only:"
+          signif.eqtl
+signif.dge FALSE TRUE
+     FALSE   421   52
+     TRUE    310   36
+
+	Fisher's Exact Test for Count Data
+
+data:  dge_eqtl_table
+p-value = 0.8201
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.5816614 1.5065120
+sample estimates:
+odds ratio 
+ 0.9402546 
+
+[1] "d7 only:"
+          signif.eqtl
+signif.dge FALSE TRUE
+     FALSE  7651 4825
+     TRUE    686  408
+
+	Fisher's Exact Test for Count Data
+
+data:  dge_eqtl_table
+p-value = 0.3819
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.8278755 1.0733784
+sample estimates:
+odds ratio 
+  0.943094 
+
+[1] "d1 reQTL only:"
+          signif.eqtl
+signif.dge FALSE TRUE
+     FALSE   673  248
+     TRUE     60   21
+
+	Fisher's Exact Test for Count Data
+
+data:  dge_eqtl_table
+p-value = 0.8967
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+ 0.5369553 1.6235516
+sample estimates:
+odds ratio 
+ 0.9498471 
+
+[1] "integrated.strongest.restricted:"
+ [1] "ALDH18A1"    "ALG14"       "ANKFY1"      "ASF1B"       "ASXL1"      
+ [6] "AURKB"       "BRI3"        "BUD31"       "C11orf1"     "CDK5"       
+[11] "CENPM"       "COPB1"       "DDOST"       "DERL2"       "DOT1L"      
+[16] "DPY19L4"     "EHMT2"       "EID2B"       "FAM92A"      "FAM98A"     
+[21] "FEN1"        "FICD"        "FKBP10"      "FKBP7"       "GATAD2B"    
+[26] "GTSE1"       "HSPA13"      "KCNE1"       "KIAA0556"    "LINC00507"  
+[31] "LMAN1"       "LPAR1"       "LRRC42"      "MCM10"       "MELK"       
+[36] "MITD1"       "NUF2"        "POLR3G"      "PPP1R18"     "PRDM5"      
+[41] "QSER1"       "SAR1B"       "SLFN5"       "SPEF2"       "SPICE1"     
+[46] "SUV39H2"     "TMEM222"     "TNNC1"       "TSC22D1-AS1" "TSFM"       
+[51] "TXNDC5"      "VPS37A"      "XPR1"        "YPEL3"       "ZNF251"     
+[56] "ZNF519"     
+[1] 56
+[1] "integrated.strongest:"
+  [1] "AC026304.1"  "ACTR3C"      "ADAM17"      "ADAR"        "ALDH18A1"   
+  [6] "ALG14"       "ANKFY1"      "ANKMY2"      "ANKUB1"      "ANO6"       
+ [11] "APOE"        "ARFGAP1"     "ARHGDIA"     "ARPC1A"      "ASF1B"      
+ [16] "ASNA1"       "ASPA"        "ASXL1"       "AURKB"       "BRI3"       
+ [21] "BRPF3"       "BUD31"       "C11orf1"     "C11orf65"    "CCM2"       
+ [26] "CDK5"        "CENPM"       "CHCHD6"      "CHPF2"       "CLN5"       
+ [31] "COPB1"       "CROT"        "CSRP2"       "CUL1"        "DBP"        
+ [36] "DCUN1D2"     "DDOST"       "DERL2"       "DESI1"       "DOT1L"      
+ [41] "DPY19L4"     "DTNBP1"      "DTX3L"       "EHMT2"       "EID2B"      
+ [46] "ESCO2"       "ESR1"        "FAM92A"      "FAM98A"      "FAR2"       
+ [51] "FBXO36"      "FEN1"        "FICD"        "FKBP10"      "FKBP7"      
+ [56] "FMR1"        "GATAD2B"     "GINS3"       "GPR132"      "GTF2F2"     
+ [61] "GTSE1"       "HEATR5B"     "HOOK1"       "HSPA13"      "ICE2"       
+ [66] "KAT6A"       "KCNE1"       "KHDC1"       "KIAA0556"    "KLF12"      
+ [71] "KYAT1"       "LINC00507"   "LMAN1"       "LPAR1"       "LRP2BP"     
+ [76] "LRRC42"      "MAIP1"       "MAML3"       "MAP4"        "MAST4"      
+ [81] "MATN1-AS1"   "MCM10"       "MED28"       "MEGF6"       "MELK"       
+ [86] "MITD1"       "MRPS31"      "NELFE"       "NUF2"        "OTUD3"      
+ [91] "OXSR1"       "PARP11"      "PML"         "POLR3G"      "PPCDC"      
+ [96] "PPP1R12C"    "PPP1R18"     "PPP1R2"      "PRDM5"       "PRKACA"     
+[101] "PRKACB"      "PTTG2"       "QSER1"       "RASSF7"      "RBM12B"     
+[106] "RDX"         "RFWD2"       "SAR1B"       "SCNN1A"      "SEC24B-AS1" 
+[111] "SLFN5"       "SLIRP"       "SMKR1"       "SMPDL3B"     "SNX17"      
+[116] "SPACA9"      "SPEF2"       "SPICE1"      "SSSCA1"      "STK11IP"    
+[121] "SUV39H2"     "TAPBP"       "TBC1D13"     "TGFB1"       "TIMM9"      
+[126] "TMEM222"     "TNNC1"       "TRAF3IP1"    "TSC22D1-AS1" "TSFM"       
+[131] "TUBGCP5"     "TXNDC5"      "VPS26A"      "VPS37A"      "WDR53"      
+[136] "WDR78"       "XPR1"        "YPEL3"       "ZCCHC10"     "ZMAT5"      
+[141] "ZNF234"      "ZNF251"      "ZNF302"      "ZNF416"      "ZNF519"     
+[146] "ZNF540"      "ZNF551"      "ZNF592"      "ZNF599"      "ZNF624"     
+[151] "ZNF71"       "ZNRF2"      
+[1] 152
+           coef.name.dge
+code.signif ancestry.PCs d1.vs.d0 d7.vs.d0 d7.vs.d1 sex
+        000           47      310       50      430   8
+        001            0        3        0        3   0
+        010            0        6        1        8   0
+        011            1        5        0        5   0
+        100           10       51       12       79   3
+        101            3       10        2       12   0
+        110            1        7        0       10   0
+        111           85      383       11      441  24
+           coef.name.dge
+code.signif d1.vs.d0 d7.vs.d0 d7R.vs.d7NR
+        001       25        2           0
+        010       17        1           0
+        011        5        0           0
+        101       76       17           6
+        110        9        3           0
+        111        7        4           2
+     SNP                gene           group        gene.SNP        
+ Length:40710       Length:40710       d0:13570   Length:40710      
+ Class :character   Class :character   d1:13570   Class :character  
+ Mode  :character   Mode  :character   d7:13570   Mode  :character  
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+    chrom                Bhat                Shat               lfdr        
+ Length:40710       Min.   :-1.617616   Min.   :0.009558   Min.   :0.00000  
+ Class :character   1st Qu.:-0.077526   1st Qu.:0.022926   1st Qu.:0.01045  
+ Mode  :character   Median : 0.003236   Median :0.030887   Median :0.04337  
+                    Mean   : 0.001609   Mean   :0.037042   Mean   :0.05944  
+                    3rd Qu.: 0.080326   3rd Qu.:0.043320   3rd Qu.:0.08953  
+                    Max.   : 2.803155   Max.   :0.461646   Max.   :0.45131  
+                                                                            
+      lfsr               pm                psd             signif       
+ Min.   :0.00000   Min.   :-0.22526   Min.   :0.003547   Mode :logical  
+ 1st Qu.:0.01621   1st Qu.: 0.01569   1st Qu.:0.016146   FALSE:23819    
+ Median :0.07032   Median : 0.04062   Median :0.022929   TRUE :16891    
+ Mean   :0.10929   Mean   : 0.06104   Mean   :0.028147                  
+ 3rd Qu.:0.15605   3rd Qu.: 0.08011   3rd Qu.:0.033515                  
+ Max.   :0.70152   Max.   : 2.31867   Max.   :0.385471                  
+                                                                        
+ SNP_gene_TSS_dist   AN_sample     AC_sample        MAF_sample     
+ Min.   :-999697   Min.   :210   Min.   : 15.10   Min.   :0.06879  
+ 1st Qu.:-302114   1st Qu.:210   1st Qu.: 42.35   1st Qu.:0.16552  
+ Median :   8410   Median :214   Median : 74.10   Median :0.25762  
+ Mean   :   4957   Mean   :238   Mean   : 88.76   Mean   :0.27241  
+ 3rd Qu.: 311955   3rd Qu.:290   3rd Qu.:125.40   3rd Qu.:0.37466  
+ Max.   : 999966   Max.   :290   Max.   :267.95   Max.   :0.50000  
+                                                                   
+      pval           n_tests_local   FDR_local_bonferroni FDR_local_fdr_bh
+ Min.   :0.0000000   Min.   :   10   Min.   :0.0000       Min.   :0.0000  
+ 1st Qu.:0.0003232   1st Qu.: 2416   1st Qu.:0.9146       1st Qu.:0.1118  
+ Median :0.0052478   Median : 3013   Median :1.0000       Median :0.4535  
+ Mean   :0.0944752   Mean   : 3008   Mean   :0.7980       Mean   :0.4703  
+ 3rd Qu.:0.0586092   3rd Qu.: 3541   3rd Qu.:1.0000       3rd Qu.:0.8153  
+ Max.   :0.9999464   Max.   :11032   Max.   :1.0000       Max.   :1.0000  
+                                                                          
+      POS                REF                ALT                 INFO       
+ Min.   :    45845   Length:40710       Length:40710       Min.   :0.4001  
+ 1st Qu.: 31509077   Class :character   Class :character   1st Qu.:0.8445  
+ Median : 58284187   Mode  :character   Mode  :character   Median :0.9406  
+ Mean   : 73225988                                         Mean   :0.8914  
+ 3rd Qu.:109073866                                         3rd Qu.:0.9825  
+ Max.   :248821898                                         Max.   :1.0000  
+                                                                           
+       AC              AN          RefPanelAF          TYPED        
+ Min.   : 28.0   Min.   :271.0   Min.   :0.0000924   Mode :logical  
+ 1st Qu.: 59.0   1st Qu.:338.0   1st Qu.:0.1706190   FALSE:37494    
+ Median :106.0   Median :338.0   Median :0.3078455   TRUE :3216     
+ Mean   :125.5   Mean   :335.9   Mean   :0.3661396                  
+ 3rd Qu.:182.0   3rd Qu.:338.0   3rd Qu.:0.5336620                  
+ Max.   :304.0   Max.   :338.0   Max.   :0.9913460                  
+                                                                    
+  signif_rank      code.signif        code.signif.sharing
+ Min.   :      1   Length:40710       Length:40710       
+ 1st Qu.:  26763   Class :character   Class :character   
+ Median :  55582   Mode  :character   Mode  :character   
+ Mean   : 143426                                         
+ 3rd Qu.: 113467                                         
+ Max.   :8135405                                         
+                                                         
+ code.signif.sharing.masked   pm.sign.d0            pve         
+ Length:40710               Min.   :-1.00000   Min.   :0.00000  
+ Class :character           1st Qu.:-1.00000   1st Qu.:0.01315  
+ Mode  :character           Median : 1.00000   Median :0.02403  
+                            Mean   : 0.01415   Mean   :0.04998  
+                            3rd Qu.: 1.00000   3rd Qu.:0.04723  
+                            Max.   : 1.00000   Max.   :0.48274  
+                                                                
+    ENTREZID           GENENAME            SYMBOL          GENEBIOTYPE       
+ Min.   :        1   Length:40710       Length:40710       Length:40710      
+ 1st Qu.:     6920   Class :character   Class :character   Class :character  
+ Median :    26986   Mode  :character   Mode  :character   Mode  :character  
+ Mean   :  1450984                                                           
+ 3rd Qu.:    81890                                                           
+ Max.   :109286553                                                           
+ NA's   :309                                                                 
+   SEQNAME            SEQSTRAND       
+ Length:40710       Min.   :-1.00000  
+ Class :character   1st Qu.:-1.00000  
+ Mode  :character   Median : 1.00000  
+                    Mean   : 0.01371  
+                    3rd Qu.: 1.00000  
+                    Max.   : 1.00000  
+                                      
+[1] 1154

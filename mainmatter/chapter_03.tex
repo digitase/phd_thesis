@@ -124,6 +124,7 @@ In this study, we model the influence of host genetics on longitudinal transcrip
 % 2.2.2.1.	X:1-2699520: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR1.shapeit3.mac5.aa.genotypes
 % 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
 % 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
+\todo{better to just caveat, and leave numbers in}
 Prior to imputation, 213277 monomorphic markers that provide no information for imputation were removed.
 Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service\footnote{\url{https://imputation.sanger.ac.uk/}}, which involves pre-phasing with EAGLE2 (v2.4), then imputation with PBWT (v3.1) using the Haplotype Reference Consortium (r1.1) panel.
 Markers were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
@@ -538,6 +539,7 @@ X chromosome variants were excluded, as the number of copies differ between male
 % effects. The variance of the genetic effect may also differ between genders.
 so sex-specific methods are required \url{http://www.biomedcentral.com/1471-2105/15/392}.
 
+\todo{xchrom}
 At each of 13126 autosomal genes, at all cis-variants within within +-1 Mb of the \gls{TSS}, I fit the following model to map \gls{eQTL}:
 \begin{equation}
 \begin{split}
@@ -547,6 +549,8 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 \todo{lift proper vector notation from limix}
 
 where \todo{}.
+
+% note looc matrix for x chrom
 
 PEER factors are automatically weighted such that the variance of factors tends to zero as more factors are estimated, 
 hence continuing to add more and more factors as covariates will not continue to improve \gls{eQTL} detection power, and eventually the model degrees of freedom will be depleted.
@@ -638,9 +642,23 @@ The z score can be compared to a standard normal to obtain a nominal Z-test p va
 \subsection{Replication of eQTLs in a reference dataset}
 
 To validate the \gls{eQTL} mapping approach, I estimate the replication of significant eQTLs in an independent reference.
-Due to the lack of large sample size \gls{eQTL} maps specific to \gls{PBMC}, I use the GTEx v8 whole blood dataset as my reference dataset.
+Due to the lack of large sample size \gls{eQTL} maps specific to \gls{PBMC}, I use the GTEx v8 whole blood dataset as my reference dataset (n=670, 51.2\% eGene rate).
 For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal p value for that variant in GTEx (where the variant exists in both datasets).
-I apply \software{qvalue} to estimate the proportion of those nominal p values that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
+I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those nominal p values that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
+
+The mega-analysis has comparable replication rate for shared \glspl{eQTL} at moderately stringent \gls{lfsr} thresholds up to $10^{-5}$ (\autoref{fig:hird_eQTL_pi1vsGTExWholeBlood}).
+Past this, as the $\pi_1$ procedure assumes a well-behaved p value distribution in $\left[0, 1\right]$, reliability declines due to the number of p values being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum p value being too far from 1.
+The numbers of \glspl{reQTL} were too low to assess replication using this method, and one might not expect them to replicate in a baseline dataset such as GTEx whole blood, especially for those \glspl{reQTL} significant only at post-vaccination timepoints.
+As the mega-analysis has a higher eGene rate \todo{get exact numbers, roughly 50 vs 30pc} compared to the \gls{RNAseq}-only analysis, with similar replication,
+I assume this represents is due to the power advantage from having larger a sample size, rather than technical effects from merging the expression data.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
+    \caption{}
+    \label{fig:hird_eQTL_pi1vsGTExWholeBlood}
+\end{figure}
+
 
 \subsection{Genotype interactions with non-timepoint predictors}
 
@@ -663,33 +681,25 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 
 \section{Results}
 
-\subsection{Per timepoint mapping}
+\subsection{Mapping reQTLs to Pandemix vaccination}
 
-- mapped eQTLs at x genes, x autosomal variants, each timepoitn
-- 3 versions
-- limix, mashr
-- reqtl defined as
+Within each timepoint condition (day 0 pre-vaccination, day 1, and day 7), cis-\glspl{eQTL} ($\pm 1 \text{Mb}$ of the \gls{TSS}) were mapped using \software{LIMIX},
+then joint analysis of effects was done using \software{mashr} to obtain posterior effect size and standard errors.
+At \gls{lfsr} < 0.05, 6887/13570 genes (\percentage{0.5075166}) were eGenes (genes with a significant \gls{eQTL}) in at least one timepoint.
+The most significant \gls{eQTL} variant across all timepoints was selected as the lead variant for each eGene.
+\glspl{reQTL} were defined by comparing the effect size of this lead \gls{eQTL} between each pair of timepoints using beta-comparison approach.
+Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.1675621}) \glspl{eQTL} were classified as significant \glspl{reQTL} (nominal p difference < 0.05).
 
-- x genes had eQTL at at least 1 timepoint (eGene)
-- overall eGene rate in each analysis is
-
-- decide on version: replication
-- shared replicates well
-- mega superior
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
-    \caption{}
-    \label{fig:hird_eQTL_pi1vsGTExWholeBlood}
-\end{figure}
-
-- more detailed breakdown of sharing in mega
-- day 0 more egenes
+\autoref{fig:hird_eQTL_upset_mega} illustrates the difference between calling sharing using a significance threshold versus difference in betas approach.
+For instance, day 0 was the timepoint with the largest number of eGenes, reflecting the larger sample size compared to other timepoints.
+Although there are 1427 eGenes significant at only day 0, at 646/1427 eGenes, the effect size at day 0 does not differ significantly when compared to day 1 or day 7.
+The most significant \glspl{eQTL} with the highest abs(z) in any timepoint are shared between timepoints, highlighting the power advantage for mapping shared effects granted by joint analysis.
+Shared \glspl{eQTL} appear to be enriched close to the \gls{TSS}, whereas \glspl{reQTL} do not show this pattern.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_03/get_signif_qtls.upset.eGenes_sharing_no_ties_joint.dataset_mega.groups_v2_v3_v4.cisDist_1e6.sampleAcThresh_15.randomSubsetN_200000.signifThresh_0.05.pdf}
+    % \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_03/get_signif_qtls.upset.eGenes_sharing_no_ties_joint.dataset_mega.groups_v2_v3_v4.cisDist_1e6.sampleAcThresh_15.randomSubsetN_200000.signifThresh_0.05.pdf}
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.upset.pdf}
     \caption{}
     \label{fig:hird_eQTL_upset_mega}
 \end{figure}
@@ -701,36 +711,48 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 %     \label{fig:hird_eQTL_heatmap_mega}
 % \end{figure}
 
-potential problems with mega discussed b4
-- platform fx
-- Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
-- lme4qtl interactions with bonferroni
-
-\subsection{Characterising re-eQTLs at each timepoint}
-
+I focus on \glspl{eQTL} that are significant post-vaccination, and explain more variation in expression post-vaccination, as the converse may be caused by greater power at day 0 rather than being a result of vaccine stimulation.
+\todo{put pve formula in methods}
+The majority of \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
+Gene set enrichment analysis on these sets of \glspl{reQTL} at day 1 and day 7 did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
+\todo{mention ranked enrichments}
 % Possible Ranking metrics:
 %     PVE: prefers large maf and high betas since it squares the beta. even if the beta does not change so much. ignores sign.
 %     beta:
 %     p: ignores sign
 %     Z score:
-\missingfigure{tmod reqtls}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.z_sharing.vs.SNP_gene_TSS_dist.pdf}
+    \caption{}
+    \label{fig:hird_eQTL_zSharing_vs_TSSdist_mega}
+\end{figure}
+
+\subsection{Characterising re-eQTLs at each timepoint}
+
+% TODO: get 1 example of reQTL DE at day 1 and day 7, 1 example not.
+% make sure filter criteria match above plot
+%
+% dge no d1 ADCY3
+% dge yes d1 LPAR1
+
+% dge no d7 plot_dge_eqtl_genotypes.ENSG00000167670,rs2613791_SNP_chr19_5148372_G_A.pdf
+% dge yes d7 plot_dge_eqtl_genotypes.ENSG00000155304,rs9980764_SNP_chr21_14564182_C_T.pdf
 
 - DGE vs reQTL
 - fisher test
+% TODO: redo fisher test using new criteria
 
-- an example of d1 reQTL at adcy3
+% FRANco comparison like caliskan TODO
 
-- previously found in franco
-and in:
-whole blood
-% (A) ADCY3, (B) DNAAF1 and (C) ZNF517):
-% before and after stimulation with M. leprae sonicate in whole blood cells.
-% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006952
-and in: 
-caliskan
+% TODO
+% plot proving strongest reQTLs are not strongest DGEs
 
-and in High-throughput allele-specific expression across 250 environmental conditions
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5131815/
+% coloc; which se am i using TODO
+
+% TODO
+% pull platform interaction in as a filter
 
 - high expre at all t, so not due to cell type specific e
 - not DGE either
@@ -740,25 +762,29 @@ and in High-throughput allele-specific expression across 250 environmental condi
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000138031,rs916485_SNP_chr2_24859404_T_C.pdf}
     \caption{}
-    \label{fig:hird_eQTL_ADCY3}
+    \label{fig:hird_eQTL_ploteQTL_ADCY3}
 \end{figure}
 
 \subsection{Interaction}
 
+potential problems with mega discussed b4
+- platform fx
+- Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
+- lme4qtl interactions with bonferroni
+
 - interaction with cell type lme4qtl
 - If it is assumed that eQTL effects can differ between cell types, then in addition to the genotype main efect, an interaction term between genotype and cell type abundance is required.
 
+\todo{gene set enrichment for cell type interacting genes to further validate xCell score usefulness}
+
 \subsection{TODO Colocalisation of re-eQTLs with known context-specific immune QTLs}
 
-% Figure with e.g. reQTL coloc
-Colocalisation with known associations;
-Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014);
-Here the inverse: coloc is used to understand the biological relevance of observed expression variation
-
-% What is coloc and why coloc
+Colocalisation with known associations [...]
+Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014) [...]
+Here the inverse: coloc is used to understand the biological relevance of observed expression variation.
+% Choice of method;
 % See coloc_comparisons in notes for a summary
-Choice of method; 
-Coloc and assumptions; Hypercoloc and assumptions
+% Coloc and assumptions; Hypercoloc and assumptions
 
 \subsection{TODO Disruption of binding site motifs as a model for reQTLs}
 
@@ -777,7 +803,20 @@ In the multi-tissue paradigm: cite the GTEx U curve
 
 adcy3
 franco, but
-likely broad innate response, rather than vacc specific
+
+- an example of d1 reQTL at adcy3
+
+- previously found in franco
+and in:
+whole blood
+% (A) ADCY3, (B) DNAAF1 and (C) ZNF517):
+% before and after stimulation with M. leprae sonicate in whole blood cells.
+% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006952
+and in: 
+caliskan
+
+and in High-throughput allele-specific expression across 250 environmental conditions
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5131815/
 
 % PBMCs Rhinovirus in vitro
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4395341/
@@ -809,9 +848,14 @@ likely broad innate response, rather than vacc specific
 % [32]. The reQTL for DNAAF1 displays the strongest P value among the reQTL we
 % identified.
 
+likely broad innate response, rather than vacc specific
 
 
 Biggest question remains, why are reQTLs reQTLs
+
+% fu mechs
+TFs are tissue specific
+% https://www.biorxiv.org/content/biorxiv/early/2019/10/06/785584.full.pdf
 
 Confounded by changes in immune cell proportions in bulk PBMCs;
 as cell type -> E, but also modified G -> E
@@ -846,4 +890,7 @@ No conditional eQTL analysis to disentangle conditional effects;
 miss some reQTLs
 Are re qtls more likely to be distal and secondary?
 
+op effects may be more common
+% https://www.nature.com/articles/s41431-019-0468-4#Sec9
+oppposite effect has greater power to detect
 

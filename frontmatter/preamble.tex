@@ -46,7 +46,15 @@
 \usepackage{numprint}
 
 % Format si units
+%
 \usepackage{siunitx}
+\sisetup{round-mode=figures, round-precision=4}
+%
+% Define percentage formatting
+% https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
+\newcommand\percentage[2][]{
+    \SI[scientific-notation = fixed, fixed-exponent = 0, output-decimal-marker={.}, #1]{#2e2}{\percent}
+}
 
 % Define line spacing
 % Setspace switches off double-spacing at places where even the most die-hard
