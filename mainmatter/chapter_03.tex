@@ -297,6 +297,7 @@ but automatic outlier exclusion based on \gls{SD} thresholds at the \gls{eQTL} m
 \end{figure}
 
 \subsection{Estimation of cell type abundance via expression deconvolution}
+\todo{not technically deconv}
 
 % Also, \gls{RNAseq} expression estimates are inherently compositional \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
 As \gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample, which shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
@@ -307,6 +308,7 @@ Immune cell abundance also varies naturally between healthy individuals (\url{ht
 
 Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals,
 so I used expression deconvolution as an alternative to derive cell type abundances from bulk expression data for use in \gls{eQTL} modelling\autocite{davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2019CellTypeSpecific}.
+\todo{deconv returns an aggregate measure, so should not confound results for any one gene}
 % https://github.com/dviraran/xCell
 %
 % xCell uses the expression levels ranking and not the actual values, thus
@@ -662,18 +664,26 @@ I assume this represents is due to the power advantage from having larger a samp
 
 \subsection{Genotype interactions with non-timepoint predictors}
 
-Given the modest sample size, I also use the two-step approach used by others\autocite{westra2015CellSpecificEQTL, kim-hellmuth2017GeneticRegulatoryEffects, davenport2018DiscoveringVivoCytokineeQTL} \url{https://doi.org/10.1371/journal.pgen.1005908},
-where tests for interaction are only performed at variants with a main \gls{eQTL} effect.
+If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
+then an interaction term between genotype and cell type abundance is required, 
+otherwise the slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
+one can not \enquote*{} for this modification just by including the main effect for cell type abundance.
+
+Given the modest sample size, I also use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},
+where tests for interaction are only performed at a subset of tests, often the lead \gls{eQTL} variant for each gene.
 % Unfortunately, there seems to be no consensus between these studies for controlling the interaction effect tests for multiple testing.
 %
 % Strange custom 5% FDR: westra2015CellSpecificEQTL
 % Bonferroni: kim-hellmuth2017GeneticRegulatoryEffects
 % Benjamini-Hochberg FDR: kim-hellmuth2017GeneticRegulatoryEffects
-% Benjamini-Hochberg procedure, and a 0.15 FDR threshold: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005908#sec007
+% Benjamini-Hochberg procedure, and a 0.15 FDR threshold: peters2016InsightGenotypePhenotypeAssociations
 %
-% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005908#sec007
 The key to the two-stage approach is that if the estimates for the interaction effect are sufficiently independent from the estimates of the main effect from main-effect only models,
-the type I error can be controlled using a Bonferroni correction based on the number of interactions that are actually tested, rather the number of interactions that could have been tested for\autocite{kooperberg2008IncreasingPowerIdentifying, }.
+the type I error can be controlled based on the number of interactions that are actually tested, rather the number of interactions that could have been tested for\autocite{kooperberg2008IncreasingPowerIdentifying,peters2016InsightGenotypePhenotypeAssociations}.
+It is unclear whether this assumption holds, as the size of the main effect may contribute to power for detecting interaction effects.
+As the main purpose of the interaction analyses is scanning for cell type effects at detected \glspl{reQTL},
+I choose to test for interactions only at the lead \gls{eQTL} variant for each gene with a significant main \gls{eQTL},
+then apply the \gls{BH} \gls{FDR} used by others\autocite{peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects}.
 
 \gls{eQTL} models interactions between genotype and other predictors were fit using \software{lme4qtl}.
 The model specification is as in \todo{above section}, with the addition of \todo{interactions with cel type/platform}.
@@ -711,12 +721,15 @@ Shared \glspl{eQTL} appear to be enriched close to the \gls{TSS}, whereas \glspl
 %     \label{fig:hird_eQTL_heatmap_mega}
 % \end{figure}
 
+\subsection{Characterising reQTLs post-vaccination}
+
 I focus on \glspl{eQTL} that are significant post-vaccination, and explain more variation in expression post-vaccination, as the converse may be caused by greater power at day 0 rather than being a result of vaccine stimulation.
-\todo{put pve formula in methods}
-The majority of \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
-Gene set enrichment analysis on these sets of \glspl{reQTL} at day 1 and day 7 did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
-\todo{mention ranked enrichments}
-% Possible Ranking metrics:
+\todo{put pve formula in methods, include point that pve norms to var(y)}
+Many of the \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
+Once again, shared \glspl{eQTL} are enriched close to the \gls{TSS}, and \glspl{reQTL} are distributed across the cis- window.
+Gene set enrichment analysis on eGenes for these sets of \glspl{reQTL} at day 1 (68 eGenes) and day 7 (226 eGenes) did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
+%
+% Possible Ranking metrics for ranked enrichments
 %     PVE: prefers large maf and high betas since it squares the beta. even if the beta does not change so much. ignores sign.
 %     beta:
 %     p: ignores sign
@@ -729,34 +742,14 @@ Gene set enrichment analysis on these sets of \glspl{reQTL} at day 1 and day 7 d
     \label{fig:hird_eQTL_zSharing_vs_TSSdist_mega}
 \end{figure}
 
-\subsection{Characterising re-eQTLs at each timepoint}
+The strongest reQTL at day 1 was for \gene{ADCY3} (p difference = \num{8.676917e-06}, BH FDR = \num{0.1177458}),
+where the \gls{reQTL} variant explained approximately \percentage{0.01862996} of expression variation at day 0, increasing to \percentage{0.14075782} at day 1 (\autoref{fig:hird_eQTL_ploteQTL_ADCY3}).
+At day 7 the strongest \gls{reQTL} was at \gene{SH2D4A} (p difference = \num{1.369564e-06}, BH FDR = \num{0.01747935}).
+Here, the \gls{reQTL} variant explained similar amounts of expression variation at day 0 (\percentage{0.08229266}) and day 7 (\percentage{0.08956865}), with opposite directions of effect (\autoref{fig:hird_eQTL_ploteQTL_SH2D4A}).
 
-% TODO: get 1 example of reQTL DE at day 1 and day 7, 1 example not.
-% make sure filter criteria match above plot
-%
-% dge no d1 ADCY3
-% dge yes d1 LPAR1
-
-% dge no d7 plot_dge_eqtl_genotypes.ENSG00000167670,rs2613791_SNP_chr19_5148372_G_A.pdf
-% dge yes d7 plot_dge_eqtl_genotypes.ENSG00000155304,rs9980764_SNP_chr21_14564182_C_T.pdf
-
-- DGE vs reQTL
-- fisher test
-% TODO: redo fisher test using new criteria
-
-% FRANco comparison like caliskan TODO
-
-% TODO
-% plot proving strongest reQTLs are not strongest DGEs
-
-% coloc; which se am i using TODO
-
-% TODO
-% pull platform interaction in as a filter
-
-- high expre at all t, so not due to cell type specific e
-- not DGE either
-- possible mech is cell type specific eqtl
+Both \gene{ADCY3} and \gene{SH2D4A} have moderately high percentile expression at all timepoints, and are not differentially expressed post-vaccination.
+Only 5/68 (\percentage{0.1323529}) genes with \glspl{reQTL} that explain more variation at day 1 were upregulated at day 1 vs. day 0; 5/226 (\percentage{0.02212389}) for day 7 vs. day 0.
+Overall, \glspl{reQTL} were less likely compared to shared \glspl{eQTL} (\percentage{0.2920277} vs. \percentage{0.4929356}, Fisher's test p < \num{2.2e-16}) to be differentially expressed post-vaccination.
 
 \begin{figure}
     \centering
@@ -765,48 +758,127 @@ Gene set enrichment analysis on these sets of \glspl{reQTL} at day 1 and day 7 d
     \label{fig:hird_eQTL_ploteQTL_ADCY3}
 \end{figure}
 
-\subsection{Interaction}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000104611,rs7841346_SNP_chr8_20170963_C_A.pdf}
+    \caption{}
+    \label{fig:hird_eQTL_ploteQTL_SH2D4A}
+\end{figure}
 
-potential problems with mega discussed b4
-- platform fx
-- Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
-- lme4qtl interactions with bonferroni
+\subsection{Genotype by cell type interaction effects}
 
-- interaction with cell type lme4qtl
-- If it is assumed that eQTL effects can differ between cell types, then in addition to the genotype main efect, an interaction term between genotype and cell type abundance is required.
+Given that many \glspl{reQTL} are not explained by differential expression post-vaccination, the presence of cell type-specific \gls{eQTL} effects was considered.
+Standardised \software{xCell} enrichment scores were used to approximate abundance of 7 \gls{PBMC} cell types from the expression data.
+\todo{move this up to model}
+After pruning highly correlated cell types, scores for monocytes, \gls{NK} cells and plasma cells remained.
+Within-timepoint full \gls{eQTL} models including the genotype main effect, the three cell type abundances, and three cell type-genotype interaction terms, were fit using \software{lme4qtl}, 
+then compared to a nested model excluding the three interaction terms.
 
+Significant cell type interactions were detected at 16/1154 \glspl{reQTL} (BH FDR < 0.05)
 \todo{gene set enrichment for cell type interacting genes to further validate xCell score usefulness}
+For \gene{ADCY3}, at day 1 post-vaccination, the full model had significantly better model fit ($chisq(3) = 26.290769$, \gls{LRT} BH FDR = \num{9.539518e-05}).
+Although the genotype effect size was \num{0.255954767} (SE = \num{0.03339378}) in the nested model,
+the estimate in the full model was \num{-0.007216815} (\num{0.06656115});
+with the three cell type-genotype interaction term estimates being:
+monocyte \num{0.212978154} (\num{0.04897962}),
+\gls{NK} cells \num{-0.009195402} (\num{0.04470412}),
+and plasma cells \num{0.016151511} (\num{0.06632921}).
+\todo{this is probably what tables are for}
+This indicates the \gls{eQTL} effect is actually driven largely by the monocyte abundance;
+in the case when monocyte abundance is zero (representing an average abundance across all samples, as scores are standardised), the effect of increasing genotype dosage on \gene{ADCY3} expression is minimal.
+\missingfigure{expression vs monocyte xCell score, colored by genotype}
 
-\subsection{TODO Colocalisation of re-eQTLs with known context-specific immune QTLs}
+\subsection{TODO Genotype by platform interaction effects}
 
-Colocalisation with known associations [...]
-Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014) [...]
-Here the inverse: coloc is used to understand the biological relevance of observed expression variation.
+% pull platform interaction in as a filter
+%
+% potential problems with mega discussed b4
+% - platform fx
+% - Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
+% - lme4qtl interactions with bonferroni
+- Perhaps using platform specific effects as a filter for reQTLs.
+
+\subsection{TODO Colocalisation of reQTLs with known \textit{in vitro} condition-specific immune eQTLs}
+
+% TODO
 % Choice of method;
 % See coloc_comparisons in notes for a summary
 % Coloc and assumptions; Hypercoloc and assumptions
+\begin{outline}
 
-\subsection{TODO Disruption of binding site motifs as a model for reQTLs}
+% rs916485_SNP_chr2_24859404_T_C
+\1 In a 500 Mb window around the lead \gene{ADCY3} variant rs916485, \software{hyprcoloc} to colocalise with existing datasets and fine map.
+
+\1 Day 1 HIRD colocs with BLUEPRINT and Fairfax monocytes (both stim and non stim), but not with Quach (\autoref{fig:hird_eQTL_coloc_ADCY3}).
+\2 Biases from ethnicity-derived differences in LD?
+\2 Also, priors need tuning?
+
+% fine mapped to 2_24874775_A_G, nearest gene (45,064 bp downstream to canonical TSS): ADCY3 TSS is at 24919839, rev strand
+\1 Fine mapped to rs13407914 (PP = 1), an intronic variant 45064 bp downstream of the TSS.
+
+% note in 2019-06-17_team_meeting.pptx, originally was rs10185143
+\todo{FYI the IBD/T cell coloc fine maps to chr2:24935139 T C (rs713586) with PP=1}
+
+\end{outline}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.locusPlot.gene_ENSG00000138031.pdf}
+    \caption{}
+    \label{fig:hird_eQTL_coloc_ADCY3}
+\end{figure}
 
 \section{Discussion}
 
-more reqtls at d1, expected
+% TODO: here
+Overall summary
+
+more reqtls at d1, expected, but no
 Given the large changes in expression, detect context-specific fx.
 
 % parameters of innate cells were more strongly controlled by genetic variation than were those of adaptive cells,
 % "https://www.nature.com/articles/s41590-018-0049-7#Abs1"
 
-
-
 How much sharing vs expected?
 In the multi-tissue paradigm: cite the GTEx U curve
 
-adcy3
-franco, but
+op effects may be more common
+% https://www.nature.com/articles/s41431-019-0468-4#Sec9
+oppposite effect has greater power to detect
 
+
+Confounded by changes in immune cell proportions in bulk PBMCs;
+as cell type -> E, but also modified G -> E
+how good is our deconv? stim at day 1
+Note, the use of gene signatures for deconv
+    in stimulated samples
+    does not distinguish upreg from prolif either
+    if expression goes up, the method will detect more of the signature
+    i.e. it may correct away some signal of upregulation
+
+computational reasons
+only test top snp, miss some 
+assume that main effect is signif 
+lme4qtl was not scalable
+
+Confounding by multiple causal variants?;
+No conditional eQTL analysis to disentangle conditional effects;
+
+miss some reQTLs
+Are re qtls more likely to be distal and secondary?
+
+
+
+e.g. ct specific
+ACDY3 talk
+The strongest \gls{reQTL} detected at day 1 was \gene{ADCY3}, 
+effect probs due to large mono abundance at d1
+or correlated
+
+franco, but
 - an example of d1 reQTL at adcy3
 
-- previously found in franco
+
 and in:
 whole blood
 % (A) ADCY3, (B) DNAAF1 and (C) ZNF517):
@@ -848,49 +920,52 @@ and in High-throughput allele-specific expression across 250 environmental condi
 % [32]. The reQTL for DNAAF1 displays the strongest P value among the reQTL we
 % identified.
 
-likely broad innate response, rather than vacc specific
+so likely broad innate response, rather than vacc specific
+
 
 
 Biggest question remains, why are reQTLs reQTLs
+
+dge eqtl overlap poor?
+average no dge, but dge by genotypes
+what other mechs?
+can be indep
+like davenport, we observe little overlap
+
+attempt to addres by coloc
+% Colocalisation with known associations [...]
+% Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014) [...]
+% Here the inverse: coloc is used to understand the biological relevance of observed expression variation.
+can miss
 
 % fu mechs
 TFs are tissue specific
 % https://www.biorxiv.org/content/biorxiv/early/2019/10/06/785584.full.pdf
 
-Confounded by changes in immune cell proportions in bulk PBMCs;
-as cell type -> E, but also modified G -> E
-how good is our deconv? stim at day 1
-Note, the use of gene signatures for deconv
-    in stimulated samples
-    does not distinguish upreg from prolif either
-    if expression goes up, the method will detect more of the signature
-    i.e. it may correct away some signal of upregulation
+davenport etc. demonstrated tfs
 
-assume that main effect is signif 
-lme4qtl was not scalable
+% tf review
+% https://www.cell.com/cell/pdf/S0092-8674(18)30106-5.pdf
+
+introns can be TF bound
+% https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0046784
+
+% rs13407913
+% cursory scan: http://54.245.180.226/php_file/multiple.php?ID=rs13407913
+% SP1 is monocyte specific https://europepmc.org/article/med/28008225
+and upreg at d1
+
+need more principaled scan
 
 
-Why dge eqtl overlap poor?
-average no dge, but dge by genotypes
-what other mechs?
-can be indep
-
-It must be said, overlap is not rigorous
-Formal Mediation analysis required
 
 Unclear connection to vaccine biology e.g. what genesets/pathways/cell types are driving the observed transcriptomic and eQTL response?;
 big lim: sample size: unable to leverage Ab data for mediation analysis
 misses a main advantage of in vivo design
 
-computational reasons
-only test top snp, miss some 
+Need GWAS 
 
-Confounding by multiple causal variants?;
-No conditional eQTL analysis to disentangle conditional effects;
-miss some reQTLs
-Are re qtls more likely to be distal and secondary?
+franco: It must be said, overlap is not rigorous
+    they recog Formal Mediation analysis required
 
-op effects may be more common
-% https://www.nature.com/articles/s41431-019-0468-4#Sec9
-oppposite effect has greater power to detect
 

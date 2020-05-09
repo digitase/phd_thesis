@@ -58,7 +58,7 @@ Such information helps elucidate a vaccine's mode of action, discover \enquote{m
 Various systems vaccinology studies of seasonal influenza vaccines have been conducted, taking longitudinal measurements pre-vaccination, and commonly at some subset of days 1, 3, 7, and 28 post-vaccination.
 These measurements can be correlated to changes in antibody titres after vaccination to define signatures of antibody response with potential utility as correlates of protection.
 One of the earliest such studies by Zhu et al.\autocite{zhu2010WholeGenomeTranscriptional} found that expression of type 1 interferon-modulated genes was a signature of response to \gls{LAIV}.
-An expression signature including \textit{STAT1}, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{bucasas2011EarlyPatternsGene}; kinase CaMKIV expression is also a strong predictor \autocite{nakaya2011SystemsBiologyVaccination}, as are genes related to B cell proliferation \autocite{tan2014GeneSignaturesRelated}.
+An expression signature including \gene{STAT1}, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{bucasas2011EarlyPatternsGene}; kinase CaMKIV expression is also a strong predictor \autocite{nakaya2011SystemsBiologyVaccination}, as are genes related to B cell proliferation \autocite{tan2014GeneSignaturesRelated}.
 
 For these studies of seasonal influenza vaccines in adults, responses tend to be biased by recall from past vaccination or infection\autocite{bucasas2011EarlyPatternsGene, nakaya2012SystemsVaccinologyLearning}.
 There have also been few studies of adjuvanted influenza vaccines, despite their superior efficacy in comparison to non-adjuvanted counterparts\autocite{wilkins2017AS03MF59AdjuvantedInfluenza,tregoning2018AdjuvantedInfluenzaVaccines}.
@@ -631,11 +631,11 @@ At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857
 
 Consistent with global expression at day 1 being markedly different from expression at other timepoints (\autoref{fig:hird_expression_pcs}), the highest numbers of differentially expressed genes are observed at day 1, with 644 genes differentially expressed vs. baseline.
 The majority of these (580/644) were upregulated.
-The gene with the highest \gls{FC} increase at day 1 compared to baseline was \textit{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
-Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \textit{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \textit{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \textit{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
+The gene with the highest \gls{FC} increase at day 1 compared to baseline was \gene{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
+Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \gene{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \gene{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \gene{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
 Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\autoref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by signatures of innate immunity.
 \todo{can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets}
-64 genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells, with the largest absolute fold change observed for \textit{FGFBP2} ($\log_2\text{\gls{FC}} = -0.9141547$).
+64 genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells, with the largest absolute fold change observed for \gene{FGFBP2} ($\log_2\text{\gls{FC}} = -0.9141547$).
 \todo{not sure of interpretation at FGFBP2, it is indeed highly expressed in NKs through \url{https://dice-database.org/genes/FGFBP2}}
 For both up and downregulated genes, there was a tendency to return to baseline expression levels by day 7.
 \todo{any point in a table of e.g. top 20 DE genes, or is the gene set analysis already enough?}
@@ -650,8 +650,8 @@ For both up and downregulated genes, there was a tendency to return to baseline 
 \subsection{Adaptive immune response at day 7 post-vaccination}
 
 59 genes were differentially expressed at day 7 vs. baseline, with expression fold changes more modest than those at day 1.
-The genes with the highest upregulation were the B cell-associated genes \textit{TNFRSF17} ($\log_2\text{\gls{FC}} = 1.7538617$) and \textit{MZB1} ($\log_2\text{\gls{FC}} = 1.7369668$).
-Plasma cell-specific genes including \textit{SDC1} (encodes CD138 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5437827/}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \textit{ELL2} (\url{https://www.nature.com/articles/ni.1786}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
+The genes with the highest upregulation were the B cell-associated genes \gene{TNFRSF17} ($\log_2\text{\gls{FC}} = 1.7538617$) and \gene{MZB1} ($\log_2\text{\gls{FC}} = 1.7369668$).
+Plasma cell-specific genes including \gene{SDC1} (encodes CD138 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5437827/}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \gene{ELL2} (\url{https://www.nature.com/articles/ni.1786}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
 \todo{finish citing}
 Strongly enriched modules at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\autoref{fig:hird_tmodDotPlot_timepoint}).
 Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of an adaptive immune response at day 7.
@@ -766,7 +766,7 @@ Hence, it is particularly important that the robustness of these observed baseli
 % https://link.springer.com/article/10.1007/s10875-010-9490-6
 % Immune responses to inactivated influenza virus adjuvanted with a different oil-in-water emulsion, MF59, have recently been described [35, 36]. Although a direct comparison between the adjuvants is complicated by the fact that different methodologies may have been used to measure immune responses, our data indicate that AS03A-adjuvanted influenza vaccines induce strong HI responses and CD4 T-cell frequencies relative to those induced with the MF59-adjuvanted product.
 %
-% AS03-adjuvanted split-virion influenza A/H5N1 vaccine: (\textit{GBP1}, \textit{IRF1}, and \textit{STAT1}) expressions are up in adjuvanted (\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0167488}), three genes that play a role in interferon and antiviral response.
+% AS03-adjuvanted split-virion influenza A/H5N1 vaccine: (\gene{GBP1}, \gene{IRF1}, and \gene{STAT1}) expressions are up in adjuvanted (\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0167488}), three genes that play a role in interferon and antiviral response.
 %
 % A study of the MF59-adjuvanted \gls{TIV} \autocite{nakaya2016SystemsBiologyImmunity}
 %
