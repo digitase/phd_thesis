@@ -52,8 +52,10 @@
 %
 % Define percentage formatting
 % https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
-\newcommand\percentage[2][]{
-    \SI[scientific-notation = fixed, fixed-exponent = 0, output-decimal-marker={.}, #1]{#2e2}{\percent}
+\newcommand\percentage[2][round-precision = 2]{% default precision: 2
+    \SI[round-mode = places,
+        scientific-notation = fixed, fixed-exponent = 0,
+        output-decimal-marker={.}, #1]{#2e2}{\percent}%
 }
 
 % Define line spacing
@@ -270,6 +272,7 @@
 \newabbreviation[]{HA}{HA}{haemagglutinin}
 \newabbreviation[]{NA}{NA}{neuraminidase}
 \newabbreviation[]{LAIV}{LAIV}{live attenuated influenza vaccine}
+\newabbreviation[]{TIV}{TIV}{trivalent inactivated influenza vaccine}
 \newabbreviation[]{BH}{BH}{Benjamini-Hochberg}
 \newabbreviation[]{BTM}{BTM}{blood transcription module}
 \newabbreviation[]{NK}{NK}{natural killer}
@@ -280,6 +283,8 @@
 \newabbreviation[]{AC}{AC}{allele count}
 \newabbreviation[]{TSS}{TSS}{transcription start site}
 \newabbreviation[]{LRT}{LRT}{likelihood ratio test}
+\newabbreviation[]{ASE}{ASE}{allele-specific expression}
+\newabbreviation[]{TF}{TF}{transcription factor}
 % \newabbreviation[]{}{}{}
 %
 
