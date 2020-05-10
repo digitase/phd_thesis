@@ -10,101 +10,56 @@
 
 \subsection{Genetic factors affecting influenza vaccine response}
 
-- Vaccine-induced antibody response is a complex trait. List GWASes
-% Impact of host genetic polymorphisms on vaccine induced antibody response
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4962936/#!po=22.7273
-% Table 1.
-% Genes with polymorphisms that influence the vaccine induced antibody level (selected studies).
-% Individuals carrying the minor allele in one or both alleles showed an increased seroconversion rate after influenza vaccination.62
-% Further SNPs that influence the humoral immune response to influenza vaccination have been reported (see Table 1):
+Vaccination is a primary way in which seasonal influenza is controlled,
+and the mechanism by which these vaccines are efficacious is by raising strain-specific antibodies protective against future infection \url{https://doi.org/10.1016/j.biologicals.2009.02.002}.
+% \todo{list more factors that affect flu vacc}
+% \autocite{dhakal2019HostFactorsImpact}
+% Growing evidences suggest that host factors including age, biological sex, pregnancy, and immune history play important roles as modifiers of influenza virus vaccine efficacy.
+% We hypothesize that host genetics, the hormonal milieu, and gut microbiota contribute to host-related differences in influenza virus vaccine efficacy.
+Vaccine-induced antibody responses are influenced by various vaccine-related factors (e.g. type, dose, adjuvants), but are also a complex trait influenced by host genetics\autocite{linnik2016ImpactHostGenetic, mentzer2015SearchingHumanGenetic}.
+Studies have detected genetic variants that affect humoral response to various vaccines, including hepatitis B, influenza, measles, rubella, smallpox\autocite{linnik2016ImpactHostGenetic,dhakal2019HostFactorsImpact}.
+For antibody response to seasonal influenza vaccines, studies have detected variation that associates with response at or within
+specific \gls{HLA} alleles \url{https://www.ncbi.nlm.nih.gov/pubmed/15462607},\autocite{poland2008ImmunogeneticsSeasonalInfluenza};
+cytokines, cytokine receptors\autocite{poland2008ImmunogeneticsSeasonalInfluenza} \url{https://doi.org/10.1371/journal.pone.0071376};
+antigen processing and intracellular trafficking genes\autocite{franco2013IntegrativeGenomicAnalysis}; 
+and immunoglobulin heavy-chain variable region loci.
+% https://doi.org/10.1038/srep20842.
 
-Specifically for response to seasonal influenza vaccines...
-% Start here with this review
-% 2019
-% Host Factors Impact Vaccine Efficacy: Implications for Seasonal and Universal Influenza Vaccine Programs
-% https://jvi.asm.org/content/93/21/e00797-19
-
-% 2004
-% HLA-DRB1*0701 allele was over represented among persons who fail to mount a neutralizing antibody response.
-% https://www.ncbi.nlm.nih.gov/pubmed/15462607
-
-% 2008
-% Immunogenetics of Seasonal Influenza Vaccine Response
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
-
-% 2019
-% Common Genetic Variations Associated with thePersistence of Immunity following ChildhoodImmunization
-% https://www.cell.com/cell-reports/pdf/S2211-1247(19)30682-5.pdf
-
-For seasonal
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4302727/
-% Antibody responses to seasonal Flu-vaccines in adults have no detectable heritable component
-%
-% Finally, we immunized all of the subjects with seasonal flu vaccines in the
-% year of participation (2009, 2010 or 2011), and assessed antibody responses
-% using a standard hemagglutination-inhibition (HAI) assay (Experimental
-% procedures, section 6). We were surprised to find no detectable contribution
-% from heritable factors on any of these vaccine responses (Table 1). As
-% pre-existing antibodies are known to influence flu vaccine responses (Sasaki et
-% al., 2008), we excluded subjects with a pre-vaccination titer above 40, but
-% were still unable to find any heritable influences (Table 1). While preliminary
-% due to a small sample size, this result suggests that responses to seasonal flu
-% vaccines in healthy adults (median age: 44 years) are dominantly influenced by
-% non-heritable factors, likely due to multiple previous vaccinations and/or
-% infections involving this pathogen (Table 1).
+A potential mechanism through which genetic variation can play a causal role in influenza vaccine response is through altering the expression of genes as \glspl{eQTL}.
+eQTLs can have condition-specificity: an interaction between their effect and different environmental contexts such as tissue or cell type\autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
+The mechanisms by which eQTL interact with environment are of great interest;
+for example, cell type specificity of eQTL can tell us about the how expression is regulated in a cell type specific manner\url{https://www.biorxiv.org/content/10.1101/806117v2.full}.
+In a vaccination context, an important subset of condition-specific eQTLs are \glspl{reQTL}, defined as an eQTL whose effect interacts with external stimulation or perturbation.
+reQTL have been observed in many cell types \textit{in vitro}, or in the whole organism \textit{in vivo}.\todo{pull in citations from intro}
+As the pre- and post-stimulation environments are separated in time, a possible mechanism that leads to the observation of reQTL is a genotype-dependent change in gene expression between timepoints,
+which may underly genotype-dependent differences in antibody phenotypes.
 
 \subsection{\Glsfmtlongpl{reQTL} for seasonal influenza vaccination}
 
-A potential mechanism through which genetic variation can affect vaccine response is through altering the expression of genes.
-
-eQTLs have condition specificity
-e.g. cell types or tissues
-
-A reQTL is: \autocite{vandiedonck2017GeneticAssociationMolecular}
-% An important kind of eQTLs, called response eQTLs (reQTLs), occurs following
-% exposure to an external signal (Table 2), in particular in the immune system in
-% response to infectious agents and to various stimuli.49, 54, 55 Other
-% environmental factors, including hormones, drugs, diet, metals or pollutants,
-% can also be the source of reQTLs.56
-- an eQTL becomes more or less important after perturbation: Tells you something about the mechanism of perturbation.
-- Either expression regulatory activation/repression (signalling cascade -> TFs, chromatin remodelling etc.)
-
-Little work done on reQTL for vaccine stimulation
-Summarise Franco et al
-In the case of inactivated trivalent influenza vaccine, genetic variation in membrane trafficking and antigen processing genes was associated with both transcriptomic and antibody responses in patients after vaccination [Franco].
+\gls{reQTL} can be mapped considering a vaccine as an \textit{in vivo} immune stimulation, looking for genotype-dependent changes in gene expression in immune cells.
+Little work has been done on vaccine-stimulated reQTLs, except one study conducted for seasonal influenza vaccine.
+\autocite{franco2013IntegrativeGenomicAnalysis} collected longitudinal data in n = 247 European adults, vaccinated with \gls{TIV}.
+Peripheral whole blood gene expression measured at four timepoints (day 0, 1, 3, 14), and antibody titres measured at three timepoints (day 0, 14, 28).
+They identified 20 genes with a cis-eQTL effect, expression correlation with antibody response, and either post-vaccination differential expression \emph{or} a reQTL effect at that cis-eQTL.
+Genes involved in intracellular antigen transport and processing were enriched among those 20 genes.
 
 \subsection{Chapter summary}
 
-% NOTE:
-% Narcolepsy controversy (more evidence for genetic interaction with Pandemrix vaccine response in particular)
+% NOTE: Narcolepsy controversy (more evidence for genetic interaction with Pandemrix vaccine response in particular)
+The HIRD cohort represents a unique opportunity for detecting genetic contributions to influenza vaccine response.
+In \autoref{chap:hird_DGE}, we observed massive changes in gene expression longitudinally after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody response.
+For seasonal influenza vaccines, the contribution is small: antibody responses in adults are largely driven by non-genetic influences such as previous influenza vaccination or infection\autocite{brodin2015VariationHumanImmune}.
+\todo{distinction between expression/ab response is blurry}
+As the Pandemrix vaccine is against the 2009 pandemic strain that was not in seasonal circulation at the time the study cohort was recruited (2009-10), 
+with \gls{HIRD} individuals mounting an expression response that was not recall-dominated \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
+the relative contribution of genetic factors may be greater.
 
-- In \autoref{chap:hird_DGE}, we observed massive changes in gene expression longitudinally after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody responses.
-[variation observed in response to Pandemrix, e.g R vs. NR trajectories]
-- How does host genetics affect response to Pandemrix in the HIRD cohort?
-
-Sobolev pros
-    Small effect expected?
-    More variation will usually be explained by history of exposure rather than genetics, so may be harder to detect.
-    but not here
-
-also Knowns
-    Sobolev: R vs NR, 
-    inconsistent variation in why people are NR
-
-In this study, we model the influence of host genetics on longitudinal transcriptomic and antibody responses to Pandemrix, in vivo.
-    overall strat: map per timepoint, joint analysis
-    call reqtls
-    characterise
-
-% disc
-% [other aims: assess differences to seasonal influenza vaccines]
-20 genes from franco
-
-12/17 DGE repliacted
-14/17 eGenes
-no reQTLs
-
-subtle enough st methodology wrecks it
+In this chapter, I model the influence of common host genetic variants on longitudinal \textit{in vivo} expression response to Pandemrix in \gls{HIRD}.
+I map cis-eQTL within each timepoint, accounting for ancestry, cell type abundance and unmeasured confounders, then call reQTLs at genes where the eQTL has a different effect size pre- and post-vaccination
+Many of the strongest reQTL effects involve opposite signed effects on expression for the same variant at different timepoints.
+I detect a strong day 1 specific reQTL effect at \gene{ADCY3}.
+Through modelling cell type-genotype interactions, statistical colocalisation with cell type specific QTL datasets, 
+the reQTL signal was determined to be a monocyte-specific effect likely driven by increase monocyte abundance at day 1.
 
 \section{Methods}
 
@@ -127,13 +82,17 @@ Markers were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
 Poorly-imputed markers with $\text{INFO} < 0.4$ or post-imputation missingness $> 5\%$ were removed, resulting in 40290981 markers.
+\todo{decide to use variant or marker}
 
 \subsection{Overall strategy for detecting reQTLs}
 
 Since one of the aims of this study is to identify genetic variation that affects expression response to vaccination, it may seem most direct to model the change in each individual's expression after vaccination as the response variable.
 This approach has been used to identify condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic},\url{https://doi.org/10.1016/j.ygeno.2014.02.005}).
 Although a potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if expression between conditions is positively correlated\autocite{allison1990ChangeScoresDependent,ackermann2013ImpactNaturalGenetic,clifton2019CorrelationBaselineScore} \url{https://www.researchgate.net/publication/221689734_Dichotomania_an_obsessive_compulsive_disorder_that_is_badly_affecting_the_quality_of_analysis_of_pharmaceutical_trials}.
-\todo{no defense against why not just use interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
+% NOTE: would use ANCOVA here i.e. equiv to continuous covar in regression
+% this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
+% allison1990ChangeScoresDependent also presents some pros of change score
+% https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
 Instead, I map \glspl{eQTL} within each of three conditions (pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 
 %
@@ -349,7 +308,7 @@ I selected 7/64 of the built-in cell types: 'CD4+ T-cells', 'CD8+ T-cells', 'B-c
 % /nfs/users/nfs_b/bb9/workspace/phd/output/hird/rnaseq/4_de/array/array_data_setup.y.filtered.MaxMean.combat.rds
 % and /nfs/users/nfs_b/bb9/workspace/phd/output/hird/rnaseq/4_de/array/array_data_setup.sample.metadata.merged.rds
 \gls{RNAseq} and array expression data from sections\todo{link in preproc sections ch2} were processed separately; the large batch effect present in the array expression was first removed using ComBat.
-Finally, enrichment scores were standardised, so that score of zero estimates the average abundance of that cell type across all timepoints (\autoref{fig:hird_xCell_scores_heatmap_array, fig:hird_xCell_scores_heatmap_rnaseq}).
+Finally, enrichment scores were standardised, so that score of zero estimates the average abundance of that cell type across all timepoints (\autoref{fig:hird_xCell_scores_heatmap_array} and \autoref{fig:hird_xCell_scores_heatmap_rnaseq}).
 
 \begin{figure}
     \centering
@@ -625,6 +584,12 @@ Effects are also only compared if at least one of the two effects have lfsr < 0.
 %
 % See notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
 I combine this approach with the beta-comparison approach \url{https://psycnet.apa.org/record/1995-27766-001} \url{https://doi.org/10.1111/j.1745-9125.1998.tb01268.x} \autocite{schenker2001JudgingSignificanceDifferences} (applied to reQTLs by \autocite{kim-hellmuth2017GeneticRegulatoryEffects}), that also considers the standard error of both effects in the computation of a z score for the difference:
+% its a wald test!
+% interaction with time fixed fx vs stratified
+% https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
+% https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
+\todo{no defense against why not just use interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
+% also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
 
 \begin{equation}
 z = \frac{\beta_x - \beta_y}{\sqrt{\sigma_x^2 + \sigma_y^2 - 2\sigma^2(x, y)}}
@@ -735,6 +700,7 @@ Shared \glspl{eQTL} are enriched close to the \gls{TSS}, and \glspl{reQTL} are d
 
 Gene set enrichment analysis on eGenes for these sets of \glspl{reQTL} at day 1 (68 eGenes) and day 7 (226 eGenes) did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
 \todo{could put in reqtl ranked cerno enrichments here} % d1 magnif and d7 sign flips. if so, then define mag,damp,flip
+\todo{put in hla ranked enrichments, then comment on strong shared}
 \todo{could put in reqtl gosts here} %
 
 \todo{change all these numbers, remove the pve requirements, since equal and opp is important}
@@ -909,13 +875,23 @@ in \gls{HIRD}, I find
 and 211/1002 (\percentage{0.2105788}) at day 7.
 The enrichment of opposite sign effects in \gls{HIRD} is also most apparent at day 7.
 \todo{but why are my reQTLs opposite? consult fu}
+
+% disc
+% [other aims: assess differences to seasonal influenza vaccines]
+20 genes from franco
+
+12/17 DGE repliacted
+14/17 eGenes
+no reQTLs
+
+subtle enough st methodology wrecks it
 An approach for validating these opposite sign \gls{reQTL} using the existing \gls{HIRD} \gls{RNAseq} data is \gls{ASE} (e.g. \autocite{kumasaka2016FinemappingCellularQTLs}),
 where one would expect true opposite sign \gls{reQTL} effects would also be recapitulated as opposite directions of expression imbalance.
 
 The strongest \gls{reQTL} detected at day 1 was \gene{ADCY3}, a membrane-bound enzyme that catalyses the conversion of ATP to the second messenger cAMP \url{https://onlinelibrary.wiley.com/doi/full/10.1111/obr.12430}.
 \gls{GWAS} have identified \gene{ADCY3} as a candidate gene for diseases such as obesity \url{https://onlinelibrary.wiley.com/doi/full/10.1111/obr.12430} and IBD \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4915781/}.
 %
-\gene{ADCY3} has been identified as a reQTL in multiple studies involving stimulated blood immune cells:
+\gene{ADCY3} has been identified as a target for reQTLs in multiple studies involving stimulated blood immune cells:
 % In fact, six (SLFN5, ARL5B, SPTLC2, IRF5, ADCY3, CCDC146) of the 38 genes
 % implicated in our reQTL mapping were also identified in a recent reQTL mapping
 % study for Escherichia coli lipopolysaccharide, influenza, and interferon-β in
@@ -953,9 +929,7 @@ I accounted for the effect of abundance on mean expression including xCell score
 and also consider the effect of abundance on the genotype effect using interaction terms between xCell scores and genotype.
 Due to the modest sample size, and computational requirements for \software{lme4qtl}, I used a two-step approach, testing only for interactions at significant lead \gls{reQTL}.
 This means that the analysis addresses only whether reQTLs that can be detected based on only the main effect, may be driven by cell type interactions.
-At \todo{}/1154 reQTLs, the genotype effect was detected to interact with abundance of one or more of the tested cell types (or a correlated cell type).
-The cell type interaction analysis at the day 1 \gene{ADCY3} reQTL shows the genetic effect is mainly attributed to the monocyte score-genotype interaction term, which further supports the hypothesis that it is monocyte-specific.
-
+%
 Considering FACS measurements as a gold standard, the xCell scores used above were only moderately reliable.
 Some discrepancy is expected, as the cell types as defined in the xCell signatures do not directly correspond to the combinations of surface markers used for FACS.
 The FACS gating strategy meant that for some cell populations, the only available FACS measure was a proportion of the previously gated population,
@@ -963,6 +937,10 @@ whereas xCell attempts to estimate scores that represent proportions of the whol
 The accuracy of the built-in signatures is also lower when applied to the expression matrix for a stimulated state,
 as the enrichment method can not distinguish differential expression of signature genes due to stimulation from actual changes in cell abundance.
 A custom signature matrix can be used for xCell, but this would need to be drawn from an independent study under the same stimulation conditions as \gls{HIRD}, and would not solve the issue of coupled DE and cell abundance.
+Nevertheless, assuming a single genotype where cell-type specific slopes are likely is inappropriate, so the xCell scores were used.
+%
+At \todo{}/1154 reQTLs, the genotype effect was detected to interact with abundance of one or more of the tested cell types (or a correlated cell type).
+The cell type interaction analysis at the day 1 \gene{ADCY3} reQTL shows the genetic effect is mainly attributed to the monocyte score-genotype interaction term, which further supports the hypothesis that it is monocyte-specific.
 
 A pressing question still remains: what molecular mechanisms underlie the \gene{ADCY3} \gls{reQTL}, and indeed the remainder of the \glspl{reQTL}?
 Power differences due to condition-specific expression are unlikely to explain a large proportion of reQTLs.
@@ -987,12 +965,19 @@ Rather than condition-specific expression of the eGene, what may be condition-sp
 % SP1 is monocyte specific https://europepmc.org/article/med/28008225
 % and upreg at d1
 
+% is this really a genotype-dependent change in gene expression between timepoints?
+% TODO:
+
 Finally, I address the prospect raised in the previous chapter, that common genetic variation may explain some variation in antibody response to Pandemrix.
-I have indirectly demonstrated the effect of genetic variation on expression response by identifying reQTLs with differing effect size between timepoints,
-and some of these reQTLs will undoubtedly affect genes whose expression correlates with antibody response, 
-but for proper causal inference, a mediation analysis is required that formally tests the effect of genotype on antibody response, through the intermediate phenotype of gene expression.
+I have indirectly demonstrated genotype-dependent effects on expression response by identifying reQTLs with differing effect size between timepoints,
+but have not been able to determine resulting genotype-dependent differences in antibody phenotypes.
+Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
+but for proper test of mediation, cit is required that formally tests the effect of genotype on antibody response, through the intermediate phenotype of gene expression.
+other alternatives such as pleiotropy.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size than \gls{HIRD}, and a comparable study design assessing response to seasonal \gls{TIV}.
+% However, it is reasonable to infer the first hypothesis from a genetic association with the host antibody response, because not every SNP that affects the RNA or protein level has a physiological effect.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} for antibody response.
+\todo{propose restricted at candidates from previous signatures}
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix may be to colocalise with existing GWAS summary statistics from a separate cohort, ideally antibody response to another adjuvanted, inactivated influenza vaccine.
 
 \todo{overall summary}
