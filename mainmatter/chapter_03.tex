@@ -10,36 +10,38 @@
 
 \subsection{Genetic factors affecting influenza vaccine response}
 
-Vaccination is a primary way in which seasonal influenza is controlled,
-and the mechanism by which these vaccines are efficacious is by raising strain-specific antibodies protective against future infection \url{https://doi.org/10.1016/j.biologicals.2009.02.002}.
+Vaccination is the most effective way by which seasonal influenza is controlled\autocite{houser2015InfluenzaVaccinesChallenges},
+and the mechanism by which influenza vaccines are efficacious is by raising strain-specific antibodies protective against future infection\autocite{nauta2009RelationshipMeanAntibody}.
 % \todo{list more factors that affect flu vacc}
 % \autocite{dhakal2019HostFactorsImpact}
 % Growing evidences suggest that host factors including age, biological sex, pregnancy, and immune history play important roles as modifiers of influenza virus vaccine efficacy.
 % We hypothesize that host genetics, the hormonal milieu, and gut microbiota contribute to host-related differences in influenza virus vaccine efficacy.
-Vaccine-induced antibody responses are influenced by various vaccine-related factors (e.g. type, dose, adjuvants), but are also a complex trait influenced by host genetics\autocite{linnik2016ImpactHostGenetic, mentzer2015SearchingHumanGenetic}.
-Studies have detected genetic variants that affect humoral response to various vaccines, including hepatitis B, influenza, measles, rubella, smallpox\autocite{linnik2016ImpactHostGenetic,dhakal2019HostFactorsImpact}.
-For antibody response to seasonal influenza vaccines, studies have detected variation that associates with response at or within
-specific \gls{HLA} alleles \url{https://www.ncbi.nlm.nih.gov/pubmed/15462607},\autocite{poland2008ImmunogeneticsSeasonalInfluenza};
-cytokines, cytokine receptors\autocite{poland2008ImmunogeneticsSeasonalInfluenza} \url{https://doi.org/10.1371/journal.pone.0071376};
+Humoral responses are influenced by vaccine-associated factors (e.g. type, dose, adjuvants), 
+but are also a complex trait influenced by host genetics\autocite{linnik2016ImpactHostGenetic, mentzer2015SearchingHumanGenetic}.
+Genetic variants associated with antibody response have been detected for vaccines such as hepatitis B, influenza, measles, rubella, and smallpox\autocite{linnik2016ImpactHostGenetic,dhakal2019HostFactorsImpact}.
+For antibody response to seasonal influenza vaccines, studies have implicated 
+genetic variation within cytokine genes, cytokine receptors\autocite{poland2008ImmunogeneticsSeasonalInfluenza};
 antigen processing and intracellular trafficking genes\autocite{franco2013IntegrativeGenomicAnalysis}; 
-and immunoglobulin heavy-chain variable region loci.
-% https://doi.org/10.1038/srep20842.
+immunoglobulin heavy-chain variable region loci\autocite{avnir2016IGHV169PolymorphismModulates};
+and specific \gls{HLA} alleles \autocite{poland2008ImmunogeneticsSeasonalInfluenza,moss2013CorrelationHumanLeukocyte}.
 
 A potential mechanism through which genetic variation can play a causal role in influenza vaccine response is through altering the expression of genes as \glspl{eQTL}.
-eQTLs can have condition-specificity: an interaction between their effect and different environmental contexts such as tissue or cell type\autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
-The mechanisms by which eQTL interact with environment are of great interest;
-for example, cell type specificity of eQTL can tell us about the how expression is regulated in a cell type specific manner\url{https://www.biorxiv.org/content/10.1101/806117v2.full}.
-In a vaccination context, an important subset of condition-specific eQTLs are \glspl{reQTL}, defined as an eQTL whose effect interacts with external stimulation or perturbation.
-reQTL have been observed in many cell types \textit{in vitro}, or in the whole organism \textit{in vivo}.\todo{pull in citations from intro}
+\gls{eQTL} can have condition-specificity: an interaction between their effect on expression and different environmental contexts such as tissue or cell type\autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
+The mechanisms by which \glspl{eQTL} interact with environment are of great interest;
+for example, cell type specificity can inform us about how expression is regulated in a cell type specific manner\autocite{kim-hellmuth2019CellTypeSpecific}.
+In a vaccination context, an important subset of environment-interacting eQTLs are \glspl{reQTL}, defined as an eQTL whose effect interacts with external stimulation or perturbation.
+reQTL have been observed in many human cell types \textit{in vitro}, or in the whole organism \textit{in vivo}.
+\todo{pull in citations from intro}
 As the pre- and post-stimulation environments are separated in time, a possible mechanism that leads to the observation of reQTL is a genotype-dependent change in gene expression between timepoints,
 which may underly genotype-dependent differences in antibody phenotypes.
 
 \subsection{\Glsfmtlongpl{reQTL} for seasonal influenza vaccination}
 
 \gls{reQTL} can be mapped considering a vaccine as an \textit{in vivo} immune stimulation, looking for genotype-dependent changes in gene expression in immune cells.
-Little work has been done on vaccine-stimulated reQTLs, except one study conducted for seasonal influenza vaccine.
-\autocite{franco2013IntegrativeGenomicAnalysis} collected longitudinal data in n = 247 European adults, vaccinated with \gls{TIV}.
-Peripheral whole blood gene expression measured at four timepoints (day 0, 1, 3, 14), and antibody titres measured at three timepoints (day 0, 14, 28).
+Little work has been done on vaccine-stimulated reQTLs, except one study conducted for the seasonal \gls{TIV}.
+\autocite{franco2013IntegrativeGenomicAnalysis} collected longitudinal data in 247 European adults:
+peripheral whole blood gene expression measured at four timepoints (day 0, 1, 3, 14), 
+and antibody titres measured at three timepoints (day 0, 14, 28).
 They identified 20 genes with a cis-eQTL effect, expression correlation with antibody response, and either post-vaccination differential expression \emph{or} a reQTL effect at that cis-eQTL.
 Genes involved in intracellular antigen transport and processing were enriched among those 20 genes.
 
@@ -47,19 +49,23 @@ Genes involved in intracellular antigen transport and processing were enriched a
 
 % NOTE: Narcolepsy controversy (more evidence for genetic interaction with Pandemrix vaccine response in particular)
 The HIRD cohort represents a unique opportunity for detecting genetic contributions to influenza vaccine response.
-In \autoref{chap:hird_DGE}, we observed massive changes in gene expression longitudinally after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody response.
+In \autoref{ch:hird_DGE}, we observed global changes in gene expression after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody response.
 For seasonal influenza vaccines, the contribution is small: antibody responses in adults are largely driven by non-genetic influences such as previous influenza vaccination or infection\autocite{brodin2015VariationHumanImmune}.
-\todo{distinction between expression/ab response is blurry}
-As the Pandemrix vaccine is against the 2009 pandemic strain that was not in seasonal circulation at the time the study cohort was recruited (2009-10), 
-with \gls{HIRD} individuals mounting an expression response that was not recall-dominated \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
-the relative contribution of genetic factors may be greater.
+\todo{distinction between expression/ab response is blurry here}
+As the Pandemrix vaccine is against the pdm09 pandemic strain that was not in seasonal circulation at the time the \gls{HIRD} cohort was recruited (2010-11), 
+with individuals mounting an expression response that was not recall-dominated \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
+the relative contribution of genetic factors to Pandemrix response may be greater.
 
-In this chapter, I model the influence of common host genetic variants on longitudinal \textit{in vivo} expression response to Pandemrix in \gls{HIRD}.
-I map cis-eQTL within each timepoint, accounting for ancestry, cell type abundance and unmeasured confounders, then call reQTLs at genes where the eQTL has a different effect size pre- and post-vaccination
+\todo{straighten out tenses}
+In this chapter, I model the influence of common host genetic variation on longitudinal \textit{in vivo} expression response to Pandemrix.
+I map cis-eQTL within each timepoint, accounting for ancestry, cell type abundance and unmeasured confounders, 
+then call shared and reQTL effects from a joint model, 
+looking for genes where the lead eQTL has a different effect size pre- and post-vaccination.
 Many of the strongest reQTL effects involve opposite signed effects on expression for the same variant at different timepoints.
 I detect a strong day 1 specific reQTL effect at \gene{ADCY3}.
-Through modelling cell type-genotype interactions, statistical colocalisation with cell type specific QTL datasets, 
+Through modelling interaction of reQTL with cell type abundance estimates and statistical colocalisation with cell type specific QTL datasets, 
 the reQTL signal was determined to be a monocyte-specific effect likely driven by increase monocyte abundance at day 1.
+\todo{1 more sentence to round off context}
 
 \section{Methods}
 
@@ -80,18 +86,20 @@ variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.	Filtering
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
-Poorly-imputed variants with $\text{INFO} < 0.4$ or post-imputation missingness $> 5\%$ were removed, resulting in 40290981 variants.
+Poorly-imputed variants with $\text{INFO} < 0.4$ or post-imputation missingness $> 5\%$ were removed, leaving 40290981 variants.
 
 \subsection{Overall strategy for detecting reQTLs}
 
 Since the aim of this chapter is to identify genetic variation that affects expression response to vaccination, it may seem most direct to model the change in each individual's expression after vaccination as the response variable.
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
-Although a potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if expression between conditions is positively correlated\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
+Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
+it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
 % allison1990ChangeScoresDependent also presents some pros of change score
 % https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
+\todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
 
 %
 % DEPRECATED:
@@ -121,9 +129,8 @@ Within each timepoint, recall the the \gls{HIRD} dataset includes expression mea
 As discussed in \autoref{subsubsec:hird_dge_meta_methodChoice}, it is difficult to directly estimate the between-studies heterogeneity when the number of studies is small, 
 and Bayesian meta-analysis was preferred for combining array and \gls{RNAseq} \gls{DGE} estimates.
 \todo{why I didn't just do a mega-analysis in chapter 2 then, given I haven't any evidence if it's better or worse than Bayesian meta-analysis in that context.}
-That method does not scale to \gls{eQTL} analysis, where the number of tests is very large, in the order of thousands of tests per gene, versus a few \gls{DGE} contrasts per gene.
-Instead, I perform a mega-analysis within each timepoint, first merging array and \gls{RNAseq} expression estimates into a single matrix with ComBat\autocite{johnson2007AdjustingBatchEffects},
-where array batch and \gls{RNAseq} plate were given as known batch effects.
+That method does not scale to \gls{eQTL} analysis, where the number of tests is large, in the order of thousands of tests per gene, versus the handful \gls{DGE} contrasts per gene performed in \autoref{ch:hird_DGE}.
+Instead, I perform a mega-analysis within each timepoint, first merging array and \gls{RNAseq} expression estimates into a single matrix with ComBat\autocite{johnson2007AdjustingBatchEffects}.
 For comparison purposes, analyses were also run using in the array and \gls{RNAseq} samples separately.
 
 Defining whether an \gls{eQTL} is shared between conditions can be a tricky business.
@@ -160,15 +167,15 @@ frequentist meta-analyses (e.g. \software{Meta-Tissue}\autocite{sul2013Effective
 and Bayesian models (e.g. eQtlBma\autocite{flutre2013StatisticalFrameworkJoint}, MT-HESS, MT-eQTL).
 Joint mapping has been repeatedly been demonstrated to be more powerful than condition-by-condition analysis,
 and recent methods are now computationally efficient when scaling to large numbers of conditions and variants tested (e.g. RECOV\autocite{duong2017ApplyingMetaanalysisGenotypetissue}, mashr\autocite{urbut2018FlexibleStatisticalMethods}, HT-eQTL\autocite{li2018HTeQTLIntegrativeExpression}).
-In this chapter, I apply \software{mashr}\autocite{urbut2018FlexibleStatisticalMethods} for the estimation of \gls{eQTL} effects across my three timepoint conditions.
+In this chapter, I apply \software{mashr}\autocite{urbut2018FlexibleStatisticalMethods} for the estimation of \gls{eQTL} effects across my three timepoints.
 \software{mashr} learns patterns of correlation among multiple conditions empirically from condition-by-condition summary statistics,
 then applies shrinkage to provide improved posterior effect size estimates,
-along with measures of significance per condition. 
+and compute measures of significance per condition. 
 
 \subsection{Controlling for population structure with \glsfmtlongpl{LMM}}
 
-As discussed in \autoref{ch:hird_DGE}, there is population structure due to ancestry in the \gls{HIRD} cohort, which can affect gene expression\autocite{brown2018ExpressionReflectsPopulation}.
-In \gls{DGE} analyses, I addressed this by treating the top \glspl{PC} of the genotype matrix as covariates for large-scale population structure.
+There is population structure due to ancestry in the \gls{HIRD} cohort,
+which was addressed in \gls{DGE} analyses by treating the top \glspl{PC} of the genotype matrix as covariates for large-scale population structure (\autoref{subsec:hird_dge_genotype_pc}).
 In the context of \gls{eQTL} mapping, where the aim is to assess the marginal effect of a single genetic variant on expression, it is even more important that the confounding effect of population structure is properly controlled, or test statistics may be inflated.
 \todo{add some indication of how much inflation can be reduced by LMMs}
 % This is great background/intuition: golan2018MixedModelsCaseControl
@@ -178,7 +185,7 @@ In the context of \gls{eQTL} mapping, where the aim is to assess the marginal ef
 % issues (Yang et al., 2014).
 %
 % Also see: 2018-11-26 notes in log
-An efficient approach is the \gls{LMM}, which includes a random effect that incorporates genetic correlation between individuals, usually in the form of a kinship matrix, into the covariance of that random effect\autocite{price2010NewApproachesPopulation, eu-ahsunthornwattana2014ComparisonMethodsAccount, golan2018MixedModelsCaseControl}
+An efficient approach is the \gls{LMM} with a random effect that incorporates genetic correlation between individuals, usually in the form of a kinship matrix, into the covariance of that random effect\autocite{price2010NewApproachesPopulation, eu-ahsunthornwattana2014ComparisonMethodsAccount, golan2018MixedModelsCaseControl}
 The \gls{LMM} approach has the advantage of not only modelling large-scale population structure, but also cryptic relatedness (the presence of closely related individuals in a sample assumed to consist of unrelated individuals\autocite{astle2009PopulationStructureCryptic}) due to finer-scale effects such as family structure\autocite{golan2018MixedModelsCaseControl}.
 
 \subsubsection{Estimation of kinship matrices}
@@ -192,7 +199,7 @@ The \gls{LMM} approach has the advantage of not only modelling large-scale popul
 % 1.5.	Join per-chromosome kinships into genome-wide kinships
 % 1.5.1.	Use the leave-one-chromosome-out strategy
 %
-When testing a variant for association using \glspl{LMM}, to avoid loss of power from 'proximal contamination', the kinship matrix used should not include that variant\autocite{listgarten2012ImprovedLinearMixed}.
+When testing a variant for association using \glspl{LMM}, to avoid loss of power from \enquote{proximal contamination}, the kinship matrix used should not include that variant\autocite{listgarten2012ImprovedLinearMixed}.
 A simple way to avoid this is to compute a \gls{LOCO} kinship matrix using all variants on chromosomes other than the tested variant's chromosome\autocite{lippert2011FaSTLinearMixed}.
 
 I estimated kinship in the \gls{HIRD} data from common autosomal variants, using \software{LDAK} (5.0), which computes kinship matrices adjusted for bias caused by \gls{LD}\autocite{speed2012ImprovedHeritabilityEstimation}.
@@ -205,23 +212,22 @@ To obtain a \gls{LOCO} kinship matrix for each autosome, each autosome's kinship
 
 \subsection{Additional \glsfmtshort{eQTL}-specific expression preprocessing}
 
-There are a number of transformations that are often applied to expression data before \gls{eQTL} mapping, 
-such as the rank-based \gls{INT} (e.g. used by GTEx v8\autocite{aguet2019GTExConsortiumAtlas}),
+There are a number of transformations often applied to expression data before \gls{eQTL} mapping, 
+such as the rank-based \gls{INT} (e.g. GTEx v8\autocite{aguet2019GTExConsortiumAtlas}),
 which conforms often non-normal expression data to an approximately normal distribution, and reduces the impact of expression outliers.
 In the context of genetic association studies, the practice of applying rank-based \gls{INT} to phenotypes has been criticised for only guaranteeing approximate normality of residuals when effect sizes are small,
 and potential inflation of type I error, especially in linear models that include interactions\autocite{beasley2009RankBasedInverseNormal}.
 In multi-condition datasets, these transformations are also typically applied within conditions (e.g. within each tissue individually in GTEx v8\autocite{aguet2019GTExConsortiumAtlas}).
 % \url{https://github.com/molgenis/systemsgenetics/wiki/eQTL-mapping-analysis-cookbook-for-RNA-seq-data}
-Another common transform is standardising (centering and scaling to zero mean and unit variance), recommended by the eQTLGen Consortium\autocite{vosa2018UnravelingPolygenicArchitecture}.
-This is often done so that effects across all genes and studies can be comparably interpreted in units of standard deviation expression\autocite{qi2018IdentifyingGeneTargets}.
-The impact of these transformations on \gls{reQTL} detection has not been explored.
+Another common transform is standardising (centering and scaling to zero mean and unit variance) (e.g. eQTLGen Consortium\autocite{vosa2018UnravelingPolygenicArchitecture}),
+often done so that effects across genes and studies can be comparably interpreted in units of standard deviation expression\autocite{qi2018IdentifyingGeneTargets}.
 
-I performed simulations to evaluate the effect of the transformation on reQTL calls between a hypothetical baseline and day 1 post-vaccination condition.
+I performed simulations to evaluate the effect of these transformations on reQTL detection between a hypothetical baseline and day 1 post-vaccination condition.
 Expression values on the log scale were simulated with the \gls{eQTL} slope (beta) set to specific values corresponding to six scenarios for six gene-variant pairs (\autoref{fig:hird_eQTL_expressionTransform_sims}).
 The simulated scenarios were subjected to rank-based \gls{INT} (Blom method\autocite{beasley2009RankBasedInverseNormal}), standardisation (both centering and scaling), scaling-only, and centering-only transformations.
 Transformations were applied both within each condition and without separating conditions.
 
-The boxed facets in (\autoref{fig:hird_eQTL_expressionTransform_sims}) represent undesirable effects of transformations on \gls{reQTL} calls.
+The boxed facets in \autoref{fig:hird_eQTL_expressionTransform_sims} represent undesirable effects of transformations on \gls{reQTL} calls.
 For example, rank-based \gls{INT} induces false shared \gls{eQTL} effects in scenarios 4 and 5.
 In general, transformations that scale within condition are not appropriate, as different variance between conditions can be what drives a \gls{reQTL} effect.
 Scaling without separating conditions can also be problematic, since the total variance also contributes to the \gls{reQTL} effect size.
@@ -229,13 +235,13 @@ For example, scenarios 2 and 4 have the same 1 unit increase in slope pre-transf
 but after scaling-only the beta increases are $0.75-0=0.75$ and $0.8-0.4=0.4$ respectively---eQTL 4 now looks like a weaker effect.
 
 In light of these simulations, I decided that neither rank-based \gls{INT} nor standardisation were appropriate given my intent of detecting \glspl{reQTL} between conditions.
-Only the centering-only transformation avoids both false shared effects and preserves relative \gls{reQTL} effect sizes between genes.
+Only the centering-only transformation avoided both false shared effects and preserves relative \gls{reQTL} effect sizes between genes.
 The simple inclusion of an intercept term in the \gls{eQTL} model already achieves this.
 Not performing any rank-based transform does lose the advantage of reining in outliers.
 The expression data have already been preprocessed to remove low-expression outliers in \autoref{subsec:hird_dge_rnaseq_quantAndFilter}, 
 but automatic outlier exclusion based on \gls{SD} thresholds at the \gls{eQTL} mapping step could be considered in future implementations\autocite{vosa2018UnravelingPolygenicArchitecture}.
-Note that many preprocessing steps done prior to this stage in the pipeline (e.g. variance-stabilisation, ComBat batch effect correction) are expression transformations.
-I only consider the preservation of \gls{reQTL} effects defined from expression values post adjustment for those technical effects to be important.
+Note that many preprocessing steps done prior to this stage in the pipeline (e.g. variance-stabilisation, ComBat batch effect correction) are also expression transformations,
+but I only consider the preservation of \gls{reQTL} effects defined from expression values post-adjustment for those technical effects to be important.
 
 \begin{figure}
     \centering
@@ -258,16 +264,16 @@ I only consider the preservation of \gls{reQTL} effects defined from expression 
 \label{subsec:hird_reQTL_xCell}
 
 % Also, \gls{RNAseq} expression estimates are inherently compositional \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
-\gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
+\Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
 so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample, 
-which shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
-\gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
+These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
+and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
 but changes in cell type abundance confound this by modifying both expression and the effect of genotype on expression.
 Immune cell abundance also varies naturally between healthy individuals\autocite{brodin2015VariationHumanImmune,brodin2017HumanImmuneSystem}, so it is important to model these effects even at baseline.
 
-Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals, so I derived cell type abundance estimates from the expression data as an alternative.
-Such estimates have been used as predictors in \gls{eQTL} analysis in bulk samples where cell type specific effects are expected\autocite{westra2015CellSpecificEQTL,davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2019CellTypeSpecific}.
+Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals (\autoref{subsec:hird_dge_studyDesign}), so I derived cell type abundance estimates from the expression data as an alternative.
+Such estimates have previously been used in \gls{eQTL} analyses from bulk samples where cell type specific effects are expected\autocite{westra2015CellSpecificEQTL,davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2019CellTypeSpecific}.
 As the estimates are based on the expression of multiple genes, is not entirely circular to use them as covariates in this way for genewise \gls{eQTL} models.
 % https://github.com/dviraran/xCell
 %
@@ -294,7 +300,7 @@ As the estimates are based on the expression of multiple genes, is not entirely 
 % this type of analysis should be performed carefully.  Regarding this issue,
 % scaling the scores by samples is extremely dangerous and will inevitably will
 % result in false interpretations.
-I selected \software{xCell}\autocite{aran2017XCellDigitallyPortraying}, which previously been shown to outperform other deconvolution methods for cell type specific \gls{eQTL} mapping in blood\autocite{kim-hellmuth2019CellTypeSpecific}
+I selected \software{xCell}\autocite{aran2017XCellDigitallyPortraying}, which previously been shown to outperform other deconvolution methods for cell type specific \gls{eQTL} mapping in blood\autocite{kim-hellmuth2019CellTypeSpecific}.
 \software{xCell} computes enrichment scores based on the expression ranks of approximately 10000 signature genes derived from purified cell types,
 works for both array and \gls{RNAseq} expression data,
 and implements \enquote{spillover compensation} to reduce dependency of estimates between related cell types\autocite{aran2017XCellDigitallyPortraying}.
@@ -310,12 +316,13 @@ and implements \enquote{spillover compensation} to reduce dependency of estimate
 % https://www.nature.com/articles/s41588-018-0089-9
 % www.blueprint-epigenome.eu/index.cfm?p=7BCEDA45-EC73-3496-2C823D929DD423DB
 Reviewing the literature to find which broad classes of peripheral blood cell types are commonly-expected in the \gls{PBMC} compartment\autocite{kleiveland2015PeripheralBloodMononuclear,vanderwijst2018SinglecellRNASequencing,davenport2018DiscoveringVivoCytokineeQTL},
-I selected 7/64 of the built-in cell types: CD4\textsuperscript{+} T cells, CD8\textsuperscript{+} T cells, B cells, plasma cells, \gls{NK} cells, monocytes and \glspl{DC}.
+I selected 7/64 of the built-in cell types: CD4\textsuperscript{+} T cells, CD8\textsuperscript{+} T cells, B cells, plasma cells, \gls{NK} cells, monocytes, and \glspl{DC}.
 % /nfs/users/nfs_b/bb9/workspace/phd/output/hird/rnaseq/4_de/array/array_data_setup.y.filtered.MaxMean.combat.rds
 % and /nfs/users/nfs_b/bb9/workspace/phd/output/hird/rnaseq/4_de/array/array_data_setup.sample.metadata.merged.rds
 Array and \gls{RNAseq} data from \autoref{subsec:hird_dge_array_preproc} and \autoref{subsec:hird_dge_rnaseq_quantAndFilter} were processed through \software{xCell} separately.
 The large batch effect present in the array expression was first removed using ComBat.
 Finally, enrichment scores were standardised, so that a score of zero estimates the average abundance of that cell type across all timepoints (\autoref{fig:hird_xCell_scores_heatmap_array} and \autoref{fig:hird_xCell_scores_heatmap_rnaseq}).
+\todo{add comment on existence of chosen cell types in samples, and clustering by visit}
 
 \begin{figure}
     \centering
@@ -332,7 +339,7 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 \end{figure}
 
 As with actual cell type abundances, the enrichment scores are correlated.
-Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as covariates downstream.
+Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as predictors downstream.
 To prune the number of scores, I performed a \gls{PCA} of the cell type scores across samples,
 % Kaiser Rule
 % The more variables that load onto a particular component (i.e., have a high
@@ -341,7 +348,7 @@ To prune the number of scores, I performed a \gls{PCA} of the cell type scores a
 % component is as a summary of the data. An eigenvalue of 1.0 means that the
 % factor contains the same amount of information as a single variable. [note 1]
 determined the number of principal components that exceed the eigenvalues-greater-than-one rule of thumb\autocite{kanyongo2005InfluenceReliabilityFour},
-then selected only one cell type with the highest contribution to each of those components.
+then selected only the one cell type with the highest contribution for each of those components.
 In both array and \gls{RNAseq} datasets, the number of components retained was three, and the selected cell types were monocytes, \gls{NK} cells, and plasma cells (\autoref{fig:hird_xCell_cos2}).
 The choice to use the actual cell type scores over principal components directly as covariates is a sacrifice of orthogonality for interpretability.
 
@@ -451,11 +458,11 @@ Weighing the downside of having imperfect estimates of cell type abundance again
 %
 Apart from cell type abundance, a myriad of other unmeasured variables contribute to expression variation.
 Hidden determinants of expression variation were learnt using \software{PEER}\autocite{stegle2012UsingProbabilisticEstimation}.
-As recommended by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation \gls{RNAseq} data was performed using \software{DESeq2::vsn},
-then ComBat was applied to first merge array and \gls{RNAseq} data into a single log scale expression matrix per timepoint, treating the two array batches and three \gls{RNAseq} library prep pools as known batch effects.
+As recommended by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation \gls{RNAseq} data was performed using \software{DESeq2::vsn}.
+ComBat was applied to first merge array and \gls{RNAseq} data into a single log scale expression matrix per timepoint, treating the largest global effects on expression---the two array batches and three \gls{RNAseq} library prep pools (\autoref{fig:hird_expression_pcs})---as known batch effects.
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
 Given known covariates (intercept, sex, four genotype \glspl{PC} from \autoref{subsec:hird_dge_genotype_pc} representing ancestry, and the three xCell scores estimated above),
-PEER estimates additional hidden factors that explain variation in expression matrix.
+PEER was used to estimate additional hidden factors that explain variation in expression matrix.
 Factors are assumed to be unmeasured confounders that have global effects on a large fraction of genes, 
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
 but should soak up some of residual variation, improving power to detect cis-\glspl{eQTL}.
@@ -463,7 +470,8 @@ The analysis was run per timepoint, otherwise global changes in expression betwe
 
 Correlating the estimated factors to a larger set of known covariates reveals many correlations with xCell estimates, indicating that cell type abundance does indeed have substantial global effects on the expression matrix.
 There is little correlation with known array or \gls{RNAseq} batch effects, indicating ComBat did an adequate job of removing batch- and platform-dependent global effects on expression (\autoref{fig:hird_peer_corMatrix_v2_mega}).
-Note that I did not leave this adjustment for PEER to perform, as ComBat estimates centering and scaling factors per gene to adjust for batch effects, whereas the use of PEER factors represent a mean-only adjustment, which given the severity of the batch effect in this dataset (e \autoref{fig:hird_expression_pcs}), may be insufficient for strong batch effects\autocite{zhang2018AlternativeEmpiricalBayes}.
+Note that I did not leave this adjustment for PEER to perform, as ComBat estimates centering and scaling factors per gene to adjust for batch effects, whereas the use of PEER factors represent a mean-only adjustment
+Given the severity of the batch effect in this dataset, especially between platforms, mean-only adjustment may be insufficient\autocite{zhang2018AlternativeEmpiricalBayes}.
 
 \begin{figure}
     \centering
@@ -494,7 +502,7 @@ Note that I did not leave this adjustment for PEER to perform, as ComBat estimat
 % For list of various methods considered, also see 2018-03-05, 2018-07-25, 2018-07-27 etc. in log
 The performance of various software implementations of \glspl{LMM} specialised for genetic association studies are highly comparable; 
 the specific choice of implementation can usually be made on the basis of computational efficiency\autocite{eu-ahsunthornwattana2014ComparisonMethodsAccount}.
-I map \glspl{eQTL} within each timepoint using \software{LIMIX}\autocite{lippert2014LIMIXGeneticAnalysis}, which implements efficient univariate and multivariate \glspl{LMM} with one or more random effects.
+I map \glspl{eQTL} within each timepoint using \software{LIMIX}\autocite{lippert2014LIMIXGeneticAnalysis}, which implements univariate and multivariate \glspl{LMM} with one or more random effects.
 
 Imputed genotype probabilities were converted to alternate allele dosages using bcftools (1.7-1-ge07034a).
 Variants with sample $\text{\gls{AC}} < 15$ within each timepoint were excluded.
@@ -516,8 +524,7 @@ Variants with sample $\text{\gls{AC}} < 15$ within each timepoint were excluded.
 % so sex-specific methods are required \url{http://www.biomedcentral.com/1471-2105/15/392}.
 \todo{add note on treating x chrom variants with caution}
 
-\todo{xchrom}
-At each of 13570 genes, at all cis-variants within within +-1 Mb of the \gls{TSS}, I fit the following model to map \gls{eQTL}:
+At each of 13570 genes, at all cis-variants within within $\pm \num{1}{Mb}$ of the \gls{TSS}, I fit the following model to map \gls{eQTL}:
 \begin{equation}
 \begin{split}
 Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} + \beta G + \mathbf{u} + \epsilon
@@ -526,16 +533,16 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 \end{equation}
 \todo{lift proper vector notation from limix, then redo this with a timepoint subscript}
 where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$,
-and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, the \gls{LOCO} matrix for chromosome 1 is used.}.
+and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, no \gls{LOCO} matrix is available from LDAK, so the matrix for chromosome 1 is used.}.
 % The LMM requires a kinship matrix to scale the covariance matrix of the random effect mean zero and an unknown variance.
 \todo{add formulation of the 0-mean random effect to show exactly how the kinship matrix is used}
 
 PEER factors are automatically weighted such that the variance of factors tends to zero as more factors are estimated, 
 hence continuing to add more and more factors as covariates will not continue to improve \gls{eQTL} detection power, and eventually the model degrees of freedom will be depleted.
-To optimise k, the number of factors to include as covariates
+To optimise k, the number of factors to include as covariates%
 % Also see \autocite{demissie2011BiasDueTwostage}
 \footnote{I avoid the commonly-performed two-stage approach of treating PEER residuals as expression phenotypes, as the degrees of freedom seen downstream will be incorrect, which can have a substantial effect on estimates at this modest sample size.}, 
-Per-timepoint \gls{eQTL} mapping was performed just in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
+Per-timepoint \gls{eQTL} mapping was performed in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
 I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for day 1, and 5 factors for day 7 (\autoref{fig:hird_neGenesvsPeerK}).
 
 \begin{figure}
@@ -549,11 +556,13 @@ I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for
 
 % 2.10.	mashr
 % 2.10.1.	Apply mashr to per-day meta-analysis beta/beta_ste results
-Joint analysis was conducted with \software{mashr}\autocite{urbut2018FlexibleStatisticalMethods}, at 40197618 gene-variant pairs (tests) for which summary statistics from within timepoint mapping were available in all three timepoint conditions.
-\todo{did I do a SNPs only filter? might have deprecated that}
-The mashr model incorporates both canonical (e.g. the identity matrix) and data-driven covariance matrices to represent patterns of effects across conditions (in this case, 3 x 3 matrices).
+Joint analysis was conducted with \software{mashr}\autocite{urbut2018FlexibleStatisticalMethods}, at 40197618 gene-variant pairs (mean of \num[round-mode=places,round-precision=0]{2962.24156227} tests per gene) for which summary statistics from within timepoint mapping were available in all three timepoint conditions.
+\todo{recheck if did I do a SNPs only filter}
+The mashr model incorporates multiple canonical (the identity matrix etc.) and data-driven covariance matrices to represent patterns of effects across conditions (in this case, $3 x 3$ matrices).
 Data-driven covariance matrices are derived by dimension reduction of a strong subset of tests likely to have an effect in at least one condition.
-I took the most significant variant per gene per condition for my strong subset (45962 tests), which ensures strong condition-specific effects are included (\autoref{fig:hird_mashr_strongSubset_Z_mega}, then further filtered to only nominally significant tests.
+I took the most significant variant per gene per condition, 
+which ensures strong condition-specific effects are included (\autoref{fig:hird_mashr_strongSubset_Z_mega}), 
+then further filtered to only nominally significant tests, resulting in a strong subset of 45962 tests.
 
 \begin{figure}
     \centering
@@ -579,13 +588,14 @@ A condition-specific Bayesian measure of significance \gls{lfsr} is returned, wh
 
 Many of the tested variants for each gene will be in high \gls{LD}.
 % qtls.merged[, signif_rank := frank(qtls.merged, lfsr, -INFO, -MAF_sample, SNP_gene_TSS_dist, POS)]
-To unambiguously select a lead \gls{eQTL} variant per gene tested, I selected the variant with the lowest lfsr in any condition, breaking ties by highest imputation INFO, highest \gls{MAF}, shortest distance to the \gls{TSS}.
+To unambiguously select a lead \gls{eQTL} variant per gene, I selected the variant with the lowest lfsr in any condition, 
+breaking ties by highest imputation INFO, highest \gls{MAF}, shortest distance to the \gls{TSS}, and genomic coordinate.
 Sharing was then evaluated for that gene-variant pair across all three conditions.
 
 Thresholding on the lfsr is not appropriate for determining sharing, as the difference between significant and non-significant effect estimates in two conditions is not necessarily significant\autocite{gelman2006DifferenceSignificantNot}.
 % Not just use lfsr thresholds:
 \autocite{urbut2018FlexibleStatisticalMethods} provides a heuristic that two effects are shared by magnitude if they have the same sign, and are also within a factor of 2 of one another,
-but this does not consider the posterior standard error around the estimates.
+but this does not consider the posterior standard error of the estimates.
 % Also see:
 %
 % https://stats.stackexchange.com/questions/93540/testing-equality-of-coefficients-from-two-different-regressions
@@ -605,11 +615,11 @@ Between a pair of effects in two conditions, I compute a z score for the differe
 z = \frac{\beta_x - \beta_y}{\sqrt{\sigma_x^2 + \sigma_y^2 - 2\sigma^2(x, y)}}
 \end{equation}
 
-This strategy has been applied to call reQTLs by \autocite{kim-hellmuth2017GeneticRegulatoryEffects}.
+This strategy has been applied to call reQTLs by \autocite{kim-hellmuth2017GeneticRegulatoryEffects},
 % Actually we can get:
 % PosteriorCov
 % Q x Q x J array of posterior covariance matrices, if the output_posterior_cov = TRUE.
-It assumes posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
+assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 \todo{not sure whether this is conservative or anti-conservative}
 Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}.
 % interaction with time fixed fx vs stratified
@@ -617,7 +627,7 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
 % \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
 % also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
-The z score can be compared to a standard normal to obtain a nominal Wald test p value, the null hypothesis being a difference of zero.
+The z score can be compared to a standard normal to obtain a Wald test p value, the null hypothesis being a difference of zero.
 I use nominal p value < 0.05 as a heuristic threshold to define reQTL effects that are strong (like the mashr recommended 2-fold threshold), rather than a formal measure of significant difference.
 Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
@@ -628,13 +638,14 @@ Due to the lack of large sample size \gls{eQTL} maps specific to \gls{PBMC}, I u
 For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal p value for that variant in GTEx (where the variant exists in both datasets).
 I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those GTEx nominal p values that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
 
-The mega-analysis has comparable replication rate for shared \glspl{eQTL} at moderately stringent \gls{lfsr} thresholds up to $10^{-5}$ (\autoref{fig:hird_eQTL_pi1vsGTExWholeBlood}).
+The mega-analysis has comparable replication rate to \gls{RNAseq}-only analysis for shared \glspl{eQTL} at moderately stringent \gls{lfsr} thresholds up to $10^{-5}$ (\autoref{fig:hird_eQTL_pi1vsGTExWholeBlood}).
 Past this, as the $\pi_1$ procedure assumes a well-behaved p value distribution in $\left[0, 1\right]$, 
 reliability declines due to the number of p values being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum p value being too far from 1.
 The numbers of \glspl{reQTL} were too low to assess replication using this method, and one might not expect them to replicate in a baseline dataset such as GTEx whole blood, especially for those \glspl{reQTL} significant only at post-vaccination timepoints.
-As the mega-analysis has a higher eGene rate \percentage{0.5075166} vs. \todo{about 30pc, get exact figure} compared to the \gls{RNAseq}-only analysis, with similar replication,
+As the mega-analysis has a higher eGene rate (\percentage{0.5075166} vs. \percentage{0.29914529915}) compared to the \gls{RNAseq}-only analysis, with similar replication,
 I assume this represents a power advantage from having larger a sample size, rather than technical effects from merging the expression data.
-\todo{Need to consider Niko's comment that there are too many genotype-platform interactions to use mega-analysis. Consider filtering.}
+% \todo{add comment on number of eGenes. the real reason here is prob robustness?}
+\todo{RNAseq does test about 7000 more genes though...}
 
 \begin{figure}
     \centering
@@ -646,12 +657,13 @@ I assume this represents a power advantage from having larger a sample size, rat
     }
     \label{fig:hird_eQTL_pi1vsGTExWholeBlood}
 \end{figure}
+        % TODO: 10000?
 
 \subsection{Genotype interactions with cell type abundance}
 
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, 
-otherwise the slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
+otherwise the regression slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
 one can not correct for this modification just by including the main effect for cell type abundance.
 Given the modest sample size, I use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},
 where tests for interaction are only performed at a subset of tests, often the lead \gls{eQTL} variant for each gene.
@@ -669,10 +681,20 @@ As the main purpose of the interaction analyses is scanning for cell type effect
 I chose to test for interactions only at the lead \gls{eQTL} variant for each gene with a significant main \gls{eQTL},
 then apply the \gls{BH} \gls{FDR}, as used by others\autocite{peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects}.
 
-\gls{eQTL} models interactions between genotype and other predictors were fit using \software{lme4qtl}.
+Models in interactions between genotype and other predictors were fit using \software{lme4qtl}.
 The model specification identical to \autoref{eq:hird_reQTL_limix_model}, with the addition of three interaction terms between genotype and each xCell score.
 Significance is assessed using the likelihood-ratio test versus the nested model with no interaction terms.
 \todo{add note here that although peer is correlated with xcell, interactions are only formed with xcell, so the interaction term can be interpreted per unit of genotype increase when xcell=0}
+
+\subsection{TODO Statistical colocalisation}
+
+% TODO
+% Choice of method;
+% See coloc_comparisons in notes for a summary
+% Coloc and assumptions; Hypercoloc and assumptions
+%
+\todo{this analysis is incomplete, and is one of the things I would suggest to round off this chapter}
+- if adding coloc analysis, add \url{https://github.com/jrs95/hyprcoloc} methods here
 
 \section{Results}
 
@@ -681,19 +703,21 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 Within each timepoint condition (day 0 pre-vaccination, day 1, and day 7), cis-\glspl{eQTL} ($\pm 1 \text{Mb}$ of the \gls{TSS}) were mapped using \software{LIMIX},
 then joint analysis of effects was done using \software{mashr} to obtain posterior effect size and standard errors.
 At \gls{lfsr} < 0.05, 6887/13570 genes (\percentage{0.5075166}) were eGenes (genes with a significant \gls{eQTL}) in at least one timepoint.
-The most significant \gls{eQTL} variant across all timepoints was selected as the lead variant for each eGene,
+To sidestep the issue of multiple tested variants per gene being in \gls{LD},
+the most significant \gls{eQTL} variant across all timepoints was selected as the lead variant for each eGene,
 then \glspl{reQTL} were defined by comparing the effect size of this lead \gls{eQTL} between each pair of timepoints.
+Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.1675621}) \glspl{eQTL} were classified as \glspl{reQTL} between any pair of timepoints (nominal p difference < 0.05).
 % 1131 if ignoring d1 vs d7
 % \todo{might be interesting to note not so many d1 vs d7 reQTL}
-Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.1675621}) \glspl{eQTL} were classified as \glspl{reQTL} between any pair of timepoints (nominal p difference < 0.05).
 \todo{if it would be interesting to compare the sharing estimate condition by condition approach to mashr, then redo and pull in eigenmt-bh values}
 
 \autoref{fig:hird_eQTL_upset_mega} illustrates the difference between calling sharing using a significance threshold versus difference in betas approach.
 For instance, day 0 was the timepoint with the largest number of eGenes, reflecting the larger sample size compared to other timepoints.
 Although there are 1427 eGenes significant at only day 0, there are only 646/1427 reQTL among them, as the effect size at day 0 does not differ significantly when compared to day 1 or day 7 for the remainder.
-The strongest \glspl{eQTL} with the highest \gls{PVE} are shared between timepoints, highlighting the power advantage for mapping shared effects granted by joint analysis.
-\todo{put pve formula in methods, include point that pve is (very rough) norm to var(y), so can compare between timepoints and genes with different MAF and raw variance}
-\todo{actually, i've found that my PVE approximation is basically rescaled abs(Z), so pve is a bit pointless if we already have z, and doesn't really help with comparability}
+The strongest \glspl{eQTL} with the highest \gls{PVE}\footnote{TODO: add to methods \url{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0120758.s001}}
+are shared between timepoints, highlighting the power advantage for mapping shared effects granted by joint analysis.
+% \todo{put pve formula in methods, include point that pve is (very rough) norm to var(y), so can compare between timepoints and genes with different MAF and raw variance}
+\todo{actually, i've found that my PVE approximation is basically rescaled abs(Z), so pve is a bit pointless if we already have z, and doesn't really help with comparability between genes with diff var/MAF}
 
 \begin{figure}
     \centering
@@ -711,9 +735,10 @@ The strongest \glspl{eQTL} with the highest \gls{PVE} are shared between timepoi
 As detection power is greatest at day 0, 
 I focus on \glspl{eQTL} that are reQTLs between day 0 and either day 1 or day 7 post-vaccination, 
 % NOTE: the apparent gap is filled by dampening effects that are n.s. in day 1/7
-and are significant at the corresponding timepoint (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
+and are significant at the corresponding timepoint:
 \todo{requiring signif post-vaccination may not be correct, as it excludes many dampening effects}
-819 reQTL between day 1 and day 0, and 1002 reQTL between day 7 and day 0.
+819 reQTL between day 1 and day 0, 
+and 1002 reQTL between day 7 and day 0 (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
 Gene set enrichment analysis on the eGenes targets for these sets of \glspl{reQTL} did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
 %
 % if so, then define mag,damp,flip
@@ -733,7 +758,7 @@ Shared \glspl{eQTL} are enriched close to the \gls{TSS}, whereas \glspl{reQTL} a
 %     p: ignores sign
 %     Z score:
 
-\todo{double check magnifier definition relative to DGE}
+% \todo{double check magnifier definition relative to DGE}
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.z_sharing.vs.SNP_gene_TSS_dist.pdf}
@@ -757,6 +782,7 @@ Overall, compared to genes without reQTL,
 and no significant difference was observed at day 7 (\percentage{0.02195609} for reQTL vs. \percentage{0.01368555}, Fisher's test p = \num{0.05088}).
 % Overall, \glspl{reQTL} were less likely compared to shared \glspl{eQTL} (\percentage{0.2920277} vs. \percentage{0.4929356}, Fisher's test p < \num{2.2e-16}) to be differentially expressed post-vaccination.
 Only 5/68 (\percentage{0.1323529}) genes with \glspl{reQTL} that explain more variation at day 1 were upregulated at day 1 vs. day 0; 5/226 (\percentage{0.02212389}) for day 7 vs. day 0.
+\todo{double check denoms}
 
 \begin{figure}
     \centering
@@ -775,8 +801,7 @@ Only 5/68 (\percentage{0.1323529}) genes with \glspl{reQTL} that explain more va
 
 \subsection{Genotype by cell type interaction effects}
 
-Given that many \glspl{reQTL} are not explained by differential expression post-vaccination, the presence of cell type-specific \gls{eQTL} effects was considered.
-
+Given that many \glspl{reQTL} are not explained by differential expression post-vaccination, the presence of cell type-specific \gls{eQTL} effects was considered as an alternate explanation.
 As described in \autoref{subsec:hird_reQTL_xCell}, \software{xCell} enrichment scores were used to approximate abundance of seven \gls{PBMC} cell types from the expression data.
 After pruning highly correlated cell types to avoid multicollinearity, standardised scores for monocytes, \gls{NK} cells and plasma cells were tested for genotype interactions.
 Within-timepoint full \gls{eQTL} models including the genotype main effect, the three cell type abundance main effects, and three cell type-genotype interaction terms, were fit using \software{lme4qtl}, 
@@ -790,9 +815,9 @@ monocyte=\num{0.212978154} (\num{0.04897962}),
 \gls{NK} cells=\num{-0.009195402} (\num{0.04470412}),
 and plasma cells=\num{0.016151511} (\num{0.06632921}).
 \todo{gene set enrichment for cell type interacting genes to further validate xCell score usefulness}
-This indicates the \gls{eQTL} effect is actually driven largely by the monocyte score (or a cell type that is highly correlated with monocyte score, see \autoref{fig:hird_xCell_cos2}).
+The small magnitude of the genotype main effect in the full model vs. the nested model indicates the \gls{eQTL} effect is driven largely by the monocyte score (or a cell type that is highly correlated with monocyte score, see \autoref{fig:hird_xCell_cos2}).
 In the case where the monocyte score is zero (representing an average abundance across all samples, as scores are standardised), the effect of increasing genotype dosage on \gene{ADCY3} expression is minimal.
-\missingfigure{expression vs monocyte xCell score, colored by genotype}
+\missingfigure{expression vs monocyte xCell score, colored by genotype, to visually prove the point}
 
 \subsection{TODO Genotype by platform interaction effects}
 
@@ -803,20 +828,16 @@ In the case where the monocyte score is zero (representing an average abundance 
 % - Using a fixed effect assumes mean diff between rnaseq and array and forces the slope to the average.
 % - lme4qtl interactions with bonferroni
 - Perhaps using platform specific effects as a filter for reQTLs.
+\todo{Need to consider Nikos' comment that there are too many (1069/13570 significant BH FDR) genotype-platform interactions to use mega-analysis. Consider filtering.}
 
 \subsection{TODO Colocalisation of reQTLs with known \textit{in vitro} condition-specific immune eQTLs}
 
-% TODO
-% Choice of method;
-% See coloc_comparisons in notes for a summary
-% Coloc and assumptions; Hypercoloc and assumptions
-%
-% Colocalisation with known associations [...]
-% Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014) [...]
-% Here the inverse: coloc is used to understand the biological relevance of observed expression variation.
 \begin{outline}
 
 \todo{this analysis is incomplete, and is one of the things I would suggest to round off this chapter}
+
+\1 Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014)
+\1 Here the inverse: coloc is used to understand the biological relevance of observed reQTL by coloc with known immune QTL
 
 % rs916485_SNP_chr2_24859404_T_C
 \1 In a 500 Mb window around the lead \gene{ADCY3} variant rs916485, \software{hyprcoloc} to colocalise with existing datasets and fine map.
@@ -826,7 +847,7 @@ In the case where the monocyte score is zero (representing an average abundance 
 \2 Also, priors need tuning?
 
 % fine mapped to 2_24874775_A_G, nearest gene (45,064 bp downstream to canonical TSS): ADCY3 TSS is at 24919839, rev strand
-\1 \software{hyprcoloc} fine maps the signal to rs13407914 (PP = 1), an intronic variant 45064 bp downstream of the TSS.
+\1 \software{hyprcoloc} fine maps the signal to rs13407914 (credible set size=1, PP = 1), an intronic variant 45064 bp downstream of the TSS.
 
 % note in 2019-06-17_team_meeting.pptx, originally was rs10185143
 \todo{FYI the IBD/T cell coloc fine maps to chr2:24935139 T C (rs713586) with PP=1}
@@ -837,7 +858,7 @@ In the case where the monocyte score is zero (representing an average abundance 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.locusPlot.gene_ENSG00000138031.pdf}
-    \caption{Multi-trait colocalisation of HIRD reQTL signal at ADCY3 (500 Kb window), with genetic associations from IHEC, BLUEPRINT, eQTL Catalogue, and GWAS Catalogue. Plots are colored by colocalised cluster. Black indicates non-colocalised datasets.}
+    \caption{Multi-trait colocalisation of HIRD reQTL signal at ADCY3 (500 Kb window), with QTL studies from IHEC, BLUEPRINT, eQTL Catalogue, and GWAS Catalogue. Plots are colored by colocalised cluster. Black indicates non-colocalised datasets.}
     \label{fig:hird_eQTL_coloc_ADCY3}
 \end{figure}
 
@@ -853,6 +874,7 @@ Even in a joint mapping framework, defining \gls{reQTL} by set significance thre
 I account for the direction and magnitude of effect sizes, defining reQTL strength as the difference in effect size between timepoints.
 Most \gls{eQTL} are shared between conditions and replicate well in GTEx whole blood;
 \percentage{0.1675621} of lead \gls{eQTL} for each eGene were \gls{reQTL} that differed in effect size between timepoints.
+
 % Also see for conditional:
 % https://academic.oup.com/hmg/article/26/8/1444/2970473
 % https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003649
@@ -877,16 +899,17 @@ In \autocite{fu2012UnravelingRegulatoryMechanisms}, the proportion of opposite s
 in \gls{HIRD}, I find
 39/819 (\percentage{0.04761905}) at day 1,
 and 211/1002 (\percentage{0.2105788}) at day 7.
-Clearly, the enrichment of opposite sign effects in \gls{HIRD} is also most apparent at day 7.
-\todo{I'm not exactly sure why at the moment.}
-The strongest reQTL at day 7 is one such effect;
+% TODO comment on n tissues
+The enrichment of opposite sign effects in \gls{HIRD} is also apparent at day 7.
+\todo{I'm not exactly sure why at the moment. Enrichment analyses so far have not turned up much. Up regulation of cell cycle TFs is a possibility.}
+The strongest reQTL at day 7 is one such opposite sign effect;
 \gene{SH2D4A} has constitutive expression in T cells, B cells, macrophages, and \glspl{DC}, 
 encoding a adapter protein involved in intracellular signal transduction\footnote{\url{https://doi.org/10.1111/j.1600-065X.2009.00829.x}}.
 An approach for validating these opposite sign \gls{reQTL} using the existing \gls{HIRD} \gls{RNAseq} data is \gls{ASE} (e.g. \autocite{kumasaka2016FinemappingCellularQTLs}),
 where one would expect true opposite sign \gls{reQTL} effects would also be recapitulated as opposite directions of expression imbalance.
 
 The strongest \gls{reQTL} detected at day 1 was \gene{ADCY3}, a membrane-bound enzyme that catalyses the conversion of ATP to the second messenger cAMP\autocite{wu2016AdenylateCyclaseNew}.
-\glspl{GWAS} have identified \gene{ADCY3} as a candidate gene for diseases such as obesity\autocite{wu2016AdenylateCyclaseNew} and IBD\autocite{mcgovern2015GeneticsInflammatoryBowel}.
+\Glspl{GWAS} have identified \gene{ADCY3} as a candidate gene for diseases such as obesity\autocite{wu2016AdenylateCyclaseNew} and IBD\autocite{mcgovern2015GeneticsInflammatoryBowel}.
 %
 \gene{ADCY3} has been identified as a target for reQTLs in multiple studies involving stimulated blood immune cells:
 % In fact, six (SLFN5, ARL5B, SPTLC2, IRF5, ADCY3, CCDC146) of the 38 genes
@@ -915,25 +938,28 @@ Given the diversity of stimulations and tissue types, the effect is likely a con
 Statistical colocalisation suggests that the day 1 reQTL signal identified here is likely to be a monocyte-specific effect---and independent to the IBD signal, which colocalises with T cell and macrophage datasets.
 The proportion of monocytes in the PBMC increase at day 1, supported by both FACS\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} measurements, and an increase in monocyte xCell score.
 Expression of \gene{ADCY3} is not monocyte-specific, as despite the increase in monocyte proportion, no upregulation is observed at day 1.
+\todo{add lfsr.dge}
 Colocalisation is also not restricted to stimulated monocytes,
 hence the signal could be hypothesised to result simply from the increased proportion of the bulk sample taken up by monocytes,
 rather than a upregulation-driven increase in detection power,
 or a vaccine-induced activation of the locus at day 1.
+\todo{need to consider: if this kind of thing is what bulk in vivo reQTL can find, they what is the additional value over FACS?}
 
 Changes in relative abundances for many cell types occur in the bulk PBMC samples after vaccination.
 I accounted for the effect of abundance on mean expression including xCell scores and PEER factors as fixed effects in the model,
 and also considered the effect of abundance on the genotype effect using interaction terms between xCell scores and genotype.
-Due to the modest sample size, and computational requirements for \software{lme4qtl}, I used a two-step approach, testing only for interactions at significant lead \gls{reQTL}.
-focusing only whether reQTLs that have a detectable main effect may be driven by cell type interactions.
+Due to the modest sample size, and computational requirements for \software{lme4qtl}, 
+I focused only whether reQTLs that have a detectable main effect may be driven by cell type interactions,
+testing only for interactions at significant lead \gls{reQTL},
 %
-Considering FACS measurements as a gold standard, the xCell scores used above were only moderately reliable.
+Compared to FACS measurements in a cohort subset, the xCell scores used above were only weakly correlated.
 Some discrepancy is expected, as the cell types as defined in the xCell signatures do not directly correspond to the combinations of surface markers used for FACS.
 The FACS gating strategy also meant that for some cell populations, the only available FACS measure was a proportion of the previously gated population,
 whereas xCell attempts to estimate scores that represent proportions of the whole mixture.
 The accuracy of the built-in signatures is lower when applied to the expression matrix for a stimulated state,
 likely because the enrichment-based method can not distinguish differential expression of signature genes due to stimulation from actual changes in cell abundance.
 % A custom signature matrix can be used for xCell, but this would need to be drawn from an independent study under the same stimulation conditions as \gls{HIRD}, and would not solve the issue of coupled DE and cell abundance.
-Nevertheless, the xCell scores were used as a best approximation, as assuming a single genotype where cell-type specific slopes are likely is inappropriate.
+Nevertheless, as assuming a single genotype where cell-type specific slopes are likely is inappropriate, so xCell scores were used as a best approximation.
 %
 At 16/1154 reQTLs, the genotype effect was detected to interact with abundance of one or more of the tested cell types (or a correlated cell type).
 At the day 1 \gene{ADCY3} reQTL, the genetic effect can be mainly attributed to the monocyte score-genotype interaction term, further supporting the hypothesis that it is monocyte-specific.
@@ -947,15 +973,16 @@ A pressing question remains: what molecular mechanisms underlie the \gene{ADCY3}
 Power differences due to condition-specific expression are unlikely to explain a large proportion of reQTLs.
 As in \autocite{kim-hellmuth2017GeneticRegulatoryEffects, davenport2018DiscoveringVivoCytokineeQTL}, the overlap between differentially expressed genes and genes with reQTL was poor,
 and reQTL were not more likely to be differentially expressed compared to genes without reQTL.
-One mechanism by which cis-eQTL affect expression is through their impact on \gls{TF} binding affinity to motifs in promoters and enhancers\autocite{pai2015GeneticMechanisticBasis},
-and immune cells, including monocytes, are regulated by cell type specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
+One mechanism by which cis-eQTL affect expression is through their impact on \gls{TF} binding affinity to motifs in promoters and enhancers\autocite{pai2015GeneticMechanisticBasis}.
+Immune cells, including monocytes, are regulated by cell type specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
 \todo{harmonise terminology for 'opposite'}
-Cell type specific expression of different \glspl{TF} form a model that can explain magnifying, dampening and opposite reQTL effects;
-for example, opposite effects can result from \glspl{TF} for the same gene, that are activating in one cell type and suppressive in another\autocite{fu2012UnravelingRegulatoryMechanisms}.
+Cell type specific expression of different \glspl{TF} have been proposed as a model for explaining magnifying, dampening and opposite reQTL effects;
+for example, opposite effects can result from \glspl{TF} regulating the same gene, that are activating in one cell type and suppressive in another\autocite{fu2012UnravelingRegulatoryMechanisms}.
 There is evidence that \gls{TF} activity is important for \textit{in vivo} immune reQTL:
 \autocite{caliskan2015HostGeneticVariation} found rhinovirus reQTLs were ENCODE ChIP-seq peaks for the \glspl{TF} \gene{STAT1} and \gene{STAT2},
 and \autocite{davenport2018DiscoveringVivoCytokineeQTL} found interferon and anti-IL6 drug reQTLs likely disrupt \gene{ISRE} and \gene{IRF4} binding motifs.
-Rather than condition-specific expression of the eGene, what may be condition-specific is the expression of \glspl{TF} whose activity is affected by the reQTL \footnote{
+Rather than condition-specific expression of the eGene, what may be condition-specific is the expression of \glspl{TF} whose activity is affected by the reQTL%
+\footnote{
     A cursory scan of \gls{TF} motifs disrupted by the location of the fine-mapped \gene{ADCY3} reQTL intronic variant rs13407913 on \url{https://ccg.epfl.ch/snp2tfbs/snpviewer.php},
     does indeed show several motifs (for NR2C2, HNF4A, HNF4G, NR2F1)
     where the PWM score is higher for the ALT allele, 
@@ -966,15 +993,15 @@ Rather than condition-specific expression of the eGene, what may be condition-sp
 % SP1 is monocyte specific https://europepmc.org/article/med/28008225
 % and upreg at d1
 
-Finally, I address the prospect raised in the previous chapter, that common genetic variation may explain some variation in antibody response to Pandemrix.
+Finally, I address the prospect that common genetic variation may explain some variation in antibody response to Pandemrix.
 I have indirectly demonstrated genotype-dependent effects on expression response by identifying reQTLs with differing effect size between timepoints,
-\todo{Is this really a genotype-dependent change in gene expression between timepoints? i.e. how does the change score/ANCOVA approach differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
-but have not attempted to determine resulting genotype-dependent differences in antibody phenotypes.
+but have not yet to determined resulting genotype-dependent differences in antibody phenotypes.
 Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
 but a formal test such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} is required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
-The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} to Pandemrix antibody response.
+The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix will be to leverage external genetic associations to similar phenotypes,
 for example, colocalisation with existing GWAS summary statistics for antibody response to a similar type of adjuvanted, inactivated vaccine.
 
+\todo{add 1 concluding line}
 \todo{Overall I feel like the chapter is too descriptive, and falls short of making biological insights into Pandemrix response. Any additional analyses would hope to address that.}

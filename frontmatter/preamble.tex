@@ -105,9 +105,6 @@
 % \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
 % \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
 
-% Show margins
-\usepackage{showframe}
-
 %
 % Figures and tables
 %
@@ -158,6 +155,12 @@
 
 % Use symbols for footnotes
 \usepackage[symbol,perpage]{footmisc}
+
+% The package defines commands that switch according to the prevailing ‘draft’ or ‘final’ options; each command takes two arguments, the first for the ‘true’, the second for the ‘false’ case.
+\usepackage{ifdraft}
+
+% Show margins
+\ifdraft{\usepackage{showframe}}{}
 
 %
 % Bibliography
