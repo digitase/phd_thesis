@@ -5,7 +5,7 @@
 
 % The one central and memorable contribution of the paper.
 \chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine}
-\label{chap:hird_DGE}
+\label{ch:hird_DGE}
 
 \section{Introduction}
 
@@ -84,7 +84,7 @@ This is in contrast to several studies of seasonal influenza vaccines, where cer
 \subsection{Chapter summary}
 
 Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number (46/178) of individuals, potentially limiting power to detect a expression signatures associated with antibody response.
-In addition, the responder vs. non-responder phenotype definition used does not account for variation in pre-existing baseline titres, and the binary definition can result in loss of statistical power\autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
+In addition, the responder vs. non-responder phenotype definition used does not account for variation in pre-existing baseline titres, and the binary definition can result in loss of statistical power\autocite{cohen1983CostDichotomization, senn2005DichotomaniaObsessiveCompulsive, fedorov2009ConsequencesDichotomization}.
 
 In this chapter, I integrate the original microarray data from \gls{HIRD} with \gls{RNAseq} data on a larger subset (75) of newly sequenced individuals from the same cohort using Bayesian random-effects meta-analysis.
 The overall pattern of expression over time from my meta-analysis agrees with the patterns from the original study \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, with transient innate immune response at day 1 post-vaccination, progressing to adaptive immune response by day 7.
@@ -164,6 +164,7 @@ DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiage
 In total, 192 samples from 176 individuals in the HIRD cohort were genotyped at 550601 markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
 
 \subsection{Genotype data preprocessing}
+\label{subsec:hird_dge_genotype_preproc}
 
 Using PLINK (v1.90b3w), genotype data underwent the following quality control procedures to remove poorly genotyped samples and markers:
 max marker missingness across samples $< 5\%$, 
@@ -184,6 +185,7 @@ For each pair of samples with pairwise kinship coefficient $> 0.177$ (first-degr
 After filtering, 169 samples and 549414 markers remained.
 
 \subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
+\label{subsec:hird_dge_genotype_pc}
 
 As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic ancestry) in expression and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount,brown2018ExpressionReflectsPopulation}.
 Treating HapMap 3 samples as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
@@ -253,6 +255,7 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 \end{figure}
 
 \subsection{\glsfmtshort{RNAseq} quantification and filtering}
+\label{subsec:hird_dge_rnaseq_quantAndFilter}
 
 % 1.	Quantification (Salmon --libType ISR, which is equiv to TopHat -fr-firststrand with paired end data)
 % 1.1.	Used index /lustre/scratch117/core/sciops_repository/transcriptomes/Homo_sapiens/ensembl_83_transcriptome/GRCh38_15_plus_hs38
@@ -332,6 +335,7 @@ The change in the distribution of gene expressions among samples before and afte
 After the application of all filters, expression values were available for 21626 genes over 223 samples (75/75 individuals on day 0, 73/75 on day 1, and 75/75 on day 7).
 
 \subsection{Array data preprocessing}
+\label{subsec:hird_dge_array_preproc}
 
 % 6.	Pre-process microarray expression data
 % 6.1.	Annotate Entrez and ENS ids using hgug4112a.db
@@ -473,6 +477,7 @@ From model 2, I defined contrasts for the \gls{TRI} specifically at each of the 
 Corresponding coefficients and standard errors for the contrasts were extracted from the linear models, which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
 \subsubsection{Choice of \glsfmtlong{DGE} meta-analysis method}
+\label{subsubsec:hird_dge_meta_methodChoice}
 
 In the section \todo{add section labels}, I concluded that a two-stage meta-analysis approach would be appropriate.
 This meta-analysis is restricted to 13593 genes assayed by both the array and \gls{RNAseq} platforms.

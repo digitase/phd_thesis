@@ -48,7 +48,7 @@
 % Format si units
 %
 \usepackage{siunitx}
-\sisetup{round-mode=figures, round-precision=4}
+\sisetup{round-mode=figures, round-precision=3}
 %
 % Define percentage formatting
 % https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
@@ -206,6 +206,18 @@
 % Redefine contextual label in front of the reference for \autoref
 % Package babel supports many languages, therefore you have to put the redefinition into \extrasenglish.
 \addto\extrasenglish{\renewcommand\figureautorefname{Fig.}}
+%
+% Note label conventions: https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing#Sections
+% ch: 	chapter
+% sec: 	section
+% subsec: 	subsection
+% fig: 	figure
+% tab: 	table
+% eq: 	equation
+% lst: 	code listing
+% itm: 	enumerated list item
+% alg: 	algorithm
+% app: 	appendix subsection
 
 % Nice colors for clickable links
 % \usepackage{bookmark}
@@ -244,7 +256,7 @@
 % Abbreviation definitions
 %
 % \newabbreviation[⟨options⟩]{⟨label⟩}{⟨short⟩}{⟨long⟩}
-\newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
+\newabbreviation[longplural=genome-wide association studies,shortplural=GWAS]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
 \newabbreviation[longplural=response expression quantitative trait loci]{reQTL}{reQTL}{response expression quantitative trait locus}
@@ -286,6 +298,8 @@
 \newabbreviation[]{ASE}{ASE}{allele-specific expression}
 \newabbreviation[]{TF}{TF}{transcription factor}
 \newabbreviation[]{HLA}{HLA}{human leukocyte antigen}
+\newabbreviation[]{PVE}{PVE}{proportion of variance explained}
+\newabbreviation[]{CIT}{CIT}{causal inference test}
 % \newabbreviation[]{}{}{}
 %
 
