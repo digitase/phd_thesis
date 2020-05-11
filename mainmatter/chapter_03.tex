@@ -218,12 +218,6 @@ The impact of these transformations on \gls{reQTL} detection has not been explor
 
 I performed simulations to evaluate the effect of the transformation on reQTL calls between a hypothetical baseline and day 1 post-vaccination condition.
 Expression values on the log scale were simulated with the \gls{eQTL} slope (beta) set to specific values corresponding to six scenarios for six gene-variant pairs (\autoref{fig:hird_eQTL_expressionTransform_sims}).
-Scenario 0 has no \gls{eQTL}, 
-scenario 1 is a shared eQTL (beta = 1), 
-scenario 2 is a \gls{reQTL} where beta increases from 0 to 1,
-scenario 3 is a \gls{reQTL} where beta increases from 0 to 2,
-scenario 4 is a \gls{reQTL} where beta increases from 1 to 2,
-and scenario 6 is a \gls{reQTL} where beta increases from 1 to 4.
 The simulated scenarios were subjected to rank-based \gls{INT} (Blom method\autocite{beasley2009RankBasedInverseNormal}), standardisation (both centering and scaling), scaling-only, and centering-only transformations.
 Transformations were applied both within each condition and without separating conditions.
 
@@ -246,9 +240,19 @@ I only consider the preservation of \gls{reQTL} effects defined from expression 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/simulate_expression_transforms.pdf}
-    \caption{expression xforms}
+    \caption{
+        Simulated log scale expression in two conditions for six genes (columns) representing six different scenarios:
+            Scenario 0 has no \gls{eQTL}, 
+            scenario 1 is a shared eQTL (beta = 1), 
+            scenario 2 is a \gls{reQTL} where beta increases from 0 to 1,
+            scenario 3 is a \gls{reQTL} where beta increases from 0 to 2,
+            scenario 4 is a \gls{reQTL} where beta increases from 1 to 2,
+            and scenario 6 is a \gls{reQTL} where beta increases from 1 to 4.
+            Rows represent the effect of different expression transformations across samples, conducted both within condition, and including both conditions.
+    }
     \label{fig:hird_eQTL_expressionTransform_sims}
 \end{figure}
+\todo{add sample sizes and model for expression sim}
 
 \subsection{Estimation of cell type abundance from expression}
 \label{subsec:hird_reQTL_xCell}
@@ -316,14 +320,14 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_array.plots.pdf}
-    \caption{xCell enrichment scores in array data}
+    \caption{Standardised xCell enrichment scores for seven \gls{PBMC} cell types in array samples.}
     \label{fig:hird_xCell_scores_heatmap_array}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
-    \caption{xCell enrichment scores in rnaseq data}
+    \caption{Standardised xCell enrichment scores for seven \gls{PBMC} cell types in \gls{RNAseq} samples.}
     \label{fig:hird_xCell_scores_heatmap_rnaseq}
 \end{figure}
 
@@ -345,22 +349,24 @@ The choice to use the actual cell type scores over principal components directly
 % principal components. The contribution of a variable (var) to a given principal
 % component is (in percentage) : (var.cos2 * 100) / (total cos2 of the
 % component).
+% TODO missing scree plot in array file
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.49\textwidth}
+    \begin{subfigure}[b]{1.0\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=8]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_array.plots.pdf}
-        \caption{array}
+        \caption{Array estimates.}
     \end{subfigure}%
-    \hfill%
-    \begin{subfigure}[b]{0.49\textwidth}
+    \vspace{1em}\vfill%
+    \begin{subfigure}[b]{1.0\textwidth}
         \centering
-        \includegraphics[width=1.0\textwidth,page=8]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
-        \caption{rnaseq}
+        \includegraphics[width=1.0\textwidth,page=9]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
+        \caption{\gls{RNAseq} estimates.}
     \end{subfigure}%
-    \caption{xCell cos2 contributions}
+    \caption{Quality of representation (cos2) for each input variable in each \gls{PC} dimension after \gls{PCA} of xCell scores. Higher cos2 represents higher contribution of that variable to that dimension.}
     \label{fig:hird_xCell_cos2}
 \end{figure}
+\todo{no need for both size and color, use one for contribution percent}
 
 Scores were validated against \gls{FACS} measurements in the subset of individuals that had them.
 \todo{add info on the markers used for the chosen FACS counterparts}
@@ -378,7 +384,6 @@ Missing values were imputed with \software{missForest}, a random forest imputati
 % - expression matrices are mostly complete, and we only exclude genes based on low expression in RNAseq
 % - we cannot drop whole FACS panels so easily like we can drop genes
 Although the increase in xCell score for monocytes at day 1 and plasma cells at day 7 reflect the increases in these cell types observed by\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, overall correlation between xCell and \gls{FACS} was weak (\autoref{fig:hird_xCell_vs_FACS}).
-\todo{just add all pops?}
 Weighing the downside of having imperfect estimates of cell type abundance against the downsides of not accounting for abundance, or excluding samples without \gls{FACS} measures, I chose to continue the analysis using the xCell scores.
 
 \begin{figure}
@@ -386,23 +391,24 @@ Weighing the downside of having imperfect estimates of cell type abundance again
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=6]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{mono}
+        \caption{Monocytes.}
     \end{subfigure}%
     \vspace{1em}\vfill%
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=3]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{nk}
+        \caption{\gls{NK} cells.}
     \end{subfigure}%
     \vspace{1em}\vfill%
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{plasma}
+        \caption{Plasma cells.}
     \end{subfigure}%
-    \caption{xCell vs facs int}
+    \caption{Correlation between standarised xCell scores and normalised \gls{FACS} measurements for a similar immune subset, in the subset of individuals with \gls{FACS} data.}
     \label{fig:hird_xCell_vs_FACS}
 \end{figure}
+\todo{get subset size}
 
 \subsection{Finding hidden confounders using factor analysis}
 
@@ -462,9 +468,10 @@ Note that I did not leave this adjustment for PEER to perform, as ComBat estimat
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/peer_mega/peer.factor_cor_matrix.v2.pdf}
-    \caption{Note that PEER factors are not constrained to be orthogonal, so correlations to the provided known factors are expected.}
+    \caption{Correlation of PEER factors to known factors and other possible covariates. Note that PEER factors are not constrained to be orthogonal, so correlations to known factors are expected.}
     \label{fig:hird_peer_corMatrix_v2_mega}
 \end{figure}
+\todo{remake this with only top k factors, and prune the possible covariates}
 
 \subsection{\glsfmtshort{eQTL} mapping per timepoint}
 
@@ -534,7 +541,7 @@ I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/count_eGenes.signif_eGenes_vs_PEER_n.dataset_mega.chr_chr1.pdf}
-    \caption{optimlise}
+    \caption{Number of significant eGenes detected on chromosome 1 (hierarchical Bonferroni-\gls{BH} FDR < 0.05) as a function of the number of PEER factors included as covariates k.}
     \label{fig:hird_neGenesvsPeerK}
 \end{figure}
 
@@ -545,14 +552,13 @@ I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for
 Joint analysis was conducted with \software{mashr}\autocite{urbut2018FlexibleStatisticalMethods}, at 40197618 gene-variant pairs (tests) for which summary statistics from within timepoint mapping were available in all three timepoint conditions.
 \todo{did I do a SNPs only filter? might have deprecated that}
 The mashr model incorporates both canonical (e.g. the identity matrix) and data-driven covariance matrices to represent patterns of effects across conditions (in this case, 3 x 3 matrices).
-Data-driven covariance matrices are derived by dimension reduction a strong subset of tests likely to have an effect in at least one condition.
-I took the most significant variant per gene per condition, which ensures strong condition-specific effects are included (\autoref{fig:hird_mashr_strongSubset_Z_mega}, then further filtered to only nominally significant tests.
+Data-driven covariance matrices are derived by dimension reduction of a strong subset of tests likely to have an effect in at least one condition.
+I took the most significant variant per gene per condition for my strong subset (45962 tests), which ensures strong condition-specific effects are included (\autoref{fig:hird_mashr_strongSubset_Z_mega}, then further filtered to only nominally significant tests.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/mash_mega/mashr.strong_subset_zval_heatmap.cisDist_1e6.sampleAcThresh_15.randomSubsetN_200000.pdf}
-    % 45962 tests (including X)
-    \caption{optimlise, sample 10k}
+    \caption{Clustering of within-timepoint Z scores in the strong mashr subset (random sample of 10000/45962 tests), confirming the presence of strong condition-specific effects.}
     \label{fig:hird_mashr_strongSubset_Z_mega}
 \end{figure}
 
@@ -633,7 +639,11 @@ I assume this represents a power advantage from having larger a sample size, rat
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
-    \caption{}
+    \caption{
+        Effect of \gls{HIRD} lfsr threshold on GTEx whole blood replication rate ($\pi_1$), number of p values used to compute $\pi_1$, and maximum p value among those p values; 
+        for shared and \gls{reQTL} called from the array-only, \gls{RNAseq}-only and mega-analysis pipelines. 
+        Shaded region for $\pi_1$ represents the 5th-95th percentile range of 1000 bootstraps.
+    }
     \label{fig:hird_eQTL_pi1vsGTExWholeBlood}
 \end{figure}
 
@@ -674,6 +684,7 @@ At \gls{lfsr} < 0.05, 6887/13570 genes (\percentage{0.5075166}) were eGenes (gen
 The most significant \gls{eQTL} variant across all timepoints was selected as the lead variant for each eGene,
 then \glspl{reQTL} were defined by comparing the effect size of this lead \gls{eQTL} between each pair of timepoints.
 % 1131 if ignoring d1 vs d7
+% \todo{might be interesting to note not so many d1 vs d7 reQTL}
 Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.1675621}) \glspl{eQTL} were classified as \glspl{reQTL} between any pair of timepoints (nominal p difference < 0.05).
 \todo{if it would be interesting to compare the sharing estimate condition by condition approach to mashr, then redo and pull in eigenmt-bh values}
 
@@ -682,33 +693,38 @@ For instance, day 0 was the timepoint with the largest number of eGenes, reflect
 Although there are 1427 eGenes significant at only day 0, there are only 646/1427 reQTL among them, as the effect size at day 0 does not differ significantly when compared to day 1 or day 7 for the remainder.
 The strongest \glspl{eQTL} with the highest \gls{PVE} are shared between timepoints, highlighting the power advantage for mapping shared effects granted by joint analysis.
 \todo{put pve formula in methods, include point that pve is (very rough) norm to var(y), so can compare between timepoints and genes with different MAF and raw variance}
-\todo{actually, i've found that my PVE approximation is basically rescaled abs(Z), which is nonlinear rescaled lfsr, so pve is a bit pointless if we already have z}
+\todo{actually, i've found that my PVE approximation is basically rescaled abs(Z), so pve is a bit pointless if we already have z, and doesn't really help with comparability}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.upset.pdf}
-    \caption{}
+    \caption{
+        Summary of eQTL mapping results at 13570 genes-lead eQTL pairs,
+        with intersections based on significance (lfsr < 0.05).
+        Counts of shared eQTLs and reQTLs; and distribution of INFO score, min MAF across timepoints, and max PVE across timepoints for those lead variants are shown above each intersection.
+    }
     \label{fig:hird_eQTL_upset_mega}
 \end{figure}
 
 \subsection{Characterising reQTLs post-vaccination}
 
+As detection power is greatest at day 0, 
+I focus on \glspl{eQTL} that are reQTLs between day 0 and either day 1 or day 7 post-vaccination, 
+% NOTE: the apparent gap is filled by dampening effects that are n.s. in day 1/7
+and are significant at the corresponding timepoint (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega}).
+\todo{requiring signif post-vaccination may not be correct, as it excludes many dampening effects}
+819 reQTL between day 1 and day 0, and 1002 reQTL between day 7 and day 0.
+Gene set enrichment analysis on the eGenes targets for these sets of \glspl{reQTL} did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
+%
+% if so, then define mag,damp,flip
 % Of the 819 reQTL between day 1 and day 0, there 49 magnifiers, 720 dampeners, 39 sign flips.
 % Of the 1002 reQTL between day 7 and day 0, there are 58 magnifiers, 651 dampeners, 211 sign flips.
-
-As the sample size is greatest at day 0, 
-I focus on \glspl{eQTL} that are reQTLs between day 0 and either day 1 or day 7 post-vaccination, 
-and are significant at the corresponding timepoint.
-\todo{requiring signif post-vaccination excludes many dampening effects}
-% NOTE: the apparent gap is filled by dampening effects that are n.s. in day 1/7
-Many of the \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination (\autoref{fig:hird_eQTL_zSharing_vs_TSSdist_mega})---as lfsr quantifies uncertainty in the sign of the effect, I do not compare the sign unless the lfsr < 0.05 at day 0 also.
-% Signs are only compared if both conditions have lfsr < 0.05, as the sign of the insignificant condition is uncertain.
+% \todo{could put in reqtl ranked cerno enrichments here}
+% \todo{put cerno on pve/abs(z) e.g. hla ranked enrichments, then comment on strong shared effects in discussion}
+%
+Many of the \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination---as lfsr quantifies uncertainty in the sign of the effect, I do not compare the sign unless the reQTL is also significant at day 0.
 Shared \glspl{eQTL} are enriched close to the \gls{TSS}, whereas \glspl{reQTL} are distributed across the cis- window.
 \todo{the lack of any positional enrichment makes me concerned for false positives? check with ASE?}
-
-% Gene set enrichment analysis on eGenes for these sets of \glspl{reQTL} at day 1 (88 eGenes) and day 7 (269 eGenes) did not detect any significant enrichments (\software{gprofiler2}, g:SCS adjusted p < 0.05).
-\todo{could put in reqtl ranked cerno enrichments here} % d1 magnif and d7 sign flips. if so, then define mag,damp,flip
-\todo{put cerno on pve/abs(z) e.g. hla ranked enrichments, then comment on strong shared effects in discussion}
 
 %
 % Possible Ranking metrics for ranked enrichments
@@ -717,10 +733,16 @@ Shared \glspl{eQTL} are enriched close to the \gls{TSS}, whereas \glspl{reQTL} a
 %     p: ignores sign
 %     Z score:
 
+\todo{double check magnifier definition relative to DGE}
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.z_sharing.vs.SNP_gene_TSS_dist.pdf}
-    \caption{align d0 plus}
+    \caption{
+        Z score for difference in effect vs. day 0, of lead eQTLs for all eGenes significant at either day 1 or day 7;
+        versus distance of the lead SNP to the TSS.
+        Direction of effect is aligned so that the beta at day 0 is positive. 
+        Points with positive z score are magnified effects post-vaccination, points with negative z scores are dampening and opposite sign effects.
+    }
     \label{fig:hird_eQTL_zSharing_vs_TSSdist_mega}
 \end{figure}
 
@@ -739,16 +761,17 @@ Only 5/68 (\percentage{0.1323529}) genes with \glspl{reQTL} that explain more va
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000138031,rs916485_SNP_chr2_24859404_T_C.pdf}
-    \caption{}
+    \caption{\gene{ADCY3}, strongest reQTL at day 1.}
     \label{fig:hird_eQTL_ploteQTL_ADCY3}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000104611,rs7841346_SNP_chr8_20170963_C_A.pdf}
-    \caption{}
+    \caption{\gene{SH2D4A}, strongest reQTL at day 7. Top: Array and \gls{RNAseq} expression before merging with ComBat for mega-analysis. Bottom: eQTL effects at each timepoint condition in the mega-analysis.}
     \label{fig:hird_eQTL_ploteQTL_SH2D4A}
 \end{figure}
+\todo{convert to subfigures}
 
 \subsection{Genotype by cell type interaction effects}
 
@@ -814,7 +837,7 @@ In the case where the monocyte score is zero (representing an average abundance 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.locusPlot.gene_ENSG00000138031.pdf}
-    \caption{}
+    \caption{Multi-trait colocalisation of HIRD reQTL signal at ADCY3 (500 Kb window), with genetic associations from IHEC, BLUEPRINT, eQTL Catalogue, and GWAS Catalogue. Plots are colored by colocalised cluster. Black indicates non-colocalised datasets.}
     \label{fig:hird_eQTL_coloc_ADCY3}
 \end{figure}
 
@@ -842,7 +865,7 @@ The proportion of genes with reQTL I detect based on only the lead signal likely
 Given the larger global changes in expression vs. baseline at day 1 compared to day 7 described in \autoref{ch:hird_DGE}, 
 % that these changes are mostly tied to innate immune activation \todo{sectionref},
 % and that innate immunity is under stronger genetic control than adaptive immunity\autocite{patin2018NaturalVariationParameters},
-the larger number of \glspl{reQTL} detected at day 7 was unexpected.
+the larger number of \glspl{reQTL} detected at day 7 was unexpected (819 vs. 1002).
 Opposite sign effects among \gls{reQTL} post-vaccination were common.
 % This is methodologically unsurprising, as opposite sign of effect tends to result in greater difference in betas given to the beta-comparison approach.
 Prevalance of opposite sign effects between pairs of conditions has been previously described in multi-tissue studies.
@@ -854,8 +877,11 @@ In \autocite{fu2012UnravelingRegulatoryMechanisms}, the proportion of opposite s
 in \gls{HIRD}, I find
 39/819 (\percentage{0.04761905}) at day 1,
 and 211/1002 (\percentage{0.2105788}) at day 7.
-The enrichment of opposite sign effects in \gls{HIRD} is also most apparent at day 7.
+Clearly, the enrichment of opposite sign effects in \gls{HIRD} is also most apparent at day 7.
 \todo{I'm not exactly sure why at the moment.}
+The strongest reQTL at day 7 is one such effect;
+\gene{SH2D4A} has constitutive expression in T cells, B cells, macrophages, and \glspl{DC}, 
+encoding a adapter protein involved in intracellular signal transduction\footnote{\url{https://doi.org/10.1111/j.1600-065X.2009.00829.x}}.
 An approach for validating these opposite sign \gls{reQTL} using the existing \gls{HIRD} \gls{RNAseq} data is \gls{ASE} (e.g. \autocite{kumasaka2016FinemappingCellularQTLs}),
 where one would expect true opposite sign \gls{reQTL} effects would also be recapitulated as opposite directions of expression imbalance.
 
