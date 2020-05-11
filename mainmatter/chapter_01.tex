@@ -3,12 +3,19 @@
 %
 % Unifies results chapters under the framework of human genetics.
 
+% TODO: look through dloads folder for relevant papers for each section
+
 \chapter{Introduction}
 
 \begin{outline}
     \1 Variation between humans exists
     \1 The eternal debate: nature vs nurture
     \1 Why study human genetics?
+    % karczewski2020AnalyticTranslationalGenetics
+    % In humans, analysis of large-scale natural variation data can provide valuable insights into human
+    % disease and gene function. Joint analysis of genotype and phenotype data is especially powerful,
+    % but even in the absence of phenotype data, patterns of variation data across the genome can inform
+    % population history, natural selection, and the biological function of genes.
     \1 The structure of the genome and it's variation
     \1 Finding causal anchors
     \1 Leveraging natural G variation.
@@ -114,13 +121,17 @@
     \2 coloc
         \3 Under the assumption that the mechanism by which non-coding associations affect disease risk is through their effect on gene expression, a successful way to link associations to their target gene is by statistical colocalisation with eQTL datasets, to determine if the GWAS and eQTL signal share the same causal variant[Co-localization of Conditional eQTL and GWAS Signatures in Schizophrenia].
 
+        % https://www.nature.com/articles/s41588-019-0385-z
     \2 TWAS
     % When a TWAS gene also colocalizes with your trait of interest you have a 19% chance you've found the correct causal gene.
     % https://twitter.com/Eric_Fauman/status/1220885592193499137?s=09
 
     \2 MR
+    Transcriptome-wide association studies (TWAS) integrating GWAS and eQTLs data have been proposed to unravel gene–trait associations7,9,10. However, although these studies aim to identify genes whose (genetically predicted) expression is significantly associated to complex traits, they do not aim to estimate the strength of the causal effect and are unable to distinguish causation from horizontal pleiotropy (i.e., when a genetic variant influences multiple phenotypes independently). For this reason, we rather chose to apply a Mendelian randomization (MR) approach to estimate the causal effect of gene expression on complex traits.
 
     \2 a transcriptional risk score (TRS)
+
+    \2 causal inference
 
 \1 for eqtls, closest gene is often not the best candidate
         % https://twitter.com/Eric_Fauman/status/1198595609013489670/photo/1
@@ -197,6 +208,7 @@
     \2 interaction between cells in vivo
     \2 stimulation conditions
 
+    % emph that reveals differences in regulation structure or importance between conditions
 review: condition/Cell-type specific methods
     refere to 2019-11-19 Cell-count specific eQTL mapping papers
 
