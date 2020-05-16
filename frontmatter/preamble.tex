@@ -52,7 +52,7 @@
 %
 % Define percentage formatting
 % https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
-\newcommand\percentage[2][round-precision = 2]{% default precision: 2
+\newcommand\percentage[2][round-precision = 1]{% default precision: 2
     \SI[round-mode = places,
         scientific-notation = fixed, fixed-exponent = 0,
         output-decimal-marker={.}, #1]{#2e2}{\percent}%
@@ -303,6 +303,11 @@
 \newabbreviation[]{HLA}{HLA}{human leukocyte antigen}
 \newabbreviation[]{PVE}{PVE}{proportion of variance explained}
 \newabbreviation[]{CIT}{CIT}{causal inference test}
+\newabbreviation[]{SNP}{SNP}{single nucleotide polymorphism}
+\newabbreviation[]{bp}{bp}{base pair}
+\newabbreviation[]{FWER}{FWER}{family-wise error rate}
+\newabbreviation[]{WGS}{WGS}{whole-genome sequencing}
+\newabbreviation[]{WES}{WES}{whole-exome sequencing}
 % \newabbreviation[]{}{}{}
 %
 
@@ -315,4 +320,8 @@
 
 % Format gene names
 \newcommand{\gene}[1]{\textit{#1}}
+
+% Format 'p-value'
+\newcommand{\pvalue}{\textit{p}-value}
+\newcommand{\pvalues}{\textit{p}-values}
 

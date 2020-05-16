@@ -5,57 +5,114 @@
 
 \chapter{Discussion}
 
-Tie ch 2 to 3 using baseline predictors?
+\begin{outline}
 
-Limitations, and the perfect study.
+summary of chapters
+    Tie ch 2 to 3 using baseline predictors?
+    A response eqtl is not always a response eqtl
 
-A response eqtl is not always a response eqtl
+    Limitations, and the perfect study.
 
-More timepoints
-Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
-% https://www.nature.com/articles/s41588-020-0579-4
+gene signatures, rise and fall
 
-More conditions
-e.g. 250
-e.g. StructLMM 
-    Identifies eQTLs with GxE, where the number of environments in E is large (modelled as a random effect)
+    Cost-effectiveness and clinical implementation
+        if you can identify NRs, what are you going to do about it?
 
-as datasets and conditions get larger, proportion of eGenes is going to be 100pc, then the question is what are the most relevant ones
-% We observed that cis-eQTLs can be detected for 88% of the studied genes in vosa2018UnravelingPolygenicArchitecture
-% In contrast, trans-eQTLs (detected for 37% of 10,317 studied trait-associated variants) were more informative.
+Finer and finer context
 
-Era of single cell.
-    1st
-    Single-cell RNA sequencing identifies celltype-specific cis-eQTLs and co-expression QTLs
-    https://www.nature.com/articles/s41588-018-0089-9
+    More timepoints
+    Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
+    % https://www.nature.com/articles/s41588-020-0579-4
 
-    "Single-cell eQTLGen Consortium: a personalized understanding of disease"
-    https://arxiv.org/abs/1909.12550
+    More conditions
+    e.g. 250
+    e.g. StructLMM 
+        Identifies eQTLs with GxE, where the number of environments in E is large (modelled as a random effect)
 
-    Optimal design of single-cell RNA sequencing experiments for cell-type-specific eQTL analysis
-    https://www.biorxiv.org/content/biorxiv/early/2019/09/12/766972.full.pdf
+    as datasets and conditions get larger, proportion of eGenes is going to be 100pc, then the question is what are the most relevant ones
+    % We observed that cis-eQTLs can be detected for 88% of the studied genes in vosa2018UnravelingPolygenicArchitecture
+    % In contrast, trans-eQTLs (detected for 37% of 10,317 studied trait-associated variants) were more informative.
 
-    Single-cell genomic approaches for developing the next generation of immunotherapies Ido Yofe, Rony Dahan and Ido Amit
+    Era of single cell.
+        1st
+        Single-cell RNA sequencing identifies celltype-specific cis-eQTLs and co-expression QTLs
+        https://www.nature.com/articles/s41588-018-0089-9
 
-    % Lähnemann, D., Köster, J., Szczurek, E., McCarthy, D. J., Hicks, S. C.,
-    % Robinson, M. D., Vallejos, C. A., Campbell, K. R., Beerenwinkel, N., Mahfouz,
-    % A., Pinello, L., Skums, P., Stamatakis, A., Attolini, C. S.-O., Aparicio, S.,
-    % Baaijens, J., Balvert, M., Barbanson, B. de, Cappuccio, A., … Schönhuth, A.
-    % (2020). Eleven grand challenges in single-cell data science. Genome Biology,
-    % 21(1). https://doi.org/10.1186/s13059-020-1926-6
+        "Single-cell eQTLGen Consortium: a personalized understanding of disease"
+        https://arxiv.org/abs/1909.12550
 
-    reQTL detection: bulk, sorted, sc
-    current sc will only detect highly expressed genes
+        Optimal design of single-cell RNA sequencing experiments for cell-type-specific eQTL analysis
+        https://www.biorxiv.org/content/biorxiv/early/2019/09/12/766972.full.pdf
 
-Cost-effectiveness and clinical implementation
+        Single-cell genomic approaches for developing the next generation of immunotherapies Ido Yofe, Rony Dahan and Ido Amit
 
-    if you can identify NRs, what are you going to do about it?
+        % Lähnemann, D., Köster, J., Szczurek, E., McCarthy, D. J., Hicks, S. C.,
+        % Robinson, M. D., Vallejos, C. A., Campbell, K. R., Beerenwinkel, N., Mahfouz,
+        % A., Pinello, L., Skums, P., Stamatakis, A., Attolini, C. S.-O., Aparicio, S.,
+        % Baaijens, J., Balvert, M., Barbanson, B. de, Cappuccio, A., … Schönhuth, A.
+        % (2020). Eleven grand challenges in single-cell data science. Genome Biology,
+        % 21(1). https://doi.org/10.1186/s13059-020-1926-6
 
-Deep phenotyping
-    
-    disease specific biobanks e.g. ibd bioresource/predicct
+        reQTL detection: bulk, sorted, sc
+        current sc will only detect highly expressed genes
+
+More GWAS
+
+
+    will everything be associated as n continues to increase
+    sensitive to the smallest differences in case/control
+
+complementary to GWAS
+
+    Deep phenotyping
+        
+        disease specific biobanks e.g. ibd bioresource/predicct
+
+    PheWAS\autocite{verma2017CurrentScopeChallenges}
+    % https://onlinelibrary.wiley.com/doi/full/10.1111/imm.12195
+    PheWAS has the advantage of identifying genetic variants with pleiotropic properties.
+
+Translational directions
+\1 Why care?
+
+    \2 polygenic scores, prs: marker for diagnosis
+
+        \3 use in the clinic
+            % doi: http://dx.doi.org/10.1101/19013086
+            \4 e.g. polygenic background can modify penetrance 
+
+        \3 but challenges from:
+
+            \4 ancestry effects
+            % https://twitter.com/skathire/status/1202554709107712001?s=09
+            \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
+
+            % Variable prediction accuracy of polygenic scores within an ancestry group
+            % https://elifesciences.org/articles/48376
+            \4 non-ancestry effects
+
+    \2 pathway analysis: "the great hairball gambit"
+
+    \2 pathway prs
+        \3 challenge is variant to gene assignment/mapping
+            \4 e.g. restrictions to fine mapped eQTLs
+
+    \2 Understand mech. of causal genes: molecular pathogenesis
+
+    \2 how to drug a complex disease with no single 'candidate gene'?
+% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
+% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
+% - Do many of these common causal variants e.g. converge to hit on the same pathways?
+% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
+
+        \3 e.g. of successful GWAS -> drug target
+            \4 drug targets with genetic support are more likely
+
+        \3 building allelic series
 
 unification
     immunology and vaccine dev: deep phenotyping, small cohorts achieved -> larger cohorts
     human genetics and gwas: large cohorts achieved -> deeper phenotyping
+
+\end{outline}
 

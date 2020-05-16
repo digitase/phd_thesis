@@ -8,97 +8,160 @@
 \chapter{Introduction}
 
 \begin{outline}
-    \1 Variation between humans exists
-    \1 The eternal debate: nature vs nurture
-    \1 Why study human genetics?
+
+\section{Structure and diversity of the human genome}
+
+\1 The human genome is about three billion \glspl{bp} in length, containing 20000-25000 protein-coding genes \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman,theencodeprojectconsortium2012IntegratedEncyclopediaDNA} that span 1-3\% of its length.
+The majority of the remainder is likely dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
+A diploid human cell contains two copies of the genome; 46 chromosomes comprised of 23 maternal-parental pairs: 22 pairs of homologous autosomes and one pair of sex chromosomes.
+
+\1 Variation in the genome exists in the form of \glspl{SNP}, short indels, and structural variants.
+% https://www.ncbi.nlm.nih.gov/dbvar/content/overview/
+% Structural variation (SV) is generally defined as a region of DNA
+% approximately 1 kb and larger in size and can include inversions and
+% balanced translocations or genomic imbalances (insertions and deletions),
+% commonly referred to as copy number variants (CNVs).
+The vast majority ($> \percentage{99.9}$) of variants are \glspl{SNP} and short indels \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
+On average, a pair of human genomes differs by one \gls{SNP} per 1000-2000 \gls{bp} \autocite{theinternationalsnpmapworkinggroup2001MapHumanGenome}.
+
+\1 The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and combinations of haplotypes over time.
+Variants physically close on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate.
+% The Law of Dominance: An organism with alternate forms of a gene will express the form that is dominant.
+% Law of Segregation: states that a diploid organism passes a randomly selected allele for a trait to its offspring, such that the offspring receives one allele from each parent.
+% Law of independent assortment: states that genes do not influence each other with regard to the sorting of alleles into gametes; every possible combination of alleles for every gene is equally likely to occur.
+This violation of the law of independent assortment appears as \gls{LD} \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+The genome is inherited in a mosaic of haplotype blocks delimited by recombination hotspots, each block containing variants in strong \gls{LD} \autocite{theinternationalhapmapconsortium2007SecondGenerationHuman}.
+These patterns of genetic variation are population-specific, and can be used to trace the demography of human populations through history \autocite{karczewski2020AnalyticTranslationalGenetics}.
+
+\section{Genetic association studies for complex traits}
+
+\1 Variation in human traits arises from an interplay between genetics and environment.
+Traits for which genetic variation explains a non-zero fraction of phenotypic variation are heritable.
+    \2 Twin studies provide upper bounds on heritability \url{https://www.nature.com/articles/nrg3243}
+\1 Discovering the specific variants that contribute through association of genetic variants and phenotypes is a mainstay of the field of human genetics.
+Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
+Genetic association studies have intrinsic resistance to backdoor path effects that confound observational studies of phenotypes.
+\todo{something sweeping about utility: mechanism and translational utility}
     % karczewski2020AnalyticTranslationalGenetics
     % In humans, analysis of large-scale natural variation data can provide valuable insights into human
     % disease and gene function. Joint analysis of genotype and phenotype data is especially powerful,
     % but even in the absence of phenotype data, patterns of variation data across the genome can inform
     % population history, natural selection, and the biological function of genes.
-    \1 The structure of the genome and it's variation
-    \1 Finding causal anchors
-    \1 Leveraging natural G variation.
-        % https://www.annualreviews.org/doi/pdf/10.1146/annurev-biodatasci-072018-021148
-    % Genetic studies inform therapeutic discoveries and development
-\end{outline}
+    \2 What are the benefits of leveraging natural genetic variation?
 
-\section{A brief overview of genetic association for complex traits}
+\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variation affects phenotype through it's impact on the function or regulation of genes.
+How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait, and the frequencies, effect sizes, and interactions between trait-associated variants \autocite{visscher2019Fisher1918Paper}.
+The number of genes defines a spectrum of traits from monogenic (where inheritance may follow a Mendelian pattern) to polygenic (where inheritance is complex).
+Many architectures have been proposed for complex traits; all have in common that the number of genes that affect a complex trait is very large (ranging from dozens to many thousands),
+and the average effect of each locus is relatively small compared to loci associated with monogenic traits \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
+\todo{distinguish genes and loci and variants, consider adding margin notes}
 
-\subsection{Early days}
+% Read:
+%     5 years of GWAS: most common traits are polygenic
+%     10 years of GWAS:
+% TODO: then outline only at this point, or risk wasting time
+\1 \glspl{GWAS} systematically tests each of the millions of common variants across the genome for association with a trait.
+As the per variant effect size is so low for complex traits, enormous sample sizes are required.
 
-\begin{outline}
-    % From R.A. Fisher’s 1918 Paper to GWAS a Century Later
-    \1 Early days, prior to GWAS
-    \1 Mendelian genetics, family and linkage studies
-    \1 Complex traits and the Common disease, common variant hypothesis
-    \1 Twin studies and heritability estimates of complex traits
-    % candidate_gene_studies folder in dloads
-    \1 Candidate gene studies (Border et al., 2019)
-    \1 Appreciation of polygenicity
-\end{outline}
+    \2 Prior to the advent of \glspl{GWAS} candidate genes would be proposed on the basis of prior knowledge
+    \2 early reports already noted issues with replication of genetic associations \autocite{hirschhorn2002ComprehensiveReviewGenetic}
+\glspl{GWAS} has revealed the vast majority of humans traits are polygenic, and that many such studies suffered from poor power \autocite{border2019NoSupportHistorical}
 
-\subsection{The advent of \glsfmtshort{GWAS}}
+\1 [Design of GWAS studies]
+\1 genotyping arrays
+    \2 comparison to linkage analysis \autocite{altshuler2008GeneticMappingHuman}
+    \2 taking advantage of LD 
+    \2 genotyping arrays target common known tag variants
+    \2 phasing and imputation allow cost efficient ascertainment of unmeasured variants 
+    \2 number of variants incurs a massive burden from multiple-testing
 
-\begin{outline}
+    \2 Theoretical results show there are only about one million independent tests that can be performed in the genome
+    \todo{also a result of LD: add relationship to haplotype blocks}
+    \2 The field has converged on a discovery threshold of $0.05 / \num{10e6} = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, 
+    akin to controlling the family-wise type I error rate at $\alpha = 0.05$ using the Bonferroni correction.%
+    \footnote{The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) unless the \pvalues have strong negative correlations.}
 
-    \1 10 years of GWAS
-    \1 "The case of the missing heritability"
+\1 Missing heritability refers to the observation that SNP-based heritability estimates from \gls{GWAS} fall short of additive (narrow-sense) heritability estimates from traditional quantitative methods such as twin studies.
+Perhaps unsurprisingly, it has been hypothesised that the remaining heritability lies in variants that can not be assessed by \gls{GWAS} due to rarity or small effect.
+% Also see:
+% 2007: Wellcome Trust Case Control Consortium landmark GWAS
+% 2009: Finding the missing heritability of complex diseases https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2831613/
+% 2018: Revisiting the Missing Heritability of Complex Diseases, Ten Years On https://www.genome.gov/event-calendar/Revisiting-Missing-Heritability-of-Complex-Diseases-Ten-Years-On
+A classic example is the heritability of human height, estimated at 80\% by twin studies \autocite{maher2008PersonalGenomesCase}, 
+where considering only significant associations from \gls{GWAS} explains 5\% \autocite{maher2008PersonalGenomesCase}.
+Consideration of all common variants using mixed models (\software{GCTA}) increases the estimate to 45\% \autocite{yang2010CommonSNPsExplain},
+% NOTE: a second approach to heritability estimation is linkage disequilibrium (LD) score regression.
+% TODO: https://doi.org/10.1371/journal.pgen.1008222
+Recent work suggests the full estimate of 80\% might be recoverable by also including rare and poorly tagged variants measured by \gls{WGS} \autocite{wainschtein2019RecoveryTraitHeritability}.
 
-    \1 genotyping arrays
-        \2 common known variants
-        \2 designed to cover tag variants that represent most genetic variation
-        \2 imputation
+\1 WES/WGS is a trade-off between sample size and genomic coverage
+    \2 Allows discovery and association with rare and novel variation, including structural variants.
 
-    \1 if discovering new var
-    \1 WES (about 40Mbp of the genome)
-        \2 covers more of the genome in terms of bp
-        \2 but lower n, so lower power than array genotyping to do single variant associations
-        \2 why 50x? variable coverage due to pulldown 
-
-    \1 WGS
-        \2 tradeoff between variant capture (n needed to observe variant) and sequencing depth (gives confidence to call variants)
-        \2 20x ok to call 90\% of singletons
-
-        \2 rare variants, including in nc regions
-            \3 current discovery biases, finding higher effect size vars first
-
-            \3 burden tests (e.g. SAIGE)
-                \4 to get gene, aggregate based on variant consequence scores e.g. vep scores
-
-        \2 structural variants
-
-\end{outline}
-
-\subsection{Narrowing the signal}
-
-\begin{outline}
-
-\1 PheWAS\autocite{verma2017CurrentScopeChallenges}
+% \1 WES (about 40Mbp of the genome)
+%     \2 covers more of the genome in terms of bp
+%     \2 but lower n, so lower power than array genotyping to do single variant associations
+%     \2 why 50x? variable coverage due to pulldown
+% \1 WGS
+%     \2 tradeoff between variant capture (n needed to observe variant) and sequencing depth (gives confidence to call variants)
+%     \2 20x ok to call 90\% of singletons
+%     \2 rare variants, including in nc regions
+%         \3 current discovery biases, finding higher effect size vars first
+%         \3 burden tests (e.g. SAIGE)
+%             \4 \url{https://www.nature.com/articles/s41576-019-0177-4}
+%             \4 to get gene, aggregate based on variant consequence scores e.g. vep scores
+%     \2 structural variants
 
 \1 Fine-mapping
 
-    \2 as sample sizes get larger, and provided that sequencing or imputation can more exhaustively identify all of the candidate SNPs on the haplotype, rare recombination events will pile up, helping to make the causal SNP stand out above the passenger SNPs that usually travel on its haplotype [Huang 2017].
-
+    \2 tagging enables, but also a curse
     \2 tag snps: causal snps may not be directly typed, may need to be imputed
 
-\end{outline}
+    \2 as sample sizes get larger, and provided that sequencing or imputation can more exhaustively identify all of the candidate SNPs on the haplotype, rare recombination events will pile up, helping to make the causal SNP stand out above the passenger SNPs that usually travel on its haplotype [Huang 2017].
 
-\subsection{Interpretation of genetic associations with molecular studies}
+\section{Interpretation of genetic associations with molecular phenotypes}
 
-\begin{outline}
-
-\1 Locus to gene mapping problem
-    \2 nc snps
+\1 Locus to gene mapping problem. even if you have causal var
+    \2 nc snps regulate
         \3 Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
 
         % many prioritisation methods possible https://www.nature.com/articles/ng.3359
+        e.g.
+            https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5062579/
+            We then used Sherlock, a tool that integrates GWAS and expression quantitative trait locus (eQTL) data, to identify weak GWAS signals that are also supported by eQTL data. 
 
-\1 using intermediate/endophenotypes
+
+\1 using ifntermediate/endophenotypes
     \2 endophenotypes paper
-    \2 expression as an important intermediate
-        \3 measure by array, rnaseq 
+    % and used when final phenos are complicated https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
+
+\1 Gene expression is a fundamental intermediate phenotype
+    % dogma
+        \2 measure by array, rnaseq 
+ 2012
+ENCODE study publishes 30 research papers describing the active regions of the human genome including confirmation that the human genome contains 20,687 protein-coding genes.
     \2 theory is that genetic variants manifest their effects through these phenotypes, central dogma based
+
+    % For example, Gamazon et al.31proposed agene-based association method called
+    % PrediXcan that testspredicted gene expression through which genetic
+    % variationaffects a phenotype. In this method, an external referencedataset
+    % that has jointly measured genotypes and tissue-spe-cific gene expression is
+    % used to identify a set of variants thatmodulate transcript abundance of a
+    % gene. Like other tran-scriptome-wide association studies
+    % (TWASs),32PrediXcancan be considered a weighted burden test, where
+    % eachvariant in a gene set is weighted by its additive allelic effecton
+    % expression.
+    % 31.Gamazon, E.R., Wheeler, H.E., Shah, K.P., Mozaffari,
+    % S.V.,Aquino-Michaels, K., Carroll, R.J., Eyler, A.E., Denny, J.C.,
+    % Nic-olae, D.L., Cox, N.J., Im, H.K.; and GTEx Consortium (2015).A
+    % gene-based association method for mapping traits usingreference
+    % transcriptome data. Nat. Genet.47, 1091–1098.
+    % 32.Gusev, A., Ko, A., Shi, H.,
+    % Bhatia, G., Chung, W., Penninx,B.W.J.H., Jansen, R., de Geus, E.J.C.,
+    % Boomsma, D.I., Wright,F.A., et al. (2016). Integrative approaches for
+    % large-scale tran-scriptome-wide association studies. Nat. Genet.48,
+    % 245–252.
+
+    GTEx
 
     \1 eqtl reviwe: albert2015RoleRegulatoryVariationa
     % and
@@ -125,8 +188,11 @@
     \2 TWAS
     % When a TWAS gene also colocalizes with your trait of interest you have a 19% chance you've found the correct causal gene.
     % https://twitter.com/Eric_Fauman/status/1220885592193499137?s=09
+    % _tmp_TWAS_faq
 
     \2 MR
+    https://www.nature.com/articles/s41576-018-0020-3
+    Using genetic data to strengthen causal inference in observational research
     Transcriptome-wide association studies (TWAS) integrating GWAS and eQTLs data have been proposed to unravel gene–trait associations7,9,10. However, although these studies aim to identify genes whose (genetically predicted) expression is significantly associated to complex traits, they do not aim to estimate the strength of the causal effect and are unable to distinguish causation from horizontal pleiotropy (i.e., when a genetic variant influences multiple phenotypes independently). For this reason, we rather chose to apply a Mendelian randomization (MR) approach to estimate the causal effect of gene expression on complex traits.
 
     \2 a transcriptional risk score (TRS)
@@ -139,59 +205,17 @@
         \3 e.g. gtex, ENCODE
         % http://www.cureffi.org/2019/12/04/prnp-gwas-other-traits/
         % Another solution is functional genomics — you ask whether the GWAS hit SNPs are also known, from other datasets, to have functional effects on a gene. See, as one example, a recent study of drug targets for immune-related traits [Fang 2019].
-\end{outline}
-
-\subsection{So what? Translational directions [can cut this whole section]}
-
-\begin{outline}
-
-\1 Why care?
-
-    \2 polygenic scores, prs: marker for diagnosis
-
-        \3 use in the clinic
-            % doi: http://dx.doi.org/10.1101/19013086
-            \4 e.g. polygenic background can modify penetrance 
-
-        \3 but challenges from:
-
-            \4 ancestry effects
-            % https://twitter.com/skathire/status/1202554709107712001?s=09
-            \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
-
-            % Variable prediction accuracy of polygenic scores within an ancestry group
-            % https://elifesciences.org/articles/48376
-            \4 non-ancestry effects
-
-    \2 pathway analysis: "the great hairball gambit"
-
-    \2 pathway prs
-        \3 challenge is variant to gene assignment/mapping
-            \4 e.g. restrictions to fine mapped eQTLs
-
-    \2 Understand mech. of causal genes: molecular pathogenesis
 
     \2 Drug target prioritisation for disease traits
     % higher success rate
     % https://doi.org/10.1371/journal.pgen.1008489
 
-    \2 how to drug a complex disease with no single 'candidate gene'?
+    % karczewski2020AnalyticTranslationalGenetics
+    % Genetic studies inform therapeutic discoveries and development
 
-        \3 e.g. of successful GWAS -> drug target
-            \4 drug targets with genetic support are more likely
-
-        \3 building allelic series
-
-% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
-% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
-% - Do many of these common causal variants e.g. converge to hit on the same pathways?
-% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
-
-\end{outline}
 
 \section{The effects of genetic variation on expression: context is key}
 
-\begin{outline}
 
 \1 inthe dreaded GxE interaction
     \2 "In genetics, context matters"
@@ -218,10 +242,45 @@ review: condition/Cell-type specific methods
 \1 types of context specific QTL
     \2 ackerman conditional vs dynamic
 
+\1 why care about reQTLs
+
+% 	Found reQTLs? So what? Gather take home messages and inspiration for post reQTL analyses
+% •	reQTL effect characteristation
+% o	reQTLs can show reversal of effect between conditions (Fairfax et al. 2014)
+% •	reQTLs vs expression
+% o	enrichment in DE genes vs eQTLs and non eQTLs (Barreiro et al., 2012)
+% o	context-specific eQTL are identified because of both treatment-induced regulatory effects and treatment-inducing gene expression to detectable levels (Fairfax et al. 2014)
+% •	trans effects
+% o	reQTLs develop trans-effects on stimulation (Fairfax et al. 2014)
+% •	reQTLs in pathways
+% o	Fairfax et al. 2014: reQTLs frequently intersected established canonical pathways of monocyte signaling
+% •	reQTLs enrichment in relevant GWAS hits
+% o	Barreiro et al., 2012
+% o	Fairfax et al. 2014
+% •	genomic feature enrichment of reQTLs in certain feature classes
+% o	UTRs (Fu et al., 2012)
+% •	Overlap of reQTL genes with DE genes
+% o	Franco et al. 2014
+% •	Mediation analysis of eQTL -> Ab response (Franco et al. 2014)
+% •	Colocalisation with GWAS (Kim-Hellmuth et al. 2017)
+% •	motifs enriched at reQTL binding sites e.g. STATs, IRFs (Caliskan et al. 2015; Davenport et al. 2018)
+% 	Gather reQTL datasets for coloc
+% •	Fairfax 2014 stim monocytes
+% •	CEDAR range of resting cells
+% •	Schmiedel_2018 stim CD4/8s
+% •	Alasoo 2018 stim macro
+% •	… and whole blood meta control
+
+
 \1 Mechanisms of reQTLs
 What molecular mechanisms might allow for interaction between \Gls{eQTL} and different environmental conditions?
 % Fu, J., Wolfs, M. G. M., Deelen, P., Westra, H.-J., Fehrmann, R. S. N., te Meerman, G. J., … Franke, L. (2012). Unraveling the Regulatory Mechanisms Underlying Tissue-Dependent Genetic Variation of Gene Expression. PLoS Genetics, 8(1), e1002431. https://doi.org/10.1371/journal.pgen.1002431
 Four categories of tissue-dependent cis-eQTL effects, and proposed two molecular models.
+% o	reQTL review
+% 	Prev paragraph:
+% •	Molecular models (Fu 2012)
+% •	Conceptual models (Ackermann 2014)
+
 
 % Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
 
@@ -230,38 +289,51 @@ Four categories of tissue-dependent cis-eQTL effects, and proposed two molecular
 
 coloc of immune mediated traits is enhanced by context-specific eQTLs
 
-\end{outline}
+
+
+Longitudinal studies
+    what are we actually being told?
+    differences in regulation over time
+
+    genetic effects on change in expression
+
+    both appear as an interaction
 
 \section{Immunity is a complex trait}
 
 Is it even plausible that genetic var is important?
-Brodin: most env paper.
+    Brodin: most env paper.
 
 Immune-mediated diseases
-Heritability of immune parameters and immune-mediated diseases
-    ranges from 
+    Heritability of immune parameters and immune-mediated diseases
+        ranges from 
 
-\subsection{Genetic factors affecting the healthy immune system}
+% The innate immune response 
+% The adaptive immune response can be either humoral or cell-mediated
 
-Why study health?
-Factors affecting the healthy immune system.
+Genetic factors affecting the healthy immune system
 
-In healthy populations, $\approx$50\% variation in immune system driven by non-genetic factors, $\approx$30–40\% variation is driven by genetic variation (Liston and Goris 2018).
+    Why study health?
+    Factors affecting the healthy immune system.
 
-"Such systems  immunology studies in  healthy individuals have  revealed that human immune  systems are incredibly  variable among individuals,  but very stable within  individuals over time (11),  and most of this variation is  attributed to non-heritable  factors (12)."
+    In healthy populations, $\approx$50\% variation in immune system driven by non-genetic factors, $\approx$30–40\% variation is driven by genetic variation (Liston and Goris 2018).
 
-\subsection{Genetic factors affecting immune response to challenge}
+    "Such systems  immunology studies in  healthy individuals have  revealed that human immune  systems are incredibly  variable among individuals,  but very stable within  individuals over time (11),  and most of this variation is  attributed to non-heritable  factors (12)."
 
-Given the genetic control of the healthy immune system, one can hypothesise that immune response to challenge may also be influenced by genetic factors.
+Genetic factors affecting immune response to challenge
 
-The need for controlled immune challenge in trials.
-Studies of natural infection are complicated.
-clinical trials as an opportunity: 
-    Vaccines and drugs used as controlled immune challenge.
+    Given the genetic control of the healthy immune system, one can hypothesise that immune response to challenge may also be influenced by genetic factors.
 
-Posit that eQTls where the genetic effect of 
+    The need for controlled immune challenge in trials.
+    Studies of natural infection are complicated.
+    clinical trials as an opportunity: 
+        Vaccines and drugs used as controlled immune challenge.
 
-\subsubsection{Context-specific immune response eQTLs in vitro}
+Need for systems immunology
+    generate mol phenotypes 
+    in the right context
+
+\subsection{Context-specific immune response eQTLs in vitro}
 
 % nice figure from human adaptation perspective
 % https://www.researchgate.net/publication/315705480_Living_in_an_adaptive_world_Genomic_dissection_of_the_genus_Homo_and_its_immune_response
@@ -300,7 +372,7 @@ Overall, as the number of experimental systems and stimulations increases, large
 moost recent are very high thrgouhpug
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5131815/
 
-\subsubsection{\textit{in vivo} response QTL mapping}
+\subsection{\textit{in vivo} response QTL mapping}
 
 less popular
 A complementary approach.
@@ -322,90 +394,90 @@ What we learn on top of in vitro
 Large cohorts: 
 % vQTLs possible: https://advances.sciencemag.org/content/5/8/eaaw3538/tab-pdf
 
-\section{Immune response to vaccination}
+\subsection{Immune response to vaccination is a complex trait}
 
 Vaccination has enormous impact on global health [10.1098/rstb.2013.0433].
 
 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
 
-% The innate immune response 
-% The adaptive immune response can be either humoral or cell-mediated
+Systems vaccinology: from empirical to rational vaccinology
 
-\subsection{Systems vaccinology: from empirical to rational vaccinology}
+    % Convert sysvacc lit review to text
 
-History of vaccine dev
-[summary of low-throughput immunology e.g. animal models]  
+    History of vaccine dev
+    [summary of low-throughput immunology e.g. animal models]  
 
-- Vaccination coverage in vunerable populations is below optimal
+    - Vaccination coverage in vunerable populations is below optimal
 
-However, a vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
-[1 statistic on vaccine efficiacy differences e.g. rotavirus]
-% Vaccination of special populations: Protecting the vulnerable.
-Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno comprimised patients, ethnically-diverse populations, and developing countries.
-For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.
-Immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood[Immunological mechanisms of vaccination]. 
+    However, a vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
+    [1 statistic on vaccine efficiacy differences e.g. rotavirus]
+    % Vaccination of special populations: Protecting the vulnerable.
+    Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno comprimised patients, ethnically-diverse populations, and developing countries.
+    For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.
+    Immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood[Immunological mechanisms of vaccination]. 
 
-rational vacc, where the key is sys vacc
+    rational vacc, where the key is sys vacc
 
-Review of systems vaccinology (pull out of self\_viva\_copypasta)
-These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination[Vaccinology in the era of high-throughput biology.].
+    Review of systems vaccinology (pull out of self\_viva\_copypasta)
+    These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination[Vaccinology in the era of high-throughput biology.].
 
-Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
-Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified [http://dx.doi.org/10.1098/rstb.2014.0146].
-\todo{define what a signature is}
-Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza], and also to vaccine candidates against [HIV, malaria], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
+    Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
+    Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified [http://dx.doi.org/10.1098/rstb.2014.0146].
+    \todo{define what a signature is}
+    Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza], and also to vaccine candidates against [HIV, malaria], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
 
-% Merge in first year report intro
+    % Merge in first year report intro
 
-Cotugno
-- dna meth: DNA methylation [52, 53, 54] events
+    Cotugno
+    - dna meth: DNA methylation [52, 53, 54] events
 
-How to use sysvacc to inform better design (A systems framework for vaccine design Mooney2013), and how to move towards personalised vaccinology (https://doi.org/10.1016/j.vaccine.2017.07.062).
+    How to use sysvacc to inform better design (A systems framework for vaccine design Mooney2013), and how to move towards personalised vaccinology (https://doi.org/10.1016/j.vaccine.2017.07.062).
 
-Overview, including pathogen-side factors
+    Overview, including pathogen-side factors
 
-\subsection{Genetic factors affecting vaccine response}
+Genetic factors affecting vaccine response
 
-% linnik2016ImpactHostGenetic
-% Although immunobiological research (green cluster) shows close proximity to genetic studies (blue cluster), vaccine research and clinical studies (red cluster) are almost separated from genetic studies. In contrast, cancer research (yellow cluster) highly overlaps with both genetic studies and immunobiological research.
+    % linnik2016ImpactHostGenetic
+    % Although immunobiological research (green cluster) shows close proximity to genetic studies (blue cluster), vaccine research and clinical studies (red cluster) are almost separated from genetic studies. In contrast, cancer research (yellow cluster) highly overlaps with both genetic studies and immunobiological research.
 
-Read this \url{Vaccine. 2018 August 28; 36(36): 5350–5357. doi:10.1016/j.vaccine.2017.07.062.}
-Search for "variation in vaccine response genetics GA Poland" in google scholar
+    Read this \url{Vaccine. 2018 August 28; 36(36): 5350–5357. doi:10.1016/j.vaccine.2017.07.062.}
+    Search for "variation in vaccine response genetics GA Poland" in google scholar
 
-% https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(19)30121-5/fulltext
+    % https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(19)30121-5/fulltext
 
-% See protocol paper for references
+    % See protocol paper for references
 
-measles
-% https://www.sciencedaily.com/releases/2011/09/110922134546.htm
+    measles
+    % https://www.sciencedaily.com/releases/2011/09/110922134546.htm
 
-Relatively few studies have assessed the impact of human genetic variation on responses[Franco, Lareau 2016].
-% Franco to be touched on in chapter 3
+    Relatively few studies have assessed the impact of human genetic variation on responses[Franco, Lareau 2016].
+    % Franco to be touched on in chapter 3
 
-This is despite evidence from genome-wide association studies suggesting such genetic variation influences immune response to vaccines and susceptibility to disease[Systems immunogenetics of vaccines.].
-%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/
-%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5548390/
-%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
+    This is despite evidence from genome-wide association studies suggesting such genetic variation influences immune response to vaccines and susceptibility to disease[Systems immunogenetics of vaccines.].
+    %     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/
+    %     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5548390/
+    %     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2610683/
 
-Results from vaccine-related twin studies e.g. in "TWIN STUDIES ON GENETIC VARIATIONS IN RESISTANCE TO TUBERCULOSIS", and (Defective T Memory Cell Differentiation after Varicella Zoster Vaccination in Older Individuals)
+    Results from vaccine-related twin studies e.g. in "TWIN STUDIES ON GENETIC VARIATIONS IN RESISTANCE TO TUBERCULOSIS", and (Defective T Memory Cell Differentiation after Varicella Zoster Vaccination in Older Individuals)
 
-Nice summary table for gwas 
-Review paper on GWAS for vaccines mooney2013SystemsImmunogeneticsVaccines
+    Nice summary table for gwas 
+    Review paper on GWAS for vaccines mooney2013SystemsImmunogeneticsVaccines
 
-Genetics of adverse events e.g. \url{https://www.ncbi.nlm.nih.gov/pubmed/18454680}
+    Genetics of adverse events e.g. \url{https://www.ncbi.nlm.nih.gov/pubmed/18454680}
 
-\section{Immune response to biologic therapies}
+\subsection{Immune response to biologic therapies is a complex trait}
 
-\subsection{Genetic factors affecting biologic responses}
+Expression response to biologics
+
+Genetic factors affecting biologic responses
 
 e.g. PANTS immunogenicity
 % touched on in chapter 3
 
 \section{Thesis overview}
 
-% By chapter CCC overview.
-Chapters 1 and 2.
-Chapter 3.
-Chapter 4.
-Chapter 5.
+By chapter CCC overview.
+
+\end{outline}
+

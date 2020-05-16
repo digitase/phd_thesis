@@ -172,6 +172,9 @@ max marker missingness across samples $< 5\%$,
 max sample missingness across markers $< 1\%$, 
 max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \autoref{fig:hird_genotype_sample_hetRate_missingness}),
 % The HWE threshold should depend on the multi-ethnicity of the cohort
+% \todo{see}
+% https://www.nature.com/articles/nrg2344
+% Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
 removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
 
 \begin{figure}
@@ -189,10 +192,10 @@ After filtering, 169 samples and 549414 markers remained.
 \label{subsec:hird_dge_genotype_pc}
 
 As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic ancestry) in expression and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount,brown2018ExpressionReflectsPopulation}.
-Treating HapMap 3 samples as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
+Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
 \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
 For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
-The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as covariates for ancestry downstream.
+The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as continuous covariates for ancestry downstream.
 \todo{Add Tracy-Widom statistics for PCs to justify later choice of 4 PCs for covariates}
 \todo{nicer version, copy the peer code, facet the hird and hapmap samples}
 
@@ -407,6 +410,8 @@ Normalisation was also not able to completely remove the batch effect within the
 % Also see:
 % Wang, C., Gong, B., Bushel, P. R., Thierry-Mieg, J., Thierry-Mieg, D., Xu, J., Fang, H., Hong, H., Shen, J., Su, Z., Meehan, J., Li, X., Yang, L., Li, H., Łabaj, P. P., Kreil, D. P., Megherbi, D., Gaj, S., Caiment, F., … Tong, W. (2014). The concordance between RNA-seq and microarray data depends on chemical treatment and transcript abundance. Nature Biotechnology, 32(9), 926–932. https://doi.org/10.1038/nbt.3001
 %
+% TODO: THE rnaseq review paper: https://www.nature.com/articles/nrg2484
+% Figure 2: Quantifying expression levels: RNA-Seq and microarray compared.
 % The CBM paper intro has a good summary too. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5510692/
 The large platform effect likely stems from systematic technological differences in how each platform measures expression.
 For example, arrays suffer from ratio compression due to cross-hybridisation\autocite{draghici2006ReliabilityReproducibilityIssues}.
@@ -470,11 +475,15 @@ For each gene, I fit a model (model 1) with expression as the response variable;
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
+%
+% See: https://stats.stackexchange.com/questions/151730/test-if-two-coefficients-are-statistically-different-in-logistic-regression
+Contrasts were defined, testing if linear combinations of estimated coefficients are different from zero.
+From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
+From model 2, I defined contrasts for the \gls{TRI} specifically at each of the three timepoints.
+%
 % https://support.bioconductor.org/p/70175/
 % es <- fit2$coefficients
 % es_se <- sqrt(fit2$s2.post) * fit2$stdev.unscaled
-From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
-From model 2, I defined contrasts for the \gls{TRI} specifically at each of the three timepoints.
 Corresponding coefficients and standard errors for the contrasts were extracted from the linear models, which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
 \subsubsection{Choice of \glsfmtlong{DGE} meta-analysis method}
@@ -607,7 +616,9 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 
 \subsubsection{Multiple testing correction}
 
-For the frequentist random-effects meta-analysis, nominal gene-wise p values are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
+For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
+% https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
+\todo{add note on ositive regression dependency \autocite{goeman2014MultipleHypothesisTesting}}
 For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr}, which are analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
 \todo{add comment on symmetry}
 %

@@ -1,22 +1,12 @@
 %
 % PhD Thesis
 %
-% https://tex.stackexchange.com/questions/49277/what-does-the-draft-mode-change
-\documentclass[
-    11pt,
-    % draft,
-    % final,
-    a4paper,twoside,openright
-]{book}
-
-%
 % Version: 0.0
 %
 % Semantic versioning (aka SemVer) [...] uses a sequence of three digits (Major.Minor.Patch) [...]
 % Breaking changes are indicated by increasing the major number (high risk),
 % new non-breaking features increment the minor number (medium risk) and
 % all other non-breaking changes increment the patch number (lowest risk).
-
 % 
 % Specifications
 %
@@ -32,6 +22,12 @@
 %
 % Preamble
 %
+\documentclass[
+    11pt,
+    draft,
+    % final,
+    a4paper,twoside,openright
+]{book}
 % \input{filename} imports the commands from filename.tex into the target file;
 % it's equivalent to typing all the commands from filename.tex right into the
 % current file where the \input line is.

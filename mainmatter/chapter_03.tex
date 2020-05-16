@@ -137,6 +137,7 @@ and Bayesian meta-analysis was preferred for combining array and \gls{RNAseq} \g
 That method does not scale to \gls{eQTL} analysis, where the number of tests is large, in the order of thousands of tests per gene, versus the handful \gls{DGE} contrasts per gene performed in \autoref{ch:hird_DGE}.
 Instead, I perform a mega-analysis within each timepoint, first merging array and \gls{RNAseq} expression estimates into a single matrix with ComBat\autocite{johnson2007AdjustingBatchEffects}.
 For comparison purposes, analyses were also run using in the array and \gls{RNAseq} samples separately.
+\todo{add -7 note as with ch2}
 
 Defining whether an \gls{eQTL} is shared between conditions can be a tricky business.
 Naively, one can map \glspl{eQTL} separately in each condition, then assess the overlap of significant associations between conditions.
@@ -229,6 +230,7 @@ often done so that effects across genes and studies can be comparably interprete
 
 I performed simulations to evaluate the effect of these transformations on reQTL detection between a hypothetical baseline and day 1 post-vaccination condition.
 Expression values on the log scale were simulated with the \gls{eQTL} slope (beta) set to specific values corresponding to six scenarios for six gene-variant pairs (\autoref{fig:hird_eQTL_expressionTransform_sims}).
+\todo{log scale: as interactions depend on the scale at which departure from additivity is detected}
 The simulated scenarios were subjected to rank-based \gls{INT} (Blom method\autocite{beasley2009RankBasedInverseNormal}), standardisation (both centering and scaling), scaling-only, and centering-only transformations.
 Transformations were applied both within each condition and without separating conditions.
 
@@ -537,15 +539,16 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 \label{eq:hird_reQTL_limix_model}
 \end{equation}
 \todo{lift proper vector notation from limix, then redo this with a timepoint subscript}
-where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$,
+where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper},
 and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, no \gls{LOCO} matrix is available from LDAK, so the matrix for chromosome 1 is used.}.
 % The LMM requires a kinship matrix to scale the covariance matrix of the random effect mean zero and an unknown variance.
 \todo{add formulation of the 0-mean random effect to show exactly how the kinship matrix is used}
+\todo{note stacking of kinship for day -7 repeated measures}
 
 PEER factors are automatically weighted such that the variance of factors tends to zero as more factors are estimated, 
 hence continuing to add more and more factors as covariates will not continue to improve \gls{eQTL} detection power, and eventually the model degrees of freedom will be depleted.
 To optimise k, the number of factors to include as covariates%
-% Also see \autocite{demissie2011BiasDueTwostage}
+% Also see \autocite{demissie2011BiasDueTwostage} % holmes2019ProblemsInterpretingUsing
 \footnote{I avoid the commonly-performed two-stage approach of treating PEER residuals as expression phenotypes, as the degrees of freedom seen downstream will be incorrect, which can have a substantial effect on estimates at this modest sample size.}, 
 Per-timepoint \gls{eQTL} mapping was performed in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
 I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for day 1, and 5 factors for day 7 (\autoref{fig:hird_neGenesvsPeerK}).
@@ -597,12 +600,11 @@ To unambiguously select a lead \gls{eQTL} variant per gene, I selected the varia
 breaking ties by highest imputation INFO, highest \gls{MAF}, shortest distance to the \gls{TSS}, and genomic coordinate.
 Sharing was then evaluated for that gene-variant pair across all three conditions.
 
-Thresholding on the lfsr is not appropriate for determining sharing, as the difference between significant and non-significant effect estimates in two conditions is not necessarily significant\autocite{gelman2006DifferenceSignificantNot}.
+Thresholding on the lfsr is not appropriate for determining sharing, as the difference between significant and non-significant effect estimates in two conditions is not necessarily significant\autocite{schenker2001JudgingSignificanceDifferences,gelman2006DifferenceSignificantNot}.
 % Not just use lfsr thresholds:
 \autocite{urbut2018FlexibleStatisticalMethods} provides a heuristic that two effects are shared by magnitude if they have the same sign, and are also within a factor of 2 of one another,
 but this does not consider the posterior standard error of the estimates.
 % Also see:
-%
 % https://stats.stackexchange.com/questions/93540/testing-equality-of-coefficients-from-two-different-regressions
     % I found the key difference is whether the assumption that the error variance is the same or not.
 % https://stats.stackexchange.com/questions/55501/test-a-significant-difference-between-two-slope-values
@@ -612,9 +614,9 @@ but this does not consider the posterior standard error of the estimates.
 % https://andrewpwheeler.wordpress.com/2016/10/19/testing-the-equality-of-two-regression-coefficients/
     % Var(A-B) = Var(A) + Var(B) - 2*Cov(A,B)
     % NOTE: Assumes that Cov is 0, this is anticonservative when Cov is actually positive.
-% Notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
+% Also: notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
 % Also: https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1745-9125.1998.tb01268.x
-Between a pair of effects in two conditions, I compute a z score for the difference in effects\autocite{clogg1995StatisticalMethodsComparing,schenker2001JudgingSignificanceDifferences}:
+Between a pair of effects in two conditions, I compute a z-score for the difference in effects\autocite{clogg1995StatisticalMethodsComparing,schenker2001JudgingSignificanceDifferences}:
 
 \begin{equation}
 z = \frac{\beta_x - \beta_y}{\sqrt{\sigma_x^2 + \sigma_y^2 - 2\sigma^2(x, y)}}
@@ -626,26 +628,27 @@ This strategy has been applied to call reQTLs by \autocite{kim-hellmuth2017Genet
 % Q x Q x J array of posterior covariance matrices, if the output_posterior_cov = TRUE.
 assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 \todo{not sure whether this is conservative or anti-conservative}
-Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}.
 % interaction with time fixed fx vs stratified
 % https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
 % https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
 % \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
 % also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
-The z score can be compared to a standard normal to obtain a Wald test p value, the null hypothesis being a difference of zero.
-I use nominal p value < 0.05 as a heuristic threshold to define reQTL effects that are strong (like the mashr recommended 2-fold threshold), rather than a formal measure of significant difference.
+Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}.
+% NOTE: A Wald test uses W ~ chisq(1), equivalent to sqrt(W) ~ N(0, 1).
+A Wald test \pvalue for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
+I use nominal \pvalue < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
 Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
 \subsection{Replication of eQTLs in a reference dataset}
 
 To validate the \gls{eQTL} mapping approach, I estimate the replication of significant eQTLs in a large independent reference.
 Due to the lack of large sample size \gls{eQTL} maps specific to \gls{PBMC}, I use the GTEx v8 whole blood dataset as my reference dataset (n=670, 51.2\% eGene rate).
-For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal p value for that variant in GTEx (where the variant exists in both datasets).
-I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those GTEx nominal p values that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
+For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal \pvalue for that variant in GTEx (where the variant exists in both datasets).
+I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those GTEx nominal \pvalues that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
 
 The mega-analysis has comparable replication rate to \gls{RNAseq}-only analysis for shared \glspl{eQTL} at moderately stringent \gls{lfsr} thresholds up to $10^{-5}$ (\autoref{fig:hird_eQTL_pi1vsGTExWholeBlood}).
-Past this, as the $\pi_1$ procedure assumes a well-behaved p value distribution in $\left[0, 1\right]$, 
-reliability declines due to the number of p values being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum p value being too far from 1.
+Past this, as the $\pi_1$ procedure assumes a well-behaved \pvalue distribution in $\left[0, 1\right]$, 
+reliability declines due to the number of \pvalues being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum \pvalue being too far from 1.
 The numbers of \glspl{reQTL} were too low to assess replication using this method, and one might not expect them to replicate in a baseline dataset such as GTEx whole blood, especially for those \glspl{reQTL} significant only at post-vaccination timepoints.
 As the mega-analysis has a higher eGene rate (\percentage{0.5075166} vs. \percentage{0.29914529915}) compared to the \gls{RNAseq}-only analysis, with similar replication,
 I assume this represents a power advantage from having larger a sample size, rather than technical effects from merging the expression data.
@@ -656,7 +659,7 @@ I assume this represents a power advantage from having larger a sample size, rat
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
     \caption{
-        Effect of \gls{HIRD} lfsr threshold on GTEx whole blood replication rate ($\pi_1$), number of p values used to compute $\pi_1$, and maximum p value among those p values; 
+        Effect of \gls{HIRD} lfsr threshold on GTEx whole blood replication rate ($\pi_1$), number of \pvalues used to compute $\pi_1$, and maximum \pvalue among those \pvalues; 
         for shared and \gls{reQTL} called from the array-only, \gls{RNAseq}-only and mega-analysis pipelines. 
         Shaded region for $\pi_1$ represents the 5th-95th percentile range of 1000 bootstraps.
     }
@@ -666,6 +669,8 @@ I assume this represents a power advantage from having larger a sample size, rat
 
 \subsection{Genotype interactions with cell type abundance}
 
+\todo{be more specific: "moderator"}
+% https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, 
 otherwise the regression slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
@@ -714,6 +719,7 @@ then \glspl{reQTL} were defined by comparing the effect size of this lead \gls{e
 Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.1675621}) \glspl{eQTL} were classified as \glspl{reQTL} between any pair of timepoints (nominal p difference < 0.05).
 % 1131 if ignoring d1 vs d7
 % \todo{might be interesting to note not so many d1 vs d7 reQTL}
+% TODO: expected? in fairfax, how many shared? in vivo studies, more or less?
 \todo{if it would be interesting to compare the sharing estimate condition by condition approach to mashr, then redo and pull in eigenmt-bh values}
 
 \autoref{fig:hird_eQTL_upset_mega} illustrates the difference between calling sharing using a significance threshold versus difference in betas approach.
@@ -913,6 +919,7 @@ The strongest reQTL at day 7 is one such opposite sign effect;
 \gene{SH2D4A} has constitutive expression in T cells, B cells, macrophages, and \glspl{DC}, 
 encoding a adapter protein involved in intracellular signal transduction\footnote{\url{https://doi.org/10.1111/j.1600-065X.2009.00829.x}}.
 An approach for validating these opposite sign \gls{reQTL} using the existing \gls{HIRD} \gls{RNAseq} data is \gls{ASE} (e.g. \autocite{kumasaka2016FinemappingCellularQTLs}),
+% \todo{switch to Allele-Specific QTL Fine Mapping with PLASMA}
 where one would expect true opposite sign \gls{reQTL} effects would also be recapitulated as opposite directions of expression imbalance.
 
 The strongest \gls{reQTL} detected at day 1 was \gene{ADCY3}, a membrane-bound enzyme that catalyses the conversion of ATP to the second messenger cAMP\autocite{wu2016AdenylateCyclaseNew}.
@@ -937,7 +944,7 @@ in whole blood \textit{in vivo} day 1 after vaccination with seasonal \gls{TIV}\
 % for ZNF517 is a newly identified reQTL [21, 22, 24, 26]. ADCY3 is among the
 % most upregulated genes after stimulation with M. leprae antigens and has been
 % identified as part of the T1R gene set signature identified by Orlova et al.
-% [32]. The reQTL for DNAAF1 displays the strongest P value among the reQTL we
+% [32]. The reQTL for DNAAF1 displays the strongest p value among the reQTL we
 % identified.
 and in whole blood after stimulation with \text{M. leprae antigen} for 26-32 h\autocite{manry2017DecipheringGeneticControl}.
 Given the diversity of stimulations and tissue types, the effect is likely a consequence of general immune activation, rather than a Pandemrix-specific response.
@@ -1004,7 +1011,8 @@ Finally, I address the prospect that common genetic variation may explain some v
 I have indirectly demonstrated genotype-dependent effects on expression response by identifying reQTLs with differing effect size between timepoints,
 but have not yet to determined resulting genotype-dependent differences in antibody phenotypes.
 Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
-but a formal test such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} is required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
+but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
+and a formal tests such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} are required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix will be to leverage external genetic associations to similar phenotypes,
