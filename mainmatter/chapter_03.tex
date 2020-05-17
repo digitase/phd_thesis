@@ -58,7 +58,7 @@ the relative contribution of genetic factors to Pandemrix response may be greate
 
 \todo{straighten out tenses}
 In this chapter, I model the influence of common host genetic variation on longitudinal \textit{in vivo} expression response to Pandemrix.
-I map cis-eQTL within each timepoint, accounting for ancestry, cell type abundance and unmeasured confounders, 
+I map cis-eQTL within each timepoint, accounting for ancestry, cell type abundance and unmeasured covariates, 
 then call shared and reQTL effects from a joint model, 
 looking for genes where the lead eQTL has a different effect size pre- and post-vaccination.
 Many of the strongest reQTL effects involve opposite signed effects on expression for the same variant at different timepoints.
@@ -81,8 +81,9 @@ the reQTL signal was determined to be a monocyte-specific effect likely driven b
 % 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
 % 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
 Prior to imputation, 213277 monomorphic variants that provide no information for imputation were removed.
-Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service\footnote{\url{https://imputation.sanger.ac.uk/}}, which involves pre-phasing with EAGLE2 (v2.4), then imputation with PBWT (v3.1) using the Haplotype Reference Consortium (r1.1) panel.
-variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
+Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service, 
+which involves pre-phasing with EAGLE2 (v2.4) and imputation with PBWT (v3.1) against the Haplotype Reference Consortium (r1.1) panel \url{https://www.ncbi.nlm.nih.gov/pubmed/27548312}.
+Variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.	Filtering
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
@@ -94,16 +95,20 @@ Since the aim of this chapter is to identify genetic variation that affects expr
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
 it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
-% TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
-% this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
-% allison1990ChangeScoresDependent also presents some pros of change score
-% https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
+\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
+% \todo  Using each patient as her own control through calculation of a change score is worse than using no control if the baseline is noisy. If the correlation between baseline and follow-up measurement is less than 0.5, subtracting the baseline is worse than just analyzing the follow-up measurement.
+% http://biostat.mc.vanderbilt.edu/wiki/Main/MeasureChange
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
+% TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % Repeated is a pair t test
 % Change.
 % Pretest covariate
 % Interaction
 % Stratified
+% panel data aka longitudinal
+% this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
+% allison1990ChangeScoresDependent also presents some pros of change score
+% https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
 
 %
@@ -181,8 +186,12 @@ and compute measures of significance per condition.
 \subsection{Controlling for population structure with \glsfmtlongpl{LMM}}
 
 There is population structure due to ancestry in the \gls{HIRD} cohort,
-which was addressed in \gls{DGE} analyses by treating the top \glspl{PC} of the genotype matrix as covariates for large-scale population structure (\autoref{subsec:hird_dge_genotype_pc}).
-In the context of \gls{eQTL} mapping, where the aim is to assess the marginal effect of a single genetic variant on expression, it is even more important that the confounding effect of population structure is properly controlled, or test statistics may be inflated.
+which was incorporated in \gls{DGE} analyses by treating the top \glspl{PC} of the genotype matrix as continuous covariates for large-scale population structure (\autoref{subsec:hird_dge_genotype_pc}).
+In the context of \gls{eQTL} mapping (and genetic association studies in general), 
+where the aim is to assess the marginal effect of a single genetic variant on expression, 
+population structure can be correlated with both expression (e.g. through polygenic effects)
+and the tested variant (e.g. through ancestry-dependent frequency differences).
+This leads to \gls{OVB} from confounding, which if not controlled for, leads to genome-wide inflation of test statistics \autocite{price2010NewApproachesPopulation}.
 \todo{add some indication of how much inflation can be reduced by LMMs}
 % This is great background/intuition: golan2018MixedModelsCaseControl
 % using LMMs is appropriate for controlling for population structure (which is a common
@@ -276,7 +285,7 @@ so estimates for genes that have cell type specific expression depend on the rel
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
 and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
-but changes in cell type abundance confound this by modifying both expression and the effect of genotype on expression.
+but changes in cell type abundance influence this by modifying both expression and the effect of genotype on expression.
 Immune cell abundance also varies naturally between healthy individuals\autocite{brodin2015VariationHumanImmune,brodin2017HumanImmuneSystem}, so it is important to model these effects even at baseline.
 
 Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals (\autoref{subsec:hird_dge_studyDesign}), so I derived cell type abundance estimates from the expression data as an alternative.
@@ -424,7 +433,7 @@ Weighing the downside of having imperfect estimates of cell type abundance again
 \end{figure}
 \todo{get subset size}
 
-\subsection{Finding hidden confounders using factor analysis}
+\subsection{Finding hidden covariates using factor analysis}
 
 % If RANKINT, why RANKINT before PEER?
 %
@@ -470,7 +479,7 @@ ComBat was applied to first merge array and \gls{RNAseq} data into a single log 
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
 Given known covariates (intercept, sex, four genotype \glspl{PC} from \autoref{subsec:hird_dge_genotype_pc} representing ancestry, and the three xCell scores estimated above),
 PEER was used to estimate additional hidden factors that explain variation in expression matrix.
-Factors are assumed to be unmeasured confounders that have global effects on a large fraction of genes, 
+Factors are assumed to be unmeasured covariates that have global effects on a large fraction of genes, 
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
 but should soak up some of residual variation, improving power to detect cis-\glspl{eQTL}.
 The analysis was run per timepoint, otherwise global changes in expression between timepoints induced by the vaccine would be recapitulated as factors.
@@ -539,10 +548,10 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 \label{eq:hird_reQTL_limix_model}
 \end{equation}
 \todo{lift proper vector notation from limix, then redo this with a timepoint subscript}
-where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper},
+where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper};
 and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, no \gls{LOCO} matrix is available from LDAK, so the matrix for chromosome 1 is used.}.
 % The LMM requires a kinship matrix to scale the covariance matrix of the random effect mean zero and an unknown variance.
-\todo{add formulation of the 0-mean random effect to show exactly how the kinship matrix is used}
+\todo{add formulation of the 0-mean random effect to show exactly how the kinship matrix is used \autocite{sul2018PopulationStructureGenetic}}
 \todo{note stacking of kinship for day -7 repeated measures}
 
 PEER factors are automatically weighted such that the variance of factors tends to zero as more factors are estimated, 
@@ -552,6 +561,7 @@ To optimise k, the number of factors to include as covariates%
 \footnote{I avoid the commonly-performed two-stage approach of treating PEER residuals as expression phenotypes, as the degrees of freedom seen downstream will be incorrect, which can have a substantial effect on estimates at this modest sample size.}, 
 Per-timepoint \gls{eQTL} mapping was performed in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
 I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for day 1, and 5 factors for day 7 (\autoref{fig:hird_neGenesvsPeerK}).
+\todo{i leave the pcs in to guard against unusually differentiated markers, where random effect alone may not be enough \autocite{price2010NewApproachesPopulation}}
 
 \begin{figure}
     \centering
@@ -628,6 +638,7 @@ This strategy has been applied to call reQTLs by \autocite{kim-hellmuth2017Genet
 % Q x Q x J array of posterior covariance matrices, if the output_posterior_cov = TRUE.
 assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 \todo{not sure whether this is conservative or anti-conservative}
+% TODO this is convservative unless corr is >0.5?
 % interaction with time fixed fx vs stratified
 % https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
 % https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
@@ -669,10 +680,11 @@ I assume this represents a power advantage from having larger a sample size, rat
 
 \subsection{Genotype interactions with cell type abundance}
 
-\todo{be more specific: "moderator"}
+\todo{be more specific: "moderator", not 'modify'}
 % https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, 
+\todo{point is, doesn't make sense to assume the genotype effect is the same at all levels of cell type abundance}
 otherwise the regression slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
 one can not correct for this modification just by including the main effect for cell type abundance.
 Given the modest sample size, I use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},

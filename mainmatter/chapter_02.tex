@@ -133,6 +133,7 @@ The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres
 %             \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
 % \end{outline}
 However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
+\todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}. hence TRI, whilst combining, is still not ideal}
 Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
 
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
@@ -191,7 +192,8 @@ After filtering, 169 samples and 549414 markers remained.
 \subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
 \label{subsec:hird_dge_genotype_pc}
 
-As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic ancestry) in expression and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount,brown2018ExpressionReflectsPopulation}.
+As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
+Large-scale population structure explains variation in gene expression \autocite{brown2018ExpressionReflectsPopulation}, so including population structure as covariates can increase power.
 Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
 \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
 For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
@@ -473,6 +475,7 @@ then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisi
 Linear models were fit using limma\autocite{ritchie2015LimmaPowersDifferential}, which is computationally fast, and performs well for sufficiently large ($n \ge 3$ per group) sample sizes\autocite{soneson2013ComparisonMethodsDifferential}.
 For each gene, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
+\todo{add equation from ch3. especially justify having TRI in as predictor}
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
 %
@@ -727,6 +730,7 @@ The same analysis using only the \gls{RNAseq} data replicated 0/62 genes.
 \todo{move numbers to results?}
 The majority of the effects for these genes were simply much stronger in the array dataset than in the RNAseq dataset (\autoref{fig:hird_DGE_effectSizeComparisons_rma}).
 Given that the range of \gls{TRI} is higher in the array individuals (\autoref{tab:hird_table1}), this does not seem unusual that stronger \gls{TRI}-associated effects are observed there.
+\todo{TRI is also not ideal}
 
 58/62 reported hits were measured by both platforms and assessed in the meta-analysis.
 Only 15/58 signals replicated using frequentist random-effects meta-analysis to combine per-platform estimates.

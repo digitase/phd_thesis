@@ -51,7 +51,7 @@
 Results: Our approach has 1) a distinct computational edge, and 2) comparable performance in terms of statistical power over other currently existing joint modeling approaches such as MetaTissue eQTL and eQTL-BMA. Using simulations, we show that our method increases the power to detect eQTLs when compared to a tissue-by-tissue approach and can exceed the performance, in terms of computational speed, of MetaTissue eQTL and eQTL-BMA. We apply our method to two publicly available expression datasets from normal human brains, one comprised of four brain regions from 150 neuropathologically normal samples and another comprised of ten brain regions from 134 neuropathologically normal samples, and show that by using our method and jointly analyzing multiple brain regions, we identify eQTLs within more genes when compared to three often used existing methods.
 Conclusions: Since we employ a score test-based approach, there is no need for parameter estimation under the alternative hypothesis. As a result, model parameters only have to be estimated once per genome, significantly decreasing computation time. Our method also accommodates the analysis of next- generation sequencing data. As an example, by modeling gene transcripts in an analogous fashion to tissues in our current formulation one would be able to test for both a variant overall effect across all isoforms of a gene as well as transcript-specific effects. We implement our approach within the R package JAGUAR, which is now available at the Comprehensive R Archive Network repository.},
   file = {/Users/bb9/Zotero/storage/2TCMBA6D/Acharya et al_2016_BMC Bioinformatics_Exploiting expression patterns across multiple tissues to map expression.pdf},
-  keywords = {_unread_med_priority,genetic association,JAGUAR,methods,multilevel/hierarchical model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
+  keywords = {_unread_med_priority,genetic association,JAGUAR,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
   langid = {english},
   number = {1}
 }
@@ -88,7 +88,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   url = {https://linkinghub.elsevier.com/retrieve/pii/S1534580708002475},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/DTQ3BHLL/Affolter et al_2008_Developmental Cell_Signal-Induced Repression.pdf},
-  keywords = {developmental biology,review,signalling,signalling; activator insufficiency,signalling; cooperative activation,signalling; default repression,signalling; signal-induced repression,signalling; transduction},
+  keywords = {cell signalling,cell signalling; activator insufficiency,cell signalling; cooperative activation,cell signalling; default repression,cell signalling; signal-induced repression,cell signalling; transduction,developmental biology,review},
   langid = {english},
   number = {1}
 }
@@ -173,7 +173,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   url = {http://www.nature.com/articles/s41588-018-0046-7},
   urldate = {2018-11-12},
   file = {/Users/bb9/Zotero/storage/GPJFBSGA/Alasoo et al_2018_Nature Genetics_Shared genetic effects on chromatin and gene expression indicate a role for.pdf},
-  keywords = {_unread_med_priority,genotype-environment interaction (GxE),quantitative trait loci (QTL),quantitative trait loci; chromatin accessibility (caQTLs),quantitative trait loci; expression (eQTLs),quantitative trait loci; in vitro,quantitative trait loci; response (reQTL)},
+  keywords = {_unread_med_priority,genotype-environment interaction (GxE),in vitro study,quantitative trait loci (QTL),quantitative trait loci; chromatin accessibility (caQTLs),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL)},
   langid = {english},
   number = {3}
 }
@@ -224,7 +224,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   url = {https://www.jstor.org/stable/271083?origin=crossref},
   urldate = {2019-06-28},
   file = {/Users/bb9/Zotero/storage/MCSBKC8E/Allison_1990_Sociological Methodology_Change Scores as Dependent Variables in Regression Analysis.pdf},
-  keywords = {Lord's paradox,regression,regression to the mean,statistics,statistics; change score},
+  keywords = {regression,regression to the mean,statistics,statistics; change score,statistics; Lord's paradox},
   langid = {english}
 }
 
@@ -414,7 +414,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   urldate = {2020-05-10},
   abstract = {We review the problem of confounding in genetic association studies, which arises principally because of population structure and cryptic relatedness. Many treatments of the problem consider only a simple “island” model of population structure. We take a broader approach, which views population structure and cryptic relatedness as different aspects of a single confounder: the unobserved pedigree defining the (often distant) relationships among the study subjects. Kinship is therefore a central concept, and we review methods of defining and estimating kinship coefficients, both pedigreebased and marker-based. In this unified framework we review solutions to the problem of population structure, including family-based study designs, genomic control, structured association, regression control, principal components adjustment and linear mixed models. The last solution makes the most explicit use of the kinships among the study subjects, and has an established role in the analysis of animal and plant breeding studies. Recent computational developments mean that analyses of human genetic association data are beginning to benefit from its powerful tests for association, which protect against population structure and cryptic kinship, as well as intermediate levels of confounding by the pedigree.},
   file = {/Users/bb9/Zotero/storage/4PE37WE6/Astle_Balding_2009_Statistical Science_Population Structure and Cryptic Relatedness in Genetic Association Studies.pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical model,population stratification,population stratification; cryptic relatedness,review},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical/mixed model,population stratification,population stratification; ancestry,population stratification; cryptic relatedness,review},
   langid = {english},
   number = {4}
 }
@@ -450,7 +450,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   urldate = {2018-07-16},
   abstract = {Next-generation sequencing technologies are quickly becoming the preferred approach for characterizing and quantifying entire genomes. Even though data produced from these technologies are proving to be the most informative of any thus far, very little attention has been paid to fundamental design aspects of data collection and analysis, namely sampling, randomization, replication, and blocking. We discuss these concepts in an RNA sequencing framework. Using simulations we demonstrate the benefits of collecting replicated RNA sequencing data according to well known statistical designs that partition the sources of biological and technical variation. Examples of these designs and their corresponding models are presented with the goal of testing differential expression.},
   file = {/Users/bb9/Zotero/storage/AU3J8MK6/Auer_Doerge_2010_Genetics_Statistical Design and Analysis of RNA Sequencing Data.pdf},
-  keywords = {research design,RNA-seq,transcriptomics},
+  keywords = {RNA-seq,study design,transcriptomics},
   langid = {english},
   number = {2}
 }
@@ -489,7 +489,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
 Results: Here, we evaluate the impact of varying read depth and sample number on the performance of differential gene expression identification workflows, as measured by precision, or the fraction of genes correctly identified as differentially expressed, and by recall, or the fraction of differentially expressed genes identified. We focus our analysis on 30 high-performing workflows, systematically varying the read depth and number of biological replicates of patient monocyte samples provided as input. We find that, in general for most workflows, read depth has little effect on workflow performance when held above two million reads per sample, with reduced workflow performance below this threshold. The greatest impact of decreased sample number is seen below seven samples per group, when more heterogeneity in workflow performance is observed. The choice of differential expression identification tool, in particular, has a large impact on the response to limited inputs.
 Conclusions: Among the tested workflows, the recall/precision balance remains relatively stable at a range of read depths and sample numbers, although some workflows are more sensitive to input restriction. At ranges typically recommended for biological studies, performance is more greatly impacted by the number of biological replicates than by read depth. Caution should be used when selecting analysis workflows and interpreting results from low sample number experiments, as all workflows exhibit poorer performance at lower sample numbers near typically reported values, with variable impact on recall versus precision. These analyses highlight the performance characteristics of common differential gene expression workflows at varying read depths and sample numbers, and provide empirical guidance in experimental and analytical design.},
   file = {/Users/bb9/Zotero/storage/6JE92497/12859_2018_2445_MOESM5_ESM.pdf;/Users/bb9/Zotero/storage/C5PZBKYL/Baccarella et al_2018_BMC Bioinformatics_Empirical assessment of the impact of sample number and read depth on RNA-Seq.pdf},
-  keywords = {methods,methods; comparison of,research design,RNA-seq,statistics,statistics; power,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {methods,methods; comparison of,power (statistics),RNA-seq,statistics,study design,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {1}
 }
@@ -504,7 +504,7 @@ Conclusions: Among the tested workflows, the recall/precision balance remains re
   url = {http://www.ssrn.com/abstract=1010095},
   urldate = {2018-07-27},
   file = {/Users/bb9/Zotero/storage/QZYLIRV8/Bafumi_Gelman_2007_SSRN Electronic Journal_Fitting Multilevel Models When Predictors and Group Effects Correlate.pdf},
-  keywords = {_unread_low_priority,multilevel/hierarchical model,regression},
+  keywords = {_unread_low_priority,multilevel/hierarchical/mixed model,regression},
   langid = {english}
 }
 
@@ -593,7 +593,7 @@ Conclusions: Among the tested workflows, the recall/precision balance remains re
   eprint = {3806354},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/CI5IK9HU/Baron_Kenny_1986_Journal of Personality and Social Psychology_The moderator-mediator variable distinction in social psychological research.pdf},
-  keywords = {causal model,causal model; mediation,causal model; moderator,methods},
+  keywords = {causal model,methods,statistics,statistics; mediation,statistics; moderator},
   langid = {english},
   number = {6}
 }
@@ -612,7 +612,7 @@ Conclusions: Among the tested workflows, the recall/precision balance remains re
   urldate = {2019-11-24},
   abstract = {Linear mixed-effects models (LMEMs) have become increasingly prominent in psycholinguistics and related areas. However, many researchers do not seem to appreciate how random effects structures affect the generalizability of an analysis. Here, we argue that researchers using LMEMs for confirmatory hypothesis testing should minimally adhere to the standards that have been in place for many decades. Through theoretical arguments and Monte Carlo simulation, we show that LMEMs generalize best when they include the maximal random effects structure justified by the design. The generalization performance of LMEMs including data-driven random effects structures strongly depends upon modeling criteria and sample size, yielding reasonable results on moderately-sized samples when conservative criteria are used, but with little or no power advantage over maximal models. Finally, random-intercepts-only LMEMs used on within-subjects and/or within-items data from populations where subjects and/or items vary in their sensitivity to experimental manipulations always generalize worse than separate F1 and F2 tests, and in many cases, even worse than F1 alone. Maximal LMEMs should be the ‘gold standard’ for confirmatory hypothesis testing in psycholinguistics and beyond.},
   file = {/Users/bb9/Zotero/storage/3MWVAPDS/Barr et al_2013_Journal of Memory and Language_Random effects structure for confirmatory hypothesis testing.pdf},
-  keywords = {_unread_low_priority,multilevel/hierarchical model,multilevel/hierarchical model; maximal random-effect structure,regression,regression; linear,statistics},
+  keywords = {_unread_low_priority,multilevel/hierarchical/mixed model,multilevel/hierarchical/mixed model; maximal random-effect structure,regression,regression; linear,statistics},
   langid = {english},
   number = {3}
 }
@@ -666,7 +666,7 @@ Conclusions: Among the tested workflows, the recall/precision balance remains re
   url = {http://link.springer.com/10.1007/s10519-009-9281-0},
   urldate = {2020-01-16},
   file = {/Users/bb9/Zotero/storage/VCKYNJLF/Beasley et al_2009_Behavior Genetics_Rank-Based Inverse Normal Transformations are Increasingly Used, But are They.pdf},
-  keywords = {methods,methods; comparison of,statistics,statistics; data transformation,statistics; inverse normal transform (INT),statistics; rank-based inverse normal transform},
+  keywords = {data transformation (statistics),data transformation (statistics); Blom,data transformation (statistics); inverse normal transform (INT),methods,methods; comparison of},
   langid = {english},
   number = {5}
 }
@@ -773,7 +773,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   url = {http://ajp.psychiatryonline.org/doi/10.1176/appi.ajp.2018.18070881},
   urldate = {2019-05-14},
   file = {/Users/bb9/Zotero/storage/IN64GETQ/Border et al_2019_American Journal of Psychiatry_No Support for Historical Candidate Gene or Candidate Gene-by-Interaction.pdf},
-  keywords = {_unread_low_priority,depression/major depressive disorder (MDD),genetic association,genetic association; candidate gene,review},
+  keywords = {_unread_low_priority,depression/major depressive disorder (MDD),genetic association,genetic association; candidate gene study,review},
   langid = {english},
   number = {5}
 }
@@ -790,7 +790,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   url = {http://doi.wiley.com/10.1002/jrsm.12},
   urldate = {2018-07-10},
   file = {/Users/bb9/Zotero/storage/GXTAJK3R/Borenstein et al_2010_Research Synthesis Methods_A basic introduction to fixed-effect and random-effects models for meta-analysis.pdf},
-  keywords = {_favourite,meta-analysis,multilevel/hierarchical model},
+  keywords = {_favourite,meta-analysis,multilevel/hierarchical/mixed model},
   langid = {english},
   number = {2}
 }
@@ -856,7 +856,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   url = {https://www.cambridge.org/core/product/identifier/S1047198700001297/type/journal_article},
   urldate = {2019-05-14},
   file = {/Users/bb9/Zotero/storage/9X7ZHTPX/Brambor et al_2006_Political Analysis_Understanding Interaction Models.pdf},
-  keywords = {_favourite,political science,regression,regression; linear,review,statistics,statistics; interaction,statistics; multicollinearity,statistics; multiplicative interaction,statistics; omitted-variable bias (OVB)},
+  keywords = {_favourite,interaction (statistics),interaction (statistics); multiplicative,multicollinearity,political science,regression,regression; linear,review,statistics,statistics; omitted-variable bias (OVB)},
   langid = {english},
   number = {1}
 }
@@ -992,8 +992,27 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   doi = {10.1101/364448},
   abstract = {Population structure in genotype data has been extensively studied, and is revealed by looking at the principal components of the genotype matrix. However, no similar analysis of population structure in gene expression data has been conducted, in part because a naïve principal components analysis of the gene expression matrix does not cluster by population. We identify a linear projection that reveals population structure in gene expression data. Our approach relies on the coupling of the principal components of genotype to the principal components of gene expression via canonical correlation analysis. Futhermore, we analyze the variance of each gene within the projection matrix to determine which genes significantly influence the projection. We identify thousands of significant genes, and show that a number of the top genes have been implicated in diseases that disproportionately impact African Americans.},
   file = {/Users/bb9/Zotero/storage/3TZILV5F/Brown et al_2018_Expression reflects population structure.pdf},
-  keywords = {canonical correlation analysis (CCA),population stratification,principal component analysis (PCA),transcriptomics,transcriptomics; population},
+  keywords = {canonical correlation analysis (CCA),population stratification,principal component analysis (PCA),transcriptomics},
   langid = {english}
+}
+
+@article{browning2011HaplotypePhasingExisting,
+  title = {Haplotype Phasing: Existing Methods and New Developments},
+  shorttitle = {Haplotype Phasing},
+  author = {Browning, Sharon R. and Browning, Brian L.},
+  date = {2011-10},
+  journaltitle = {Nature Reviews Genetics},
+  volume = {12},
+  pages = {703--714},
+  issn = {1471-0056, 1471-0064},
+  doi = {10.1038/nrg3054},
+  url = {http://www.nature.com/articles/nrg3054},
+  urldate = {2020-05-17},
+  abstract = {Determination of haplotype phase is becoming increasingly important as we enter the era of large-scale sequencing because many of its applications, such as imputing low-frequency variants and characterizing the relationship between genetic variation and disease susceptibility, are particularly relevant to sequence data. Haplotype phase can be generated through laboratory-based experimental methods, or it can be estimated using computational approaches. We assess the haplotype phasing methods that are available, focusing in particular on statistical methods, and we discuss the practical aspects of their application. We also describe recent developments that may transform this field, particularly the use of identity-by-descent for computational phasing.},
+  file = {/Users/bb9/Zotero/storage/QHJ748AP/Browning_Browning_2011_Nature Reviews Genetics_Haplotype phasing.pdf},
+  keywords = {phasing (genetics),review},
+  langid = {english},
+  number = {10}
 }
 
 @article{bucasas2011EarlyPatternsGene,
@@ -1011,7 +1030,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/FQ6KBLB3/Bucasas et al_2011_The Journal of Infectious Diseases_Early Patterns of Gene Expression Correlate With the Humoral Immune Response to.pdf;/Users/bb9/Zotero/storage/Q4AQS9ZC/Bucasas_et_al_Figure_S2.tif;/Users/bb9/Zotero/storage/R6LW98PH/Bucasas_et_al_Figure_S1.tif;/Users/bb9/Zotero/storage/ZPGJUS8Z/Bucasas_et_al_Figure_S3.tif},
   isbn = {1537-6613 (Electronic) 0022-1899 (Linking)},
-  keywords = {influenza,influenza; seasonal,predictive modelling,systems vaccinology,vaccine,vaccine; titre response index (TRI),vaccine; trivalent inactivated influenza (TIV)},
+  keywords = {influenza,influenza; seasonal,predictive modelling,systems vaccinology,titre response index (TRI),vaccine,vaccine; trivalent inactivated influenza (TIV)},
   number = {7}
 }
 
@@ -1046,7 +1065,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   urldate = {2018-08-31},
   abstract = {Permutation tests are widely used in genomic research as a straightforward way to obtain reliable statistical inference without making strong distributional assumptions. However, in this paper we show that in genetic association studies it is not typically possible to construct exact permutation tests of gene-gene or gene-environment interaction hypotheses. We describe an alternative to the permutation approach in testing for interaction, a parametric bootstrap approach. Using simulations, we compare the finite-sample properties of a few often-used permutation tests and the parametric bootstrap. We consider interactions of an exposure with single and multiple polymorphisms. Finally, we address when permutation tests of interaction will be approximately valid in large samples for specific test statistics.},
   file = {/Users/bb9/Zotero/storage/9ID4RFM3/Bůžková et al_2011_Annals of Human Genetics_Permutation and Parametric Bootstrap Tests for Gene-Gene and Gene-Environment.pdf},
-  keywords = {bootstrap,bootstrap; parametric,genetic interaction (GI),multilevel/hierarchical model,permutation test},
+  keywords = {bootstrap,bootstrap; parametric,genetic interaction (GI),multilevel/hierarchical/mixed model,permutation test},
   langid = {english},
   number = {1}
 }
@@ -1341,7 +1360,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   urldate = {2018-09-04},
   abstract = {Expression quantitative trait loci (eQTL) mapping concerns finding genomic variation to elucidate variation of expression traits. This problem poses significant challenges due to high dimensionality of both the gene expression and the genomic marker data. We propose a multivariate response regression approach with simultaneous variable selection and dimension reduction for the eQTL mapping problem. Transcripts with similar expression are clustered into groups, and their expression profiles are viewed as a multivariate response. Then, we employ our recently developed sparse partial least-squares regression methodology to select markers associated with each cluster of genes. We demonstrate with extensive simulations that our eQTL mapping with multivariate response sparse partial least-squares regression (M-SPLS eQTL) method overcomes the issue of multiple transcript- or marker-specific analyses, thereby avoiding potential elevation of type I error. Additionally, joint analysis of multiple transcripts by multivariate response regression increases power for detecting weak linkages. We illustrate that M-SPLS eQTL compares competitively with other approaches and has a number of significant advantages, including the ability to handle highly correlated genotype data and computational efficiency. We provide an application of this methodology to a mouse data set concerning obesity and diabetes.},
   file = {/Users/bb9/Zotero/storage/PCW3BIHJ/Chun_Keles_2009_Genetics_Expression Quantitative Trait Loci Mapping With Multivariate Sparse Partial.pdf},
-  keywords = {methods,multivariate/joint model,quantitative trait loci (QTL),regression,regression; sparse partial least squares (SPLS)},
+  keywords = {methods,multivariate/joint model,quantitative trait loci (QTL),regression,sparse partial least squares regression (SPLS)},
   langid = {english},
   number = {1}
 }
@@ -1358,7 +1377,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   url = {http://doi.wiley.com/10.1002/sim.5821},
   urldate = {2020-04-06},
   file = {/Users/bb9/Zotero/storage/J67I48R2/Chung et al_2013_Statistics in Medicine_Avoiding zero between-study variance estimates in random-effects meta-analysis.pdf},
-  keywords = {Bayesian inference,Bayesian inference; Bayes modal (BM),Bayesian inference; priors,meta-analysis,meta-analysis; study heterogeneity,methods},
+  keywords = {Bayesian inference,Bayesian inference; modal estimation,Bayesian prior,meta-analysis,meta-analysis; study heterogeneity,methods},
   langid = {english},
   number = {23}
 }
@@ -1376,7 +1395,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   urldate = {2019-08-06},
   abstract = {Group-level variance estimates of zero often arise when fitting multilevel or hierarchical linear models, especially when the number of groups is small. For situations where zero variances are implausible a priori, we propose a maximum penalized likelihood approach to avoid such boundary estimates. This approach is equivalent to estimating variance parameters by their posterior mode, given a weakly informative prior distribution. By choosing the penalty from the log-gamma family with shape parameter greater than 1, we ensure that the estimated variance will be positive. We suggest a default log-gamma(2, λ) penalty with λ → 0, which ensures that the maximum penalized likelihood estimate is approximately one standard error from zero when the maximum likelihood estimate is zero, thus remaining consistent with the data while being nondegenerate. We also show that the maximum penalized likelihood estimator with this default penalty is a good approximation to the posterior median obtained under a noninformative prior. Our default method provides better estimates of model parameters and standard errors than the maximum likelihood or the restricted maximum likelihood estimators. The log-gamma family can also be used to convey substantive prior information. In either case—pure penalization or prior information—our recommended procedure gives nondegenerate estimates and in the limit coincides with maximum likelihood as the number of groups increases.},
   file = {/Users/bb9/Zotero/storage/IFL2HKY6/Chung et al_2013_Psychometrika_A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in.pdf},
-  keywords = {_favourite,Bayesian inference,Bayesian inference; modal estimation,Bayesian inference; priors,Bayesian inference; priors; weakly informative,maximum likelihood estimation (MLE),maximum likelihood estimation; penalised,maximum likelihood estimation; restricted (REML),meta-analysis,meta-analysis; study heterogeneity,methods,multilevel/hierarchical model},
+  keywords = {_favourite,Bayesian inference,Bayesian inference; modal estimation,Bayesian prior,Bayesian prior; weakly informative,maximum likelihood estimation (MLE),maximum likelihood estimation; penalised,maximum likelihood estimation; restricted (REML),meta-analysis,meta-analysis; study heterogeneity,methods,multilevel/hierarchical/mixed model},
   langid = {english},
   number = {4}
 }
@@ -1444,7 +1463,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   url = {http://journals.sagepub.com/doi/10.1177/014662168300700301},
   urldate = {2019-07-12},
   file = {/Users/bb9/Zotero/storage/KE7DNA69/Cohen_1983_Applied Psychological Measurement_The Cost of Dichotomization.pdf},
-  keywords = {statistics,statistics; dichotomization},
+  keywords = {data transformation (statistics),data transformation (statistics); dichotomization,statistics},
   langid = {english},
   number = {3}
 }
@@ -1507,7 +1526,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   pages = {1--19},
   doi = {10.1186/s13059-016-0881-8},
   file = {/Users/bb9/Zotero/storage/5BMHSWMY/Conesa et al_2016_Genome Biology_A survey of best practices for RNA-seq data analysis.pdf},
-  keywords = {_favourite,methods,methods; comparison of,research design,review,RNA-seq},
+  keywords = {_favourite,methods,methods; comparison of,review,RNA-seq,study design},
   number = {13}
 }
 
@@ -1668,6 +1687,24 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   number = {1}
 }
 
+@article{das2018GenotypeImputationLarge,
+  title = {Genotype {{Imputation}} from {{Large Reference Panels}}},
+  author = {Das, Sayantan and Abecasis, Gonçalo R. and Browning, Brian L.},
+  date = {2018-08-31},
+  journaltitle = {Annual Review of Genomics and Human Genetics},
+  volume = {19},
+  pages = {73--96},
+  issn = {1527-8204, 1545-293X},
+  doi = {10.1146/annurev-genom-083117-021602},
+  url = {https://www.annualreviews.org/doi/10.1146/annurev-genom-083117-021602},
+  urldate = {2020-05-17},
+  abstract = {Genotype imputation has become a standard tool in genome-wide association studies because it enables researchers to inexpensively approximate whole-genome sequence data from genome-wide single-nucleotide polymorphism array data. Genotype imputation increases statistical power, facilitates fine mapping of causal variants, and plays a key role in meta-analyses of genome-wide association studies. Only variants that were previously observed in a reference panel of sequenced individuals can be imputed. However, the rapid increase in the number of deeply sequenced individuals will soon make it possible to assemble enormous reference panels that greatly increase the number of imputable variants. In this review, we present an overview of genotype imputation and describe the computational techniques that make it possible to impute genotypes from reference panels with millions of individuals.},
+  file = {/Users/bb9/Zotero/storage/76U8WZYX/Das et al_2018_Annual Review of Genomics and Human Genetics_Genotype Imputation from Large Reference Panels.pdf},
+  keywords = {imputation (genetics),imputation (genetics); reference-based,review},
+  langid = {english},
+  number = {1}
+}
+
 @article{davenport2018DiscoveringVivoCytokineeQTL,
   ids = {davenport2018DiscoveringVivoCytokine},
   title = {Discovering in Vivo Cytokine-{{eQTL}} Interactions from a Lupus Clinical Trial},
@@ -1680,7 +1717,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   url = {https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1560-8},
   urldate = {2020-04-21},
   file = {/Users/bb9/Zotero/storage/DKJ7PUGD/Davenport et al_2018_Discovering in vivo cytokine eQTL interactions from a lupus clinical trial.pdf;/Users/bb9/Zotero/storage/IBMJSAEL/13059_2018_1560_MOESM2_ESM.xlsx;/Users/bb9/Zotero/storage/PJLI89Z2/13059_2018_1560_MOESM1_ESM.pdf},
-  keywords = {_favourite,genetic association,genotype-environment interaction (GxE),multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; in vivo,quantitative trait loci; response (reQTL),systemic lupus erythematosus (SLE)},
+  keywords = {_favourite,genetic association,genotype-environment interaction (GxE),in vivo study,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systemic lupus erythematosus (SLE)},
   langid = {english},
   number = {1},
   options = {useprefix=true}
@@ -1772,7 +1809,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   urldate = {2019-05-14},
   abstract = {Randomized Controlled Trials (RCTs) are increasingly popular in the social sciences, not only in medicine. We argue that the lay public, and sometimes researchers, put too much trust in RCTs over other methods of investigation. Contrary to frequent claims in the applied literature, randomization does not equalize everything other than the treatment in the treatment and control groups, it does not automatically deliver a precise estimate of the average treatment effect (ATE), and it does not relieve us of the need to think about (observed or unobserved) covariates. Finding out whether an estimate was generated by chance is more difficult than commonly believed. At best, an RCT yields an unbiased estimate, but this property is of limited practical value. Even then, estimates apply only to the sample selected for the trial, often no more than a convenience sample, and justification is required to extend the results to other groups, including any population to which the trial sample belongs, or to any individual, including an individual in the trial. Demanding ‘external validity’ is unhelpful because it expects too much of an RCT while undervaluing its potential contribution. RCTs do indeed require minimal assumptions and can operate with little prior knowledge. This is an advantage when persuading distrustful audiences, but it is a disadvantage for cumulative scientific progress, where prior knowledge should be built upon, not discarded. RCTs can play a role in building scientific knowledge and useful predictions but they can only do so as part of a cumulative program, combining with other methods, including conceptual and theoretical development, to discover not ‘what works’, but ‘why things work’.},
   file = {/Users/bb9/Zotero/storage/JXTTS66Y/Deaton_Cartwright_2018_Social Science & Medicine_Understanding and misunderstanding randomized controlled trials.pdf},
-  keywords = {_unread_low_priority,randomized controlled trial (RCT),research design,review},
+  keywords = {_unread_low_priority,randomized controlled trial (RCT),review,study design},
   langid = {english}
 }
 
@@ -1828,7 +1865,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   url = {http://doi.wiley.com/10.1002/gepi.20607},
   urldate = {2020-05-10},
   file = {/Users/bb9/Zotero/storage/LIWCTMJW/Demissie_Cupples_2011_Genetic Epidemiology_Bias due to two-stage residual-outcome regression analysis in genetic.pdf},
-  keywords = {_untagged_working_set,regression,regression; regression of residuals},
+  keywords = {_untagged_working_set,regression,regression; regression of residuals/two-stage},
   langid = {english},
   number = {7}
 }
@@ -1864,7 +1901,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   eprint = {27466657},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/V69IALL9/Dias et al_2014_NICE DSU Technical Support Document 2.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,meta-analysis},
+  keywords = {Bayesian inference,Bayesian prior,meta-analysis},
   langid = {english}
 }
 
@@ -1879,7 +1916,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   urldate = {2019-11-29},
   abstract = {IBD treatment is undergoing a transformation with an expanding repertoire of drugs targeting different aspects of the immune response. Three novel classes of drugs have emerged in the past decade that target leukocyte trafficking to the gut (vedolizumab), neutralize key cytokines with antibodies (ustekinumab) and inhibit cytokine signalling pathways (tofacitinib). In advanced development are other drugs for IBD, including therapies targeting other cytokines such as IL-23 and IL-6. However, all agents tested so far are hampered by primary and secondary loss of response, so it is desirable to develop personalized strategies to identify which patients should be treated with which drugs. Stratification of patients with IBD by clinical parameters alone lacks sensitivity{$\mkern1mu$}, and alternative modalities are now needed to deliver precision medicine in IBD. High-r esolution profiling of immune response networks in individual patients is a promising approach and different technical platforms, including in vivo real-t ime molecular endoscopy{$\mkern1mu$}, tissue transcriptomics and germline genetics, are promising tools to help predict responses to specific therapies. However, important challenges remain regarding the clinical utility of these technologies, including their scalability and accessibility. This Review focuses on unravelling some of the complexity of mucosal immune responses in IBD pathogenesis and how current and emerging analytical platforms might be harnessed to effectively stratify and individualise IBD therapy.},
   file = {/Users/bb9/Zotero/storage/MQC7EMHT/Digby-Bell et al_2019_Nature Reviews Gastroenterology & Hepatology_Interrogating host immunity to predict treatment response in inflammatory bowel.pdf},
-  keywords = {drug response,drug response; immunogenicity,inflammatory bowel disease (IBD),personalised medicine,review},
+  keywords = {immunogenicity,inflammatory bowel disease (IBD),personalised medicine,review},
   langid = {english}
 }
 
@@ -1943,7 +1980,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
 
 Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   file = {/Users/bb9/Zotero/storage/BEV83KI6/Dobbyn et al_2017_Co-localization of Conditional eQTL and GWAS Signatures in Schizophrenia.pdf},
-  keywords = {_unread_high_priority,coloc,coloc2,colocalization,genetic association,genetic association; conditional,genetic association; genome-wide (GWAS),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),schizophrenia},
+  keywords = {_unread_high_priority,coloc,coloc2,colocalization,conditional analysis (genetics),genetic association,genetic association; genome-wide (GWAS),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),schizophrenia},
   langid = {english}
 }
 
@@ -2010,7 +2047,7 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   url = {http://doi.wiley.com/10.1111/j.1600-0587.2012.07348.x},
   urldate = {2019-10-31},
   file = {/Users/bb9/Zotero/storage/Z3F3V8ZL/Dormann et al_2013_Ecography_Collinearity.pdf},
-  keywords = {regression,review,statistics,statistics; multicollinearity},
+  keywords = {multicollinearity,regression,review,statistics},
   langid = {english},
   number = {1}
 }
@@ -2027,7 +2064,7 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   urldate = {2019-02-01},
   abstract = {Hierarchically-organized data arise naturally in many psychology and neuroscience studies. As the standard assumption of independent and identically distributed samples does not hold for such data, two important problems are to accurately estimate group-level effect sizes, and to obtain powerful statistical tests against group-level null hypotheses. A common approach is to summarize subject-level data by a single quantity per subject, which is often the mean or the difference between class means, and treat these as samples in a group-level t-test. This “naive” approach is, however, suboptimal in terms of statistical power, as it ignores information about the intra-subject variance. To address this issue, we review several approaches to deal with nested data, with a focus on methods that are easy to implement. With what we call the sufficient-summary-statistic approach, we highlight a computationally efficient technique that can improve statistical power by taking into account within-subject variances, and we provide step-by-step instructions on how to apply this approach to a number of frequently-used measures of effect size. The properties of the reviewed approaches and the potential benefits over a group-level t-test are quantitatively assessed on simulated data and demonstrated on EEG data from a simulated-driving experiment.},
   file = {/Users/bb9/Zotero/storage/9EYCM2RG/Dowding_Haufe_2018_Frontiers in Human Neuroscience_Powerful Statistical Inference for Nested Data Using Sufficient Summary.pdf},
-  keywords = {meta-analysis,meta-analysis; Stouffer's Z-score method (inverse normal method),multilevel/hierarchical model,sufficient summary statistic approach},
+  keywords = {meta-analysis,meta-analysis; Stouffer's Z-score method (inverse normal method),multilevel/hierarchical/mixed model,sufficient summary statistic approach},
   langid = {english}
 }
 
@@ -2162,7 +2199,7 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0003347205002253},
   urldate = {2019-11-27},
   file = {/Users/bb9/Zotero/storage/SLM7B5VX/Engqvist_2005_Animal Behaviour_The mistreatment of covariate interaction terms in linear model analyses of.pdf},
-  keywords = {analysis of covariance (ANCOVA),regression,regression; linear,statistics,statistics; interaction},
+  keywords = {analysis of covariance (ANCOVA),interaction (statistics),regression,regression; linear,statistics},
   langid = {english},
   number = {4}
 }
@@ -2200,7 +2237,7 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   urldate = {2018-07-18},
   abstract = {Approaches based on linear mixed models (LMMs) have recently gained popularity for modelling population substructure and relatedness in genome-wide association studies. In the last few years, a bewildering variety of different LMM methods/software packages have been developed, but it is not always clear how (or indeed whether) any newlyproposed method differs from previously-proposed implementations. Here we compare the performance of several LMM approaches (and software implementations, including EMMAX, GenABEL, FaST-LMM, Mendel, GEMMA and MMM) via their application to a genome-wide association study of visceral leishmaniasis in 348 Brazilian families comprising 3626 individuals (1972 genotyped). The implementations differ in precise details of methodology implemented and through various user-chosen options such as the method and number of SNPs used to estimate the kinship (relatedness) matrix. We investigate sensitivity to these choices and the success (or otherwise) of the approaches in controlling the overall genome-wide error-rate for both real and simulated phenotypes. We compare the LMM results to those obtained using traditional family-based association tests (based on transmission of alleles within pedigrees) and to alternative approaches implemented in the software packages MQLS, ROADTRIPS and MASTOR. We find strong concordance between the results from different LMM approaches, and all are successful in controlling the genome-wide error rate (except for some approaches when applied naively to longitudinal data with many repeated measures). We also find high correlation between LMMs and alternative approaches (apart from transmission-based approaches when applied to SNPs with small or non-existent effects). We conclude that LMM approaches perform well in comparison to competing approaches. Given their strong concordance, in most applications, the choice of precise LMM implementation cannot be based on power/type I error considerations but must instead be based on considerations such as speed and ease-of-use.},
   file = {/Users/bb9/Zotero/storage/323D43T9/Eu-ahsunthornwattana et al_2014_PLoS Genetics_Comparison of Methods to Account for Relatedness in Genome-Wide Association.PDF},
-  keywords = {_favourite,genetic association,genetic association; genome-wide (GWAS),genomic control/genomic inflation factor,methods,methods; comparison of,multilevel/hierarchical model,population stratification,regression,regression; linear},
+  keywords = {_favourite,genetic association,genetic association; genome-wide (GWAS),genomic control/genomic inflation (factor),methods,methods; comparison of,multilevel/hierarchical/mixed model,population stratification,regression,regression; linear},
   langid = {english},
   number = {7}
 }
@@ -2409,7 +2446,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://doi.wiley.com/10.1002/pst.331},
   urldate = {2020-04-03},
   file = {/Users/bb9/Zotero/storage/RCI4YC6G/Fedorov et al_2009_Pharmaceutical Statistics_Consequences of dichotomization.pdf},
-  keywords = {statistics,statistics; dichotomization},
+  keywords = {data transformation (statistics),data transformation (statistics); dichotomization,statistics},
   langid = {english},
   number = {1}
 }
@@ -2446,7 +2483,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2016-08-31},
   abstract = {Author Summary  Genetic variants that are associated with gene expression are known as expression Quantitative Trait Loci, or eQTLs. Many studies have been conducted to identify eQTLs, and they have proven an effective tool for identifying putative regulatory variants and linking them to specific genes. Up to now most studies have been conducted in a single tissue or cell type, but moving forward this is changing, and ongoing studies are collecting data aimed at mapping eQTLs in dozens of tissues. Current statistical methods are not able to fully exploit the richness of these kinds of data, taking account of both the sharing and differences in eQTLs among tissues. In this paper we develop a statistical framework to address this problem, to improve power to detect eQTLs when they are shared among multiple tissues, and to allow for differences among tissues to be estimated. Applying these methods to data from three tissues suggests that sharing of eQTLs among tissues may be substantially more common than it appeared in previous analyses of the same data.},
   file = {/Users/bb9/Zotero/storage/T2W7ZDJ7/Flutre et al_2013_PLOS Genet_A Statistical Framework for Joint eQTL Analysis in Multiple Tissues.pdf;/Users/bb9/Zotero/storage/GQ9WUCMW/article.html},
-  keywords = {_unread_med_priority,Bayesian inference,Bayesian model averaging (BMA),eQtlBma,genetic association,methods,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_unread_med_priority,Bayesian inference,Bayesian model averaging (BMA),eQtlBma,methods,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   number = {5}
 }
 
@@ -2510,7 +2547,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprint = {26742691},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/W8A7BEPS/Fourati et al_2016_Pre-vaccination inflammation and B-cell signalling predict age-related.pdf},
-  keywords = {elderly,hepatitis B,immune system,immune system; age,immune system; baseline,predictive modelling,systems vaccinology,vaccine}
+  keywords = {hepatitis B,immune system,immune system; age,immune system; baseline,old age/elderly (65+),predictive modelling,systems vaccinology,vaccine}
 }
 
 @article{franco2013IntegrativeGenomicAnalysis,
@@ -2527,7 +2564,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4ZRII2SI/elife-00299-supp1-v2.xlsx;/Users/bb9/Zotero/storage/KN9FU3RY/Franco et al_2013_eLife_Integrative genomic analysis of the human immune response to influenza.pdf},
   isbn = {10.7554/eLife.00899},
-  keywords = {_favourite,causal model,genetic association,genotype-environment interaction (GxE),influenza,influenza; seasonal,predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; in vivo,quantitative trait loci; response (reQTL),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
+  keywords = {_favourite,causal model,genetic association,genotype-environment interaction (GxE),in vivo study,influenza,influenza; seasonal,predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
   number = {2}
 }
 
@@ -2543,7 +2580,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://www.tandfonline.com/doi/full/10.1080/00273171.2014.968836},
   urldate = {2019-09-18},
   file = {/Users/bb9/Zotero/storage/YS5TRRZH/Frane_2015_Multivariate Behavioral Research_Power and Type I Error Control for Univariate Comparisons in Multivariate.pdf},
-  keywords = {MANOVA-protection,multiple testing,multivariate analysis of variance (MANOVA),statistics,statistics; misconceptions,statistics; power},
+  keywords = {MANOVA-protection,multiple testing,multivariate analysis of variance (MANOVA),power (statistics),statistics,statistics; misconceptions},
   langid = {english},
   number = {2}
 }
@@ -2564,7 +2601,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/ZDR96Y8X/Frasca et al_2010_Intrinsic defects in B cell response to seasonal influenza vaccination in.pdf},
   isbn = {0264-410X},
-  keywords = {elderly,immune system,immune system; age,influenza,influenza; seasonal,systems vaccinology,vaccine},
+  keywords = {immune system,immune system; age,influenza,influenza; seasonal,old age/elderly (65+),systems vaccinology,vaccine},
   number = {51}
 }
 
@@ -2581,7 +2618,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://doi.wiley.com/10.1046/j.1365-2656.2002.00618.x},
   urldate = {2019-03-06},
   file = {/Users/bb9/Zotero/storage/DVLCX4NB/Freckleton_2002_Journal of Animal Ecology_On the misuse of residuals in ecology.pdf},
-  keywords = {regression,regression; linear,regression; regression of residuals},
+  keywords = {regression,regression; linear,regression; regression of residuals/two-stage},
   langid = {english},
   number = {3}
 }
@@ -2599,7 +2636,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://doi.wiley.com/10.1002/jrsm.1217},
   urldate = {2019-04-12},
   file = {/Users/bb9/Zotero/storage/ZAUK66UF/Friede et al_2017_Research Synthesis Methods_Meta-analysis of few small studies in orphan diseases.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; weakly informative,bayesmeta,meta-analysis,meta-analysis; odds ratios,meta-analysis; small k,methods,rare disease,rare disease; orphan disease},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; weakly informative,bayesmeta,meta-analysis,meta-analysis; odds ratios,meta-analysis; small k,methods,rare disease,rare disease; orphan disease},
   langid = {english},
   number = {1}
 }
@@ -2617,7 +2654,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://doi.wiley.com/10.1002/bimj.201500236},
   urldate = {2018-07-10},
   file = {/Users/bb9/Zotero/storage/37TAUCR5/Friede et al_2017_Biometrical Journal_Meta-analysis of two studies in the presence of heterogeneity with applications.pdf},
-  keywords = {Bayesian inference,meta-analysis,meta-analysis; small k,meta-analysis; study heterogeneity,methods,methods; comparison of,multilevel/hierarchical model},
+  keywords = {Bayesian inference,meta-analysis,meta-analysis; small k,meta-analysis; study heterogeneity,methods,methods; comparison of,multilevel/hierarchical/mixed model},
   langid = {english},
   number = {4}
 }
@@ -2655,7 +2692,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://doi.wiley.com/10.1002/gepi.21640},
   urldate = {2018-07-31},
   file = {/Users/bb9/Zotero/storage/UAYBGKXG/Furlotte et al_2012_Genetic Epidemiology_Genome-Wide Association Mapping With Longitudinal Data.pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),longGWAS,methods,multilevel/hierarchical model,multivariate/joint model},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),longGWAS,methods,multilevel/hierarchical/mixed model,multivariate/joint model},
   langid = {english},
   number = {5}
 }
@@ -2788,7 +2825,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://projecteuclid.org/euclid.aos/1112967698},
   urldate = {2018-07-20},
   file = {/Users/bb9/Zotero/storage/DVH29CLJ/Gelman_2005_The Annals of Statistics_Analysis of variance - why it is more important than ever.pdf},
-  keywords = {_unread_low_priority,analysis of variance (ANOVA),frequentist inference,multilevel/hierarchical model,regression,regression; linear,statistics},
+  keywords = {_unread_low_priority,analysis of variance (ANOVA),frequentist inference,multilevel/hierarchical/mixed model,regression,regression; linear,statistics},
   langid = {english},
   number = {1}
 }
@@ -2824,7 +2861,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2019-04-12},
   abstract = {Various noninformative prior distributions have been suggested for scale parameters in hierarchical models. We construct a new folded-noncentral-t family of conditionally conjugate priors for hierarchical standard deviation parameters, and then consider noninformative and weakly informative priors in this family. We use an example to illustrate serious problems with the inverse-gamma family of “noninformative” prior distributions. We suggest instead to use a uniform prior on the hierarchical standard deviation, using the half-t family when the number of groups is small and in other settings where a weakly informative prior is desired. We also illustrate the use of the half-t family for hierarchical modeling of multiple variance parameters such as arise in the analysis of variance.},
   file = {/Users/bb9/Zotero/storage/SZJZJUME/Gelman_2006_Bayesian Analysis_Prior distributions for variance parameters in hierarchical models (comment on.pdf},
-  keywords = {_favourite,Bayesian inference,Bayesian inference; priors,meta-analysis,meta-analysis; study heterogeneity,multilevel/hierarchical model},
+  keywords = {_favourite,Bayesian inference,Bayesian prior,meta-analysis,meta-analysis; study heterogeneity,multilevel/hierarchical/mixed model},
   langid = {english},
   number = {3}
 }
@@ -2841,7 +2878,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://projecteuclid.org/euclid.aoas/1231424214},
   urldate = {2019-08-14},
   file = {/Users/bb9/Zotero/storage/YPV96RLA/Gelman et al_2008_The Annals of Applied Statistics_A weakly informative default prior distribution for logistic and other.pdf},
-  keywords = {bayesglm,Bayesian inference,Bayesian inference; priors,methods,regression,regression; linear,regression; logistic},
+  keywords = {bayesglm,Bayesian inference,Bayesian prior,methods,regression,regression; linear,regression; logistic},
   langid = {english},
   number = {4}
 }
@@ -2859,7 +2896,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2018-10-30},
   abstract = {Applied researchers often find themselves making statistical inferences in settings that would seem to require multiple comparisons adjustments. We challenge the Type I error paradigm that underlies these corrections. Moreover we posit that the problem of multiple comparisons can disappear entirely when viewed from a hierarchical Bayesian perspective. We propose building multilevel models in the settings where multiple comparisons arise. Multilevel models perform partial pooling (shifting estimates toward each other), whereas classical procedures typically keep the centers of intervals stationary, adjusting for multiple comparisons by making the intervals wider (or, equivalently, adjusting the p values corresponding to intervals of fixed width). Thus, multilevel models address the multiple comparisons problem and also yield more efficient estimates, especially in settings with low group-level variation, which is where multiple comparisons are a particular concern.},
   file = {/Users/bb9/Zotero/storage/NBVXUWWE/Gelman et al_2012_Journal of Research on Educational Effectiveness_Why We (Usually) Don't Have to Worry About Multiple Comparisons.pdf},
-  keywords = {Bayesian inference,multilevel/hierarchical model,multiple testing},
+  keywords = {Bayesian inference,multilevel/hierarchical/mixed model,multiple testing},
   langid = {english},
   number = {2}
 }
@@ -3023,7 +3060,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2020-04-26},
   bookauthor = {Borgan, Ørnulf and Breslow, Norman E. and Chatterjee, Nilanjan and Gail, Mitchell H. and Scott, Alastair and Wild, Christopher J.},
   isbn = {978-1-315-15408-4},
-  keywords = {_favourite,case-control,genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical model,review},
+  keywords = {_favourite,case-control,genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical/mixed model,review},
   langid = {english}
 }
 
@@ -3093,7 +3130,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://link.springer.com/10.1007/s10654-016-0149-3},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/WFIQKRF7/Greenland et al_2016_European Journal of Epidemiology_Statistical tests, P values, confidence intervals, and power.pdf},
-  keywords = {_favourite,review,statistics,statistics; confidence intervals,statistics; misconceptions,statistics; p values,statistics; power},
+  keywords = {_favourite,power (statistics),review,statistics,statistics; confidence intervals,statistics; misconceptions,statistics; p-values},
   langid = {english},
   number = {4}
 }
@@ -3162,7 +3199,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprint = {1809.04407},
   eprinttype = {arxiv},
   file = {/Users/bb9/Zotero/storage/K69H8YWP/Günhan et al_2018_arXiv1809.04407 [stat]_Meta-analysis of few studies involving rare events.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; weakly informative,Cochrane Database of Systematic Reviews,meta-analysis,meta-analysis; binary endpoints,meta-analysis; random-effects,meta-analysis; small k,MetaStan,methods,multilevel/hierarchical model},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; weakly informative,Cochrane Database of Systematic Reviews,meta-analysis,meta-analysis; binary endpoints,meta-analysis; random-effects,meta-analysis; small k,MetaStan,methods,multilevel/hierarchical/mixed model},
   langid = {english},
   primaryClass = {stat}
 }
@@ -3212,7 +3249,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://www.nature.com/articles/ng.3506},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/CCABLM7B/Gusev et al_2016_Nature Genetics_Integrative approaches for large-scale transcriptome-wide association studies.pdf},
-  keywords = {genetic association,genetic association; transcriptome-wide (TWAS),obesity},
+  keywords = {genetic association,obesity,transcriptome-wide association study (TWAS)},
   langid = {english},
   number = {3},
   options = {useprefix=true}
@@ -3275,7 +3312,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/2ADXQRX6/Hagan et al_2015_Systems vaccinology.pdf},
   isbn = {1873-2518 (Electronic)\textbackslash{}r0264-410X (Linking)},
-  keywords = {_untagged_working_set,★,review,systems vaccinology,vaccine,vaccine; development,vaccine; rational design},
+  keywords = {_untagged_working_set,review,systems vaccinology,vaccine,vaccine; development,vaccine; rational design},
   number = {40}
 }
 
@@ -3365,7 +3402,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2019-04-10},
   abstract = {There exists a variety of situations in which a random effects meta-analysis might be undertaken using a small number of clinical trials. A problem associated with small meta-analyses is estimating the heterogeneity between trials. To overcome this problem, information from other related studies may be incorporated into the meta-analysis. A Bayesian approach to this problem is presented using data from previous meta-analyses in the same therapeutic area to formulate a prior distribution for the heterogeneity. The treatment difference parameters are given non-informative priors. Further, related trials which compare one or other of the treatments of interest with a common third treatment are included in the model to improve inference on both the heterogeneity and the treatment difference. Two approaches to estimating relative efficacy are considered, namely a general parametric approach and a method explicit to binary data. The methodology is illustrated using data from 26 clinical trials which investigate the prevention of cirrhosis using beta-blockers and sclerotherapy. Both sources of external information lead to more precise posterior distributions for all parameters, in particular that representing heterogeneity.},
   file = {/Users/bb9/Zotero/storage/S28VM9AZ/Higgins_Whitehead_1996_Statistics in Medicine_Borrowing strength from external trials in a meta-analysis.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; informative,inverse-gamma distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; meta-meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; informative,inverse-gamma distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; meta-meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity},
   langid = {english},
   number = {24}
 }
@@ -3383,7 +3420,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2018-07-10},
   abstract = {Meta-analysis in the presence of unexplained heterogeneity is frequently undertaken by using a random-effects model, in which the effects underlying different studies are assumed to be drawn from a normal distribution. Here we discuss the justification and interpretation of such models, by addressing in turn the aims of estimation, prediction and hypothesis testing. A particular issue that we consider is the distinction between inference on the mean of the random-effects distribution and inference on the whole distribution. We suggest that random-effects meta-analyses as currently conducted often fail to provide the key results, and we investigate the extent to which distribution-free, classical and Bayesian approaches can provide satisfactory methods. We conclude that the Bayesian approach has the advantage of naturally allowing for full uncertainty, especially for prediction. However, it is not without problems, including computational intensity and sensitivity to a priori judgements. We propose a simple prediction interval for classical meta-analysis and offer extensions to standard practice of Bayesian meta-analysis, making use of an example of studies of ‘set shifting’ ability in people with eating disorders.},
   file = {/Users/bb9/Zotero/storage/MV68YUC9/Higgins et al_2009_Journal of the Royal Statistical Society Series A (Statistics in Society)_A re-evaluation of random-effects meta-analysis.pdf},
-  keywords = {Bayesian inference,frequentist inference,meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity,methods,methods; comparison of,multilevel/hierarchical model,review},
+  keywords = {Bayesian inference,frequentist inference,meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity,methods,methods; comparison of,multilevel/hierarchical/mixed model,review},
   langid = {english},
   number = {1}
 }
@@ -3436,7 +3473,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2020-05-15},
   abstract = {Most common diseases are complex genetic traits, with multiple genetic and environmental components contributing to susceptibility. It has been proposed that common genetic variants, including single nucleotide polymorphisms (SNPs), influence susceptibility to common disease. This proposal has begun to be tested in numerous studies of association between genetic variation at these common DNA polymorphisms and variation in disease susceptibility. We have performed an extensive review of such association studies. We find that over 600 positive associations between common gene variants and disease have been reported; these associations, if correct, would have tremendous importance for the prevention, prediction, and treatment of most common diseases. However, most reported associations are not robust: of the 166 putative associations which have been studied three or more times, only 6 have been consistently replicated. Interestingly, of the remaining 160 associations, well over half were observed again one or more times. We discuss the possible reasons for this irreproducibility and suggest guidelines for performing and interpreting genetic association studies. In particular, we emphasize the need for caution in drawing conclusions from a single report of an association between a genetic variant and disease susceptibility. Genet Med 2002:4(2):45–61.},
   file = {/Users/bb9/Zotero/storage/DTSUQJL3/Hirschhorn et al_2002_Genetics in Medicine_A comprehensive review of genetic association studies.pdf},
-  keywords = {_untagged_working_set},
+  keywords = {genetic association,review},
   langid = {english},
   number = {2}
 }
@@ -3454,7 +3491,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://www.tandfonline.com/doi/abs/10.1198/000313001300339897},
   urldate = {2019-11-24},
   file = {/Users/bb9/Zotero/storage/5KY8TNR6/Hoenig_Heisey_2001_The American Statistician_The Abuse of Power.pdf},
-  keywords = {statistics,statistics; observed power,statistics; post-hoc power,statistics; power},
+  keywords = {power (statistics),power (statistics); observed,power (statistics); post-hoc,statistics},
   langid = {english},
   number = {1}
 }
@@ -3470,7 +3507,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2019-05-14},
   abstract = {Large-scale transcriptome studies with multiple samples per individual are widely used to study disease biology. Yet current methods for differential expression are inadequate for these repeated measures designs. Here we introduce a novel method, dream, that increases power, controls the false positive rate, integrates with standard workflows, and yields biological insight in multiple datasets.},
   file = {/Users/bb9/Zotero/storage/D7PM5AV2/Hoffman_Roussos_2018_bioRxiv_dream.pdf},
-  keywords = {dream,methods,research design,research design; repeated measures,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {dream,methods,repeated measures/longitudinal study,transcriptomics,transcriptomics; differential gene expression},
   langid = {english}
 }
 
@@ -3487,7 +3524,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2019-05-13},
   abstract = {Body mass index (BMI), a proxy measure for obesity, is determined by both environmental (including ethnicity, age, and sex) and genetic factors, with . 400 BMI-associated loci identified to date. However, the impact, interplay, and underlying biological mechanisms among BMI, environment, genetics, and ancestry are not completely understood. To further examine these relationships, we utilized 427,509 calendar year-averaged BMI measurements from 100,418 adults from the single large multiethnic Genetic Epidemiology Research on Adult Health and Aging (GERA) cohort. We observed substantial independent ancestry and nationality differences, including ancestry principal component interactions and nonlinear effects. To increase the list of BMI-associated variants before assessing other differences, we conducted a genome-wide association study (GWAS) in GERA, with replication in the Genetic Investigation of Anthropomorphic Traits (GIANT) consortium combined with the UK Biobank (UKB), followed by GWAS in GERA combined with GIANT, with replication in the UKB. We discovered 30 novel independent BMI loci (P , 5.0 3 1028) that replicated. We then assessed the proportion of BMI variance explained by sex in the UKB using previously identified loci compared to previously and newly identified loci and found slight increases: from 3.0 to 3.3\% for males and from 2.7 to 3.0\% for females. Further, the variance explained by previously and newly identified variants decreased with increasing age in the GERA and UKB cohorts, echoed in the variance explained by the entire genome, which also showed gene–age interaction effects. Finally, we conducted a tissue expression QTL enrichment analysis, which revealed that GWAS BMI-associated variants were enriched in the cerebellum, consistent with prior work in humans and mice.},
   file = {/Users/bb9/Zotero/storage/YMNF9F49/Hoffmann et al_2018_Genetics_A Large Multiethnic Genome-Wide Association Study of Adult Body Mass Index.pdf},
-  keywords = {body mass index (BMI),BOLT-LMM,ethnicity,genetic association,genetic association; genome-wide (GWAS),Genetic Epidemiology Research on Adult Health and Aging (GERA),meta-analysis,METASOFT,multilevel/hierarchical model,UK Biobank (UKB)},
+  keywords = {body mass index (BMI),BOLT-LMM,ethnicity,genetic association,genetic association; genome-wide (GWAS),Genetic Epidemiology Research on Adult Health and Aging (GERA),meta-analysis,METASOFT,multilevel/hierarchical/mixed model,UK Biobank (UKB)},
   langid = {english},
   number = {2}
 }
@@ -3504,7 +3541,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://www.nature.com/articles/s41380-018-0037-1},
   urldate = {2019-09-18},
   file = {/Users/bb9/Zotero/storage/DRWVMG56/Holmes_Davey Smith_2019_Molecular Psychiatry_Problems in interpreting and using GWAS of conditional phenotypes illustrated.pdf},
-  keywords = {_favourite,alcohol consumption,genetic association,genetic association; genome-wide (GWAS),Mendelian randomization (MR),regression,regression; regression of residuals,statistics,statistics; misconceptions},
+  keywords = {_favourite,alcohol consumption,genetic association,genetic association; genome-wide (GWAS),Mendelian randomization (MR),regression,regression; regression of residuals/two-stage,statistics,statistics; misconceptions},
   langid = {english},
   number = {2}
 }
@@ -3702,7 +3739,7 @@ In conclusion, this thesis provides a strong evidence base for eQTL study design
   abstract = {We introduce a statistical model for microarray gene expression data that comprises data calibration, the quantification of differential expression, and the quantification of measurement error. In particular, we derive a transformation h for intensity measurements, and a difference statistic h whose variance is approximately constant along the whole intensity range. This forms a basis for statistical inference from microarray data, and provides a rational data pre-processing strategy for multivariate analyses. For the transformation h, the parametric form h(x) = arsinh(a + bx) is derived from a model of the variance-versus-mean dependence for microarray intensity data, using the method of variance stabilizing transformations. For large intensities, h coincides with the logarithmic transformation, and h with the log-ratio. The parameters of h together with those of the calibration between experiments are estimated with a robust variant of maximum-likelihood estimation. We demonstrate our approach on data sets from different experimental platforms, including two-colour cDNA arrays and a series of Affymetrix oligonucleotide arrays.},
   file = {/Users/bb9/Zotero/storage/7BVSGUX4/Huber et al_2002_Bioinformatics_Variance stabilization applied to microarray data calibration and to the.pdf},
   issue = {Suppl 1},
-  keywords = {background correction,methods,microarray (expression),microarray (expression); between-array normalisation,transcriptomics,variance stabilization,vsn},
+  keywords = {background correction,data transformation (statistics),data transformation (statistics); variance stabilisation,methods,microarray (expression),microarray (expression); between-array normalisation,transcriptomics,vsn},
   langid = {english},
   options = {useprefix=true}
 }
@@ -3718,7 +3755,7 @@ In conclusion, this thesis provides a strong evidence base for eQTL study design
   eprint = {1707.03301},
   eprinttype = {arxiv},
   file = {/Users/bb9/Zotero/storage/78C8IBPS/Huo et al_2017_arXiv1707.03301 [stat]_Bayesian latent hierarchical model for transcriptomic meta-analysis to detect.pdf},
-  keywords = {_unread_low_priority,Bayesian inference,meta-analysis,meta-analysis; p-value combination,methods,microarray (expression),multilevel/hierarchical model,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression},
+  keywords = {_unread_low_priority,Bayesian inference,meta-analysis,meta-analysis; p-value combination,methods,microarray (expression),multilevel/hierarchical/mixed model,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression},
   langid = {english},
   primaryClass = {stat}
 }
@@ -3808,6 +3845,40 @@ In conclusion, this thesis provides a strong evidence base for eQTL study design
   keywords = {influenza,influenza; A(H1N1)pdm09}
 }
 
+@article{internationalhumangenomesequencingconsortium2001InitialSequencingAnalysis,
+  title = {Initial Sequencing and Analysis of the Human Genome},
+  author = {{International Human Genome Sequencing Consortium}},
+  date = {2001-02},
+  journaltitle = {Nature},
+  volume = {409},
+  pages = {860--921},
+  issn = {0028-0836, 1476-4687},
+  doi = {10.1038/35057062},
+  url = {http://www.nature.com/articles/35057062},
+  urldate = {2020-05-15},
+  file = {/Users/bb9/Zotero/storage/G5PQYCF3/International Human Genome Sequencing Consortium - 2001 - Initial sequencing and analysis of the human genom.pdf},
+  keywords = {Human Genome Project (HGP)},
+  langid = {english},
+  number = {6822}
+}
+
+@article{internationalhumangenomesequencingconsortium2004FinishingEuchromaticSequence,
+  title = {Finishing the Euchromatic Sequence of the Human Genome},
+  author = {{International Human Genome Sequencing Consortium}},
+  date = {2004-10},
+  journaltitle = {Nature},
+  volume = {431},
+  pages = {931--945},
+  issn = {0028-0836, 1476-4687},
+  doi = {10.1038/nature03001},
+  url = {http://www.nature.com/articles/nature03001},
+  urldate = {2020-05-15},
+  file = {/Users/bb9/Zotero/storage/S5TFHFAJ/International Human Genome Sequencing Consortium_2004_Nature_Finishing the euchromatic sequence of the human genome.pdf},
+  keywords = {Human Genome Project (HGP)},
+  langid = {english},
+  number = {7011}
+}
+
 @article{ishigaki2017PolygenicBurdensCellspecific,
   title = {Polygenic Burdens on Cell-Specific Pathways Underlie the Risk of Rheumatoid Arthritis},
   author = {Ishigaki, Kazuyoshi and Kochi, Yuta and Suzuki, Akari and Tsuchida, Yumi and Tsuchiya, Haruka and Sumitomo, Shuji and Yamaguchi, Kensuke and Nagafuchi, Yasuo and Nakachi, Shinichiro and Kato, Rika and Sakurai, Keiichi and Shoda, Hirofumi and Ikari, Katsunori and Taniguchi, Atsuo and Yamanaka, Hisashi and Miya, Fuyuki and Tsunoda, Tatsuhiko and Okada, Yukinori and Momozawa, Yukihide and Kamatani, Yoichiro and Yamada, Ryo and Kubo, Michiaki and Fujio, Keishi and Yamamoto, Kazuhiko},
@@ -3856,7 +3927,7 @@ In conclusion, this thesis provides a strong evidence base for eQTL study design
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0085253815529748},
   urldate = {2019-05-13},
   file = {/Users/bb9/Zotero/storage/LZNWYBW2/Jager et al_2008_Kidney International_Confounding.pdf},
-  keywords = {_unread_med_priority,causal model,causal model; confounder,epidemiology},
+  keywords = {_unread_med_priority,causal model,confounder (statistics),epidemiology},
   langid = {english},
   number = {3}
 }
@@ -3921,7 +3992,7 @@ Conclusion: Although 5 Â 10À8 has become the de facto standard genome-wide thr
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/9PKT2NP9/Johnson et al_2007_Adjusting batch effects in microarray expression data using empirical Bayes.pdf},
   isbn = {1465-4644, 1468-4357},
-  keywords = {batch effects,Bayesian inference,Bayesian inference; empirical Bayes,ComBat,methods,microarray (expression),transcriptomics},
+  keywords = {batch effects,Bayesian inference,ComBat,empirical Bayes,methods,microarray (expression),transcriptomics},
   number = {1}
 }
 
@@ -4026,7 +4097,7 @@ Conclusion: Although 5 Â 10À8 has become the de facto standard genome-wide thr
   urldate = {2018-08-07},
   abstract = {Genomewide association mapping in model organisms such as inbred mouse strains is a promising approach for the identification of risk factors related to human diseases. However, genetic association studies in inbred model organisms are confronted by the problem of complex population structure among strains. This induces inflated false positive rates, which cannot be corrected using standard approaches applied in human association studies such as genomic control or structured association. Recent studies demonstrated that mixed models successfully correct for the genetic relatedness in association mapping in maize and Arabidopsis panel data sets. However, the currently available mixed-model methods suffer from computational inefficiency. In this article, we propose a new method, efficient mixed-model association (EMMA), which corrects for population structure and genetic relatedness in model organism association mapping. Our method takes advantage of the specific nature of the optimization problem in applying mixed models for association mapping, which allows us to substantially increase the computational speed and reliability of the results. We applied EMMA to in silico whole-genome association mapping of inbred mouse strains involving hundreds of thousands of SNPs, in addition to Arabidopsis and maize data sets. We also performed extensive simulation studies to estimate the statistical power of EMMA under various SNP effects, varying degrees of population structure, and differing numbers of multiple measurements per strain. Despite the limited power of inbred mouse association mapping due to the limited number of available inbred strains, we are able to identify significantly associated SNPs, which fall into known QTL or genes identified through previous studies while avoiding an inflation of false positives. An R package implementation and webserver of our EMMA method are publicly available.},
   file = {/Users/bb9/Zotero/storage/DIIERYN3/Kang et al_2008_Genetics_Efficient Control of Population Structure in Model Organism Association Mapping.pdf},
-  keywords = {EMMA,genetic association,methods,multilevel/hierarchical model,phylogenetic control,population stratification},
+  keywords = {EMMA,genetic association,methods,multilevel/hierarchical/mixed model,phylogenetic control,population stratification},
   langid = {english},
   number = {3}
 }
@@ -4136,7 +4207,7 @@ Conclusion: Although 5 Â 10À8 has become the de facto standard genome-wide thr
   urldate = {2019-11-24},
   abstract = {Background Anti-TNF drugs are effective treatments for the management of Crohn’s disease but treatment failure is common. We aimed to identify clinical and pharmacokinetic factors that predict primary nonresponse at week 14 after starting treatment, non-remission at week 54, and adverse events leading to drug withdrawal.},
   file = {/Users/bb9/Zotero/storage/5LV28L53/Kennedy et al_2019_The Lancet Gastroenterology & Hepatology_Predictors of anti-TNF treatment failure in anti-TNF-naive patients with active.pdf},
-  keywords = {biologics,biologics; anti-TNF,drug response,drug response; immunogenicity,inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),PANTS},
+  keywords = {anti-TNF drug,biologics,immunogenicity,inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),PANTS},
   langid = {english},
   number = {5},
   options = {useprefix=true}
@@ -4282,7 +4353,7 @@ Conclusion: Although 5 Â 10À8 has become the de facto standard genome-wide thr
   abstract = {Numerous cell types are involved in maintenance of the intestinal tissue. However, the main players are cells of the epithelial lining and the immune system. Human peripheral blood mononuclear cells (PBMCs) are used to investigate the effect of food bioactives on various immune cells. These cells are easily isolated from blood of healthy donors or buffy coats (leukocyte concentrates, a by-product from hospital Blood Banks in the manufacturing of red blood cell and thrombocyte concentrates from anti-coagulated whole blood). PBMCs have a different composition, phenotype and activation status than cells found in intestinal tissue. However, this is a useful test system for investigation of immune modulatory effects of food bioactive compounds. Methods for the isolation of PBMCs and how they are used to investigate effects of bioactive components are discussed in this chapter.},
   file = {/Users/bb9/Zotero/storage/VU6ZXGNZ/Kleiveland_2015_The Impact of Food Bioactives on Health_Peripheral Blood Mononuclear Cells.pdf},
   isbn = {978-3-319-15791-7 978-3-319-16104-4},
-  keywords = {peripheral blood mononuclear cell (PBMC),research design},
+  keywords = {peripheral blood mononuclear cell (PBMC),study design},
   langid = {english}
 }
 
@@ -4375,7 +4446,7 @@ Conclusions: When evidence for heterogeneity is lacking, standard practice is to
   url = {http://doi.wiley.com/10.1002/gepi.20300},
   urldate = {2020-05-06},
   file = {/Users/bb9/Zotero/storage/PXIGH7WC/Kooperberg_LeBlanc_2008_Genetic Epidemiology_Increasing the power of identifying gene × gene interactions in genome-wide.pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),genetic interaction (GI),multiple testing,multiple testing; Bonferroni,permutation test,statistics,statistics; interaction},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),genetic interaction (GI),interaction (statistics),multiple testing,multiple testing; Bonferroni,permutation test,statistics},
   langid = {english},
   number = {3}
 }
@@ -4469,7 +4540,7 @@ Conclusions: Modern FDR methods that use an informative covariate provide advant
   urldate = {2019-05-17},
   abstract = {Due to the strong overreliance on p-values in the scientific literature some researchers have argued that p-values should be abandoned or banned, and that we need to move beyond p-values and embrace practical alternatives. When proposing alternatives to p-values statisticians often commit the ‘Statistician’s Fallacy’, where they declare which statistic researchers really ‘want to know’. Instead of telling researchers what they want to know, statisticians should teach researchers which questions they can ask. In some situations, the answer to the question they are most interested in will be the p-value. There is clear room for improvement in how we teach p-values. If anyone really believes p-values are an important cause of problems in science, preventing the misinterpretation of p-values by developing better evidence-based education and user-centered statistical software should be a top priority. At least for some research questions we might not need alternatives to p-values, but can improve our inferences more by using alternatives to null-hypothesis tests. As long as null-hypothesis tests have been criticized, researchers have suggested to include minimal-effects tests and equivalence tests in our statistical toolbox, and these tests have the potential to greatly improve the questions researchers ask.},
   file = {/Users/bb9/Zotero/storage/8VEK2J95/Lakens_The practical alternative to the p-value is the correctly used p-value.pdf},
-  keywords = {_unread_low_priority,statistics,statistics; misconceptions,statistics; p values,statistics; statistician's fallacy},
+  keywords = {_unread_low_priority,statistics,statistics; misconceptions,statistics; p-values,statistics; statistician's fallacy},
   langid = {english}
 }
 
@@ -4660,6 +4731,23 @@ Conclusions: Adjuvanted and unadjuvanted monovalent influenza A(H1N1)pdm09 vacci
   number = {2}
 }
 
+@article{li2009GenotypeImputation,
+  title = {Genotype Imputation.},
+  author = {Li, Yun and Willer, Cristen and Sanna, Serena and Abecasis, Goncalo R},
+  date = {2009},
+  journaltitle = {Annual review of genomics and human genetics},
+  volume = {10},
+  pages = {387--406},
+  publisher = {{NIH Public Access}},
+  issn = {1545-293X},
+  doi = {10.1146/annurev.genom.9.081307.164242},
+  abstract = {Genotype imputation is now an essential tool in the analysis of genome-wide association scans. This technique allows geneticists to accurately evaluate the evidence for association at genetic markers that are not directly genotyped. Genotype imputation is particularly useful for combining results across studies that rely on different genotyping platforms but also increases the power of individual scans. Here, we review the history and theoretical underpinnings of the technique. To illustrate performance of the approach, we summarize results from several gene mapping studies. Finally, we preview the role of genotype imputation in an era when whole genome resequencing is becoming increasingly common.},
+  eprint = {19715440},
+  eprinttype = {pmid},
+  file = {/Users/bb9/Zotero/storage/GZPU7GCS/Li et al_2009_Genotype imputation.pdf},
+  keywords = {_favourite,imputation (genetics),linkage analysis,review}
+}
+
 @article{li2013MolecularSignaturesAntibody,
   title = {Molecular Signatures of Antibody Responses Derived from a Systems Biology Study of Five Human Vaccines},
   author = {Li, Shuzhao and Rouphael, Nadine and Duraisingham, Sai and Romero-Steiner, Sandra and Presnell, Scott and Davis, Carl and Schmidt, Daniel S and Johnson, Scott E and Milton, Andrea and Rajam, Gowrisankar and Kasturi, Sudhir and Carlone, George M and Quinn, Charlie and Chaussabel, Damien and Palucka, A Karolina and Mulligan, Mark J and Ahmed, Rafi and Stephens, David S and Nakaya, Helder I and Pulendran, Bali},
@@ -4675,7 +4763,7 @@ Conclusions: Adjuvanted and unadjuvanted monovalent influenza A(H1N1)pdm09 vacci
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/HXIPQVBZ/Li et al_2013_Nature Immunology_Molecular signatures of antibody responses derived from a systems biology study_(SM).pdf;/Users/bb9/Zotero/storage/LDUQBRSG/Li et al_2013_Nature Immunology_Molecular signatures of antibody responses derived from a systems biology study.pdf},
   isbn = {1529-2916 (Electronic)\textbackslash{}r1529-2908 (Linking)},
-  keywords = {_unread_high_priority,blood transcription module (BTM),influenza,systems vaccinology,systems vaccinology; comparative study,vaccine},
+  keywords = {_unread_high_priority,blood transcription module (BTM),comparative study,influenza,systems vaccinology,vaccine},
   number = {2}
 }
 
@@ -4787,7 +4875,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2019-10-13},
   abstract = {Many host- and vaccine-specific factors modulate an antibody response. Host genetic polymorphisms, in particular, modulate the immune response in multiple ways on different scales. This review article describes how information on host genetic polymorphisms and corresponding immune cascades may be used to generate personalized vaccine strategies to optimize the antibody response.},
   file = {/Users/bb9/Zotero/storage/4LFP7YPQ/Linnik_Egli_2016_Human Vaccines & Immunotherapeutics_Impact of host genetic polymorphisms on vaccine induced antibody response.pdf},
-  keywords = {bibliometrics,immune system,immune system; host genetics,immune system; humoral/antibody,review,systems vaccinology,vaccine},
+  keywords = {bibliometrics,immune system,immune system; host genetics,immune system; humoral,review,systems vaccinology,vaccine},
   langid = {english},
   number = {4}
 }
@@ -4804,7 +4892,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   url = {http://www.nature.com/articles/nmeth.1681},
   urldate = {2018-07-17},
   file = {/Users/bb9/Zotero/storage/KHK5KWWN/Lippert et al_2011_Nature Methods_FaST linear mixed models for genome-wide association studies_(supplementary).pdf;/Users/bb9/Zotero/storage/VJR778IG/Lippert et al_2011_Nature Methods_FaST linear mixed models for genome-wide association studies.pdf},
-  keywords = {FaST-LMM,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical model,regression,regression; linear},
+  keywords = {FaST-LMM,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical/mixed model,regression,regression; linear},
   langid = {english},
   number = {10}
 }
@@ -4819,7 +4907,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2018-07-18},
   abstract = {Multi-trait mixed models have emerged as a promising approach for joint analyses of multiple traits. In principle, the mixed model framework is remarkably general. However, current methods implement only a very specific range of tasks to optimize the necessary computations. Here, we present a multi-trait modeling framework that is versatile and fast: LIMIX enables to flexibly adapt mixed models for a broad range of applications with different observed and hidden covariates, and variable study designs. To highlight the novel modeling aspects of LIMIX we performed three vastly different genetic studies: joint GWAS of correlated blood lipid phenotypes, joint analysis of the expression levels of the multiple transcript-isoforms of a gene, and pathway-based modeling of molecular traits across environments. In these applications we show that LIMIX increases GWAS power and phenotype prediction accuracy, in particular when integrating stepwise multi-locus regression into multi-trait models, and when analyzing large numbers of traits. An open source implementation of LIMIX is freely available at: https://github.com/PMBio/limix.},
   file = {/Users/bb9/Zotero/storage/KQ2UP9MG/Lippert et al_2014_LIMIX.pdf;/Users/bb9/Zotero/storage/YJBQEN76/Lippert et al_2014_LIMIX_(supplementary).pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),LIMIX,methods,multilevel/hierarchical model,quantitative trait loci (QTL),regression,regression; linear},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),LIMIX,methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),regression,regression; linear},
   langid = {english}
 }
 
@@ -4835,7 +4923,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   url = {http://www.nature.com/articles/nmeth.2037},
   urldate = {2020-05-10},
   file = {/Users/bb9/Zotero/storage/4YSPTVTX/Listgarten et al_2012_Nature Methods_Improved linear mixed models for genome-wide association studies.pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical model,proximal contamination},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical/mixed model,proximal contamination},
   langid = {english},
   number = {6}
 }
@@ -4871,7 +4959,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2020-03-30},
   abstract = {Motivation: RNA-seq is replacing microarrays as the primary tool for gene expression studies. Many RNA-seq studies have used insufficient biological replicates, resulting in low statistical power and inefficient use of sequencing resources.},
   file = {/Users/bb9/Zotero/storage/BKZSKIIE/Liu et al_2014_Bioinformatics_RNA-seq differential expression studies.pdf},
-  keywords = {research design,RNA-seq,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {RNA-seq,study design,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {3}
 }
@@ -5015,9 +5103,24 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   url = {http://www.nature.com/doifinder/10.1038/ng.3190},
   urldate = {2018-07-17},
   file = {/Users/bb9/Zotero/storage/FUEV7NR6/Loh et al_2015_Nature Genetics_Efficient Bayesian mixed-model analysis increases association power in large.pdf},
-  keywords = {BOLT-LMM,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
+  keywords = {BOLT-LMM,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
   langid = {english},
   number = {3}
+}
+
+@article{loh2016ReferencebasedPhasingUsing,
+  title = {Reference-Based Phasing Using the {{Haplotype Reference Consortium}} Panel},
+  author = {Loh, Po-Ru and Danecek, Petr and Palamara, Pier Francesco and Fuchsberger, Christian and Reshef, Yakir A and Finucane, Hilary K and Schoenherr, Sebastian and Forer, Lukas and McCarthy, Shane and Abecasis, Goncalo R and Durbin, Richard and Price, Alkes L},
+  date = {2016},
+  journaltitle = {bioRxiv},
+  volume = {48},
+  pages = {052308},
+  issn = {1061-4036},
+  doi = {10.1101/052308},
+  abstract = {Haplotype phasing is a fundamental problem in medical and population genetics. Phasing is generally performed via statistical phasing within a genotyped cohort, an approach that can attain high accuracy in very large cohorts but attains lower accuracy in smaller cohorts. Here, we instead explore the paradigm of reference-based phasing. We introduce a new phasing algorithm that attains high accuracy across a broad range of cohort sizes by efficiently leveraging information from large external reference panels (such as the Haplotype Reference Consortium, HRC) using a new data structure based on the positional Burrows-Wheeler transform. Our method improves phasing accuracy by {$>$}2x compared to the best publicly available alternative for phasing small European-ancestry cohorts, and it attains a ≈20x speedup and ≈10\% increase in accuracy compared to reference-based phasing using SHAPEIT2. Our method is freely available for reference-based phasing using the HRC panel via the Sanger Imputation Service and the Michigan Imputation Server.},
+  file = {/Users/bb9/Zotero/storage/APYARGBS/Loh et al_2016_Reference-based phasing using the Haplotype Reference Consortium panel.pdf},
+  keywords = {Eagle2,Haplotype Reference Consortium (HRC),methods,Michigan Imputation Server,phasing (genetics),phasing (genetics); reference-based,Sanger Imputation Service},
+  number = {11}
 }
 
 @article{love2014ModeratedEstimationFold,
@@ -5035,7 +5138,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   eprint = {25516281},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/2AA9PHUK/Love et al_2014_Genome Biology_Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2.pdf;/Users/bb9/Zotero/storage/BMMJDXK5/550.html},
-  keywords = {Bayesian inference,Bayesian inference; empirical Bayes,DESeq2,methods,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {Bayesian inference,DESeq2,empirical Bayes,methods,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {12}
 }
@@ -5107,7 +5210,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2018-07-10},
   abstract = {As the sequencing cost continued to drop in the past decade, RNA sequencing (RNA-seq) has replaced microarray to become the standard high-throughput experimental tool to analyze transcriptomic profile. As more and more datasets are generated and accumulated in the public domain, meta-analysis to combine multiple transcriptomic studies to increase statistical power has received increasing popularity. In this article, we propose a Bayesian hierarchical model to jointly integrate microarray and RNA-seq studies. Since systematic fold change differences across RNA-seq and microarray for detecting differentially expressed genes have been previously reported, we replicated this finding in several real datasets and showed that incorporation of a normalization procedure to account for the bias improves the detection accuracy and power. We compared our method with the popular two-stage Fisher’s method using simulations and two real applications in a histological subtype (invasive lobular carcinoma) of breast cancer comparing PR+ versus PR- and early-stage versus late-stage patients. The result showed improved detection power and more significant and interpretable pathways enriched in the detected biomarkers from the proposed Bayesian model.},
   file = {/Users/bb9/Zotero/storage/GK83B4ZM/Ma et al_2017_Journal of Computational Biology_A Joint Bayesian Model for Integrating Microarray and RNA Sequencing.pdf},
-  keywords = {Bayesian inference,CBM (Cross-platform Bayesian Model),Markov chain Monte Carlo (MCMC),meta-analysis,methods,microarray (expression),multilevel/hierarchical model,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression},
+  keywords = {Bayesian inference,CBM (Cross-platform Bayesian Model),Markov chain Monte Carlo (MCMC),meta-analysis,methods,microarray (expression),multilevel/hierarchical/mixed model,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression},
   langid = {english},
   number = {7}
 }
@@ -5180,7 +5283,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2020-02-11},
   abstract = {Glucocorticoids (GCs) mediate physiological responses to environmental stress and are commonly used as pharmaceuticals. GCs act primarily through the GC receptor (GR, a transcription factor). Despite their clear biomedical importance, little is known about the genetic architecture of variation in GC response. Here we provide an initial assessment of variability in the cellular response to GC treatment by profiling gene expression and protein secretion in 114 EBV-transformed B lymphocytes of African and European ancestry. We found that genetic variation affects the response of nearby genes and exhibits distinctive patterns of genotype-treatment interactions, with genotypic effects evident in either only GC-treated or only control-treated conditions. Using a novel statistical framework, we identified interactions that influence the expression of 26 genes known to play central roles in GC-related pathways (e.g. NQO1, AIRE, and SGK1) and that influence the secretion of IL6.},
   file = {/Users/bb9/Zotero/storage/MSJ3RIWN/Maranville et al_2011_PLoS Genetics_Interactions between Glucocorticoid Treatment and Cis-Regulatory Polymorphisms.pdf},
-  keywords = {allelic imbalance,BRIdGE (Bayesian Regression for Identifying Gene-Environment interactions),genotype-environment interaction (GxE),glucocorticoids,lymphoblastoid cell lines (LCLs),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; in vitro,quantitative trait loci; response (reQTL)},
+  keywords = {allelic imbalance,BRIdGE (Bayesian Regression for Identifying Gene-Environment interactions),genotype-environment interaction (GxE),glucocorticoids,in vitro study,lymphoblastoid cell lines (LCLs),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL)},
   langid = {english},
   number = {7}
 }
@@ -5214,7 +5317,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0092867419308967},
   urldate = {2019-09-18},
   file = {/Users/bb9/Zotero/storage/AE2CBISJ/Martin et al_2019_Cell_Single-Cell Analysis of Crohn’s Disease Lesions Identifies a Pathogenic.pdf},
-  keywords = {anti-TNF therapy,drug resistance,inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),network science,network science; module identification,single-cell sequencing,single-cell sequencing; scRNA-seq},
+  keywords = {anti-TNF drug,drug resistance,inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),network science,network science; module identification,single-cell sequencing,single-cell sequencing; scRNA-seq},
   langid = {english},
   number = {6}
 }
@@ -5270,6 +5373,24 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   keywords = {_untagged_working_set,inflammatory bowel disease (IBD),review},
   langid = {english},
   number = {5}
+}
+
+@article{mefford2012CovariateDilemma,
+  title = {The {{Covariate}}'s {{Dilemma}}},
+  author = {Mefford, Joel and Witte, John S.},
+  editor = {Visscher, Peter M.},
+  date = {2012-11-08},
+  journaltitle = {PLoS Genetics},
+  volume = {8},
+  pages = {e1003096},
+  issn = {1553-7404},
+  doi = {10.1371/journal.pgen.1003096},
+  url = {https://dx.plos.org/10.1371/journal.pgen.1003096},
+  urldate = {2020-05-16},
+  file = {/Users/bb9/Zotero/storage/SQI2XX7Y/Mefford_Witte_2012_PLoS Genetics_The Covariate's Dilemma.PDF},
+  keywords = {_favourite,genetic association,randomized controlled trial (RCT),statistics,statistics; confounder,statistics; covariate},
+  langid = {english},
+  number = {11}
 }
 
 @article{mele2015HumanTranscriptomeTissues,
@@ -5422,7 +5543,7 @@ Conclusions: The R function collapseRows implements several standard and network
 Results: We treat the causal inference as a 'chain' of mathematical conditions that must be satisfied to conclude that the potential mediator is causal for the trait, where the inference is only as good as the weakest link in the chain. P-values are computed for the component conditions, which include tests of linkage and conditional independence. The Intersection-Union Test, in which a series of statistical tests are combined to form an omnibus test, is then employed to generate the overall test result. Using computer simulated mouse crosses, we show that type I error is low under a variety of conditions that include hidden variables and reactive pathways. We show that power under a simple causal model is comparable to other model selection techniques as well as Bayesian network reconstruction methods. We further show empirically that this method compares favorably to Bayesian network reconstruction methods for reconstructing transcriptional regulatory networks in yeast, recovering 7 out of 8 experimentally validated regulators.
 Conclusion: Here we propose a novel statistical framework in which existing notions of causal mediation are formalized into a hypothesis test, thus providing a standard quantitative measure of uncertainty in the form of a p-value. The method is theoretically and computationally accessible and with the provided software may prove a useful tool in disentangling molecular relationships.},
   file = {/Users/bb9/Zotero/storage/TWCMHL8A/Millstein et al_2009_BMC Genetics_Disentangling molecular relationships with a causal inference test.pdf},
-  keywords = {_untagged_working_set,causal inference test (CIT),methods},
+  keywords = {_untagged_working_set,causal inference test (CIT),causal model,methods},
   langid = {english},
   number = {1}
 }
@@ -5553,7 +5674,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/7Q5IYEMC/Mooney et al_2013_Systems immunogenetics of vaccines.pdf},
   isbn = {1096-3618 (Electronic); 1044-5323 (Linking)},
-  keywords = {_unread_med_priority,_untagged_working_set,★,systems vaccinology,vaccine},
+  keywords = {_unread_med_priority,_untagged_working_set,systems vaccinology,vaccine},
   number = {2}
 }
 
@@ -5566,7 +5687,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   urldate = {2018-07-30},
   abstract = {Different environmental factors, including diet, physical activity, or external conditions can contribute to genotype-environment interactions (GxE). Although high-dimensional environmental data are increasingly available, and multiple environments have been implicated with GxE at the same loci, multi-environment tests for GxE are not established. Such joint analyses can increase power to detect GxE and improve the interpretation of these effects. Here, we propose the structured linear mixed model (StructLMM), a computationally efficient method to test for and characterize loci that interact with multiple environments. After validating our model using simulations, we apply StructLMM to body mass index in UK Biobank, where our method detects previously known and novel GxE signals. Finally, in an application to a large blood eQTL dataset, we demonstrate that StructLMM can be used to study interactions with hundreds of environmental variables.},
   file = {/Users/bb9/Zotero/storage/6NHNHNMT/Moore et al_2018_A linear mixed model approach to study multivariate gene-environment.pdf;/Users/bb9/Zotero/storage/PWWGIKZS/Moore et al_2018_A linear mixed model approach to study multivariate gene-environment_(supplementary).pdf},
-  keywords = {genetic association,genotype-environment interaction (GxE),methods,multilevel/hierarchical model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),StructLMM},
+  keywords = {genetic association,genotype-environment interaction (GxE),methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),StructLMM},
   langid = {english}
 }
 
@@ -5685,7 +5806,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/K4PHJ4KX/Müller et al_2016_PLOS ONE_Removing Batch Effects from Longitudinal Gene Expression - Quantile.PDF},
   isbn = {1932-6203 (Electronic)\textbackslash{}r1932-6203 (Linking)},
-  keywords = {batch effects,longitudinal study,methods,methods; comparison of,microarray (expression),transcriptomics},
+  keywords = {batch effects,methods,methods; comparison of,microarray (expression),repeated measures/longitudinal study,transcriptomics},
   number = {6}
 }
 
@@ -5752,7 +5873,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/C2K8UEA4/Nakaya et al_2012_Systems vaccinology.pdf},
   isbn = {1939-005X (Electronic) 1939-005X (Linking)},
-  keywords = {_untagged_working_set,★,systems vaccinology,vaccine},
+  keywords = {_untagged_working_set,systems vaccinology,vaccine},
   number = {2}
 }
 
@@ -5772,7 +5893,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4Q5NCJEN/1-s2.0-S1074761315004902-mmc1.pdf;/Users/bb9/Zotero/storage/EY62DTFW/Nakaya et al_2015_Immunity_Systems Analysis of Immunity to Influenza Vaccination across Multiple Years and.pdf},
   isbn = {1097-4180 (Electronic)\textbackslash{}r1074-7613 (Linking)},
-  keywords = {blood transcription module (BTM),elderly,immune system,immune system; age,immune system; baseline,influenza,influenza; seasonal,predictive modelling,systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
+  keywords = {blood transcription module (BTM),immune system,immune system; age,immune system; baseline,influenza,influenza; seasonal,old age/elderly (65+),predictive modelling,systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
   number = {6}
 }
 
@@ -6042,7 +6163,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   url = {http://academic.oup.com/aje/article/163/5/397/61279/Limits-to-Causal-Inference-based-on-Mendelian},
   urldate = {2019-05-13},
   file = {/Users/bb9/Zotero/storage/37FXTHVU/Nitsch et al_2006_American Journal of Epidemiology_Limits to Causal Inference based on Mendelian Randomization.pdf},
-  keywords = {_unread_med_priority,Mendelian randomization (MR),research design; randomized controlled trial (RCT),review},
+  keywords = {_unread_med_priority,Mendelian randomization (MR),randomized controlled trial (RCT),review,study design},
   langid = {english},
   number = {5}
 }
@@ -6077,7 +6198,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   urldate = {2019-05-15},
   abstract = {In nephrology research, both observational studies and randomized controlled trials (RCTs) are commonly applied. Clinicians using the evidence from epidemiological studies should be aware of the specific qualities and limitations of each study design. The purpose of the article is therefore to provide a brief overview of the range of study designs and to comment on the most important strengths and weaknesses of these designs. In general, RCTs are the optimal study design to study the effects of therapy or other interventions and to establish causality, although their use is limited by ethical and practical concerns. Conversely, observational study designs, including case reports, case series, cross-sectional studies, case-control studies and cohort studies, are usually more useful than RCTs for non-therapeutic research questions. In conclusion, both observational studies and RCTs fulfill a complementary and valuable role in nephrology.},
   file = {/Users/bb9/Zotero/storage/XERFTVNT/Noordzij et al_2009_Nephron Clinical Practice_Study Designs in Clinical Research.pdf},
-  keywords = {_unread_low_priority,observational study,randomized controlled trial (RCT),research design,review},
+  keywords = {_unread_low_priority,observational study,randomized controlled trial (RCT),review,study design},
   langid = {english},
   number = {3}
 }
@@ -6112,7 +6233,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/NUCEL2TI/Obermoser et al_2013_Immunity_Systems Scale Interactive Exploration Reveals Quantitative and Qualitative.pdf},
   isbn = {1097-4180 (Electronic)\textbackslash{}r1074-7613 (Linking)},
-  keywords = {blood transcription module (BTM),influenza,influenza; seasonal,Streptococcus pneumoniae (pneumococcus),systems vaccinology,systems vaccinology; comparative study,vaccine,vaccine; Fluzone,vaccine; Pneumovax23},
+  keywords = {blood transcription module (BTM),comparative study,influenza,influenza; seasonal,Streptococcus pneumoniae (pneumococcus),systems vaccinology,vaccine,vaccine; Fluzone,vaccine; Pneumovax23},
   number = {4}
 }
 
@@ -6288,7 +6409,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   urldate = {2019-02-27},
   abstract = {Although the operation of natural selection requires that genotypes differ in fitness, some geneticists may find it easier to understand natural selection than fitness. Partly this reflects the fact that the word ‘fitness’ has been used to mean subtly different things. In this Review I distinguish among these meanings (for example, individual fitness, absolute fitness and relative fitness) and explain how evolutionary geneticists use fitness to predict changes in the genetic composition of populations through time. I also review the empirical study of fitness, emphasizing approaches that take advantage of recent genetic and genomic data, and I highlight important unresolved problems in understanding fitness.},
   file = {/Users/bb9/Zotero/storage/7M3SUNUF/Orr_2009_Nature Reviews Genetics_Fitness and its role in evolutionary genetics.pdf},
-  keywords = {_unread_low_priority,fitness (biology),review,review; fundamental concepts in genetics},
+  keywords = {_unread_low_priority,fitness (evolutionary biology),review,review; fundamental concepts in genetics},
   langid = {english},
   number = {8}
 }
@@ -6382,7 +6503,7 @@ Conclusions: Extensive simulations study showed that the distribution of the pro
   keywords = {_favourite,epidemiology,field guide,rotavirus}
 }
 
-@article{panousis2014AllelicMappingBiasa,
+@article{panousis2014AllelicMappingBias,
   title = {Allelic Mapping Bias in {{RNA}}-Sequencing Is Not a Major Confounder in {{eQTL}} Studies},
   author = {Panousis, Nikolaos I and Gutierrez-Arcelus, Maria and Dermitzakis, Emmanouil T and Lappalainen, Tuuli},
   date = {2014-09},
@@ -6393,7 +6514,7 @@ Conclusions: Extensive simulations study showed that the distribution of the pro
   url = {http://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0467-2},
   urldate = {2019-07-29},
   file = {/Users/bb9/Zotero/storage/VIGNY4PU/Panousis et al_2014_Genome Biology_Allelic mapping bias in RNA-sequencing is not a major confounder in eQTL studies.pdf},
-  keywords = {quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),RNA-seq,transcriptomics,transcriptomics; allelic mapping bias},
+  keywords = {quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),RNA-seq,RNA-seq; allelic mapping bias},
   langid = {english},
   number = {9}
 }
@@ -6484,7 +6605,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   eprint = {29476184},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/LN4YMYAE/Patin et al_2018_Nature Immunology_Natural variation in the parameters of innate immune cells is preferentially.pdf},
-  keywords = {_unread_high_priority,_untagged_working_set,★}
+  keywords = {_unread_high_priority,_untagged_working_set}
 }
 
 @article{patro2017SalmonProvidesFast,
@@ -6522,9 +6643,26 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   eprint = {24585732},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4IJLZUV9/Pearce_Richiardi_2014_International Journal of Epidemiology_Commentary.pdf},
-  keywords = {causal model,causal model; collider,statistics,statistics; Berkson's paradox,statistics; collider bias,statistics; sampling/ascertainment/selection bias},
+  keywords = {causal model,statistics,statistics; Berkson's paradox,statistics; collider,statistics; collider bias,statistics; sampling/ascertainment/selection bias},
   langid = {english},
   number = {2}
+}
+
+@article{peer2008EstimationMultipleTesting,
+  title = {Estimation of the Multiple Testing Burden for Genomewide Association Studies of Nearly All Common Variants},
+  author = {Pe'er, Itsik and Yelensky, Roman and Altshuler, David and Daly, Mark J.},
+  date = {2008-05},
+  journaltitle = {Genetic Epidemiology},
+  volume = {32},
+  pages = {381--385},
+  issn = {07410395, 10982272},
+  doi = {10.1002/gepi.20303},
+  url = {http://doi.wiley.com/10.1002/gepi.20303},
+  urldate = {2020-05-16},
+  file = {/Users/bb9/Zotero/storage/XXSGEYVL/Pe'er et al_2008_Genetic Epidemiology_Estimation of the multiple testing burden for genomewide association studies of.pdf},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),HapMap,multiple testing},
+  langid = {english},
+  number = {4}
 }
 
 @article{peters2016InsightGenotypePhenotypeAssociations,
@@ -6838,7 +6976,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   urldate = {2018-07-26},
   abstract = {Genome-wide association (GWA) studies are an effective approach for identifying genetic variants associated with disease risk. GWA studies can be confounded by population stratification — systematic ancestry differences between cases and controls — which has previously been addressed by methods that infer genetic ancestry. Those methods perform well in data sets in which population structure is the only kind of structure present but are inadequate in data sets that also contain family structure or cryptic relatedness. Here, we review recent progress on methods that correct for stratification while accounting for these additional complexities.},
   file = {/Users/bb9/Zotero/storage/Z9XJH9Y3/Price et al_2010_Nature Reviews Genetics_New approaches to population stratification in genome-wide association studies.pdf},
-  keywords = {_favourite,genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical model,population stratification,review},
+  keywords = {_favourite,genetic association,genetic association; genome-wide (GWAS),multilevel/hierarchical/mixed model,population stratification,population stratification; ancestry,population stratification; cryptic relatedness,population stratification; family structure,review},
   langid = {english},
   number = {7}
 }
@@ -6892,7 +7030,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/UZNH2UAU/Pulendran_Ahmed_2011_Immunological mechanisms of vaccination.pdf},
   isbn = {1529-2916 (Electronic) 1529-2908 (Linking)},
-  keywords = {_unread_med_priority,_untagged_working_set,★,systems vaccinology,vaccine},
+  keywords = {_unread_med_priority,_untagged_working_set,systems vaccinology,vaccine},
   number = {6}
 }
 
@@ -6928,7 +7066,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   url = {http://doi.wiley.com/10.1002/sim.4326},
   urldate = {2019-08-16},
   file = {/Users/bb9/Zotero/storage/MTY48ZJR/Pullenayegum_2011_Statistics in Medicine_An informed reference prior for between-study heterogeneity in meta-analyses of.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; informative,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; informative,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; study heterogeneity},
   langid = {english},
   number = {26}
 }
@@ -7124,7 +7262,7 @@ Conclusions: RNA-seq is a reliable tool but the repetitive nature of the human g
 Results: Among outcome types, heterogeneity was found to be lowest in meta-analyses of obstetric outcomes. Among intervention comparison types, heterogeneity was lowest in meta-analyses comparing two pharmacologic interventions. Predictive distributions are reported for different settings. In two example meta-analyses, incorporating external evidence led to a more precise heterogeneity estimate.
 Conclusion: Heterogeneity was influenced by meta-analysis characteristics. Informative priors for between-study variance were derived for each specific setting. Our analyses thus assist the incorporation of realistic prior information into meta-analyses including few studies. Ó 2015 The Authors. Published by Elsevier Inc. This is an open access article under the CC BY license (http:// creativecommons.org/licenses/by/3.0/).},
   file = {/Users/bb9/Zotero/storage/Q3B64CGA/Rhodes et al_2015_Journal of Clinical Epidemiology_Predictive distributions were developed for the extent of heterogeneity in.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; informative,Cochrane Database of Systematic Reviews,log-t distribution,meta-analysis,meta-analysis; continuous endpoint,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; informative,Cochrane Database of Systematic Reviews,log-t distribution,meta-analysis,meta-analysis; continuous endpoint,meta-analysis; study heterogeneity},
   langid = {english},
   number = {1}
 }
@@ -7141,7 +7279,7 @@ Conclusion: Heterogeneity was influenced by meta-analysis characteristics. Infor
   url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.7090},
   urldate = {2019-04-12},
   file = {/Users/bb9/Zotero/storage/CBTQZ5CA/Rhodes et al_2016_Statistics in Medicine_Implementing informative priors for heterogeneity in meta‐analysis using.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; informative,data augmentation,meta-analysis,meta-analysis; meta-regression,meta-analysis; random-effects,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; informative,data augmentation,meta-analysis,meta-analysis; meta-regression,meta-analysis; random-effects,meta-analysis; study heterogeneity},
   langid = {english},
   number = {29}
 }
@@ -7248,7 +7386,7 @@ Conclusion: Heterogeneity was influenced by meta-analysis characteristics. Infor
 Results: Differential and non-differential expression datasets were simulated using a combination of negative binomial and exponential distributions derived from real RNA-Seq data. These datasets were used to evaluate the performance of three commonly used differential expression analysis algorithms and to quantify the changes in power with respect to true and false positive rates when simulating variations in sequencing depth, biological replication and multiplex experimental design choices.
 Conclusions: This work quantitatively explores comparisons between contemporary analysis tools and experimental design choices for the detection of differential expression using RNA-Seq. We found that the DESeq algorithm performs more conservatively than edgeR and NBPSeq. With regard to testing of various experimental designs, this work strongly suggests that greater power is gained through the use of biological replicates relative to library (technical) replicates and sequencing depth. Strikingly, sequencing depth could be reduced as low as 15\% without substantial impacts on false positive or true positive rates.},
   file = {/Users/bb9/Zotero/storage/U3F3IWX8/Robles et al_2012_Eﬃcient experimental design and analysis strategies for the detection of.pdf},
-  keywords = {methods,methods; comparison of,research design,RNA-seq,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {methods,methods; comparison of,RNA-seq,study design,transcriptomics,transcriptomics; differential gene expression},
   langid = {english}
 }
 
@@ -7297,7 +7435,7 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   eprint = {1711.08683},
   eprinttype = {arxiv},
   file = {/Users/bb9/Zotero/storage/UNJQYL2P/Röver_2017_arXiv1711.08683 [stat]_Bayesian random-effects meta-analysis using the bayesmeta R package.pdf},
-  keywords = {_favourite,Bayesian inference,bayesmeta,meta-analysis,meta-analysis; random-effects,methods,multilevel/hierarchical model},
+  keywords = {_favourite,Bayesian inference,bayesmeta,meta-analysis,meta-analysis; random-effects,methods,multilevel/hierarchical/mixed model},
   langid = {english},
   primaryClass = {stat}
 }
@@ -7316,7 +7454,7 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   urldate = {2019-05-10},
   abstract = {Linear mixed effect models are powerful tools used to account for population structure in genome-wide association studies (GWASs) and estimate the genetic architecture of complex traits. However, fully-specified models are computationally demanding and common simplifications often lead to reduced power or biased inference. We describe Grid-LMM (https://github.com/deruncie/GridLMM), an extendable algorithm for repeatedly fitting complex linear models that account for multiple sources of heterogeneity, such as additive and non-additive genetic variance, spatial heterogeneity, and genotype-environment interactions. Grid-LMM can compute approximate (yet highly accurate) frequentist test statistics or Bayesian posterior summaries at a genome-wide scale in a fraction of the time compared to existing general-purpose methods. We apply Grid-LMM to two types of quantitative genetic analyses. The first is focused on accounting for spatial variability and non-additive genetic variance while scanning for QTL; and the second aims to identify gene expression traits affected by non-additive genetic variation. In both cases, modeling multiple sources of heterogeneity leads to new discoveries.},
   file = {/Users/bb9/Zotero/storage/NJ2Q6AW3/Runcie_Crawford_2019_PLOS Genetics_Fast and flexible linear mixed models for genome-wide genetics.pdf},
-  keywords = {_unread_low_priority,genetic association,genetic association; genome-wide (GWAS),Grid-LMM,methods,multilevel/hierarchical model,regression,regression; linear},
+  keywords = {_unread_low_priority,genetic association,genetic association; genome-wide (GWAS),Grid-LMM,methods,multilevel/hierarchical/mixed model,regression,regression; linear},
   langid = {english},
   number = {2}
 }
@@ -7437,7 +7575,7 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0016508519414145},
   urldate = {2019-11-24},
   file = {/Users/bb9/Zotero/storage/K8YQ8DH5/1-s2.0-S0016508519414145-mmc1.pdf;/Users/bb9/Zotero/storage/UVB8UHU5/Sazonovs et al_2019_Gastroenterology_HLA-DQA105 Carriage Associated With Development of Anti-Drug Antibodies to.pdf},
-  keywords = {biologics,biologics; anti-TNF,drug response,drug response; immunogenicity,genetic association,genetic association; genome-wide (GWAS),human leukocyte antigen (HLA),inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),PANTS,pharmacogenomics},
+  keywords = {anti-TNF drug,biologics,genetic association,genetic association; genome-wide (GWAS),human leukocyte antigen (HLA),immunogenicity,inflammatory bowel disease (IBD),inflammatory bowel disease; Crohn's disease (CD),PANTS,pharmacogenomics},
   langid = {english}
 }
 
@@ -7505,7 +7643,7 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   url = {http://www.nature.com/articles/ng.3211},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/RMDFGETW/Schizophrenia Working Group of the Psychiatric Genomics Consortium et al_2015_Nature Genetics_LD Score regression distinguishes confounding from polygenicity in genome-wide.pdf},
-  keywords = {_unread_low_priority,genetic association,genetic association; genome-wide (GWAS),genetic association; test statistic inflation,LD score regression,methods,population stratification},
+  keywords = {_unread_low_priority,genetic association,genetic association; genome-wide (GWAS),genomic control/genomic inflation (factor),LD score regression,methods,population stratification},
   langid = {english},
   number = {3}
 }
@@ -7607,7 +7745,7 @@ Conclusions: In the presence of between-study heterogeneity, especially with unb
   date = {2005},
   pages = {14},
   file = {/Users/bb9/Zotero/storage/RTDPKJZW/Senn_2005_Dichotomania.pdf},
-  keywords = {_untagged_working_set,statistics,statistics; dichotomization},
+  keywords = {_untagged_working_set,data transformation (statistics),data transformation (statistics); dichotomization,statistics},
   langid = {english}
 }
 
@@ -7676,7 +7814,7 @@ Conclusions: In the presence of between-study heterogeneity, especially with unb
   urldate = {2019-10-13},
   abstract = {Significance testing was developed as an objective method for summarizing statistical evidence for a hypothesis. It has been widely adopted in genetic studies, including genome-wide association studies and, more recently, exome sequencing studies. However, significance testing in both genome-wide and exome-wide studies must adopt stringent significance thresholds to allow multiple testing, and it is useful only when studies have adequate statistical power, which depends on the characteristics of the phenotype and the putative genetic variant, as well as the study design. Here, we review the principles and applications of significance testing and power calculation, including recently proposed gene-based tests for rare variants.},
   file = {/Users/bb9/Zotero/storage/277Z5ECB/Sham_Purcell_2014_Nature Reviews Genetics_Statistical power and significance testing in large-scale genetic studies.pdf},
-  keywords = {_unread_low_priority,_untagged_working_set,Bayesian inference,rare variation,research design,review,statistics,statistics; power},
+  keywords = {_unread_low_priority,_untagged_working_set,Bayesian inference,power (statistics),rare variation,review,statistics,study design},
   langid = {english},
   number = {5}
 }
@@ -7830,7 +7968,7 @@ Conclusions: In the presence of between-study heterogeneity, especially with unb
   url = {http://www.nature.com/articles/nature07940},
   urldate = {2020-02-14},
   file = {/Users/bb9/Zotero/storage/GAF8UE7Q/Smirnov et al_2009_Nature_Genetic analysis of radiation-induced changes in human gene expression.pdf},
-  keywords = {genotype-environment interaction (GxE),linkage analysis,microarray (expression),quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),radiation response},
+  keywords = {genotype-environment interaction (GxE),linkage analysis,microarray (expression),quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),radiation},
   langid = {english},
   number = {7246}
 }
@@ -8052,7 +8190,7 @@ Conclusions: Very small sample sizes, which are still common in RNA-seq experime
   url = {http://www.nature.com/articles/ncomms8432},
   urldate = {2018-07-31},
   file = {/Users/bb9/Zotero/storage/IBJZIT87/Stephan et al_2015_Nature Communications_A random forest approach to capture genetic effects in the presence of.pdf},
-  keywords = {_unread_low_priority,genetic association,genetic interaction (GI),multilevel/hierarchical model,population stratification,random forests},
+  keywords = {_unread_low_priority,genetic association,genetic interaction (GI),multilevel/hierarchical/mixed model,population stratification,random forests},
   langid = {english},
   number = {1}
 }
@@ -8107,7 +8245,7 @@ Conclusions: Very small sample sizes, which are still common in RNA-seq experime
   urldate = {2018-11-02},
   abstract = {We introduce a new Empirical Bayes approach for large-scale hypothesis testing, including estimating false discovery rates (FDRs), and effect sizes. This approach has two key differences from existing approaches to FDR analysis. First, it assumes that the distribution of the actual (unobserved) effects is unimodal, with a mode at 0. This “unimodal assumption” (UA), although natural in many contexts, is not usually incorporated into standard FDR analysis, and we demonstrate how incorporating it brings many benefits. Specifically, the UA facilitates efficient and robust computation—estimating the unimodal distribution involves solving a simple convex optimization problem—and enables more accurate inferences provided that it holds. Second, the method takes as its input two numbers for each test (an effect size estimate and corresponding standard error), rather than the one number usually used (p value or z score). When available, using two numbers instead of one helps account for variation in measurement precision across tests. It also facilitates estimation of effects, and unlike standard FDR methods, our approach provides interval estimates (credible regions) for each effect in addition to measures of significance. To provide a bridge between interval estimates and significance measures, we introduce the term “local false sign rate” to refer to the probability of getting the sign of an effect wrong and argue that it is a superior measure of significance than the local FDR because it is both more generally applicable and can be more robustly estimated. Our methods are implemented in an R package ashr available from http://github.com/stephens999/ashr.},
   file = {/Users/bb9/Zotero/storage/IJYJG6GI/Stephens_2016_Biostatistics_False discovery rates.pdf},
-  keywords = {_favourite,ashr,Bayesian inference,Bayesian inference; empirical Bayes,methods,multiple testing,multiple testing; false discovery rate (FDR),multiple testing; local false discovery rate (lfdr),multiple testing; local false sign rate (lfsr),statistics,statistics; type S error},
+  keywords = {_favourite,ashr,Bayesian inference,empirical Bayes,methods,multiple testing,multiple testing; false discovery rate (FDR),multiple testing; local false discovery rate (lfdr),multiple testing; local false sign rate (lfsr),statistics,statistics; type S error},
   langid = {english}
 }
 
@@ -8180,8 +8318,28 @@ Conclusions: Our results show that each of the five networks compared provides u
   doi = {10.1371/journal.pgen.1003491},
   url = {http://dx.plos.org/10.1371/journal.pgen.1003491},
   file = {/Users/bb9/Zotero/storage/YS9NEM2K/Sul et al_2013_PLoS Genetics_Effectively Identifying eQTLs from Multiple Tissues by Combining Mixed Model.PDF},
-  keywords = {genetic association,meta-analysis,Meta-Tissue,methods,multilevel/hierarchical model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {genetic association,meta-analysis,Meta-Tissue,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   number = {6}
+}
+
+@article{sul2018PopulationStructureGenetic,
+  title = {Population Structure in Genetic Studies: {{Confounding}} Factors and Mixed Models},
+  shorttitle = {Population Structure in Genetic Studies},
+  author = {Sul, Jae Hoon and Martin, Lana S. and Eskin, Eleazar},
+  editor = {Barsh, Gregory S.},
+  date = {2018-12-27},
+  journaltitle = {PLOS Genetics},
+  volume = {14},
+  pages = {e1007309},
+  issn = {1553-7404},
+  doi = {10.1371/journal.pgen.1007309},
+  url = {https://dx.plos.org/10.1371/journal.pgen.1007309},
+  urldate = {2020-05-16},
+  abstract = {A genome-wide association study (GWAS) seeks to identify genetic variants that contribute to the development and progression of a specific disease. Over the past 10 years, new approaches using mixed models have emerged to mitigate the deleterious effects of population structure and relatedness in association studies. However, developing GWAS techniques to accurately test for association while correcting for population structure is a computational and statistical challenge. Using laboratory mouse strains as an example, our review characterizes the problem of population structure in association studies and describes how it can cause false positive associations. We then motivate mixed models in the context of unmodeled factors.},
+  file = {/Users/bb9/Zotero/storage/U6HK8ZF7/Sul et al_2018_PLOS Genetics_Population structure in genetic studies.pdf},
+  keywords = {_favourite,EMMA,genetic association,genetic association; genome-wide (GWAS),heritability,multilevel/hierarchical/mixed model,population stratification,review,statistics,statistics; omitted-variable bias (OVB)},
+  langid = {english},
+  number = {12}
 }
 
 @article{sun2018GenomicAtlasHuman,
@@ -8214,7 +8372,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   urldate = {2018-07-10},
   abstract = {Findings from clinical and biological studies are often not reproducible when tested in independent cohorts. Due to the testing of a large number of hypotheses and relatively small sample sizes, results from whole-genome expression studies in particular are often not reproducible. Compared to singlestudy analysis, gene expression meta-analysis can improve reproducibility by integrating data from multiple studies. However, there are multiple choices in designing and carrying out a meta-analysis. Yet, clear guidelines on best practices are scarce. Here, we hypothesized that studying subsets of very large meta-analyses would allow for systematic identification of best practices to improve reproducibility. We therefore constructed three very large gene expression meta-analyses from clinical samples, and then examined meta-analyses of subsets of the datasets (all combinations of datasets with up to N/2 samples and K/2 datasets) compared to a ‘silver standard’ of differentially expressed genes found in the entire cohort. We tested three random-effects meta-analysis models using this procedure. We showed relatively greater reproducibility with more-stringent effect size thresholds with relaxed significance thresholds; relatively lower reproducibility when imposing extraneous constraints on residual heterogeneity; and an underestimation of actual false positive rate by Benjamini–Hochberg correction. In addition, multivariate regression showed that the accuracy of a meta-analysis increased significantly with more included datasets even when controlling for sample size.},
   file = {/Users/bb9/Zotero/storage/RAGNRM8R/Sweeney et al_2017_Nucleic Acids Research_Methods to increase reproducibility in differential gene expression via.pdf},
-  keywords = {meta-analysis,methods,methods; comparison of,multilevel/hierarchical model,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {meta-analysis,methods,methods; comparison of,multilevel/hierarchical/mixed model,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {1}
 }
@@ -8283,7 +8441,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {http://genome.cshlp.org/cgi/doi/10.1101/gr.124321.111},
   urldate = {2019-05-21},
   file = {/Users/bb9/Zotero/storage/82U3IVKA/Tarazona et al_2011_Genome Research_Differential expression in RNA-seq.pdf},
-  keywords = {methods,methods; comparison of,NOISeq,research design,RNA-seq,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {methods,methods; comparison of,NOISeq,RNA-seq,study design,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {12}
 }
@@ -8316,7 +8474,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   urldate = {2018-07-10},
   abstract = {Motivation: Large compendia of gene expression data have proven valuable for the discovery of novel biological relationships. The majority of available RNA assays are run on microarray, while RNA-seq is becoming the platform of choice for new experiments. The data structure and distributions between the platforms differ, making it challenging to combine them. We performed supervised and unsupervised machine learning evaluations, as well as differential expression analyses, to assess which normalization methods are best suited for combining microarray and RNA-seq data.},
   file = {/Users/bb9/Zotero/storage/ML8H44NQ/Taroni_Greene_2017_Cross-Platform Normalization Enables Machine Learning Model Training On.pdf},
-  keywords = {machine learning,machine learning; classification,microarray (expression),quantile normalisation,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression,transcriptomics; normalisation},
+  keywords = {machine learning,machine learning; classification,microarray (expression),quantile normalisation,RNA-seq,transcriptomics,transcriptomics; cross-platform,transcriptomics; differential gene expression},
   langid = {english}
 }
 
@@ -8441,6 +8599,23 @@ Conclusions: Our results show that each of the five networks compared provides u
   number = {7311}
 }
 
+@article{theinternationalhapmapconsortium2005HaplotypeMapHuman,
+  title = {A Haplotype Map of the Human Genome},
+  author = {{The International HapMap Consortium}},
+  date = {2005-10},
+  journaltitle = {Nature},
+  volume = {437},
+  pages = {1299--1320},
+  issn = {0028-0836, 1476-4687},
+  doi = {10.1038/nature04226},
+  url = {http://www.nature.com/articles/nature04226},
+  urldate = {2018-07-19},
+  file = {/Users/bb9/Zotero/storage/EM7WGKMH/The International HapMap Consortium_2005_Nature_A haplotype map of the human genome.pdf},
+  keywords = {haplotype block,HapMap,linkage disequilibrium (LD)},
+  langid = {english},
+  number = {7063}
+}
+
 @article{theinternationalhapmapconsortium2007SecondGenerationHuman,
   title = {A Second Generation Human Haplotype Map of over 3.1 Million {{SNPs}}},
   author = {{The International HapMap Consortium}},
@@ -8453,7 +8628,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {http://www.nature.com/articles/nature06258},
   urldate = {2020-05-15},
   file = {/Users/bb9/Zotero/storage/67ACWFWK/The International HapMap Consortium_2007_Nature_A second generation human haplotype map of over 3.pdf},
-  keywords = {HapMap,HapMap; Phase II},
+  keywords = {haplotype block,HapMap,HapMap; Phase II},
   langid = {english},
   number = {7164}
 }
@@ -8540,7 +8715,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   urldate = {2019-05-15},
   abstract = {The appropriate choice in study design is essential for the successful execution of biomedical and public health research. There are many study designs to choose from within two broad categories of observational and interventional studies. Each design has its own strengths and weaknesses, and the need to understand these limitations is necessary to arrive at correct study conclusions.},
   file = {/Users/bb9/Zotero/storage/UNMHC36Q/Thiese_2014_Biochemia Medica_Observational and interventional study design types\; an overview.pdf},
-  keywords = {_unread_low_priority,interventional/experimental study,observational study,research design,review},
+  keywords = {_unread_low_priority,interventional/experimental study,observational study,review,study design},
   langid = {english},
   number = {2}
 }
@@ -8710,7 +8885,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {https://academic.oup.com/ije/article-lookup/doi/10.1093/ije/dys041},
   urldate = {2019-08-16},
   file = {/Users/bb9/Zotero/storage/JEFU9ML6/Turner et al_2012_International Journal of Epidemiology_Predicting the extent of heterogeneity in meta-analysis, using empirical data.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; study heterogeneity},
   langid = {english},
   number = {3}
 }
@@ -8728,7 +8903,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {http://doi.wiley.com/10.1002/sim.6381},
   urldate = {2019-04-12},
   file = {/Users/bb9/Zotero/storage/JNENA48S/Turner et al_2015_Statistics in Medicine_Predictive distributions for between-study heterogeneity and simple methods for.pdf},
-  keywords = {Bayesian inference,Bayesian inference; priors,Bayesian inference; priors; informative,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; study heterogeneity},
+  keywords = {Bayesian inference,Bayesian prior,Bayesian prior; informative,Cochrane Database of Systematic Reviews,log-normal distribution,meta-analysis,meta-analysis; binary endpoints,meta-analysis; study heterogeneity},
   langid = {english},
   number = {6}
 }
@@ -8810,6 +8985,28 @@ Conclusions: Our results show that each of the five networks compared provides u
   options = {useprefix=true}
 }
 
+@article{vanbreukelen2006ANCOVAChangeBaseline,
+  title = {{{ANCOVA}} versus Change from Baseline Had More Power in Randomized Studies and More Bias in Nonrandomized Studies},
+  author = {van Breukelen, Gerard J.P.},
+  date = {2006-09},
+  journaltitle = {Journal of Clinical Epidemiology},
+  volume = {59},
+  pages = {920--925},
+  issn = {08954356},
+  doi = {10.1016/j.jclinepi.2006.02.007},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S0895435606000813},
+  urldate = {2020-05-16},
+  abstract = {Background and Objective: For inferring a treatment effect from the difference between a treated and untreated group on a quantitative outcome measured before and after treatment, current methods are analysis of covariance (ANCOVA) of the outcome with the baseline as covariate, and analysis of variance (ANOVA) of change from baseline. This article compares both methods on power and bias, for randomized and nonrandomized studies.
+Methods: The methods are compared by writing both as a regression model and as a repeated measures model, and are applied to a nonrandomized study of preventing depression.
+Results: In randomized studies both methods are unbiased, but ANCOVA has more power. If treatment assignment is based on the baseline, only ANCOVA is unbiased. In nonrandomized studies with preexisting groups differing at baseline, the two methods cannot both be unbiased, and may contradict each other. In the study of depression, ANCOVA suggests absence, but ANOVA of change suggests presence, of a treatment effect. The methods differ because ANCOVA assumes absence of a baseline difference.
+Conclusion: In randomized studies and studies with treatment assignment depending on the baseline, ANCOVA must be used. In nonrandomized studies of preexisting groups, ANOVA of change seems less biased than ANCOVA, but two control groups and two baseline measurements are recommended. Ó 2006 Elsevier Inc. All rights reserved.},
+  file = {/Users/bb9/Zotero/storage/62JE22U7/van Breukelen_2006_Journal of Clinical Epidemiology_ANCOVA versus change from baseline had more power in randomized studies and.pdf},
+  keywords = {_favourite,analysis of covariance (ANCOVA),repeated measures/longitudinal study,statistics,statistics; change score,statistics; Lord's paradox},
+  langid = {english},
+  number = {9},
+  options = {useprefix=true}
+}
+
 @article{vanbreukelen2013ANCOVACHANGEBaseline,
   title = {{{ANCOVA Versus CHANGE From Baseline}} in {{Nonrandomized Studies}}: {{The Difference}}},
   shorttitle = {{{ANCOVA Versus CHANGE From Baseline}} in {{Nonrandomized Studies}}},
@@ -8823,7 +9020,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {http://www.tandfonline.com/doi/abs/10.1080/00273171.2013.831743},
   urldate = {2019-05-15},
   file = {/Users/bb9/Zotero/storage/A3S3EFD6/van Breukelen_2013_Multivariate Behavioral Research_ANCOVA Versus CHANGE From Baseline in Nonrandomized Studies.pdf},
-  keywords = {_unread_low_priority,analysis of covariance (ANCOVA),analysis of variance (ANOVA),epidemiology,Lord's paradox,research design,research design; change from baseline,statistics},
+  keywords = {_favourite,_unread_med_priority,analysis of covariance (ANCOVA),analysis of variance (ANOVA),epidemiology,multilevel/hierarchical/mixed model,repeated measures/longitudinal study,statistics,statistics; change score,statistics; Lord's paradox,study design},
   langid = {english},
   number = {6},
   options = {useprefix=true}
@@ -8907,7 +9104,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {https://openpsychologydata.metajnl.com/article/10.5334/jopd.33/},
   urldate = {2019-08-14},
   file = {/Users/bb9/Zotero/storage/5ZMKP5NU/Van Erp et al_2017_Journal of Open Psychology Data_Estimates of Between-Study Heterogeneity for 705 Meta-Analyses Reported in.pdf},
-  keywords = {_unread_high_priority,_untagged_working_set,Bayesian inference,Bayesian inference; priors,meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity,psychology},
+  keywords = {_unread_high_priority,_untagged_working_set,Bayesian inference,Bayesian prior,meta-analysis,meta-analysis; random-effects,meta-analysis; study heterogeneity,psychology},
   langid = {english},
   number = {1}
 }
@@ -9015,6 +9212,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   urldate = {2020-02-10},
   abstract = {Background: With the changed therapeutic armamentarium for Crohn's disease (CD) and ulcerative colitis (UC), biomarkers predicting treatment response are urgently needed. We studied whole blood and mucosal expression of genes previously reported to predict outcome to anti-TNF therapy, and investigated if the signature was specific for anti-TNF agents.},
   file = {/Users/bb9/Zotero/storage/6HRCJSFW/Verstockt et al_2019_EBioMedicine_Low TREM1 expression in whole blood predicts anti-TNF response in inflammatory.pdf},
+  keywords = {_untagged_working_set},
   langid = {english}
 }
 
@@ -9083,7 +9281,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0002929711005337},
   urldate = {2020-05-15},
   file = {/Users/bb9/Zotero/storage/97ARXQ5L/Visscher et al_2012_The American Journal of Human Genetics_Five Years of GWAS Discovery.pdf},
-  keywords = {common disease-common variant (CDCV),genetic association,genetic association; genome-wide (GWAS),review},
+  keywords = {genetic architecture,genetic architecture; common disease-common variant (CDCV),genetic association,genetic association; genome-wide (GWAS),heritability,heritability; missing,review},
   langid = {english},
   number = {1}
 }
@@ -9192,7 +9390,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {http://www.nature.com/articles/s41588-019-0385-z},
   urldate = {2019-05-13},
   file = {/Users/bb9/Zotero/storage/BWYKCUDL/Wainberg et al_2019_Nature Genetics_Opportunities and challenges for transcriptome-wide association studies.pdf},
-  keywords = {_unread_med_priority,genetic association,genetic association; transcriptome-wide (TWAS),review},
+  keywords = {_unread_med_priority,genetic association,review,transcriptome-wide association study (TWAS)},
   langid = {english},
   number = {4}
 }
@@ -9224,6 +9422,23 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   file = {/Users/bb9/Zotero/storage/YAHDZI9W/Wald_Old_2019_Genetics in Medicine_The illusion of polygenic disease risk prediction.pdf},
   keywords = {methods,polygenic score,polygenic score; genetic/polygenic risk score (GRS/PRS),Risk Screening Converter,screening (medicine)},
   langid = {english}
+}
+
+@article{wall2003HaplotypeBlocksLinkage,
+  title = {Haplotype Blocks and Linkage Disequilibrium in the Human Genome},
+  author = {Wall, Jeffrey D. and Pritchard, Jonathan K.},
+  date = {2003-08},
+  journaltitle = {Nature Reviews Genetics},
+  volume = {4},
+  pages = {587--597},
+  issn = {1471-0056, 1471-0064},
+  doi = {10.1038/nrg1123},
+  url = {http://www.nature.com/articles/nrg1123},
+  urldate = {2020-05-17},
+  file = {/Users/bb9/Zotero/storage/BL3GUAVG/Wall_Pritchard_2003_Nature Reviews Genetics_Haplotype blocks and linkage disequilibrium in the human genome.pdf},
+  keywords = {haplotype block,linkage disequilibrium (LD),review},
+  langid = {english},
+  number = {8}
 }
 
 @article{wang2008BottomModularView,
@@ -9322,7 +9537,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz619/5545976},
   urldate = {2019-10-28},
   file = {/Users/bb9/Zotero/storage/TH3YCHWQ/Wang et al_2019_Bioinformatics_Using multiple measurements of tissue to estimate subject- and.pdf},
-  keywords = {Bayesian inference,Bayesian inference; empirical Bayes,expression deconvolution,genotype-environment interaction (GxE),methods,MIND,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL)},
+  keywords = {Bayesian inference,empirical Bayes,expression deconvolution,genotype-environment interaction (GxE),methods,MIND,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL)},
   langid = {english}
 }
 
@@ -9339,7 +9554,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108},
   urldate = {2019-07-18},
   file = {/Users/bb9/Zotero/storage/JRBI9HWF/Wasserstein_Lazar_2016_The American Statistician_The ASA Statement on ip-i -Values.pdf},
-  keywords = {_favourite,statistics,statistics; p values},
+  keywords = {_favourite,statistics,statistics; p-values},
   langid = {english},
   number = {2}
 }
@@ -9428,7 +9643,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {http://www.nature.com/articles/s41588-018-0216-7},
   urldate = {2018-11-26},
   file = {/Users/bb9/Zotero/storage/3ELCIMPI/Westra et al_2018_Nature Genetics_Fine-mapping and functional studies highlight potential causal variants for.pdf},
-  keywords = {ATAC-seq,autoimmune disease,fine mapping,FINEMAP,genetic association,genetic association; genome-wide (GWAS),Hi-C,rheumatoid arthritis,type 1 diabetes (T1D)},
+  keywords = {ATAC-seq,autoimmune disease,fine mapping,FINEMAP,genetic association,genetic association; genome-wide (GWAS),Hi-C,immune-mediated disease,rheumatoid arthritis,type 1 diabetes (T1D)},
   langid = {english},
   number = {10}
 }
@@ -9458,7 +9673,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   urldate = {2020-04-09},
   abstract = {Influenza is a major cause of respiratory disease leading to hospitalization in young children. However, seasonal trivalent influenza vaccines (TIVs) have been shown to be ineffective and poorly immunogenic in this population. The development of liveattenuated influenza vaccines and adjuvanted vaccines are important advances in the prevention of influenza in young children. The oil-in-water emulsions MF59 and adjuvant systems 03 (AS03) have been used as adjuvants in both seasonal adjuvanted trivalent influenza vaccines (ATIVs) and pandemic monovalent influenza vaccines. Compared with non-adjuvanted vaccine responses, these vaccines induce a more robust and persistent antibody response for both homologous and heterologous influenza strains in infants and young children. Evidence of a significant improvement in vaccine efficacy with these adjuvanted vaccines resulted in the use of the monovalent (A/H1N1) AS03-adjuvanted vaccine in children in the 2009 influenza pandemic and the licensure of the seasonal MF59 ATIV for children aged 6 months to 2 years in Canada. The mechanism of action of MF59 and AS03 remains unclear. Adjuvants such as MF59 induce proinflammatory cytokines and chemokines, including CXCL10, but independently of type-1 interferon. This proinflammatory response is associated with improved recruitment, activation and maturation of antigen presenting cells at the injection site. In young children MF59 ATIV produced more homogenous and robust transcriptional responses, more similar to adult-like patterns, than did TIV. Early gene signatures characteristic of the innate immune response, which correlated with antibody titers were also identified. Differences were detected when comparing child and adult responses including opposite trends in gene set enrichment at day 3 postvaccination and, unlike adult data, a lack of correlation between magnitude of plasmablast response at day 7 and antibody titers at day 28 in children. These insights show the utility of novel approaches in understanding new adjuvants and their importance for developing improved influenza vaccines for children.},
   file = {/Users/bb9/Zotero/storage/C7QY3N5F/Wilkins et al_2017_Frontiers in Immunology_AS03- and MF59-Adjuvanted Influenza Vaccines in Children.pdf},
-  keywords = {adjuvant,adjuvant; AS03,adjuvant; MF59,influenza,review,vaccine,young children},
+  keywords = {adjuvant,adjuvant; AS03,adjuvant; MF59,early childhood (3y-6y),influenza,review,vaccine},
   langid = {english}
 }
 
@@ -9468,7 +9683,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   volume = {18},
   pages = {14},
   file = {/Users/bb9/Zotero/storage/JRVW9UV6/Williams et al_Assumptions of Multiple Regression.pdf},
-  keywords = {_favourite,regression,regression; assumptions,regression; linear,statistics},
+  keywords = {_favourite,regression,regression; assumptions,regression; linear},
   langid = {english},
   number = {11}
 }
@@ -9551,7 +9766,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   urldate = {2019-05-22},
   abstract = {Motivation: RNA-seq has become a routine technique in differential expression (DE) identification. Scientists face a number of experimental design decisions, including the sample size. The power for detecting differential expression is affected by several factors, including the fraction of DE genes, distribution of the magnitude of DE, distribution of gene expression level, sequencing coverage and the choice of type I error control. The complexity and flexibility of RNA-seq experiments, the high-throughput nature of transcriptome-wide expression measurements and the unique characteristics of RNA-seq data make the power assessment particularly challenging.},
   file = {/Users/bb9/Zotero/storage/SNFHBCTH/Wu et al_2015_Bioinformatics_PROPER.pdf},
-  keywords = {methods,PROPER,research design,RNA-seq,statistics,statistics; power,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {methods,power (statistics),PROPER,RNA-seq,statistics,study design,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {2}
 }
@@ -9570,7 +9785,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   urldate = {2020-05-11},
   abstract = {Obesity has become epidemic worldwide, and abdominal obesity has a negative impact on health. Current treatment options on obesity, however, still remain limited. It is then of importance to find a new target for anti-obesity drug development based upon recent molecular studies in obesity. Adenylate cyclase 3 (ADCY3) is the third member of adenylyl cyclase family and catalyses the synthesis of cAMP from ATP. Genetic studies with candidate gene and genome-wide association study approaches have demonstrated that ADCY3 genetic polymorphisms are associated with obesity in European and Chinese populations. Epigenetic studies have indicated that increased DNA methylation levels in the ADCY3 gene are involved in the pathogenesis of obesity. Furthermore, biological analyses with animal models have implicated that ADCY3 dysfunction resulted in increased body weight and fat mass, while reduction of body weight is partially explained by ADCY3 activation. In this review, we describe genomic and biological features of ADCY3, summarize genetic and epigenetic association studies of the ADCY3 gene with obesity and discuss dysfunction and activation of ADCY3. Based upon all data, we suggest that ADCY3 is a new target for anti-obesity drug development. Further investigation on the effectiveness of ADCY3 activator and its delivery approach to treat abdominal obesity has been taken into our consideration.},
   file = {/Users/bb9/Zotero/storage/N5W56KLR/Wu et al_2016_Obesity Reviews_Adenylate cyclase 3.pdf},
-  keywords = {_untagged_working_set,ADCY3,obesity},
+  keywords = {_untagged_working_set,adenylyl cyclase 3 (ADCY3),obesity},
   langid = {english},
   number = {9}
 }
@@ -9604,7 +9819,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {http://www.nature.com/articles/ng.608},
   urldate = {2020-05-15},
   file = {/Users/bb9/Zotero/storage/84YCGNTJ/Yang et al_2010_Nature Genetics_Common SNPs explain a large proportion of the heritability for human height.pdf},
-  keywords = {height (human),heritability,heritability; missing,multilevel/hierarchical model},
+  keywords = {height (human),heritability,heritability; missing,multilevel/hierarchical/mixed model},
   langid = {english},
   number = {7}
 }
@@ -9621,7 +9836,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {http://www.nature.com/articles/ng.2876},
   urldate = {2018-08-07},
   file = {/Users/bb9/Zotero/storage/F38HGDXJ/Yang et al_2014_Nature Genetics_Advantages and pitfalls in the application of mixed-model association methods.pdf},
-  keywords = {genetic association,multilevel/hierarchical model,population stratification,review},
+  keywords = {genetic association,multilevel/hierarchical/mixed model,population stratification,review},
   langid = {english},
   number = {2}
 }
@@ -9654,7 +9869,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   urldate = {2019-05-31},
   abstract = {Motivation: Although genome-wide association studies (GWAS) have deepened our understanding of the genetic architecture of complex traits, the mechanistic links that underlie how genetic variants cause complex traits remains elusive. To advance our understanding of the underlying mechanistic links, various consortia have collected a vast volume of genomic data that enable us to investigate the role that genetic variants play in gene expression regulation. Recently, a collaborative mixed model (CoMM) (Yang et al., 2018a) was proposed to jointly interrogate genome on complex traits by integrating both the GWAS dataset and the expression quantitative trait loci (eQTL) dataset. Although CoMM is a powerful approach that leverages regulatory information while accounting for the uncertainty in using an eQTL dataset, it requires individual-level GWAS data and cannot fully make use of widely available GWAS summary statistics. Therefore, statistically efficient methods that leverages transcriptome information using only summary statistics information from GWAS data are required. Results: In this study, we propose a novel probabilistic model, CoMM-S2, to examine the mechanistic role that genetic variants play, by using only GWAS summary statistics instead of individual-level GWAS data. Similar to CoMM which uses individual-level GWAS data, CoMM-S2 combines two models: the first model examines the relationship between gene expression and genotype, while the second model examines the relationship between the phenotype and the predicted gene expression from the first model. Distinct from CoMM, CoMM-S2 requires only GWAS summary statistics. Using both simulation studies and real data analysis, we demonstrate that even though CoMM-S2 utilizes GWAS summary statistics, it has comparable performance as CoMM, which uses individual-level GWAS data. Contact: jin.liu@duke-nus.edu.sg  Availability and implementation: The implement of CoMM-S2 is included in the CoMM package that can be downloaded from https://github.com/gordonliu8100822/CoMM. Supplementary information: Supplementary data are available at Bioinformatics online.},
   file = {/Users/bb9/Zotero/storage/K8SAMF2J/Yang et al_2019_bioRxiv_CoMM-S2.pdf},
-  keywords = {CoMM-S2,genetic association,genetic association; genome-wide (GWAS),genetic association; transcriptome-wide (TWAS),methods,multilevel/hierarchical model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {CoMM-S2,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),transcriptome-wide association study (TWAS)},
   langid = {english}
 }
 
@@ -9752,7 +9967,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/7WGFNATS/Zak_Aderem_2015_Systems integration of innate and adaptive immunity.pdf},
   isbn = {1873-2518 0264-410X},
-  keywords = {_untagged_working_set,★,review,systems vaccinology,vaccine},
+  keywords = {_untagged_working_set,review,systems vaccinology,vaccine},
   number = {40}
 }
 
@@ -9867,7 +10082,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {http://www.nature.com/articles/ng.2310},
   urldate = {2018-07-25},
   file = {/Users/bb9/Zotero/storage/HFVSVDKK/Zhou_Stephens_2012_Nature Genetics_Genome-wide efficient mixed-model analysis for association studies.pdf},
-  keywords = {GEMMA,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical model,population stratification,regression,regression; linear},
+  keywords = {GEMMA,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical/mixed model,population stratification,regression,regression; linear},
   langid = {english},
   number = {7}
 }
@@ -9884,7 +10099,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {http://www.nature.com/articles/nmeth.2848},
   urldate = {2018-07-29},
   file = {/Users/bb9/Zotero/storage/TGTYUZMW/Zhou_Stephens_2014_Nature Methods_Efficient multivariate linear mixed model algorithms for genome-wide.pdf},
-  keywords = {GEMMA,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical model,multivariate/joint model,population stratification,regression,regression; linear},
+  keywords = {GEMMA,genetic association,genetic association; genome-wide (GWAS),methods,multilevel/hierarchical/mixed model,multivariate/joint model,population stratification,regression,regression; linear},
   langid = {english},
   number = {4}
 }
@@ -9919,7 +10134,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/T52J7SD9/Zhu et al_2010_Vaccine_A whole genome transcriptional analysis of the early immune response induced by.pdf},
   isbn = {1873-2518},
-  keywords = {influenza,influenza; seasonal,microarray (expression),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV),young children},
+  keywords = {early childhood (3y-6y),influenza,influenza; seasonal,microarray (expression),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
   number = {16}
 }
 
@@ -9935,7 +10150,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {http://www.nature.com/articles/ng.3538},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/LLA2WHKR/Zhu et al_2016_Nature Genetics_Integration of summary data from GWAS and eQTL studies predicts complex trait.pdf},
-  keywords = {_unread_high_priority,genetic association,genetic association; genome-wide (GWAS),genetic association; transcriptome-wide (TWAS),Mendelian randomization (MR),Mendelian randomization; summary data-based (SMR),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_unread_high_priority,genetic association,genetic association; genome-wide (GWAS),Mendelian randomization (MR),Mendelian randomization; summary data-based (SMR),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),transcriptome-wide association study (TWAS)},
   langid = {english},
   number = {5}
 }
@@ -9954,7 +10169,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {https://academic.oup.com/bioinformatics/article/35/12/2084/5159452},
   urldate = {2020-04-06},
   file = {/Users/bb9/Zotero/storage/SFIK4GUW/Zhu et al_2019_Bioinformatics_Heavy-tailed prior distributions for sequence count data.pdf;/Users/bb9/Zotero/storage/Z79GMW26/Zhu et al_2018_bioRxiv_Heavy-tailed prior distributions for sequence count data.pdf},
-  keywords = {apeglm,Bayesian inference,Bayesian inference; empirical Bayes,Bayesian inference; priors,Cauchy distribution,DESeq2,methods,RNA-seq,transcriptomics,transcriptomics; differential gene expression},
+  keywords = {apeglm,Bayesian inference,Bayesian prior,Cauchy distribution,DESeq2,empirical Bayes,methods,RNA-seq,transcriptomics,transcriptomics; differential gene expression},
   langid = {english},
   number = {12}
 }

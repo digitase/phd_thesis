@@ -24,14 +24,18 @@ A diploid human cell contains two copies of the genome; 46 chromosomes comprised
 The vast majority ($> \percentage{99.9}$) of variants are \glspl{SNP} and short indels \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
 On average, a pair of human genomes differs by one \gls{SNP} per 1000-2000 \gls{bp} \autocite{theinternationalsnpmapworkinggroup2001MapHumanGenome}.
 
-\1 The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and combinations of haplotypes over time.
-Variants physically close on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate.
+\todo{work in definition of haplotype somewhere, is it specifically from parents, or from any ancestor?}
+The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and haplotypes over time.
+Variants at physically close loci on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate, referred to as linkage.
 % The Law of Dominance: An organism with alternate forms of a gene will express the form that is dominant.
 % Law of Segregation: states that a diploid organism passes a randomly selected allele for a trait to its offspring, such that the offspring receives one allele from each parent.
 % Law of independent assortment: states that genes do not influence each other with regard to the sorting of alleles into gametes; every possible combination of alleles for every gene is equally likely to occur.
-This violation of the law of independent assortment appears as \gls{LD} \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
-The genome is inherited in a mosaic of haplotype blocks delimited by recombination hotspots, each block containing variants in strong \gls{LD} \autocite{theinternationalhapmapconsortium2007SecondGenerationHuman}.
-These patterns of genetic variation are population-specific, and can be used to trace the demography of human populations through history \autocite{karczewski2020AnalyticTranslationalGenetics}.
+Non-random association of alleles at two loci, more often than expected from the law of independent assortment, is known as \gls{LD} \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+\gls{LD} is often quantified within a population by $r^2$, the squared correlation coefficient between the binary presence/absence vectors for each allele over population individuals \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+Recombination events are not distributed uniformly throughout the genome.
+Over time, the result is a genome structured in a mosaic of blocks delimited by recombination hotspots, each block containing haplotypes in strong \gls{LD} \autocite{wall2003HaplotypeBlocksLinkage,theinternationalhapmapconsortium2007SecondGenerationHuman}.
+\todo{not exactly sure if having LD automatically results in haplotype blocks over time, there are evo forces at work too}
+This correlation structure reflects population-specific evolutionary history, and can be used to trace the demography of human populations back through time \autocite{karczewski2020AnalyticTranslationalGenetics}.
 
 \section{Genetic association studies for complex traits}
 
@@ -40,14 +44,14 @@ Traits for which genetic variation explains a non-zero fraction of phenotypic va
     \2 Twin studies provide upper bounds on heritability \url{https://www.nature.com/articles/nrg3243}
 \1 Discovering the specific variants that contribute through association of genetic variants and phenotypes is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to backdoor path effects that confound observational studies of phenotypes.
+Genetic association studies have intrinsic resistance to backdoor path effects that plague observational studies of phenotypes.
 \todo{something sweeping about utility: mechanism and translational utility}
     % karczewski2020AnalyticTranslationalGenetics
     % In humans, analysis of large-scale natural variation data can provide valuable insights into human
     % disease and gene function. Joint analysis of genotype and phenotype data is especially powerful,
     % but even in the absence of phenotype data, patterns of variation data across the genome can inform
     % population history, natural selection, and the biological function of genes.
-    \2 What are the benefits of leveraging natural genetic variation?
+    \2 What are the benefits of leveraging natural genetic variation? Analogies to RCTs.
 
 \1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variation affects phenotype through it's impact on the function or regulation of genes.
 How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait, and the frequencies, effect sizes, and interactions between trait-associated variants \autocite{visscher2019Fisher1918Paper}.
@@ -56,62 +60,66 @@ Many architectures have been proposed for complex traits; all have in common tha
 and the average effect of each locus is relatively small compared to loci associated with monogenic traits \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
 \todo{distinguish genes and loci and variants, consider adding margin notes}
 
-% Read:
-%     5 years of GWAS: most common traits are polygenic
-%     10 years of GWAS:
-% TODO: then outline only at this point, or risk wasting time
-\1 \glspl{GWAS} systematically tests each of the millions of common variants across the genome for association with a trait.
-As the per variant effect size is so low for complex traits, enormous sample sizes are required.
+\1 [Principles of GWAS]
+For decades, linkage analysis was successfully used to map genetic variants affecting Mendelian traits by tracing their cosegregation through pedigrees.
+They were not successful for complex traits, as small effect size on disease risk leads to low penetrance \autocite{visscher2012FiveYearsGWAS}.
+% \1 Prior to the advent of \glspl{GWAS}, genetic association studies were performed for variants in or near candidate genes selected on the basis of prior knowledge \autocite{hirschhorn2002ComprehensiveReviewGenetic}.
+%     \2 Reviews of these early studies already noted issues with replication \autocite{hirschhorn2002ComprehensiveReviewGenetic},
+%     \2 \glspl{GWAS} has revealed the vast majority of humans traits are complex, and that many such studies suffered from poor power at the samples sizes
+%     \2 \autocite{border2019NoSupportHistorical} TODO: read this to find out exactly why they failed
+\glspl{GWAS} systematically tests large numbers of variants selected in an unbiased manner across the genome for association with a trait, taking advantage of the block-like \gls{LD} structure of the genome.
+    \2 The number of variants on a modern genotyping array is in the order of $10^5 - 10^6$, carefully selected to sufficiently tag (be in strong \gls{LD} with) known common variants \autocite{theinternationalhapmapconsortium2005HaplotypeMapHuman}.
+    \2 Genotype imputation then allows ascertainment of variants not directly genotyped \autocite{das2018GenotypeImputationLarge}.
+    As unrelated individuals still share ancestral haplotypes, study samples can be matched to a panel of haplotypes derived from reference samples via the directly genotyped variants, then unmeasured variants can then be imputed.
+    Given a sufficient sample size, modern imputation panels now allow cost-effective genetic association at hundreds of millions of variants with frequencies as rare as 0.01\% \url{https://www.biorxiv.org/content/10.1101/563866v1}. 
+    \todo{seems like there is some connection to be made between the selection of tag snps and the feasibility of imputation}
+    \2 Testing such large numbers of variants incurs a massive multiple testing burden, but again, correlation between variants due to \gls{LD} means there are only the equivalent of $\approx 10^6$ tests that can be performed in the European genome \autocite{peer2008EstimationMultipleTesting}.
+    \2 The field has thus converged on a discovery threshold of $0.05 / \num{10e6} = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged},
+    akin to controlling the family-wise type I error rate at $\alpha = 0.05$ for one million tests using the Bonferroni correction\footnote{
+        The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, and is always conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) unless the \pvalues have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
+    }.
 
-    \2 Prior to the advent of \glspl{GWAS} candidate genes would be proposed on the basis of prior knowledge
-    \2 early reports already noted issues with replication of genetic associations \autocite{hirschhorn2002ComprehensiveReviewGenetic}
-\glspl{GWAS} has revealed the vast majority of humans traits are polygenic, and that many such studies suffered from poor power \autocite{border2019NoSupportHistorical}
-
-\1 [Design of GWAS studies]
-\1 genotyping arrays
-    \2 comparison to linkage analysis \autocite{altshuler2008GeneticMappingHuman}
-    \2 taking advantage of LD 
-    \2 genotyping arrays target common known tag variants
-    \2 phasing and imputation allow cost efficient ascertainment of unmeasured variants 
-    \2 number of variants incurs a massive burden from multiple-testing
-
-    \2 Theoretical results show there are only about one million independent tests that can be performed in the genome
-    \todo{also a result of LD: add relationship to haplotype blocks}
-    \2 The field has converged on a discovery threshold of $0.05 / \num{10e6} = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, 
-    akin to controlling the family-wise type I error rate at $\alpha = 0.05$ using the Bonferroni correction.%
-    \footnote{The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) unless the \pvalues have strong negative correlations.}
-
-\1 Missing heritability refers to the observation that SNP-based heritability estimates from \gls{GWAS} fall short of additive (narrow-sense) heritability estimates from traditional quantitative methods such as twin studies.
-Perhaps unsurprisingly, it has been hypothesised that the remaining heritability lies in variants that can not be assessed by \gls{GWAS} due to rarity or small effect.
 % Also see:
 % 2007: Wellcome Trust Case Control Consortium landmark GWAS
-% 2009: Finding the missing heritability of complex diseases https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2831613/
+% 2009: Well-known paper: Finding the missing heritability of complex diseases https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2831613/
 % 2018: Revisiting the Missing Heritability of Complex Diseases, Ten Years On https://www.genome.gov/event-calendar/Revisiting-Missing-Heritability-of-Complex-Diseases-Ten-Years-On
-A classic example is the heritability of human height, estimated at 80\% by twin studies \autocite{maher2008PersonalGenomesCase}, 
-where considering only significant associations from \gls{GWAS} explains 5\% \autocite{maher2008PersonalGenomesCase}.
-Consideration of all common variants using mixed models (\software{GCTA}) increases the estimate to 45\% \autocite{yang2010CommonSNPsExplain},
+%
 % NOTE: a second approach to heritability estimation is linkage disequilibrium (LD) score regression.
-% TODO: https://doi.org/10.1371/journal.pgen.1008222
-Recent work suggests the full estimate of 80\% might be recoverable by also including rare and poorly tagged variants measured by \gls{WGS} \autocite{wainschtein2019RecoveryTraitHeritability}.
+%
+% \1 Missing heritability refers to the observation that SNP-based heritability estimates from \gls{GWAS} fall short of additive (narrow-sense) heritability estimates from traditional quantitative methods such as twin studies.
+% Perhaps unsurprisingly, it has been hypothesised that the remaining heritability lies in variants that can not be assessed by \gls{GWAS} due to rarity or small effect.
+% A classic example is the heritability of human height, estimated at 80\% by twin studies \autocite{maher2008PersonalGenomesCase},
+% where considering only significant associations from \gls{GWAS} explains 5\% \autocite{maher2008PersonalGenomesCase}.
+% Consideration of all common variants using mixed models (\software{GCTA}) increases the estimate to 45\% \autocite{yang2010CommonSNPsExplain},
+% Recent work (\software{GREML-WGS}) suggests the full estimate of 80\% might be recoverable by also including rare and poorly tagged variants measured by \gls{WGS} \autocite{wainschtein2019RecoveryTraitHeritability}.
 
-\1 WES/WGS is a trade-off between sample size and genomic coverage
-    \2 Allows discovery and association with rare and novel variation, including structural variants.
-
-% \1 WES (about 40Mbp of the genome)
-%     \2 covers more of the genome in terms of bp
-%     \2 but lower n, so lower power than array genotyping to do single variant associations
-%     \2 why 50x? variable coverage due to pulldown
+% \1 WES/WGS is a trade-off between sample size and genomic coverage
+%     \2 Allows discovery and association with rare and novel variation, including structural variants.
+% \1 WES (covers about 40Mbp of the genome)
+%     \2 covers more of the genome than GWAS
+%     \2 but lower n, so lower power to do single variant associations
+%     \2 needs 50x: variable coverage due to pulldown
 % \1 WGS
-%     \2 tradeoff between variant capture (n needed to observe variant) and sequencing depth (gives confidence to call variants)
+%     \2 there is a tradeoff between variant capture (n needed to observe variant) and sequencing depth (gives confidence to call variants)
 %     \2 20x ok to call 90\% of singletons
 %     \2 rare variants, including in nc regions
 %         \3 current discovery biases, finding higher effect size vars first
 %         \3 burden tests (e.g. SAIGE)
-%             \4 \url{https://www.nature.com/articles/s41576-019-0177-4}
-%             \4 to get gene, aggregate based on variant consequence scores e.g. vep scores
-%     \2 structural variants
+%             \4 review \url{https://www.nature.com/articles/s41576-019-0177-4}
+%     \2 also gets structural variants
 
-\1 Fine-mapping
+% Read:
+%     5 years of GWAS: most common traits are polygenic
+%     10 years of GWAS:
+% TODO: then outline only at this point, or risk wasting time
+\1 [Finding the causal variant]
+    \2
+
+Operationally, in this
+review what we mean by ‘‘causal variant’’ is an
+(unknown) variant that has a direct or indirect functional
+effect on disease risk, rather than a variant
+that is associated with disease risk through LD,
 
     \2 tagging enables, but also a curse
     \2 tag snps: causal snps may not be directly typed, may need to be imputed
@@ -120,7 +128,10 @@ Recent work suggests the full estimate of 80\% might be recoverable by also incl
 
 \section{Interpretation of genetic associations with molecular phenotypes}
 
-\1 Locus to gene mapping problem. even if you have causal var
+QTLs
+
+\1 [locus to gene mapping problem]
+    \2 Even if the causal variant is known
     \2 nc snps regulate
         \3 Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
 
@@ -128,17 +139,15 @@ Recent work suggests the full estimate of 80\% might be recoverable by also incl
         e.g.
             https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5062579/
             We then used Sherlock, a tool that integrates GWAS and expression quantitative trait locus (eQTL) data, to identify weak GWAS signals that are also supported by eQTL data. 
-
+    \2 enriched in reg
 
 \1 using ifntermediate/endophenotypes
-    \2 endophenotypes paper
+    \2 endophenotypes paper \autocite{goldman2007DeconstructionVulnerabilityComplex}
     % and used when final phenos are complicated https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
 \1 Gene expression is a fundamental intermediate phenotype
     % dogma
         \2 measure by array, rnaseq 
- 2012
-ENCODE study publishes 30 research papers describing the active regions of the human genome including confirmation that the human genome contains 20,687 protein-coding genes.
     \2 theory is that genetic variants manifest their effects through these phenotypes, central dogma based
 
     % For example, Gamazon et al.31proposed agene-based association method called
@@ -243,6 +252,7 @@ review: condition/Cell-type specific methods
     \2 ackerman conditional vs dynamic
 
 \1 why care about reQTLs
+Expose differences in regulation
 
 % 	Found reQTLs? So what? Gather take home messages and inspiration for post reQTL analyses
 % •	reQTL effect characteristation
@@ -352,7 +362,7 @@ reqtls in immunity
 % ongene expression are highly context-specific and informativefor disease6–11.
 
 The majority of response eQTL mapping experiments to date have been conducted \textit{in vitro}, where one can precisely adjust both the length and intensity of stimulation.
-Environmental variables including cell type composition or tissue type that are expected to interact with the eQTL effect and may confound the interaction effect with stimulation can be controlled.
+Environmental variables including cell type composition or tissue type that are expected to interact with the eQTL effect and may affect the interaction effect with stimulation can be controlled.
 The choice of experiment system and stimulation can also be hypothesis-driven, for example, if certain tissues are expected to be more relevant for a specific disease. 
 \todo{add more pros for in vitro reQTLs here, and find citations}.
 
@@ -381,6 +391,9 @@ in vivo pros
     choice of context 
     whole organism phenotypes
     more likely to be repeated measures
+        why is this good
+
+        blocking: deliberate aliasing with higher order interactions
 
 Review of in vivo mapping.
 What we learn on top of in vitro
