@@ -794,6 +794,8 @@ Shared \glspl{eQTL} are enriched close to the \gls{TSS}, whereas \glspl{reQTL} a
     \label{fig:hird_eQTL_zSharing_vs_TSSdist_mega}
 \end{figure}
 
+\todo{expand this to plot 1, list top 5 damp, flip, amp at each timepoint}
+\todo{note anything in lit about any of the 30}
 The strongest reQTL at day 1 was for \gene{ADCY3} (p difference = \num{8.676917e-06}, BH FDR = \num{0.1177458}),
 where the \gls{reQTL} variant explained approximately \percentage{0.01862996} of expression variation at day 0, increasing to \percentage{0.14075782} at day 1 (\autoref{fig:hird_eQTL_ploteQTL_ADCY3}).
 At day 7 the strongest \gls{reQTL} was at \gene{SH2D4A} (p difference = \num{1.369564e-06}, BH FDR = \num{0.01747935}).
@@ -831,6 +833,7 @@ After pruning highly correlated cell types to avoid multicollinearity, standardi
 Within-timepoint full \gls{eQTL} models including the genotype main effect, the three cell type abundance main effects, and three cell type-genotype interaction terms, were fit using \software{lme4qtl}, 
 then compared to a nested model excluding the three interaction terms.
 
+\todo{siunitx permits uncertainties}
 Significant cell type interactions were detected at 16/1154 \glspl{reQTL} (BH FDR < 0.05) in any timepoint, including \gene{ADCY3} at day 1 ($\chi^2(3) = \num{26.290769}$, \gls{LRT} BH FDR = \num{9.539518e-05}).
 Although the genotype effect size was \num{0.255954767} (SE = \num{0.03339378}) in the nested model,
 the estimate in the full model was \num{-0.007216815} (\num{0.06656115});
@@ -1024,6 +1027,8 @@ I have indirectly demonstrated genotype-dependent effects on expression response
 but have not yet to determined resulting genotype-dependent differences in antibody phenotypes.
 Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
 but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
+\todo{note coloc doesn't distinguish pleiotropy from mediation?}
+% many many scenarios possible: https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0613-2/figures/1
 and a formal tests such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} are required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.

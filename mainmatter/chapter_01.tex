@@ -11,41 +11,50 @@
 
 \section{Structure and diversity of the human genome}
 
-\1 The human genome is about three billion \glspl{bp} in length, containing 20000-25000 protein-coding genes \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman,theencodeprojectconsortium2012IntegratedEncyclopediaDNA} that span 1-3\% of its length.
+\1 The human genome is almost three billion \glspl{bp} in length, containing 20000-25000 protein-coding genes \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman,theencodeprojectconsortium2012IntegratedEncyclopediaDNA} that span 1-3\% of its length.
 The majority of the remainder is likely dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
 A diploid human cell contains two copies of the genome; 46 chromosomes comprised of 23 maternal-parental pairs: 22 pairs of homologous autosomes and one pair of sex chromosomes.
-
-\1 Variation in the genome exists in the form of \glspl{SNP}, short indels, and structural variants.
+%
+\1 Variation in the genome between individuals in a population exists in the form of \glspl{SNP}, short indels, and structural variants---\glspl{SNP} and short indels take up the vast majority ($> \percentage{99.9}$) \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
 % https://www.ncbi.nlm.nih.gov/dbvar/content/overview/
 % Structural variation (SV) is generally defined as a region of DNA
 % approximately 1 kb and larger in size and can include inversions and
 % balanced translocations or genomic imbalances (insertions and deletions),
 % commonly referred to as copy number variants (CNVs).
-The vast majority ($> \percentage{99.9}$) of variants are \glspl{SNP} and short indels \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
 On average, a pair of human genomes differs by one \gls{SNP} per 1000-2000 \gls{bp} \autocite{theinternationalsnpmapworkinggroup2001MapHumanGenome}.
+Each version of a variant is called an allele; an individual has a maternal and parental allele at each variant.
 
-\todo{work in definition of haplotype somewhere, is it specifically from parents, or from any ancestor?}
-The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and haplotypes over time.
-Variants at physically close loci on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate, referred to as linkage.
 % The Law of Dominance: An organism with alternate forms of a gene will express the form that is dominant.
 % Law of Segregation: states that a diploid organism passes a randomly selected allele for a trait to its offspring, such that the offspring receives one allele from each parent.
 % Law of independent assortment: states that genes do not influence each other with regard to the sorting of alleles into gametes; every possible combination of alleles for every gene is equally likely to occur.
-Non-random association of alleles at two loci, more often than expected from the law of independent assortment, is known as \gls{LD} \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
-\gls{LD} is often quantified within a population by $r^2$, the squared correlation coefficient between the binary presence/absence vectors for each allele over population individuals \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+\1 The many variants in a population are inherited in a smaller number of haplotypes: 
+contiguous stretches of the genome passed through generations via meiotic segregation.
+The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and breaking apart haplotypes into shorter ones over time.
+\todo{LD decay just takes a really really long time, but there are evo forces at work too that maintain LD}
+Variants at physically close positions (loci) on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate on the same haplotype, referred to as genetic linkage.
+Genetic linkage is one source of \gls{LD}: the non-random association of alleles at two loci, differing from expectation based on their frequencies and the law of independent assortment \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+\gls{LD} is often quantified within a population by $r^2$, the squared correlation coefficient between alleles \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+
 Recombination events are not distributed uniformly throughout the genome.
-Over time, the result is a genome structured in a mosaic of blocks delimited by recombination hotspots, each block containing haplotypes in strong \gls{LD} \autocite{wall2003HaplotypeBlocksLinkage,theinternationalhapmapconsortium2007SecondGenerationHuman}.
-\todo{not exactly sure if having LD automatically results in haplotype blocks over time, there are evo forces at work too}
-This correlation structure reflects population-specific evolutionary history, and can be used to trace the demography of human populations back through time \autocite{karczewski2020AnalyticTranslationalGenetics}.
+The genome is a mosaic of blocks delimited by recombination hotspots, 
+characterised by strong \gls{LD} within blocks, and little \gls{LD} between blocks \autocite{wall2003HaplotypeBlocksLinkage,theinternationalhapmapconsortium2007SecondGenerationHuman}.
+The structure of correlated haplotypes reflects a population's unique evolutionary history, and can be used to trace the demography of human populations back through time \autocite{karczewski2020AnalyticTranslationalGenetics}.
+
+\missingfigure{block-like structure of the genome}
 
 \section{Genetic association studies for complex traits}
 
 \1 Variation in human traits arises from an interplay between genetics and environment.
 Traits for which genetic variation explains a non-zero fraction of phenotypic variation are heritable.
     \2 Twin studies provide upper bounds on heritability \url{https://www.nature.com/articles/nrg3243}
-\1 Discovering the specific variants that contribute through association of genetic variants and phenotypes is a mainstay of the field of human genetics.
+\1 Discovering the specific variants that contribute, through association of genetic variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to backdoor path effects that plague observational studies of phenotypes.
-\todo{something sweeping about utility: mechanism and translational utility}
+Genetic association studies have intrinsic resistance to backdoor path effects that permeate observational studies of the causes of human phenotypes.
+\todo{insert something sweeping about utility: insights into trait biology and clinical translational potential for disease traits, genetic support target identification}
+% 72. Nelson, M.R., Tipney, H., Painter, J.L., Shen, J., Nicoletti, P.,
+% Shen, Y., Floratos, A., Sham, P.C., Li, M.J., Wang, J., et al.
+% (2015). The support of human genetic evidence for approved
+% drug indications. Nat. Genet. 47, 856–860.
     % karczewski2020AnalyticTranslationalGenetics
     % In humans, analysis of large-scale natural variation data can provide valuable insights into human
     % disease and gene function. Joint analysis of genotype and phenotype data is especially powerful,
@@ -53,31 +62,89 @@ Genetic association studies have intrinsic resistance to backdoor path effects t
     % population history, natural selection, and the biological function of genes.
     \2 What are the benefits of leveraging natural genetic variation? Analogies to RCTs.
 
-\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variation affects phenotype through it's impact on the function or regulation of genes.
-How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait, and the frequencies, effect sizes, and interactions between trait-associated variants \autocite{visscher2019Fisher1918Paper}.
-The number of genes defines a spectrum of traits from monogenic (where inheritance may follow a Mendelian pattern) to polygenic (where inheritance is complex).
-Many architectures have been proposed for complex traits; all have in common that the number of genes that affect a complex trait is very large (ranging from dozens to many thousands),
-and the average effect of each locus is relatively small compared to loci associated with monogenic traits \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
-\todo{distinguish genes and loci and variants, consider adding margin notes}
+\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variants at loci in the genome affect phenotype through by impacting on the function or regulation of target genes.
+How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait; and the allele frequencies, effect sizes, and interactions of trait-associated variants \autocite{visscher2019Fisher1918Paper}.
+The number of genes defines a spectrum of traits from monogenic (where inheritance follow simple Mendelian patterns) to polygenic (where inheritance is more complex).
+Many architectures have been proposed for complex traits; all have in common that the number of genes that affect a complex trait is large (ranging from dozens to many thousands),
+and the average effect of trait-associated loci is relatively small compared to monogenic traits \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
 
-\1 [Principles of GWAS]
-For decades, linkage analysis was successfully used to map genetic variants affecting Mendelian traits by tracing their cosegregation through pedigrees.
-They were not successful for complex traits, as small effect size on disease risk leads to low penetrance \autocite{visscher2012FiveYearsGWAS}.
-% \1 Prior to the advent of \glspl{GWAS}, genetic association studies were performed for variants in or near candidate genes selected on the basis of prior knowledge \autocite{hirschhorn2002ComprehensiveReviewGenetic}.
+\1 For decades, linkage analysis was successfully used to map loci affecting Mendelian traits by tracing their cosegregation with the trait through pedigrees.
+They were not successful for complex traits, as small effect sizes equate to low penetrance in pedigrees \autocite{visscher2012FiveYearsGWAS}.
+Genetic association studies were also performed for a variety of traits, focusing on variants in or near candidate genes selected on the basis of prior biological knowledge,
+but these studies were plagued with reproducibility issues \autocite{hirschhorn2002ComprehensiveReviewGenetic}.
+
+\1 \Glspl{GWAS} systematically test common variants (traditionally defined as $\text{\gls{MAF}} > 1-5\%$) selected in an unbiased manner across the genome for association with a trait.
+Many of the early association studies were on traits now known to be complex.
 %     \2 Reviews of these early studies already noted issues with replication \autocite{hirschhorn2002ComprehensiveReviewGenetic},
-%     \2 \glspl{GWAS} has revealed the vast majority of humans traits are complex, and that many such studies suffered from poor power at the samples sizes
+%     \2 \glspl{GWAS} has revealed the vast majority of humans traits are complex, and that many such studies suffered from poor power at the samples sizes TODO: 10 years of GWAS
 %     \2 \autocite{border2019NoSupportHistorical} TODO: read this to find out exactly why they failed
-\glspl{GWAS} systematically tests large numbers of variants selected in an unbiased manner across the genome for association with a trait, taking advantage of the block-like \gls{LD} structure of the genome.
-    \2 The number of variants on a modern genotyping array is in the order of $10^5 - 10^6$, carefully selected to sufficiently tag (be in strong \gls{LD} with) known common variants \autocite{theinternationalhapmapconsortium2005HaplotypeMapHuman}.
-    \2 Genotype imputation then allows ascertainment of variants not directly genotyped \autocite{das2018GenotypeImputationLarge}.
-    As unrelated individuals still share ancestral haplotypes, study samples can be matched to a panel of haplotypes derived from reference samples via the directly genotyped variants, then unmeasured variants can then be imputed.
-    Given a sufficient sample size, modern imputation panels now allow cost-effective genetic association at hundreds of millions of variants with frequencies as rare as 0.01\% \url{https://www.biorxiv.org/content/10.1101/563866v1}. 
-    \todo{seems like there is some connection to be made between the selection of tag snps and the feasibility of imputation}
-    \2 Testing such large numbers of variants incurs a massive multiple testing burden, but again, correlation between variants due to \gls{LD} means there are only the equivalent of $\approx 10^6$ tests that can be performed in the European genome \autocite{peer2008EstimationMultipleTesting}.
-    \2 The field has thus converged on a discovery threshold of $0.05 / \num{10e6} = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged},
-    akin to controlling the family-wise type I error rate at $\alpha = 0.05$ for one million tests using the Bonferroni correction\footnote{
-        The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, and is always conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) unless the \pvalues have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
-    }.
+
+% TODO main take homes of GWAS
+
+Thousands of robust associations 
+auto-immune, metabolic, and psychiatric disease in particular
+\autocite{visscher2012FiveYearsGWAS,visscher201710YearsGWAS}
+
+The vast majority of these traits are now known to be complex
+appreciation of polygenicity
+No one risk locus is sufficient, only raises by a bit
+
+genetic variance
+most genetic variance is additive \autocite{visscher2019Fisher1918Paper}
+not epistasis
+
+pleiotropy is wide spread \autocite{visscher2012FiveYearsGWAS}
+
+many replicated across popoulations \autocite{visscher2012FiveYearsGWAS}
+
+\missingfigure{OR vs MAF tam2019BenefitsLimitationsGenomewide}
+% d | Genetic variants exist along a spectrum of allele frequencies and
+% effect sizes. Most risk variants identified by GWAS lie within the two diagonal lines.
+% Rare variants with small effect sizes are difficult to identify using GWAS, and common
+% variants with large effects are unusual for common complex diseases.
+% tam2019BenefitsLimitationsGenomewide
+
+\autocite{gallagher2018PostGWASEraAssociation,tam2019BenefitsLimitationsGenomewide}
+
+\subsection{From trait to locus: principles of \glsfmtlongpl{GWAS}}
+
+As variants on the same haplotype tend to be in strong \gls{LD}, and the number of haplotypes is comparatively few, 
+it is possible to select a subset of tag variants such that all other known common variants are within a certain \gls{LD} threshold of that subset. 
+In practice, there is enough redundancy that the number of variants measured on a modern genotyping array (in the order of \numrange[retain-unity-mantissa=false]{1e5}{1e6}) is sufficient to tag almost all common variants  \autocite{theinternationalhapmapconsortium2005HaplotypeMapHuman,barrett2006EvaluatingCoverageGenomewide}.
+Remaining common variants are indirectly measured through their strong correlation with a tag variant.
+Furthermore, as unrelated individuals still share short ancestral haplotypes, 
+study samples can be assigned haplotypes from a panel of haplotypes derived from reference samples by matching on the directly genotyped variants.
+This process of genotype imputation allows ascertainment of variants not directly genotyped \autocite{das2018GenotypeImputationLarge},
+and help to recover many rarer variants that are poorly-tagged \autocite{visscher201710YearsGWAS}.
+\todo{seems like there is some connection to be made between the tagability of common variation and the feasibility of imputation}
+Modern imputation panels enable cost-effective \glspl{GWAS} including tens of millions of variants down to frequencies of \textapprox{0.01\%} \url{https://www.biorxiv.org/content/10.1101/563866v1}.
+
+Testing such large numbers of variants incurs a massive multiple testing burden, but acknowledging the correlation between variants due to \gls{LD},
+there are only the equivalent of \textapprox{10^6} independent tests in the European genome, regardless of the number of tests actually performed \autocite{peer2008EstimationMultipleTesting}.
+The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, akin\footnote{
+    The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, and is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. In fact it is always conservative unless the \pvalues have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
+}
+to controlling the family-wise type I error rate at using the Bonferroni correction.
+Still, for complex traits with small per-variant effects, the required sample sizes are enormous \autocite{visscher201710YearsGWAS}.
+Total \gls{GWAS} sample sizes in the millions are no longer an unusual occurrence \autocite{tam2019BenefitsLimitationsGenomewide}.
+
+\todo{CUT: There is a limit, the strategy of association is fundamentally unsuited to rare variants.}
+%     Rare Variants Association Analysis in Large-Scale Sequencing Studies at the Single Locus Level
+%     https://doi.org/10.1371/journal.pcbi.1004993
+%     Despite being extremely successful for common variants in GWA studies [43–46], procedures based on false-positive control are often underpowered in NGS studies involving rare variants (as illustrated in Fig 1).
+%     In NGS studies with rare variants, the Signals region often degenerates due to extremely low MAF and high dimensionality.
+%
+% GWAS arrays don't tag rare variants very well:
+% Also: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3830981/
+% When the allele frequencies of two loci are very different, the r2 will never
+% be very large. To see this, let's assume pA<<PB and 1-pA≈1. Then the maximum
+% r2≈pA/pB*(1-pB), which is <<1 since PA is very small compared to pB. This
+% indicates that causal rare variants are mostly likely to be missed in GWAS for
+% single marker tests, since GWAS chips are designed to include predominantly
+% common variants (e.g. MAF>0.05).
+%
+% Therefore, GWASs are by design powered to detect association with causal variants that are relatively common in the population.
+% \autocite{visscher2012FiveYearsGWAS}
 
 % Also see:
 % 2007: Wellcome Trust Case Control Consortium landmark GWAS
@@ -86,6 +153,7 @@ They were not successful for complex traits, as small effect size on disease ris
 %
 % NOTE: a second approach to heritability estimation is linkage disequilibrium (LD) score regression.
 %
+\todo{CUT: Missing heritability}
 % \1 Missing heritability refers to the observation that SNP-based heritability estimates from \gls{GWAS} fall short of additive (narrow-sense) heritability estimates from traditional quantitative methods such as twin studies.
 % Perhaps unsurprisingly, it has been hypothesised that the remaining heritability lies in variants that can not be assessed by \gls{GWAS} due to rarity or small effect.
 % A classic example is the heritability of human height, estimated at 80\% by twin studies \autocite{maher2008PersonalGenomesCase},
@@ -93,8 +161,10 @@ They were not successful for complex traits, as small effect size on disease ris
 % Consideration of all common variants using mixed models (\software{GCTA}) increases the estimate to 45\% \autocite{yang2010CommonSNPsExplain},
 % Recent work (\software{GREML-WGS}) suggests the full estimate of 80\% might be recoverable by also including rare and poorly tagged variants measured by \gls{WGS} \autocite{wainschtein2019RecoveryTraitHeritability}.
 
+\todo{CUT: WGS/WES migitates the coverage bias of GWAS towards known variation.}
 % \1 WES/WGS is a trade-off between sample size and genomic coverage
-%     \2 Allows discovery and association with rare and novel variation, including structural variants.
+%     \2 Allows tdiscovery and association with rare and novel variation, including structural variants.
+%     \2 "In addition, other genome-wide scans, such as WES and WGS studies, allow testing for a burden of rare variants across shared functional units (e.g., genes) in a way that is not accessible to GWASs."
 % \1 WES (covers about 40Mbp of the genome)
 %     \2 covers more of the genome than GWAS
 %     \2 but lower n, so lower power to do single variant associations
@@ -108,27 +178,26 @@ They were not successful for complex traits, as small effect size on disease ris
 %             \4 review \url{https://www.nature.com/articles/s41576-019-0177-4}
 %     \2 also gets structural variants
 
-% Read:
-%     5 years of GWAS: most common traits are polygenic
-%     10 years of GWAS:
+\subsection{From locus to variant: fine-mapping}
+
+\1 By design, a significantly-associated variant from a \gls{GWAS} needs not be a variant that causally affects the trait, and may only tag a causal variant.
+    \2 Fine-mapping is the process of determining which of the many correlated variants at a \gls{GWAS} locus are causal.
+    \2 The power to separate causal and tag variants then depends on \gls{LD} and sample size \autocite{visscher201710YearsGWAS}.
+    \2 State-of-the-art methods provide Bayesian posterior probabilities that associated variants are causal given the \gls{LD} structure of the region, and can consider the presence of multiple causal variants at the same locus \autocite{schaid2018GenomewideAssociationsCandidate}.
+    \2 Naturally, these methods assign probabilities assuming the causal variant is in the set of variants tested.
+    \2 The causal variant must either be genotyped or imputed denser genotyping e.g. by WGS, and larger imputation panels will help.
+
+\subsection{From variant to function: gene prioritisation}
+
 % TODO: then outline only at this point, or risk wasting time
-\1 [Finding the causal variant]
-    \2
 
-Operationally, in this
-review what we mean by ‘‘causal variant’’ is an
-(unknown) variant that has a direct or indirect functional
-effect on disease risk, rather than a variant
-that is associated with disease risk through LD,
+target gene
+Even if 
 
-    \2 tagging enables, but also a curse
-    \2 tag snps: causal snps may not be directly typed, may need to be imputed
+Unlike Mendelian traits, reg
+    two-thirds of GWAS-associated loci implicate a gene that is not the nearest gene to the most associated SNP
 
-    \2 as sample sizes get larger, and provided that sequencing or imputation can more exhaustively identify all of the candidate SNPs on the haplotype, rare recombination events will pile up, helping to make the causal SNP stand out above the passenger SNPs that usually travel on its haplotype [Huang 2017].
-
-\section{Interpretation of genetic associations with molecular phenotypes}
-
-QTLs
+over 90\% nc \autocite{gallagher2018PostGWASEraAssociation}
 
 \1 [locus to gene mapping problem]
     \2 Even if the causal variant is known
@@ -141,10 +210,30 @@ QTLs
             We then used Sherlock, a tool that integrates GWAS and expression quantitative trait locus (eQTL) data, to identify weak GWAS signals that are also supported by eQTL data. 
     \2 enriched in reg
 
+
+
+IMD, t2d, schizo
+GWAS hits over-represented in regulatory regions in disease specific tissues 
+
+\section{Interpretation of genetic associations with molecular phenotypes}
+
+
+
+QTLs
+\autocite{visscher201710YearsGWAS}
+
+It should be noted that although
+the effect sizes of individual genetic variants are small in
+populations, their effect sizes on molecular phenotypes
+can be large, and the drug effects of gene targets can also
+be magnified (e.g., statins).
+
 \1 using ifntermediate/endophenotypes
     \2 endophenotypes paper \autocite{goldman2007DeconstructionVulnerabilityComplex}
     % and used when final phenos are complicated https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
+\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variation affects phenotype through it's impact on the function or regulation of genes.
+direct or indirect
 \1 Gene expression is a fundamental intermediate phenotype
     % dogma
         \2 measure by array, rnaseq 
@@ -226,7 +315,7 @@ QTLs
 \section{The effects of genetic variation on expression: context is key}
 
 
-\1 inthe dreaded GxE interaction
+\1 inthe dreaded GxE statistical interaction
     \2 "In genetics, context matters"
     % https://www.nature.com/articles/s41588-019-0515-7
 
@@ -291,6 +380,7 @@ Four categories of tissue-dependent cis-eQTL effects, and proposed two molecular
 % •	Molecular models (Fu 2012)
 % •	Conceptual models (Ackermann 2014)
 
+\missingfigure{magnify, dampen, flip}
 
 % Rotival, M. (2019). Characterising the genetic basis of immune response variation to identify causal mechanisms underlying disease susceptibility. HLA, 94(3), 275?284. https://doi.org/10.1111/tan.13598
 
