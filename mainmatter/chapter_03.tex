@@ -286,6 +286,7 @@ These proportions shift after Pandemrix vaccination\autocite{sobolev2016Adjuvant
 and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
 but changes in cell type abundance influence this by modifying both expression and the effect of genotype on expression.
+% TODO: https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 Immune cell abundance also varies naturally between healthy individuals\autocite{brodin2015VariationHumanImmune,brodin2017HumanImmuneSystem}, so it is important to model these effects even at baseline.
 
 Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals (\autoref{subsec:hird_dge_studyDesign}), so I derived cell type abundance estimates from the expression data as an alternative.
@@ -717,6 +718,7 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 %
 \todo{this analysis is incomplete, and is one of the things I would suggest to round off this chapter}
 - if adding coloc analysis, add \url{https://github.com/jrs95/hyprcoloc} methods here
+- cannot deal with multiple causal within each group
 
 \section{Results}
 
@@ -1032,6 +1034,9 @@ but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
 and a formal tests such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} are required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
+% https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
+% The basic problem with underpowered studies is that, although the rate of false positives (type I error) in hypothesis tests is fixed, the rate of true positives (power) goes down. Hence, a positive (= significant) result is less likely to be a true positive in an underpowered study. This idea is expressed in the false discovery rate [2], see also [3]. This seems what the quote refers to.
+% An additional issue often named regarding underpowered studies is that they lead to overestimated effect sizes. The reasons is that a) with lower power, your estimates of the true effects will become more variable (stochastic) around their true value, and b) only the strongest of those effects will pass the significance filter when the power is low. One should add though that this is a reporting problem that could easily be fixed by discussing and reporting all and not only significant effects.
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix will be to leverage external genetic associations to similar phenotypes,
 for example, colocalisation with existing GWAS summary statistics for antibody response to a similar type of adjuvanted, inactivated vaccine.
 

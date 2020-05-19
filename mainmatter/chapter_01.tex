@@ -11,8 +11,10 @@
 
 \section{Structure and diversity of the human genome}
 
-\1 The human genome is almost three billion \glspl{bp} in length, containing 20000-25000 protein-coding genes \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman,theencodeprojectconsortium2012IntegratedEncyclopediaDNA} that span 1-3\% of its length.
-The majority of the remainder is likely dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
+\1 The human genome is almost three billion \glspl{bp} in length, 
+containing 20000-25000 protein-coding genes \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA,1000genomesprojectconsortium2015GlobalReferenceHuman} that span 1-3\% of its length, 
+with the remainder being non-coding.
+% Some of the the remainder is likely dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
 A diploid human cell contains two copies of the genome; 46 chromosomes comprised of 23 maternal-parental pairs: 22 pairs of homologous autosomes and one pair of sex chromosomes.
 %
 \1 Variation in the genome between individuals in a population exists in the form of \glspl{SNP}, short indels, and structural variants---\glspl{SNP} and short indels take up the vast majority ($> \percentage{99.9}$) \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
@@ -23,6 +25,7 @@ A diploid human cell contains two copies of the genome; 46 chromosomes comprised
 % commonly referred to as copy number variants (CNVs).
 On average, a pair of human genomes differs by one \gls{SNP} per 1000-2000 \gls{bp} \autocite{theinternationalsnpmapworkinggroup2001MapHumanGenome}.
 Each version of a variant is called an allele; an individual has a maternal and parental allele at each variant.
+\todo{consider moving awkward defs to margin notes, in the style of nature reviews}
 
 % The Law of Dominance: An organism with alternate forms of a gene will express the form that is dominant.
 % Law of Segregation: states that a diploid organism passes a randomly selected allele for a trait to its offspring, such that the offspring receives one allele from each parent.
@@ -44,17 +47,19 @@ The structure of correlated haplotypes reflects a population's unique evolutiona
 
 \section{Genetic association studies for complex traits}
 
+\subsection{Complex traits are heritable}
+
 \1 Variation in human traits arises from an interplay between genetics and environment.
 Traits for which genetic variation explains a non-zero fraction of phenotypic variation are heritable.
-    \2 Twin studies provide upper bounds on heritability \url{https://www.nature.com/articles/nrg3243}
-\1 Discovering the specific variants that contribute, through association of genetic variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
+Many measurable human traits are heritable and twin studies provide upper bounds on this heritability \url{https://www.nature.com/articles/ng.3285}.
+Discovering the specific genetic variants that contribute to this heritability, through association of variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to backdoor path effects that permeate observational studies of the causes of human phenotypes.
-\todo{insert something sweeping about utility: insights into trait biology and clinical translational potential for disease traits, genetic support target identification}
-% 72. Nelson, M.R., Tipney, H., Painter, J.L., Shen, J., Nicoletti, P.,
-% Shen, Y., Floratos, A., Sham, P.C., Li, M.J., Wang, J., et al.
-% (2015). The support of human genetic evidence for approved
-% drug indications. Nat. Genet. 47, 856–860.
+Genetic association studies have intrinsic resistance to many backdoor path effects that permeate observational studies of the causes of human phenotypes.
+\todo{add something sweeping about utility: insights into trait biology and clinical translational potential for disease traits, genetically support drug target identification}
+% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489
+% Are drug targets with genetic support twice as likely to be approved? Revised
+% estimates of the impact of genetic support for drug mechanisms on the
+% probability of drug approval
     % karczewski2020AnalyticTranslationalGenetics
     % In humans, analysis of large-scale natural variation data can provide valuable insights into human
     % disease and gene function. Joint analysis of genotype and phenotype data is especially powerful,
@@ -62,53 +67,41 @@ Genetic association studies have intrinsic resistance to backdoor path effects t
     % population history, natural selection, and the biological function of genes.
     \2 What are the benefits of leveraging natural genetic variation? Analogies to RCTs.
 
-\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variants at loci in the genome affect phenotype through by impacting on the function or regulation of target genes.
+\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, 
+thus it is assumed that genetic variants at loci in the genome affect phenotype through by impacting on the function or regulation of target genes.
 How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait; and the allele frequencies, effect sizes, and interactions of trait-associated variants \autocite{visscher2019Fisher1918Paper}.
 The number of genes defines a spectrum of traits from monogenic (where inheritance follow simple Mendelian patterns) to polygenic (where inheritance is more complex).
 Many architectures have been proposed for complex traits; all have in common that the number of genes that affect a complex trait is large (ranging from dozens to many thousands),
-and the average effect of trait-associated loci is relatively small compared to monogenic traits \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
+thus the average effect of each trait-associated loci is small \autocite{gibson2011RareCommonVariants,boyle2017ExpandedViewComplex} \url{https://www.pnas.org/content/106/23/9362}.
 
-\1 For decades, linkage analysis was successfully used to map loci affecting Mendelian traits by tracing their cosegregation with the trait through pedigrees.
-They were not successful for complex traits, as small effect sizes equate to low penetrance in pedigrees \autocite{visscher2012FiveYearsGWAS}.
-Genetic association studies were also performed for a variety of traits, focusing on variants in or near candidate genes selected on the basis of prior biological knowledge,
-but these studies were plagued with reproducibility issues \autocite{hirschhorn2002ComprehensiveReviewGenetic}.
+\subsection{Lessons from the last decade}
 
-\1 \Glspl{GWAS} systematically test common variants (traditionally defined as $\text{\gls{MAF}} > 1-5\%$) selected in an unbiased manner across the genome for association with a trait.
-Many of the early association studies were on traits now known to be complex.
-%     \2 Reviews of these early studies already noted issues with replication \autocite{hirschhorn2002ComprehensiveReviewGenetic},
-%     \2 \glspl{GWAS} has revealed the vast majority of humans traits are complex, and that many such studies suffered from poor power at the samples sizes TODO: 10 years of GWAS
-%     \2 \autocite{border2019NoSupportHistorical} TODO: read this to find out exactly why they failed
+\1 For decades, linkage analysis has successfully been used to map loci affecting Mendelian traits by tracing their cosegregation with the trait through pedigrees \autocite{visscher2012FiveYearsGWAS}.
+Genetic association studies were also performed, focusing on variants in or near candidate genes selected on the basis of prior biological knowledge \autocite{hirschhorn2002ComprehensiveReviewGenetic}.
+These approaches were not successful for complex traits, as small effect sizes equate to low penetrance in pedigrees \autocite{visscher2012FiveYearsGWAS},
+and poor power at the sample sizes typically used in early candidate gene studies \autocite{border2019NoSupportHistorical}.
 
-% TODO main take homes of GWAS
+\1 \Glspl{GWAS} systematically test common variants ($\text{\gls{MAF}} > 1-5\%$) selected in a hypothesis-free manner across the genome for association with a trait.
+Using large sample sizes to overcome small effects and multiple testing burden, thousands of associations have been discovered for complex traits and disease,
+many robustly replicated across populations \autocite{visscher2012FiveYearsGWAS,visscher201710YearsGWAS}.
+Most genetic variance is explained by additive effects, the contribution of epistatic interactions is small \autocite{visscher2019Fisher1918Paper}, 
+and pleiotropy is widespread \autocite{visscher2012FiveYearsGWAS}.
+Sample sizes in the millions are increasingly commonplace, 
+and discovery of new associations with increasing sample size shows no sign of plateauing \autocite{tam2019BenefitsLimitationsGenomewide}.
+It is now appreciated that most heritable phenotypes are complex, and have remarkable polygenicity.
+% TODO: any more takehomes from: \autocite{gallagher2018PostGWASEraAssociation,tam2019BenefitsLimitationsGenomewide}
 
-Thousands of robust associations 
-auto-immune, metabolic, and psychiatric disease in particular
-\autocite{visscher2012FiveYearsGWAS,visscher201710YearsGWAS}
-
-The vast majority of these traits are now known to be complex
-appreciation of polygenicity
-No one risk locus is sufficient, only raises by a bit
-
-genetic variance
-most genetic variance is additive \autocite{visscher2019Fisher1918Paper}
-not epistasis
-
-pleiotropy is wide spread \autocite{visscher2012FiveYearsGWAS}
-
-many replicated across popoulations \autocite{visscher2012FiveYearsGWAS}
-
-\missingfigure{OR vs MAF tam2019BenefitsLimitationsGenomewide}
-% d | Genetic variants exist along a spectrum of allele frequencies and
+% Genetic variants exist along a spectrum of allele frequencies and
 % effect sizes. Most risk variants identified by GWAS lie within the two diagonal lines.
 % Rare variants with small effect sizes are difficult to identify using GWAS, and common
 % variants with large effects are unusual for common complex diseases.
 % tam2019BenefitsLimitationsGenomewide
+\missingfigure{OR vs MAF tam2019BenefitsLimitationsGenomewide, extended by imputation, sample size, sequenceing based genotypes, but may be indis from noise}
 
-\autocite{gallagher2018PostGWASEraAssociation,tam2019BenefitsLimitationsGenomewide}
+\subsection{From complex trait to associated locus}
 
-\subsection{From trait to locus: principles of \glsfmtlongpl{GWAS}}
-
-As variants on the same haplotype tend to be in strong \gls{LD}, and the number of haplotypes is comparatively few, 
+\glspl{GWAS} rely on the tendency of variants on the same haplotype to be in strong \gls{LD}
+As the number of haplotypes is comparatively few, 
 it is possible to select a subset of tag variants such that all other known common variants are within a certain \gls{LD} threshold of that subset. 
 In practice, there is enough redundancy that the number of variants measured on a modern genotyping array (in the order of \numrange[retain-unity-mantissa=false]{1e5}{1e6}) is sufficient to tag almost all common variants  \autocite{theinternationalhapmapconsortium2005HaplotypeMapHuman,barrett2006EvaluatingCoverageGenomewide}.
 Remaining common variants are indirectly measured through their strong correlation with a tag variant.
@@ -125,8 +118,6 @@ The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \n
     The Bonferroni procedure makes no assumptions about the dependence structure of the \pvalues, and is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. In fact it is always conservative unless the \pvalues have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
 }
 to controlling the family-wise type I error rate at using the Bonferroni correction.
-Still, for complex traits with small per-variant effects, the required sample sizes are enormous \autocite{visscher201710YearsGWAS}.
-Total \gls{GWAS} sample sizes in the millions are no longer an unusual occurrence \autocite{tam2019BenefitsLimitationsGenomewide}.
 
 \todo{CUT: There is a limit, the strategy of association is fundamentally unsuited to rare variants.}
 %     Rare Variants Association Analysis in Large-Scale Sequencing Studies at the Single Locus Level
@@ -162,6 +153,7 @@ Total \gls{GWAS} sample sizes in the millions are no longer an unusual occurrenc
 % Recent work (\software{GREML-WGS}) suggests the full estimate of 80\% might be recoverable by also including rare and poorly tagged variants measured by \gls{WGS} \autocite{wainschtein2019RecoveryTraitHeritability}.
 
 \todo{CUT: WGS/WES migitates the coverage bias of GWAS towards known variation.}
+% \1 approx 10-fold increase in variants per tech upgrade
 % \1 WES/WGS is a trade-off between sample size and genomic coverage
 %     \2 Allows tdiscovery and association with rare and novel variation, including structural variants.
 %     \2 "In addition, other genome-wide scans, such as WES and WGS studies, allow testing for a burden of rare variants across shared functional units (e.g., genes) in a way that is not accessible to GWASs."
@@ -178,94 +170,119 @@ Total \gls{GWAS} sample sizes in the millions are no longer an unusual occurrenc
 %             \4 review \url{https://www.nature.com/articles/s41576-019-0177-4}
 %     \2 also gets structural variants
 
-\subsection{From locus to variant: fine-mapping}
+\subsection{From associated locus to causal variant}
 
 \1 By design, a significantly-associated variant from a \gls{GWAS} needs not be a variant that causally affects the trait, and may only tag a causal variant.
     \2 Fine-mapping is the process of determining which of the many correlated variants at a \gls{GWAS} locus are causal.
     \2 The power to separate causal and tag variants then depends on \gls{LD} and sample size \autocite{visscher201710YearsGWAS}.
-    \2 State-of-the-art methods provide Bayesian posterior probabilities that associated variants are causal given the \gls{LD} structure of the region, and can consider the presence of multiple causal variants at the same locus \autocite{schaid2018GenomewideAssociationsCandidate}.
+    % For sparse enough problems, most other Bayesian methods provide posterior probabilities on "models" by enumerating (CAVIAR), schochastic search (FINEMAP) or sampling (BIMBAM) from all possible combinations of variables.
+    % https://stephenslab.github.io/susie-paper/manuscript_results/motivating_example.html
+    \2 State-of-the-art methods (e.g. CAVIAR, PAINTOR, FINEMAP, SuSiE) provide Bayesian posterior probabilities that associated variants are causal given the \gls{LD} structure of the region, and can consider the presence of multiple causal variants at the same locus \autocite{schaid2018GenomewideAssociationsCandidate}.
     \2 Naturally, these methods assign probabilities assuming the causal variant is in the set of variants tested.
     \2 The causal variant must either be genotyped or imputed denser genotyping e.g. by WGS, and larger imputation panels will help.
 
-\subsection{From variant to function: gene prioritisation}
+\subsection{From causal variant to target gene}
 
-% TODO: then outline only at this point, or risk wasting time
+\1 Unlike for Mendelian traits where most causal variants are coding \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4573249/}, 
+over 90\% of \gls{GWAS} loci fall in non-coding regions of the genome \autocite{gallagher2018PostGWASEraAssociation},
+and often too far from the nearest gene to be in \gls{LD} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5291268/}.
+Thus even if the causal variant at a locus is fine-mapped, 
+it may not be obvious how to find the target genes through which that variant affects the trait.
+% \2 For two-thirds of \gls{GWAS}-associated complex trait loci where target genes have been assigned, the implicated gene is not the nearest gene \autocite{visscher201710YearsGWAS}.
+%
+% https://twitter.com/Eric_Fauman/status/1198595609013489670
+% I tweeted this diagram 2 weeks ago and it's applicable here too. The sentence
+% in the paper is true if restated to be specific to eQTLs, but is demonstrably
+% not true for pQTLs. Metabolite QTLs are also most likely to be caused by the
+% closest gene: https://ncbi.nlm.nih.gov/pmc/articles/PMC6326795/
 
-target gene
-Even if 
+\1 Rather than directly impacting the coding sequence of a gene, 
+many non-coding GWAS loci are thought to affect traits by affecting the regulation of target genes \autocite{gallagher2018PostGWASEraAssociation}.
+\gls{GWAS} loci are enriched in regulatory regions annotated by functional genomics studies, such as
+    % Transposase-Accessible Chromatin followed by sequencing (ATAC-seq) is a simple protocol for detection of open chromatin.
+    chromatin accessibility peaks, 
+    % DNase-seq
+    DNase I hypersensitive sites,
+    % ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel DNA sequencing to identify the binding sites of DNA-associated proteins.
+    histone binding sites, 
+    \gls{TF} binding motifs,
+    and enhancers \url{https://genome.cshlp.org/content/22/9/1748.full} \autocite{gallagher2018PostGWASEraAssociation}.
+For complex diseases, enrichment is observed in disease-relevant tissues \autocite{visscher201710YearsGWAS}.
+All these regulatory elements can have cis- or trans-regulatory effects on gene expression,
+placing expression as an important intermediate linking \gls{GWAS} variants and their associated traits.
 
-Unlike Mendelian traits, reg
-    two-thirds of GWAS-associated loci implicate a gene that is not the nearest gene to the most associated SNP
+% \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
+\1 Molecular phenotypes like expression are quantitative complex traits; variants that affect expression are called \glspl{eQTL}.
+    \2 eQTLs can be cis- or trans- to their target gene \autocite{albert2015RoleRegulatoryVariation}.
+    \2 Effect sizes on molecular phenotypes can be large \autocite{visscher201710YearsGWAS}.
+    \2 GWAS variants are enriched for eQTLs \url{https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888}
 
-over 90\% nc \autocite{gallagher2018PostGWASEraAssociation}
+Assuming that a locus on the genome is associated with both a complex trait and an \gls{eQTL},
+how can we separate the scenario where one variant affects both trait and expression (pleiotropy),
+from coincidental overlap between distinct causal variants that may or may not be in \gls{LD}?
+Bayesian probabilistic colocalisation methods (e.g. eCAVIAR, Sherlock, coloc \autocite{wallace2020ElicitingPriorsRelaxing}) 
+address this by estimating the posterior probability that the same causal variant is associated with both phenotypes.
+Colocalisation of a \gls{GWAS} loci with \glspl{eQTL} is a natural first step for target gene prioritisation,
+distinguishing pleiotropy from linkage, 
+but not vertical pleiotropy (mediation) from horizontal pleiotropy (independent effect on trait and expression) \autocite{hemani2018EvaluatingPotentialRole}.
+Colocalisation can be complemented by other methods that integrate intermediate phenotypes (TWAS, MR, mediation analysis etc.) to help untangle causal effects of genetic variation on complex traits \autocite{hemani2018EvaluatingPotentialRole}.
+%
+% Other types of methods:
+% Summary: https://sashagusev.github.io/2017-10/twas-vulnerabilities.html
+% transcriptome association (e.g. TWAS)
+%    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6342197/
+%    As TWAS methods were originally proposed as tests for association between
+%    local genetically regulated component of expression and disease with no
+%    causality guarantees [Gamazon, et al. 2015; Gusev, et al. 2016; Mancuso,
+%    et al. 2017a; Mancuso, et al. 2017b; Zhu, et al. 2016], it remains unclear
+%    whether and when TWAS can be interpreted as valid tests of causality.
+%
+%     https://www.nature.com/articles/s41576-018-0020-3
+%     Transcriptome-wide association studies (TWAS) integrating GWAS and eQTLs
+%     data have been proposed to unravel gene–trait associations7,9,10. However,
+%     although these studies aim to identify genes whose (genetically predicted)
+%     expression is significantly associated to complex traits, they do not aim
+%     to estimate the strength of the causal effect and are unable to distinguish
+%     causation from horizontal pleiotropy (i.e., when a genetic variant
+%     influences multiple phenotypes independently).
+%
+%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5986723/
+%     Like other transcriptome-wide association studies (TWASs),32 PrediXcan can be
+%     considered a weighted burden test, where each variant in a gene set is weighted
+%     by its additive allelic effect on expression.
+%
+% Mendelian randomisation (e.g. MR-Egger, SMR) under certain assumptions
+%     hemani2018EvaluatingPotentialRole
+%     Of prime focus among the many limitations to MR is the unprovable assumption
+%     that apparent pleiotropic associations are mediated by the exposure (i.e.
+%     reflect vertical pleiotropy), and do not arise due to SNPs influencing the two
+%     traits through independent pathways (‘horizontal pleiotropy’)
+%
+% Mediation
+%     hemani2018EvaluatingPotentialRole
+%     Genetic mediation-based analyses (37–40) are more liable to problems of
+%     confounding and measurement error than MR (41–43), but could potentially
+%     separate between vertical and horizontal pleiotropy in some scenarios.
+%     Use genetic colocalization to eliminate possibility distinct causal variants
+%     (25,30,31); if instruments are available for the outcome then test the reverse
+%     causal effect (110); if not use MR Steiger (43); use genetic mediation-based
+%     analysis (40,111) to try to separate horizontal and vertical pleiotropy
+%
+%     millstein2009DisentanglingMolecularRelationships
+%     Causal effect estimates often
+%     considered in 'Mendelian randomization' approaches [11], can be confounded by
+%     pleiotropic effects and reverse causation [12], thus, these approaches are not
+%     generally considered for problems such as reconstructing transcript regulatory
+%     pathways, in which pleiotropy is common and there may be little a priori
+%     information on the structure of the causal relationship between traits.
 
-\1 [locus to gene mapping problem]
-    \2 Even if the causal variant is known
-    \2 nc snps regulate
-        \3 Genome-wide association studies have successfully identified genetic variants associated with immune-mediated disease, the majority of which are non-coding[10 Years of GWAS Discovery].
+\missingfigure{mediation by intermediate phenotype}
 
-        % many prioritisation methods possible https://www.nature.com/articles/ng.3359
-        e.g.
-            https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5062579/
-            We then used Sherlock, a tool that integrates GWAS and expression quantitative trait locus (eQTL) data, to identify weak GWAS signals that are also supported by eQTL data. 
-    \2 enriched in reg
+\section{Genetic effects on expression: context is key}
 
+% TODO: then outline only at this point, or risk wasting time.
+% not trying to write at this point. need to get to Pants
 
-
-IMD, t2d, schizo
-GWAS hits over-represented in regulatory regions in disease specific tissues 
-
-\section{Interpretation of genetic associations with molecular phenotypes}
-
-
-
-QTLs
-\autocite{visscher201710YearsGWAS}
-
-It should be noted that although
-the effect sizes of individual genetic variants are small in
-populations, their effect sizes on molecular phenotypes
-can be large, and the drug effects of gene targets can also
-be magnified (e.g., statins).
-
-\1 using ifntermediate/endophenotypes
-    \2 endophenotypes paper \autocite{goldman2007DeconstructionVulnerabilityComplex}
-    % and used when final phenos are complicated https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
-
-\1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, thus it is assumed that genetic variation affects phenotype through it's impact on the function or regulation of genes.
-direct or indirect
-\1 Gene expression is a fundamental intermediate phenotype
-    % dogma
-        \2 measure by array, rnaseq 
-    \2 theory is that genetic variants manifest their effects through these phenotypes, central dogma based
-
-    % For example, Gamazon et al.31proposed agene-based association method called
-    % PrediXcan that testspredicted gene expression through which genetic
-    % variationaffects a phenotype. In this method, an external referencedataset
-    % that has jointly measured genotypes and tissue-spe-cific gene expression is
-    % used to identify a set of variants thatmodulate transcript abundance of a
-    % gene. Like other tran-scriptome-wide association studies
-    % (TWASs),32PrediXcancan be considered a weighted burden test, where
-    % eachvariant in a gene set is weighted by its additive allelic effecton
-    % expression.
-    % 31.Gamazon, E.R., Wheeler, H.E., Shah, K.P., Mozaffari,
-    % S.V.,Aquino-Michaels, K., Carroll, R.J., Eyler, A.E., Denny, J.C.,
-    % Nic-olae, D.L., Cox, N.J., Im, H.K.; and GTEx Consortium (2015).A
-    % gene-based association method for mapping traits usingreference
-    % transcriptome data. Nat. Genet.47, 1091–1098.
-    % 32.Gusev, A., Ko, A., Shi, H.,
-    % Bhatia, G., Chung, W., Penninx,B.W.J.H., Jansen, R., de Geus, E.J.C.,
-    % Boomsma, D.I., Wright,F.A., et al. (2016). Integrative approaches for
-    % large-scale tran-scriptome-wide association studies. Nat. Genet.48,
-    % 245–252.
-
-    GTEx
-
-    \1 eqtl reviwe: albert2015RoleRegulatoryVariationa
-    % and
-    % Imprialou, M., Petretto, E., & Bottolo, L. (2017). Expression QTLs Mapping and Analysis: A Bayesian Perspective. In K. Schughart & R. W. Williams (Eds.), Systems Genetics (Vol. 1488, pp. 189–215). Springer New York. https://doi.org/10.1007/978-1-4939-6427-7_8
-
-    recent review
     Vandiedonck
     % Altogether, these studies revealed important recurrent features of the
     % thousands of eQTLs found in different tissues. Thus, almost 60%‐80% of
@@ -275,45 +292,6 @@ direct or indirect
     % statistical power to detect them cannot be excluded.90 A general rule is
     % that the more distant the eQTLs, the more cell‐ and context‐specific and
     % the lower their effect sizes.
-
-\1 coloc methods
-    % (that photo on all the coloc methods that all attempt to solve the problem)
-
-    \2 coloc
-        \3 Under the assumption that the mechanism by which non-coding associations affect disease risk is through their effect on gene expression, a successful way to link associations to their target gene is by statistical colocalisation with eQTL datasets, to determine if the GWAS and eQTL signal share the same causal variant[Co-localization of Conditional eQTL and GWAS Signatures in Schizophrenia].
-
-        % https://www.nature.com/articles/s41588-019-0385-z
-    \2 TWAS
-    % When a TWAS gene also colocalizes with your trait of interest you have a 19% chance you've found the correct causal gene.
-    % https://twitter.com/Eric_Fauman/status/1220885592193499137?s=09
-    % _tmp_TWAS_faq
-
-    \2 MR
-    https://www.nature.com/articles/s41576-018-0020-3
-    Using genetic data to strengthen causal inference in observational research
-    Transcriptome-wide association studies (TWAS) integrating GWAS and eQTLs data have been proposed to unravel gene–trait associations7,9,10. However, although these studies aim to identify genes whose (genetically predicted) expression is significantly associated to complex traits, they do not aim to estimate the strength of the causal effect and are unable to distinguish causation from horizontal pleiotropy (i.e., when a genetic variant influences multiple phenotypes independently). For this reason, we rather chose to apply a Mendelian randomization (MR) approach to estimate the causal effect of gene expression on complex traits.
-
-    \2 a transcriptional risk score (TRS)
-
-    \2 causal inference
-
-\1 for eqtls, closest gene is often not the best candidate
-        % https://twitter.com/Eric_Fauman/status/1198595609013489670/photo/1
-    \2 annotation of nc var is functional genomics
-        \3 e.g. gtex, ENCODE
-        % http://www.cureffi.org/2019/12/04/prnp-gwas-other-traits/
-        % Another solution is functional genomics — you ask whether the GWAS hit SNPs are also known, from other datasets, to have functional effects on a gene. See, as one example, a recent study of drug targets for immune-related traits [Fang 2019].
-
-    \2 Drug target prioritisation for disease traits
-    % higher success rate
-    % https://doi.org/10.1371/journal.pgen.1008489
-
-    % karczewski2020AnalyticTranslationalGenetics
-    % Genetic studies inform therapeutic discoveries and development
-
-
-\section{The effects of genetic variation on expression: context is key}
-
 
 \1 inthe dreaded GxE statistical interaction
     \2 "In genetics, context matters"
@@ -329,6 +307,7 @@ direct or indirect
     \2 cell type
     \2 interaction between cells in vivo
     \2 stimulation conditions
+    GTEx
 
     % emph that reveals differences in regulation structure or importance between conditions
 review: condition/Cell-type specific methods
