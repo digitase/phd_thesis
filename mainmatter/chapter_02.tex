@@ -619,7 +619,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 
 \subsubsection{Multiple testing correction}
 
-For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
+For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
 \todo{add note on ositive regression dependency \autocite{goeman2014MultipleHypothesisTesting}}
 For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr}, which are analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
@@ -834,4 +834,6 @@ Chapter 3 will examine one hypothesis: the impact of common human genetic variat
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
 
 \todo{why blood? ready easy supply of immune cells}
+% \autocite{brodin2015VariationHumanImmune}
+% Although blood is not an immunological organ per se, it is the conduit for most immune cells circulating in the body, especially after an immunological stimulus such as vaccination (FIG. 1).
 

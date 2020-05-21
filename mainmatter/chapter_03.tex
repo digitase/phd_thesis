@@ -17,7 +17,7 @@ and the mechanism by which influenza vaccines are efficacious is by raising stra
 % Growing evidences suggest that host factors including age, biological sex, pregnancy, and immune history play important roles as modifiers of influenza virus vaccine efficacy.
 % We hypothesize that host genetics, the hormonal milieu, and gut microbiota contribute to host-related differences in influenza virus vaccine efficacy.
 Humoral responses are influenced by vaccine-associated factors (e.g. type, dose, adjuvants), 
-but are also a complex trait influenced by host genetics\autocite{linnik2016ImpactHostGenetic, mentzer2015SearchingHumanGenetic}.
+but are also a complex trait influenced by host genetics\autocite{mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic}.
 Genetic variants associated with antibody response have been detected for vaccines such as hepatitis B, influenza, measles, rubella, and smallpox\autocite{linnik2016ImpactHostGenetic,dhakal2019HostFactorsImpact}.
 For antibody response to seasonal influenza vaccines, studies have implicated 
 genetic variation within cytokine genes, cytokine receptors\autocite{poland2008ImmunogeneticsSeasonalInfluenza};
@@ -649,20 +649,20 @@ assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 % also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
 Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}.
 % NOTE: A Wald test uses W ~ chisq(1), equivalent to sqrt(W) ~ N(0, 1).
-A Wald test \pvalue for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
-I use nominal \pvalue < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
+A Wald test \pvalue{} for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
+I use nominal \pvalue{} < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
 Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
 \subsection{Replication of eQTLs in a reference dataset}
 
 To validate the \gls{eQTL} mapping approach, I estimate the replication of significant eQTLs in a large independent reference.
 Due to the lack of large sample size \gls{eQTL} maps specific to \gls{PBMC}, I use the GTEx v8 whole blood dataset as my reference dataset (n=670, 51.2\% eGene rate).
-For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal \pvalue for that variant in GTEx (where the variant exists in both datasets).
-I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those GTEx nominal \pvalues that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
+For lead variants called as significant in the \gls{HIRD} dataset at a given lfsr threshold, I lookup the nominal \pvalue{} for that variant in GTEx (where the variant exists in both datasets).
+I applied \software{qvalue::qvalue\_truncp} to estimate the proportion of those GTEx nominal \pvalues{} that are null ($\pi_0$), the compute a measure of replication $\pi_1 = 1 - \pi_0$.
 
 The mega-analysis has comparable replication rate to \gls{RNAseq}-only analysis for shared \glspl{eQTL} at moderately stringent \gls{lfsr} thresholds up to $10^{-5}$ (\autoref{fig:hird_eQTL_pi1vsGTExWholeBlood}).
 Past this, as the $\pi_1$ procedure assumes a well-behaved \pvalue distribution in $\left[0, 1\right]$, 
-reliability declines due to the number of \pvalues being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum \pvalue being too far from 1.
+reliability declines due to the number of \pvalues{} being too small\footnote{\url{https://github.com/StoreyLab/qvalue/pull/6\#commitcomment-26277751}}, or the maximum \pvalue{} being too far from 1.
 The numbers of \glspl{reQTL} were too low to assess replication using this method, and one might not expect them to replicate in a baseline dataset such as GTEx whole blood, especially for those \glspl{reQTL} significant only at post-vaccination timepoints.
 As the mega-analysis has a higher eGene rate (\percentage{0.5075166} vs. \percentage{0.29914529915}) compared to the \gls{RNAseq}-only analysis, with similar replication,
 I assume this represents a power advantage from having larger a sample size, rather than technical effects from merging the expression data.
@@ -673,7 +673,7 @@ I assume this represents a power advantage from having larger a sample size, rat
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
     \caption{
-        Effect of \gls{HIRD} lfsr threshold on GTEx whole blood replication rate ($\pi_1$), number of \pvalues used to compute $\pi_1$, and maximum \pvalue among those \pvalues; 
+        Effect of \gls{HIRD} lfsr threshold on GTEx whole blood replication rate ($\pi_1$), number of \pvalues{} used to compute $\pi_1$, and maximum \pvalue{} among those \pvalues{}; 
         for shared and \gls{reQTL} called from the array-only, \gls{RNAseq}-only and mega-analysis pipelines. 
         Shaded region for $\pi_1$ represents the 5th-95th percentile range of 1000 bootstraps.
     }
@@ -810,6 +810,7 @@ Overall, compared to genes without reQTL,
 % \todo{change % to reflect new numbers}
 % TODO: dge by reqtl plot
 \glspl{reQTL} were less likely be differentially expressed post-vaccination at day 1 (\percentage{0.2649573} for reQTL vs. \percentage{0.4227119}, Fisher's test p < \num{2.2e-16}),
+\todo{reword not significant}
 and no significant difference was observed at day 7 (\percentage{0.02195609} for reQTL vs. \percentage{0.01368555}, Fisher's test p = \num{0.05088}).
 % Overall, \glspl{reQTL} were less likely compared to shared \glspl{eQTL} (\percentage{0.2920277} vs. \percentage{0.4929356}, Fisher's test p < \num{2.2e-16}) to be differentially expressed post-vaccination.
 Only 5/68 (\percentage{0.1323529}) genes with \glspl{reQTL} that explain more variation at day 1 were upregulated at day 1 vs. day 0; 5/226 (\percentage{0.02212389}) for day 7 vs. day 0.

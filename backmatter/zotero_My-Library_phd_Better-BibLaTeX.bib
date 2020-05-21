@@ -67,7 +67,7 @@
 Results: Our approach has 1) a distinct computational edge, and 2) comparable performance in terms of statistical power over other currently existing joint modeling approaches such as MetaTissue eQTL and eQTL-BMA. Using simulations, we show that our method increases the power to detect eQTLs when compared to a tissue-by-tissue approach and can exceed the performance, in terms of computational speed, of MetaTissue eQTL and eQTL-BMA. We apply our method to two publicly available expression datasets from normal human brains, one comprised of four brain regions from 150 neuropathologically normal samples and another comprised of ten brain regions from 134 neuropathologically normal samples, and show that by using our method and jointly analyzing multiple brain regions, we identify eQTLs within more genes when compared to three often used existing methods.
 Conclusions: Since we employ a score test-based approach, there is no need for parameter estimation under the alternative hypothesis. As a result, model parameters only have to be estimated once per genome, significantly decreasing computation time. Our method also accommodates the analysis of next- generation sequencing data. As an example, by modeling gene transcripts in an analogous fashion to tissues in our current formulation one would be able to test for both a variant overall effect across all isoforms of a gene as well as transcript-specific effects. We implement our approach within the R package JAGUAR, which is now available at the Comprehensive R Archive Network repository.},
   file = {/Users/bb9/Zotero/storage/2TCMBA6D/Acharya et al_2016_BMC Bioinformatics_Exploiting expression patterns across multiple tissues to map expression.pdf},
-  keywords = {_unread_med_priority,genetic association,JAGUAR,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
+  keywords = {_unread_med_priority,JAGUAR,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
   langid = {english},
   number = {1}
 }
@@ -86,7 +86,7 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   urldate = {2018-07-02},
   abstract = {DNA sequence variation causes changes in gene expression, which in turn has profound effects on cellular states. These variations affect tissue development and may ultimately lead to pathological phenotypes. A genetic locus containing a sequence variation that affects gene expression is called an ‘‘expression quantitative trait locus’’ (eQTL). Whereas the impact of cellular context on expression levels in general is well established, a lot less is known about the cell-state specificity of eQTL. Previous studies differed with respect to how ‘‘dynamic eQTL’’ were defined. Here, we propose a unified framework distinguishing static, conditional and dynamic eQTL and suggest strategies for mapping these eQTL classes. Further, we introduce a new approach to simultaneously infer eQTL from different cell types. By using murine mRNA expression data from four stages of hematopoiesis and 14 related cellular traits, we demonstrate that static, conditional and dynamic eQTL, although derived from the same expression data, represent functionally distinct types of eQTL. While static eQTL affect generic cellular processes, non-static eQTL are more often involved in hematopoiesis and immune response. Our analysis revealed substantial effects of individual genetic variation on cell type-specific expression regulation. Among a total number of 3,941 eQTL we detected 2,729 static eQTL, 1,187 eQTL were conditionally active in one or several cell types, and 70 eQTL affected expression changes during cell type transitions. We also found evidence for feedback control mechanisms reverting the effect of an eQTL specifically in certain cell types. Loci correlated with hematological traits were enriched for conditional eQTL, thus, demonstrating the importance of conditional eQTL for understanding molecular mechanisms underlying physiological trait variation. The classification proposed here has the potential to streamline and unify future analysis of conditional and dynamic eQTL as well as many other kinds of QTL data.},
   file = {/Users/bb9/Zotero/storage/TLFXQIHW/Ackermann et al_2013_PLoS Genetics_Impact of Natural Genetic Variation on Gene Expression Dynamics.PDF},
-  keywords = {_favourite,genetic association,genotype-environment interaction (GxE),mouse (Mus musculus),mouse (Mus musculus); BXD,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),random forests,review},
+  keywords = {_favourite,genotype-environment interaction (GxE),mouse (Mus musculus),mouse (Mus musculus); BXD,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),random forests,review},
   langid = {english},
   number = {6}
 }
@@ -419,6 +419,24 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   number = {6}
 }
 
+@article{arnold2018ProspectsSystemsSerology,
+  title = {Prospects from Systems Serology Research},
+  author = {Arnold, Kelly B. and Chung, Amy W.},
+  date = {2018-03},
+  journaltitle = {Immunology},
+  volume = {153},
+  pages = {279--289},
+  issn = {00192805},
+  doi = {10.1111/imm.12861},
+  url = {http://doi.wiley.com/10.1111/imm.12861},
+  urldate = {2020-05-21},
+  abstract = {Antibodies are highly functional glycoproteins capable of providing immune protection through multiple mechanisms, including direct pathogen neutralization and the engagement of their Fc portions with surrounding effector immune cells that induce anti-pathogenic responses. Small modifications to multiple antibody biophysical features induced by vaccines can significantly alter functional immune outcomes, though it is difficult to predict which combinations confer protective immunity. In order to give insight into the highly complex and dynamic processes that drive an effective humoral immune response, here we discuss recent applications of ‘Systems Serology’, a new approach that uses data-driven (also called ‘machine learning’) computational analysis and high-throughput experimental data to infer networks of important antibody features associated with protective humoral immunity and/or Fc functional activity. This approach offers the ability to understand humoral immunity beyond single correlates of protection, assessing the relative importance of multiple biophysical modifications to antibody features with multivariate computational approaches. Systems Serology has the exciting potential to help identify novel correlates of protection from infection and may generate a more comprehensive understanding of the mechanisms behind protection, including key relationships between specific Fc functions and antibody biophysical features (e.g. antigen recognition, isotype, subclass and/or glycosylation events). Reviewed here are some of the experimental and computational technologies available for Systems Serology research and evidence that the application has broad relevance to multiple different infectious diseases including viruses, bacteria, fungi and parasites.},
+  file = {/Users/bb9/Zotero/storage/46QJSFTY/Arnold_Chung_2018_Immunology_Prospects from systems serology research.pdf},
+  keywords = {_untagged_working_set,review,systems serology},
+  langid = {english},
+  number = {3}
+}
+
 @article{asimit2019StochasticSearchJoint,
   title = {Stochastic Search and Joint Fine-Mapping Increases Accuracy and Identifies Previously Unreported Associations in Immune-Mediated Diseases},
   author = {Asimit, Jennifer L. and Rainbow, Daniel B. and Fortune, Mary D. and Grinberg, Nastasiya F. and Wicker, Linda S. and Wallace, Chris},
@@ -487,6 +505,23 @@ Conclusions: Since we employ a score test-based approach, there is no need for p
   keywords = {RNA-seq,study design,transcriptomics},
   langid = {english},
   number = {2}
+}
+
+@article{avey2020SeasonalVariabilityShared,
+  title = {Seasonal {{Variability}} and {{Shared Molecular Signatures}} of {{Inactivated Influenza Vaccination}} in {{Young}} and {{Older Adults}}},
+  author = {Avey, Stefan and Mohanty, Subhasis and Chawla, Daniel G. and Meng, Hailong and Bandaranayake, Thilinie and Ueda, Ikuyo and Zapata, Heidi J. and Park, Koonam and Blevins, Tamara P. and Tsang, Sui and Belshe, Robert B. and Kaech, Susan M. and Shaw, Albert C. and Kleinstein, Steven H.},
+  date = {2020-03-15},
+  journaltitle = {The Journal of Immunology},
+  volume = {204},
+  pages = {1661--1673},
+  issn = {0022-1767, 1550-6606},
+  doi = {10.4049/jimmunol.1900922},
+  url = {http://www.jimmunol.org/lookup/doi/10.4049/jimmunol.1900922},
+  urldate = {2020-05-21},
+  file = {/Users/bb9/Zotero/storage/Q9IAPIGQ/Avey et al_2020_The Journal of Immunology_Seasonal Variability and Shared Molecular Signatures of Inactivated Influenza.pdf},
+  keywords = {_untagged_working_set,systems vaccinology},
+  langid = {english},
+  number = {6}
 }
 
 @article{avnir2016IGHV169PolymorphismModulates,
@@ -627,7 +662,7 @@ Conclusions: Among the tested workflows, the recall/precision balance remains re
   eprint = {3806354},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/CI5IK9HU/Baron_Kenny_1986_Journal of Personality and Social Psychology_The moderator-mediator variable distinction in social psychological research.pdf},
-  keywords = {causal model,methods,statistics,statistics; mediation,statistics; moderator/modifier},
+  keywords = {causal inference,methods,statistics,statistics; mediation,statistics; moderator/modifier},
   langid = {english},
   number = {6}
 }
@@ -860,6 +895,23 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   langid = {english}
 }
 
+@article{boyd2015PredictingVaccineResponsiveness,
+  title = {Predicting {{Vaccine Responsiveness}}},
+  author = {Boyd, Scott D. and Jackson, Katherine J.L.},
+  date = {2015-03},
+  journaltitle = {Cell Host \& Microbe},
+  volume = {17},
+  pages = {301--307},
+  issn = {19313128},
+  doi = {10.1016/j.chom.2015.02.015},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S1931312815000724},
+  urldate = {2020-05-21},
+  file = {/Users/bb9/Zotero/storage/WPRGPNJI/Boyd_Jackson_2015_Cell Host & Microbe_Predicting Vaccine Responsiveness.pdf},
+  keywords = {_untagged_working_set,review,systems vaccinology},
+  langid = {english},
+  number = {3}
+}
+
 @article{boyd2018CharacterizationEnhancerPromoter,
   title = {Characterization of the Enhancer and Promoter Landscape of Inflammatory Bowel Disease from Human Colon Biopsies},
   author = {Boyd, Mette and Thodberg, Malte and Vitezic, Morana and Bornholdt, Jette and Vitting-Seerup, Kristoffer and Chen, Yun and Coskun, Mehmet and Li, Yuan and Lo, Bobby Zhao Sheng and Klausen, Pia and Jan Schweiger, Pawel and Pedersen, Anders Gorm and Rapin, Nicolas and Skovgaard, Kerstin and Dahlgaard, Katja and Andersson, Robin and Terkelsen, Thilde Bagger and Lilje, Berit and Troelsen, Jesper Thorvald and Petersen, Andreas Munk and Jensen, Kim Bak and Gögenur, Ismail and Thielsen, Peter and Seidelin, Jakob Benedict and Nielsen, Ole Haagen and Bjerrum, Jacob Tveiten and Sandelin, Albin},
@@ -976,7 +1028,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   urldate = {2019-05-17},
   abstract = {There is considerable heterogeneity in immunological parameters between individuals, but its sources are largely unknown. To assess the relative contribution of heritable versus non-heritable factors, we have performed a systems-level analysis of 210 healthy twins between 8 and 82 years of age. We measured 204 different parameters, including cell population frequencies, cytokine responses, and serum proteins, and found that 77\% of these are dominated ({$>$}50\% of variance) and 58\% almost completely determined ({$>$}80\% of variance) by nonheritable influences. In addition, some of these parameters become more variable with age, suggesting the cumulative influence of environmental exposure. Similarly, the serological responses to seasonal influenza vaccination are also determined largely by nonheritable factors, likely due to repeated exposure to different strains. Lastly, in MZ twins discordant for cytomegalovirus infection, more than half of all parameters are affected. These results highlight the largely reactive and adaptive nature of the immune system in healthy individuals.},
   file = {/Users/bb9/Zotero/storage/39J92DS6/Brodin et al_2015_Cell_Variation in the Human Immune System Is Largely Driven by Non-Heritable.pdf},
-  keywords = {_unread_high_priority,heritability,immune system,structural equation modeling (SEM),systems immunology,twin study},
+  keywords = {_unread_med_priority,heritability,immune system,immune system; age,immune system; baseline,immune system; chronic infection,structural equation modeling (SEM),systems immunology,twin study},
   langid = {english},
   number = {1-2}
 }
@@ -994,7 +1046,7 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   urldate = {2020-05-10},
   abstract = {The human immune system is highly variable between individuals but relatively stable over time within a given person. Recent conceptual and technological advances have enabled systems immunology analyses, which reveal the composition of immune cells and proteins in populations of healthy individuals. The range of variation and some specific influences that shape an individual’s immune system is now becoming clearer. Human immune systems vary as a consequence of heritable and non-heritable influences, but symbiotic and pathogenic microbes and other non-heritable influences explain most of this variation. Understanding when and how such influences shape the human immune system is key for defining metrics of immunological health and understanding the risk of immune-mediated and infectious diseases.},
   file = {/Users/bb9/Zotero/storage/NSFBGSST/Brodin_Davis_2017_Nature Reviews Immunology_Human immune system variation.pdf},
-  keywords = {_untagged_working_set,immune system,immune system; baseline,review},
+  keywords = {_unread_med_priority,immune system,immune system; baseline,immune system; temporal stability,review,systems immunology},
   langid = {english},
   number = {1}
 }
@@ -1213,6 +1265,24 @@ Conclusion This is the first validated prognostic biomarker that can predict pro
   isbn = {0022-1899},
   keywords = {influenza,systems vaccinology,vaccine},
   number = {2}
+}
+
+@article{cao2016SystemsImmunologyAntibody,
+  title = {Systems Immunology: {{Beyond}} Antibody Titers},
+  shorttitle = {Systems Immunology},
+  author = {Cao, Raquel and Mejias, Asuncion and Ramilo, Octavio},
+  date = {2016-07},
+  journaltitle = {Journal of Infection},
+  volume = {72},
+  pages = {S115-S118},
+  issn = {01634453},
+  doi = {10.1016/j.jinf.2016.04.031},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S0163445316300585},
+  urldate = {2020-05-21},
+  abstract = {Despite the evident success of currently available vaccines to prevent infectious diseases, we still lack a full understanding of the mechanisms by which vaccines induce protective immune responses. Systems immunology applies multifaceted analytical tools to better understand the immune responses to vaccines by deep characterization of the cellular components, regulatory pathways, antibody responses and immune gene profiles with the ultimate goal of identifying the complex cellular, genetic and regulatory factors and mechanisms that contribute to effective and protective immune responses.},
+  file = {/Users/bb9/Zotero/storage/TIPLSG8Z/Cao et al_2016_Journal of Infection_Systems immunology.pdf},
+  keywords = {_untagged_working_set,review,systems immunology,systems vaccinology},
+  langid = {english}
 }
 
 @online{carterHostProteinsUsed,
@@ -1739,7 +1809,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4VGTWP7U/Croteau-Chonka et al_2015_PLOS ONE_Expression Quantitative Trait Loci Information Improves Predictive Modeling of.PDF},
   isbn = {1932-6203 (Electronic) 1932-6203 (Linking)},
-  keywords = {_unread_low_priority,complex traits,genetic association,genetic association; genome-wide (GWAS),predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_unread_low_priority,complex traits,genetic association,genetic association; genome-wide (GWAS),predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; logistic},
   number = {10}
 }
 
@@ -1807,7 +1877,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   url = {https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1560-8},
   urldate = {2020-04-21},
   file = {/Users/bb9/Zotero/storage/DKJ7PUGD/Davenport et al_2018_Discovering in vivo cytokine eQTL interactions from a lupus clinical trial.pdf;/Users/bb9/Zotero/storage/IBMJSAEL/13059_2018_1560_MOESM2_ESM.xlsx;/Users/bb9/Zotero/storage/PJLI89Z2/13059_2018_1560_MOESM1_ESM.pdf},
-  keywords = {_favourite,genetic association,genotype-environment interaction (GxE),in vivo study,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systemic lupus erythematosus (SLE)},
+  keywords = {_favourite,genotype-environment interaction (GxE),in vivo study,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systemic lupus erythematosus (SLE)},
   langid = {english},
   number = {1},
   options = {useprefix=true}
@@ -1882,8 +1952,26 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/TF68BGS6/Davis et al_2016_An Efficient Multiple-Testing Adjustment for eQTL Studies that Accounts for.pdf},
   isbn = {1537-6605 (Electronic) 0002-9297 (Linking)},
-  keywords = {eGene-MVN,eigenMT,genetic association,methods,multiple testing,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {eGene-MVN,eigenMT,methods,multiple testing,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   number = {1}
+}
+
+@article{davis2017SystemsImmunologyJust,
+  title = {Systems Immunology: Just Getting Started},
+  author = {Davis, Mark M and Tato, Cristina M and Furman, David},
+  date = {2017-06-20},
+  journaltitle = {Nature Immunology},
+  volume = {18},
+  pages = {725--732},
+  issn = {1529-2908},
+  doi = {10.1038/ni.3768},
+  url = {http://www.nature.com/doifinder/10.1038/ni.3768%5Cnhttp://www.ncbi.nlm.nih.gov/pubmed/28632713},
+  abstract = {Systems-biology approaches in immunology take various forms, but here we review strategies for measuring a broad swath of immunological functions as a means of discovering previously unknown relationships and phenomena and as a powerful way of understanding the immune system as a whole. This approach has rejuvenated the field of vaccine development and has fostered hope that new ways will be found to combat infectious diseases that have proven refractory to classical approaches. Systems immunology also presents an important new strategy for understanding human immunity directly, taking advantage of the many ways the immune system of humans can be manipulated.},
+  eprint = {28632713},
+  eprinttype = {pmid},
+  file = {/Users/bb9/Zotero/storage/6SWJVIAQ/Davis et al_2017_Nature Immunology_Systems immunology.pdf},
+  keywords = {_untagged_working_set,review,systems immunology,systems vaccinology},
+  number = {7}
 }
 
 @article{deaton2018UnderstandingMisunderstandingRandomized,
@@ -1903,6 +1991,25 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   langid = {english}
 }
 
+@article{degregorio2014EmpiricismRationalDesign,
+  title = {From Empiricism to Rational Design: A Personal Perspective of the Evolution of Vaccine Development},
+  shorttitle = {From Empiricism to Rational Design},
+  author = {De Gregorio, Ennio and Rappuoli, Rino},
+  date = {2014-07},
+  journaltitle = {Nature Reviews Immunology},
+  volume = {14},
+  pages = {505--514},
+  issn = {1474-1733, 1474-1741},
+  doi = {10.1038/nri3694},
+  url = {http://www.nature.com/articles/nri3694},
+  urldate = {2020-05-21},
+  abstract = {Vaccination, which is the most effective medical intervention that has ever been introduced, originated from the observation that individuals who survived a plague or smallpox would not get the disease twice. To mimic the protective effects of natural infection, Jenner — and later Pasteur — inoculated individuals with attenuated or killed disease-causing agents. This empirical approach inspired a century of vaccine development and the effective prophylaxis of many infectious diseases. From the 1980s, several waves of new technologies have enabled the development of novel vaccines that would not have been possible using the empirical approach. The technological revolution in the field of vaccination is now continuing, and it is delivering novel and safer vaccines. In this Timeline article, we provide our views on the transition from empiricism to rational vaccine design.},
+  file = {/Users/bb9/Zotero/storage/BM6EA57Q/De Gregorio_Rappuoli_2014_Nature Reviews Immunology_From empiricism to rational design.pdf},
+  keywords = {_favourite,_untagged_working_set,review,systems vaccinology,vaccine,vaccine; rational design},
+  langid = {english},
+  number = {7}
+}
+
 @article{dejager2015ImmVarProjectInsights,
   title = {{{ImmVar}} Project: {{Insights}} and Design Considerations for Future Studies of “Healthy” Immune Variation},
   shorttitle = {{{ImmVar}} Project},
@@ -1917,7 +2024,7 @@ Conclusions: The correlation between baseline and post-intervention scores can b
   urldate = {2020-05-20},
   abstract = {The Immune Variation (ImmVar) project is one of a series of recent efforts to map the extent of variation in immune function in healthy human subjects. The focus of our initial studies involved a careful mapping of the genetic architecture of the adaptive and innate immunologic transcriptomes. Our studies highlight the shared nature of this immunogenetic architecture across human populations, the important role of context in uncovering effects of genetic variation, and the fact that, over all tested genes, common genetic variation account for a minority of the variance in the immune transcriptome in healthy subjects. Yet, it is an element of the variance that can be measured very precisely and will play an important role in the design of future studies. We therefore discuss how insights from ImmVar and similar studies inform experimental strategies and frame the design of future studies of immune function in health and disease. © 2015 Elsevier Ltd. All rights reserved.},
   file = {/Users/bb9/Zotero/storage/W78DGYEC/De Jager et al_2015_Seminars in Immunology_ImmVar project.pdf},
-  keywords = {_unread_low_priority,immune system,immune system; baseline,ImmVar,quantitative trait loci (QTL),quantitative trait loci; ancestry,quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),review},
+  keywords = {_unread_low_priority,immune system,immune system; baseline,ImmVar,quantitative trait loci (QTL),quantitative trait loci; ancestry,quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),review,systems immunology},
   langid = {english},
   number = {1}
 }
@@ -2160,6 +2267,22 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   langid = {english}
 }
 
+@article{dopico2015WidespreadSeasonalGene,
+  title = {Widespread Seasonal Gene Expression Reveals Annual Differences in Human Immunity and Physiology},
+  author = {Dopico, Xaquin Castro and Evangelou, Marina and Ferreira, Ricardo C. and Guo, Hui and Pekalski, Marcin L. and Smyth, Deborah J. and Cooper, Nicholas and Burren, Oliver S. and Fulford, Anthony J. and Hennig, Branwen J. and Prentice, Andrew M. and Ziegler, Anette-G. and Bonifacio, Ezio and Wallace, Chris and Todd, John A.},
+  date = {2015-11},
+  journaltitle = {Nature Communications},
+  volume = {6},
+  issn = {2041-1723},
+  doi = {10.1038/ncomms8000},
+  url = {http://www.nature.com/articles/ncomms8000},
+  urldate = {2020-05-21},
+  file = {/Users/bb9/Zotero/storage/DWRRRDY6/Dopico et al_2015_Nature Communications_Widespread seasonal gene expression reveals annual differences in human.pdf},
+  keywords = {_untagged_working_set,systems immunology},
+  langid = {english},
+  number = {1}
+}
+
 @article{dormann2013CollinearityReviewMethods,
   title = {Collinearity: A Review of Methods to Deal with It and a Simulation Study Evaluating Their Performance},
   shorttitle = {Collinearity},
@@ -2260,7 +2383,7 @@ Note: Eli A. Stahl and Solveig K. Sieberts are co-corresponding authors},
   urldate = {2018-11-02},
   abstract = {Motivation: There is recent interest in using gene expression data to contextualize findings from traditional genome-wide association studies (GWAS). Conditioned on a tissue, expression quantitative trait loci (eQTLs) are genetic variants associated with gene expression, and eGenes are genes whose expression levels are associated with genetic variants. eQTLs and eGenes provide great supporting evidence for GWAS hits and important insights into the regulatory pathways involved in many diseases. When a significant variant or a candidate gene identified by GWAS is also an eQTL or eGene, there is strong evidence to further study this variant or gene. Multi-tissue gene expression datasets like the Gene Tissue Expression (GTEx) data are used to find eQTLs and eGenes. Unfortunately, these datasets often have small sample sizes in some tissues. For this reason, there have been many meta-analysis methods designed to combine gene expression data across many tissues to increase power for finding eQTLs and eGenes. However, these existing techniques are not scalable to datasets containing many tissues, like the GTEx data. Furthermore, these methods ignore a biological insight that the same variant may be associated with the same gene across similar tissues.},
   file = {/Users/bb9/Zotero/storage/HHXA7UJJ/Duong et al_2017_Bioinformatics_Applying meta-analysis to genotype-tissue expression data from multiple tissues.pdf},
-  keywords = {genetic association,meta-analysis,methods,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),RE2,RECOV},
+  keywords = {meta-analysis,methods,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),RE2,RECOV},
   langid = {english},
   number = {14}
 }
@@ -2539,7 +2662,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/Y98MQIBX/Fairfax_Knight_2014_Current Opinion in Immunology_Genetics of gene expression in immunity to infection.pdf},
   isbn = {1879-0372 (Electronic)\textbackslash r0952-7915 (Linking)},
-  keywords = {_unread_high_priority,genetic association,genotype-environment interaction (GxE),quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),review},
+  keywords = {_unread_high_priority,genotype-environment interaction (GxE),quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),review},
   number = {1}
 }
 
@@ -2690,7 +2813,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4ZRII2SI/elife-00299-supp1-v2.xlsx;/Users/bb9/Zotero/storage/KN9FU3RY/Franco et al_2013_eLife_Integrative genomic analysis of the human immune response to influenza.pdf},
   isbn = {10.7554/eLife.00899},
-  keywords = {_favourite,causal model,genetic association,genotype-environment interaction (GxE),in vivo study,influenza,influenza; seasonal,mediation analysis,predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
+  keywords = {_favourite,causal inference,genotype-environment interaction (GxE),in vivo study,influenza,influenza; seasonal,mediation analysis,predictive modelling,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),systems vaccinology,vaccine,vaccine; trivalent inactivated influenza (TIV)},
   number = {2}
 }
 
@@ -3188,7 +3311,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   urldate = {2020-04-10},
   abstract = {Background: High hemagglutination inhibition (HAI) and neuraminidase inhibition (NAI) titers are generally associated with reduced influenza risk. While repeated influenza vaccination reduces seroresponse, vaccine effectiveness is not always reduced. Methods: During the 2007-2008 influenza season, a randomized, placebo-controlled trial (FLUVACS) evaluated the efficacies of live-attenuated (LAIV) and inactivated influenza vaccines (IIV) among healthy adults aged 18-49 in Michigan; IIV vaccine efficacy (VE) and LAIV VE against influenza disease were estimated at 68\% and 36\%. Using the principal stratification/VE moderation framework, we analyzed data from this trial to assess how each VE varied by HAI or NAI responses to vaccination observed for vaccinated individuals and predicted counterfactually for placebo recipients. We also assessed how each VE varied with pre-vaccination/baseline variables including HAI titer, NAI titer, and vaccination history. Results: IIV VE appeared to increase with Day 30 post-vaccination HAI titer, albeit not significantly (p=0.20 and estimated VE 14.4\%, 70.5\%, and 85.5\% at titer below the assay lower quantification limit, 512, and 4096 (maximum)). Moreover, IIV VE increased significantly with Day 30 post-vaccination NAI titer (p=0.040), with estimated VE zero at titer 10 and 92.2\% at highest titer 640. There was no evidence that fold-change in post-vaccination HAI or NAI titer associated with IIV VE (p=0.76, 0.38). For LAIV, there was no evidence that VE associated with post-vaccination or fold-rise HAI or NAI titers (p-values {$>$}0.40). For IIV, VE increased with increasing baseline NAI titer in those previously vaccinated, but VE decreased with increasing baseline NAI titer in those previously unvaccinated. In contrast, for LAIV, VE did not depend on previous vaccination or baseline HAI or NAI titer. Conclusions: Future efficacy trials should measure baseline and post-vaccination antibody titers in both vaccine and control/placebo recipients, enabling analyses to better elucidate correlates of vaccine- and natural-protection. Trial registration: ClinicalTrials.gov NCT00538512. October 1, 2007.},
   file = {/Users/bb9/Zotero/storage/JAPHCMDN/Gilbert et al_2019_BMC Infectious Diseases_HAI and NAI titer correlates of inactivated and live attenuated influenza.pdf},
-  keywords = {_untagged_working_set},
+  keywords = {_untagged_working_set,immune system,immune system; baseline,vaccine,vaccine; correlates of protection,vaccine; efficacy},
   langid = {english},
   number = {1}
 }
@@ -3317,6 +3440,24 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   number = {4}
 }
 
+@article{greenwood2014ContributionVaccinationGlobal,
+  title = {The Contribution of Vaccination to Global Health: Past, Present and Future},
+  shorttitle = {The Contribution of Vaccination to Global Health},
+  author = {Greenwood, Brian},
+  date = {2014-06-19},
+  journaltitle = {Philosophical Transactions of the Royal Society B: Biological Sciences},
+  volume = {369},
+  pages = {20130433},
+  issn = {0962-8436, 1471-2970},
+  doi = {10.1098/rstb.2013.0433},
+  url = {https://royalsocietypublishing.org/doi/10.1098/rstb.2013.0433},
+  urldate = {2020-05-21},
+  file = {/Users/bb9/Zotero/storage/G2U9LI6S/Greenwood_2014_Philosophical Transactions of the Royal Society B Biological Sciences_The contribution of vaccination to global health.pdf},
+  keywords = {_untagged_working_set,review,vaccine},
+  langid = {english},
+  number = {1645}
+}
+
 @article{gregersen2012CellTypeSpecific,
   title = {Cell Type–Specific {{eQTLs}} in the Human Immune System},
   author = {Gregersen, Peter K},
@@ -3332,6 +3473,24 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   keywords = {_unread_high_priority,_untagged_working_set,quantitative trait loci (QTL)},
   langid = {english},
   number = {5}
+}
+
+@article{greiff2017SystemsAnalysisReveals,
+  title = {Systems {{Analysis Reveals High Genetic}} and {{Antigen}}-{{Driven Predetermination}} of {{Antibody Repertoires}} throughout {{B Cell Development}}},
+  author = {Greiff, Victor and Menzel, Ulrike and Miho, Enkelejda and Weber, Cédric and Riedel, René and Cook, Skylar and Valai, Atijeh and Lopes, Telma and Radbruch, Andreas and Winkler, Thomas H. and Reddy, Sai T.},
+  date = {2017-05},
+  journaltitle = {Cell Reports},
+  volume = {19},
+  pages = {1467--1478},
+  issn = {22111247},
+  doi = {10.1016/j.celrep.2017.04.054},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S221112471730565X},
+  urldate = {2020-05-21},
+  abstract = {Antibody repertoire diversity and plasticity is crucial for broad protective immunity. Repertoires change in size and diversity across multiple B cell developmental stages and in response to antigen exposure. However, we still lack fundamental quantitative understanding of the extent to which repertoire diversity is predetermined. Therefore, we implemented a systems immunology framework for quantifying repertoire predetermination on three distinct levels: (1) B cell development (pre-B cell, naive B cell, plasma cell), (2) antigen exposure (three structurally different proteins), and (3) four antibody repertoire components (V-gene usage, clonal expansion, clonal diversity, repertoire size) extracted from antibody repertoire sequencing data (400 million reads). Across all three levels, we detected a dynamic balance of high genetic (e.g., {$>$}90\% for V-gene usage and clonal expansion in naive B cells) and antigen-driven (e.g., 40\% for clonal diversity in plasma cells) predetermination and stochastic variation. Our study has implications for the prediction and manipulation of humoral immunity.},
+  file = {/Users/bb9/Zotero/storage/DI7UGRN4/Greiff et al_2017_Cell Reports_Systems Analysis Reveals High Genetic and Antigen-Driven Predetermination of.pdf},
+  keywords = {_untagged_working_set,systems immunology},
+  langid = {english},
+  number = {7}
 }
 
 @article{grice2009TrulyMultivariateApproach,
@@ -3364,7 +3523,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   url = {http://www.nature.com/articles/s41588-018-0154-4},
   urldate = {2018-07-13},
   file = {/Users/bb9/Zotero/storage/ZN3CNYGW/GTEx Consortium et al_2018_Nature Genetics_Using an atlas of gene regulation across 44 human tissues to inform complex.pdf},
-  keywords = {complex traits,eQTLEnrich,genetic association,genetic association; genome-wide (GWAS),GTEx,METASOFT,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {complex traits,eQTLEnrich,genetic association,genetic association; genome-wide (GWAS),GTEx,GTEx; v6p,METASOFT,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   langid = {english},
   number = {7},
   options = {useprefix=true}
@@ -3534,6 +3693,28 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   options = {useprefix=true}
 }
 
+@article{haralambieva2016WholeTranscriptomeProfiling,
+  title = {Whole {{Transcriptome Profiling Identifies CD93}} and {{Other Plasma Cell Survival Factor Genes Associated}} with {{Measles}}-{{Specific Antibody Response}} after {{Vaccination}}},
+  author = {Haralambieva, Iana H. and Zimmermann, Michael T. and Ovsyannikova, Inna G. and Grill, Diane E. and Oberg, Ann L. and Kennedy, Richard B. and Poland, Gregory A.},
+  editor = {Tregoning, John S},
+  date = {2016-08-16},
+  journaltitle = {PLOS ONE},
+  volume = {11},
+  pages = {e0160970},
+  issn = {1932-6203},
+  doi = {10.1371/journal.pone.0160970},
+  url = {https://dx.plos.org/10.1371/journal.pone.0160970},
+  urldate = {2020-05-21},
+  abstract = {Background There are insufficient system-wide transcriptomic (or other) data that help explain the observed inter-individual variability in antibody titers after measles vaccination in otherwise healthy individuals.
+Methods We performed a transcriptome(mRNA-Seq)-profiling study after in vitro viral stimulation of PBMCs from 30 measles vaccine recipients, selected from a cohort of 764 schoolchildren, based on the highest and lowest antibody titers. We used regression and network biology modeling to define markers associated with neutralizing antibody response.
+Results We identified 39 differentially expressed genes that demonstrate significant differences between the high and low antibody responder groups (p-value 0.0002, q-value 0.092), including the top gene CD93 (p{$<$}1.0E-13, q{$<$}1.0E-09), encoding a receptor required for antigen-driven B-cell differentiation, maintenance of immunoglobulin production and preservation of plasma cells in the bone marrow. Network biology modeling highlighted plasma cell survival (CD93, IL6, CXCL12), chemokine/cytokine activity and cell-cell communication/ adhesion/migration as biological processes associated with the observed differential response in the two responder groups.
+Conclusion We identified genes and pathways that explain in part, and are associated with, neutralizing antibody titers after measles vaccination. This new knowledge could assist in the},
+  file = {/Users/bb9/Zotero/storage/EDL23SX8/Haralambieva et al_2016_PLOS ONE_Whole Transcriptome Profiling Identifies CD93 and Other Plasma Cell Survival.PDF},
+  keywords = {_untagged_working_set,systems vaccinology,vaccine},
+  langid = {english},
+  number = {8}
+}
+
 @article{harris2018EffectAntibioticMediatedMicrobiome,
   title = {Effect of {{Antibiotic}}-{{Mediated Microbiome Modulation}} on {{Rotavirus Vaccine Immunogenicity}}: {{A Human}}, {{Randomized}}-{{Control Proof}}-of-{{Concept Trial}}},
   shorttitle = {Effect of {{Antibiotic}}-{{Mediated Microbiome Modulation}} on {{Rotavirus Vaccine Immunogenicity}}},
@@ -3655,7 +3836,7 @@ Conclusions: Non-parametric tests are most useful for small studies. Using non-p
   eprint = {28842433},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/RKZRE7KP/HIPC-CHI Signatures Project Team_HIPC-I Consortium_2017_Science Immunology_Multicohort analysis reveals baseline transcriptional predictors of influenza.pdf},
-  keywords = {immune system,immune system; age,immune system; baseline,influenza,meta-analysis,systems vaccinology,vaccine},
+  keywords = {immune system,immune system; age,immune system; baseline,influenza,meta-analysis,predictive modelling,systems vaccinology,vaccine},
   number = {14}
 }
 
@@ -3875,7 +4056,7 @@ Lastly, integrative analyses were performed, using the early-life eQTLs, as well
 
 In conclusion, this thesis provides a strong evidence base for eQTL study design and guidance for analysis strategies in future studies. The characterisation of genetic regulation of neonatal immune responses and the interaction between regulatory variants and stimulatory conditions is a useful resource, and generates insights on the early-life origins of immune-related diseases that develop later in life.},
   file = {/Users/bb9/Zotero/storage/9TYBQHGP/Huang_2019_The genetics of gene expression.pdf},
-  keywords = {causal model,colocalisation (genomics),genotype-environment interaction (GxE),immune-mediated disease,Mendelian randomization (MR),monocytes,neonate/newborn (0d-4w),quantitative trait loci (QTL),quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),T cell}
+  keywords = {causal inference,colocalisation (genomics),genotype-environment interaction (GxE),immune-mediated disease,Mendelian randomization (MR),monocytes,neonate/newborn (0d-4w),quantitative trait loci (QTL),quantitative trait loci; cell type-specific,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),T cell}
 }
 
 @article{huang2019NeonatalGeneticsGene,
@@ -4126,7 +4307,7 @@ In conclusion, this thesis provides a strong evidence base for eQTL study design
   url = {https://linkinghub.elsevier.com/retrieve/pii/S0085253815529748},
   urldate = {2019-05-13},
   file = {/Users/bb9/Zotero/storage/LZNWYBW2/Jager et al_2008_Kidney International_Confounding.pdf},
-  keywords = {_unread_med_priority,causal model,confounder (statistics),epidemiology},
+  keywords = {_unread_med_priority,causal inference,confounder (statistics),epidemiology},
   langid = {english},
   number = {3}
 }
@@ -4726,7 +4907,7 @@ Conclusions: Modern FDR methods that use an informative covariate provide advant
   url = {http://www.nature.com/articles/ng.3467},
   urldate = {2018-07-10},
   file = {/Users/bb9/Zotero/storage/N7UN7Y7C/Kumasaka et al_2016_Nature Genetics_Fine-mapping cellular QTLs with RASQUAL and ATAC-seq.pdf},
-  keywords = {ATAC-seq,genetic association,methods,quantitative trait loci (QTL),quantitative trait loci; chromatin accessibility (caQTLs),quantitative trait loci; expression (eQTLs),RASQUAL},
+  keywords = {ATAC-seq,methods,quantitative trait loci (QTL),quantitative trait loci; chromatin accessibility (caQTLs),quantitative trait loci; expression (eQTLs),RASQUAL},
   langid = {english},
   number = {2}
 }
@@ -4753,7 +4934,7 @@ Conclusions: Modern FDR methods that use an informative covariate provide advant
   urldate = {2020-01-26},
   abstract = {The human immune system varies extensively between individuals, but variation within individuals over time has not been well characterized. Systems-level analyses allow for simultaneous quantification of many interacting immune system components, and the inference of global regulatory principles. Here we present a longitudinal, systems-level analysis in 99 healthy adults, 50 to 65 years of age and sampled every 3rd month during one year. We describe the structure of inter-individual variation and characterize extreme phenotypes along a principal curve. From coordinated measurement fluctuations, we infer relationships between 115 immune cell populations and 750 plasma proteins constituting the blood immune system. While most individuals have stable immune systems, the degree of longitudinal variability is an individual feature. The most variable individuals, in the absence of overt infections, exhibited markers of poor metabolic health suggestive of a functional link between metabolic and immunologic homeostatic regulation.},
   file = {/Users/bb9/Zotero/storage/C5X6VS67/Lakshmikanth et al_2020_bioRxiv_Human immune system variation during one year.pdf},
-  keywords = {_untagged_working_set},
+  keywords = {_unread_low_priority,immune system,immune system; baseline,immune system; cell composition,immune system; temporal stability,longitudinal study,mass cytometry,Olink assay,proteomics,systems immunology},
   langid = {english}
 }
 
@@ -4890,7 +5071,7 @@ Conclusions: Adjuvanted and unadjuvanted monovalent influenza A(H1N1)pdm09 vacci
   urldate = {2020-05-19},
   abstract = {Replicable genetic association signals have consistently been found through genome-wide association studies in recent years. The recent dramatic expansion of study sizes improves power of estimation of effect sizes, genomic prediction, causal inference, and polygenic selection, but it simultaneously increases susceptibility of these methods to bias due to subtle population structure. Standard methods using genetic principal components to correct for structure might not always be appropriate and we use a simulation study to illustrate when correction might be ineffective for avoiding biases. New methods such as trans-ethnic modeling and chromosome painting allow for a richer understanding of the relationship between traits and population structure. We illustrate the arguments using real examples (stroke and educational attainment) and provide a more nuanced understanding of population structure, which is set to be revisited as a critical aspect of future analyses in genetic epidemiology. We also make simple recommendations for how problems can be avoided in the future. Our results have particular importance for the implementation of GWAS meta-analysis, for prediction of traits, and for causal inference.},
   file = {/Users/bb9/Zotero/storage/XUDQ8A22/Lawson et al_2020_Human Genetics_Is population structure in the genetic biobank era irrelevant, a challenge, or.pdf},
-  keywords = {_favourite,_unread_med_priority,causal model,genetic association,genetic association; genome-wide (GWAS),population stratification,population stratification; ancestry,review,statistics,statistics; confounder},
+  keywords = {_favourite,_unread_med_priority,causal inference,genetic association,genetic association; genome-wide (GWAS),population stratification,population stratification; ancestry,review,statistics,statistics; confounder},
   langid = {english},
   number = {1}
 }
@@ -5143,7 +5324,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   urldate = {2018-07-18},
   abstract = {Multi-trait mixed models have emerged as a promising approach for joint analyses of multiple traits. In principle, the mixed model framework is remarkably general. However, current methods implement only a very specific range of tasks to optimize the necessary computations. Here, we present a multi-trait modeling framework that is versatile and fast: LIMIX enables to flexibly adapt mixed models for a broad range of applications with different observed and hidden covariates, and variable study designs. To highlight the novel modeling aspects of LIMIX we performed three vastly different genetic studies: joint GWAS of correlated blood lipid phenotypes, joint analysis of the expression levels of the multiple transcript-isoforms of a gene, and pathway-based modeling of molecular traits across environments. In these applications we show that LIMIX increases GWAS power and phenotype prediction accuracy, in particular when integrating stepwise multi-locus regression into multi-trait models, and when analyzing large numbers of traits. An open source implementation of LIMIX is freely available at: https://github.com/PMBio/limix.},
   file = {/Users/bb9/Zotero/storage/KQ2UP9MG/Lippert et al_2014_LIMIX.pdf;/Users/bb9/Zotero/storage/YJBQEN76/Lippert et al_2014_LIMIX_(supplementary).pdf},
-  keywords = {genetic association,genetic association; genome-wide (GWAS),LIMIX,methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),regression,regression; linear},
+  keywords = {genetic association,genetic association; genome-wide (GWAS),LIMIX,methods,multilevel/hierarchical/mixed model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),regression,regression; linear},
   langid = {english}
 }
 
@@ -5164,6 +5345,23 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   number = {6}
 }
 
+@article{liston2016ShapingVariationHuman,
+  title = {Shaping {{Variation}} in the {{Human Immune System}}},
+  author = {Liston, Adrian and Carr, Edward J. and Linterman, Michelle A.},
+  date = {2016-10},
+  journaltitle = {Trends in Immunology},
+  volume = {37},
+  pages = {637--646},
+  issn = {14714906},
+  doi = {10.1016/j.it.2016.08.002},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S1471490616300916},
+  urldate = {2020-05-21},
+  file = {/Users/bb9/Zotero/storage/5XPJJ9Q3/Liston et al_2016_Trends in Immunology_Shaping Variation in the Human Immune System.pdf;/Users/bb9/Zotero/storage/86LBM266/1-s2.0-S1471490616300916-mmc7.mp4},
+  keywords = {_favourite,_unread_med_priority,heritability,immune system,immune system; age,immune system; baseline,immune system; host genetics,immune system; temporal stability,review,systems immunology},
+  langid = {english},
+  number = {10}
+}
+
 @article{liston2018OriginsDiversityHuman,
   title = {The Origins of Diversity in Human Immunity},
   author = {Liston, Adrian and Goris, An},
@@ -5176,7 +5374,7 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   url = {http://www.nature.com/articles/s41590-018-0047-9},
   urldate = {2019-10-01},
   file = {/Users/bb9/Zotero/storage/PHYIK5TV/Liston_Goris_2018_Nature Immunology_The origins of diversity in human immunity.pdf},
-  keywords = {_untagged_working_set,heritability,immune system,immune system; baseline,review,systems immunology},
+  keywords = {_unread_med_priority,heritability,immune system,immune system; baseline,review,systems immunology},
   langid = {english},
   number = {3}
 }
@@ -5379,6 +5577,27 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   number = {12}
 }
 
+@article{lu2014ExploringMolecularCauses,
+  title = {Exploring the Molecular Causes of Hepatitis {{B}} Virus Vaccination Response: An Approach with Epigenomic and Transcriptomic Data},
+  shorttitle = {Exploring the Molecular Causes of Hepatitis {{B}} Virus Vaccination Response},
+  author = {Lu, Youtao and Cheng, Yi and Yan, Weili and Nardini, Christine},
+  date = {2014-12},
+  journaltitle = {BMC Medical Genomics},
+  volume = {7},
+  issn = {1755-8794},
+  doi = {10.1186/1755-8794-7-12},
+  url = {http://bmcmedgenomics.biomedcentral.com/articles/10.1186/1755-8794-7-12},
+  urldate = {2020-05-21},
+  abstract = {Background: Variable responses to the Hepatitis B Virus (HBV) vaccine have recently been reported as strongly dependent on genetic causes. Yet, the details on such mechanisms of action are still unknown. In parallel, altered DNA methylation states have been uncovered as important contributors to a variety of health conditions. However, methodologies for the analysis of such high-throughput data (epigenomic), especially from the computational point of view, still lack of a gold standard, mostly due to the intrinsic statistical distribution of methylomic data i.e. binomial rather than (pseudo-) normal, which characterizes the better known transcriptomic data. We present in this article our contribution to the challenge of epigenomic data analysis with application to the variable response to the Hepatitis B virus (HBV) vaccine and its most lethal degeneration: hepatocellular carcinoma (HCC).
+Methods: Twenty-five infants were recruited and classified as good and non-/low- responders according to serological test results. Whole genome DNA methylation states were profiled by Illumina HumanMethylation 450 K beadchips. Data were processed through quality and dispersion filtering and with differential methylation analysis based on a combination of average methylation differences and non-parametric statistical tests. Results were finally associated to already published transcriptomics and post-transcriptomics to gain further insight.
+Results: We highlight 2 relevant variations in poor-responders to HBV vaccination: the hypomethylation of RNF39 (Ring Finger Protein 39) and the complex biochemical alteration on SULF2 via hypermethylation, down-regulation and post-transcriptional control.
+Conclusions: Our approach appears to cope with the new challenges implied by methylomic data distribution to warrant a robust ranking of candidates. In particular, being RNF39 within the Major Histocompatibility Complex (MHC) class I region, its altered methylation state fits with an altered immune reaction compatible with poor responsiveness to vaccination. Additionally, despite SULF2 having been indicated as a potential target for HCC therapy, we can recommend that non-responders to HBV vaccine who develop HCC are quickly directed to other therapies, as SULF2 appears to be already under multiple molecular controls in such patients. Future research in this direction is warranted.},
+  file = {/Users/bb9/Zotero/storage/4W7H6P7Y/Lu et al_2014_BMC Medical Genomics_Exploring the molecular causes of hepatitis B virus vaccination response.pdf},
+  keywords = {_untagged_working_set,systems vaccinology},
+  langid = {english},
+  number = {1}
+}
+
 @article{lumley2002ImportanceNormalityAssumption,
   title = {The {{Importance}} of the {{Normality Assumption}} in {{Large Public Health Data Sets}}},
   author = {Lumley, Thomas and Diehr, Paula and Emerson, Scott and Chen, Lu},
@@ -5431,6 +5650,24 @@ Conclusions: Simulations and applications to real datasets showed that MICE ofte
   keywords = {_untagged_working_set},
   langid = {english},
   number = {1}
+}
+
+@article{lynn2018EarlyLifeAntibioticDrivenDysbiosis,
+  title = {Early-{{Life Antibiotic}}-{{Driven Dysbiosis Leads}} to {{Dysregulated Vaccine Immune Responses}} in {{Mice}}},
+  author = {Lynn, Miriam Anne and Tumes, Damon John and Choo, Jocelyn Mei and Sribnaia, Anastasia and Blake, Stephen James and Leong, Lex Ee Xiang and Young, Graeme Paul and Marshall, Helen Siobhan and Wesselingh, Steve Lodewijk and Rogers, Geraint Berian and Lynn, David John},
+  date = {2018-05},
+  journaltitle = {Cell Host \& Microbe},
+  volume = {23},
+  pages = {653-660.e5},
+  issn = {19313128},
+  doi = {10.1016/j.chom.2018.04.009},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S1931312818302063},
+  urldate = {2020-05-21},
+  abstract = {Antibody-mediated responses play a critical role in vaccine-mediated immunity. However, for reasons that are poorly understood, these responses are highly variable between individuals. Using a mouse model, we report that antibiotic-driven intestinal dysbiosis, specifically in early life, leads to significantly impaired antibody responses to five different adjuvanted and live vaccines. Restoration of the commensal microbiota following antibiotic exposure rescues these impaired responses. In contrast, antibiotic-treated adult mice do not exhibit impaired antibody responses to vaccination. Interestingly, in contrast to impaired antibody responses, immunized mice exposed to early-life antibiotics display significantly enhanced T cell cytokine recall responses upon ex vivo restimulation with the vaccine antigen. Our results demonstrate that, in mice, antibioticdriven dysregulation of the gut microbiota in early life can modulate immune responses to vaccines that are routinely administered to infants worldwide.},
+  file = {/Users/bb9/Zotero/storage/9AKZ6I2R/Lynn et al_2018_Cell Host & Microbe_Early-Life Antibiotic-Driven Dysbiosis Leads to Dysregulated Vaccine Immune.pdf},
+  keywords = {_untagged_working_set,mice,microbiome,microbiome; dysbiosis,systems vaccinology},
+  langid = {english},
+  number = {5}
 }
 
 @article{ma2017JointBayesianModel,
@@ -5722,7 +5959,7 @@ Science, this issue p. 648, p. 660, p. 666; see also p. 640},
 Results: Here we compare legacy QTL mapping methods with several modern multi-locus methods and evaluate their ability to produce eQTL that agree with independent external data in a systematic way. We found that the modern multi-locus methods (Random Forests, sparse partial least squares, lasso, and elastic net) clearly outperformed the legacy QTL methods (Haley-Knott regression and composite interval mapping) in terms of biological relevance of the mapped eQTL. In particular, we found that our new approach, based on Random Forests, showed superior performance among the multi-locus methods.
 Conclusions: Benchmarks based on the recapitulation of experimental findings provide valuable insight when selecting the appropriate eQTL mapping method. Our battery of tests suggests that Random Forests map eQTL that are more likely to be validated by independent data, when compared to competing multi-locus and legacy eQTL mapping methods.},
   file = {/Users/bb9/Zotero/storage/697W73KH/Michaelson et al_2010_BMC Genomics_Data-driven assessment of eQTL mapping methods.pdf},
-  keywords = {_unread_med_priority,genetic association,methods,methods; comparison of,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; multi-locus,random forests},
+  keywords = {_unread_med_priority,methods,methods; comparison of,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; multi-locus,random forests},
   langid = {english},
   number = {1}
 }
@@ -5779,7 +6016,7 @@ Conclusions: The R function collapseRows implements several standard and network
 Results: We treat the causal inference as a 'chain' of mathematical conditions that must be satisfied to conclude that the potential mediator is causal for the trait, where the inference is only as good as the weakest link in the chain. P-values are computed for the component conditions, which include tests of linkage and conditional independence. The Intersection-Union Test, in which a series of statistical tests are combined to form an omnibus test, is then employed to generate the overall test result. Using computer simulated mouse crosses, we show that type I error is low under a variety of conditions that include hidden variables and reactive pathways. We show that power under a simple causal model is comparable to other model selection techniques as well as Bayesian network reconstruction methods. We further show empirically that this method compares favorably to Bayesian network reconstruction methods for reconstructing transcriptional regulatory networks in yeast, recovering 7 out of 8 experimentally validated regulators.
 Conclusion: Here we propose a novel statistical framework in which existing notions of causal mediation are formalized into a hypothesis test, thus providing a standard quantitative measure of uncertainty in the form of a p-value. The method is theoretically and computationally accessible and with the provided software may prove a useful tool in disentangling molecular relationships.},
   file = {/Users/bb9/Zotero/storage/TWCMHL8A/Millstein et al_2009_BMC Genetics_Disentangling molecular relationships with a causal inference test.pdf},
-  keywords = {_untagged_working_set,causal inference test (CIT),causal model,mediation analysis,methods},
+  keywords = {_untagged_working_set,causal inference,causal inference test (CIT),mediation analysis,methods},
   langid = {english},
   number = {1}
 }
@@ -5910,7 +6147,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/7Q5IYEMC/Mooney et al_2013_Systems immunogenetics of vaccines.pdf},
   isbn = {1096-3618 (Electronic); 1044-5323 (Linking)},
-  keywords = {_unread_med_priority,_untagged_working_set,systems vaccinology,vaccine},
+  keywords = {_unread_med_priority,_untagged_working_set,genetic association,genetic association; genome-wide (GWAS),review,systems vaccinology,vaccine},
   number = {2}
 }
 
@@ -6058,7 +6295,7 @@ Conclusion: Gene expression profiles in blood-based samples are strongly depende
   pagetotal = {904}
 }
 
-@article{Muyanja2014,
+@article{muyanja2014ImmuneActivationAlters,
   title = {Immune Activation Alters Cellular and Humoral Responses to Yellow Fever {{17D}} Vaccine},
   author = {Muyanja, Enoch and Ssemaganda, Aloysius and Ngauv, Pearline and Cubas, Rafael and Perrin, Helene and Srinivasan, Divya and Canderan, Glenda and Lawson, Benton and Kopycinski, Jakub and Graham, Amanda S and Rowe, Dawne K and Smith, Michaela J and Isern, Sharon and Michael, Scott and Silvestri, Guido and Vanderford, Thomas H and Castro, Erika and Pantaleo, Giuseppe and Singer, Joel and Gillmour, Jill and Kiwanuka, Noah and Nanvubya, Annet and Schmidt, Claudia and Birungi, Josephine and Cox, Josephine and Haddad, Elias K and Kaleebu, Pontiano and Fast, Patricia and Sekaly, Rafick-Pierre and Trautmann, Lydie},
   date = {2014-07-01},
@@ -6485,7 +6722,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   url = {https://academic.oup.com/cid/article-lookup/doi/10.1093/cid/cit373},
   urldate = {2019-10-19},
   file = {/Users/bb9/Zotero/storage/4CF96JXE/O'Connor_Pollard_2013_Clinical Infectious Diseases_Characterizing Vaccine Responses Using Host Genomic and Transcriptomic Analysis.pdf},
-  keywords = {_unread_high_priority,_untagged_working_set},
+  keywords = {_unread_high_priority,_untagged_working_set,immune system,immune system; host genetics,review,systems vaccinology},
   langid = {english},
   number = {6}
 }
@@ -6610,7 +6847,7 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   urldate = {2018-07-17},
   abstract = {Motivation: In order to discover quantitative trait loci, multi-dimensional genomic datasets combining DNA-seq and ChiP-/RNA-seq require methods that rapidly correlate tens of thousands of molecular phenotypes with millions of genetic variants while appropriately controlling for multiple testing.},
   file = {/Users/bb9/Zotero/storage/HX7CCHXT/Ongen et al_2016_Bioinformatics_Fast and efficient QTL mapper for thousands of molecular phenotypes.pdf},
-  keywords = {_favourite,FastQTL,genetic association,methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_favourite,FastQTL,methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   langid = {english},
   number = {10}
 }
@@ -6648,6 +6885,24 @@ Conclusion: Overall, the result shows that no method is perfect. In general, TB 
   keywords = {_unread_low_priority,fitness (evolutionary biology),review,review; fundamental concepts in genetics},
   langid = {english},
   number = {8}
+}
+
+@article{orru2013GeneticVariantsRegulating,
+  title = {Genetic {{Variants Regulating Immune Cell Levels}} in {{Health}} and {{Disease}}},
+  author = {Orrù, Valeria and Steri, Maristella and Sole, Gabriella and Sidore, Carlo and Virdis, Francesca and Dei, Mariano and Lai, Sandra and Zoledziewska, Magdalena and Busonero, Fabio and Mulas, Antonella and Floris, Matteo and Mentzen, Wieslawa I. and Urru, Silvana A.M. and Olla, Stefania and Marongiu, Michele and Piras, Maria G. and Lobina, Monia and Maschio, Andrea and Pitzalis, Maristella and Urru, Maria F. and Marcelli, Marco and Cusano, Roberto and Deidda, Francesca and Serra, Valentina and Oppo, Manuela and Pilu, Rosella and Reinier, Frederic and Berutti, Riccardo and Pireddu, Luca and Zara, Ilenia and Porcu, Eleonora and Kwong, Alan and Brennan, Christine and Tarrier, Brendan and Lyons, Robert and Kang, Hyun M. and Uzzau, Sergio and Atzeni, Rossano and Valentini, Maria and Firinu, Davide and Leoni, Lidia and Rotta, Gianluca and Naitza, Silvia and Angius, Andrea and Congia, Mauro and Whalen, Michael B. and Jones, Chris M. and Schlessinger, David and Abecasis, Gonçalo R. and Fiorillo, Edoardo and Sanna, Serena and Cucca, Francesco},
+  date = {2013-09},
+  journaltitle = {Cell},
+  volume = {155},
+  pages = {242--256},
+  issn = {00928674},
+  doi = {10.1016/j.cell.2013.08.041},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S0092867413010726},
+  urldate = {2020-05-21},
+  abstract = {The complex network of specialized cells and molecules in the immune system has evolved to defend against pathogens, but inadvertent immune system attacks on ‘‘self’’ result in autoimmune disease. Both genetic regulation of immune cell levels and their relationships with autoimmunity are largely undetermined. Here, we report genetic contributions to quantitative levels of 95 cell types encompassing 272 immune traits, in a cohort of 1,629 individuals from four clustered Sardinian villages. We first estimated trait heritability, showing that it can be substantial, accounting for up to 87\% of the variance (mean 41\%). Next, by assessing \$8.2 million variants that we identified and confirmed in an extended set of 2,870 individuals, 23 independent variants at 13 loci associated with at least one trait. Notably, variants at three loci (HLA, IL2RA, and SH2B3/ATXN2) overlap with known autoimmune disease associations. These results connect specific cellular phenotypes to specific genetic variants, helping to explicate their involvement in disease.},
+  file = {/Users/bb9/Zotero/storage/HRJVKK25/Orrù et al_2013_Cell_Genetic Variants Regulating Immune Cell Levels in Health and Disease.pdf},
+  keywords = {_untagged_working_set,systems immunology},
+  langid = {english},
+  number = {1}
 }
 
 @article{oshlack2009TranscriptLengthBias,
@@ -6841,7 +7096,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   eprint = {29476184},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/LN4YMYAE/Patin et al_2018_Nature Immunology_Natural variation in the parameters of innate immune cells is preferentially.pdf},
-  keywords = {_unread_high_priority,_untagged_working_set,immune system,immune system; baseline,Milieu Intérieur Consortium (MIC)}
+  keywords = {_unread_med_priority,cytomegalovirus,genetic association,genetic association; genome-wide (GWAS),immune system,immune system; age,immune system; baseline,immune system; cell composition,immune system; chronic infection,immune system; host genetics,immune system; sex,Milieu Intérieur Consortium (MIC),smoking,systems immunology}
 }
 
 @article{patro2017SalmonProvidesFast,
@@ -6879,7 +7134,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   eprint = {24585732},
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/4IJLZUV9/Pearce_Richiardi_2014_International Journal of Epidemiology_Commentary.pdf},
-  keywords = {causal model,statistics,statistics; Berkson's paradox,statistics; collider,statistics; collider bias,statistics; sampling/ascertainment/selection bias},
+  keywords = {causal inference,statistics,statistics; Berkson's paradox,statistics; collider,statistics; collider bias,statistics; sampling/ascertainment/selection bias},
   langid = {english},
   number = {2}
 }
@@ -6984,7 +7239,7 @@ Conclusion\hspace{0.6em} Specific gene networks confer susceptibility to SLE, ac
   url = {http://www.pnas.org/lookup/doi/10.1073/pnas.1714765115},
   urldate = {2018-12-05},
   file = {/Users/bb9/Zotero/storage/GWERYC2N/Piasecka et al_2018_Proceedings of the National Academy of Sciences_Distinctive roles of age, sex, and genetics in shaping transcriptional.pdf;/Users/bb9/Zotero/storage/MQ48TG38/Piasecka et al_2018_Proceedings of the National Academy of Sciences_Distinctive roles of age, sex, and genetics in shaping transcriptional.pdf},
-  keywords = {_unread_high_priority,genetic association,genotype-environment interaction (GxE),immune system,immune system; age,immune system; sex,inflammatory bowel disease (IBD),influenza,Milieu Intérieur Consortium (MIC),quantitative trait loci (QTL),quantitative trait loci; cis,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),quantitative trait loci; trans,systems immunology},
+  keywords = {_unread_high_priority,genotype-environment interaction (GxE),immune system,immune system; age,immune system; sex,inflammatory bowel disease (IBD),influenza,Milieu Intérieur Consortium (MIC),quantitative trait loci (QTL),quantitative trait loci; cis,quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),quantitative trait loci; trans,systems immunology},
   langid = {english},
   number = {3}
 }
@@ -7679,6 +7934,25 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   number = {1}
 }
 
+@article{roederer2015GeneticArchitectureHuman,
+  title = {The {{Genetic Architecture}} of the {{Human Immune System}}: {{A Bioresource}} for {{Autoimmunity}} and {{Disease Pathogenesis}}},
+  shorttitle = {The {{Genetic Architecture}} of the {{Human Immune System}}},
+  author = {Roederer, Mario and Quaye, Lydia and Mangino, Massimo and Beddall, Margaret H. and Mahnke, Yolanda and Chattopadhyay, Pratip and Tosi, Isabella and Napolitano, Luca and Terranova Barberio, Manuela and Menni, Cristina and Villanova, Federica and Di Meglio, Paola and Spector, Tim D. and Nestle, Frank O.},
+  date = {2015-04},
+  journaltitle = {Cell},
+  volume = {161},
+  pages = {387--403},
+  issn = {00928674},
+  doi = {10.1016/j.cell.2015.02.046},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S0092867415002470},
+  urldate = {2020-05-21},
+  abstract = {Despite recent discoveries of genetic variants associated with autoimmunity and infection, genetic control of the human immune system during homeostasis is poorly understood. We undertook a comprehensive immunophenotyping approach, analyzing 78,000 immune traits in 669 female twins. From the top 151 heritable traits (up to 96\% heritable), we used replicated GWAS to obtain 297 SNP associations at 11 genetic loci, explaining up to 36\% of the variation of 19 traits. We found multiple associations with canonical traits of all major immune cell subsets and uncovered insights into genetic control for regulatory T cells. This data set also revealed traits associated with loci known to confer autoimmune susceptibility, providing mechanistic hypotheses linking immune traits with the etiology of disease. Our data establish a bioresource that links genetic control elements associated with normal immune traits to common autoimmune and infectious diseases, providing a shortcut to identifying potential mechanisms of immune-related diseases.},
+  file = {/Users/bb9/Zotero/storage/J94MIAFR/Roederer et al_2015_Cell_The Genetic Architecture of the Human Immune System.pdf},
+  keywords = {_untagged_working_set,systems immunology},
+  langid = {english},
+  number = {2}
+}
+
 @article{rotival2019CharacterisingGeneticBasis,
   title = {Characterising the Genetic Basis of Immune Response Variation to Identify Causal Mechanisms Underlying Disease Susceptibility},
   author = {Rotival, Maxime},
@@ -7710,6 +7984,26 @@ Conclusions: This work quantitatively explores comparisons between contemporary 
   keywords = {_favourite,Bayesian inference,bayesmeta,meta-analysis,meta-analysis; random-effects,methods,multilevel/hierarchical/mixed model},
   langid = {english},
   primaryClass = {stat}
+}
+
+@article{rueckert2012VaccinesEmpiricalDevelopment,
+  title = {Vaccines: {{From Empirical Development}} to {{Rational Design}}},
+  shorttitle = {Vaccines},
+  author = {Rueckert, Christine and Guzmán, Carlos A.},
+  editor = {Hobman, Tom C.},
+  date = {2012-11-08},
+  journaltitle = {PLoS Pathogens},
+  volume = {8},
+  pages = {e1003001},
+  issn = {1553-7374},
+  doi = {10.1371/journal.ppat.1003001},
+  url = {https://dx.plos.org/10.1371/journal.ppat.1003001},
+  urldate = {2020-05-21},
+  abstract = {Infectious diseases are responsible for an overwhelming number of deaths worldwide and their clinical management is often hampered by the emergence of multi-drug-resistant strains. Therefore, prevention through vaccination currently represents the best course of action to combat them. However, immune escape and evasion by pathogens often render vaccine development difficult. Furthermore, most currently available vaccines were empirically designed. In this review, we discuss why rational design of vaccines is not only desirable but also necessary. We introduce recent developments towards specifically tailored antigens, adjuvants, and delivery systems, and discuss the methodological gaps and lack of knowledge still hampering true rational vaccine design. Finally, we address the potential and limitations of different strategies and technologies for advancing vaccine development.},
+  file = {/Users/bb9/Zotero/storage/HE7Y3XS7/Rueckert_Guzmán_2012_PLoS Pathogens_Vaccines.PDF},
+  keywords = {_untagged_working_set,review,systems vaccinology,vaccine,vaccine; rational design},
+  langid = {english},
+  number = {11}
 }
 
 @article{runcie2019FastFlexibleLinear,
@@ -7866,7 +8160,7 @@ Methods: We characterized the serological response to 15 antigens from common hu
 Results: We identified age and sex as important determinants of humoral immunity, with older individuals and women having higher rates of seropositivity for most antigens. Genome-wide association studies revealed significant associations between variants in the human leukocyte antigen (HLA) class II region on chromosome 6 and anti-EBV and anti-rubella IgG levels. We used HLA imputation to fine map these associations to amino acid variants in the peptide-binding groove of HLA-DRβ1 and HLA-DPβ1, respectively. We also observed significant associations for total IgA levels with two loci on chromosome 2 and with specific KIR-HLA combinations.
 Conclusions: Using extensive serological testing and genome-wide association analyses in a well-characterized cohort of healthy individuals, we demonstrated that age, sex, and specific human genetic variants contribute to inter-individual variability in humoral immunity. By highlighting genes and pathways implicated in the normal antibody response to frequently encountered antigens, these findings provide a basis to better understand disease pathogenesis. (Continued on next page)},
   file = {/Users/bb9/Zotero/storage/MHAH9HME/for The Milieu Intérieur Consortium et al. - 2018 - Human genetic variants and age are the strongest p.pdf},
-  keywords = {_unread_low_priority,_untagged_working_set,genetic association,genetic association; genome-wide (GWAS),immune system,immune system; age,immune system; host genetics,immune system; humoral,Milieu Intérieur Consortium (MIC)},
+  keywords = {_unread_low_priority,_untagged_working_set,genetic association,genetic association; genome-wide (GWAS),immune system,immune system; age,immune system; host genetics,immune system; humoral,Milieu Intérieur Consortium (MIC),systems immunology,systems vaccinology},
   langid = {english},
   number = {1}
 }
@@ -8333,7 +8627,7 @@ Conclusions: Very small sample sizes, which are still common in RNA-seq experime
   urldate = {2020-04-10},
   abstract = {Some studies have analyzed the effect of a predictor measured at a later time point (X1), or of the X1-X0 difference, while adjusting for the predictor measured at baseline (X0), on some outcome Y of interest. The present simulation study shows that, if used to analyze the effect of change in X on Y, there is a high risk for this analysis to produce type 1-errors, especially with a strong correlation between true X and Y, when X0 and X1 are not measured with very high reliability, and with a large sample size. These problems are not encountered if analyzing the unadjusted effect of the X1-X0 difference on Y instead, and as this effect exhibits power on par with the adjusted effect it seems as the preferable method when using change between two measurement points as a predictor.},
   file = {/Users/bb9/Zotero/storage/LTLY7QMW/Sorjonen et al_2019_The peril of adjusting for baseline when using change as a predictor.pdf},
-  keywords = {_untagged_working_set},
+  keywords = {_untagged_working_set,statistics,statistics; change score},
   langid = {english},
   type = {preprint}
 }
@@ -8610,7 +8904,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   doi = {10.1371/journal.pgen.1003491},
   url = {http://dx.plos.org/10.1371/journal.pgen.1003491},
   file = {/Users/bb9/Zotero/storage/YS9NEM2K/Sul et al_2013_PLoS Genetics_Effectively Identifying eQTLs from Multiple Tissues by Combining Mixed Model.PDF},
-  keywords = {genetic association,meta-analysis,Meta-Tissue,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {meta-analysis,Meta-Tissue,methods,multilevel/hierarchical/mixed model,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   number = {6}
 }
 
@@ -8869,7 +9163,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   url = {http://www.sciencemag.org/cgi/doi/10.1126/science.1262110},
   urldate = {2018-09-04},
   file = {/Users/bb9/Zotero/storage/6TD4JNZR/NIAAA-02-2016-council-Ardlie.pdf;/Users/bb9/Zotero/storage/9MFJJWZH/Portal_Analysis_Methods_v4_110315.pdf;/Users/bb9/Zotero/storage/SC9BZJAE/The GTEx Consortium et al_2015_Science_The Genotype-Tissue Expression (GTEx) pilot analysis_(supplementary).pdf;/Users/bb9/Zotero/storage/TF3FKWJ9/The GTEx Consortium et al_2015_Science_The Genotype-Tissue Expression (GTEx) pilot analysis.pdf;/Users/bb9/Zotero/storage/VUJ37GDP/648.html},
-  keywords = {_favourite,eQtlBma,genetic association,GTEx,Matrix eQTL,MT-eQTL,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_favourite,eQtlBma,GTEx,Matrix eQTL,MT-eQTL,multivariate/joint model,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   langid = {english},
   number = {6235}
 }
@@ -9134,6 +9428,26 @@ Conclusions: Our results show that each of the five networks compared provides u
   number = {2}
 }
 
+@article{tsang2015UtilizingPopulationVariation,
+  title = {Utilizing Population Variation, Vaccination, and Systems Biology to Study Human Immunology},
+  author = {Tsang, John S.},
+  date = {2015-08},
+  journaltitle = {Trends in Immunology},
+  volume = {36},
+  pages = {479--493},
+  publisher = {{Elsevier Ltd}},
+  issn = {14714906},
+  doi = {10.1016/j.it.2015.06.005},
+  url = {http://dx.doi.org/10.1016/j.it.2015.06.005},
+  abstract = {The move toward precision medicine has highlighted the importance of understanding biological variability within and across individuals in the human population. In particular, given the prevalent involvement of the immune system in diverse pathologies, an important question is how much and what information about the state of the immune system is required to enable accurate prediction of future health and response to medical interventions. Towards addressing this question, recent studies using vaccination as a model perturbation and systems-biology approaches are beginning to provide a glimpse of how natural population variation together with multiplexed, high-throughput measurement and computational analysis can be used to uncover predictors of immune response quality in humans. Here I discuss recent developments in this emerging field, with emphasis on baseline correlates of vaccination responses, sources of immune-state variability, as well as relevant features of study design, data generation, and computational analysis.},
+  eprint = {26187853},
+  eprinttype = {pmid},
+  file = {/Users/bb9/Zotero/storage/IKJIGQT5/Tsang_2015_Utilizing population variation, vaccination, and systems biology to study human.pdf},
+  isbn = {0002-9297},
+  keywords = {_untagged_working_set,review,systems immunology,systems vaccinology,vaccine},
+  number = {8}
+}
+
 @article{tsang2020ImprovingVaccineinducedImmunity,
   title = {Improving Vaccine-Induced Immunity: {{Can Baseline Predict Outcome}}?},
   shorttitle = {Improving Vaccine-Induced Immunity},
@@ -9146,7 +9460,7 @@ Conclusions: Our results show that each of the five networks compared provides u
   urldate = {2020-04-10},
   abstract = {Immune signatures measured at baseline and immediately prior to vaccination, may predict the immune response to vaccination. Such pre-vaccine assessment might allow not only populationbased, but also more personalized vaccination strategies (‘precision vaccination’). If baseline immune signatures are predictive, the underlying mechanism they reflect may also determine vaccination outcome. Thus, baseline signatures might contribute to identifying interventional targets to be modulated prior to vaccination in order to improve vaccination responses. This concept has the potential to transform vaccination strategies and usher in a new approach to improve global health.},
   file = {/Users/bb9/Zotero/storage/YW3SKM55/Tsang et al_2020_Trends in Immunology_Improving vaccine-induced immunity.pdf},
-  keywords = {_untagged_working_set},
+  keywords = {_untagged_working_set,immune system,immune system; baseline,predictive modelling,review,systems vaccinology},
   langid = {english}
 }
 
@@ -9545,6 +9859,25 @@ Conclusion: In randomized studies and studies with treatment assignment dependin
   keywords = {review,rotavirus,vaccine,vaccine; effectiveness,vaccine; efficacy}
 }
 
+@article{villani2018SystemsImmunologyLearning,
+  title = {Systems {{Immunology}}: {{Learning}} the {{Rules}} of the {{Immune System}}},
+  shorttitle = {Systems {{Immunology}}},
+  author = {Villani, Alexandra-Chloé and Sarkizova, Siranush and Hacohen, Nir},
+  date = {2018-04-26},
+  journaltitle = {Annual Review of Immunology},
+  volume = {36},
+  pages = {813--842},
+  issn = {0732-0582, 1545-3278},
+  doi = {10.1146/annurev-immunol-042617-053035},
+  url = {http://www.annualreviews.org/doi/10.1146/annurev-immunol-042617-053035},
+  urldate = {2020-05-21},
+  abstract = {Given the many cell types and molecular components of the human immune system, along with vast variations across individuals, how should we go about developing causal and predictive explanations of immunity? A central strategy in human studies is to leverage natural variation to find relationships among variables, including DNA variants, epigenetic states, immune phenotypes, clinical descriptors, and others. Here, we focus on how natural variation is used to find patterns, infer principles, and develop predictive models for two areas: (a) immune cell activation—how single-cell profiling boosts our ability to discover immune cell types and states—and (b) antigen presentation and recognition—how models can be generated to predict presentation of antigens on MHC molecules and their detection by T cell receptors. These are two examples of a shift in how we find the drivers and targets of immunity, especially in the human system in the context of health and disease.},
+  file = {/Users/bb9/Zotero/storage/ZMLG9DX5/Villani et al_2018_Annual Review of Immunology_Systems Immunology.pdf},
+  keywords = {_untagged_working_set,review,systems immunology},
+  langid = {english},
+  number = {1}
+}
+
 @article{vinuela2019InfluenceGeneticVariants,
   title = {Influence of Genetic Variants on Gene Expression in Human Pancreatic Islets – Implications for Type 2 Diabetes},
   author = {Viñuela, Ana and Varshney, Arushi and van de Bunt, Martijn and Prasad, Rashmi B. and Asplund, Olof and Bennett, Amanda and Boehnke, Michael and Brown, Andrew and Erdos, Michael R. and Fadista, João and Hansson, Ola and Hatem, Gad and Howald, Cédric and Iyengar, Apoorva K. and Johnson, Paul and Krus, Ulrika and MacDonald, Patrick E. and Mahajan, Anubha and Manning Fox, Jocelyn E. and Narisu, Narisu and Nylander, Vibe and Orchard, Peter and Oskolkov, Nikolay and Panousis, Nikolaos I. and Payne, Anthony and Stitzel, Michael L. and Vadlamudi, Swarooparani and Welch, Ryan and Collins, Francis S. and Mohlke, Karen L. and Gloyn, Anna L. and Scott, Laura J. and Dermitzakis, Emmanouil T. and Groop, Leif and Parker, Stephen C.J. and McCarthy, Mark I.},
@@ -9801,7 +10134,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   urldate = {2020-05-14},
   abstract = {Mapping gene expression as a quantitative trait using whole genome-sequencing and transcriptome analysis allows to discover the functional consequences of genetic variation. We developed a novel method and ultra-fast software Findr for higly accurate causal inference between gene expression traits using cis-regulatory DNA variations as causal anchors, which improves current methods by taking into consideration hidden confounders and weak regulations. Findr outperformed existing methods on the DREAM5 Systems Genetics challenge and on the prediction of microRNA and transcription factor targets in human lymphoblastoid cells, while being nearly a million times faster. Findr is publicly available at https:// github.com/lingfeiwang/findr.},
   file = {/Users/bb9/Zotero/storage/EQYTYDGE/Wang_Michoel_2017_PLOS Computational Biology_Efficient and accurate causal inference with hidden confounders from.pdf},
-  keywords = {_unread_low_priority,causal model,Findr,methods,network science,network science; gene coexpression,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
+  keywords = {_unread_low_priority,causal inference,Findr,methods,network science,network science; gene coexpression,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   langid = {english},
   number = {8}
 }
@@ -9934,7 +10267,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   eprinttype = {pmid},
   file = {/Users/bb9/Zotero/storage/M9C698VW/Westra et al_2013_Nature Genetics_Systematic identification of trans eQTLs as putative drivers of known disease_(supplementary).pdf;/Users/bb9/Zotero/storage/Z7VQSJUX/Westra et al_2013_Nature Genetics_Systematic identification of trans eQTLs as putative drivers of known disease.pdf},
   isbn = {doi:10.1038/ng.2756},
-  keywords = {_unread_low_priority,genetic association,permutation test,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; trans,whole blood},
+  keywords = {_unread_low_priority,permutation test,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; trans,whole blood},
   number = {10}
 }
 
@@ -9988,7 +10321,7 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   url = {http://www.nature.com/articles/s41588-018-0216-7},
   urldate = {2018-11-26},
   file = {/Users/bb9/Zotero/storage/3ELCIMPI/Westra et al_2018_Nature Genetics_Fine-mapping and functional studies highlight potential causal variants for.pdf},
-  keywords = {ATAC-seq,autoimmune disease,fine-mapping,FINEMAP,genetic association,genetic association; genome-wide (GWAS),Hi-C,immune-mediated disease,rheumatoid arthritis,type 1 diabetes (T1D)},
+  keywords = {ATAC-seq,fine-mapping,FINEMAP,genetic association,genetic association; genome-wide (GWAS),Hi-C,immune-mediated disease,immune-mediated disease; auto-immune,rheumatoid arthritis,type 1 diabetes (T1D)},
   langid = {english},
   number = {10}
 }
@@ -10330,16 +10663,24 @@ Conclusion: Excessive inflammation in the skin early after antigen challenge ret
   number = {40}
 }
 
-@article{Zalocusky2017,
-  title = {The 10,000 {{Immunomes Project}}: {{A}} Resource for Human Immunology},
-  author = {Zalocusky, Kelly A and Kan, Matthew J and Hu, Zicheng and Dunn, Patrick and Thomson, Elizabeth and Wiser, Jeffrey and Bhattacharya, Sanchita and Butte, Atul J},
-  date = {2017},
-  journaltitle = {bioRxiv},
-  doi = {10.1101/180489},
-  url = {http://biorxiv.org/content/early/2017/08/25/180489.abstract},
-  abstract = {New immunological assays now enable rich measurements of human immune function, but difficulty attaining enough measurements across sufficiently large and diverse cohorts has hindered describing normal human immune physiology on a large scale. Here we present the 10,000 Immunomes Project (10KIP), a diverse human immunology reference derived from over 44,000 individuals across 242 studies from ImmPort, a publicly available resource of raw immunology study data and protocols. We carefully curated datasets, aggregating subjects from healthy/control arms and harmonizing data across studies. We demonstrate 10KIP\&\#039;s utility by describing variations in serum cytokines and leukocytes by age, race, and sex; defining a baseline cell-cytokine network; and using 10KIP as a common control to describe immunologic changes in pregnancy. Subject-level data is available for interactive visualization and download at http://10kImmunomes.org/. We believe 10KIP can serve as a common control cohort and will accelerate hypothesis generation by clinical and basic immunologists across diverse populations.},
-  file = {/Users/bb9/Zotero/storage/T4XCH88R/Zalocusky et al_2017_The 10,000 Immunomes Project.pdf},
-  keywords = {_untagged_working_set,10KIP,control cohort,immune system,immune system; baseline,immunone}
+@article{zalocusky201810000Immunomes,
+  ids = {zalocusky201710000Immunomes},
+  title = {The 10,000 {{Immunomes Project}}: {{Building}} a {{Resource}} for {{Human Immunology}}},
+  shorttitle = {The 10,000 {{Immunomes Project}}},
+  author = {Zalocusky, Kelly A. and Kan, Matthew J. and Hu, Zicheng and Dunn, Patrick and Thomson, Elizabeth and Wiser, Jeffrey and Bhattacharya, Sanchita and Butte, Atul J.},
+  date = {2018-10},
+  journaltitle = {Cell Reports},
+  volume = {25},
+  pages = {513-522.e3},
+  issn = {22111247},
+  doi = {10.1016/j.celrep.2018.09.021},
+  url = {https://linkinghub.elsevier.com/retrieve/pii/S2211124718314517},
+  urldate = {2020-05-21},
+  abstract = {There is increasing appreciation that the immune system plays critical roles not only in the traditional domains of infection and inflammation but also in many areas of biology, including tumorigenesis, metabolism, and even neurobiology. However, one of the major barriers for understanding human immunological mechanisms is that immune assays have not been reproducibly characterized for a sufficiently large and diverse healthy human cohort. Here, we present the 10,000 Immunomes Project (10KIP), a framework for growing a diverse human immunology reference, from ImmPort, a publicly available resource of subject-level immunology data. Although some measurement types are sparse in the presently deposited ImmPort database, the extant data allow for a diversity of robust comparisons. Using 10KIP, we describe variations in serum cytokines and leukocytes by age, race, and sex; define a baseline cell-cytokine network; and describe immunologic changes in pregnancy. All data in the resource are available for visualization and download at http:// 10kimmunomes.org/.},
+  file = {/Users/bb9/Zotero/storage/RA8UAFDX/Zalocusky et al_2018_Cell Reports_The 10,000 Immunomes Project.pdf},
+  keywords = {_unread_low_priority,10KIP,control cohort,immune system,immune system; baseline,immunone,systems immunology},
+  langid = {english},
+  number = {2}
 }
 
 @article{zeng2019ComprehensiveMultipleEQTL,
@@ -10473,7 +10814,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {http://www.nature.com/articles/s41588-018-0160-6},
   urldate = {2018-07-23},
   file = {/Users/bb9/Zotero/storage/MH37WLR9/Zhou et al_2018_Nature Genetics_Deep learning sequence-based ab initio prediction of variant effects on.pdf},
-  keywords = {ExPecto,genetic association,genotype-environment interaction (GxE),machine learning,methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; response (reQTL),transcriptomics,transcriptomics; differential gene expression},
+  keywords = {ExPecto,genotype-environment interaction (GxE),machine learning,methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),quantitative trait loci; tissue-specific,transcriptomics,transcriptomics; differential gene expression},
   langid = {english}
 }
 
@@ -10509,7 +10850,7 @@ Conclusions: We demonstrate the value of these new contributions compared to cur
   url = {http://www.nature.com/articles/ng.3538},
   urldate = {2019-05-17},
   file = {/Users/bb9/Zotero/storage/LLA2WHKR/Zhu et al_2016_Nature Genetics_Integration of summary data from GWAS and eQTL studies predicts complex trait.pdf},
-  keywords = {_unread_high_priority,genetic association,genetic association; genome-wide (GWAS),Mendelian randomization (MR),Mendelian randomization; summary data-based (SMR),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs),transcriptome-wide association study (TWAS)},
+  keywords = {_unread_high_priority,genetic association,genetic association; genome-wide (GWAS),Mendelian randomization (MR),Mendelian randomization; summary data-based (SMR),methods,quantitative trait loci (QTL),quantitative trait loci; expression (eQTLs)},
   langid = {english},
   number = {5}
 }
