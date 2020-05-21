@@ -31,6 +31,10 @@
 % \input{filename} imports the commands from filename.tex into the target file;
 % it's equivalent to typing all the commands from filename.tex right into the
 % current file where the \input line is.
+%
+% Tell texcount to ignore the preamble:
+% https://tex.stackexchange.com/questions/286019/how-can-i-convince-texcount-that-my-use-of-newcolumntype-is-perfectly-valid-syn
+%TC:ignore
 \input{./frontmatter/preamble}
 
 %
@@ -61,6 +65,7 @@
 \include{./frontmatter/abstract}
 \include{./frontmatter/acknowledgements}
 \include{./frontmatter/toc}
+%TC:endignore
 
 %
 % Mainmatter, including appendix

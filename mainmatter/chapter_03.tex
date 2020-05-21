@@ -106,6 +106,8 @@ Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre
 % Interaction
 % Stratified
 % panel data aka longitudinal
+% blocking
+% Longitudinal studies what are we actually being told?  differences in regulation over time
 % this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
 % allison1990ChangeScoresDependent also presents some pros of change score
 % https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
@@ -146,7 +148,7 @@ For comparison purposes, analyses were also run using in the array and \gls{RNAs
 
 Defining whether an \gls{eQTL} is shared between conditions can be a tricky business.
 Naively, one can map \glspl{eQTL} separately in each condition, then assess the overlap of significant associations between conditions.
-This underestimates sharing due to the difficulty of distinguishing true lack of sharing from missed discoveries from incomplete power within each condition.
+This underestimates sharing due to the difficulty of distinguishing true lack of sharing from missed discoveries from incomplete power within each condition \autocite{flutre2013StatisticalFrameworkJoint,peters2016InsightGenotypePhenotypeAssociations}.
 Condition-by-condition analysis also makes no attempt to borrow information across conditions for mapping shared associations\autocite{flutre2013StatisticalFrameworkJoint,urbut2018FlexibleStatisticalMethods,li2018HTeQTLIntegrativeExpression}.
 Counterintuitively, a joint multivariate analysis may be more powerful even when associations are not shared across all conditions\autocite{stephens2013UnifiedFrameworkAssociation}.
 
@@ -734,6 +736,7 @@ Most \glspl{eQTL} were shared across timepoints; 1154/6887 (\percentage{0.167562
 % 1131 if ignoring d1 vs d7
 % \todo{might be interesting to note not so many d1 vs d7 reQTL}
 % TODO: expected? in fairfax, how many shared? in vivo studies, more or less?
+% look at ackermann2013ImpactNaturalGenetic for list of sharing estimates
 \todo{if it would be interesting to compare the sharing estimate condition by condition approach to mashr, then redo and pull in eigenmt-bh values}
 
 \autoref{fig:hird_eQTL_upset_mega} illustrates the difference between calling sharing using a significance threshold versus difference in betas approach.
@@ -896,6 +899,10 @@ In the case where the monocyte score is zero (representing an average abundance 
 
 In the \gls{HIRD} cohort, 
 \gls{eQTL} were detected for \percentage{0.5075166} of genes in at least one timepoint, day 0, day 1, or day 7.
+% TODO:
+% Compare to GTEx
+% BIOS We detected cis-eQTL effects for 66% of the protein-coding genes and 19% of the noncoding genes tested.
+% \todo{\url{https://www.nature.com/articles/ng.3737}, zhernakova2017IdentificationContextdependentExpression, BIOS}
 % Each method for determining reQTL has it's own biases.
 Even in a joint mapping framework, defining \gls{reQTL} by set significance thresholds, or change in the amount of expression variation explained, will miss classifying equal but opposite effect sizes.
 % Other studies have classified effects as magnifying (same sign and greater magnitude) or dampening effects after stimulation\autocite{davenport2018DiscoveringVivoCytokineeQTL},
@@ -904,6 +911,7 @@ Even in a joint mapping framework, defining \gls{reQTL} by set significance thre
 I account for the direction and magnitude of effect sizes, defining reQTL strength as the difference in effect size between timepoints.
 Most \gls{eQTL} are shared between conditions and replicate well in GTEx whole blood;
 \percentage{0.1675621} of lead \gls{eQTL} for each eGene were \gls{reQTL} that differed in effect size between timepoints.
+\todo{compare sharing with mashr and ongen2017EstimatingCausalTissues}
 
 % Also see for conditional:
 % https://academic.oup.com/hmg/article/26/8/1444/2970473
@@ -911,7 +919,7 @@ Most \gls{eQTL} are shared between conditions and replicate well in GTEx whole b
 Multiple independent eQTLs are present for a large fraction of eGenes\autocite{zeng2019ComprehensiveMultipleEQTL}.
 As the lead variant for reQTL assessment for each eGene was chosen based on significance across all conditions, I can not detect reQTL that are masked by a stronger shared eQTL at that gene.
 This is not expected to be uncommon, as the effective sample size for shared eQTLs is usually large due to borrowing of information across conditions.
-Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more likely to be enriched in enhancers rather than promoters, and importantly, more context-specific\autocite{dobbyn2018LandscapeConditionalEQTL}.
+Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more likely to be enriched in enhancers rather than promoters, and importantly, more context-specific\autocite{vandiedonck2017GeneticAssociationMolecular,dobbyn2018LandscapeConditionalEQTL}.
 The proportion of genes with reQTL I detect based on only the lead signal likely represents a lower bound.
 
 Given the larger global changes in expression vs. baseline at day 1 compared to day 7 described in \autoref{ch:hird_DGE}, 
@@ -999,6 +1007,7 @@ At the day 1 \gene{ADCY3} reQTL, the genetic effect can be mainly attributed to 
 % 20 genes from Franco
 % 12/17 DGE replicated
 % 14/17 eGenes replicated, none were reQTL
+\todo{dge is coupled to reqtl, if you do an enrichment of dge+reqtl overlap genes, enrichment is driven by DGE signal}
 
 A pressing question remains: what molecular mechanisms underlie the \gene{ADCY3} \gls{reQTL}, and indeed the remainder of the \glspl{reQTL}?
 Power differences due to condition-specific expression are unlikely to explain a large proportion of reQTLs.
@@ -1008,9 +1017,10 @@ One mechanism by which cis-eQTL affect expression is through their impact on \gl
 Immune cells, including monocytes, are regulated by cell type specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
 \todo{harmonise terminology for 'opposite'}
 Cell type specific expression of different \glspl{TF} have been proposed as a model for explaining magnifying, dampening and opposite reQTL effects;
+\todo{ check "rs2223286 is associated with profound directional effects in the expression of SELL dependent upon genotype, with the minor C allele associated with increased expression of SELL in B-cells and reduced expression of SELL in monocytes " }
 for example, opposite effects can result from \glspl{TF} regulating the same gene, that are activating in one cell type and suppressive in another\autocite{fu2012UnravelingRegulatoryMechanisms}.
 There is evidence that \gls{TF} activity is important for \textit{in vivo} immune reQTL:
-\autocite{caliskan2015HostGeneticVariation} found rhinovirus reQTLs were ENCODE ChIP-seq peaks for the \glspl{TF} \gene{STAT1} and \gene{STAT2},
+\autocite{caliskan2015HostGeneticVariation} found rhinovirus reQTLs in \glspl{PBMC} were enriched in ENCODE ChIP-seq peaks for the \glspl{TF} \gene{STAT1} and \gene{STAT2},
 and \autocite{davenport2018DiscoveringVivoCytokineeQTL} found interferon and anti-IL6 drug reQTLs likely disrupt \gene{ISRE} and \gene{IRF4} binding motifs.
 Rather than condition-specific expression of the eGene, what may be condition-specific is the expression of \glspl{TF} whose activity is affected by the reQTL%
 \footnote{
@@ -1034,6 +1044,7 @@ but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
 and a formal tests such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} are required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
 \autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
+% TODO: after all that Intro about gwas to function, we unfortunately lack the gwas part here
 % https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
 % The basic problem with underpowered studies is that, although the rate of false positives (type I error) in hypothesis tests is fixed, the rate of true positives (power) goes down. Hence, a positive (= significant) result is less likely to be a true positive in an underpowered study. This idea is expressed in the false discovery rate [2], see also [3]. This seems what the quote refers to.
 % An additional issue often named regarding underpowered studies is that they lead to overestimated effect sizes. The reasons is that a) with lower power, your estimates of the true effects will become more variable (stochastic) around their true value, and b) only the strongest of those effects will pass the significance filter when the power is low. One should add though that this is a reporting problem that could easily be fixed by discussing and reporting all and not only significant effects.
