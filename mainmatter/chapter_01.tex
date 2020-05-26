@@ -61,7 +61,7 @@ Traits for which genetic variation explains a non-zero fraction of phenotypic va
 Many measurable human traits are heritable and twin studies provide upper bounds on this heritability \url{https://www.nature.com/articles/ng.3285}.
 Discovering the specific genetic variants that contribute to heritability, through association of variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to many backdoor path effects that permeate observational studies of the causes of human phenotypes.
+Genetic association studies have intrinsic resistance to many back-door path effects that permeate observational studies of the causes of human phenotypes.
 \todo{add something sweeping about utility here or elsewhere: e.g. insights into trait biology and clinical translational potential for disease traits, genetically support drug target identification}
 
 \1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, 
@@ -180,12 +180,13 @@ to controlling the family-wise type I error rate at using the Bonferroni correct
 
 \1 By design, a significantly-associated variant from a \gls{GWAS} needs not be a variant that causally affects the trait, and may only tag a causal variant.
     \2 Fine-mapping is the process of determining which of the many correlated variants at a \gls{GWAS} locus are causal.
-    \2 The power to separate causal and tag variants depends on \gls{LD} and sample size \autocite{visscher201710YearsGWAS}.
     % For sparse enough problems, most other Bayesian methods provide posterior probabilities on "models" by enumerating (CAVIAR), schochastic search (FINEMAP) or sampling (BIMBAM) from all possible combinations of variables.
     % https://stephenslab.github.io/susie-paper/manuscript_results/motivating_example.html
-    \2 State-of-the-art methods (e.g. CAVIAR, PAINTOR, FINEMAP, SuSiE) provide Bayesian posterior probabilities that associated variants are causal, and some methods can consider the presence of multiple causal variants at the same locus \autocite{schaid2018GenomewideAssociationsCandidate}.
-    \2 Naturally, these methods assign probabilities assuming the causal variant is in the set of variants observed.
-    \2 The causal variant must either be genotyped or imputed. Denser genotyping e.g. by WGS, and larger imputation panels will help.
+    \2 State-of-the-art methods (e.g. PAINTOR, CAVIARBF, FINEMAP \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6050137/}, SuSiE) provide Bayesian posterior probabilities that associated variants are causal, and some methods can consider the presence of multiple causal variants at the same locus \autocite{schaid2018GenomewideAssociationsCandidate}.
+    \2 Even if a single causal variant cannot be assigned, a credible set can
+    \2 Power: to separate causal and tag variants depends on \gls{LD} and sample size \autocite{visscher201710YearsGWAS}. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6050137/}
+    \2 Resolution: Naturally, these methods assign probabilities assuming the causal variant is in the set of variants observed.
+    \2 The causal variant must either be genotyped or confidently imputed. Denser genotyping e.g. by WGS, and larger imputation panels will help.
 
 \subsection{From causal variant to target gene via expression}
 
@@ -202,6 +203,7 @@ it may not be obvious how to find the target genes through which that variant af
 % not true for pQTLs. Metabolite QTLs are also most likely to be caused by the
 % closest gene: https://ncbi.nlm.nih.gov/pmc/articles/PMC6326795/
 
+% TODO: read cano-gamez2020GWASFunctionUsing
 \1 Rather than directly impacting the coding sequence of a gene, 
 many non-coding GWAS loci are thought to affect traits by affecting the regulation of target genes \autocite{gallagher2018PostGWASEraAssociation}.
 \gls{GWAS} loci are enriched in regulatory elements annotated by functional genomics studies, such as
@@ -222,6 +224,7 @@ these enrichments put forth expression as an important molecular phenotype linki
 % \1 <basics of eQTLs> \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}
 \1 Studies of the genetic architecture of quantitative molecular phenotypes have further reinforced this hypothesis.
     \2 Molecular phenotypes like expression are heritable complex traits \autocite{gaffney2013GlobalPropertiesFunctional}
+    \2 Expression can be assayed by e.g. array or RNAseq
     \2 The variants associated with expression are called \glspl{eQTL}.
     % \2 The per-variant effect sizes on molecular phenotypes can be large \autocite{visscher201710YearsGWAS}.
     \2 eQTLs can also be cis- or trans- to their target gene \autocite{albert2015RoleRegulatoryVariation}.
@@ -239,6 +242,7 @@ how can we separate the scenario where one variant affects both trait and expres
 from coincidental overlap between distinct causal variants that may possibly in \gls{LD}?
 Bayesian probabilistic colocalisation methods (e.g. eCAVIAR, Sherlock, coloc \autocite{wallace2020ElicitingPriorsRelaxing}) 
 address this by estimating the posterior probability that the same causal variant is associated with both phenotypes.
+\todo{add uses other vars}
 distinguishing pleiotropy from linkage, 
 but not vertical pleiotropy (mediation) from horizontal pleiotropy (independent effects on trait and expression) \autocite{hemani2018EvaluatingPotentialRole}.
 As colocalisation of a \gls{GWAS} loci with \glspl{eQTL} is is necessary but not sufficient for mediation, 
@@ -315,13 +319,14 @@ to help untangle the multiplex of possible causal pathways from variant to trait
         \3 and experimental stimulation (see \autoref{subsec:intro_reQTL}).
 
 \1 Given the effect of an eQTL can be starkly different between environments, it is difficult to determine the appropriate \gls{eQTL} dataset to use for target gene prioritisation at GWAS loci.
-    \2 It has already been shown that use of cell-type specific eQTLs increases coloc rates with GWAS hits \autocite{kim-hellmuth2019CellTypeSpecific}
+\2 It has already been shown that use of cell-type specific eQTLs increases coloc rates with GWAS hits \autocite{kim-hellmuth2019CellTypeSpecific} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4498151/} \url{https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1}
     \2 Successful colocalisation of GWAS loci with coloc may prioritise not only the target gene, but the specific environments most relevant to a trait.
+    % TODO:  coloc then finemap: also can help fine mapping, as large fx = smaller n required = able to do denser genotypeing by e.g. wgs, so smaller credible sets at much lower sample sizes https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1
 
 \1 What molecular mechanisms might facilitate genotype-environment interactions at \glspl{eQTL}?
     \2 \autocite{ackermann2013ImpactNaturalGenetic}: defines static, conditional, dynamic eQTLs
-    \2 \autocite{fu2012UnravelingRegulatoryMechanisms}: proposes TF-based mechanisms for cis-eQTL (here, define mag, damp, flip) (\autoref{fig:intro_reQTLmechs})
-    \2 \autocite{gaffney2013GlobalPropertiesFunctional,rotival2019CharacterisingGeneticBasis}: suggests info on more regulatory layers will help break down transcriptional and post-transcriptional
+    \2 \textcite{fu2012UnravelingRegulatoryMechanisms}: proposes TF-based mechanisms for cis-eQTL (here, define mag, damp, flip) (\autoref{fig:intro_reQTLmechs})
+    \2 \textcite{gaffney2013GlobalPropertiesFunctional,rotival2019CharacterisingGeneticBasis}: suggests info on more regulatory layers will help break down transcriptional and post-transcriptional
 
 \begin{figure}
     \centering
@@ -345,9 +350,9 @@ and amenable to separation (e.g. FACS) and stimulation.
 
     \2 Since then, \textit{in vitro} immune reQTL studies have been conducted for a variety of 
     cell types
-        (e.g. primary CD14+ monocytes\autocite{fairfax2014InnateImmuneActivity}) 
+        (e.g. primary CD14+ monocytes \autocite{fairfax2014InnateImmuneActivity}) 
     and stimulations 
-    (IFN$\gamma$ and LPS\autocite{fairfax2014InnateImmuneActivity}).
+    (IFN$\gamma$ and LPS \autocite{fairfax2014InnateImmuneActivity}).
 
     \todo{list a few from \autocite{fairfax2014InnateImmuneActivity} until \autocite{alasoo2019GeneticEffectsPromoter}}
     % 	Found reQTLs? So what? Gather take home messages and inspiration for post reQTL analyses

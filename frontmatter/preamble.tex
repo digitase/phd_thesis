@@ -79,9 +79,6 @@
 % Defines an outline environment, which allows outline-style indented lists with freely mixed levels up to four levels deep.
 \usepackage{outlines}
 
-% Allow URL breaks at any alphanumerical character
-\usepackage{xurl}
-
 %
 % Document structure and layout
 %
@@ -176,12 +173,13 @@
 
 % https://leesjohn.wordpress.com/2013/04/22/a-latex-bibliography-style-i-like-nature-style-in-biblatex/
 \usepackage[
-	style=nature,
+    style=nature,
 	maxcitenames=1,
 	maxbibnames=6,
     giveninits=true,
 	uniquename=init,
 	sorting=none,
+	date=year,
 	url=false,
 	doi=true,
 	isbn=false,
@@ -192,12 +190,16 @@
     % [...] the higher-level command \autocite; biblatex will automatically translate it
     % into the lower-level citation command most appropriate for the style family
     % (e.g., \parencite for authoryear, \footcite for authortitle).
-    autocite=superscript,
+    autocite=plain,
 	backend=biber
 ]{biblatex}
 % 
 % NOTE: this is a path relative to main.tex
 \addbibresource{backmatter/zotero_My-Library_phd_Better-BibLaTeX.bib}
+
+% Allow URL breaks at any alphanumerical character
+% Must load after biblatex for biblatex to use xurl.
+\usepackage{xurl}
 
 %
 % Navigation
@@ -309,6 +311,8 @@
 \newabbreviation[]{WGS}{WGS}{whole-genome sequencing}
 \newabbreviation[]{WES}{WES}{whole-exome sequencing}
 \newabbreviation[]{OVB}{OVB}{omitted-variable bias}
+\newabbreviation[]{PANTS}{PANTS}{Personalised Anti-TNF Therapy in Crohn's Disease}
+\newabbreviation[]{PNR}{PNR}{primary non-responder}
 % \newabbreviation[]{}{}{}
 %
 

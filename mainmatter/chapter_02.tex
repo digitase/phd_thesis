@@ -56,6 +56,7 @@ For novel and emerging diseases, there may be no prior knowledge of robust corre
 % Preparing for the Next Influenza Pandemic: The Development of a Universal Influenza Vaccine Michelle C Crank, John R Mascola, Barney S Graham The Journal of Infectious Diseases, Volume 219, Issue Supplement_1, 15 April 2019, Pages S107–S109, https://doi.org/10.1093/infdis/jiz043
 In response, the last decade has seen the rise of systems vaccinology studies: the analysis of high-dimensional data measured using multiple technologies in vaccinated individuals, in order to characterise response to vaccination at multiple levels of the biological system\autocite{pulendran2014SystemsVaccinologyProbing}.
 \todo{is there a more recent review?}
+\todo{define 'signature'}
 Such information helps elucidate a vaccine's mode of action, discover \enquote{molecular signatures} predictive of vaccine safety and efficacy, and has become an increasingly important part of the modern vaccine development chain\autocite{hagan2015SystemsVaccinologyEnabling,raeven2019SystemsVaccinologyBig}.
 
 Various systems vaccinology studies of seasonal influenza vaccines have been conducted, taking longitudinal measurements pre-vaccination, and commonly at some subset of days 1, 3, 7, and 28 post-vaccination.
@@ -102,7 +103,10 @@ Leveraging the greater power that rank-based gene set enrichment analyses afford
 The design of the \gls{HIRD} study is described in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
 In brief, the study enrolled 178 healthy adult volunteers in the UK.
 The vaccine dose was administered after blood sampling on day 0; five other longitudinal blood samples were taken on days -7, 0, 1, 7, 14 and 63.
-Serological responses were medasured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell subset counts (\gls{FACS} panels, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
+\todo{why blood? ready easy supply of immune cells, despite delivery being muscle?}
+% \autocite{brodin2015VariationHumanImmune}
+% Although blood is not an immunological organ per se, it is the conduit for most immune cells circulating in the body, especially after an immunological stimulus such as vaccination (FIG. 1).
+Serological responses were measured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell subset counts (\gls{FACS} panels, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
 The gene expression microarrays were performed in two batches.
 
 In addition to the existing data, array genotypes were generated for 169 individuals; and \gls{RNAseq} data for 75 individuals at days 0, 1, and 7.
@@ -134,6 +138,7 @@ The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres
 % \end{outline}
 However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
 \todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}. hence TRI, whilst combining, is still not ideal}
+\todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
 Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
 
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
@@ -475,7 +480,7 @@ then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisi
 Linear models were fit using limma\autocite{ritchie2015LimmaPowersDifferential}, which is computationally fast, and performs well for sufficiently large ($n \ge 3$ per group) sample sizes\autocite{soneson2013ComparisonMethodsDifferential}.
 For each gene, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
-\todo{add equation from ch3. especially justify having TRI in as predictor}
+\todo{add equation from ch3. especially justify having TRI in as predictor, by equiv to contrasts}
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
 %
@@ -635,6 +640,7 @@ Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest}\a
 The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}, which are annotated sets of coexpressed genes mined from publicly available human blood transcriptomic data, and provide sets tailored for enrichment analyses in blood cells.
 
 \section{Results}
+\todo{more text}
 
 \subsection{Extensive global changes in expression after vaccination}
 
@@ -730,7 +736,11 @@ The same analysis using only the \gls{RNAseq} data replicated 0/62 genes.
 \todo{move numbers to results?}
 The majority of the effects for these genes were simply much stronger in the array dataset than in the RNAseq dataset (\autoref{fig:hird_DGE_effectSizeComparisons_rma}).
 Given that the range of \gls{TRI} is higher in the array individuals (\autoref{tab:hird_table1}), this does not seem unusual that stronger \gls{TRI}-associated effects are observed there.
-\todo{TRI is also not ideal}
+%
+% \todo{TRI (cite) is a bit of a hack too to combine two assays. it seems to be 'residualised change score'}
+% lots of issues in lit, see ch3 section
+% \todo{also, see sorjonen2019PerilAdjustingBaseline change as predictor}
+% should probably analyse MN, HAI, separately after log
 
 58/62 reported hits were measured by both platforms and assessed in the meta-analysis.
 Only 15/58 signals replicated using frequentist random-effects meta-analysis to combine per-platform estimates.
@@ -832,8 +842,4 @@ Unfortunately, between-platform variation in expression impedes identification o
 The fundamental question of why gene expression and antibody responses vary between \gls{HIRD} individuals remains.
 Chapter 3 will examine one hypothesis: the impact of common human genetic variation on Pandemrix expression response.
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
-
-\todo{why blood? ready easy supply of immune cells}
-% \autocite{brodin2015VariationHumanImmune}
-% Although blood is not an immunological organ per se, it is the conduit for most immune cells circulating in the body, especially after an immunological stimulus such as vaccination (FIG. 1).
 

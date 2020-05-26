@@ -4,41 +4,176 @@
 
 \chapter{multiPANTS}
 
+\begin{outline}
+
 \section{Introduction}
 
-Why do some people not respond?
+\subsection{IBD}
 
-Explore time series transcriptomic
+\1 IBD is a complex IMID of the GI tract.
+    \2 Prevelance of IBD in the Western world is at least 0.5\%, and rising \url{https://www.nature.com/articles/nrgastro.2015.150}.
+    \2 Although often seen as a disease of the Western world, the disease is increasingly common in non-Western countries as they industrialise.
+    \2 Pathogenesis defined by interaction of the host genetic, environmental (e.g. diet) and gut microbial factors \url{https://www.nature.com/articles/nrgastro.2015.186}
 
-Multilevel model where individual is a RE, 
-Find out optimal spline degree.
-Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
-First need to eQTL scan in general with mashr and find the snps in the most reQTLish genes, since this modelling is probably expensive
+\1 It has two major forms, UC and CD.
+    \1 UC is distinguished by ...
+    \2 CD is distinguished by ... \autocite{roda2020CrohnDisease}
 
-Creating composite features to conduct genetic associations on.
+\1 IBD is one of the most-well studied diseases by GWAS
+    \2 Over TODO hits at TODO loci (dig up latest paper out of \autocite{delange2017GenomewideAssociationStudy,huang2017FinemappingInflammatoryBowel,luo2017ExploringGeneticArchitecture})
+    \2 Genetic correlation between UC and CD is high
+    \2 Hits unique to CD are TODO
 
-Identifying signatures of response.
+\subsection{Anti-TNF therapies for IBD}
 
-What is the hypothesis???
+\1 anti-tnfs in use for IBD
+    \2 also used in related conditions e.g. RA \autocite{mulhearn2019UsingImmunophenotypePredict}
+    \2 "Biologic therapy with anti-TNF agents." for IBD \url{https://www.nature.com/articles/nrgastro.2015.135}
+        \3 Two big players: adalimumab and infliximab \autocite{adegbola2018AntiTNFTherapyCrohn}
+        \3 Their mechanisms of action on the target pathway \autocite{levin2016MechanismActionAntiTNF}
 
-% Cancer gene expressio nsignatures –The rise and fall?
+\1 failure of anti-tnfs is common (TODO\%) \url{https://journals.lww.com/ctg/Fulltext/2016/01000/Loss_of_Response_to_Anti_TNFs__Definition,.2.aspx}
+    % "[3] FlamantM, Roblin X. Inflammatory bowel disease: towards a personalizedmedicine.  Ther Adv Gastroenterol 2018;11:1756283X17745029."
+    % For anti-TNF therapy in particular, primary nonresponse
+    % rates vary from 10 to 30%, and the annual risk of secondary
+    % loss of response ranges from 13% for infliximab (IFX) to 20% for
+    % adalimumab (ADM) [3].
+    % 4 Ben-Horin S, Kopylov U, Chowers Y. Optimizing anti-TNF treatments in inflammatory bowel disease. Autoimmun Rev 2014;13:24–30.
+    % This practice is associated with insufficient remission rates
+    % that results from primary non-response (20%–40% in clinical
+    % trials; 10%–20% in real-life cohorts)4
+    \2 types of failure: \gls{PNR}, non-remission, adverse events.
+        \3 immunogenicity (not a failure) via anti-drug Abs
+        \3 clinical predictors \autocite{kennedy2019PredictorsAntiTNFTreatment}
+
+\1 failure is also a complex trait, and does not necessarily share the same genetic arch as disease risk
+    % \autocite{gaujoux2019CellcentredMetaanalysisReveals}
+    % Several attempts have been made to define a baseline signature
+    % of anti-TNF response in patients with IBD using genetics,7 8
+    % microbiome9 and gene expression data.10–13 Yet, no predictive
+    % biomarker is in clinical practice.
+    \2 e.g. \autocite{sazonovs2019HLADQA105Carriage}
+    \2 follow the same strat of gene prioritisation for failure phenotypes, to drug target prioritisation as outlined in ch1
+    \todo{make sure some statement of drug target prioritisation is in ch1}
+
+
+\1 Biologics are part of the treatment pyramid \url{https://www.nature.com/articles/nrgastro.2013.158}
+    \2 biologics are the 2nd most intense therapies below surgical intervention
+    \2 Step-up approach: undertreats patients
+    \2 Step-down approach: exposes patients to risks from more aggressive therapies
+    \2 Neither are ideal
+
+\1 The promise of transcriptomic signatures for response prediction and stratifying patients to the right therapies
+    \2 much like for sysvacc in ch2
+    \2 starts with DGE R vs NR in biopsies
+    % verstockt2019LowTREM1Expression
+    % Gene expression analysis of inflamed biopsies
+    % of Crohn's disease (CD) and ulcerative colitis patients (UC) prior
+    % to IFX therapy, identified several genes differentially expressed
+    % between responders and non-responders [6–8].
+    % Finally,
+    % advanced bioinformatic techniques integrated all publically available
+    % datasets and identified colonic expression of both oncostatin
+    % M (OSM) and Triggering Receptor Expressed on Myeloid cells 1
+    % (TREM1) as key players in and predictors of anti-TNF (non-)responsiveness
+    % [11–13].
+    \2 cause or effect?
+    \2 conflict in existing studies e.g. \enquote{The difference in results of these two studies could not be more stark: one found that TREM1 was downregulated in anti-TNF responders, and the other found that TREM1 was downregulated in anti-TNF non-responders.} \url{https://www.nature.com/articles/s41575-019-0228-5}
+        % \3 <Also grep other signatures from this paper>
+    \2 TREM1 signature \autocite{verstockt2019LowTREM1Expression}
+        \2 prospective study of 54 active IBD patients (24CD, 30UC)
+        % at baseline
+        % validated whole blood TREM1 as the first predictive signal for
+        % anti-TNF induced endoscopic remission in a mixed cohort of patients
+        % with both Crohn's disease or ulcerative colitis.
+        % anti-TNF specific
+        % In the anti-TNF cohort, TREM1 was significantly downregulated at
+        % baseline in patients achieving endoscopic remission (fold change (FC)
+        % = 0.67, p b .001) (Fig. 1A).
+        % Logistic regression analysis identified total whole blood TREM1 mRNA expression as the only significant predictor of anti-TNF induced endoscopic remission (p = .02). ROC analysis based on baseline TREM1 mRNA levels in the anti-TNF cohort, gave an area under the curve (AUC) of 77.7% (95% CI 65.2–90.1%, p = .001).
+        % TREM1 is a receptor expressed on innate immune cells, known to
+        % amplify inflammatory signals that are initially triggered by Toll-like receptors
+        % and thus contributing to the pathophysiology of many acute and
+        % chronic inflammatory conditions [19].
+
+\subsection{The PANTS cohort}
+
+% NOTE: here is overall structure of existing study
+\1 prospective observational study UK wide, with total enrolled n=1610 , 92.29pc EUR \autocite{kennedy2019PredictorsAntiTNFTreatment}
+    \2 patients at least 6yo, with active luminal CD, and antitnf naive
+        \3 active defined by CRP and faecal calprotectin
+    \2 up to 12 mo of followup (until withdrawl due to remission or otherwise), possible 2y extension
+    \2 2 drugs: ada and inf
+    \2 evaluates several aspects of antitnf response: PNR at week 14, non-remission at w54, adverse events
+        \3 also immunogenicity (defined by antidrug ab levels)
+    \2 PNR evaluated at w14 via algo, after PNR (24\%), rarely helpful to keep dosing
+    \2 immunogenicity (63pc adalimumab), (28.5pc infliximab)
+        \3 use of immunomods had protective effect on time to immunogenicity 
+    \2 8\% have an adverse drug reaction that curtails treatment
+    \2 clinical factors associated with response
+        \3 low serum drug concentration in peripheral blood at w14 (ELISA) assoc with PNR and non-remission and immunogenicity, (in multivariate models, for both drugs) 
+        \3 optimal is conc above which there is no improvement
+    \2 suggest Dose intensification
+
+% The HLA-DQA1*05 allele, carried by approximately 40% of Europeans,
+% significantly increased the rate of immunogenicity (hazard ratio [HR],
+% 1.90; 95% confidence interval [CI], 1.60–2.25; P ¼ 5.88  10–13).
+% Both drugs, and regardless of immunomodulator
+% Dominant effect
+\1 in this cohort, immunogenicity has a genetic association \autocite{sazonovs2019HLADQA105Carriage} 
+
+\subsection{chapter summary}
+
+\1 What is the hypothesis???
+\1 Identifying signatures of PNR
+    \2 replicate TREM1?
+\1 Identifying reQTL
+    \2 Why require a reQTL approach?
+    \2 There are IBD specific reQTL (TODO is that relevant?) \autocite{piasecka2018DistinctiveRolesAge}
+    \2 identify reQTL for use in e.g. mediation analysis of the genetic causes of non-response via expression
 
 \section{Methods}
 
-Can be biased due to dropouts, especiallyif dropout related to treatment beingstudied
-
-% multivariate_multiomics_longitudinal/"Time-Course Gene Set Analysis for Longitudinal Gene Expression Data"
-
-% Annotate early
+\subsection{Overall strategy}
 
 % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
-Responder analysis is a 4-fold loser. It fails to give the needed clinical
-interpretation, has poor statistical properties, increases the cost of studies
-because binary outcomes require significantly higher sample sizes, and raises
-ethical issues because more patients are required to be randomized than would
-be needed were the endpoint and analysis to be fully efficient.
+% Responder analysis is a 4-fold loser. It fails to give the needed clinical
+% interpretation, has poor statistical properties, increases the cost of studies
+% because binary outcomes require significantly higher sample sizes, and raises
+% ethical issues because more patients are required to be randomized than would
+% be needed were the endpoint and analysis to be fully efficient.
 
-immunomods
+\subsection{Response phenotype data}
+
+% NOTE: here is to describe numbers of PANTS data i use
+
+% Main visits: Study visits were scheduled at first dose (week 0), postinduction
+% (week 14), and at weeks 30 and 54 after
+% first dose.
+% , the following windows of
+% eligibility were specified: week 0 (week –4 to 0), week 14
+% (week 10–20), week 30 (week 22–38), and week 54
+% (week 42–66; appendix pp 12–13).
+%
+% more visits for inflix
+
+% 1241 patients were assessable at week 14. Primary nonresponse
+% occurred in 170 (21·9%, 95% CI 19·1–25·0) of
+% 775 patients treated with infliximab and 125 (26·8%,
+% 22·9–31·1) of 466 patients treated with adalimumab
+% (table 2). After excluding primary non-responders,
+% the estimated proportion of infliximab-treated patients
+% who had loss of response by week 54 was 36·9%
+% (32·7–40·9), and for adalimumab was 34·1% (28·4–39·4;
+% appendix pp 15–16). At week 54, 469 (60·9%; 57·4–64·0)
+% of 770 infliximab-treated patients were classified as
+% being in non-remission, compared with 295 (66·9%;
+% 62·3–71·3) of 441 adalimumab-treated patients (table 2).
+
+\1 PNR defined at w14 as ...
+    \2 grey zone is intermediate
+    \2 loss of response defined for primary responders ... "treatment escalation, drug withdrawal, or surgery."
+
 % > pheno %>% filter(RNAseq_Sample_Status == 'Pass') %>% distinct(PANTS.ID, .keep_all=T) %>% select(Primary_Response, Ever_Immunomodulator) %>% table
 %                 Ever_Immunomodulator
 % Primary_Response  NO YES
@@ -62,19 +197,27 @@ In the IFX+ADA cohort,
 
 n patients with data for each number of visits
 
-"Comparative analysis of differential gene expression tools for RNA sequencing time course data"
+\subsection{RNAseq data preprocessing}
 
-\subsection{Phenotypes}
+\subsection{DGE}
 
-% Genetic Loci associated with C-reactive
-% protein levels and risk of coronary heart disease.
-%
-% This was recently demonstrated by
-% a GWAS of C-reactive protein (CRP) levels; that study
-% found that common variants near the HNF1A gene were
-% associated with variation in CRP.60
+Explore time series transcriptomic
+    "Comparative analysis of differential gene expression tools for RNA sequencing time course data"
+Multilevel model where individual is a RE, 
+Find out optimal spline degree.
 
-\subsection{Covariates to use}
+\subsubsection{Covariates to use}
+
+% Univariable analyses showed the strongest associations
+% with primary non-response to infliximab and
+% adalimumab were with week 14 drug and anti-drug
+% antibody concentrations (table 3; appendix p 17). Primary
+% non-response to infliximab was also associated with
+% older age at first dose, smoking at baseline, non-use of an
+% immunomodulator at baseline, lower baseline albumin
+% concentrations, and higher baseline white cell count.
+% Primary non-response to adalimumab was associated
+% with a higher body-mass index at baseline.
 
 Sex
 Age
@@ -85,6 +228,29 @@ Ever Immunomodulator
 Current Smoker
 PCA
 Proportions of the 6 cell types: CD4+ T cells, CD8+ T cells, B cells, NK cells, monocytes, and granulocytes
+
+\subsection{Genotype data preprocessing}
+
+% sazonovs2019HLADQA105Carriage
+% DNA was extracted from pretreatment blood samples from
+% 1524 individuals in the PANTS cohort and genotyping undertaken
+% using the Illumina CoreExome microarray
+%
+% After quality
+% control, 1323 individuals remained in the study, of which
+% 1240 had drug and anti-drug antibody level data available
+% (Supplementary Figure 2).
+%
+% 7,578,947 variants with an information content metric score .4 were subsequently taken forward for analysis
+%
+% HLA types were imputed at 2- and 4-digit resolution for the
+% following loci: HLA-A, HLA-C, HLA-B, HLA-DRB1, HLA-DQA1,
+% HLA-DQB1, and HLA-DPB1.
+%
+% sex,
+% drug type (infliximab or adalimumab), immunomodulator use,
+% and the first within-sample principal component were
+% included as covariates (Supplementary Table 2).
 
 \subsection{reQTL}
 
@@ -99,7 +265,28 @@ ANCOVA vs repeated measures vs mixed model
 % The biggest advantage of mixed models is their incredible flexibility.  They can handle clustered individuals as well as repeated measures (even in the same model).  They can handle crossed random effects, where there are repeated measures not only on an individual, but also on each stimulus.
 % https://www.theanalysisfactor.com/repeated-measures-approaches/
 
+Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
+First need to eQTL scan in general with mashr and find the snps in the most reQTLish genes, since this modelling is probably expensive
+
 \section{Results}
 
 \section{Discussion}
 
+% kennedy2019PredictorsAntiTNFTreatment
+% "In our study, higher baseline markers of
+% inflammation predicted lower drug concentrations at
+% week 14, suggesting that higher inflammatory load might
+% contribute to faster drug elimination."
+
+% Genetic Loci associated with C-reactive
+% protein levels and risk of coronary heart disease.
+%
+% This was recently demonstrated by
+% a GWAS of C-reactive protein (CRP) levels; that study
+% found that common variants near the HNF1A gene were
+% associated with variation in CRP.60
+
+\1 can we expand the PANTS conclusions to IBD and other IMIDs?
+\1 source of multiomics data 1000IBD cohort \autocite{imhann20191000IBDProjectMultiomics}
+
+\end{outline}

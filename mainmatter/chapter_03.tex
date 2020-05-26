@@ -88,6 +88,8 @@ Variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
 Poorly-imputed variants with $\text{INFO} < 0.4$ or post-imputation missingness $> 5\%$ were removed, leaving 40290981 variants.
+% e.g. of more formal?
+% Following standard practices, we discarded poorly imputed SNPs, defined as having an information content metric (INFO) score <0.4. We removed SNPs significantly deviated from Hardy-Weinberg equilibrium (P<1×10-10), with a call-rate ≤0.95 or minor allele frequency ≤1%, leaving 7,578,947 variants. PCA and genotype filtering were performed using the Hail framework (version 0.1).6
 
 \subsection{Overall strategy for detecting reQTLs}
 
@@ -95,23 +97,45 @@ Since the aim of this chapter is to identify genetic variation that affects expr
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
 it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
-\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
-% \todo  Using each patient as her own control through calculation of a change score is worse than using no control if the baseline is noisy. If the correlation between baseline and follow-up measurement is less than 0.5, subtracting the baseline is worse than just analyzing the follow-up measurement.
-% http://biostat.mc.vanderbilt.edu/wiki/Main/MeasureChange
+%
+% Step 1: why use a change score equivalent, not ANCOVA
+% half a century of debate
+% https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
+% https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
+
+% TODO: Write both as special cases of glm, and highlight their different assumptions
+%
+\todo{upend change score bit}
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
+\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
-% Repeated is a pair t test
-% Change.
-% Pretest covariate
-% Interaction
-% Stratified
-% panel data aka longitudinal
-% blocking
-% Longitudinal studies what are we actually being told?  differences in regulation over time
-% this argues FOR change scores lul https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20
-% allison1990ChangeScoresDependent also presents some pros of change score
-% https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682 is Senn, strong for change score
+% TODO it is not the case that serve as their own controls
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
+Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}
+
+% Step 2: why stratification/subgroup not interaction
+% TODO interaction is more efficient under certain assumptions
+%     https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
+% These models will consistently estimate the same thing only when the mean model is true.
+% possible here since time is not treated as continuous
+%
+% cons:
+% interaction gives direct p nominal value, we have to estimate
+% but how to control for multiplicity?
+%
+% Statistical Approaches for Estimating Sex-Specific Effects in Endocrine Disruptors Research
+% https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
+%
+% also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
+% TODO:
+% really, pro is Simplicity
+% Can do interactions
+% Can do coloc
+% Can use peer
+% interaction with time fixed fx vs stratified
+% \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
+%
+% note intent to use joint modelling later, so as to not lose info and fall into jelly bean problem https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.836601
 
 %
 % DEPRECATED:
@@ -238,6 +262,9 @@ In multi-condition datasets, these transformations are also typically applied wi
 % \url{https://github.com/molgenis/systemsgenetics/wiki/eQTL-mapping-analysis-cookbook-for-RNA-seq-data}
 Another common transform is standardising (centering and scaling to zero mean and unit variance) (e.g. eQTLGen Consortium\autocite{vosa2018UnravelingPolygenicArchitecture}),
 often done so that effects across genes and studies can be comparably interpreted in units of standard deviation expression\autocite{qi2018IdentifyingGeneTargets}.
+\todo{helps with coloc}
+
+\todo{emph here that the sims match what my def of reqtl is for rest of chapter}
 
 I performed simulations to evaluate the effect of these transformations on reQTL detection between a hypothetical baseline and day 1 post-vaccination condition.
 Expression values on the log scale were simulated with the \gls{eQTL} slope (beta) set to specific values corresponding to six scenarios for six gene-variant pairs (\autoref{fig:hird_eQTL_expressionTransform_sims}).
@@ -287,7 +314,7 @@ so estimates for genes that have cell type specific expression depend on the rel
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
 and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
-but changes in cell type abundance influence this by modifying both expression and the effect of genotype on expression.
+but changes in cell type abundance influence this by \todo{??} both expression and the effect of genotype on expression.
 % TODO: https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 Immune cell abundance also varies naturally between healthy individuals\autocite{brodin2015VariationHumanImmune,brodin2017HumanImmuneSystem}, so it is important to model these effects even at baseline.
 
@@ -358,7 +385,7 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 \end{figure}
 
 As with actual cell type abundances, the enrichment scores are correlated.
-Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as predictors downstream.
+Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as indepedent variables in regression downstream.
 To prune the number of scores, I performed a \gls{PCA} of the cell type scores across samples,
 % Kaiser Rule
 % The more variables that load onto a particular component (i.e., have a high
@@ -593,7 +620,8 @@ then further filtered to only nominally significant tests, resulting in a strong
 \end{figure}
 
 The mash model was trained on a random subset of 200000 tests, using the Exchangeable Z-scores model\autocite{urbut2018FlexibleStatisticalMethods}.
-The correlation of null tests between conditions, important to account for due to the repeated measures structure of the data, was estimated using \software{mashr::estimate\_null\_correlation}.
+The correlation of null tests between conditions, critical to account for due to the repeated measures structure of the data, was estimated using \software{mashr::estimate\_null\_correlation}.
+\todo{note this is critical, since we know a priori not independent}
 The fitted model was used as a prior to compute posterior effects and standard errors for all tests through shrinkage.
 % Stephens, M. (2016). False discovery rates: A new deal. Biostatistics, kxw041. https://doi.org/10.1093/biostatistics/kxw041
 % analogous to a false discovery rate, but more stringent because it requires true discoveries to be not only nonzero, but also correctly signed.
@@ -641,13 +669,9 @@ This strategy has been applied to call reQTLs by \autocite{kim-hellmuth2017Genet
 % Q x Q x J array of posterior covariance matrices, if the output_posterior_cov = TRUE.
 assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 \todo{not sure whether this is conservative or anti-conservative}
+\todo{mashr does not provide by default}
+% TODO we consider the var cov matrix of coefficients here, not the expressions
 % TODO this is convservative unless corr is >0.5?
-% interaction with time fixed fx vs stratified
-% https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
-% https://ehp.niehs.nih.gov/doi/10.1289/EHP334 < TODO
-% \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
-% also see homo: https://cris.maastrichtuniversity.nl/ws/files/11868404/799719.pdf
-Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}.
 % NOTE: A Wald test uses W ~ chisq(1), equivalent to sqrt(W) ~ N(0, 1).
 A Wald test \pvalue{} for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
 I use nominal \pvalue{} < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
@@ -684,6 +708,7 @@ I assume this represents a power advantage from having larger a sample size, rat
 \subsection{Genotype interactions with cell type abundance}
 
 \todo{be more specific: "moderator", not 'modify'}
+% https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 % https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, 
@@ -873,7 +898,7 @@ In the case where the monocyte score is zero (representing an average abundance 
 \1 Here the inverse: coloc is used to understand the biological relevance of observed reQTL by coloc with known immune QTL
 
 % rs916485_SNP_chr2_24859404_T_C
-\1 In a 500 Mb window around the lead \gene{ADCY3} variant rs916485, \software{hyprcoloc} to colocalise with existing datasets and fine map.
+\1 In a 500 Mb window around the lead \gene{ADCY3} variant rs916485, \software{HyPrColoc} to colocalise with existing datasets and fine map.
 
 \1 Day 1 HIRD colocs with BLUEPRINT and Fairfax monocytes (both stim and non stim), but not with Quach or Schmiedel monocytes (\autoref{fig:hird_eQTL_coloc_ADCY3})
 \2 Biases from ethnicity-derived differences in LD?
@@ -881,11 +906,15 @@ In the case where the monocyte score is zero (representing an average abundance 
 % e.g. Assess priors at adcy3, Then coloc all
 
 % fine mapped to 2_24874775_A_G, nearest gene (45,064 bp downstream to canonical TSS): ADCY3 TSS is at 24919839, rev strand
-\1 \software{hyprcoloc} fine maps the signal to rs13407914 (credible set size=1, PP = 1), an intronic variant 45064 bp downstream of the TSS.
+\1 \software{HyPrColoc} fine maps the signal to rs13407913 (credible set size=1, PP = 1), an intronic variant 45064 bp downstream of the TSS.
 
 % note in 2019-06-17_team_meeting.pptx, originally was rs10185143
 \todo{FYI the IBD/T cell coloc fine maps to chr2:24935139 T C (rs713586) with PP=1}
 \todo{add obesity GWAS}
+
+% Assumptions
+% multiethnic
+% 1 causal per (cluster/trait), untrue in any bulk
 
 \end{outline}
 
@@ -902,6 +931,8 @@ In the \gls{HIRD} cohort,
 \gls{eQTL} were detected for \percentage{0.5075166} of genes in at least one timepoint, day 0, day 1, or day 7.
 % TODO:
 % Compare to GTEx
+% NOTE: BIOS does not provide full stats
+ % You can download the cis-eQTLs detected at a false-discovery rate of 0.05:
 % BIOS We detected cis-eQTL effects for 66% of the protein-coding genes and 19% of the noncoding genes tested.
 % \todo{\url{https://www.nature.com/articles/ng.3737}, zhernakova2017IdentificationContextdependentExpression, BIOS}
 % Each method for determining reQTL has it's own biases.
@@ -950,6 +981,7 @@ where one would expect true opposite sign \gls{reQTL} effects would also be reca
 
 The strongest \gls{reQTL} detected at day 1 was \gene{ADCY3}, a membrane-bound enzyme that catalyses the conversion of ATP to the second messenger cAMP\autocite{wu2016AdenylateCyclaseNew}.
 \Glspl{GWAS} have identified \gene{ADCY3} as a candidate gene for diseases such as obesity\autocite{wu2016AdenylateCyclaseNew} and IBD\autocite{mcgovern2015GeneticsInflammatoryBowel}.
+\todo{replace mcgovern2015GeneticsInflammatoryBowel with more recent}
 %
 \gene{ADCY3} has been identified as a target for reQTLs in multiple studies involving stimulated blood immune cells:
 % In fact, six (SLFN5, ARL5B, SPTLC2, IRF5, ADCY3, CCDC146) of the 38 genes
@@ -1043,7 +1075,7 @@ but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
 \todo{note coloc doesn't distinguish pleiotropy from mediation?}
 % many many scenarios possible: https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0613-2/figures/1
 and a formal tests such as the \gls{CIT}\autocite{millstein2009DisentanglingMolecularRelationships} are required to distinguish mediation of genotype-antibody associations through gene expression from competing models.
-\autocite{franco2013IntegrativeGenomicAnalysis} attempted this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
+\autocite{franco2013IntegrativeGenomicAnalysis} realised this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
 % TODO: after all that Intro about gwas to function, we unfortunately lack the gwas part here
 % https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
