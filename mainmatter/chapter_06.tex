@@ -14,34 +14,44 @@ summary of chapters
 
     Limitations, and the perfect study.
 
-Signature methods 
+Prediction is not inference
+    % Calculating the sample size required for developing a clinical prediction model
     two chapters of mine
+    have always treated the R as indep in DGE
+    kinda strange: response is a organism pheno should be downstream of E
+        for modelling convenicnece
+        cant make causal claims anyway
+            without a control, we cannot observe the counterfactual of what if an individual was a non-responder
+
+        correlates of protection
+
+        error in var models
+
+    % beyond dge
+    % TODO: https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-356
+
+    sysvacc: need genetics to move beyond prediction
+
     gene signatures, rise and fall
+        expression as a biomarker
 
-    never make causal claims
-
-    predictive claims
-
-        rely of stability of 'responder'
-            \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
-
-    and to Cost-effectiveness and clinical implementation
-        if you can identify NRs, what are you going to do about it?
-
-in vivo studies and transition between state, can think of change, so use interactions
-for cell type specific, stratified;
-
+        rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
 
 The design of more longitudinal cohorts in the future
 
+    avoid bulk:
+        Even if cell type interaction/proxy gene approach
+        Cannot distinguish between correlated cell types
+
     more chance for in vivo
+        but how to take advantage of it
 
     systems immunology/vacc still needed: generate mol phenotypes, in the right context,
     but make sure to include genotypes
 
     all the change score nonsense
 
-    gone are the days of GWAS marginals
+    gone are the days of GWAS marginals (just a screening approach)
         under time pressure, or convention
         throwing in covariates
 
@@ -50,12 +60,29 @@ The design of more longitudinal cohorts in the future
     must no longer be divorced from rigourous statistics
         statistical considerations from small scale studies
 
-More GWAS
+    move away from dichotomania
 
+        predictive claims
 
-    will everything be associated as n continues to increase
+            rely of stability of 'responder'
+                \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
+                senn2016MasteringVariationVariance
+                senn2018StatisticalPitfallsPersonalized
+
+        and to Cost-effectiveness and clinical implementation
+            if you can identify NRs, what are you going to do about it?
+
+Extending the sample size
+
+    longitudinal studies are smallish
+    e.g. IBD bioresource
+        TWAS: predicted gene expression, then associate with phenotypes
+
+    will everything be gwas associated as n continues to increase
     sensitive to the smallest differences in case/control
-
+    
+    equiavlence testing
+        but what is really smallest effect size of interest?
 
 Finer and finer context
     in the intro: gwas to function pipeline
@@ -96,6 +123,7 @@ Finer and finer context
 
         reQTL detection: bulk, sorted, sc
         current sc will only detect highly expressed genes
+
 
 Deep phenotyping
         
@@ -140,6 +168,9 @@ Translational directions
             \4 e.g. restrictions to fine mapped eQTLs
 
     \2 Understand mech. of causal genes: molecular pathogenesis
+    % word mechanism thrown around
+    % Mechanism is important because of possibility for intervention. Here, causal is important
+
 
 
 % \subsection{From target gene to candidate drug}
@@ -164,6 +195,11 @@ Translational directions
 unification
     immunology and vaccine dev: deep phenotyping, small cohorts achieved -> larger cohorts
     human genetics and gwas: large cohorts achieved -> deeper phenotyping
+
+    MOFA
+    multiomics
+        % https://twitter.com/Eric_Fauman/status/1266128178692718598?s=19
+        Pqtls more accurate?
 
     already lots of expression data
 

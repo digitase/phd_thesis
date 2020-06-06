@@ -78,6 +78,7 @@ Gene expression was profiled using a microarray, and \gls{DGE} analyses detected
 These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, but the interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine.
 
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
+\todo{high variability, recheck this was the reason, or quote them}
 However, due to high variability among the vaccine non-responders in variables such as baseline antibody titres, a consensus predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
 This is in contrast to several studies of seasonal influenza vaccines, where certain expression signatures are able to predict vaccine response even pre-vaccination\autocite{furman2013ApoptosisOtherImmune, tsang2014GlobalAnalysesHuman, nakaya2015SystemsAnalysisImmunity, hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
 \todo{make sure gap and how it is filled is emphed enough}
@@ -136,6 +137,7 @@ The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres
 %             \4 Note that log2(post-pre) does not make sense mathematically, as post-pre may well be negative
 %             \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
 % \end{outline}
+\todo{heterogeneity: well of course there was}
 However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
 \todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}. hence TRI, whilst combining, is still not ideal}
 \todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
@@ -328,6 +330,7 @@ Given the proportion of removed counts at this stage was low for most samples (\
 Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\autoref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
 Genes were further filtered to require detection (non-zero expression) in at least 95\% of samples, and a minimum of 0.5 \gls{CPM} in at least 20\% of samples.
 The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed\autocite{chen2016ReadsGenesPathways}.
+% TODO \url{https://f1000research.com/articles/5-1408/v3}
 The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\autoref{fig:hird_rnaseq_cpm_filtering}).
 
 \begin{figure}
@@ -461,6 +464,9 @@ For the array data, as \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} 
 For the \gls{RNAseq} data, between-sample normalisation was performed using the \gls{TMM} method\autocite{evans2018SelectingBetweensampleRNASeq} from edgeR\autocite{robinson2010EdgeRBioconductorPackage}; 
 then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisionWeights}, resulting in expression values with units of $\log_2{\text{\gls{CPM}}}$.
 \todo{this is DGE specific normalisation, which is why it goes here, not in the preprocessing section}
+% TODO:
+% voom does t(log2(t(counts + 0.5)/(lib.size + 1) * 1e+06)), it does not variance-stabilise.
+% The idea is to use weights instead.
 
 % 7.	Differential expression (limma)
 % 7.2.	Create contrasts
@@ -480,7 +486,12 @@ then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisi
 Linear models were fit using limma\autocite{ritchie2015LimmaPowersDifferential}, which is computationally fast, and performs well for sufficiently large ($n \ge 3$ per group) sample sizes\autocite{soneson2013ComparisonMethodsDifferential}.
 For each gene, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
-\todo{add equation from ch3. especially justify having TRI in as predictor, by equiv to contrasts}
+\todo{add equation from ch3. especially justify having TRI in as predictor, by noting equiv of traditional lm to contrasts}
+% TODO: The peril of adjusting for baseline when using change as a predictor
+% https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html
+% Limma has a built-in approach for analyzing repeated measures data using duplicateCorrelation(). The model can handle a single random effect, and forces the magnitude of the random effect to be the same across all genes.
+% ...
+% The duplicateCorrelation method estimates a single variance term genome-wide even though the donor contribution of a particular gene can vary substantially from the genome-wide trend.
 Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
 %
@@ -817,6 +828,11 @@ Hence, it is particularly important that the robustness of these observed baseli
 % TODO
 \todo{There is also something to be said about 'prediction is not inference'. For use as correlates of protection, as promised by proponents of systems studies, prediction is what is important.}
 % - Prediction is not inference tsang2014GlobalAnalysesHuman
+% TODO: https://stats.stackexchange.com/questions/22718/what-is-the-difference-between-linear-regression-on-y-with-x-and-x-with-y/62323#62323
+% In statistics, errors-in-variables models or measurement error models[1][2][3] are regression models that account for measurement errors in the independent variables. In contrast, standard regression models assume that those regressors have been measured exactly, or observed without error; as such, those models account only for errors in the dependent variables, or responses.[citation needed]
+% controlled by experimenter
+% In statistics, errors-in-variables models or measurement error models[1][2][3] are regression models that account for measurement errors in the independent variables. In contrast, standard regression models assume that those regressors have been measured exactly, or observed without error; as such, those models account only for errors in the dependent variables, or responses.[citation needed]
+% https://web.stanford.edu/class/polisci100a/regress5.pdf
 %
 % For prediction, what rules can be easily implemented in the clinic?
 % DAMIP gives rulesets composed of small sets of genes, amenable to rapid qPCR assays.
@@ -841,5 +857,6 @@ Baseline-adjusted antibody response is correlated with expression of gene sets, 
 Unfortunately, between-platform variation in expression impedes identification of specific genes that contribute.
 The fundamental question of why gene expression and antibody responses vary between \gls{HIRD} individuals remains.
 Chapter 3 will examine one hypothesis: the impact of common human genetic variation on Pandemrix expression response.
+\todo{At no point in this chapter are we estimating causal effects}
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
 

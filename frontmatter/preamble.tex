@@ -35,6 +35,9 @@
 % For theorems
 \usepackage{amsthm}
 
+% Makes the standard macros for Greek letters in mathematical mode also available in text mode
+\usepackage{alphabeta}
+
 % Context-sensitive quotes, provides \enquote
 %
 % When using babel or polyglossia with biblatex, loading csquotes is recommended
@@ -156,6 +159,12 @@
 % The package defines commands that switch according to the prevailing ‘draft’ or ‘final’ options; each command takes two arguments, the first for the ‘true’, the second for the ‘false’ case.
 \usepackage{ifdraft}
 
+% This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package. 
+\usepackage{marginnote}
+
+% The epigraph package can be used to typeset a relevant quotation or saying as an epigraph, usually just after a sectional heading.
+\usepackage{epigraph}
+
 % Show margins
 \ifdraft{\usepackage{showframe}}{}
 
@@ -260,7 +269,7 @@
 %
 % Abbreviation definitions
 %
-% \newabbreviation[⟨options⟩]{⟨label⟩}{⟨short⟩}{⟨long⟩}
+% \newabbreviation[options]{label}{short}{long}
 \newabbreviation[longplural=genome-wide association studies,shortplural=GWAS]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
@@ -280,6 +289,7 @@
 \newabbreviation[]{TPM}{TPM}{transcripts per million}
 \newabbreviation[]{SD}{SD}{standard deviation}
 \newabbreviation[]{TMM}{TMM}{trimmed mean of M-values}
+\newabbreviation[]{ML}{ML}{maximum likelihood}
 \newabbreviation[]{REML}{REML}{restricted maximum likelihood}
 \newabbreviation[]{lfsr}{lfsr}{local false sign rate}
 \newabbreviation[]{DC}{DC}{dendritic cell}
@@ -312,7 +322,8 @@
 \newabbreviation[]{WES}{WES}{whole-exome sequencing}
 \newabbreviation[]{OVB}{OVB}{omitted-variable bias}
 \newabbreviation[]{PANTS}{PANTS}{Personalised Anti-TNF Therapy in Crohn's Disease}
-\newabbreviation[]{PNR}{PNR}{primary non-responder}
+\newabbreviation[]{PNR}{PNR}{primary non-response}
+\newabbreviation[]{LOR}{LOR}{loss of response}
 % \newabbreviation[]{}{}{}
 %
 

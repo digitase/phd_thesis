@@ -106,18 +106,53 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % TODO: Write both as special cases of glm, and highlight their different assumptions
 %
 \todo{upend change score bit}
+% Our data structure is
+% Over all approach is stratified
+%
+% 2 schools of thought. 50 years of debate
+% Change score assigns special status
+% ...
+%
+% Besides not even estimatejng the same effect
+%
+% Many other models reduce to change score
+%
+% Mixed is flexible, but overall aim aligns with change score
+%
+% Simplest application of developed eqtl methods
+
+
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 \todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % TODO it is not the case that serve as their own controls
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
 Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}
+% TODO: equivalence is not straightforward, since of joint mashr downstream
+
+% real killer is missing data for manova/ancova
+% TODO: also MANOVA
+% Instead of just accommodating unequal variances and covariance within a subject, the mixed models approach directly models the covariance structure of the multiple dependent variables.
+% https://blogs.sas.com/content/sastraining/2011/02/02/the-punchline-manova-or-a-mixed-model/
+% https://stats.stackexchange.com/questions/13197/differences-between-manova-and-repeated-measures-anova
+% avoids sphericity http://www.discoveringstatistics.com/docs/sphericity.pdf
+%
+% But, we are interested in interaction, and this is not directly answered by manova (i.e. multivariate mode in limix)
+
+% Independence: errors assoc with one observation are not correlated with erros of any other
+% Homoscedasticity: Var y does not depend on x
 
 % Step 2: why stratification/subgroup not interaction
 % TODO interaction is more efficient under certain assumptions
 %     https://stats.stackexchange.com/questions/332963/why-may-results-from-model-with-interaction-term-and-stratified-model-be-differe
 % These models will consistently estimate the same thing only when the mean model is true.
 % possible here since time is not treated as continuous
+% https://stats.stackexchange.com/questions/93540/testing-equality-of-coefficients-from-two-different-regressions
+    % I found the key difference is whether the assumption that the error variance is the same or not.
+% https://stats.stackexchange.com/questions/55501/test-a-significant-difference-between-two-slope-values
+    % The classic (and more statistically powerful) way of testing this is to combine both datasets into a single regression model and then include the area as an interaction term. See, for example, here:
+    % http://www.theanalysisfactor.com/compare-regression-coefficients/
+    % This is "more ... powerful" only if more restrictive assumptions apply. In particular, it assumes homoscedasticity of error variances. Often one would not want to assume that (without additional justification) and therefore would use something like the Welch or Satterthwaite t-test. – whuber♦ Mar 30 '16 at 21:46
 %
 % cons:
 % interaction gives direct p nominal value, we have to estimate
@@ -386,6 +421,7 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 
 As with actual cell type abundances, the enrichment scores are correlated.
 Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as indepedent variables in regression downstream.
+\todo{does not bias, but unstable and more var of estimates}
 To prune the number of scores, I performed a \gls{PCA} of the cell type scores across samples,
 % Kaiser Rule
 % The more variables that load onto a particular component (i.e., have a high
@@ -504,10 +540,12 @@ Weighing the downside of having imperfect estimates of cell type abundance again
 %
 Apart from cell type abundance, a myriad of other unmeasured variables contribute to expression variation.
 Hidden determinants of expression variation were learnt using \software{PEER}\autocite{stegle2012UsingProbabilisticEstimation}.
-As recommended by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation \gls{RNAseq} data was performed using \software{DESeq2::vsn}.
+As suggested by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation \gls{RNAseq} data was performed using \software{DESeq2::vsn}.
 ComBat was applied to first merge array and \gls{RNAseq} data into a single log scale expression matrix per timepoint, treating the largest global effects on expression---the two array batches and three \gls{RNAseq} library prep pools (\autoref{fig:hird_expression_pcs})---as known batch effects.
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
 Given known covariates (intercept, sex, four genotype \glspl{PC} from \autoref{subsec:hird_dge_genotype_pc} representing ancestry, and the three xCell scores estimated above),
+% TODO: sole motivation here is efficiency. not so much confounding. PEER finds factors that explain var. so given factors are included for the sake of downstream modelling interest
+% this is also the primary motivation behind recommendation of including prognostic covariates in RCTs
 PEER was used to estimate additional hidden factors that explain variation in expression matrix.
 Factors are assumed to be unmeasured covariates that have global effects on a large fraction of genes, 
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
@@ -578,6 +616,7 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 \label{eq:hird_reQTL_limix_model}
 \end{equation}
 \todo{lift proper vector notation from limix, then redo this with a timepoint subscript}
+% TODO: kinship constrained varcov matrix. The scaling term is a var comp? error term has identity var cov
 where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper};
 and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, no \gls{LOCO} matrix is available from LDAK, so the matrix for chromosome 1 is used.}.
 % The LMM requires a kinship matrix to scale the covariance matrix of the random effect mean zero and an unknown variance.
@@ -621,7 +660,7 @@ then further filtered to only nominally significant tests, resulting in a strong
 
 The mash model was trained on a random subset of 200000 tests, using the Exchangeable Z-scores model\autocite{urbut2018FlexibleStatisticalMethods}.
 The correlation of null tests between conditions, critical to account for due to the repeated measures structure of the data, was estimated using \software{mashr::estimate\_null\_correlation}.
-\todo{note this is critical, since we know a priori not independent}
+\todo{note this is critical, since we know a priori not independent due to eqtl sharing}
 The fitted model was used as a prior to compute posterior effects and standard errors for all tests through shrinkage.
 % Stephens, M. (2016). False discovery rates: A new deal. Biostatistics, kxw041. https://doi.org/10.1093/biostatistics/kxw041
 % analogous to a false discovery rate, but more stringent because it requires true discoveries to be not only nonzero, but also correctly signed.
@@ -646,17 +685,11 @@ Thresholding on the lfsr is not appropriate for determining sharing, as the diff
 \autocite{urbut2018FlexibleStatisticalMethods} provides a heuristic that two effects are shared by magnitude if they have the same sign, and are also within a factor of 2 of one another,
 but this does not consider the posterior standard error of the estimates.
 % Also see:
-% https://stats.stackexchange.com/questions/93540/testing-equality-of-coefficients-from-two-different-regressions
-    % I found the key difference is whether the assumption that the error variance is the same or not.
-% https://stats.stackexchange.com/questions/55501/test-a-significant-difference-between-two-slope-values
-    % The classic (and more statistically powerful) way of testing this is to combine both datasets into a single regression model and then include the area as an interaction term. See, for example, here:
-    % http://www.theanalysisfactor.com/compare-regression-coefficients/
-    % This is "more ... powerful" only if more restrictive assumptions apply. In particular, it assumes homoscedasticity of error variances. Often one would not want to assume that (without additional justification) and therefore would use something like the Welch or Satterthwaite t-test. – whuber♦ Mar 30 '16 at 21:46
 % https://andrewpwheeler.wordpress.com/2016/10/19/testing-the-equality-of-two-regression-coefficients/
     % Var(A-B) = Var(A) + Var(B) - 2*Cov(A,B)
     % NOTE: Assumes that Cov is 0, this is anticonservative when Cov is actually positive.
 % Also: notes from 2018-10-11 on wald test, and comments on sharing_func in get sharing script
-% Also: https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1745-9125.1998.tb01268.x
+% Also: USING THE CORRECT STATISTICAL TEST FOR THE EQUALITY OF REGRESSION COEFFICIENTS https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1745-9125.1998.tb01268.x
 Between a pair of effects in two conditions, I compute a z-score for the difference in effects\autocite{clogg1995StatisticalMethodsComparing,schenker2001JudgingSignificanceDifferences}:
 
 \begin{equation}
@@ -708,6 +741,8 @@ I assume this represents a power advantage from having larger a sample size, rat
 \subsection{Genotype interactions with cell type abundance}
 
 \todo{be more specific: "moderator", not 'modify'}
+% TODO: In regression, one of the assumptions is the additive assumption. This assumption states that the influence of a predictor variable on the dependent variable is independent of any other influence
+% Holding all else equal Implies beta does not depend on other predictors
 % https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 % https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
@@ -834,6 +869,7 @@ Both \gene{ADCY3} and \gene{SH2D4A} have moderately high percentile expression a
 Overall, compared to genes without reQTL,
 % \todo{change % to reflect new numbers}
 % TODO: dge by reqtl plot
+% TODO: need to compare to shared eQTL
 \glspl{reQTL} were less likely be differentially expressed post-vaccination at day 1 (\percentage{0.2649573} for reQTL vs. \percentage{0.4227119}, Fisher's test p < \num{2.2e-16}),
 \todo{reword not significant}
 and no significant difference was observed at day 7 (\percentage{0.02195609} for reQTL vs. \percentage{0.01368555}, Fisher's test p = \num{0.05088}).
@@ -1017,6 +1053,7 @@ rather than a upregulation-driven increase in detection power,
 or a vaccine-induced activation of the locus at day 1.
 \todo{need to consider: if this kind of thing is what bulk in vivo reQTL can find, they what is the additional value over FACS?}
 
+% TODO: do we fall into the table 2 fallacy? we should not interpret cell count estiamte params as causal effects, but moderation is demonstrable
 Changes in relative abundances for many cell types occur in the bulk PBMC samples after vaccination.
 I accounted for the effect of abundance on mean expression including xCell scores and PEER factors as fixed effects in the model,
 and also considered the effect of abundance on the genotype effect using interaction terms between xCell scores and genotype.
@@ -1068,6 +1105,10 @@ Rather than condition-specific expression of the eGene, what may be condition-sp
 % and upreg at d1
 
 Finally, I address the prospect that common genetic variation may explain some variation in antibody response to Pandemrix.
+% TODO
+% Based on studies in twins, genetics seems to contribute only marginally to this heterogeneity
+% in vaccination outcomes in adults, suggesting environmental factors as key drivers [19,20].
+% tsang2020
 I have indirectly demonstrated genotype-dependent effects on expression response by identifying reQTLs with differing effect size between timepoints,
 but have not yet to determined resulting genotype-dependent differences in antibody phenotypes.
 Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
