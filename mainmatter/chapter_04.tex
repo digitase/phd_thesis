@@ -88,6 +88,7 @@
     % (TREM1) as key players in and predictors of anti-TNF (non-)responsiveness
     % [11–13].
     \2 cause or effect?
+    \2 list of existing studies
     \2 conflict in existing studies e.g. \enquote{The difference in results of these two studies could not be more stark: one found that TREM1 was downregulated in anti-TNF responders, and the other found that TREM1 was downregulated in anti-TNF non-responders.} \url{https://www.nature.com/articles/s41575-019-0228-5}
         % \3 <Also grep other signatures from this paper>
     \2 TREM1 signature \autocite{verstockt2019LowTREM1Expression}
@@ -264,6 +265,8 @@ Samples from additional visits (e.g. scheduled due to \gls{LOR} or early study e
 %
 % RNA library preparation from total RNA was conducted following the manufacturer’s protocol for the Kapa mRNA HyperPrep Kit. Briefly, 250 ng of total RNA was enriched for mRNA using magnetic oligo-dT beads. The remaining RNA was then fragmented by magnesium under elevated temperature. After fragmentation RNA was depleted of rRNA and globin mRNA using the QIAseq FastSelect RNA Removal Kit by Qiagen. The depleted RNA then underwent first strand synthesis using reverse transcriptase and random primers. Combined second strand synthesis and A-tailing incorporated dUTP into the second cDNA strand for stranded RNA sequencing and added dAMP to the 3’ ends for adapter ligation. The cDNA fragments were then ligated to sequencing adaptors (IDT xGEN Dual Index UMI adapters) and was enriched using 16 cycles of PCR. Final libraries were assessed using the Agilent Tapestation and Qubit (ThermoFisher) assay methods then sequenced on an Illumina HiSeq 4000 sequencer using 2x75bp read length.
 
+Differences from Salmon
+
 \subsection{RNAseq quality control}
 
 \subsection{\Glsfmtlong{DGE}}
@@ -278,11 +281,12 @@ but different types of third variable can be distinguished conceptually.
 % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819361/}
 % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2254615/}
 In this section, I focus on identifying third variables that are covariates:
-where Z is associated with Y and explains some variation in Y,
+where Z is correlated with Y and explains some variation in Y,
 and conditioning on Z increases the efficiency of estimating X \textrightarrow Y.
 Here, the predictors in question are primary response status, drug, and study visit; and the response variable is gene expression.
 
-Many phenotypes and technical variables are available as potential covariates in the \gls{PANTS} cohort (\autoref{fig:multipants_pheno_corrplot}).
+Many phenotypes and technical variables are available as potential covariates in the \gls{PANTS} cohort;
+\autoref{fig:multipants_pheno_corrplot} shows their correlations with each other, and the predictor variables.
 % From Mark:
 % As a follow-up, here is what Sam shared about estimating cell composition in the data: “We used the Houseman method [bmcbioinformatics.biomedcentral.com], which is implemented with the estimateCellCounts() function from the minfi package in R.”
 These include proportions of six common cell types in whole blood, 
@@ -317,14 +321,25 @@ indicating their importance for specific genes only, such as genes with sex-spec
     \2 choice: penalty is 1 df, so include some of these low median, high max variables as covariates.
     \2 so basically select all, except Gran, and ever immunomod
 
+Note covariates chosen here are used in all genewise models.
+
 \1 If covariates are also associated with the predictor X, issues can arise depending on their causal role.
 In general,
 conditioning on a confounder (X \textleftarrow Z \textrightarrow Y) reduces bias,
 conditioning on a collider (X \textrightarrow Z \textleftarrow Y) induces bias,
 and conditioning on a mediator (X \textrightarrow Z \textrightarrow Y) changes the effect estimated by removing the indirect effect mediated by Z.
     \2 Do the selected covariates have potential roles as confounders, colliders or mediators?
-    \2 cell counts are potential ... confounders/mediators ... depends ...
+    \2 cell counts?
     \todo{don't know if it matters if there are colliders among covariates, since we can't estimate any causal effects in DGE due to lack of a control group}
+
+% reasons to keep in cell count covariates
+% - for genes where they are covariates, ok to keep
+% - should rarely be a collider, as in most genes, E -> CC is unlikely vs CC -> E
+% - in the case of mediation, PNR -> CC -> R
+%     - main focus of analysis is not to identify differences in cell proportion driving R/NR, but transcriptomic ones
+%     - estimate will no longer be total effect, but a null-biased effect
+%         - it is the case that far fewer DGE were identified when cc were included
+% - it's already popular for diff meth, and in DGE, can increase robustness \url{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1878-x}
 
 \todo{because this is non-randomised, baseline differences do matter}
 % - pull in baseline from kennedy2019PredictorsAntiTNFTreatment
@@ -383,8 +398,10 @@ journals need p values
 
 \subsubsection{Spline model}
 
-simple time x responder interaction over time
-    assumes linear change
+\url{https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-019-0666-3}
+
+use other timepoints avoiding the exponential number of comparisons
+but simple time x responder interaction over time assumes linear change
 
 treat time as categorical visits (like baseline/w14 analysis above), then f test all interactions
     not clean defintion of visits
@@ -433,7 +450,48 @@ Sparse partial least squares regression for simultaneous dimension reduction and
 % and the first within-sample principal component were
 % included as covariates (Supplementary Table 2).
 
+autosomal only
+
+although it may seem possible to have duplicate individuals
+    following the stacking logic of TODOcite, 
+    it estimation of the alternative model log likelihood
+    excluding just a 2 duplicates at w14
+    makes LL alt much lower
+    LRT returns false negatives
+
+    resulting p value distribution is not well behaved:
+    large spike at 1
+
+    but the betas and stes remain comparable
+    since we use mashr to get signif values, 
+    can keep these in or out. 
+
+
+\subsubsection{PCA}
+
+% FlashPCA2
+akt
+
+choose 5
+    less pop structure than HIRD
+    number of signif tracy does not dep on our sample, but on the ref pop 
+    no consensus on method anyway
+
+    not sensitive
+    % This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
+    % We see that in each SNP category, results are virtually identical for K = 1, 2, 5 or 10.
+    % https://www.nature.com/articles/ng1847
+
 \subsection{reQTL}
+
+\subsubsection{PEER}
+
+DESeq2 vst
+betwen sample norm e.g. sequencing depth 
+
+\subsubsection{LDAK}
+
+\subsubsection{eqtl model}
 
 % gutierrez-arcelus2020AllelespecificExpressionChanges
 
@@ -448,6 +506,16 @@ ANCOVA vs repeated measures vs mixed model
 
 Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
 First need to eQTL scan in general with mashr and find the snps in the most reQTLish genes, since this modelling is probably expensive
+
+AC thresh 15
+further filter
+avoid small numbers minor hom leads to data points 
+potential to have high influence on the beta
+
+    despite mashr
+    when the whole point is calling signif changes in beta
+
+breaking ties by highest imputation INFO, highest \gls{MAF}, shortest dist to \gls{TSS}, and genomic coordinate.
 
 \section{Results}
 
@@ -496,6 +564,9 @@ Not sure how much intersect with w14 pairwise
 
 "Comparative analysis of differential gene expression tools for RNA sequencing time course data"
 Surprisingly, TC tools were outperformed by the classical pairwise comparison approach on short time series (<8 time points) in terms of overall performance and robustness to noise, mostly because of high number of false positives, with the exception of ImpulseDE2.
+
+replication
+    Sensitive to covariates, end points, drug
 
 PNR definition
     its very complex

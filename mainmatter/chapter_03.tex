@@ -80,10 +80,12 @@ the reQTL signal was determined to be a monocyte-specific effect likely driven b
 % 2.2.2.1.	X:1-2699520: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR1.shapeit3.mac5.aa.genotypes
 % 2.2.2.2.	X:2699521-154931043: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_nonPAR.shapeit3.mac5.aa.genotypes
 % 2.2.2.3.	X:154931044-155270560: impute against reference resources/refs/imputation/hrc.r1.1/pbwt/HRC.r1-1.GRCh37.chrX_PAR2.shapeit3.mac5.aa.genotypes
-Prior to imputation, 213277 monomorphic variants that provide no information for imputation were removed.
+Prior to imputation, 213277 monomorphic variants that provide no information for imputation
+Variant alleles were aligned such that the reference allele matches the GRCh37 reference, and 358 indels were removed.
 Imputation for the autosomes and X chromosome was conducted using the Sanger Imputation Service, 
 which involves pre-phasing with EAGLE2 (v2.4) and imputation with PBWT (v3.1) against the Haplotype Reference Consortium (r1.1) panel \url{https://www.ncbi.nlm.nih.gov/pubmed/27548312}.
-Variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
+% TODO: now, switch variants to SNPS. footnote no more indels
+Imputed variants were lifted-over from GRCh37 to GRCh38 coordinates using CrossMap.
 % 4.	Filtering
 % 4.1.	BCFTOOLS_INCLUDE="MAF>$MAF_THRESH & F_MISSING<0.05 & FILTER==\"PASS\" & INFO/INFO>0.4"
 % 4.2.	Use MAF thresholds 0.05, 0.10, 0.20
@@ -120,7 +122,6 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % Mixed is flexible, but overall aim aligns with change score
 %
 % Simplest application of developed eqtl methods
-
 
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 \todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
@@ -208,7 +209,7 @@ For comparison purposes, analyses were also run using in the array and \gls{RNAs
 Defining whether an \gls{eQTL} is shared between conditions can be a tricky business.
 Naively, one can map \glspl{eQTL} separately in each condition, then assess the overlap of significant associations between conditions.
 This underestimates sharing due to the difficulty of distinguishing true lack of sharing from missed discoveries from incomplete power within each condition \autocite{flutre2013StatisticalFrameworkJoint,peters2016InsightGenotypePhenotypeAssociations}.
-Condition-by-condition analysis also makes no attempt to borrow information across conditions for mapping shared associations\autocite{flutre2013StatisticalFrameworkJoint,urbut2018FlexibleStatisticalMethods,li2018HTeQTLIntegrativeExpression}.
+Condition-by-condition analysis also cannot borrow information across conditions for mapping shared associations\autocite{flutre2013StatisticalFrameworkJoint,urbut2018FlexibleStatisticalMethods,li2018HTeQTLIntegrativeExpression}.
 Counterintuitively, a joint multivariate analysis may be more powerful even when associations are not shared across all conditions\autocite{stephens2013UnifiedFrameworkAssociation}.
 
 % 2018-07-25 log: HIRD eQTL modelling possibilities
@@ -244,6 +245,9 @@ In this chapter, I apply \software{mashr}\autocite{urbut2018FlexibleStatisticalM
 then applies shrinkage to provide improved posterior effect size estimates,
 and compute measures of significance per condition. 
 
+% TODO
+% mashr: build on traditional metaanalysis methodology (see urbut)
+
 \subsection{Controlling for population structure with \glsfmtlongpl{LMM}}
 
 There is population structure due to ancestry in the \gls{HIRD} cohort,
@@ -252,7 +256,9 @@ In the context of \gls{eQTL} mapping (and genetic association studies in general
 where the aim is to assess the marginal effect of a single genetic variant on expression, 
 population structure can be correlated with both expression (e.g. through polygenic effects)
 and the tested variant (e.g. through ancestry-dependent frequency differences).
+% While genetics is more resistant to confounding due to randomisation of alleles, one of the things that can affect is ...
 This leads to \gls{OVB} from confounding, which if not controlled for, leads to genome-wide inflation of test statistics \autocite{price2010NewApproachesPopulation}.
+% TODO \url{https://www.nature.com/articles/srep06874}
 \todo{add some indication of how much inflation can be reduced by LMMs}
 % This is great background/intuition: golan2018MixedModelsCaseControl
 % using LMMs is appropriate for controlling for population structure (which is a common
@@ -261,7 +267,7 @@ This leads to \gls{OVB} from confounding, which if not controlled for, leads to 
 % issues (Yang et al., 2014).
 %
 % Also see: 2018-11-26 notes in log
-An efficient approach is the \gls{LMM} with a random effect that incorporates genetic correlation between individuals, usually in the form of a kinship matrix, into the covariance of that random effect\autocite{price2010NewApproachesPopulation, eu-ahsunthornwattana2014ComparisonMethodsAccount, golan2018MixedModelsCaseControl}
+An useful approach is the \gls{LMM} with a random effect that incorporates genetic correlation between individuals, usually in the form of a kinship matrix, into the covariance of that random effect\autocite{price2010NewApproachesPopulation, eu-ahsunthornwattana2014ComparisonMethodsAccount, golan2018MixedModelsCaseControl}
 The \gls{LMM} approach has the advantage of not only modelling large-scale population structure, but also cryptic relatedness (the presence of closely related individuals in a sample assumed to consist of unrelated individuals\autocite{astle2009PopulationStructureCryptic}) due to finer-scale effects such as family structure\autocite{golan2018MixedModelsCaseControl}.
 
 \subsubsection{Estimation of kinship matrices}
@@ -291,6 +297,7 @@ To obtain a \gls{LOCO} kinship matrix for each autosome, each autosome's kinship
 There are a number of transformations often applied to expression data before \gls{eQTL} mapping, 
 such as the rank-based \gls{INT} (e.g. GTEx v8\autocite{aguet2019GTExConsortiumAtlas}),
 which conforms often non-normal expression data to an approximately normal distribution, and reduces the impact of expression outliers.
+% TODO: read https://onlinelibrary.wiley.com/doi/full/10.1111/biom.13214
 In the context of genetic association studies, the practice of applying rank-based \gls{INT} to phenotypes has been criticised for only guaranteeing approximate normality of residuals when effect sizes are small,
 and potential inflation of type I error, especially in linear models that include interactions\autocite{beasley2009RankBasedInverseNormal}.
 In multi-condition datasets, these transformations are also typically applied within conditions (e.g. within each tissue individually in GTEx v8\autocite{aguet2019GTExConsortiumAtlas}).
@@ -421,7 +428,9 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 
 As with actual cell type abundances, the enrichment scores are correlated.
 Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as indepedent variables in regression downstream.
-\todo{does not bias, but unstable and more var of estimates}
+% TODO not the sizes
+\todo{does not bias least squares regression, but unstable (vary sample to sample) to changes in data due to sampling var, and more std error of estimates will be high (tending to inf if perfect multi)}
+\footnote{high intercorrelation is not necessary nor sufficient by itself to induce multicollinearity, but multiple correlation does have an inverse relationship with the standard error of coefficient estimates \autocite{maddala1992IntroductionEconometrics}}
 To prune the number of scores, I performed a \gls{PCA} of the cell type scores across samples,
 % Kaiser Rule
 % The more variables that load onto a particular component (i.e., have a high
@@ -540,17 +549,21 @@ Weighing the downside of having imperfect estimates of cell type abundance again
 %
 Apart from cell type abundance, a myriad of other unmeasured variables contribute to expression variation.
 Hidden determinants of expression variation were learnt using \software{PEER}\autocite{stegle2012UsingProbabilisticEstimation}.
-As suggested by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation \gls{RNAseq} data was performed using \software{DESeq2::vsn}.
+As suggested by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation on \gls{RNAseq} count data was performed using \software{DESeq2::vst}.
 ComBat was applied to first merge array and \gls{RNAseq} data into a single log scale expression matrix per timepoint, treating the largest global effects on expression---the two array batches and three \gls{RNAseq} library prep pools (\autoref{fig:hird_expression_pcs})---as known batch effects.
 % (e.g., by introducing principal components of the genotype data), is not included in the model, and it may be recapitulated in the inferred factors.
-Given known covariates (intercept, sex, four genotype \glspl{PC} from \autoref{subsec:hird_dge_genotype_pc} representing ancestry, and the three xCell scores estimated above),
+Given selected known covariates (intercept, sex, four genotype \glspl{PC} from \autoref{subsec:hird_dge_genotype_pc} representing ancestry, and the three xCell scores estimated above),
 % TODO: sole motivation here is efficiency. not so much confounding. PEER finds factors that explain var. so given factors are included for the sake of downstream modelling interest
-% this is also the primary motivation behind recommendation of including prognostic covariates in RCTs
+% this is also the primary motivation behind recommendation of including prognostic covariates in RCTs \url{https://trialsjournal.biomedcentral.com/articles/10.1186/1745-6215-15-139}
 PEER was used to estimate additional hidden factors that explain variation in expression matrix.
 Factors are assumed to be unmeasured covariates that have global effects on a large fraction of genes, 
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
 but should soak up some of residual variation, improving power to detect cis-\glspl{eQTL}.
 The analysis was run per timepoint, otherwise global changes in expression between timepoints induced by the vaccine would be recapitulated as factors.
+% TODO: not like PCs: not orthogonal
+% TODO: add auto relevance ,
+% TODO: do not keep explaining more var. var of factors themselves declines
+% and no guarantee of decreasing order when known
 
 Correlating the estimated factors to a larger set of known covariates reveals many correlations with xCell estimates, indicating that cell type abundance does indeed have substantial global effects on the expression matrix.
 There is little correlation with known array or \gls{RNAseq} batch effects, indicating ComBat did an adequate job of removing batch- and platform-dependent global effects on expression (\autoref{fig:hird_peer_corMatrix_v2_mega}).
@@ -588,8 +601,11 @@ The performance of various software implementations of \glspl{LMM} specialised f
 the specific choice of implementation can usually be made on the basis of computational efficiency\autocite{eu-ahsunthornwattana2014ComparisonMethodsAccount}.
 I map \glspl{eQTL} within each timepoint using \software{LIMIX}\autocite{lippert2014LIMIXGeneticAnalysis}, which implements univariate and multivariate \glspl{LMM} with one or more random effects.
 
-Imputed genotype probabilities were converted to alternate allele dosages using bcftools (1.7-1-ge07034a).
+Imputed genotype probabilities were converted to continuous alternate allele dosages using bcftools (1.7-1-ge07034a).
 Variants with sample $\text{\gls{AC}} < 15$ within each timepoint were excluded.
+% TODO:
+% per timepoint weakness here is that filtering MAF when unequal sizes restricts assessible results to lowest n
+% but, due to tagging, not all hope is lost
 \todo{add approximate MAFs, then cite hierarch paper}
 % As is standard for imputation, we excluded all X-linked SNPs for the
 % following reasons: (i) the X chromosome has to be treated differently from
@@ -608,7 +624,10 @@ Variants with sample $\text{\gls{AC}} < 15$ within each timepoint were excluded.
 % so sex-specific methods are required \url{http://www.biomedcentral.com/1471-2105/15/392}.
 \todo{add note on treating x chrom variants with caution}
 
-At each of 13570 genes, at all cis-variants within within $\pm \num{1}{Mb}$ of the \gls{TSS}, I fit the following model to map \gls{eQTL}:
+At each of 13570 genes, at all cis-variants within within $\pm \num{1}{Mb}$ of the gene \gls{TSS}, I fit the following model to map \gls{eQTL}:
+% TODO
+% Ensembl GENESEQSTART if fwd strand, otherwise GENESEQEND
+ % Like all Ensembl features the start of an exon is always less than or equal to the end of the exon, regardless of the strand it is on. The start of the transcript is the start of the first exon of a transcript on the forward strand or the end of the last exon of a transcript on the reverse strand. The start and end of a gene are defined to be the lowest start value of its transcripts and the highest end value respectively.
 \begin{equation}
 \begin{split}
 Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} + \beta G + \mathbf{u} + \epsilon
@@ -620,6 +639,9 @@ Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} +
 where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper};
 and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix\footnote{For chromosome X variants, no \gls{LOCO} matrix is available from LDAK, so the matrix for chromosome 1 is used.}.
 % The LMM requires a kinship matrix to scale the covariance matrix of the random effect mean zero and an unknown variance.
+% In the past, the only available measure of genetic similarity was a kinship coefficient computed as a probability of identity by descent in a pedigree, and so a single random effect term sufficed to model genome-wide additive effects. Nowadays genetic similarity can be measured directly, and in many different ways, from genome-wide SNP data.
+% GRM is : "consists of average allelic correlations across the SNPs (adjusted for LD and genotype certainty)" https://www.nature.com/articles/ng.3865?proof=true
+% By default, LDAK scales kinships to have mean zero and average diagonalone
 \todo{add formulation of the 0-mean random effect to show exactly how the kinship matrix is used \autocite{sul2018PopulationStructureGenetic}}
 \todo{note stacking of kinship for day -7 repeated measures}
 
@@ -630,12 +652,12 @@ To optimise k, the number of factors to include as covariates%
 \footnote{I avoid the commonly-performed two-stage approach of treating PEER residuals as expression phenotypes, as the degrees of freedom seen downstream will be incorrect, which can have a substantial effect on estimates at this modest sample size.}, 
 Per-timepoint \gls{eQTL} mapping was performed in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
 I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for day 1, and 5 factors for day 7 (\autoref{fig:hird_neGenesvsPeerK}).
-\todo{i leave the pcs in to guard against unusually differentiated markers, where random effect alone may not be enough \autocite{price2010NewApproachesPopulation}}
+\todo{i leave the pcs in to guard against unusually differentiated between pop markers, where random effect alone may not be enough \autocite{price2010NewApproachesPopulation}, \url{https://www.nature.com/articles/srep06874}}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/count_eGenes.signif_eGenes_vs_PEER_n.dataset_mega.chr_chr1.pdf}
-    \caption{Number of significant eGenes detected on chromosome 1 (hierarchical Bonferroni-\gls{BH} FDR < 0.05) as a function of the number of PEER factors included as covariates k.}
+    \caption{Number of significant eGenes detected on chromosome 1 (hierarchical Bonferroni-\gls{BH}\autocite{huang2018PowerFalseDiscovery} FDR < 0.05) as a function of the number of PEER factors included as covariates k.}
     \label{fig:hird_neGenesvsPeerK}
 \end{figure}
 
@@ -677,7 +699,7 @@ A condition-specific Bayesian measure of significance \gls{lfsr} is returned, wh
 Many of the tested variants for each gene will be in high \gls{LD}.
 % qtls.merged[, signif_rank := frank(qtls.merged, lfsr, -INFO, -MAF_sample, SNP_gene_TSS_dist, POS)]
 To unambiguously select a lead \gls{eQTL} variant per gene, I selected the variant with the lowest lfsr in any condition, 
-breaking ties by highest imputation INFO, highest \gls{MAF}, shortest distance to the \gls{TSS}, and genomic coordinate.
+breaking ties by highest imputation INFO, highest \gls{MAF}, most upstream of the \gls{TSS}, and genomic coordinate.
 Sharing was then evaluated for that gene-variant pair across all three conditions.
 
 Thresholding on the lfsr is not appropriate for determining sharing, as the difference between significant and non-significant effect estimates in two conditions is not necessarily significant\autocite{schenker2001JudgingSignificanceDifferences,gelman2006DifferenceSignificantNot}.
@@ -708,6 +730,7 @@ assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 % NOTE: A Wald test uses W ~ chisq(1), equivalent to sqrt(W) ~ N(0, 1).
 A Wald test \pvalue{} for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
 I use nominal \pvalue{} < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
+% TODO: but ideally, define reQTL strength as an ordering, not by thresholding
 Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
 \subsection{Replication of eQTLs in a reference dataset}
@@ -748,8 +771,8 @@ I assume this represents a power advantage from having larger a sample size, rat
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, 
 \todo{point is, doesn't make sense to assume the genotype effect is the same at all levels of cell type abundance}
-otherwise the regression slope of the \gls{eQTL} will represent an average across the abundance range for that cell type;
-one can not correct for this modification just by including the main effect for cell type abundance.
+otherwise the regression slope of the \gls{eQTL} term will represent an average across the abundance range for that cell type term, and vice versa;
+one can not adjust for this modification just by including the main effect for cell type abundance.
 Given the modest sample size, I use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},
 where tests for interaction are only performed at a subset of tests, often the lead \gls{eQTL} variant for each gene.
 % Unfortunately, there seems to be no consensus between these studies for controlling the interaction effect tests for multiple testing.
@@ -769,7 +792,7 @@ then apply the \gls{BH} \gls{FDR}, as used by others\autocite{peters2016InsightG
 Models in interactions between genotype and other predictors were fit using \software{lme4qtl}.
 The model specification identical to \autoref{eq:hird_reQTL_limix_model}, with the addition of three interaction terms between genotype and each xCell score.
 Significance is assessed using the likelihood-ratio test versus the nested model with no interaction terms.
-\todo{add note here that although peer is correlated with xcell, interactions are only formed with xcell, so the interaction term can be interpreted per unit of genotype increase when xcell=0}
+\todo{can we interpret with peer in? add note of CLAIM here that although peer is correlated with xcell, interactions are only formed with xcell, so the interaction term can be interpreted per unit of genotype increase when xcell=0}
 
 \subsection{TODO Statistical colocalisation}
 
@@ -989,6 +1012,9 @@ As the lead variant for reQTL assessment for each eGene was chosen based on sign
 This is not expected to be uncommon, as the effective sample size for shared eQTLs is usually large due to borrowing of information across conditions.
 Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more likely to be enriched in enhancers rather than promoters, and importantly, more context-specific\autocite{vandiedonck2017GeneticAssociationMolecular,dobbyn2018LandscapeConditionalEQTL}.
 The proportion of genes with reQTL I detect based on only the lead signal likely represents a lower bound.
+
+% list of other missed:
+% low MAF not tagged
 
 Given the larger global changes in expression vs. baseline at day 1 compared to day 7 described in \autoref{ch:hird_DGE}, 
 % that these changes are mostly tied to innate immune activation \todo{sectionref},

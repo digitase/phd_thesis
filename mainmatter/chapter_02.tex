@@ -142,8 +142,10 @@ However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there wa
 \todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}. hence TRI, whilst combining, is still not ideal}
 \todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
 Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
+% TODO: efficiency
 
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
+% TODO: it is a residualised change score \url{https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20}
 For each assay, a linear regression was fit with the $\log_2{\text{day 63}/\text{day -7}}$ titre fold change as the response, and the $\log_2{\text{day -7}}$ baseline titre as the predictor.
 The residuals from the two regressions were each standardized to zero mean and unit variance, then averaged.
 The \gls{TRI} expresses a continuous measure of change in antibody titres across both assays post-vaccination, compared to individuals with a similar baseline titre, and remains comparable to the binary 4-fold change definition (\autoref{fig:hird_tri}).\todo{cite appropriate subfigures here, after adding proper subfigure labels}
@@ -179,11 +181,20 @@ Using PLINK (v1.90b3w), genotype data underwent the following quality control pr
 max marker missingness across samples $< 5\%$, 
 max sample missingness across markers $< 1\%$, 
 max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \autoref{fig:hird_genotype_sample_hetRate_missingness}),
+% TODO: add discordant sex mismatch to indicate possible sample swaps, distribution of F estimates
 % The HWE threshold should depend on the multi-ethnicity of the cohort
 % \todo{see}
 % https://www.nature.com/articles/nrg2344
 % Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
 removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
+% TODO
+% We exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because
+%   this can be indicative of a genotyping or genotype-calling error. However,
+%   deviations from HWE may also indicate selection; accordingly,
+%   if a case sample shows deviations from HWE at loci associated with disease,
+%   it would obviously be counterproductive to remove these loci from further investigation.
+%   Therefore, only control samples should be used when testing for deviations for HWE.
+  
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc2.pdf}
@@ -203,9 +214,15 @@ As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, he
 Large-scale population structure explains variation in gene expression \autocite{brown2018ExpressionReflectsPopulation}, so including population structure as covariates can increase power.
 Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
 \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
+% TODO: this vs in-sample pca
+% TODO http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf % If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
+% TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6007879/#!po=31.2500
+% if there may be related, prefer projection:
+% Principal Components Analysis with Related individuals (PC-AiR) [Conomos, et al. 2015] infers PS in the presence of related individuals. This method identifies an unrelated subset of individuals that represents the ancestral diversity of the sample and computes PCs in this subset and projects PCs onto the remainder of the sample.
 For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
 The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as continuous covariates for ancestry downstream.
 \todo{Add Tracy-Widom statistics for PCs to justify later choice of 4 PCs for covariates}
+% TODO: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020190
 \todo{nicer version, copy the peer code, facet the hird and hapmap samples}
 
 \begin{figure}
@@ -329,6 +346,7 @@ Given the proportion of removed counts at this stage was low for most samples (\
 
 Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\autoref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
 Genes were further filtered to require detection (non-zero expression) in at least 95\% of samples, and a minimum of 0.5 \gls{CPM} in at least 20\% of samples.
+% TODO: check number of genes hit by non-zero and write a justification
 The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed\autocite{chen2016ReadsGenesPathways}.
 % TODO \url{https://f1000research.com/articles/5-1408/v3}
 The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\autoref{fig:hird_rnaseq_cpm_filtering}).
