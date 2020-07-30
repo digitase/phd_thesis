@@ -8,6 +8,7 @@
 \label{ch:hird_DGE}
 
 \section{Introduction}
+% TODO add specific flu vaccine immunology here
 
 \subsection{Seasonal and pandemic influenza}
 
@@ -86,6 +87,9 @@ This is in contrast to several studies of seasonal influenza vaccines, where cer
 \subsection{Chapter summary}
 
 Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number (46/178) of individuals, potentially limiting power to detect a expression signatures associated with antibody response.
+% TODO: http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf
+% These four variables—power, significance criterion, sample size, and populationeffect size—are related such that when the values of three of these are fixed, thefourth is determined (Cohen, 1988, p. 14).
+% TODO: do not say power when you mean efficiency or sensitivity
 In addition, the responder vs. non-responder phenotype definition used does not account for variation in pre-existing baseline titres, and the binary definition can result in loss of statistical power\autocite{cohen1983CostDichotomization, senn2005DichotomaniaObsessiveCompulsive, fedorov2009ConsequencesDichotomization}.
 
 In this chapter, I integrate the original microarray data from \gls{HIRD} with \gls{RNAseq} data on a larger subset (75) of newly sequenced individuals from the same cohort using Bayesian random-effects meta-analysis.
@@ -108,6 +112,7 @@ The vaccine dose was administered after blood sampling on day 0; five other long
 % \autocite{brodin2015VariationHumanImmune}
 % Although blood is not an immunological organ per se, it is the conduit for most immune cells circulating in the body, especially after an immunological stimulus such as vaccination (FIG. 1).
 Serological responses were measured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell subset counts (\gls{FACS} panels, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
+% TODO: Check range of inflenza hai and MN titres.  Indicate min max
 The gene expression microarrays were performed in two batches.
 
 In addition to the existing data, array genotypes were generated for 169 individuals; and \gls{RNAseq} data for 75 individuals at days 0, 1, and 7.
@@ -210,9 +215,14 @@ After filtering, 169 samples and 549414 markers remained.
 \subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
 \label{subsec:hird_dge_genotype_pc}
 
+% TODO: read
+% Efficient toolkit implementing best practices for principal component analysis of population genetic data
+
 As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
 Large-scale population structure explains variation in gene expression \autocite{brown2018ExpressionReflectsPopulation}, so including population structure as covariates can increase power.
 Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
+% https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0093766
+% TODO: Prior to PCA, thinning of the SNPs by LD and removal of regions with known high LD or other artefacts such as inversions have been recommended [1], [15], as high correlations between the SNPs can distort the resulting eigenvectors.
 \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
 % TODO: this vs in-sample pca
 % TODO http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf % If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
@@ -333,8 +343,9 @@ Relative transcript abundances were summarised to Ensembl gene-level count estim
 % 5.4.2.	Short non-coding GENEBIOTYPES: https://www.gencodegenes.org/pages/biotypes.html
 % 5.5.	NOTE: we have not yet removed GENEBIOTYPE=NA. These may be retired ids.
 Genes with short noncoding RNA biotypes\footnote{miRNA, miRNA\_pseudogene, miscRNA, miscRNA pseudogene, Mt rRNA, Mt tRNA, rRNA, scRNA, snlRNA, snoRNA, snRNA, tRNA, tRNA\_pseudogene. List from \url{https://www.ensembl.org/Help/Faq?id=468}} were removed, as they are generally not polyadenylated, and expression estimates can be biased by misassignment of counts from overlapping protein-coding or lncRNA genes\autocite{zhao2018EvaluationTwoMain}.
-% Also, they can be shorter than the 75 bp read length
+% TODO: Also, they can be shorter than the 75 bp read length, should be depeleted by size selection, and are likely to be misassigned
 Globin genes, which are highly expressed in erythrocytes and reticulocytes, cell types expected to be depleted in \gls{PBMC} \autocite{min2010VariabilityGeneExpression}, were also removed.
+% TODO: https://www.nature.com/articles/s41598-020-62801-6
 Given the proportion of removed counts at this stage was low for most samples (\autoref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to have been efficient.
 
 \begin{figure}
@@ -434,6 +445,7 @@ The final normalised $\log_2$ intensity values for these 18216 genes over 173 sa
 \subsection{\Glsfmtlong{DGE}}
 
 \gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\autoref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
+% TODO: note no filtering of expression data before pca due to wanting to see batch fx
 Normalisation was also not able to completely remove the batch effect within the array data (\autoref{fig:hird_expression_pcs}a).
 % Also see:
 % Wang, C., Gong, B., Bushel, P. R., Thierry-Mieg, J., Thierry-Mieg, D., Xu, J., Fang, H., Hong, H., Shen, J., Su, Z., Meehan, J., Li, X., Yang, L., Li, H., Łabaj, P. P., Kreil, D. P., Megherbi, D., Gaj, S., Caiment, F., … Tong, W. (2014). The concordance between RNA-seq and microarray data depends on chemical treatment and transcript abundance. Nature Biotechnology, 32(9), 926–932. https://doi.org/10.1038/nbt.3001
@@ -515,8 +527,13 @@ A second model (model 2) was also fit, including 3 additional terms for the inte
 %
 % See: https://stats.stackexchange.com/questions/151730/test-if-two-coefficients-are-statistically-different-in-logistic-regression
 Contrasts were defined, testing if linear combinations of estimated coefficients are different from zero.
+% TODO: What is a contrast? A contrast is essentially a difference in regression coefficients. We have seen that the regression coefficients can express a difference in means or a single mean, as well as the slope and intercept of a line. A contrast is a way of testing more general hypotheses about population means.
+% A contrast is defined as the sum of each group mean multiplied by a coefficient for each group
+% In statistics, particularly in analysis of variance and linear regression, a contrast is a linear combination of variables (parameters or statistics) whose coefficients add up to zero, allowing comparison of different treatments.[1][2]
 From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
 From model 2, I defined contrasts for the \gls{TRI} specifically at each of the three timepoints.
+% TODO: by merely specifying the model with interactions, we allow them, and thus change the interp. thus both required
+% TODO: did i really define contrasts? put in actual model equation here
 %
 % https://support.bioconductor.org/p/70175/
 % es <- fit2$coefficients
@@ -666,7 +683,11 @@ For the Bayesian random-effects meta-analysis, posterior effect sizes and standa
 \subsection{Gene set enrichment analysis using \glsfmtlongpl{BTM}}
 
 Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest}\autocite{weiner3rd2016TmodPackageGeneral}, which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \texttt{bayesmeta}.
+% TODO: alternative
+% The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
+
 The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}, which are annotated sets of coexpressed genes mined from publicly available human blood transcriptomic data, and provide sets tailored for enrichment analyses in blood cells.
+% TODO: why use cerno https://academic.oup.com/bioinformatics/article/35/24/5146/5511403
 
 \section{Results}
 \todo{more text}
@@ -875,6 +896,9 @@ Baseline-adjusted antibody response is correlated with expression of gene sets, 
 Unfortunately, between-platform variation in expression impedes identification of specific genes that contribute.
 The fundamental question of why gene expression and antibody responses vary between \gls{HIRD} individuals remains.
 Chapter 3 will examine one hypothesis: the impact of common human genetic variation on Pandemrix expression response.
+% TODO: ch4 also corrects for cell props
 \todo{At no point in this chapter are we estimating causal effects}
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
+
+% TODO: not adjusted for cell comp, but not necc bad
 

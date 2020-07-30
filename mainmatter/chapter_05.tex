@@ -7,14 +7,6 @@
 
 \begin{outline}
 
-suffer from core set of limitations 
-    dichot
-        addressed in ch2
-    bulk data
-        addressed in ch3
-    no statistical integration
-        simple overlap will not work
-
 summary of chapters
 
     baseline prediction might require much larger sample sizes
@@ -24,10 +16,92 @@ summary of chapters
 
     Limitations, and the perfect study.
 
-Prediction is not inference
+suffer from core set of limitations 
+    dichot
+        addressed in ch2
+    bulk data
+        addressed in ch3
+    no statistical integration
+        simple overlap will not work
+
+        e.g. other papers that talk about 'integrating'
+        % franco,
+        % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180824
+        % devries2020IntegratingGWASBulk
+
+reQTL on bulk in vivo has huge challenges
+
+    composition explains a huge amount of var in bulk farahbod2020UntanglingEffectsCellular
+
+    some are implicitly accounted for in peer
+        but interactions with geno are not guaranteed to be
+
+    effect is EXARCERBATED by in vivo
+        not just sample var, but active recuitment changes in cell prop e.g. recruitment
+            why should this be considered a con of in vivo?
+
+    unclear what benefit would outweigh this
+
+need to recognise 
+    bulk and sorted eQTL differ in interp
+        and correction using cell prop covariates does not unify them
+
+    also, it's not the same as intervertion to set cell counts e.g. FACS
+
+        control is not intervention
+            % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
+            The difference between intervening on a variable and conditioning on that
+            variable should,hopefully, be obvious. When we intervene on a variable in a
+            model, we fix its value. Wechangethe system, and the values of other variables
+            often change as a result. When we condition on avariable, we change nothing; we
+            merely narrow our focus to the subset of cases in which thevariable takes the
+            value we are interested in. What changes, then, is our perception about
+            theworld, not the world itself.
+
+must no longer be divorced from rigourous statistical theory
+    statistical considerations from small scale studies
+        Two disciplines of statistical genomics : Neither can be neglected
+
+    move away from dichotomania
+    % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
+    % Responder analysis is a 4-fold loser. It fails to give the needed clinical
+    % interpretation, has poor statistical properties, increases the cost of studies
+    % because binary outcomes require significantly higher sample sizes, and raises
+    % ethical issues because more patients are required to be randomized than would
+
+            rely of stability of 'responder', something intrinsic
+            % "60% of the time, it works every time"
+                \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
+                senn2016MasteringVariationVariance
+                senn2018StatisticalPitfallsPersonalized
+
+        and to Cost-effectiveness and clinical implementation
+            if you can identify NRs, what are you going to do about it?
+
+        in ch 3, used TRI
+        in ch 4, 
+            May be more powerful to directly with the constituent phenotypes directly (CRP level, HBI score, whether there was escalation in steroid treatment, or exit for treatment failure)
+
+            predictive claims
+
+    in chapter 3, i discussed in brief
+        change is not ancova
+        stratified is not interaction
+        yet many studies out there the that use one or the other to answer the same biological reQTL questions
+
+    also beware the effects of normalisation
+
+    beware the effects of model misspec
+        missing interaction terms
+
+esp when considering replication of reQTL
+    all above must line up
+
+Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
     % Calculating the sample size required for developing a clinical prediction model
     two chapters of mine
-    have always treated the R as indep in DGE
+        have touched on suggesting to build a predictive model
+    but have always treated the R as indep in DGE
     kinda strange: response is a organism pheno should be downstream of E
 
         Is response , the main predictor
@@ -43,9 +117,21 @@ Prediction is not inference
         no error
             assuming otherwise would stray into the realm of error in variables models
         
+            we are effectively assuming that R is an intrinsic thing, and is determined without error
+    
+    convert the language e.g. logFC, to prediction e.g. CV error
 
     % beyond dge
     % TODO: https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-356
+
+    potential methods
+
+        Sparse partial least squares regression for simultaneous dimension reduction and variable selection
+        % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2810828/
+
+         Sparse Partial Least Squares Classification for High Dimensional Data 
+        % https://pubmed.ncbi.nlm.nih.gov/20361856/
+
 
     sysvacc: need genetics to move beyond prediction
 
@@ -59,7 +145,12 @@ Prediction is not inference
 
 The design of more longitudinal cohorts in the future
 
-    avoid bulk:
+    more n
+        just because n sufficient for eqtl at 1 condition
+        underpowered when looking for interactions (implied for reQTL, even more problematic for e.g. further cell count interatcions)
+        similar to stratified analysis problem in clinical trials
+
+    ofc if avoid bulk, no prob with cell counts:
         Even if cell type interaction/proxy gene approach
         Cannot distinguish between correlated cell types
 
@@ -78,22 +169,7 @@ The design of more longitudinal cohorts in the future
 
     as     complex disease genetics moves 
     computation not limits correct stat
-    must no longer be divorced from rigourous statistics
-        statistical considerations from small scale studies
 
-        Two disciplines of statistical genomics : Neither can be neglected
-
-    move away from dichotomania
-
-        predictive claims
-
-            rely of stability of 'responder'
-                \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
-                senn2016MasteringVariationVariance
-                senn2018StatisticalPitfallsPersonalized
-
-        and to Cost-effectiveness and clinical implementation
-            if you can identify NRs, what are you going to do about it?
 
 Extending the sample size
 
@@ -107,6 +183,7 @@ Extending the sample size
     equiavlence testing \url{https://doi.org/10.1177/1948550617697177}
         but what is really smallest effect size of interest?
 
+as more n, allows
 Finer and finer context
     in the intro: gwas to function pipeline
     now, the future
@@ -120,11 +197,13 @@ Finer and finer context
     e.g. StructLMM 
         Identifies eQTLs with GxE, where the number of environments in E is large (modelled as a random effect)
 
+        vqtls: e.g. % doi: https://doi.org/10.1101/2020.07.28.225730 
+
     as datasets and conditions get larger, proportion of eGenes is going to be 100pc, then the question is what are the most relevant ones
     % We observed that cis-eQTLs can be detected for 88% of the studied genes in vosa2018UnravelingPolygenicArchitecture
     % In contrast, trans-eQTLs (detected for 37% of 10,317 studied trait-associated variants) were more informative.
 
-    Era of single cell.
+    Era of single cell. (ultamite context)
         1st
         Single-cell RNA sequencing identifies celltype-specific cis-eQTLs and co-expression QTLs
         https://www.nature.com/articles/s41588-018-0089-9
@@ -147,14 +226,23 @@ Finer and finer context
         reQTL detection: bulk, sorted, sc
         current sc will only detect highly expressed genes
 
+        reqtl followup using single cell cell type specific expression
+        % https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1008408
 
-Deep phenotyping
+        devries2020IntegratingGWASBulk
+        Subsequently, scRNA-seq data was used to pinpoint the potential cell type in which the response QTL effects manifest themselves
+            but really they only looked at cell type specific expression, not sc eqtl mapping
+
+and allows
+more phenotypes
         
         disease specific biobanks e.g. ibd bioresource/predicct
 
     vaccines:
         the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
 
+    % Our GWASfor 54 functionally relevantphenotypes oftheadaptiveimmune system in 489 healthy individuals identifieseight genome-wide significant associations explain-ing 6%–20% of variance.
+    % https://www.cell.com/cell-reports/pdf/S2211-1247(18)31493-1.pdf
 
     PheWAS\autocite{verma2017CurrentScopeChallenges}
     % https://onlinelibrary.wiley.com/doi/full/10.1111/imm.12195
@@ -194,8 +282,6 @@ Translational directions
     % word mechanism thrown around
     % Mechanism is important because of possibility for intervention. Here, causal is important
 
-
-
 % \subsection{From target gene to candidate drug}
 %
 % https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489
@@ -215,9 +301,18 @@ Translational directions
 
         \3 building allelic series
 
+sample size
+    complex traits and disease already moved out of candidate gene era
+    vaccine and drug response traits lagging due to sample size requirements
+
 unification
     immunology and vaccine dev: deep phenotyping, small cohorts achieved -> larger cohorts
     human genetics and gwas: large cohorts achieved -> deeper phenotyping
+
+    more intermediates:
+        The proteome
+        % https://pubmed.ncbi.nlm.nih.gov/32709985/
+        % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
 
     MOFA
     multiomics
@@ -232,6 +327,8 @@ unification
         layering of evidence (triangulation)
 
     with GWAS of immune phenotypes
+
+    getting at causality
 
 \end{outline}
 

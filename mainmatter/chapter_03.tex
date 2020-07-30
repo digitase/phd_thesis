@@ -100,7 +100,7 @@ This approach has been applied for identification of condition-specific \gls{eQT
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
 it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
 %
-% Step 1: why use a change score equivalent, not ANCOVA
+% Step 1: why not change score, why not ANCOVA, why strat and diff?
 % half a century of debate
 % https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
 % https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
@@ -123,12 +123,26 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 %
 % Simplest application of developed eqtl methods
 
+% joint method over interaction
+%     large numbers of conditions, not practical to use interactions
+
+% pros for split
+%     limix not ok with repeated samples in kinship matrix
+%     peer not directly applicable
+    
+% change score should ask average of individual diffs
+% strat and interaction should ask diff in averages
+% interaction is further borrowing info
+
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 \todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % TODO it is not the case that serve as their own controls
+% more like soaking up some of the variation as within patient random effect, allowing more precise
+% also see: https://blog.statsols.com/making-it-personal-n-of-1-trials-allowing-for-individuality-but-not-overdoing-it
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
 Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}
+% See PMC4425538 : The method we have used did not account for heteroscedasticity while estimating the standard errors of the interaction term, which may lead to inflated statistics.
 % TODO: equivalence is not straightforward, since of joint mashr downstream
 
 % real killer is missing data for manova/ancova
@@ -154,6 +168,12 @@ Unlike a test for difference implemented using a genotype-condition interaction 
     % The classic (and more statistically powerful) way of testing this is to combine both datasets into a single regression model and then include the area as an interaction term. See, for example, here:
     % http://www.theanalysisfactor.com/compare-regression-coefficients/
     % This is "more ... powerful" only if more restrictive assumptions apply. In particular, it assumes homoscedasticity of error variances. Often one would not want to assume that (without additional justification) and therefore would use something like the Welch or Satterthwaite t-test. – whuber♦ Mar 30 '16 at 21:46
+%
+% https://stats.stackexchange.com/questions/33692/joint-model-with-interaction-terms-vs-separate-regressions-for-a-group-comparis
+%     The first model will fully interact gender with all other covariates in the model. Essentially, the effect of each covariate (b2, b3... bn). In the second model, the effect of gender is only interacted with your IV. So, assuming you have more covariates than just the IV and gender, this may drive somewhat different results.
+% i.e. there are interactions between time and ALL VARIABLES
+%
+% whereas interaction model pools estimates (borrows info)
 %
 % cons:
 % interaction gives direct p nominal value, we have to estimate
@@ -267,8 +287,14 @@ This leads to \gls{OVB} from confounding, which if not controlled for, leads to 
 % issues (Yang et al., 2014).
 %
 % Also see: 2018-11-26 notes in log
+% TODO: read this Deconstructing the sources of genotype-phenotype associations in humans
 An useful approach is the \gls{LMM} with a random effect that incorporates genetic correlation between individuals, usually in the form of a kinship matrix, into the covariance of that random effect\autocite{price2010NewApproachesPopulation, eu-ahsunthornwattana2014ComparisonMethodsAccount, golan2018MixedModelsCaseControl}
 The \gls{LMM} approach has the advantage of not only modelling large-scale population structure, but also cryptic relatedness (the presence of closely related individuals in a sample assumed to consist of unrelated individuals\autocite{astle2009PopulationStructureCryptic}) due to finer-scale effects such as family structure\autocite{golan2018MixedModelsCaseControl}.
+%
+% TODO although: https://twitter.com/A_A_Zaidi/status/1285578961356034049
+% When structure has a recent origin, PCA or LMMs won't fully correct for stratification if the GRM is derived from common variants as they are older and not very informative about recent demographic history.
+% TODO:
+% fine scale: https://academic.oup.com/hmg/article-abstract/doi/10.1093/hmg/ddaa157/5874041
 
 \subsubsection{Estimation of kinship matrices}
 
@@ -313,6 +339,7 @@ Expression values on the log scale were simulated with the \gls{eQTL} slope (bet
 \todo{log scale: as interactions depend on the scale at which departure from additivity is detected}
 The simulated scenarios were subjected to rank-based \gls{INT} (Blom method\autocite{beasley2009RankBasedInverseNormal}), standardisation (both centering and scaling), scaling-only, and centering-only transformations.
 Transformations were applied both within each condition and without separating conditions.
+% TODO: add existing papers that use mash on rank int
 
 The boxed facets in \autoref{fig:hird_eQTL_expressionTransform_sims} represent undesirable effects of transformations on \gls{reQTL} calls.
 For example, rank-based \gls{INT} induces false shared \gls{eQTL} effects in scenarios 4 and 5.
@@ -320,16 +347,19 @@ In general, transformations that scale within condition are not appropriate, as 
 Scaling without separating conditions can also be problematic, since the total variance also contributes to the \gls{reQTL} effect size.
 For example, scenarios 2 and 4 have the same 1 unit increase in slope pre-transformation (the same fold-change between conditions), 
 but after scaling-only the beta increases are $0.75-0=0.75$ and $0.8-0.4=0.4$ respectively---eQTL 4 now looks like a weaker effect.
+% TODO: this is ofc due to my definition
 
 In light of these simulations, I decided that neither rank-based \gls{INT} nor standardisation were appropriate given my intent of detecting \glspl{reQTL} between conditions.
 Only the centering-only transformation avoided both false shared effects and preserves relative \gls{reQTL} effect sizes between genes.
 The simple inclusion of an intercept term in the \gls{eQTL} model already achieves this.
 Not performing any rank-based transform does lose the advantage of reining in outliers.
 The expression data have already been preprocessed to remove low-expression outliers in \autoref{subsec:hird_dge_rnaseq_quantAndFilter}, 
+% TODO: note for a large number of samples
 but automatic outlier exclusion based on \gls{SD} thresholds at the \gls{eQTL} mapping step could be considered in future implementations\autocite{vosa2018UnravelingPolygenicArchitecture}.
 Note that many preprocessing steps done prior to this stage in the pipeline (e.g. variance-stabilisation, ComBat batch effect correction) are also expression transformations,
 but I only consider the preservation of \gls{reQTL} effects defined from expression values post-adjustment for those technical effects to be important.
 
+% TODO: https://github.com/eliocamp/tagger/issues
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/simulate_expression_transforms.pdf}
@@ -349,6 +379,13 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 
 \subsection{Estimation of cell type abundance from expression}
 \label{subsec:hird_reQTL_xCell}
+
+% TODO: farahbod2020UntanglingEffectsCellular
+% bulk samples are a mix
+% observed expression of a gene across samples is a mix of cell type specificness of the gene and composotition (affected by sample error and bio fx)
+% and composition can explain a lot of variance
+% the more cell type specific, the more affected by composition
+% extreme case: perfectly cell type specific is called a marker gene, and is used in deconv methods to actually get cell estiamtes.
 
 % Also, \gls{RNAseq} expression estimates are inherently compositional \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
 \Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
@@ -442,6 +479,7 @@ determined the number of principal components that exceed the eigenvalues-greate
 then selected only the one cell type with the highest contribution for each of those components.
 In both array and \gls{RNAseq} datasets, the number of components retained was three, and the selected cell types were monocytes, \gls{NK} cells, and plasma cells (\autoref{fig:hird_xCell_cos2}).
 The choice to use the actual cell type scores over principal components directly as covariates is a sacrifice of orthogonality for interpretability.
+% TODO: add percent var explained by the 3
 
 % var$contrib: contains the contributions (in percentage) of the variables to the
 % principal components. The contribution of a variable (var) to a given principal
@@ -507,6 +545,7 @@ Weighing the downside of having imperfect estimates of cell type abundance again
     \label{fig:hird_xCell_vs_FACS}
 \end{figure}
 \todo{get subset size}
+\todo{change corr scatterplots to corr matrix}
 
 \subsection{Finding hidden covariates using factor analysis}
 
@@ -560,7 +599,7 @@ Factors are assumed to be unmeasured covariates that have global effects on a la
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
 but should soak up some of residual variation, improving power to detect cis-\glspl{eQTL}.
 The analysis was run per timepoint, otherwise global changes in expression between timepoints induced by the vaccine would be recapitulated as factors.
-% TODO: not like PCs: not orthogonal
+% TODO: not like PCs: not orthogonal or uncorrelated
 % TODO: add auto relevance ,
 % TODO: do not keep explaining more var. var of factors themselves declines
 % and no guarantee of decreasing order when known
@@ -763,16 +802,22 @@ I assume this represents a power advantage from having larger a sample size, rat
 
 \subsection{Genotype interactions with cell type abundance}
 
-\todo{be more specific: "moderator", not 'modify'}
+\todo{be more specific: "moderator", 'modify'?????}
 % TODO: In regression, one of the assumptions is the additive assumption. This assumption states that the influence of a predictor variable on the dependent variable is independent of any other influence
 % Holding all else equal Implies beta does not depend on other predictors
 % https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 % https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
+% TODO: why?
+% happens if there is cell type specific relevance of g
+% cause cell type affects g->e i.e. symetrically, geno affects c -> e
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
-then an interaction term between genotype and cell type abundance is required, 
+then an interaction term between genotype and cell type abundance is required, % i.e. the assumption of additivity is baked in
 \todo{point is, doesn't make sense to assume the genotype effect is the same at all levels of cell type abundance}
-otherwise the regression slope of the \gls{eQTL} term will represent an average across the abundance range for that cell type term, and vice versa;
+otherwise the regression slope of the \gls{eQTL} term will represent an pooled effect across the abundance range for that cell type term, and vice versa;
 one can not adjust for this modification just by including the main effect for cell type abundance.
+% TODO: if the data gen process is so, the simply a misspecification to not have it
+% referred to in econometrics as "functional form misspecification", a special case of OVB.
+% e.g. https://www.econometrics-with-r.org/9-2-ttivomra.html
 Given the modest sample size, I use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},
 where tests for interaction are only performed at a subset of tests, often the lead \gls{eQTL} variant for each gene.
 % Unfortunately, there seems to be no consensus between these studies for controlling the interaction effect tests for multiple testing.
@@ -923,6 +968,8 @@ After pruning highly correlated cell types to avoid multicollinearity, standardi
 Within-timepoint full \gls{eQTL} models including the genotype main effect, the three cell type abundance main effects, and three cell type-genotype interaction terms, were fit using \software{lme4qtl}, 
 then compared to a nested model excluding the three interaction terms.
 
+% TODO: why include the main effect?
+
 \todo{siunitx permits uncertainties}
 Significant cell type interactions were detected at 16/1154 \glspl{reQTL} (BH FDR < 0.05) in any timepoint, including \gene{ADCY3} at day 1 ($\chi^2(3) = \num{26.290769}$, \gls{LRT} BH FDR = \num{9.539518e-05}).
 Although the genotype effect size was \num{0.255954767} (SE = \num{0.03339378}) in the nested model,
@@ -966,6 +1013,7 @@ In the case where the monocyte score is zero (representing an average abundance 
 
 % fine mapped to 2_24874775_A_G, nearest gene (45,064 bp downstream to canonical TSS): ADCY3 TSS is at 24919839, rev strand
 \1 \software{HyPrColoc} fine maps the signal to rs13407913 (credible set size=1, PP = 1), an intronic variant 45064 bp downstream of the TSS.
+    \2 note not accurate due to MAF issues
 
 % note in 2019-06-17_team_meeting.pptx, originally was rs10185143
 \todo{FYI the IBD/T cell coloc fine maps to chr2:24935139 T C (rs713586) with PP=1}
@@ -1079,7 +1127,8 @@ rather than a upregulation-driven increase in detection power,
 or a vaccine-induced activation of the locus at day 1.
 \todo{need to consider: if this kind of thing is what bulk in vivo reQTL can find, they what is the additional value over FACS?}
 
-% TODO: do we fall into the table 2 fallacy? we should not interpret cell count estiamte params as causal effects, but moderation is demonstrable
+% TODO: do we fall into the Table 2 Fallacy? we should not interpret cell count estiamte params as causal effects, but moderation is demonstrable
+% http://www.dagitty.net/learn/graphs/table2-fallacy.html
 Changes in relative abundances for many cell types occur in the bulk PBMC samples after vaccination.
 I accounted for the effect of abundance on mean expression including xCell scores and PEER factors as fixed effects in the model,
 and also considered the effect of abundance on the genotype effect using interaction terms between xCell scores and genotype.
@@ -1109,6 +1158,10 @@ A pressing question remains: what molecular mechanisms underlie the \gene{ADCY3}
 Power differences due to condition-specific expression are unlikely to explain a large proportion of reQTLs.
 As in \autocite{kim-hellmuth2017GeneticRegulatoryEffects, davenport2018DiscoveringVivoCytokineeQTL}, the overlap between differentially expressed genes and genes with reQTL was poor,
 and reQTL were not more likely to be differentially expressed compared to genes without reQTL.
+%
+% TODO
+% reqtl already tests whether change in e is diff by g, so no need to check DGE too
+% may be no reason to believe that most DGE is also the most reQTL
 One mechanism by which cis-eQTL affect expression is through their impact on \gls{TF} binding affinity to motifs in promoters and enhancers\autocite{pai2015GeneticMechanisticBasis}.
 Immune cells, including monocytes, are regulated by cell type specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
 \todo{harmonise terminology for 'opposite'}

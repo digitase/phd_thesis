@@ -1,6 +1,7 @@
 %
 % Chapter 4
 %
+% multiPANTS
 
 \chapter{multiPANTS}
 
@@ -35,6 +36,8 @@
     \2 also used in related conditions e.g. RA \autocite{mulhearn2019UsingImmunophenotypePredict}
     \2 "Biologic therapy with anti-TNF agents." for IBD \url{https://www.nature.com/articles/nrgastro.2015.135}
         \3 Two big players: adalimumab and infliximab \autocite{adegbola2018AntiTNFTherapyCrohn}
+            % and biosimilars
+            % dosing     ADA: per 2 weeks, subcut. injection IFX: per 8 weeks, infusion, done at study visits
         \3 \url{https://www.nice.org.uk/guidance/ta329}
         \3 promote mucosal healing
         \3 Their mechanisms of action on the target pathway \autocite{levin2016MechanismActionAntiTNF}
@@ -55,8 +58,6 @@
         % Furthermore 10-40% of patients fail to respond to 10-12 weeks of therapy (primary non-response - PNR), and a further 23-46% lose response (loss of response – LOR) after 12 months of treatment.
 
 \1 although reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
-    % Genome-wide association studies (GWAS) have proven to be a more successful approach for this objective. To date, eight GWAS on anti-TNF response in RA have been performed (22–29), identifying several loci associated at a genome-wide scale. From these, variation at MED15, GFRA1, PDE3A-SLCO1C1, and CD84 has been replicated in, at least, an independent cohort of patients (30).
-    \2 GWAS studies in RA \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6614444/}
     % Several attempts have been made to define a baseline signature
     % of anti-TNF response in patients with IBD using genetics,7 8
     % microbiome9 and gene expression data.10–13 Yet, no predictive
@@ -158,15 +159,6 @@
 
 \section{Methods}
 
-\subsection{Overall strategy}
-
-% https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
-% Responder analysis is a 4-fold loser. It fails to give the needed clinical
-% interpretation, has poor statistical properties, increases the cost of studies
-% because binary outcomes require significantly higher sample sizes, and raises
-% ethical issues because more patients are required to be randomized than would
-% be needed were the endpoint and analysis to be fully efficient.
-
 \subsection{Study design}
 
 % Visit info from protocol
@@ -221,6 +213,13 @@ For this chapter, samples from scheduled major visits that fall outside the wind
 Samples from additional visits (e.g. scheduled due to \gls{LOR} or early study exit) that fall into major visit windows were also included, as additional visits often replaced major visits for patients with \gls{PNR} or \gls{LOR}.
 % TODO: add figure ref
 
+% TODO: breakdown visit label assignment: how many from exit, lor?
+
+% TODO: Are these sensible window defs: biologically distinct?
+% Loss of response (LOR) will be defined after week 13 by reviewing the following:
+%  Initial response to anti-TNF defined at week 12.
+%  Symptomatic inflammatory IBD activity, which is of sufficient severity and duration to warrant an escalation in steroid, immunomodulatory, or anti-TNF therapy or surgical resection as directed by the patient’s gastroenterologist.
+
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Study_Day_vs_Visit_Label.pdf}
@@ -250,6 +249,15 @@ Samples from additional visits (e.g. scheduled due to \gls{LOR} or early study e
 \1 \gls{PNR} was defined as <...>
 \1 "In the event of loss of response (LOR) an additional LOR visit will be scheduled to occur immediately prior to the next anti-TNF infusion / injection.  Patients will remain in the study if they continue with the same anti-TNF drug, even if LOR or ADRs occur."
 
+\subsection{Available phenotypes}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.ggcorrplot.pdf}
+    \caption{}
+    \label{fig:multipants_pheno_filtered_ggcorrplot}
+\end{figure}
+
 \subsection{RNAseq data generation and quantification}
 
 % From Mark:
@@ -269,18 +277,50 @@ Differences from Salmon
 
 \subsection{RNAseq quality control}
 
-\subsection{\Glsfmtlong{DGE}}
+sample filtering
+Starting from the full resequenced RNAseq dataset from AbbVie (Mar 2020)
+    % 1141 samples
+    % filter out samples
+    % Failed Mark’s RNAseq QC (~200 removed)
+    % grey zone response (10 removed)
+    % missing values for avail phenotypes.
+    840 samples
 
-\subsubsection{Covariate selection}
+gene filtering
+58884 genes
+as in ch 2
+    % filters
+    % >1.25 CPM in >10% (84) samples (15848 left)
+        % 1.25 CPM = 10 counts based on median lib size
+    % >0 in >90% of samples (15645 left)
+        % Count of zero will be dominated by pseudo-count before log transform
+    % globins and short ncRNAs (15592 left)
+        % globins should not be expressed in immune cells
+        % counts in short ncRNAs can be misassignments
+15592 genes
+
+% TODO: any need for plot?
+visualise main factors that influence global gene expression by pca
+
+% TODO: recolor to 1 page
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.prcomp.pdf}
+    \caption{}
+    \label{fig:multipants_dream_prcomp}
+\end{figure}
+
+\subsection{Model selection}
 
 In estimating the effect X\textrightarrow Y, of predictor X on response variable Y by regression, 
 conditioning on a third variable Z can increase, decrease, or even reverse the effect estimate.
-The regression model does not statistically distinguish what causal role Z may play,
+The regression model is agnostic to what causal role Z may play,
 but different types of third variable can be distinguished conceptually.
 % TODO
 % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819361/}
 % \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2254615/}
 In this section, I focus on identifying third variables that are covariates:
+% TODO: note this is the formal def of covariate
 where Z is correlated with Y and explains some variation in Y,
 and conditioning on Z increases the efficiency of estimating X \textrightarrow Y.
 Here, the predictors in question are primary response status, drug, and study visit; and the response variable is gene expression.
@@ -292,6 +332,7 @@ Many phenotypes and technical variables are available as potential covariates in
 These include proportions of six common cell types in whole blood, 
 estimated using the Houseman method (\software{minfi::estimateCellCounts} \url{https://academic.oup.com/bioinformatics/article/30/10/1363/267584}) 
 from whole blood Illumina MethylationEPIC data also collected for the same patients and timepoints.
+% TODO: 1 sentence on houseman method
 
 \begin{figure}
     \centering
@@ -302,6 +343,7 @@ from whole blood Illumina MethylationEPIC data also collected for the same patie
 
 A variance components analysis was conducted to identify variables that explain large fractions of variation in expression
 using \software{variancePartition}\autocite{hoffman2016VariancePartitionInterpretingDrivers}, which fits a mixed regression model.
+% TODO covariates chosen here are used in all genewise models, we need a unified set.
 Variables in \autoref{fig:multipants_pheno_corrplot} were included as predictors.
 Additional categorical variables were included for patient, \gls{RNAseq} plate, and library prep protocol version.
 An additional continuous variable consisting of random numbers drawn from the standard normal distribution was also included as a null.
@@ -321,8 +363,6 @@ indicating their importance for specific genes only, such as genes with sex-spec
     \2 choice: penalty is 1 df, so include some of these low median, high max variables as covariates.
     \2 so basically select all, except Gran, and ever immunomod
 
-Note covariates chosen here are used in all genewise models.
-
 \1 If covariates are also associated with the predictor X, issues can arise depending on their causal role.
 In general,
 conditioning on a confounder (X \textleftarrow Z \textrightarrow Y) reduces bias,
@@ -333,6 +373,7 @@ and conditioning on a mediator (X \textrightarrow Z \textrightarrow Y) changes t
     \todo{don't know if it matters if there are colliders among covariates, since we can't estimate any causal effects in DGE due to lack of a control group}
 
 % reasons to keep in cell count covariates
+% - lots of var explained, this is expected as they change a lot over time
 % - for genes where they are covariates, ok to keep
 % - should rarely be a collider, as in most genes, E -> CC is unlikely vs CC -> E
 % - in the case of mediation, PNR -> CC -> R
@@ -340,19 +381,32 @@ and conditioning on a mediator (X \textrightarrow Z \textrightarrow Y) changes t
 %     - estimate will no longer be total effect, but a null-biased effect
 %         - it is the case that far fewer DGE were identified when cc were included
 % - it's already popular for diff meth, and in DGE, can increase robustness \url{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1878-x}
+% note that interpretation will be an adjusted one for cell count models
 
-\todo{because this is non-randomised, baseline differences do matter}
-% - pull in baseline from kennedy2019PredictorsAntiTNFTreatment
-% Univariable analyses showed the strongest associations
-% with primary non-response to infliximab and
-% adalimumab were with week 14 drug and anti-drug
-% antibody concentrations (table 3; appendix p 17). Primary
-% non-response to infliximab was also associated with
-% older age at first dose, smoking at baseline, non-use of an
-% immunomodulator at baseline, lower baseline albumin
-% concentrations, and higher baseline white cell count.
-% Primary non-response to adalimumab was associated
-% with a higher body-mass index at baseline.
+% TODO: need appropriate anova for each cell prop over time for p values
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.cell_type_proportion_vs_Study_Day.pdf}
+    \caption{}
+    \label{fig:multipants_cell_type_proportion_vs_Study_Day}
+\end{figure}
+
+baseline diffs are evident in clinical data
+    \todo{because this is non-randomised, baseline differences do matter}
+    % - pull in baseline from kennedy2019PredictorsAntiTNFTreatment
+% “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).”
+% Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
+    % Univariable analyses showed the strongest associations
+    % with primary non-response to infliximab and
+    % adalimumab were with week 14 drug and anti-drug
+    % antibody concentrations (table 3; appendix p 17). Primary
+    % non-response to infliximab was also associated with
+    % older age at first dose, smoking at baseline, non-use of an
+    % immunomodulator at baseline, lower baseline albumin
+    % concentrations, and higher baseline white cell count.
+    % Primary non-response to adalimumab was associated
+    % with a higher body-mass index at baseline.
+we make sure relevant ones from paper are in the model
 
 % Sex
 % Age
@@ -370,13 +424,34 @@ and conditioning on a mediator (X \textrightarrow Z \textrightarrow Y) changes t
     \label{fig:multipants_varPart}
 \end{figure}
 
+\subsection{\Glsfmtlong{DGE}}
+
 \subsubsection{Contrasts model}
 
 \software{dream} hoffman2018DreamPowerfulDifferential
 
-8 groups equiv to 3 way interactions
-12 contrasts
+Group-means parametrisation with 8 means
+    no intercept 8 groups equiv param to to 3 way interactions
+    no intercept, so each coef is a mean
+so can use contrasts
 % dream.plotContrasts.pdf
+
+% TODO: add model equations here
+% i think not the same as no interaction model, as pooled is not mean of two means
+% similar to problem in ch2
+% The grand mean or pooled mean is the mean of the means of several subsamples, as long as the subsamples have the same number of data points.
+3 models
+
+first, R x time interaction at w0 and w14
+is there a diff in the diff between R vs NR between drugs?
+e.g. alex thesis and paper on how there is immunogenic diff
+    % Immunogenicity is more common in patients treated with infliximab (a murine-human
+    % chimeric monoclonal antibody) than adalimumab (a fully human monoclonal antibody)
+    % and is a major cause of low anti-TNF drug level, infusion reactions, and non-remission in
+    % patients with Crohn’s disease [96, 184].
+% TODO:, so how robust? 
+% https://statmodeling.stat.columbia.edu/2018/03/15/need-16-times-sample-size-estimate-interaction-estimate-main-effect/
+% And this implies a major, major problem with the usual plan of designing a study with a focus on the main effect, maybe even preregistering, and then looking to see what shows up in the interactions.
 
 But for dream, 
 REML is TRUE, so use fixed for small numbers of levels
@@ -414,18 +489,20 @@ TODO check What is a basis i.e. what is in the design matrix?
 cubic or linear between knots?
 Not sure if time is ok as continuous. Knots are approximate
 
-\subsection{GSE}
+cluster
+    Centroids by simple mean
+    by in large,
+    not much additional by spline vs known
+    indicaates main patterns are sustained patterns post w14
+
+\subsection{GSE tmod}
 
 camera is dev to use mod t, but in practice ranks are comparable between t and z.std, even though dream says otherwise
 % https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html#dream-analysis
+% TODO: add spearman rank corr
 
-\subsection{pred}
-
-Sparse partial least squares regression for simultaneous dimension reduction and variable selection
-% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2810828/
-
- Sparse Partial Least Squares Classification for High Dimensional Data 
-% https://pubmed.ncbi.nlm.nih.gov/20361856/
+Genes are ranked by their test statistics.
+>8k genes in the gene set annotation
 
 \subsection{Genotype data preprocessing}
 
@@ -469,29 +546,54 @@ although it may seem possible to have duplicate individuals
 
 \subsubsection{PCA}
 
-% FlashPCA2
 akt
+    just cases used. do not use in sample PCs?
+    % TODO: read
+        % Efficient toolkit implementing best practices for
+        % principal component analysis of population
+        % genetic data
+    % would use FlashPCA2 if wanted to do myself e.g. between chip batches
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/pants_samples.sampleids_cleaned_to_lowercase.filtered.GRCh38.sorted.multiPANTS.projection_1000G_pca.pdf}
+    \caption{}
+    \label{fig:multipants_genotype_akt_1000g_pca}
+\end{figure}
 
 choose 5
     less pop structure than HIRD
     number of signif tracy does not dep on our sample, but on the ref pop 
     no consensus on method anyway
 
-    not sensitive
+    not sensitive to n
     % This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
     % We see that in each SNP category, results are virtually identical for K = 1, 2, 5 or 10.
     % https://www.nature.com/articles/ng1847
 
-\subsection{reQTL}
+
+\subsection{AKT}
+
+batch effects
+    e.g. chip
 
 \subsubsection{PEER}
 
 DESeq2 vst
 betwen sample norm e.g. sequencing depth 
 
-\subsubsection{LDAK}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/count_eGenes.signif_eGenes_vs_PEER_n.dataset_multiPANTS.chr_1.pdf}
+    \caption{}
+    \label{fig:multipants_reqtl_PEER_k_choice}
+\end{figure}
 
-\subsubsection{eqtl model}
+\subsection{LDAK}
+
+\subsection{reqtl model}
+
+again, using interaction with time assumes linearity
 
 % gutierrez-arcelus2020AllelespecificExpressionChanges
 
@@ -507,41 +609,181 @@ ANCOVA vs repeated measures vs mixed model
 Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
 First need to eQTL scan in general with mashr and find the snps in the most reQTLish genes, since this modelling is probably expensive
 
+\subsubsection{limix model}
+
 AC thresh 15
 further filter
-avoid small numbers minor hom leads to data points 
-potential to have high influence on the beta
+avoid small numbers minor hom 
+without sufficient numbers, leads to data points with high leverage
+that may be unduely influential on the beta
 
-    despite mashr
+    despite mashr migitation by shrinkage? is it sufficient?
     when the whole point is calling signif changes in beta
 
+5 min filter
+    gated by lowest n, but 15 to 25 MAF diff only
+
 breaking ties by highest imputation INFO, highest \gls{MAF}, shortest dist to \gls{TSS}, and genomic coordinate.
+
+\subsubsection{mashr}
+
+\subsection{clustering reqtls}
+
+% TODO
+% Clustering time-course Microarray data using functional Bayesian innite mixture model
+% clustering folder in downloads
+% https://2-bitbio.com/2017/04/clustering-rnaseq-data-making-heatmaps.html
+% https://hbctraining.github.io/DGE_workshop/lessons/08_DGE_LRT.html
+
+data
+•	Expression of 15000 genes in blood
+•	In 4 conditions
+•	eQTL betas, units of log expression per alt allele
+o	range roughly -2.5 to 2.5
+
+aims
+•	within gene: detection of reQTL with varying effect sizes 
+•	between gene: ranking genes by strength of reQTL
+
+prefiltering
+•	e.g. pairwise tests between conditions
+
+Centering /scaling
+•	comparability between gene
+•	Amplifies noise? Migitate by prefiltering
+
+alg
+•	Hierarchical
+% https://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
+•	E.g. k-means
+
+distance metric
+•	1-cor(pearson)
+
+Number of clusters
+
+•	https://www.rdocumentation.org/packages/NbClust/versions/3.0/topics/NbClust
+o	Possible statistics: the index to be calculated. This should be one of : "kl", "ch", "hartigan", "ccc", "scott", "marriot", "trcovw", "tracew", "friedman", "rubin", "cindex", "db", "silhouette", "duda", "pseudot2", "beale", "ratkowsky", "ball", "ptbiserial", "gap", "frey", "mcclain", "gamma", "gplus", "tau", "dunn", "hubert", "sdindex", "dindex", "sdbw", "all" (all indices except GAP, Gamma, Gplus and Tau), "alllong" (all indices with Gap, Gamma, Gplus and Tau included).
 
 \section{Results}
 
 \subsection{DGE}
 
-% dream.gene_expr_filtered_vobj_fit_dge_1_decideTests.csv
-not much DGE R vs NR at baseline
-PDIA5, IGKV1-9, KCNN3 ADA only
-Top ADA genes are full of IG segments, not so for IFX
-Not sure which of the baseline diffs are relevant, not sure what informs the choice of ada vs ifx
-some DGE R vs NR at w14
-downregulated in R: immune activation, TLR and inflammatory signalling
-% dream.gene_expr_filtered_vobj_fit_dge_1.topTable_C_3RI_1RI.gene_set_enrichment.tmodCERNOtest_result_LI_ascending.csv
-e.g. CD177
-lots of DGE baseline -> w14
-more so for R than NR
-more so for IFX than ADA
-consistent with Abbvie
-Not much diff between drugs
-TODO: Add contrasts with drugs combined?
-i.e. if theres no interaction, drop it
-TODO: prettify GSE
+Are there differences in peripheral blood gene expression in PANTS cohort CD patients between PR and PNR to anti-TNF treatment
+    at week 0 (baseline visit)?
+    at week 14 (primary response visit)?
+    in trajectory over time (over first 2, or all 4 visits)?
 
-% dream.gene_expr_filtered_vobj_fit_dge_2_decideTests.csv
-306 signif
-Not sure how much intersect with w14 pairwise
+first test is interaction, to see if drugs can be pooled
+    gene wise no hits, 
+    but setwise , hits
+    so we proceed with 3 models
+
+% TODO: put in table with all decide test stats
+
+%     https://rdrr.io/bioc/limma/man/decideTests.html
+% The default method="separate" and adjust.method="BH" settings are appropriate for most analyses. method="global" is useful when it is important that the same t-statistic cutoff should correspond to statistical significance for all the contrasts.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_C_(1RI_1NI)_(1RA_1NA),C_(3RI_3NI)_(3RA_3NA).pdf}
+    \caption{}
+    \label{fig:multipants_dge_tmodCERNO_panelplot_weekxdrug_interaction}
+\end{figure}
+
+week 0 R vs NR
+    not much DGE R vs NR at baseline
+    SIGLEC10 and other pooled 
+    PDIA5, IGKV1-9, KCNN3 ADA only
+
+    % https://www.nature.com/articles/mi201614?draft=collection
+    % “Siglecs (sialic acid-binding immunoglobulin-like lectins) are members of the Ig superfamily that bind with CD24 and selectively repress DAMP-mediated inflammation, possibly via phosphatases acting on PRRs.124”
+% “The TREM-1 (triggering receptor expressed on myeloid cells 1) is an immunoglobulin present on monocytes and neutrophils that upregulates DAMP–PRR-mediated signaling.120[…] In contrast to the upregulating effects of TREM-1, CD24-Siglec signaling (Siglec-G in mice; Siglec-10 in humans) has been shown to suppress DAMP-related but not PAMP-related inflammation.123”
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.volcano_C_1R_1N,C_1RI_1NI,C_1RA_1NA.pdf}
+    \caption{}
+    \label{fig:multipants_dge_volcano_week_0}
+\end{figure}
+
+week 14 R vs NR
+    Top ADA genes are full of IG segments, not so for IFX
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.volcano_C_3R_3N,C_3RI_3NI,C_3RA_3NA.pdf}
+    \caption{}
+    \label{fig:multipants_dge_volcano_week_14}
+\end{figure}
+
+week 0 vs week 14
+
+    More DGE w0 -> w14 for R
+    Mainly magnifying effects, less dampening, some flips
+
+\subsection{spline}
+
+Finally, spline model as a formal way to test general differences between PR and PNR over time.
+spline to consider more timepoints instead of every pairwise R vs NR comp 
+
+interactions not tried
+    spline sensitive to data splitting?
+
+% TODO: Venn
+X hits in spline that are not signif w0 RvsNR, w14 RvsNR, or w14xR interaction
+
+f-test
+% is a wald test
+% https://support.bioconductor.org/p/6124/
+% The above mentioned statistics are computed for every contrast for each gene. The eBayes() function computes one more useful statistic. The moderated F-statistic (F) combines the t-statistics for all the contrasts for each gene into an overall test of significance for that gene. The moderated F-statistic tests whether any of the contrasts are non-zero for that gene, i.e., whether that gene is differentially expressed on any contrast. The moderated-F has numerator degrees of freedom equal to the number of contrasts and denominator degrees of freedom the same as the moderated-t. Its p-value is stored as fit$F.p.value. It is similar to the ordinary F-statistic from analysis of variance except that the denominator mean squares are moderated across genes.
+
+\subsection{Replication known}
+
+% OSM and OSMR
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5420447/
+
+% GIMATS
+% https://www.cell.com/cell/pdf/S0092-8674(19)30896-7.pdf
+
+TREM1 mentioned here is also of interest.
+Previously blood expression found to be a predictor, where it was downregulated in responders.
+
+In our data, strongest effect in IFX only analysis, but it’s not significant at FDR 0.05 either with or without cell prop.
+Direction of effect is upregulated in PR.
+
+Spoke to Bram over email, covariates and endoscopic endpoints for his study are different.
+% Response was defined as endoscopic remission (SES-CD ≤ 2 at week 24 for CD and Mayo endoscopic sub-score ≤ 1 at week 10 for UC).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000124731.SYMBOL_TREM1.pdf}
+    \caption{this is normalised, not residual}
+    \label{fig:multipants_dge_TREM1}
+\end{figure}
+
+\subsection{reqtls}
+
+%10007/15040 (66.5%) eGenes in at least 1 timepoint (mashr lfsr < 0.05)
+
+% TODO: u curve
+
+signif diff effects
+% TODO: 0 vs 30 and 0 vs 54
+
+% TODO: table with 6 hit stats
+
+\subsection{reqtl clusters}
+
+% TODO: cluster optimisation
+
+% TODO: cluster parcoord
+
+% TODO: top hit plot
+
+% TODO: GSEA on cluster 
+
+% TODO: plot adcy3 cluster (mention adcy3)
 
 \section{Discussion}
 
@@ -580,10 +822,74 @@ PNR definition
 Utility of the other timepoints:
     mainly seems to be maintained
 
+% Not used but avail as a covariate;w
+%     Drug_Level not considered as a covariate, but Mark did: A lot more missingness, which would drop the sample size even further
+%     Also: may not be comparable between drugs even if scaled, as dosing pattern diff, spiker for one drug
+%     TODO: good proxy for time since dose?
 Try predict drug conc?
     % Nick’s paper shows w14 drug conc is associated with PNR and remission
     % dream.pheno_df_filtered_Drug_Level_vs_Study_Day.pdf
     % About 229/329 have w14 drug conc
 
+cell count covs corrected, but doesn't mean that's enough
+% https://www.biorxiv.org/content/10.1101/2020.05.28.120600v1
+
+    still cant Separate out effect of cell count (e.g. recruitment vs stimulation)
+    without interaction models like in ch3
+
+drug level measured on or near the same study day
+    a proxy for time since last dose?
+    would have to be sep drug models?
+        due to diff dose?
+
+    more missingness, overall 319/840 missing corresponding drug levels, cuts n considerably
+
+    % Each visit was scheduled just immediately prior to the next dose of either infliximab or adalimumab and so it should be a trough level.
+    % Ie. Infliximab is given as an IV every 8 weeks.  So last dose of infliximab should be 8 weeks prior to the visit
+    % Adalimumab is given every 2 weeks. So last dose of adalimumab is 2 weeks prior.
+    % The visits are definitely timed just prior to when patient would be receiving drug as the study was designed such that we capture patients at the point of drug infusion so they would not have to come to hospital for an unnecessary visit.
+
+    % furthermore, cannot pool here even if scaled
+    % distributions of drug level vary between drugs
+    % even after scaling, 0 may not have same interp
+    % http://www.statlit.org/pdf/2013-Knapp-To-pool-or-not-to-pool.pdf "7.  Pooling "scores" on different variables "
+        % needs patient who theoritially got both drugs to solve this equiv
+
+winner's curse caused by combo of low power and a signif threshold?
+% http://www.stat.columbia.edu/~gelman/communication/Button2013.pdf
+
+vs ch3 , less strong reqtls
+
+known biomarkers
+    TREM1 mainly a surrogate for monocyte levels?
+    gut not blood
+
+counting lor as main visit
+
+attrition or loss to followup bias
+    % https://pubmed.ncbi.nlm.nih.gov/22611167/
+
+    % https://stats.stackexchange.com/questions/354279/can-a-linear-mixed-model-handle-missing-data-that-is-not-missing-at-random
+    % As you say, linear mixed-effects (LME) models are assuming that any missing data are missing at random (MAR). A way to account for suspected violations of the MAR assumption of LME models is to use joint models. Under this framework, the longitudinal response and the survival probability are associated by jointly estimating a single likelihood function. Using a joint model, you can get an estimate of how much a possible difference in survival is affecting the longitudinal response and how much the fluctuations in the longitudinal response are associated with survival.
+
+    % https://sphweb.bumc.bu.edu/otlt/MPH-Modules/EP/EP713_Bias/EP713_Bias3.html
+    % As noted above, the enrollment of subjects will not bias a prospective cohort study, because the outcome has not yet occurred. Therefore, choice cannot be related to both exposure status and outcome status. However, retention of subjects may be differentially related to exposure and outcome, and this has a similar effect that can bias the results, causing either an overestimate or an underestimate of an association.
+    % Again, depending on which category is underreported as a result of differential loss to follow-up, either an underestimate or overestimate of effect (association) can occur.
+
+    likely direction is conservative?
+
+prediction
+    R/NR ~ expression
+
+pros and cons
+    prospective
+
+    uncontrolled
+
+    cohort study
+
+validate using serological data
+
+problems with connection between dge and reqtl, as in prev ch
 
 \end{outline}
