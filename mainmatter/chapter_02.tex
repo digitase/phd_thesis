@@ -99,6 +99,8 @@ The overall pattern of expression over time from my meta-analysis agrees with th
 From existing \gls{HAI} and \gls{MN} data, I compute a baseline-adjusted, continuous measure of antibody response to vaccination, the \gls{TRI}\autocite{bucasas2011EarlyPatternsGene}.
 Effect sizes of genes with expression that correlated with \gls{TRI} were very dependent on measurement platform (array or \gls{RNAseq}), and no robust hits were detected in the meta-analysis.
 Leveraging the greater power that rank-based gene set enrichment analyses affords, I find modules of coexpressed genes that correlate with antibody response, with the strongest effects observed for adaptive immune modules at day 7, but also in inflammatory modules at baseline.
+% TODO: The power of a binary hypothesis test is the probability that the test rejects the null hypothesis ( H 0 {\displaystyle H_{0}} H_{0}) when a specific alternative hypothesis ( H 1 {\displaystyle H_{1}} H_{1}) is true. The statistical power ranges from 0 to 1, and as statistical power increases, the probability of making a type II error (wrongly failing to reject the null hypothesis) decreases.
+% TODO: For comparing significance tests, a meaningful measure of efficiency can be defined based on the sample size required for the test to achieve a given task power.[9]
 
 \section{Methods}
 
@@ -186,11 +188,12 @@ Using PLINK (v1.90b3w), genotype data underwent the following quality control pr
 max marker missingness across samples $< 5\%$, 
 max sample missingness across markers $< 1\%$, 
 max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \autoref{fig:hird_genotype_sample_hetRate_missingness}),
+% TODO: recheck if this is really max marker heterozygosity rate, not sample rate
 % TODO: add discordant sex mismatch to indicate possible sample swaps, distribution of F estimates
 % The HWE threshold should depend on the multi-ethnicity of the cohort
 % \todo{see}
 % https://www.nature.com/articles/nrg2344
-% Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
+% Once armed with a set of called genotypes, the final phase of quality control beckons. Experience has shown that most SNPs showing extreme departures from Hardy–Weinberg equilibrium (HWE) in controls can be safely discarded1, although lesser (but nevertheless quite marked) departures are to be expected under the null hypothesis, given the number of tests performed. Appropriate thresholds for any given study will depend on the sample size and overall data quality, and might best be defined by using the observed distribution of HWE statistics (the WTCCC used this approach to set a threshold at an exact p < 5.7 × 10−7 in controls)1. In any event, HWE is an imprecise tool for quality control purposes. Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
 removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
 % TODO
 % We exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because
@@ -223,6 +226,14 @@ Large-scale population structure explains variation in gene expression \autocite
 Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
 % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0093766
 % TODO: Prior to PCA, thinning of the SNPs by LD and removal of regions with known high LD or other artefacts such as inversions have been recommended [1], [15], as high correlations between the SNPs can distort the resulting eigenvectors.
+% TODO
+% price2006PrincipalComponentsAnalysis supp note
+% Linkage disequilibrium and choice of markers. Genome-wide data sets containing hundreds of thousands of markers are likely to exhibit substantial linkage disequilibrium (LD) between markers, even in the case of markers chosen to optimally tag all variation in the genome. Thus,
+% Page 6inferring population structure from the set of all markers has two potential problems. The first problem is that, due to varying levels of LD, some regions will have more redundant markers than others and will thus be overrepresented. The second problem is that strong LD at a given locus which affects many markers could result in an axis of variation which corresponds to genetic variation specifically at that locus, rather than to genome-wide ancestry. Nonetheless, we recommend inferring population structure using all markers. This recommendation is based on an analysis of HapMap8 data which suggests that these potential problems will not affect results in practice, even on a data set with over 3 million markers
+% TODO: why exclude long range/prune
+% https://www.nature.com/articles/ejhg201348
+% Very strong and/or long-range LD at a particular locus can even result in PCs that only reflect genetic variation at that specific locus.6, 7
+% We thus conclude that both excluding long-range LD regions and LD pruning are necessary when studying a relatively small population, which may consist of overlapping subpopulations.
 \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
 % TODO: this vs in-sample pca
 % TODO http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf % If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
@@ -889,6 +900,8 @@ Hence, it is particularly important that the robustness of these observed baseli
 % Sobolev sampled in March 2010 to August 2011
 % \2 Later cohorts may have recall response to H1N1 from seasonal vaccination
 
+% TODO: compare to seasonal
+
 % - Overall conclusions.
 In conclusion, Chapter 2 characterises the expansive changes in \gls{PBMC} gene expression that follow vaccination with Pandemrix.
 The dominant trend for all individuals is transient upregulation of the innate immune response at day 1, transitioning into adaptive immunity by day 7.
@@ -897,8 +910,9 @@ Unfortunately, between-platform variation in expression impedes identification o
 The fundamental question of why gene expression and antibody responses vary between \gls{HIRD} individuals remains.
 Chapter 3 will examine one hypothesis: the impact of common human genetic variation on Pandemrix expression response.
 % TODO: ch4 also corrects for cell props
-\todo{At no point in this chapter are we estimating causal effects}
+\todo{At no point in this chapter are we estimating causal effects: add point on why not CIT (lower n than franco)}
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
 
 % TODO: not adjusted for cell comp, but not necc bad
 
+% TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed

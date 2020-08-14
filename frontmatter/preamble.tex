@@ -52,14 +52,6 @@
 %
 \usepackage{siunitx}
 \sisetup{round-mode=figures, round-precision=3}
-%
-% Define percentage formatting
-% https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
-\newcommand\percentage[2][round-precision = 1]{% default precision: 2
-    \SI[round-mode = places,
-        scientific-notation = fixed, fixed-exponent = 0,
-        output-decimal-marker={.}, #1]{#2e2}{\percent}%
-}
 
 % Define line spacing
 % Setspace switches off double-spacing at places where even the most die-hard
@@ -324,12 +316,25 @@
 \newabbreviation[]{PANTS}{PANTS}{Personalised Anti-TNF Therapy in Crohn's Disease}
 \newabbreviation[]{PNR}{PNR}{primary non-response}
 \newabbreviation[]{LOR}{LOR}{loss of response}
+\newabbreviation[]{IBD}{IBD}{inflammatory bowel disease}
+\newabbreviation[]{CD}{CD}{Crohn's disease}
+\newabbreviation[]{UC}{UC}{ulcerative colitis}
+\newabbreviation[]{IMID}{IMID}{immune-mediated inflammatory disease}
+\newabbreviation[]{anti-TNF}{anti-TNF}{anti-tumour necrosis factor}
 % \newabbreviation[]{}{}{}
 %
 
 %
 % Custom commands
 %
+
+% Format decimals as percentages
+% https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
+\newcommand\percentage[2][round-precision = 1]{% default precision
+    \SI[round-mode = places,
+        scientific-notation = fixed, fixed-exponent = 0,
+        output-decimal-marker={.}, #1]{#2e2}{\percent}%
+}
 
 % Format software package names
 \newcommand{\software}[1]{\texttt{#1}}

@@ -24,7 +24,7 @@
 %
 \documentclass[
     11pt,
-	draft,
+	% draft,
     % final,
     a4paper,twoside,openright
 ]{book}
@@ -61,9 +61,9 @@
 % outputs of all the rest. [...] but it also can't be nested, can't
 % appear in the preamble, and forces page breaks around the included text.
 \include{./frontmatter/title_page}
-\include{./frontmatter/dedication}
-\include{./frontmatter/abstract}
-\include{./frontmatter/acknowledgements}
+% \include{./frontmatter/dedication}
+% \include{./frontmatter/abstract}
+% \include{./frontmatter/acknowledgements}
 \include{./frontmatter/toc}
 %TC:endignore
 
@@ -74,15 +74,15 @@
 % Intro
 \include{./mainmatter/chapter_01} 
 % HIRD transcriptomics
-\include{./mainmatter/chapter_02}
+% \include{./mainmatter/chapter_02}
 % HIRD reQTLs
-\include{./mainmatter/chapter_03}
+% \include{./mainmatter/chapter_03}
 % Vaxcin (DEPRECATED)
 % \include{./mainmatter/DEPRECATED_chapter_04}
 % multiPANTS
 \include{./mainmatter/chapter_04}
 % Discussion
-\include{./mainmatter/chapter_05}
+% \include{./mainmatter/chapter_05}
 
 \appendix
 \include{./mainmatter/appendices}

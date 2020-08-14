@@ -15,52 +15,12 @@ summary of chapters
     A response eqtl is not always a response eqtl
 
     Limitations, and the perfect study.
+        recommendations for design of future studies
 
-suffer from core set of limitations 
-    dichot
-        addressed in ch2
-    bulk data
-        addressed in ch3
-    no statistical integration
-        simple overlap will not work
+    suffer from core set of limitations 
 
-        e.g. other papers that talk about 'integrating'
-        % franco,
-        % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180824
-        % devries2020IntegratingGWASBulk
-
-reQTL on bulk in vivo has huge challenges
-
-    composition explains a huge amount of var in bulk farahbod2020UntanglingEffectsCellular
-
-    some are implicitly accounted for in peer
-        but interactions with geno are not guaranteed to be
-
-    effect is EXARCERBATED by in vivo
-        not just sample var, but active recuitment changes in cell prop e.g. recruitment
-            why should this be considered a con of in vivo?
-
-    unclear what benefit would outweigh this
-
-need to recognise 
-    bulk and sorted eQTL differ in interp
-        and correction using cell prop covariates does not unify them
-
-    also, it's not the same as intervertion to set cell counts e.g. FACS
-
-        control is not intervention
-            % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
-            The difference between intervening on a variable and conditioning on that
-            variable should,hopefully, be obvious. When we intervene on a variable in a
-            model, we fix its value. Wechangethe system, and the values of other variables
-            often change as a result. When we condition on avariable, we change nothing; we
-            merely narrow our focus to the subset of cases in which thevariable takes the
-            value we are interested in. What changes, then, is our perception about
-            theworld, not the world itself.
-
-must no longer be divorced from rigourous statistical theory
-    statistical considerations from small scale studies
-        Two disciplines of statistical genomics : Neither can be neglected
+What is response?
+    why is it so difficult to make reliable response prediction, esp at baseline?
 
     move away from dichotomania
     % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
@@ -68,82 +28,38 @@ must no longer be divorced from rigourous statistical theory
     % interpretation, has poor statistical properties, increases the cost of studies
     % because binary outcomes require significantly higher sample sizes, and raises
     % ethical issues because more patients are required to be randomized than would
-
-            rely of stability of 'responder', something intrinsic
-            % "60% of the time, it works every time"
-                \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
-                senn2016MasteringVariationVariance
-                senn2018StatisticalPitfallsPersonalized
-
-        and to Cost-effectiveness and clinical implementation
-            if you can identify NRs, what are you going to do about it?
-
         in ch 3, used TRI
+            also need the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
         in ch 4, 
+            a very complex phenotype
             May be more powerful to directly with the constituent phenotypes directly (CRP level, HBI score, whether there was escalation in steroid treatment, or exit for treatment failure)
 
             predictive claims
 
-    in chapter 3, i discussed in brief
-        change is not ancova
-        stratified is not interaction
-        yet many studies out there the that use one or the other to answer the same biological reQTL questions
+            also, similar to beyond Abs
+            response has many definitions: subphenotypes that are both positive and negative may be complex traits with different architectures: immunogenicity, primary response, loss of response, remission rate, adverse fx
 
-    also beware the effects of normalisation
+    rely of stability of 'responder', something intrinsic
+        esp in DGE models (more below)
+    "60\% of the time, it works every time"
+        \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
+        senn2016MasteringVariationVariance
+        senn2018StatisticalPitfallsPersonalized
 
-    beware the effects of model misspec
-        missing interaction terms
+        reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
 
-esp when considering replication of reQTL
-    all above must line up
-
-Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
-    % Calculating the sample size required for developing a clinical prediction model
-    two chapters of mine
-        have touched on suggesting to build a predictive model
-    but have always treated the R as indep in DGE
-    kinda strange: response is a organism pheno should be downstream of E
-
-        Is response , the main predictor
-        A property measured at w14
-        Is actually A time invariant property of the individual?
-
-        for modelling convenicnece
-        cant make causal claims anyway
-            without a control, we cannot observe the counterfactual of what if an individual was a non-responder
-
-        correlates of protection
-
-        no error
-            assuming otherwise would stray into the realm of error in variables models
-        
-            we are effectively assuming that R is an intrinsic thing, and is determined without error
-    
-    convert the language e.g. logFC, to prediction e.g. CV error
-
-    % beyond dge
-    % TODO: https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-356
-
-    potential methods
-
-        Sparse partial least squares regression for simultaneous dimension reduction and variable selection
-        % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2810828/
-
-         Sparse Partial Least Squares Classification for High Dimensional Data 
-        % https://pubmed.ncbi.nlm.nih.gov/20361856/
-
-
-    sysvacc: need genetics to move beyond prediction
-
-    gene signatures, rise and fall
-        expression as a biomarker
-
-        rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
-
-        % https://www.annalsofoncology.org/article/S0923-7534(19)36531-7/fulltext
-        Table 1Evidence-based criteria for a prognostic gene signature in the path from the laboratory to clinical practice
+            in ch4: repeated dosing helps guard against this.
+            and n of 1 trials
 
 The design of more longitudinal cohorts in the future
+
+    sample size is the main problem
+        complex traits and disease already moved out of candidate gene era
+        vaccine and drug response traits lagging due to sample size requirements
+
+        prespecify interactions of interest
+
+    need a strong causal anchor: this is going backwards towards gwas, which requires N
 
     more n
         just because n sufficient for eqtl at 1 condition
@@ -170,18 +86,64 @@ The design of more longitudinal cohorts in the future
     as     complex disease genetics moves 
     computation not limits correct stat
 
+what data to get from these trials?
+    reQTL on bulk in vivo has huge challenges
 
-Extending the sample size
+    composition explains a huge amount of var in bulk farahbod2020UntanglingEffectsCellular
 
-    longitudinal studies are smallish
-    e.g. IBD bioresource
-        TWAS: predicted gene expression, then associate with phenotypes
+    can correct, but see 30 for age correction
+        ch3, coarse
+        ch4, even coarser
 
-    will everything be gwas associated as n continues to increase
-    sensitive to the smallest differences in case/control
-    
-    equiavlence testing \url{https://doi.org/10.1177/1948550617697177}
-        but what is really smallest effect size of interest?
+        rarer pops, so can always do more
+        is it ever enough?
+
+    some are implicitly accounted for in peer
+        but interactions with geno are not guaranteed to be
+
+    effect not absent in vitro
+        technology itself is proportional, with norm based on ng input, then random sampling during sequencing
+
+    but effect is certainly EXARCERBATED by in vivo
+        not just sample var, but active recuitment changes in cell prop e.g. recruitment
+            why should this be considered a con of in vivo?
+
+    need to recognise 
+        bulk and sorted eQTL differ in interp
+            and correction using cell prop covariates does not unify them
+
+        also, it's not the same as intervertion to set cell counts e.g. FACS
+
+            control is not intervention
+                % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
+                The difference between intervening on a variable and conditioning on that
+                variable should,hopefully, be obvious. When we intervene on a variable in a
+                model, we fix its value. Wechangethe system, and the values of other variables
+                often change as a result. When we condition on avariable, we change nothing; we
+                merely narrow our focus to the subset of cases in which thevariable takes the
+                value we are interested in. What changes, then, is our perception about
+                theworld, not the world itself.
+
+    unclear what benefit would outweigh this
+        imo, needs consideration for future study design
+
+    must no longer be divorced from rigourous statistical theory
+
+        statistical considerations from small scale studies
+            Two disciplines of statistical genomics : Neither can be neglected
+
+            in chapter 3, i discussed in brief
+                change is not ancova
+                stratified is not interaction
+                yet many studies out there the that use one or the other to answer the same biological reQTL questions
+
+        beware the effects of normalisation
+
+        beware the effects of model misspec
+            missing interaction terms
+
+        esp when considering replication of reQTL
+            all above must line up
 
 as more n, allows
 Finer and finer context
@@ -238,9 +200,6 @@ more phenotypes
         
         disease specific biobanks e.g. ibd bioresource/predicct
 
-    vaccines:
-        the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
-
     % Our GWASfor 54 functionally relevantphenotypes oftheadaptiveimmune system in 489 healthy individuals identifieseight genome-wide significant associations explain-ing 6%–20% of variance.
     % https://www.cell.com/cell-reports/pdf/S2211-1247(18)31493-1.pdf
 
@@ -248,70 +207,131 @@ more phenotypes
     % https://onlinelibrary.wiley.com/doi/full/10.1111/imm.12195
     PheWAS has the advantage of identifying genetic variants with pleiotropic properties.
 
-Translational directions
-\1 Why care?
+BUT basically, Extending the sample size is key
 
-    \2 polygenic scores, prs: marker for diagnosis
+    longitudinal studies are smallish
 
-    % first
-    % 13. Wray, N.R., Goddard, M.E., and Visscher, P.M. (2007). Prediction
-    % of individual genetic risk to disease from genome-wide
-    % association studies. Genome Res. 17, 1520–1528.
+    but follow very similar trends to complex disease and traits
+        candidate genes identified in small studies
+        GWAS
 
-        \3 use in the clinic
-            % doi: http://dx.doi.org/10.1101/19013086
-            \4 e.g. polygenic background can modify penetrance 
+    be careful not to slice and dice
 
-        \3 but challenges from:
+    take advantage of large resources
+    e.g. biobank
+    e.g. 1000IBD
+    e.g. IBD bioresource
+        TWAS: predicted gene expression, then associate with phenotypes
 
-            \4 ancestry effects
-            % https://twitter.com/skathire/status/1202554709107712001?s=09
-            \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
+finally translation and prediction
+    a diff question althogether
 
-            % Variable prediction accuracy of polygenic scores within an ancestry group
-            % https://elifesciences.org/articles/48376
-            \4 non-ancestry effects
+    and to Cost-effectiveness and clinical implementation
+        if you can identify NRs, what are you going to do about it?
 
-    \2 pathway analysis: "the great hairball gambit"
+        what does it take for a gene expression pred model to be clinically useful?
+            take lessons from cancer
 
-    \2 pathway prs
-        \3 challenge is variant to gene assignment/mapping
-            \4 e.g. restrictions to fine mapped eQTLs
+    Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
+        % Calculating the sample size required for developing a clinical prediction model
+        two chapters of mine
+            have touched on suggesting to build a predictive model
+        but have always treated the R as indep in DGE
+        kinda strange: response is a organism pheno should be downstream of E
 
-    \2 Understand mech. of causal genes: molecular pathogenesis
-    % word mechanism thrown around
-    % Mechanism is important because of possibility for intervention. Here, causal is important
+            Is response , the main predictor
+            A property measured at w14
+            Is actually A time invariant property of the individual?
 
-% \subsection{From target gene to candidate drug}
-%
-% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489
-% Are drug targets with genetic support twice as likely to be approved? Revised
-% estimates of the impact of genetic support for drug mechanisms on the
-% probability of drug approval
-    \2 how to drug a complex disease with no single 'candidate gene'?
-% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
-% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
-% - Do many of these common causal variants e.g. converge to hit on the same pathways?
-% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
+            for modelling convenicnece
+            cant make causal claims anyway
+                without a control, we cannot observe the counterfactual of what if an individual was a non-responder
 
-    % e.g. schizo is usually polygenic, future drug development could benefit from taking a multi-target approach \autocite{visscher201710YearsGWAS}
+            correlates of protection
 
-        \3 e.g. of successful GWAS -> drug target
-            \4 drug targets with genetic support are more likely
+            no error
+                assuming otherwise would stray into the realm of error in variables models
+            
+                we are effectively assuming that R is an intrinsic thing, and is determined without error
+        
+        efron2020PredictionEstimationAttribution
+        prediction is inherently different
+        % For those of uswho have struggled to find “significant” genes in
+        % a microarray study,8 the almost perfect prostate cancer predictions
+        % of randomforests and gbmhave to come as a disconcerting
+        % surprise.
+            prediction may still be possible even with little significant single gene diffs
 
-        \3 building allelic series
+            is the gene by gene approach good for pred?
+        
+        need to repeat DGE within folds
+            no guarantee that top DGE will be top predictors
 
-sample size
-    complex traits and disease already moved out of candidate gene era
-    vaccine and drug response traits lagging due to sample size requirements
+        need to convert the language e.g. logFC, to prediction e.g. CV error
+
+        cell props not ideal for prediction?
+            gaujoux2019CellcentredMetaanalysisReveals: "These results suggest that the predictive power of reported gene signatures is largely based on cell subset proportion differences, whose increase in colon biopsies of non-responders may serve for predictive purposes."
+
+        % beyond dge
+        % TODO: https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-356
+
+        potential methods
+
+            Sparse partial least squares regression for simultaneous dimension reduction and variable selection
+            % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2810828/
+
+             Sparse Partial Least Squares Classification for High Dimensional Data 
+            % https://pubmed.ncbi.nlm.nih.gov/20361856/
+
+        sysvacc: need genetics to move beyond prediction
+
+        gene signatures, rise and fall
+            expression as a biomarker
+
+            rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
+
+            % https://www.annalsofoncology.org/article/S0923-7534(19)36531-7/fulltext
+            Table 1Evidence-based criteria for a prognostic gene signature in the path from the laboratory to clinical practice
+
+the missing link needed for causality
+
+    avoid "low input, high throughput, no output"
+
+    no statistical integration
+        problems with connection between dge and reqtl, as in prev ch
+
+        simple overlap will not work
+
+            e.g. other papers that talk about 'integrating' recognise this
+            % franco,
+            % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180824
+            % devries2020IntegratingGWASBulk
+
+    need causal inference/MR
+        genetic instruments
+        as demonstrated by e.g. qinqin, use (r)eqtl as genetic instruments
+
+        without causality no 'mechanism'
+
+        % TODO
+        % https://onlinelibrary.wiley.com/doi/full/10.1002/gepi.22061
+        % The CIT is specifically designed to test whether a variablemediates the association between (and is the only causal linkbetween) a genetic locus and a quantitative trait. It is moreflexible than MR because it does not assume that the geneticvariant is chosen specifically to be an instrument for the medi-ator. Due to the way the test is constructed, the CIT is alsoimmune to problems of pleiotropy and reverse confounding.
+            not tried in ch2 due to low power, power not evaluated for ch4
+
+        e.g. sigeclec10
+        we have eqtls for it, but a bad idea since indep
+
+        Causal Inference Test for a Binary Outcome
 
 unification
+    triangulation
     immunology and vaccine dev: deep phenotyping, small cohorts achieved -> larger cohorts
     human genetics and gwas: large cohorts achieved -> deeper phenotyping
 
     more intermediates:
-        The proteome
+        The proteome: disconnect between regulatory layers
         % https://pubmed.ncbi.nlm.nih.gov/32709985/
+        % https://www.nature.com/articles/s41576-020-0258-4
         % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
 
     MOFA
@@ -328,7 +348,57 @@ unification
 
     with GWAS of immune phenotypes
 
-    getting at causality
+% \1 Why care?
+%
+%     \2 polygenic scores, prs: marker for diagnosis
+%
+    % first
+    % 13. Wray, N.R., Goddard, M.E., and Visscher, P.M. (2007). Prediction
+    % of individual genetic risk to disease from genome-wide
+    % association studies. Genome Res. 17, 1520–1528.
+%
+%         \3 use in the clinic
+            % doi: http://dx.doi.org/10.1101/19013086
+%             \4 e.g. polygenic background can modify penetrance
+%
+%         \3 but challenges from:
+%
+%             \4 ancestry effects
+            % https://twitter.com/skathire/status/1202554709107712001?s=09
+%             \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
+%
+            % Variable prediction accuracy of polygenic scores within an ancestry group
+            % https://elifesciences.org/articles/48376
+%             \4 non-ancestry effects
+%
+%     \2 pathway analysis: "the great hairball gambit"
+%
+%     \2 pathway prs
+%         \3 challenge is variant to gene assignment/mapping
+%             \4 e.g. restrictions to fine mapped eQTLs
+%
+%     \2 Understand mech. of causal genes: molecular pathogenesis
+    % word mechanism thrown around
+    % Mechanism is important because of possibility for intervention. Here, causal is important
+
+% \subsection{From target gene to candidate drug}
+%
+% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489
+% Are drug targets with genetic support twice as likely to be approved? Revised
+% estimates of the impact of genetic support for drug mechanisms on the
+% probability of drug approval
+    % \2 how to drug a complex disease with no single 'candidate gene'?
+% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
+% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
+% - Do many of these common causal variants e.g. converge to hit on the same pathways?
+% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
+    %
+    % e.g. schizo is usually polygenic, future drug development could benefit from taking a multi-target approach \autocite{visscher201710YearsGWAS}
+    %
+    %     \3 e.g. of successful GWAS -> drug target
+    %         \4 drug targets with genetic support are more likely
+    %
+    %     \3 building allelic series
 
 \end{outline}
 

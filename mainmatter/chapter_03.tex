@@ -100,7 +100,7 @@ This approach has been applied for identification of condition-specific \gls{eQT
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
 it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
 %
-% Step 1: why not change score, why not ANCOVA, why strat and diff?
+% Step 1: why not intra-individual change score, why not ANCOVA, why strat and diff?
 % half a century of debate
 % https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
 % https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
@@ -112,7 +112,7 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % Over all approach is stratified
 %
 % 2 schools of thought. 50 years of debate
-% Change score assigns special status
+% Change score assigns special status, assumes a specific correlation
 % ...
 %
 % Besides not even estimatejng the same effect
@@ -192,6 +192,8 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
 %
 % note intent to use joint modelling later, so as to not lose info and fall into jelly bean problem https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.836601
+
+% TODO: honestly given i used change score in ch2, the biggest motivator is probably practicality e.g. ability to use PEER
 
 %
 % DEPRECATED:
@@ -294,6 +296,7 @@ The \gls{LMM} approach has the advantage of not only modelling large-scale popul
 % TODO although: https://twitter.com/A_A_Zaidi/status/1285578961356034049
 % When structure has a recent origin, PCA or LMMs won't fully correct for stratification if the GRM is derived from common variants as they are older and not very informative about recent demographic history.
 % TODO:
+% We demonstrate that widely used approaches to adjust for population structure, including principal components analysis and mixed modelling with a random effect for a genetic relationship matrix, cannot fully account for the fine-scale geographical confounding in the UK Biobank.
 % fine scale: https://academic.oup.com/hmg/article-abstract/doi/10.1093/hmg/ddaa157/5874041
 
 \subsubsection{Estimation of kinship matrices}
@@ -770,6 +773,7 @@ assuming posterior pairwise covariance of effects is zero $\sigma^2(x, y)$.
 A Wald test \pvalue{} for the difference can be computed, as under the null hypothesis of zero difference, asymptotically $z \sim \mathcal{N}(0, 1)$.
 I use nominal \pvalue{} < 0.05 as a heuristic threshold (like the mashr recommended 2-fold threshold) to define reQTL effects that are strong, rather than a formal measure of significance.
 % TODO: but ideally, define reQTL strength as an ordering, not by thresholding
+% TODO: emph the progression from simple lfsr (e.g. gtex ccqtl, huang2020NeonatalGeneticsGene) -> mashr 2-fold (mashr) -> to want to look at se too
 Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
 \subsection{Replication of eQTLs in a reference dataset}
@@ -787,6 +791,7 @@ As the mega-analysis has a higher eGene rate (\percentage{0.5075166} vs. \percen
 I assume this represents a power advantage from having larger a sample size, rather than technical effects from merging the expression data.
 % \todo{add comment on number of eGenes. the real reason here is prob robustness?}
 \todo{RNAseq does test about 7000 more genes though...}
+% TODO: this approach may overestimate the replication rate as it does not take the direction or magnitude of eQTL effects into account.
 
 \begin{figure}
     \centering
@@ -906,6 +911,8 @@ Gene set enrichment analysis on the eGenes targets for these sets of \glspl{reQT
 Many of the \gls{reQTL} that satisfy this criteria have opposite effects pre- and post-vaccination---as lfsr quantifies uncertainty in the sign of the effect, I do not compare the sign unless the reQTL is also significant at day 0.
 Shared \glspl{eQTL} are enriched close to the \gls{TSS}, whereas \glspl{reQTL} are distributed across the cis- window.
 \todo{the lack of any positional enrichment makes me concerned for false positives? check with ASE?}
+% TODO: another possiblility
+% GARFIELD enrichment analysis21 showed that the cis-eSNPs were enriched in 3′ untranslated regions (UTR), 5′ UTR, and exon regions (Supplementary Fig. 4), consistent with known mechanisms of cis-eQTLs.
 
 %
 % Possible Ranking metrics for ranked enrichments
@@ -1051,6 +1058,9 @@ I account for the direction and magnitude of effect sizes, defining reQTL streng
 Most \gls{eQTL} are shared between conditions and replicate well in GTEx whole blood;
 \percentage{0.1675621} of lead \gls{eQTL} for each eGene were \gls{reQTL} that differed in effect size between timepoints.
 \todo{compare sharing with mashr and ongen2017EstimatingCausalTissues}
+% TODO: mashr is less condition specific inclined
+% huang2020NeonatalGeneticsGene
+% About 10–50% of the condition-specific signals were replicated using a multivariate adaptive shrinkage (mash) model (Supplementary Fig. 3B)20.
 
 % Also see for conditional:
 % https://academic.oup.com/hmg/article/26/8/1444/2970473
@@ -1152,7 +1162,7 @@ At the day 1 \gene{ADCY3} reQTL, the genetic effect can be mainly attributed to 
 % 20 genes from Franco
 % 12/17 DGE replicated
 % 14/17 eGenes replicated, none were reQTL
-\todo{dge is coupled to reqtl, if you do an enrichment of dge+reqtl overlap genes, enrichment is driven by DGE signal}
+\todo{dge is coupled to reqtl, if you do an enrichment of dge+reqtl overlap genes, likely their enrichment is driven by DGE signal}
 
 A pressing question remains: what molecular mechanisms underlie the \gene{ADCY3} \gls{reQTL}, and indeed the remainder of the \glspl{reQTL}?
 Power differences due to condition-specific expression are unlikely to explain a large proportion of reQTLs.
@@ -1204,5 +1214,9 @@ The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix ant
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix will be to leverage external genetic associations to similar phenotypes,
 for example, colocalisation with existing GWAS summary statistics for antibody response to a similar type of adjuvanted, inactivated vaccine.
 
+% TODO: need ASE, not just for validation of the effect, but because eqtl effect size is less than intepretable, and stratified analysis tends to use different adjusted effects per condition.
+
 \todo{add 1 concluding line}
 \todo{Overall I feel like the chapter is too descriptive, and falls short of making biological insights into Pandemrix response. Any additional analyses would hope to address that.}
+
+% TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed

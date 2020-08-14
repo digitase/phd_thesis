@@ -58,16 +58,17 @@ The structure of correlated haplotypes reflects a population's unique evolutiona
 
 \subsection{Principles of genetic association}
 
-\1 Variation in human traits arises from an interplay between genetics and environment.
+\1 Variation in human phenotypic traits arises from an interplay between genetics, environment and pure chance.
 Traits for which genetic variation explains a non-zero fraction of phenotypic variation are heritable.
 Many measurable human traits are heritable and twin studies provide upper bounds on this heritability \url{https://www.nature.com/articles/ng.3285}.
 Discovering the specific genetic variants that contribute to heritability, through association of variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to some back-door path effects such as reverse causality, which permeate observational studies of the causes of human phenotypes.
+Genetic association studies have intrinsic resistance to certain types of back-door path effects such as reverse causality, which permeate observational studies of the causes of human phenotypes.
 % TODO: https://twitter.com/GENES_PK/status/1283736619133149185
 \todo{add something sweeping about utility here or elsewhere: e.g. insights into trait biology and clinical translational potential for disease traits, genetically support drug target identification}
 
 \1 Under the central dogma, information flows from gene to RNA to protein to phenotype via transcription and translation, 
+% TODO: mechs not explicity mentioned, PTMs, epigenetic reg, Reverse transcription, RNA editing, predom flow of info holds.
 thus it is assumed that genetic variants at loci in the genome affect phenotype by impacting on the function or regulation of target genes.
 How genetic variation contributes to any heritable trait defines it's genetic architecture: the number of genes affecting that trait; along with the allele frequencies, effect sizes, and interactions of trait-associated variants \autocite{visscher2019Fisher1918Paper}.
 The number of genes defines a spectrum of traits from monogenic (where inheritance follows simple Mendelian patterns) to polygenic (where inheritance is complex).
@@ -89,6 +90,7 @@ and pleiotropy is widespread \autocite{visscher2012FiveYearsGWAS}.
 Sample sizes in the millions are increasingly commonplace, 
 % e.g. https://www.nature.com/articles/s41588-020-0637-y
 and discovery of new associations with increasing sample size shows no sign of plateauing \autocite{tam2019BenefitsLimitationsGenomewide}.
+    \2 These new associations have ever smaller effect sizes \url{https://www.pnas.org/content/early/2020/07/30/2005634117#F1}.
 It is now appreciated that most heritable organism-level phenotypes are complex, and have remarkable polygenicity, with many hundreds or thousands of associated loci.
 % TODO: any more takehomes from: \autocite{gallagher2018PostGWASEraAssociation,tam2019BenefitsLimitationsGenomewide}
 % TODO recent omnigenic models liu et al 2019: every gene expressed in relevant tissues has non zero effect due to reg networks (mostly indirect through other genes)
@@ -216,6 +218,7 @@ it may not be obvious how to find the target genes through which that variant af
 % Benchmarking analyses revealed that 69% of the causal candidates were nearest to the sentinel variant at the investigated molecular QTLs, indicating that genomic proximity is the most reliable indicator of ‘true positive’ causal genes. In contrast, cis-gene expression QTL data led to three false positive candidate causal gene assignments for every one true positive assignment.
 
 % TODO: read cano-gamez2020GWASFunctionUsing
+% \1 The central dogma represents part of a larger hierarchy by which genetic information is transmitted into whole-organism phenotypes.
 \1 Rather than directly impacting the coding sequence of a gene, 
 many non-coding GWAS loci are thought to affect traits by affecting the regulation of target gene expression \autocite{gallagher2018PostGWASEraAssociation}.
 \gls{GWAS} loci are enriched in regulatory elements annotated by functional genomics studies, such as
@@ -227,17 +230,18 @@ many non-coding GWAS loci are thought to affect traits by affecting the regulati
     % ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel DNA sequencing to identify the binding sites of DNA-associated proteins.
     histone binding sites, 
     \gls{TF} binding motifs,
-    and enhancers \autocite{trynka2015DisentanglingEffectsColocalizing,gallagher2018PostGWASEraAssociation} \url{https://genome.cshlp.org/content/22/9/1748.full}.
-% \2 These regulatory elements not only have \textit{cis}, but also \textit{trans} regulatory effects on gene expression.
-\2 For complex diseases, enrichment is observed in disease-relevant tissues \autocite{visscher201710YearsGWAS}.
-\2 These enrichments put forth expression as an important molecular phenotype linking non-coding \gls{GWAS} variants to their associated traits (\autoref{fig:intro_sysBio}).
+    and enhancers \autocite{trynka2015DisentanglingEffectsColocalizing,gallagher2018PostGWASEraAssociation} \url{https://genome.cshlp.org/content/22/9/1748.full} \url{https://www.nature.com/articles/s41586-020-2559-3}.
+\2 For complex diseases, genomic enrichment of GWAS loci within regulatory elements are observed in disease-relevant tissues \autocite{visscher201710YearsGWAS}.
+\2 These enrichments put forth expression as an important intermediate linking non-coding \gls{GWAS} variants to their associated traits (\autoref{fig:intro_sysBio}).
+% TODO: distinguish endophenotypes
+% Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
 \subsection{Expression is a complex trait}
 
 % \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
 % \1 <basics of eQTLs> \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}
 \1 Studies of the genetic architecture of expression have further reinforced this hypothesis.
-    \2 Molecular phenotypes like expression are heritable complex traits \autocite{gaffney2013GlobalPropertiesFunctional}
+    \2 Expression in itself, is a molecular phenotype that is heritable and complex \autocite{gaffney2013GlobalPropertiesFunctional}
     \2 Expression can be assayed by e.g. array or RNAseq
     \2 The variants associated with expression are called \glspl{eQTL}.
     % \2 The per-variant effect sizes on molecular phenotypes can be large \autocite{visscher201710YearsGWAS}.
@@ -323,7 +327,7 @@ to help untangle the multiplex of possible causal pathways from variant to trait
     \label{fig:intro_sysBio}
 \end{figure}
 
-\subsection{Genetic effects on expression: environment is key}
+\subsection{Context is key}
 
 \1 The effects of \glspl{eQTL} (and molecular \glspl{QTL} in general) are incredibly context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
     \2 This represents genotype-environment interactions at those eQTL.
@@ -347,7 +351,7 @@ to help untangle the multiplex of possible causal pathways from variant to trait
     \2 \autocite{ackermann2013ImpactNaturalGenetic}: defines static, conditional, dynamic eQTLs
     \2 \textcite{fu2012UnravelingRegulatoryMechanisms}: proposes TF-based mechanisms for cis-eQTL (here, define mag, damp, flip) (\autoref{fig:intro_reQTLmechs})
     \2 \textcite{gaffney2013GlobalPropertiesFunctional,rotival2019CharacterisingGeneticBasis}: suggests info on more regulatory layers will help break down transcriptional and post-transcriptional
-        \3 also, priming
+        % \3 also, priming
 
 \begin{figure}
     \centering
@@ -409,8 +413,8 @@ and amenable to separation (e.g. FACS) and stimulation.
         \3 ability to get whole organism phenotypes
         \3 ability to get repeated measures: can reason about change in expression over time
     \2 Major disadvantages: 
-        the choice of stimulation must be ethical \textit{in vivo}, 
-        and many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be controlled, leading to greater experimental noise (?), and more complex interpretations.
+        \3 the choice of stimulation must be ethical \textit{in vivo}, 
+        \3 and many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be controlled, leading to greater experimental noise (?), and more complex interpretations.
 
     \2 There are few published \textit{in vivo} \gls{reQTL} studies.
         \3 \autocite{franco2013IntegrativeGenomicAnalysis}: seasonal \gls{TIV}, whole blood, antigen processing and intracellular trafficking genes, attempted mediation for Ab titres, but concluded they were underpowered
@@ -419,45 +423,58 @@ and amenable to separation (e.g. FACS) and stimulation.
         \3 \autocite{davenport2018DiscoveringVivoCytokineeQTL}: whole blood, IFN status and anti-IL6 drug exposure, reQTL driven by ISRE and IRF4 motifs
 
 \1 <why care about immune reQTLs>
-    \2 Exposes differences in regulatory architecture between conditions, but does not automatically reveal the mechanisms behind those differences 
+    \2 Exposes differences in regulatory architecture between conditions. 
+    \2 Does not automatically reveal the mechanisms behind those differences, but provides a starting point for forming mechanistic hypotheses e.g. context-specific expression
+
+    \2 Nevertheless useful for interpretation of GWAS signals, providing info on likely contexts that mediate the genetic effect
 
     \2 Immune \textit{in vitro} \gls{reQTL} have been shown to be enriched more so than non-\gls{reQTL} among GWAS loci for immune-related phenotypes such as
     susceptibility to infectious \autocite{barreiro2012DecipheringGeneticArchitecture,manry2017DecipheringGeneticControl}
     and immune-mediated diseases \autocite{manry2017DecipheringGeneticControl,kim-hellmuth2017GeneticRegulatoryEffects}.
 
+        % TODO
+    % davenport
+    % eQTL interactions with drug interventions or other therapeutically relevant physiologic variables are important to identify as they can point to regulatory mechanisms, such as transcription factors or subclasses of enhancers, acting downstream of the environmental condition of interest and driving groups of eQTL interactions. The IFN status eQTL interactions we identified provide support for this approach.
+
     \2 Not yet clear whether \textit{in vivo} reQTL have any utility on top of \textit{in vitro} reQTL for interpreting GWAS loci: not that many studies, and complex interpretations.
 
     \2 Nevertheless, as the number of cell types systems and stimulations both \textit{in vitro} and \textit{in vivo} increases, the number of known reQTLs continues to grow.
 
-\section{Immune phenotypes are a complex trait}
+\section{Immune phenotypes are complex traits}
+
+\subsection{Genetic effects on the healthy immune system}
 
 \1 Heritability of immune phenotypes is not only restricted to the expression phenotypes discussed above.
 \todo{not sure if right order. Since most reQTL studies are immune, I went context-specific -> reQTL -> immune rather than context-specific -> immune -> reQTL}
-    \2 Studies of interindividual variation in the healthy immune system shows many aspects of the immune system are heritable and complex.
+    \2 Systems studies of interindividual variation in the healthy immune system shows many aspects of the immune system are heritable and complex.
+        \3 <Systems immunology: just getting started \url{https://www.nature.com/articles/ni.3768}>
     \2 Immune parameters are influenced by age, sex, seasonality, and chronic infection \autocite{brodin2015VariationHumanImmune,liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,patin2018NaturalVariationParameters,liston2018OriginsDiversityHuman} \url{https://www.nature.com/articles/ncomms8000},
     % TODO: define aspects, parameters
     % TODO: add https://www.nature.com/articles/ni.3371
     but most individuals have a healthy baseline immune state that is individual-specific, 
     and relatively stable over time \autocite{liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,lakshmikanth2020HumanImmuneSystem}.
     \todo{stable, yet varies by age? respecify scale of stability}
+    % TODO: add https://www.sciencedirect.com/science/article/abs/pii/S0952791520300698
     \2 Overall estimates of the heritability of many immune parameters, such as cell composition and serum protein levels, lies between 20-40\% \autocite{liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,patin2018NaturalVariationParameters,liston2018OriginsDiversityHuman}
     \2 Genetic regulation is more important for the innate immune system than the adaptive immune system \autocite{patin2018NaturalVariationParameters}.
 
-\1 A central goal of systems immunology is to establish causal relationships between the many components of the immune system
-    \2 Natural genetic variation represents small scale perturbation that is causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
-    \2 But as discussed in the context section above, specific effects may not be apparent in the baseline state, stimulation is required
-    \2 Studies of natural infection are complicated by e.g. determining exposure.
-    \2 As in the immune in vivo reQTL studies, vaccines and drugs used as controlled immune perturbations to study the activated immune system
-        \3 reQTL may have utility for interpretation of these immune-related complex traits too, not just IMIDs/infectious disease discussed in reQTL section above
+\1 given genetic control of healthy system, perhaps not surprising that immune response to perturbation traits are also complex
+    \2 also, as discussed in the context section above, context-specific genetic effects may not be apparent in the baseline healthy state, stimulation is required
+    \2 since a central goal of systems immunology is to establish causal relationships between the many components of the immune system
+        \3 Natural genetic variation can be leveraged, representing small scale perturbations that are causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
+    \2 In this context, immune in vivo reQTL studies can be considered as controllable perturbation studies of the activated immune system
+        \3 Studies of natural infection are complicated by e.g. determining exposure, ethics, dose
+    \2 Simultaneously provides insight in to the biology behind those specific responses
+    \2 Two immune perturbations considered in this thesis are vaccines and biologic drugs.
 
-\subsection{Response to vaccination is a complex trait}
+\subsection{Antibody response to vaccination is a complex trait}
 
 \1 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
     \2 <quick vaccine bio, specific flu vaccine goes in ch2>
         \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
             % TODO: beyond
         \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
-        \3 <...>
+        % \3 <a bit more on innate/adaptive distinction, B/T lineage distinction>
     \2 A vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
     Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno comprimised patients, ethnically-diverse populations, and developing countries.
         \3 <1 example statistic on vaccine efficiacy differences e.g. rotavirus>
@@ -484,26 +501,31 @@ and amenable to separation (e.g. FACS) and stimulation.
     \2 \autocite{oconnor2013CharacterizingVaccineResponses} has heritability estimatates
     \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
     \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
-    \2 Overall, systems vacc studies that include genetics are nowhere near as mature compared to the trait to gene pipeline described in above e.g. for immune-mediated disease
+    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
+    \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
 
-\subsection{Response to anti-TNF therapy is a complex trait}
+\subsection{Response to biologic anti-TNF therapy is a complex trait}
+% TODO: technically vaccines are biologics
 
-\todo{not sure about scope of the subsection, currently some overlap with PANTS chapter intro.}
+\todo{not sure about scope of this subsection, currently some overlap with PANTS chapter intro. tried to separate out only the non-IBD stuff here (mainly intro + RA context)}
 
 \1 <quick anti-tnf summary, specific ADA/IFX biology goes in ch4>
+    \2 biologics are drugs synthesised using a living organism, typically proteins
+    \2 cause immune response due to having immune targets, or immunogenecity because or their large and complex structure vs chem synth small molecule drugs
+    \2 one of the largest classes are anti-TNFs
     \2 anti-TNFs (or TNF inhibitors), are drugs that suppress the activity of the TNF signalling pathway of the immune system
         % \3 TNF is an inflammatory cytokine ... inflammation is ...
-    \2 they are used to treat immune-mediated inflammatory diseases e.g. RA, IBD ...
-    \2 response has many definitions
-        \3 subphenotypes that may be complex traits: immunogenicity, primary response, loss of response, remission rate, adverse fx
+    \2 they are used to treat immune-mediated inflammatory diseases e.g. rheumatoid arthritis, Crohn's disease, psoriasis and ankylosing spondylitis.
+    \2 an enormous amount of money is spent on them: anti-TNF biologics are some of the largest market share pharmaceuticals
+    \2 some proportion of patients fail. given the expenditures, it would be good to predict this
 
 % TODO: figure on TNF pathway with drug targets
+% TODO: table of biologics with costs
 
 \1 <expression signatures of response to anti-TNFs>
-    \2 have been detected e.g. for RA "Validation study of existing gene expression signatures for anti-TNF treatment in patients with rheumatoid arthritis" \url{https://pubmed.ncbi.nlm.nih.gov/22457743/}
+    \2 have been detected e.g. for RA <"Validation study of existing gene expression signatures for anti-TNF treatment in patients with rheumatoid arthritis" \url{https://pubmed.ncbi.nlm.nih.gov/22457743/}>
     % e.g. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6614444/
-    \2 also done for IBD (described in ch4)
-    \2 most detected in small cohorts, requires validation
+    \2 most detected in small cohorts, many require validation
 
 \1 <genetics of anti-TNF response>
     \2 pharmacogenomics is the study of the role of genetics in beneficial and adverse effects of drugs and theraputics \url{https://doi.org/10.1016/S0140-6736(19)31276-0}
@@ -518,10 +540,12 @@ and amenable to separation (e.g. FACS) and stimulation.
         % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150911/
         % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0213073
         \3 a few validation studies attempted e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5937760/}
-    \2 also done for IBD (described in ch4)
+
+\1 a lot of studies also done for CD and IBD (described in ch4)
 
 \section{Thesis overview}
 
+\1 My thesis focuses on two specific instances of in vivo immune response: antibody response to pandemic influenza vaccine in healthy individuals, and clinical response to biologic anti-TNF therapy for CD patients.
 \1 <By chapter context-content-conclusion overview.>
     \2 <ch 2: systems vaccinology study of Pandemrix>
         \3 context: existing Sobolev study of expression differences between pandemic flu vaccine R/NR had small sample size and binary phenotype
