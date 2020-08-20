@@ -54,6 +54,11 @@
         \2 They work by binding to both soluble and transmembrane forms \autocite{lichtenstein2013ComprehensiveReviewAntitumor} [...] \todo{specific mechanisms of action in what cell type and tissue e.g. blood? gut?} \autocite{levin2016MechanismActionAntiTNF} 
     \2 Inhibition of TNF by ADA/IFX leads to e.g. drop in markers like CRP [...] \todo{introduce parts of the response algorithm here} \autocite{levin2016MechanismActionAntiTNF}, also see \autocite{danese2015BiologicAgentsIBD,adegbola2018AntiTNFTherapyCrohn}
     \2 adalimumab is a human monoclonal antibody, infliximab is a mouse-human chimeric that is more immunogenic (more anti-drug antibodies that interfere with drug activity)
+    % TODO: half life
+    % TODO describe induction and maintenance
+    % After the induction period, adalimumab is typically administered every two weeks by subcutaneous injection with an autoinjector pen,
+    % and infliximab is typically administered every eight weeks by intravenous infusion \autocite{adegbola2018AntiTNFTherapyCrohn}.
+    % \todo{I assume dosing follows the induction and maintenance schedule from \autocite{adegbola2018AntiTNFTherapyCrohn}. Can't find anything about it in the PANTS protocol, although Sim confirmed the 2w/8w frequencies.}
         % TODO citations from here
         % Immunogenicity is more common in patients treated with infliximab (a murine-human chimeric monoclonal antibody) than adalimumab (a fully human monoclonal antibody) and is a major cause of low anti-TNF drug level, infusion reactions, and non-remission in patients with Crohn’s disease [96, 184].
         \3 These two plus their biosimilars account for [...] \todo{how much market value?}
@@ -84,7 +89,7 @@
 \subsection{Predicting response to anti-TNFs for CD}
 
 \1 previously reported clinical predictors include age, disease duration, BMI, smoking, CRP, FCP, anti-TNF drug and anti-drug antibody concentrations, but these have mostly been found in small retrospective cohorts, and rarely independently validated \autocite{ding2016SystematicReviewPredicting,kopylov2016PredictingDurableResponse,flamant2018InflammatoryBowelDisease,digby-bell2019InterrogatingHostImmunity,noor2020PersonalisedMedicineCrohn}
-    \2 in PANTS: a recent prospective clinical study of ADA and IFX for CD to date: prospective, observational cohort study UK wide, with total enrolled n=1610 \autocite{kennedy2019PredictorsAntiTNFTreatment}
+    \2 in PANTS: a recent prospective study of ADA and IFX for CD to date: large n=1610 \autocite{kennedy2019PredictorsAntiTNFTreatment}
     \2 PNR has observed at a 23.8\% rate, evaluated at w14 via clinical algorithm.
     \2 low serum drug concentration in peripheral blood at w14 (ELISA) was associated with PNR, and also non-remission and immunogenicity for both drugs
     \2 no associations at baseline
@@ -130,63 +135,23 @@
 
 \section{Methods}
 
-\subsection{PANTS study description}
+\subsection{The PANTS cohort}
 
-% TODO: am here. tidy this subsection up. continue CCC flow CHECK.
+\gls{PANTS} is a prospective, observational, UK-wide cohort study of response to \gls{anti-TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
+The study was registered with ClinicalTrials.gov identifier NCT03088449, and the protocol is available at \url{https://www.ibdresearch.co.uk/pants/}.
+% "The eligibility criteria were as follows: age 6 years or older; diagnosis of Crohn’s disease involving the colon, the small intestine, or both; and active luminal disease supported by a C-reactive protein (CRP) of more than 3 mg/L 90 days before the first dose, faecal calprotectin of more than 50 μg/g between 90 days before and 28 days after first dose, or both."
+In brief, total enrollment was 1610 patients, who were at least 6 years old, had active luminal \gls{CD}, and were naive to \gls{anti-TNF} therapy.
+Patients were invited to attend up to ten major study visits over a maximum follow-up period of three years, or until drug withdrawal.
 
-% NOTE: here is overall structure of existing study
-% 1241 patients were assessable at week 14. Primary nonresponse
-% occurred in 170 (21·9%, 95% CI 19·1–25·0) of
-% 775 patients treated with infliximab and 125 (26·8%,
-% 22·9–31·1) of 466 patients treated with adalimumab
-% (table 2). After excluding primary non-responders,
-% the estimated proportion of infliximab-treated patients
-% who had loss of response by week 54 was 36·9%
-% (32·7–40·9), and for adalimumab was 34·1% (28·4–39·4;
-% appendix pp 15–16). At week 54, 469 (60·9%; 57·4–64·0)
-% of 770 infliximab-treated patients were classified as
-% being in non-remission, compared with 295 (66·9%;
-% 62·3–71·3) of 441 adalimumab-treated patients (table 2).
+The \gls{anti-TNF} drugs evaluated were adalimumab and infliximab\footnote{The study also evaluated infliximab biosimilars. Data from patients who received a biosimilar is not included in this chapter}.
+Major visits were scheduled immediately prior to a drug dose.
+Although adalimumab and infliximab have different dosing schedules, the timing of major visits was chosen such that the same visit structure could be used for patients on both drugs.
+Additional visits could also be scheduled in case of secondary loss of response, or exit due to drug withdrawal.
 
-\1 ClinicalTrials.gov ID: NCT03088449.
-\2 Protocol available at \url{https://www.ibdresearch.co.uk/pants/}, described in kennedy2019PredictorsAntiTNFTreatment
-    \2 patients at least 6yo, with active luminal CD, and anti-TNF naive
-        \3 active defined by CRP and faecal calprotectin
-    \2 up to 12 mo of followup (until withdrawl due to remission or otherwise), possible 2y extension
-    \2 both ada and inf
-    \2 evaluates several aspects of anti-TNF response: PNR at week 14, non-remission at w54, adverse events
-        \3 also immunogenicity (defined by anti-drug Ab levels)
-    \2 immunogenicity (63pc adalimumab), (28.5pc infliximab)
-        \3 use of immunomods had protective effect on time to immunogenicity 
-    \2 8\% have an adverse drug reaction that curtails treatment
-\1 Patients recruited to the \gls{PANTS} study may attend up to 10(?????) study visits over 3 years, a detailed overview of which can be found in \textcite{kennedy2019PredictorsAntiTNFTreatment}. 
-    \2 four major visits shared by both ADA and IFX: weeks 0, 14, 30, 54
-    \2 between major visits the dosing schedule for drugs is [...]
-    \todo{I assume dosing follows the induction+maintence schedule from \autocite{adegbola2018AntiTNFTherapyCrohn}. Can't find anything about it in the PANTS protocol.}
-    % TODO:
-    % Dosing
-    % Table 2. Demonstrates the three available anti-TNF therapies in Crohn’s disease (CD).
-    % induction, then:
-    % ADA: per 2 weeks maint, subcut. injection
-    % IFX: per 8 weeks maint, infusion, done at study visits
-    %
-    % Each visit was scheduled just immediately prior to the next dose of either infliximab or adalimumab and so it should be a trough level.
-    % Ie. Infliximab is given as an IV every 8 weeks.  So last dose of infliximab should be 8 weeks prior to the visit
-    % Adalimumab is given every 2 weeks. So last dose of adalimumab is 2 weeks prior.
-    % The visits are definitely timed just prior to when patient would be receiving drug as the study was designed such that we capture patients at the point of drug infusion so they would not have to come to hospital for an unnecessary visit.
-    \2 Major visits were scheduled prior to drug doses (IFX infusion or ADA injection), so drug levels at those points will be trough levels
-    \2 At each major visit, peripheral whole blood samples were collected and preserved in Tempus™ Blood RNA Tubes.
-    \2 additional visits for study exit and loss of response (LOR) are present for some patients
-        \3 treatment failure or treatment discontinuation
-    % Loss of response (LOR) will be defined after week 13 by reviewing the following:
-    % - Initial response to anti-TNF defined at week 12.
-    % - Symptomatic inflammatory IBD activity, which is of sufficient severity and duration to warrant an escalation in steroid, immunomodulatory, or anti-TNF therapy or surgical resection as directed by the patient’s gastroenterologist.
-    % In the event of loss of response (LOR) an additional LOR visit will be scheduled to occur immediately prior to the next anti-TNF infusion / injection.  Patients will remain in the study if they continue with the same anti-TNF drug, even if LOR or ADRs occur.
-
-\subsection{Definition of timepoints}
+\subsection{Definition of timepoints for \glsfmtshort{RNAseq}}
 
 %
-% Visit info from protocol
+% Visit info from PANTS protocol
 %
 % visit_1
 %     This visit must occur in the 7 days prior to commencing anti-TNF medication, and preferably on the day of the first infusion / injection
@@ -228,41 +193,50 @@
 % Excluding visits labeled “visit_1X” (72 hour visit), we labeled the first follow-up visit after baseline as a “primary_response” visit if it occurred <= 20 weeks after baseline, in line with what was reported in the paper, and independent of whether it was labeled “visit_3” or “exit_1” or “lor_3”.
 %
 
-\1 This chapter focuses samples falling into windows around four major study visits: week 0 (week \numrange{-4}{0}), week 14 (week \numrange{10}{20}), week 30 (week \numrange{22}{38}), and week 54 (week \numrange{42}{66});
-where time is measured relative to the day of the first drug dose.
-    % TODO: effectively used similar strat to them
-    \2 Ranges indicate the eligibility windows specified in \textcite{kennedy2019PredictorsAntiTNFTreatment}.
-    \2 It is possible that the actual visit does not fall into the defined windows due to scheduling practicalities
-        \3 included, as the relative time to the next drug dose should still be correct
-    \2 the study windows also include additional exit and loss of response (LOR) visits
-        \3 Samples from additional visits (e.g. scheduled due to \gls{LOR} or early study exit) that fall into major visit windows were also included, as additional visits often replaced major visits for patients with \gls{PNR} or \gls{LOR}.
-        \3 patients with LOR visits are not entirely comparable to other patients due to possibilty of dose escalation after each LOR visit
-        \todo{Still discussing with Sim on the exact def of LOR and exit visits to decide whether this is sensible.}
-        \3 It is also possible for an individual to have more than 1 sample in a window, these were deduped to prioritise major over additional visits
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Visit_Label_upset.pdf}
-%     \caption{}
-%     \label{fig:multipants_visits_upset}
-% \end{figure}
-
-\subsection{Definition of \glsfmtfull{PNR}}
-
-% Selection criteria for samples from Nick:
 %
-% ~200 for each drug, ~100 PNR, 100 remission. PNR had to be PNR at week 14 and non-remission at week 54 (or unknown at week 54). Remission had to have active disease at baseline and be in remission or response at week 14 and remission at week 54 (or unknown at week 54 and remission at week 30).
-% ideal_downstream_cohort <- bd_vr_clin %>%
-%   filter(
-%     (crp_visit_1 >= 4 | calpro_visit_1 > 100),
-%     (pnr & (is.na(remission_visit_5) | !remission_visit_5)) |
-%     ((status_visit_2_3 %in% c("Response", "Remission")) & (remission_visit_5 | (is.na(remission_visit_5) & remission_visit_4)))
-%   )
-% They also had to be 16 years or over and have a baseline serum sample. Within the infliximab patients, there was propensity matching between PNR/non-PNR based on on_imms_visit_1 + on_steroids_visit_1 + age_at_first_dose + earliest_weight_category_4 + albumin_visit_1 + sex.
-\1 \gls{PNR} was defined before w14 visit, according to the algorithm in \autocite{kennedy2019PredictorsAntiTNFTreatment}
+% "Each visit was scheduled just immediately prior to the next dose of either infliximab or adalimumab and so it should be a trough level.
+% Ie. Infliximab is given as an IV every 8 weeks.  So last dose of infliximab should be 8 weeks prior to the visit
+% Adalimumab is given every 2 weeks. So last dose of adalimumab is 2 weeks prior.
+% The visits are definitely timed just prior to when patient would be receiving drug as the study was designed such that we capture patients at the point of drug infusion so they would not have to come to hospital for an unnecessary visit."
+The expression data for this chapter comes from \gls{PANTS} whole blood samples centered around four timepoints from the first year of follow-up: week 0, week 14, week 30, and week 54.
+These are the specified timings for four major visits.
+Samples were taken prior to drug administration, and preserved for \gls{RNAseq} in Tempus Blood RNA Tubes.
+The study day that sampling occurred relative to the first drug dose was recorded.
+
+With the aim of measuring the transcriptome at trough drug levels, I mapped samples from major and additional visits to four timepoints centered around the four major visits.
+As it could not be guaranteed that visits occurred on the exact day specified in the protocol, I considered the visit windows defined by \textcite{kennedy2019PredictorsAntiTNFTreatment}: week 0 (week \numrange{-4}{0}), week 14 (week \numrange{10}{20}), week 30 (week \numrange{22}{38}), and week 54 (week \numrange{42}{66})
+Samples were mapped according to the following criteria:
+\begin{itemize}
+\item Major visit samples were mapped to the corresponding timepoint, regardless of whether they fell within the corresponding window i.e. an available week 0 sample is always mapped to the week 0 timepoint.
+\item Samples taken at additional loss of response or exit visits falling within one of the windows were mapped to that timepoint, unless the patient also had a major visit sample inside that window.
+\end{itemize}
+Only a small minority of major visit samples fell outside their corresponding windows.
+Inclusion of samples from additional visits is important as they often replace major visits for patients with primary non-response or loss of response.
+\todo{Still discussing with Sim on the exact def of LOR and exit visits to decide whether this is sensible.}
+Samples included under both criteria should be representative of trough drug levels,
+as major visits and loss of response visits were always scheduled prior to a drug dose,
+and exit visits were scheduled for when the next drug dose would have been.
+
+\subsection{Definition of primary response}
+
+\1 PNR was defined before w14 visit, according to the clinical algorithm in \autocite{kennedy2019PredictorsAntiTNFTreatment}
     \2 note PNR and remission at w54 are exclusive
 
-\subsection{RNAseq data generation and sequencing}
+% NOTE: here is overall structure of existing study
+% 1241 patients were assessable at week 14. Primary nonresponse
+% occurred in 170 (21·9%, 95% CI 19·1–25·0) of
+% 775 patients treated with infliximab and 125 (26·8%,
+% 22·9–31·1) of 466 patients treated with adalimumab
+% (table 2). After excluding primary non-responders,
+% the estimated proportion of infliximab-treated patients
+% who had loss of response by week 54 was 36·9%
+% (32·7–40·9), and for adalimumab was 34·1% (28·4–39·4;
+% appendix pp 15–16). At week 54, 469 (60·9%; 57·4–64·0)
+% of 770 infliximab-treated patients were classified as
+% being in non-remission, compared with 295 (66·9%;
+% 62·3–71·3) of 441 adalimumab-treated patients (table 2).
+
+\subsection{RNAseq data generation}
 
 % From Mark:
 % Here is an extended version of the protocol, with highlighting of the portion on poly-A selection and subsequent depletion steps:
@@ -290,13 +264,7 @@ where time is measured relative to the day of the first drug dose.
     \2 grey zone response (10 removed)
     \2 missing values for phenotypes used in section below.
     \2 840 samples left
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Study_Day_vs_Visit_Label.pdf}
-    \caption{Distribution of samples among defined study visit windows. lor and exit are additional visits that fall into the windows.}
-    \label{fig:multipants_studyDay_boxplots}
-\end{figure}
+    \2 814 mapped to timepoints
 
 \subsection{RNAseq quantification}
 
@@ -309,6 +277,7 @@ where time is measured relative to the day of the first drug dose.
             % 1.25 CPM = 10 counts based on median lib size
         \2 >0 in >90\% of samples (15645 left)
             % Count of zero will be dominated by pseudo-count before log transform
+            % using a pseudo-counts based approach for norm
         \2 globins and short ncRNAs (15592 left)
             % globins should not be expressed in immune cells
             % counts in short ncRNAs can be misassignments
@@ -432,7 +401,18 @@ The variables that explained the most variance included patient, cell proportion
 % Current Smoker
 % Proportions of the 6 cell types: CD4+ T cells, CD8+ T cells, B cells, NK cells, monocytes, and granulocytes
 
-\subsection{\Glsfmtlong{DGE} models}
+\subsection{Fitting \Glsfmtlong{DGE} models}
+
+\1 model form is E ~ [...]
+\1 can we pool drugs with a mean term for this comparison? i.e. move from 8 to 4 means model
+    \2 test interaction between drug and response at w0, and at w14 i.e. is there a diff in the diff between R vs NR between drugs?
+    \2 no significant single gene hits at either timepoint
+    \2 but unclear if preregistered power calculations would extend to this test \url{https://statmodeling.stat.columbia.edu/2018/03/15/need-16-times-sample-size-estimate-interaction-estimate-main-effect/}
+
+    \2 there are baseline diffs are evident in clinical data \todo{because this is non-randomised, baseline differences do matter??}
+    % Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
+    \2 “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).” \autocite{kennedy2019PredictorsAntiTNFTreatment}
+    \2 I include many but not all of these covariates in the DGE model
 
 \subsubsection{Contrasts model for pairwise comparisons}
 
@@ -491,7 +471,7 @@ The variables that explained the most variance included patient, cell proportion
     % pearson, which is scale invariant on centered data https://www.researchgate.net/publication/26290974_A_new_approach_for_clustering_gene_expression_time_series_data
     \2 Centroids defined by simple mean in each visit
 
-\subsection{Gene set analysis}
+\subsection{Gene set analysis ranked}
 
 % camera is developed to use mod t, but in practice ranks are comparable between t and z.std, even though dream says otherwise
 % https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html#dream-analysis
@@ -505,16 +485,15 @@ The variables that explained the most variance included patient, cell proportion
         % TODO: add spearman rank corr
     \2 approx 8k genes in the gene set annotation for tmod
 
-
 \subsection{Genotyping and genotype data preprocessing}
 
 % sazonovs2019HLADQA105Carriage
 % DNA was extracted from pretreatment blood samples from
-% 1524 individuals in the PANTS cohort and genotyping undertaken
+% 1524 patients in the PANTS cohort and genotyping undertaken
 % using the Illumina CoreExome microarray
 %
 % After quality
-% control, 1323 individuals remained in the study, of which
+% control, 1323 patients remained in the study, of which
 % 1240 had drug and anti-drug antibody level data available
 % (Supplementary Figure 2).
 %
@@ -529,11 +508,12 @@ The variables that explained the most variance included patient, cell proportion
 % and the first within-sample principal component were
 % included as covariates (Supplementary Table 2).
 
+\1 Whole blood samples were collected into EDTA tubes for genotypeing at w0
 \1 TODO: scan Alex's thesis for genotyping and QC details
 % TODO: check no batch effects e.g. chip, which would necc an insample PCA
     \2 autosomal only
-    \2 TODO describe strange limix behaviour that lead to deduping visits by individual in sample filtering
-    % although it may seem possible to have duplicate individuals
+    \2 TODO describe strange limix behaviour that lead to deduping visits by patient in sample filtering
+    % although it may seem possible to have duplicate patients
     %     following the stacking logic of TODOcite,
     %     it estimation of the alternative model log likelihood
     %     excluding just a 2 duplicates at w14
@@ -596,7 +576,7 @@ The variables that explained the most variance included patient, cell proportion
 % https://www.theanalysisfactor.com/pre-post-data-repeated-measures/
 % ANCOVA vs repeated measures vs mixed model
 
-% The biggest advantage of mixed models is their incredible flexibility.  They can handle clustered individuals as well as repeated measures (even in the same model).  They can handle crossed random effects, where there are repeated measures not only on an individual, but also on each stimulus.
+% The biggest advantage of mixed models is their incredible flexibility.  They can handle clustered patients as well as repeated measures (even in the same model).  They can handle crossed random effects, where there are repeated measures not only on an patient, but also on each stimulus.
 % https://www.theanalysisfactor.com/repeated-measures-approaches/
 
 % Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
@@ -644,62 +624,53 @@ The variables that explained the most variance included patient, cell proportion
     % o	Possible statistics: the index to be calculated. This should be one of : "kl", "ch", "hartigan", "ccc", "scott", "marriot", "trcovw", "tracew", "friedman", "rubin", "cindex", "db", "silhouette", "duda", "pseudot2", "beale", "ratkowsky", "ball", "ptbiserial", "gap", "frey", "mcclain", "gamma", "gplus", "tau", "dunn", "hubert", "sdindex", "dindex", "sdbw", "all" (all indices except GAP, Gamma, Gplus and Tau), "alllong" (all indices with Gap, Gamma, Gplus and Tau included).
     \2 Number of clusters: gap stat fviz\_nbclust
 
+\subsubsection{gprofiler}
+
 \section{Results}
 
-% TODO: put in table with all decidetest stats
-% TODO: move through results with logical sequence of analyses
+\subsection{Longitudinal \glsfmtshort{RNAseq} data from the \gls{PANTS} cohort}
 
-% mimic table 1 in kennedy2019PredictorsAntiTNFTreatment
-\1 TODO add Table 1. Breakdown of n by visit/drug/response status and other baseline characteristics, after sample filtering
-    \2 \autoref{fig:multipants_studyDay_boxplots} shows distribution of samples by study day
-    \2 The majority of samples (814/840) do fall into these windows
-    \2 generally 2-4 visits per individual TODO: get median min max on number of samples per individual
-
-\subsection{Expression differences between PR and PNR before and after drug commencement}
-
-\1 Are there differences in peripheral blood gene expression in PANTS cohort CD patients between PR and PNR to anti-TNF treatment according to DGE?
-    \2 are there baseline differences when patients are naive (w0)?
-    \2 are there differences after starting the drug (w14)?
-
-\1 there are baseline diffs are evident in clinical data \todo{because this is non-randomised, baseline differences do matter??}
-    % Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
-    \2 “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).” \autocite{kennedy2019PredictorsAntiTNFTreatment}
-    \2 I include many but not all of these covariates in the DGE model
-
-\1 can we pool drugs for this comparison? i.e. move from 8 to 4 means model
-    \2 test interaction between drug and response at w0, and at w14 i.e. is there a diff in the diff between R vs NR between drugs?
-    \2 no significant single gene hits at either timepoint
-    \2 but unclear if preregistered power calculations would extend to this test \url{https://statmodeling.stat.columbia.edu/2018/03/15/need-16-times-sample-size-estimate-interaction-estimate-main-effect/}
-
-\1 week 0 R vs NR: single gene \autoref{fig:multipants_dge_volcano_week_0_R_N}, module \autoref{fig:multipants_dge_panelPlot_week_0_R_N}
-    \2 ADA only drug specific: IGKV1-9, KCNN3, PDIA5 downregulated in NR
-        \3 IGKV1-9 is part of many B cell, plasma cell, immunoglobulin genes that are downreg in NR in the ADA specific module analysis
-        \3 as seen in the IFX-ADA interaction, this is an ADA specific baseline phenomena, and seems to drive the signal in the pooled module analysis
-    \2 pooled analysis: SIGLEC10 (sialic acid binding Ig like lectin 10) (\autoref{fig:multipants_dge_SIGLEC10}) and CROCC2 (Ciliary Rootlet Coiled-Coil, Rootletin Family Member 2) upregulated in R
-        \3 consistent direction of effect for both hits in separate drug analyses
-        \3 pooled module analysis shows upregulation of myeloid cell receptor and antigen presentation modules
+To define transcriptomic differences between primary responders and non-responders to \gls{anti-TNF} therapy in the \gls{PANTS} cohort, 
+I analysed whole blood \gls{RNAseq} gene expression measured at up to four timepoints per patient:
+week 0 (\gls{anti-TNF} naive baseline), and weeks 14, 30 and 54 after commencing \gls{anti-TNF} therapy.
+After quality control, expression data was available for 15584 genes and 814 samples (\autoref{fig:multipants_studyDay_boxplots}).
+These samples come from 324 patients, with a median of three samples per patient (\autoref{fig:multipants_visits_upset}).
+Patient characteristics are shown in \autoref{fig:multipants_table1}. \todo{autoref to table 1}
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.pdf}
-    \caption{DGE volcano plot for PR vs PNR at week 0}
-    \label{fig:multipants_dge_volcano_week_0_R_N}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Study_Day_vs_Visit_Label.pdf}
+    \caption{Distribution of samples among defined study visit windows. lor and exit are additional visits that fall into the windows.}
+    \label{fig:multipants_studyDay_boxplots}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000142512.SYMBOL_SIGLEC10.pdf}
-    \caption{Unadjusted, normalised SIGLEC10 expression over time}
-    \label{fig:multipants_dge_SIGLEC10}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Visit_Label_upset.pdf}
+    \caption{}
+    \label{fig:multipants_visits_upset}
 \end{figure}
 
-% TODO: add missing bars are n.s.
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.pdf}
-    \caption{Panel plot of module enrichent analysis for PR vs PNR at week 0. Length of bar is effect size, shade is FDR. Blue is upreg in R, red is downreg in R.}
-    \label{fig:multipants_dge_panelPlot_week_0_R_N}
-\end{figure}
+% TODO: The balance of PNR vs pants
+% Selection criteria for samples from Nick:
+%
+% ~200 for each drug, ~100 PNR, 100 remission. PNR had to be PNR at week 14 and non-remission at week 54 (or unknown at week 54). Remission had to have active disease at baseline and be in remission or response at week 14 and remission at week 54 (or unknown at week 54 and remission at week 30).
+% ideal_downstream_cohort <- bd_vr_clin %>%
+%   filter(
+%     (crp_visit_1 >= 4 | calpro_visit_1 > 100),
+%     (pnr & (is.na(remission_visit_5) | !remission_visit_5)) |
+%     ((status_visit_2_3 %in% c("Response", "Remission")) & (remission_visit_5 | (is.na(remission_visit_5) & remission_visit_4)))
+%   )
+% They also had to be 16 years or over and have a baseline serum sample. Within the infliximab patients, there was propensity matching between PNR/non-PNR based on on_imms_visit_1 + on_steroids_visit_1 + age_at_first_dose + earliest_weight_category_4 + albumin_visit_1 + sex.
+
+% TODO: add caption and label
+% Table 1. Patient demographic and clinical characteristics
+\input{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.table1.tex}
+
+\subsection{Gene expression differences after \glsfmtshort{anti-TNF} induction}
+
+Primary response was assessed after the \gls{anti-TNF} induction at week 14.
+"This is an observational study and the clinician may decide to continue with anti-TNF therapy even if the patient meets the study definition of primary non-response."
 
 \1 week 14 R vs NR: single gene \autoref{fig:multipants_dge_volcano_week_14_R_N}, module \autoref{fig:multipants_dge_panelPlot_week_14_R_N}
     \2 much stronger effect sizes than at week 0 for single genes
@@ -730,48 +701,41 @@ The variables that explained the most variance included patient, cell proportion
     \label{fig:multipants_dge_panelPlot_week_14_R_N}
 \end{figure}
 
-\subsection{Expression differences between PR and PNR over time}
 
-\1 given the much strong differences in R vs NR expression at w14 than w0, interested in whether the change in expression upon starting anti-TNF treatment from week 0 vs week 14 is different for R and NR
-    \2 contrast for interaction between R/NR and w14/w0
-    \2 only found single gene hits for the pooled analysis \autoref{fig:multipants_dge_volcano_week_14_0_R_N}
-    \2 module analysis \autoref{fig:multipants_dge_panelPlot_week_14_0_R_N}
-        \3 finds many of the same modules as in w14-only R/NR comparison, with the same direction of effect
-        \todo{not sure about extra platelet activation modules yet}
+\subsection{Gene expression differences baseline}
+
+I compared gene 
+\1 week 0 R vs NR: single gene \autoref{fig:multipants_dge_volcano_week_0_R_N}, module \autoref{fig:multipants_dge_panelPlot_week_0_R_N}
+    \2 ADA only drug specific: IGKV1-9, KCNN3, PDIA5 downregulated in NR
+        \3 IGKV1-9 is part of many B cell, plasma cell, immunoglobulin genes that are downreg in NR in the ADA specific module analysis
+        \3 as seen in the IFX-ADA interaction, this is an ADA specific baseline phenomena, and seems to drive the signal in the pooled module analysis
+    \2 pooled analysis: SIGLEC10 (sialic acid binding Ig like lectin 10) (\autoref{fig:multipants_dge_SIGLEC10}) and CROCC2 (Ciliary Rootlet Coiled-Coil, Rootletin Family Member 2) upregulated in R
+        \3 consistent direction of effect for both hits in separate drug analyses
+        \3 pooled module analysis shows upregulation of myeloid cell receptor and antigen presentation modules
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_C_(3RI_1RI)_(3NI_1NI),C_(3RA_1RA)_(3NA_1NA),C_((3RI_1RI)_(3NI_1NI))_((3RA_1RA)_(3NA_1NA)),C_(3R_1R)_(3N_1N).pdf}
-    \caption{DGE volcano plot for PR vs PNR for week 14 - week 0 change}
-    \label{fig:multipants_dge_volcano_week_14_0_R_N}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.pdf}
+    \caption{DGE volcano plot for PR vs PNR at week 0}
+    \label{fig:multipants_dge_volcano_week_0_R_N}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_C_(3RI_1RI)_(3NI_1NI),C_(3RA_1RA)_(3NA_1NA),C_((3RI_1RI)_(3NI_1NI))_((3RA_1RA)_(3NA_1NA)),C_(3R_1R)_(3N_1N).pdf}
-    \caption{Panel plot of module enrichent analysis for PR vs PNR for week 14 - week 0 change. Length of bar is effect size, shade is FDR. Blue is upreg in R, red is downreg in R.}
-    \label{fig:multipants_dge_panelPlot_week_14_0_R_N}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000142512.SYMBOL_SIGLEC10.pdf}
+    \caption{Unadjusted, normalised SIGLEC10 expression over time}
+    \label{fig:multipants_dge_SIGLEC10}
 \end{figure}
 
-\1 TODO: add plot of w0 vs w14 effect size
-    \2 more DGE w0 vs w14 for R than NR
-    \2 most effects are magnifiying, such that R have larger foldchanges in the same direction for the same gene than NR
-
-\1 Finally, spline model as a formal way to test general differences between PR and PNR over all timepoints
-    \2 instead of doing every pairwise R vs NR comparison
-    \2 266 hits at FDR < 0.05
-    \2 clustering the expression of spline hits finds two main patterns: upregulation and downregulation after starting anti-TNFs, magnified in responders (\autoref{fig:multipants_dge_spline1})
-    \2 from this analysis, can additionally see that expression differences are maintained even out to week 54
-    \2 most hits in the spline have already been found in the separate w0, w14 or w14-w10 R vs NR comparisons (only 81 unique), but confirms the maintain
-
+% TODO: add missing bars are n.s.
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/Screenshot 2020-08-06 at 16.09.43.png}
-    \caption{Clustered expression over time for DGE genes in spline analysis}
-    \label{fig:multipants_dge_spline1}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.pdf}
+    \caption{Panel plot of module enrichent analysis for PR vs PNR at week 0. Length of bar is effect size, shade is FDR. Blue is upreg in R, red is downreg in R.}
+    \label{fig:multipants_dge_panelPlot_week_0_R_N}
 \end{figure}
-    
-\subsection{Replication of known signatures}
+
+\subsection{Replication of known signatures baseline}
 
 % OSM and OSMR
 % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5420447/
@@ -798,7 +762,51 @@ The variables that explained the most variance included patient, cell proportion
     \label{fig:multipants_dge_TREM1}
 \end{figure}
 
-\subsection{Changes in genetic control of expression over time}
+\subsection{Change magnified}
+
+\1 given the much strong differences in R vs NR expression at w14 than w0, interested in whether the change in expression upon starting anti-TNF treatment from week 0 vs week 14 is different for R and NR
+    \2 contrast for interaction between R/NR and w14/w0
+    \2 only found single gene hits for the pooled analysis \autoref{fig:multipants_dge_volcano_week_14_0_R_N}
+    \2 module analysis \autoref{fig:multipants_dge_panelPlot_week_14_0_R_N}
+        \3 finds many of the same modules as in w14-only R/NR comparison, with the same direction of effect
+        \todo{not sure about extra platelet activation modules yet}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_C_(3RI_1RI)_(3NI_1NI),C_(3RA_1RA)_(3NA_1NA),C_((3RI_1RI)_(3NI_1NI))_((3RA_1RA)_(3NA_1NA)),C_(3R_1R)_(3N_1N).pdf}
+    \caption{DGE volcano plot for PR vs PNR for week 14 - week 0 change}
+    \label{fig:multipants_dge_volcano_week_14_0_R_N}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_C_(3RI_1RI)_(3NI_1NI),C_(3RA_1RA)_(3NA_1NA),C_((3RI_1RI)_(3NI_1NI))_((3RA_1RA)_(3NA_1NA)),C_(3R_1R)_(3N_1N).pdf}
+    \caption{Panel plot of module enrichent analysis for PR vs PNR for week 14 - week 0 change. Length of bar is effect size, shade is FDR. Blue is upreg in R, red is downreg in R.}
+    \label{fig:multipants_dge_panelPlot_week_14_0_R_N}
+\end{figure}
+
+\1 TODO: add plot of w0 vs w14 effect size
+    \2 more DGE w0 vs w14 for R than NR
+    \2 most effects are magnifiying, such that R have larger foldchanges in the same direction for the same gene than NR
+
+\subsection{Expression differences during maintenance}
+
+\1 despite pnr at w14, some patients continue
+\1 Finally, spline model as a formal way to test general differences between PR and PNR over all timepoints
+    \2 instead of doing every pairwise R vs NR comparison
+    \2 266 hits at FDR < 0.05
+    \2 clustering the expression of spline hits finds two main patterns: upregulation and downregulation after starting anti-TNFs, magnified in responders (\autoref{fig:multipants_dge_spline1})
+    \2 from this analysis, can additionally see that expression differences are maintained even out to week 54
+    \2 most hits in the spline have already been found in the separate w0, w14 or w14-w10 R vs NR comparisons (only 81 unique), but confirms the maintain
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/Screenshot 2020-08-06 at 16.09.43.png}
+    \caption{Clustered expression over time for DGE genes in spline analysis}
+    \label{fig:multipants_dge_spline1}
+\end{figure}
+    
+\subsection{Genetics of gene expression over time}
 
 \1 given the substantial changes in expression after starting the drug, are there differences in genetic control of expression of the course of taking the drug? \todo{have not put in an interaction between R and NR, not sure if powered}
 \1 mapped eQTLs per timepoint, then did joint analysis with mashr
@@ -889,6 +897,17 @@ The variables that explained the most variance included patient, cell proportion
     \2 spline analysis confirmed that the diff starting at w14 is maintained at w30 and w54
     \2 \autocite{kennedy2019PredictorsAntiTNFTreatment}: "Continuing standard dosing regimens after primary non-response was rarely helpful; only 14 (12·4\% [95\% CI 6·9–19·9]) of 113 patients entered remission by week 54."
         \3 may be reflected in the transcriptomics too
+    \2 attrition or loss to followup bias for reqtl effect
+        % https://pubmed.ncbi.nlm.nih.gov/22611167/
+
+        % https://stats.stackexchange.com/questions/354279/can-a-linear-mixed-model-handle-missing-data-that-is-not-missing-at-random
+        % As you say, linear mixed-effects (LME) models are assuming that any missing data are missing at random (MAR). A way to account for suspected violations of the MAR assumption of LME models is to use joint models. Under this framework, the longitudinal response and the survival probability are associated by jointly estimating a single likelihood function. Using a joint model, you can get an estimate of how much a possible difference in survival is affecting the longitudinal response and how much the fluctuations in the longitudinal response are associated with survival.
+
+        % https://sphweb.bumc.bu.edu/otlt/MPH-Modules/EP/EP713_Bias/EP713_Bias3.html
+        % As noted above, the enrollment of subjects will not bias a prospective cohort study, because the outcome has not yet occurred. Therefore, choice cannot be related to both exposure status and outcome status. However, retention of subjects may be differentially related to exposure and outcome, and this has a similar effect that can bias the results, causing either an overestimate or an underestimate of an association.
+        % Again, depending on which category is underreported as a result of differential loss to follow-up, either an underestimate or overestimate of effect (association) can occur.
+
+        % likely direction is conservative since the most NR usually withdraw??
 
 \1 <reQTL>
     \2 only 6 reQTLs at per-comparison FDR 0.05
@@ -898,17 +917,6 @@ The variables that explained the most variance included patient, cell proportion
     \2 biases
         \3 winner's curse caused by combo of low power and a signif threshold?
         % http://www.stat.columbia.edu/~gelman/communication/Button2013.pdf
-        \3 attrition or loss to followup bias for reqtl effect
-            % https://pubmed.ncbi.nlm.nih.gov/22611167/
-
-            % https://stats.stackexchange.com/questions/354279/can-a-linear-mixed-model-handle-missing-data-that-is-not-missing-at-random
-            % As you say, linear mixed-effects (LME) models are assuming that any missing data are missing at random (MAR). A way to account for suspected violations of the MAR assumption of LME models is to use joint models. Under this framework, the longitudinal response and the survival probability are associated by jointly estimating a single likelihood function. Using a joint model, you can get an estimate of how much a possible difference in survival is affecting the longitudinal response and how much the fluctuations in the longitudinal response are associated with survival.
-
-            % https://sphweb.bumc.bu.edu/otlt/MPH-Modules/EP/EP713_Bias/EP713_Bias3.html
-            % As noted above, the enrollment of subjects will not bias a prospective cohort study, because the outcome has not yet occurred. Therefore, choice cannot be related to both exposure status and outcome status. However, retention of subjects may be differentially related to exposure and outcome, and this has a similar effect that can bias the results, causing either an overestimate or an underestimate of an association.
-            % Again, depending on which category is underreported as a result of differential loss to follow-up, either an underestimate or overestimate of effect (association) can occur.
-
-            % likely direction is conservative?
 
     \2 encourage ASE for validation like for ch3, gutierrez-arcelus2020AllelespecificExpressionChanges, to check hits are not artifacts of my pipeline
     % \2 vs ch3 HIRD, fewer strong reqtls
@@ -919,14 +927,18 @@ The variables that explained the most variance included patient, cell proportion
         \3 although there may be some disease-specific eQTLs, would need to check het of effect vs healthy controls with suitable cell composition control though
         \3 future: add interaction for response status, since no change of E in NR may dilute signal for reQTL, but it is not clear if this would boost power, or decrease due to dicing
 
+    \2 given issues about reQTL in bulk discussed in ch3, do not pursue this, but outline future solutions in ch5
+
 \1 <more limitations: internal validity>
 
     \2 a key question for interpreting both the DGE and reQTL results is the definition of visit and study day
         \3 arguably, time is only meaningful wrt to drug naive/on drug, and time since last dose and to next dose i.e. everyone is at trough drug levels
         \3 real drug levels over time will be peaky
         \3 I included LOR and EXIT visits based on a time window, but in reality, patients that have more LOR have 
+        % "A LOR visit should be scheduled any time after week 14 if the LOR criteria are met (page 11) and the patient’s gastroenterologist has escalated steroid, immunomodulatory or anti-TNF therapy. Escalation of anti-TNF therapy includes an increase in the dose, or a shortening of the interval between doses."
+        \3 It should be noted that one option following patient loss of response is dose escalation, so samples from the same patient \emph{after} recorded loss of response may actually represent a different trough drug level to the rest.
             % TODO: read Sim email
-        \3 I did not use trough drug level measured on or near the same study day as a covariate
+        \3 but I did not use trough drug level measured on or near the same study day as a covariate
         \3 this would explain more variance, but
             %     Drug_Level not considered as a covariate, but Mark did: A lot more missingness, which would drop the sample size even further
             %     Also: may not be comparable between drugs even if scaled, as dosing pattern diff, spiker for one drug

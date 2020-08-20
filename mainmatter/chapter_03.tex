@@ -138,7 +138,7 @@ Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre
 \todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % TODO it is not the case that serve as their own controls
-% more like soaking up some of the variation as within patient random effect, allowing more precise
+% more like soaking up some of the variation as within individual random effect, allowing more precise
 % also see: https://blog.statsols.com/making-it-personal-n-of-1-trials-allowing-for-individuality-but-not-overdoing-it
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
 Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}
@@ -815,6 +815,7 @@ I assume this represents a power advantage from having larger a sample size, rat
 % TODO: why?
 % happens if there is cell type specific relevance of g
 % cause cell type affects g->e i.e. symetrically, geno affects c -> e
+% Figure out what DAG model causes a reQTL in bulk to not represent causality of G -> change in e
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
 then an interaction term between genotype and cell type abundance is required, % i.e. the assumption of additivity is baked in
 \todo{point is, doesn't make sense to assume the genotype effect is the same at all levels of cell type abundance}
@@ -832,6 +833,7 @@ where tests for interaction are only performed at a subset of tests, often the l
 % Benjamini-Hochberg FDR: kim-hellmuth2017GeneticRegulatoryEffects
 % Benjamini-Hochberg procedure, and a 0.15 FDR threshold: peters2016InsightGenotypePhenotypeAssociations
 %
+% TODO: dodgy, review this paper
 The key to the two-stage approach is that if the estimates for the interaction effect are sufficiently independent from the estimates of the main effect from main-effect only models,
 the type I error can be controlled based on the number of interactions that are actually tested, rather the number of interactions that could have been tested for\autocite{kooperberg2008IncreasingPowerIdentifying,peters2016InsightGenotypePhenotypeAssociations}.
 It is unclear whether this assumption holds, as the size of the main effect may contribute to power for detecting interaction effects.

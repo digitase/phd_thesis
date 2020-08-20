@@ -48,7 +48,7 @@ What is response?
 
         reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
 
-            in ch4: repeated dosing helps guard against this.
+            in ch4: repeated dosing helps guard against this, some hope that NR is stable
             and n of 1 trials
 
 The design of more longitudinal cohorts in the future
@@ -137,12 +137,12 @@ what data to get from these trials?
                 stratified is not interaction
                 yet many studies out there the that use one or the other to answer the same biological reQTL questions
 
-        beware the effects of normalisation
+        beware the effects of normalisation (on top of stratification)
 
         beware the effects of model misspec
             missing interaction terms
 
-        esp when considering replication of reQTL
+        esp when considering biologically meaningful replication of reQTL
             all above must line up
 
 as more n, allows
@@ -226,12 +226,6 @@ BUT basically, Extending the sample size is key
 finally translation and prediction
     a diff question althogether
 
-    and to Cost-effectiveness and clinical implementation
-        if you can identify NRs, what are you going to do about it?
-
-        what does it take for a gene expression pred model to be clinically useful?
-            take lessons from cancer
-
     Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
         % Calculating the sample size required for developing a clinical prediction model
         two chapters of mine
@@ -260,6 +254,7 @@ finally translation and prediction
         % a microarray study,8 the almost perfect prostate cancer predictions
         % of randomforests and gbmhave to come as a disconcerting
         % surprise.
+            not clear DGE -> prediction is necessary
             prediction may still be possible even with little significant single gene diffs
 
             is the gene by gene approach good for pred?
@@ -288,16 +283,27 @@ finally translation and prediction
         gene signatures, rise and fall
             expression as a biomarker
 
+            success stories \url{https://www.nature.com/articles/415530a} 
+            and
             rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
 
             % https://www.annalsofoncology.org/article/S0923-7534(19)36531-7/fulltext
             Table 1Evidence-based criteria for a prognostic gene signature in the path from the laboratory to clinical practice
 
+    and to Cost-effectiveness and clinical implementation
+        if you can identify NRs, what are you going to do about it?
+
+        what does it take for a gene expression pred model to be clinically useful?
+            take lessons from cancer
+
 the missing link needed for causality
 
-    avoid "low input, high throughput, no output"
+    need causal models
 
-    no statistical integration
+        avoid "low input, high throughput, no output"
+        without causality no talking about 'mechanism'
+
+    need statistical integration
         problems with connection between dge and reqtl, as in prev ch
 
         simple overlap will not work
@@ -307,21 +313,22 @@ the missing link needed for causality
             % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180824
             % devries2020IntegratingGWASBulk
 
-    need causal inference/MR
-        genetic instruments
-        as demonstrated by e.g. qinqin, use (r)eqtl as genetic instruments
-
-        without causality no 'mechanism'
+    option:
+        Causal Inference Test for a Binary Outcome
 
         % TODO
         % https://onlinelibrary.wiley.com/doi/full/10.1002/gepi.22061
         % The CIT is specifically designed to test whether a variablemediates the association between (and is the only causal linkbetween) a genetic locus and a quantitative trait. It is moreflexible than MR because it does not assume that the geneticvariant is chosen specifically to be an instrument for the medi-ator. Due to the way the test is constructed, the CIT is alsoimmune to problems of pleiotropy and reverse confounding.
             not tried in ch2 due to low power, power not evaluated for ch4
 
+    option: MR with expression 
+        genetic instruments
+        as demonstrated by e.g. qinqin, use (r)eqtl as genetic instruments
+
         e.g. sigeclec10
         we have eqtls for it, but a bad idea since indep
 
-        Causal Inference Test for a Binary Outcome
+        does this approach require external datasets?
 
 unification
     triangulation
