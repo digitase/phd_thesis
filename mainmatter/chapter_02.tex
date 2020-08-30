@@ -57,7 +57,7 @@ For novel and emerging diseases, there may be no prior knowledge of robust corre
 % Preparing for the Next Influenza Pandemic: The Development of a Universal Influenza Vaccine Michelle C Crank, John R Mascola, Barney S Graham The Journal of Infectious Diseases, Volume 219, Issue Supplement_1, 15 April 2019, Pages S107–S109, https://doi.org/10.1093/infdis/jiz043
 In response, the last decade has seen the rise of systems vaccinology studies: the analysis of high-dimensional data measured using multiple technologies in vaccinated individuals, in order to characterise response to vaccination at multiple levels of the biological system\autocite{pulendran2014SystemsVaccinologyProbing}.
 \todo{is there a more recent review?}
-\todo{define 'signature'}
+\todo{define 'signature': nvm, remove it}
 Such information helps elucidate a vaccine's mode of action, discover \enquote{molecular signatures} predictive of vaccine safety and efficacy, and has become an increasingly important part of the modern vaccine development chain\autocite{hagan2015SystemsVaccinologyEnabling,raeven2019SystemsVaccinologyBig}.
 
 Various systems vaccinology studies of seasonal influenza vaccines have been conducted, taking longitudinal measurements pre-vaccination, and commonly at some subset of days 1, 3, 7, and 28 post-vaccination.
@@ -326,8 +326,10 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 % NOTE:
 % 3.3.	Mappability has not been considered
 \todo{add software versions}
+% NOTE: Salmon is not pseudo-alignment: "Unlike pseudoalignment, Salmon’s lightweight mapping procedure tracks, by default, the position and orientation of all mapped fragments."
 Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, which internally accounts for transcript length and GC composition.
 % https://www.biostars.org/p/304552/
+% TODO: check, this should be done after converting TPM to counts with tximport? summing TPMs doesn't make sense
 To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
 % Also see:
 %
@@ -358,6 +360,14 @@ Genes with short noncoding RNA biotypes\footnote{miRNA, miRNA\_pseudogene, miscR
 Globin genes, which are highly expressed in erythrocytes and reticulocytes, cell types expected to be depleted in \gls{PBMC} \autocite{min2010VariabilityGeneExpression}, were also removed.
 % TODO: https://www.nature.com/articles/s41598-020-62801-6
 Given the proportion of removed counts at this stage was low for most samples (\autoref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to have been efficient.
+
+
+% TODO: justifications
+            % 1.25 CPM = 10 counts based on median lib size
+            % Count of zero will be dominated by pseudo-count before log transform
+            % using a pseudo-counts based approach for norm
+            % globins should not be expressed in immune cells
+            % counts in short ncRNAs can be misassignments
 
 \begin{figure}
     \centering
@@ -455,6 +465,7 @@ The final normalised $\log_2$ intensity values for these 18216 genes over 173 sa
 
 \subsection{\Glsfmtlong{DGE}}
 
+% TODO: https://github.com/matloff/regtools/blob/master/inst/ScalingInPCA.md?s=09
 \gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\autoref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
 % TODO: note no filtering of expression data before pca due to wanting to see batch fx
 Normalisation was also not able to completely remove the batch effect within the array data (\autoref{fig:hird_expression_pcs}a).
@@ -502,12 +513,13 @@ For the array data, as \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} 
 % 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
 % Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
 % 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
-For the \gls{RNAseq} data, between-sample normalisation was performed using the \gls{TMM} method\autocite{evans2018SelectingBetweensampleRNASeq} from edgeR\autocite{robinson2010EdgeRBioconductorPackage}; 
+For the \gls{RNAseq} data, between-sample normalisation factors were computed using the \gls{TMM} method\autocite{evans2018SelectingBetweensampleRNASeq} from edgeR::calcNormFactors\autocite{robinson2010EdgeRBioconductorPackage}; 
+% TODO: Note: calcNormFactors doesn’t normalize the data, it just calculates normalization factors for use downstream.
 then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisionWeights}, resulting in expression values with units of $\log_2{\text{\gls{CPM}}}$.
 \todo{this is DGE specific normalisation, which is why it goes here, not in the preprocessing section}
 % TODO:
-% voom does t(log2(t(counts + 0.5)/(lib.size + 1) * 1e+06)), it does not variance-stabilise.
-% The idea is to use weights instead.
+% voom does t(log2(t(counts + 0.5)/(lib.size + 1) * 1e+06)), where lib.size considers norm.factors, it does not variance-stabilise.
+% The idea is to use precision weights for each observation instead.
 
 % 7.	Differential expression (limma)
 % 7.2.	Create contrasts
@@ -526,6 +538,7 @@ then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisi
 % 7.9.	(decideTests)
 Linear models were fit using limma\autocite{ritchie2015LimmaPowersDifferential}, which is computationally fast, and performs well for sufficiently large ($n \ge 3$ per group) sample sizes\autocite{soneson2013ComparisonMethodsDifferential}.
 For each gene, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
+% TODO: age is assumed linear here
 \todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
 \todo{add equation from ch3. especially justify having TRI in as predictor, by noting equiv of traditional lm to contrasts}
 % TODO: The peril of adjusting for baseline when using change as a predictor
@@ -627,6 +640,7 @@ The choice of prior for between-studies heterogeneity is influential when k is s
 % - But with modal estimation, the estimate can be on the boundary, which can create problems in posterior predictions. For example, consider a varying-intercept varying-slope multilevel model which has an intercept and slope for each group. Suppose you fit marginal maximum likelihood and get a modal estimate of 1 for the group-level correlation. Then in your predictions the intercept and slope will be perfectly correlated, which in general will be unrealistic.
 % Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
 Since I assumed zero estimates for $\tau$ are unrealistic, I use a weakly-informative gamma prior recommended by \autocite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$, increasing gently as $\tau$ increases.
+% TODO: the key point is to not constrain the value of tau to be a single estimate from 2 data points, but assume that other genes may be informative of plausible values
 This constrains $\tau$ to be positive, but still permits estimates close to zero if the data support it.
 This is in constrast to priors used in other studies from the log-normal (e.g. \autocite{pullenayegum2011InformedReferencePrior,turner2015PredictiveDistributionsBetweenstudy}) or inverse-gamma (e.g. \autocite{higgins1996BorrowingStrengthExternal}) families that have derivatives or zero close to zero, thus ruling out small values of $\tau$ no matter what the data suggest; and in contrast to half-t family priors (e.g. \autocite{gelman2006PriorDistributionsVariance,seide2019LikelihoodbasedRandomeffectsMetaanalysis}), which have their mode at zero, and do not rule out $\tau=0$.
 
@@ -877,6 +891,7 @@ Hence, it is particularly important that the robustness of these observed baseli
 %
 % TODO
 \todo{There is also something to be said about 'prediction is not inference'. For use as correlates of protection, as promised by proponents of systems studies, prediction is what is important.}
+% TODO: i have defined what would be deemed "correlates of ab response", now move to prediction
 % - Prediction is not inference tsang2014GlobalAnalysesHuman
 % TODO: https://stats.stackexchange.com/questions/22718/what-is-the-difference-between-linear-regression-on-y-with-x-and-x-with-y/62323#62323
 % In statistics, errors-in-variables models or measurement error models[1][2][3] are regression models that account for measurement errors in the independent variables. In contrast, standard regression models assume that those regressors have been measured exactly, or observed without error; as such, those models account only for errors in the dependent variables, or responses.[citation needed]

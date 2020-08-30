@@ -14,7 +14,7 @@
 \usepackage[T1]{fontenc}
 % inputenc allows the user to input accented characters directly from the keyboard
 \usepackage[utf8]{inputenc}
-% provide additional commands e.g. \texteuro; fixes errors like "Command * unavailable in encoding T1."
+% provide additional commands e.g. \texteuro; fixes some errors of the type "Command * unavailable in encoding T1."
 \usepackage{textcomp}
 
 % Culturally-determined typographical (and other) rules for a wide range of languages
@@ -112,8 +112,11 @@
 % Using \usepackage{flafter} avoids figures floating before they were defined
 \usepackage{flafter}
 
-% tabu provides a single environment: tabu designed to make all kind of tabulars provided that they do not split accross pages.
+% tabu provides a single environment: tabu designed to make all kind of tabulars provided that they do not split across pages.
 % \usepackage{tabu}
+
+% The package defines an environment tabularx, an extension of tabular which has an additional column designator, X, which creates a paragraph-like column whose width automatically expands so that the declared width of the environment is filled.
+% \usepackage{tabularx}
 
 % Nicer table rules
 \usepackage{booktabs}
@@ -320,7 +323,9 @@
 \newabbreviation[]{CD}{CD}{Crohn's disease}
 \newabbreviation[]{UC}{UC}{ulcerative colitis}
 \newabbreviation[]{IMID}{IMID}{immune-mediated inflammatory disease}
-\newabbreviation[]{anti-TNF}{anti-TNF}{anti-tumour necrosis factor}
+\newabbreviation[]{TNF}{TNF}{tumour necrosis factor}
+\newabbreviation[]{CRP}{CRP}{C-reactive protein}
+\newabbreviation[]{HBI}{HBI}{Harvey Bradshaw index}
 % \newabbreviation[]{}{}{}
 %
 

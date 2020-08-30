@@ -190,6 +190,7 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % Can use peer
 % interaction with time fixed fx vs stratified
 % \todo{interactions, apart from scalability genome wide, and additional complexity when also adding cell type and platform interactions, and assumption of homoscedascity between all groups}
+% vs pooling power
 %
 % note intent to use joint modelling later, so as to not lose info and fall into jelly bean problem https://www.ahajournals.org/doi/10.1161/CIRCULATIONAHA.108.836601
 
@@ -390,7 +391,7 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 % the more cell type specific, the more affected by composition
 % extreme case: perfectly cell type specific is called a marker gene, and is used in deconv methods to actually get cell estiamtes.
 
-% Also, \gls{RNAseq} expression estimates are inherently compositional \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
+% TODO: Also, \gls{RNAseq} expression estimates are inherently compositional at many levels (blood sample, sequencing) \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
 \Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
 so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample, 
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
@@ -807,6 +808,10 @@ I assume this represents a power advantage from having larger a sample size, rat
 
 \subsection{Genotype interactions with cell type abundance}
 
+% TODO: note moderator is more likely, but mediator G -> CC -> E is also possible
+
+% TODO need a DAG on why reqTL in vivo cannot guarantee causality of G on change in E
+
 \todo{be more specific: "moderator", 'modify'?????}
 % TODO: In regression, one of the assumptions is the additive assumption. This assumption states that the influence of a predictor variable on the dependent variable is independent of any other influence
 % Holding all else equal Implies beta does not depend on other predictors
@@ -824,6 +829,11 @@ one can not adjust for this modification just by including the main effect for c
 % TODO: if the data gen process is so, the simply a misspecification to not have it
 % referred to in econometrics as "functional form misspecification", a special case of OVB.
 % e.g. https://www.econometrics-with-r.org/9-2-ttivomra.html
+% basically, if you need a diff slope over levels of modifying var, it can't possibly have one without it being in the model
+% if you need var slopes, but only allow var intercepts
+%
+% https://stats.stackexchange.com/questions/263324/how-can-the-regression-error-term-ever-be-correlated-with-the-explanatory-variab
+% the realisation of the error term, the residuals, is forced to be uncorrelated, hence you get a biased estimate
 Given the modest sample size, I use the two-step approach used by others\autocite{westra2015CellSpecificEQTL,peters2016InsightGenotypePhenotypeAssociations,kim-hellmuth2017GeneticRegulatoryEffects,davenport2018DiscoveringVivoCytokineeQTL},
 where tests for interaction are only performed at a subset of tests, often the lead \gls{eQTL} variant for each gene.
 % Unfortunately, there seems to be no consensus between these studies for controlling the interaction effect tests for multiple testing.
@@ -1138,6 +1148,7 @@ hence the signal could be hypothesised to result simply from the increased propo
 rather than a upregulation-driven increase in detection power,
 or a vaccine-induced activation of the locus at day 1.
 \todo{need to consider: if this kind of thing is what bulk in vivo reQTL can find, they what is the additional value over FACS?}
+% TODO: need to consider more cell types one by one?
 
 % TODO: do we fall into the Table 2 Fallacy? we should not interpret cell count estiamte params as causal effects, but moderation is demonstrable
 % http://www.dagitty.net/learn/graphs/table2-fallacy.html

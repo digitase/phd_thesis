@@ -20,36 +20,43 @@ summary of chapters
     suffer from core set of limitations 
 
 What is response?
-    why is it so difficult to make reliable response prediction, esp at baseline?
+why is it so difficult to make reliable response prediction, esp at baseline?
 
-    move away from dichotomania
-    % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
-    % Responder analysis is a 4-fold loser. It fails to give the needed clinical
-    % interpretation, has poor statistical properties, increases the cost of studies
-    % because binary outcomes require significantly higher sample sizes, and raises
-    % ethical issues because more patients are required to be randomized than would
-        in ch 3, used TRI
-            also need the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
-        in ch 4, 
-            a very complex phenotype
-            May be more powerful to directly with the constituent phenotypes directly (CRP level, HBI score, whether there was escalation in steroid treatment, or exit for treatment failure)
+    need very large 
+        replicability: modules more robust
 
-            predictive claims
+        % caution on reports about any single gene e.g. SIGLEC10 ch4
 
-            also, similar to beyond Abs
-            response has many definitions: subphenotypes that are both positive and negative may be complex traits with different architectures: immunogenicity, primary response, loss of response, remission rate, adverse fx
+    improve efficiency
+        move away from dichotomania
+        % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
+        % Responder analysis is a 4-fold loser. It fails to give the needed clinical
+        % interpretation, has poor statistical properties, increases the cost of studies
+        % because binary outcomes require significantly higher sample sizes, and raises
+        % ethical issues because more patients are required to be randomized than would
+            in ch 3, used TRI
+                also need the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
+            in ch 4, 
+                a very complex phenotype
+                May be more powerful to directly with the constituent phenotypes directly (CRP level, HBI score, whether there was escalation in steroid treatment, or exit for treatment failure)
 
-    rely of stability of 'responder', something intrinsic
-        esp in DGE models (more below)
-    "60\% of the time, it works every time"
-        \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
-        senn2016MasteringVariationVariance
-        senn2018StatisticalPitfallsPersonalized
+                predictive claims
 
-        reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
+                also, similar to beyond Abs
+                response has many definitions: subphenotypes that are both positive and negative may be complex traits with different architectures: immunogenicity, primary response, loss of response, remission rate, adverse fx
 
-            in ch4: repeated dosing helps guard against this, some hope that NR is stable
-            and n of 1 trials
+    or response itself is the problem?
+        rely of stability of 'responder', something intrinsic
+            esp in DGE models (more below)
+        "60\% of the time, it works every time"
+            \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
+            senn2016MasteringVariationVariance
+            senn2018StatisticalPitfallsPersonalized
+
+            reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
+
+                in ch4: repeated dosing helps guard against this, some hope that NR is stable
+                and n of 1 trials
 
 The design of more longitudinal cohorts in the future
 
@@ -87,7 +94,8 @@ The design of more longitudinal cohorts in the future
     computation not limits correct stat
 
 what data to get from these trials?
-    reQTL on bulk in vivo has huge challenges
+reQTL on bulk in vivo has huge challenges
+more n won't help
 
     composition explains a huge amount of var in bulk farahbod2020UntanglingEffectsCellular
 
@@ -105,6 +113,7 @@ what data to get from these trials?
         technology itself is proportional, with norm based on ng input, then random sampling during sequencing
 
     but effect is certainly EXARCERBATED by in vivo
+        heterogeneity is confounded with recruitment!!!
         not just sample var, but active recuitment changes in cell prop e.g. recruitment
             why should this be considered a con of in vivo?
 
@@ -228,7 +237,7 @@ finally translation and prediction
 
     Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
         % Calculating the sample size required for developing a clinical prediction model
-        two chapters of mine
+        two chapters of mine are merely descriptive, only form the foundation for next leap should be to causal or predictive
             have touched on suggesting to build a predictive model
         but have always treated the R as indep in DGE
         kinda strange: response is a organism pheno should be downstream of E
@@ -247,9 +256,20 @@ finally translation and prediction
                 assuming otherwise would stray into the realm of error in variables models
             
                 we are effectively assuming that R is an intrinsic thing, and is determined without error
+
+        gene signatures, rise and fall
+            expression as a biomarker
+
+            success stories \url{https://www.nature.com/articles/415530a} 
+            and
+            rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
+
+            % https://www.annalsofoncology.org/article/S0923-7534(19)36531-7/fulltext
+            Table 1Evidence-based criteria for a prognostic gene signature in the path from the laboratory to clinical practice
+
+        needed to reach the status of signature
         
-        efron2020PredictionEstimationAttribution
-        prediction is inherently different
+    efron2020PredictionEstimationAttribution prediction is inherently different
         % For those of uswho have struggled to find “significant” genes in
         % a microarray study,8 the almost perfect prostate cancer predictions
         % of randomforests and gbmhave to come as a disconcerting
@@ -279,16 +299,6 @@ finally translation and prediction
             % https://pubmed.ncbi.nlm.nih.gov/20361856/
 
         sysvacc: need genetics to move beyond prediction
-
-        gene signatures, rise and fall
-            expression as a biomarker
-
-            success stories \url{https://www.nature.com/articles/415530a} 
-            and
-            rise and fall paper: 15 years experience from cancer: list challenges to clinical implementation from Discussion
-
-            % https://www.annalsofoncology.org/article/S0923-7534(19)36531-7/fulltext
-            Table 1Evidence-based criteria for a prognostic gene signature in the path from the laboratory to clinical practice
 
     and to Cost-effectiveness and clinical implementation
         if you can identify NRs, what are you going to do about it?
@@ -321,7 +331,16 @@ the missing link needed for causality
         % The CIT is specifically designed to test whether a variablemediates the association between (and is the only causal linkbetween) a genetic locus and a quantitative trait. It is moreflexible than MR because it does not assume that the geneticvariant is chosen specifically to be an instrument for the medi-ator. Due to the way the test is constructed, the CIT is alsoimmune to problems of pleiotropy and reverse confounding.
             not tried in ch2 due to low power, power not evaluated for ch4
 
+            Causal Inference Methods to Integrate Omics and Complex Traits
+            \url{http://m.perspectivesinmedicine.cshlp.org/content/early/2020/08/17/cshperspect.a040493.abstract?s=09}
+
+            % TODO: mediation can exist in the absence of a 'significant' total effect G -> pheno
+            % http://davidakenny.net/cm/mediate.htm
+            % In the opinion of most though not all analysts, Step 1 is not required. (See the Power section below why the test of c can be low power, even if paths a and b are non-trivial.)
+
     option: MR with expression 
+        instrument variables are really just perfect mediators
+
         genetic instruments
         as demonstrated by e.g. qinqin, use (r)eqtl as genetic instruments
 
@@ -329,6 +348,9 @@ the missing link needed for causality
         we have eqtls for it, but a bad idea since indep
 
         does this approach require external datasets?
+
+        MRLocus: identifying causal genes mediating a trait through Bayesian estimation of allelic heterogeneity
+        \url{https://www.biorxiv.org/content/10.1101/2020.08.14.250720v2}
 
 unification
     triangulation
@@ -340,6 +362,8 @@ unification
         % https://pubmed.ncbi.nlm.nih.gov/32709985/
         % https://www.nature.com/articles/s41576-020-0258-4
         % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
+
+        % e.g. anti-TNF does not imply reduction in TNF expression, but we see only downstream fx through regulation
 
     MOFA
     multiomics
