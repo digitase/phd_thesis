@@ -97,6 +97,7 @@ The overall pattern of expression over time from my meta-analysis agrees with th
 \todo{needs 1 more punchline sentence here}
 
 From existing \gls{HAI} and \gls{MN} data, I compute a baseline-adjusted, continuous measure of antibody response to vaccination, the \gls{TRI}\autocite{bucasas2011EarlyPatternsGene}.
+% TODO: mention TRI alternative max aFC
 Effect sizes of genes with expression that correlated with \gls{TRI} were very dependent on measurement platform (array or \gls{RNAseq}), and no robust hits were detected in the meta-analysis.
 Leveraging the greater power that rank-based gene set enrichment analyses affords, I find modules of coexpressed genes that correlate with antibody response, with the strongest effects observed for adaptive immune modules at day 7, but also in inflammatory modules at baseline.
 % TODO: The power of a binary hypothesis test is the probability that the test rejects the null hypothesis ( H 0 {\displaystyle H_{0}} H_{0}) when a specific alternative hypothesis ( H 1 {\displaystyle H_{1}} H_{1}) is true. The statistical power ranges from 0 to 1, and as statistical power increases, the probability of making a type II error (wrongly failing to reject the null hypothesis) decreases.
@@ -710,6 +711,13 @@ For the Bayesian random-effects meta-analysis, posterior effect sizes and standa
 Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest}\autocite{weiner3rd2016TmodPackageGeneral}, which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \texttt{bayesmeta}.
 % TODO: alternative
 % The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
+%
+% or TREAT from limma, or equiv testing
+
+% FDR
+% A data frame with module names, additional statistic (e.g. enrichment or AUC, depending on the test), P value and FDR q-value (P value corrected for multiple testing using the p.adjust function and Benjamini-Hochberg correction.
+
+ % TODO: write up method for data mining, write up how redundant similarly named modules are
 
 The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}, which are annotated sets of coexpressed genes mined from publicly available human blood transcriptomic data, and provide sets tailored for enrichment analyses in blood cells.
 % TODO: why use cerno https://academic.oup.com/bioinformatics/article/35/24/5146/5511403
@@ -929,6 +937,8 @@ Chapter 3 will examine one hypothesis: the impact of common human genetic variat
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
 
 % TODO: not adjusted for cell comp, but not necc bad
+% but cant get around compositional nature of data, and sep change in prop from up/down true
+% in ch4, I adjust
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
 
