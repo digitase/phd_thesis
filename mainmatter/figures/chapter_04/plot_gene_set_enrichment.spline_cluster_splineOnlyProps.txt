@@ -1,0 +1,16 @@
+# A tibble: 12 x 4
+# Groups:   cluster [6]
+   cluster spline_only     n  prop
+     <int> <lgl>       <int> <dbl>
+ 1       1 FALSE         118 0.894
+ 2       2 FALSE           5 0.161
+ 3       3 FALSE           8 0.889
+ 4       4 FALSE           5 0.25 
+ 5       5 FALSE          13 0.867
+ 6       6 FALSE           1 0.333
+ 7       1 TRUE           14 0.106
+ 8       2 TRUE           26 0.839
+ 9       3 TRUE            1 0.111
+10       4 TRUE           15 0.75 
+11       5 TRUE            2 0.133
+12       6 TRUE            2 0.667

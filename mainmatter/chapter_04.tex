@@ -145,6 +145,7 @@
 
 \subsection{Chapter summary}
 
+% TODO in this ch, I describe E differences associated with 
 \todo{this subsection}
 \1 <context>: summary of above
     \2 conflicting results in the literature and need for validation for transcriptomic signatures for R/NR to anti-TNF 
@@ -475,7 +476,6 @@ The variables that explained the most variance included patient, cell proportion
     \2 but unclear if preregistered power calculations would extend to this test \url{https://statmodeling.stat.columbia.edu/2018/03/15/need-16-times-sample-size-estimate-interaction-estimate-main-effect/}
 
     \2 there are baseline diffs are evident in clinical data \todo{because this is non-randomised, baseline differences do matter??}
-    % Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
     \2 “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).” \autocite{kennedy2019PredictorsAntiTNFTreatment}
     \2 I include many but not all of these covariates in the DGE model
 
@@ -503,6 +503,9 @@ The variables that explained the most variance included patient, cell proportion
     \2 to get p values for papers, Dream uses lmerTest approximation Satterthwaite df \url{https://link.springer.com/article/10.3758/s13428-016-0809-y} with REML
     \2 this combo controls type 1 error for n>144 in lmerTest simulations
     \2 FDR BH separately per comparison: "The default method="separate" and adjust.method="BH" settings are appropriate for most analyses. method="global" is useful when it is important that the same t-statistic cutoff should correspond to statistical significance for all the contrasts." \url{https://rdrr.io/bioc/limma/man/decideTests.html}
+
+% TODO: confidence intervals for FDR https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-288
+    % https://en.wikipedia.org/wiki/False_coverage_rate
 
 \subsubsection{Spline model for difference over all timepoints}
 
@@ -560,6 +563,9 @@ how to account for levels of noise in expression data?
         \3 practice ranks are comparable between t and z.std, even though dream says otherwise, very high spearman cor
         % TODO: add spearman rank corr
     \2 approx 8k genes in the gene set annotation for tmod
+
+% TODO: add explanation of interaction term column
+    % note interpretation depends on the original signs of effects
 
 The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}
 "DC" (from Chaussabel et al. 2008)
@@ -739,7 +745,9 @@ This is due to sample selection for \gls{RNAseq} to balance the sample size for 
 % Table 1. 
 \input{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.table1.tex}
 
-\subsection{Gene expression associated with primary response at baseline}
+\subsection{Gene expression associated with response at baseline}
+
+% TODO:  increased expression vs upreg: make this all consistent
 
 Patient primary response to anti-\gls{TNF} was defined after the induction period, between week 12 and week 14 according to the clinical decision algorithm from \textcite{kennedy2019PredictorsAntiTNFTreatment} described in \autoref{multiPANTS:PR_definition}, 
 which integrates clinician assessment with change in \gls{CRP} level and \gls{HBI} score.
@@ -770,7 +778,6 @@ Conversely, at three genes downregulated in the adalimumab-only analysis that we
 % -1.1529588 1.169468 -4.212961 2.854891e-05 0.1476074 -4.184743
 % -1.2231591 1.169468 -4.479679 8.738258e-06 0.0451797 -4.446249
 and \gene{IGKV1-9} (\num{-1.1529588}, \num{-1.2231591}).
-\todo{The role of cell composition estimates here may be more akin to precision variables. could be suppression, but hard to tell with n=3 hits to work with, in any case, formal tests for difference in effect between adjusted and non-adjusted estimates were not performed}
 
 To identify coordinately up and downregulated gene sets and increase sensitivity for detecting differences between primary responders and non-responders,
 I performed ranked gene set analysis in on the gene-wise z-statistics using blood transcriptomic modules: annotated sets of coexpressed genes in peripheral whole blood from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
@@ -779,7 +786,7 @@ This module-level analysis was also run unadjusted (\autoref{fig:multipants_dge_
 Despite only \gene{SAMD10} having a significantly different effect between drugs at the gene-level (an interaction between drug and response at week 0), 
 the large global differences observable in \autoref{fig:multipants_dge_volcano_week_0_R_N} were detected in the module-level analysis\footnote{It is likely the study is not powered to detect gene-level three-way interaction effects between timepoint, drug and response, although I am not aware of which subgroup analyses may have been prespecified during the study design and sample size calculations for the \gls{PANTS} \gls{RNAseq} cohort.}.
 Without adjusting for cell composition, many of the most significantly upregulated modules in the pooled analysis, 
-including upregulation of monocyte (LI.M11.0, LI.S4) and neutrophil modules (LI.M37.1, LI.M11.2),
+including upregulation of monocyte (LI.M11.0, LI.S4), neutrophil (LI.M37.1, LI.M11.2), and dendritic cell (LI.M165, LI.S11),
 appear to be driven by infliximab.
 These modules have heavily reduced significance after adjusting for cell composition.
 The new modules that are most upregulated in the pooled analysis after adjustment have more consistent effects between drugs, such as
@@ -788,7 +795,7 @@ MHC-TLR7-TLR8 cluster (LI.M146), antigen presentation (LI.M71, LI.M95.0), and my
 For downregulated modules before adjustment, I observed infliximab-specific effects for for NK cell (LI.M7.2) and T cell (LI.M7.0, LI.M7.1) modules.
 Adalimumab-specific effects were observed for plasma cell, B cell and immunoglobulin modules (LI.M156.0, LI.M156.0, LI.S3); and cell cycle and transcription modules (LI.M4.0, LI.M4.1).
 After adjustment, the significance of infliximab-specific modules was reduced, 
-but the significance of adalimumab-specific modules and the corresponding interaction effects went up.
+but the significance of adalimumab-specific modules and the corresponding interaction effects was increased.
 
 \begin{figure}
     \centering
@@ -818,7 +825,7 @@ but the significance of adalimumab-specific modules and the corresponding intera
     \label{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}
 \end{figure}
 
-\subsection{Assessing previously reported baseline predictors of anti-\glsfmtshort{TNF} response}
+\subsection{Assessing previously reported baseline predictors of response}
 
 In addition to hits from this study, \autoref{fig:multipants_dge_volcano_week_0_R_N} is annotated with genes whose expression in gut biopsies or blood have been tested as baseline predictors of primary response in the literature\autocite{arijs2009MucosalGeneSignatures,arijs2010PredictiveValueEpithelial,verstockt2019LowTREM1Expression,salvador-martin2020GeneSignaturesEarly}.
 Some genes expressed in gut mucosa (e.g. \gene{IL13RA2}) were not appreciably expressed in this whole blood dataset, 
@@ -833,6 +840,10 @@ before (logFC=\num{0.29283535}, FDR=\num{0.0595323})
 nor after adjusting for cell composition (logFC=\num{0.04625626}, FDR=\num{0.9864125}).
 % 0.04625626 7.668094  0.6661333 0.50560221 0.9864125  0.6657010
 
+% TODO: add effect sizes from those studies
+
+% TODO: confint not implemented in variancePartition for topTable on dream objects, and multiplicity adjustment is non-trivial, see \url{https://amstat.tandfonline.com/doi/abs/10.1198/016214504000001907}
+
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000124731.SYMBOL_TREM1.pdf}
@@ -840,7 +851,7 @@ nor after adjusting for cell composition (logFC=\num{0.04625626}, FDR=\num{0.986
 %     \label{fig:multipants_dge_TREM1}
 % \end{figure}
 
-\subsection{Gene expression associated with primary response after anti-\glsfmtshort{TNF} induction}
+\subsection{Gene expression associated with response post-induction}
 
 The same methodology applied at week 0 was applied at week 14 to identify differences in post-induction expression associated with primary response.
 A larger proportion of the transcriptome is differentially expressed at week 14: 
@@ -890,11 +901,11 @@ The direction of effect in both cases, downregulation of markers in primary resp
     \label{fig:multipants_dge_panelPlot_week_14_R_N_cellPropT}
 \end{figure}
 
-\subsection{Magnification of expression change from baseline to post-induction in primary responders}
+\subsection{Magnification of expression change from baseline to post-induction in responders}
 
 Given the stronger differences in expression between primary responders and non-responders at week 14 versus week 0,
 I estimated the change in expression from week 0 to week 14 within the two groups, and also estimated the timepoint by response interaction.
-I show only the pooled analysis here, as like with the within week 14 comparison, change from week 0 to week 14 was relatively consistent between drugs, with exceptions noted.
+I perform only the pooled comparison here both to simplify the analysis, and because similarly to the within week 14 comparison, change from week 0 to week 14 was relatively consistent between drugs, with exceptions noted.
 
 Without adjusting for cell proportions,
 12862 genes were differentially expressed in primary responders at week 14 vs week 0 in the pooled analysis,
@@ -941,9 +952,10 @@ Magnification is also observed at the module level, with nearly all module effec
     \label{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}
 \end{figure}
 
-\subsection{Interferon modules }
+\subsection{Interferon modules with opposing differential expression in responders and non-responders}
+\label{subsec:multipants_dge_opposing_interferon}
 
-There are genes were downregulated from week 0 to week 14 in responders, but upregulated in non-responders \autoref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}.
+\autoref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}) also contained genes that were downregulated from week 0 to week 14 in responders, but upregulated in non-responders.
 Considering modules from \autocite{chaussabel2008ModularAnalysisFramework} in \software{tmod} (prefixed \enquote{DC}),
 \gene{STAT2}, \gene{GBP5}, and \gene{PARP14} are annotated into an interferon module (DC.M3.4, tmodHGtest FDR=\num{0.0001261719}).
 \gene{IFIT3} and \gene{GBP2} are also annotated into interferon modules (DC.M1.2, DC.M5.12).
@@ -965,7 +977,7 @@ antiviral interferon signature (LI.M175), type I interferon response (LI.M127), 
     \label{fig:multipants_dge_evidencePlots_C_3_1_Interferon}
 \end{figure}
 
-\subsection{Sustained expression differences between primary responders and non-responders during anti-\gls{TNF} maintenance}
+\subsection{Sustained expression differences between primary responders and non-responders during maintenance}
 
 As \gls{PANTS} is an observational study, it was able to include some patients who continued with anti-\gls{TNF} therapy
 even after meeting the definition of primary non-response at week 14.
@@ -985,7 +997,7 @@ Many of these genes had previously been identified as having significant differe
 either within week 14, or for change in expression from week 0 to week 14.
 Cluster 1 contained mainly previously identified genes (\autoref{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}),
 and was enriched for modules including 
-myeloid cells and monocytes (LI.M81, FDR=\num{2.114861e-06}),
+myeloid cells and monocytes (LI.M81, hypergeometric test, FDR=\num{2.114861e-06}),
 platelet activation (LI.M196, FDR=\num{1.347609e-05}),
 immune activation (LI.M37.0, FDR=\num{1.435659e-04}),
 and TLR and inflammatory signalling (LI.M16, FDR=\num{2.364913e-03}).
@@ -995,44 +1007,32 @@ The highest proportion of genes uniquely identified as significant by the spline
 Cluster 2 was enriched in \autocite{li2013MolecularSignaturesAntibody} B cell modules (LI.M47.0, FDR=\num{1.525815e-06}; LI.M47.1, FDR=\num{4.531246e-05})
 previously identified as having a greater increase from week 0 to week 14 in primary responders versus primary non-responders (\autoref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}),
 matching the observed cluster trajectory.
-Cluster 4 was not enriched in any modules from \autocite{li2013MolecularSignaturesAntibody}.
+Cluster 4 was not enriched in any modules from \textcite{li2013MolecularSignaturesAntibody}, but is enriched for a B cell module (DC.M4.10, FDR=\num{0.001367196}) from \textcite{chaussabel2008ModularAnalysisFramework}.
 Although no genes were significantly associated with response at week 0 (\autoref{fig:multipants_dge_volcano_week_0_R_N}),
-cluster 4 is coordinately downregulated in primary responders (CERNO test, p=\num{6.175642e-25}).
+the genes in cluster 4 are coordinately downregulated as a set in primary responders (CERNO test, p=\num{6.175642e-25}).
 
-% TODO: am here
-% write cluster 3
-%
-% TAKE HOMES:
-% baseline
-%     ifx is driven by cell comps that we measure
-%     ada less so
-%     many interactions between drugs at module level
-%     up mono and neutrophil is IFX
-%     down NK an T is IFX
-%     down plasma is ADA (gajoux in plasma matches)
-%     adjusting for cell does not completely remove interactions
-% baseline rep
-%     most previously reported gut markers not expressed or DE, expected
-%         except \gene{TNFRSF1B} and \gene{PTGS2} in gut
-%     TREM1 not DE, monocyte?
-% w14
-%     stronger signal/noise
-%     weaker drug x response interaction
-%     up and down modules similar after adjustment
-%         some new ones: IFN
-%     some baseline gut markers DE now
-% change
-%     most modules mag in R
-%     some similarity in w14 R vs w14 NR and w14 R vs w0 R
-% change mag exceptions
-%     for IFNs, upreg in NR
-% spline
-%     maintained out to w30 and w54
-%     cluster 3 is IFN motifs
-% reQTL
-%     not many reQTLs
+% AL353807.3
+% STAT1
+% BATF2
+% GBP1
+% GBP5
+% IRF1
+% TAP1
+% APOL2
+% APOL1
+Cluster 3 is also of interest, enriched for type I interferon response (LI.M127, FDR=\num{0.005680666}) and interferon (DC.M3.4, FDR=\num{0.0005266239}) modules,
+as well as genes that contain putative transcription factor binding motifs for interferon regulatory factors \gene{IRF7} (\software{g:Profiler} term ID TF:M00453\_1, adj. p value=\num{0.0050514484}) 
+and \gene{IRF8} (TF:M11684\_1, adj. p value=\num{0.0077680709}; TF:M11685\_1, adj. p=\num{0.0103433288}).
+The cluster trajectory shows direction of expression change is opposing in responders and non-responders from week 0 to week 14, followed by sustained differences at week 30 and week 54.
+The trajectory and interferon-related gene set enrichments are consistent with those identified in \autoref{subsec:multipants_dge_opposing_interferon}.
+Of the 9 genes in this cluster, 8 genes have significant interaction between week 0 to week 14 expression change and response status,
+whether or not correcting for cell composition.
+However, only \gene{GBP5} was differentially expressed from week 0 to week 14 in both responders and non-responders,
+and only when unadjusted for cell composition (\autoref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}).
+This indicates that such small and opposite effects in responders and non-responders may only be detected at a single gene level in the interaction analysis where the difference is amplified,
+and the spline analysis, with the support of additional data from week 30 and week 54.
 
-
+% TODO: add siglec 10 trend raw, and add to discussion
 
 \begin{figure}
     \centering
@@ -1057,8 +1057,8 @@ cluster 4 is coordinately downregulated in primary responders (CERNO test, p=\nu
     
 \subsection{Limited evidence for change in genetic architecture of gene expression over time}
 
-Given the substantial changes in expression from baseline to post-induction,after starting the drug, and the differing trajectories observed in responders and non-responders, I performed \gls{eQTL} mapping to detect common genetic variants associated with expression.
-
+Given the substantial changes in expression from baseline to post-induction,after starting the drug, and the differing trajectories observed in responders and non-responders, 
+I performed \gls{eQTL} mapping to detect common genetic variants associated with expression.
 Variants cis (within \SI{1}{\mega b} of the TSS) to 15040 genes were tested for association.
 Mapping was done within each timepoint (weeks 0, 14, 30, and 54),
 followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and control for multiple testing were done using \software{mashr}.
@@ -1071,9 +1071,12 @@ I compared eSNP effect sizes between week 0 and each of weeks 14, 30 and 54.
 to identify \glspl{reQTL} with significant difference in effect versus baseline,
 and may be associated with changes in expression from baseline.
 Most eSNPs were shared across timepoints;
-only six eSNPs were significant at BH FDR < 0.05:
+only six eSNPs-eGene pairs were significant at BH FDR < 0.05:
 with 1/6 for week 30 versus week 0 and 5/6 for week 54 versus week 0 (\autoref{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}).
 \todo{any need to add w14 to plot?}
+Of the six eGenes, \gene{NMI} and \gene{EPSTI1} both had their respective eSNPs having magnified effects on expression at week 54 compared to week 0,
+and both are annotated to contain putative binding motifs for \gene{IRF8} and \gene{IRF2} (\software{g:Profiler} term IDs TF:M11685\_1 and TF:M11665\_1).
+However, there may be complications of confounding \todo{right word???} by cell composition for reQTLs in bulk expression data (discussed in \autoref{subsec:hird_reQTL_methods_cellTypeInteraction}).
 
 % \begin{figure}
 %     \centering
@@ -1115,71 +1118,228 @@ with 1/6 for week 30 versus week 0 and 5/6 for week 54 versus week 0 (\autoref{f
 
 In \gls{PANTS}, a cohort of \gls{CD} patients receiving infliximab or adalimumab anti-TNF therapy for the first time,
 there were substantial differences in whole blood gene expression between primary responders and non-responders.
+At baseline, the greatest differences in expression were observed between future responders and non-responders to infliximab,
+with increased expression of monocyte, neutrophil and dendritic cell gene modules in responders,
+and decreased expression of T cell and NK cell modules.
+\todo{So many modules associations here, maybe try to Google some of them...}
+These effects appear to be infliximab-specific, and are attenuated after adjusting for the proportions of six major immune cell types,
+suggesting expression differences may be driven by mediation via the proportions of these cell types.
+% Although the sample size for infliximab is greater than for adalimumab,
+% this is unlikely to be the only factor, as the drugs are much more comparable after adjusting for cell composition.
 
-At baseline, 
-baseline discussion pointss
-- x up and down
-- infx effects more mediated by cell count
-- ada more mediated by upregulation
-- baseline diffes make it hard
+In contrast, future responders to adalimumab had lower baseline expression of plasma cell and cell division modules.
+Th module-level results line up with the three gene-wise hits for the adalimumab-only analysis:
+\gene{IGKV1-9} encodes the immunoglobulin light chain variable region that forms part of antibodies produced by plasma cells,
+\gene{KCNN3} is annotated to plasma cell surface signature module (LI.S3\autocite{li2013MolecularSignaturesAntibody}), 
+and the expression of both \gene{KCNN3} and \gene{PDIA5} are correlated with blood plasmablast frequencies\autocite{tsang2014GlobalAnalysesHuman}.
+It was reported by \textcite{gaujoux2019CellcentredMetaanalysisReveals} that baseline plasma cell abundances are lower for infliximab responders,
+hypothesising that plasma cell survival is supported by increased \gls{TNF} levels in non-responders.
+Plasma cells also formed a part of a correlated module of cell populations identified by \autocite{martin2019SingleCellAnalysisCrohn},
+where lower module expression was associated with better response to anti-\gls{TNF} in a cohort with patients taking both infliximab and adalimumab.
+However, both these studies were done in gut biopsy samples, and there was no report of strong between-drug heterogenenity.
+
+The adalimumab-specific associations I find were more significant after cell proportion adjustment, 
+which may indicate per-cell downregulation rather than cell abundance being associated with response.
+However, cell composition differences mediated by rarer cell types that have abundances poorly captured by the six major types used in the model will be poorly adjusted for.
+For example, plasma cell proportions are only weakly correlated with other immune cell types in the healthy immune system\autocite{zalocusky201810000Immunomes}, 
+although the relationship may differ for \gls{CD} patients.
+If this is the case, the role of cell composition estimates for adalimumab-specific may be more akin to precision variables.
+% although formal tests for difference in effect between adjusted and non-adjusted estimates would be required to confirm this.
+
+The differences between drugs are puzzling, especially the greater effect of cell composition adjustment for infliximab. 
+Baseline patient differences between drugs may offer a partial explanation.
+% Due to lack of randomisation, patients that took infliximab and adalimumab are likely to differ by more than drug.
+In the full \gls{PANTS} cohort, baseline characteristics other than those in \autoref{tab:multipants_table1} differ between patients on different drugs\autocite{kennedy2019PredictorsAntiTNFTreatment}.
+In particular, lower albumin, higher \gls{CRP}, and higher faecal calprotectin in infliximab patients suggest that they may have had greater disease severity.
+% Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
+Differences may be driven by patient or physician preference, for example, patients with more severe disease are often given infliximab rather than adalimumab\footnote{Kennedy, N. A., personal communication, 4 June (2020).}.
+I have not yet been able to access clinical variables such as \gls{CRP} and faecal calprotectin levels to consider as variables to adjust for in my modelling.
+A richer phenotype dataset containing some of these variables has been requested from collaborators.
+
+The strongest single-gene association in the pooled analysis was \gene{SIGLEC10}, 
+which had reduced significance post-adjustment with a comparable effect size,
+where baseline expression was approximately 25\% higher in responders.
+Direction of effect was consistent between drugs, but most significant in infliximab without cell composition adjustment.
+In \gls{IBD}, small molecules called \glspl{DAMP} are released due to tissue damage and cell death, 
+and further promote inflammation through pathogen sensing \gls{PRR} pathways that include \gls{TLR} family receptors\autocite{boyapati2016GutMucosalDAMPs,desouza2016ImmunopathogenesisIBDCurrent}.
+For instance, faecal calprotectin, a marker for \gls{IBD} activity, is a complex of two \glspl{DAMP}, S100A8 and S100A9\autocite{desouza2016ImmunopathogenesisIBDCurrent}.
+SIGLEC10 has been shown to repress \gls{DAMP}-mediated inflammation through binding CD24\autocite{boyapati2016GutMucosalDAMPs}.
+\gene{SIGLEC10} is expressed on B cells, monocytes and eosinophils \url{https://www.nature.com/articles/nri2056},
+and of these cell types, module level results posit monocytes as the most likely candidate cell type to have increased module expression in responders.
+In monocytes, \gene{SIGLEC10} expression is more specific to the CD16+ monocytes\autocite{martinez2009TranscriptomeHumanMonocyte},
+and in particular the CD14+CD16++ non-classical monocytes rather than the classical CD14++CD16- or intermediate CD14++CD16+ subsets\autocite{villani2017SinglecellRNAseqReveals}.
+% Non-classical (anti-inflammatory) monocytes have a role in many chronic inflam diseases \url{https://www.annualreviews.org/doi/full/10.1146/annurev-immunol-042617-053119#_i16} 
+% including CD \url{https://www.researchgate.net/profile/Siew-Cheng_Wong/publication/221723208_The_three_human_monocyte_subsets_Implications_for_health_and_disease/links/09e415101253562a3c000000.pdf}
+% Also from above: "The two main forms of human inflammatory boweldiseases (IBD) are Crohn’s disease (CD) and ulcerative colitis (UC), and the expansion of CD16+ monocytes had been reported in both forms of IBD [87,88]. In CD, it is during active disease that the monocyte subsets perturbation was observed [87,89]."
+In \gls{PANTS}, it was suggested by \textcite{kennedy2019PredictorsAntiTNFTreatment} that higher inflammatory load as indicated by low baseline albumin levels 
+may result in low week 14 drug levels due to faster drug clearance,
+and low drug levels at week 14 were in turn associated with non-response.
+A hypothetical model might be imagined where high baseline \gene{SIGLEC10} expression reflecting 
+higher proportions of CD16+ monocytes (or lower proportions of CD16- monocytes),
+decreased \gls{DAMP}-mediated inflammation, 
+and increased chance of primary response, possibly by affecting drug clearance rate.
+This is an extremely tentative model:
+both the cell proportion estimates and module definitions used thus far only represent monocytes as a whole,
+lacking the resolution to properly explore shifts in the three monocyte subsets.
+It may be possible to use expression of monocyte subset marker genes such as those identified by \textcite{villani2017SinglecellRNAseqReveals} to improve the resolution of the cell proportion estimates.
+
+Despite the strong heterogenenity in effects between drugs, one consistent effect that emerged after adjusting for cell composition was 
+baseline upregulation of MHC-TLR7-TLR8, antigen presentation, and interferon modules in responders.
+\todo{How does the MHC come in here?}
+As mentioned above, \gls{TLR} receptors are involved in pathogen sensing, and TLR7 and TLR8 are endosomal proteins primarily expressed in monocytes, macrophages and \glspl{DC},
+part of an antigen presentation pathway that senses bacterial DNA and activates downstream innate immune pathways including type I interferon response \url{https://www.nature.com/articles/cmi201238}.
+Type I interferons have pathogenic or protective roles in many \glspl{IMID}\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4084561/}.
+It has been suggested that type I interferon responses induced via TLR7 and TLR8 can suppress colitis in mouse models, and play a role in maintaining gut homeostasis
+\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5797585/}
+\url{https://www.frontiersin.org/articles/10.3389/fmed.2018.00032/full},
+so upregulation here may again represent a less severe baseline disease in future responders.
+
+I also assessed the previously reported association of \gene{TREM1} expression in blood with anti-\gls{TNF} response.
+\textcite{gaujoux2019CellcentredMetaanalysisReveals} found \gene{TREM1} expression to be 
+lower in infliximab responders in gut biopsies,
+but higher in responders in a separate whole blood cohort.
+\textcite{verstockt2019LowTREM1Expression} also reported \gene{TREM1} to be a marker of response,
+with lower expression in responders to infliximab and adalimumab in both gut biopsies and blood.
+I did not find \gene{TREM1} to be significantly differentially expressed in \gls{PANTS}.
+although the direction of effect is increased expression in responders---
+matching the \textcite{gaujoux2019CellcentredMetaanalysisReveals} direction of effect in blood---
+\gene{TREM1} is expressed on myeloid lineage cells such as monocytes and macrophages;
+\textcite{villani2017SinglecellRNAseqReveals} reported that \gene{TREM1} expression is most specific to 
+classical monocytes and a newly identified subtype within the intermediate monocytes (\enquote{Mono3}).
+The \gene{TREM1} effect is one of the infliximab-specific differentially expressed genes that is much stronger without cell proportion adjustment,
+so it may reflect association of baseline monocyte cell proportions with response.
+
+Most previously reported baseline markers in blood and gut biopsies were non-significant in this study.
+% One exception is \gene{PTGS2}, which is also specific to Mono3 in \textcite{villani2017SinglecellRNAseqReveals}.
+For gut markers, this may not be unexpected.
+% It was recently shown that the majority of the genes in a signature for response to anti-TNF in IBD patients show higher expression in immune cell subsets, compared to other cells present in the biopsy tissues, suggesting that resident or infiltrating leucocyte populations represent a good target to investigate responses to anti-TNF therapy. However, a clear cell population has not yet been implicated in the response (215).
+Although a subset of gut infiltrating immune cells and their precursors may also be circulating,
+genes specific to epithelium and some immune cell types as monocyte-derived macrophages that differentiate after they migrate into tissues,
+will be difficult to observe in \gls{PANTS}.
+
+% TODO
+% am here: now write paragraph on muddying of whether there is a consensus antiTNF baseline signature
+
+a consensus for any marker seems far from established
+
+    \textcite{gaujoux2019CellcentredMetaanalysisReveals} note that changes in cell abundance from baseline to post-treatment occur to a greater extent in responders. 
+
+        % Genetic Loci associated with C-reactive
+        % protein levels and risk of coronary heart disease.
+        %
+        % TODO: there are known loci
+        % This was recently demonstrated by
+        % a GWAS of C-reactive protein (CRP) levels; that study
+        % found that common variants near the HNF1A gene were
+        % associated with variation in CRP.60
+
+        richness of dataset 
+        although
+        other mediators of NR could be modelled using genetic instruments e.g drug level
+
+    \2 blood, not gut
+        % TODO: gaujoux2019CellcentredMetaanalysisReveals "Taken together, the majority of anti-TNF response signature genes are more highly expressed by immune cell subsets, with" suggesting immune cells and not gut tissue is expressing signatures, and blood might be ok
+        % 16 Planell N, Masamunt MC, Leal RF, et al. Usefulness of transcriptional blood biomarkers as a non-invasive surrogate marker of mucosal healing and endoscopic response in ulcerative colitis. J Crohns Colitis 2017;11:1335–46.
+    %
+    % gut biopsy: mucosal as well as infiltrating e.g. macrophages
+    % blood, only circulating, precursor, or downstream
+
+    final: even if it turns out that the between-drug heterogenenity in this study is resolved by adjusting for one or
+    even starker differences are likely to be found between studies
+    Many studies consider anti-\gls{TNF} drugs as a single class, aggregating cohorts for infliximab, adalimumab and other biologic anti-\gls{TNF} drugs.
+    due to the difficulty of large cohorts.
 
 
-\1 at baseline, SIGLEC10 and CROCC2 were significantly upregulated in future PR to anti-TNF in the pooled analysis, with concordant direction of effect in both drugs
-% IFX: probably due to cell comp
-% ADA: probably not only due to cell comp, or not completely adjusting
-    \2 high levels of SIGLEC10 in nc-monocytes \url{https://jbiol.biomedcentral.com/articles/10.1186/jbiol206} 
-        % but more formal test required for e.g. nc mono
-        \3 nc monocytes have a role in many chronic inflam diseases \url{https://www.annualreviews.org/doi/full/10.1146/annurev-immunol-042617-053119#_i16} including CD \url{https://www.researchgate.net/profile/Siew-Cheng_Wong/publication/221723208_The_three_human_monocyte_subsets_Implications_for_health_and_disease/links/09e415101253562a3c000000.pdf}
-    \2 SIGLEC10 is one of the innate immune cell-surface Ig superfamily that binds with CD24 and repress DAMP-mediated inflammation. \url{https://www.nature.com/articles/mi201614?draft=collection}
-    \2 in the context of IBD: Levels of DAMPS are increased in IBD. 
-        \3 chronic inflam -> tissue death -> release of small proinflam molecules called DAMPs \autocite{desouza2016ImmunopathogenesisIBDCurrent}
-        \3 "Interestingly, faecal calprotectin, the most frequently used and most sensitive marker of IBD clinical activity, is a complex of S100A8–S100A9, two prototypical DAMPs" \url{https://www.nature.com/articles/mi201614?draft=collection} \autocite{desouza2016ImmunopathogenesisIBDCurrent}
-        % Previous studies investigating the association between baseline markers of inflammation and anti-TNF response are conflicting.2,30 
-        \2 from \autocite{kennedy2019PredictorsAntiTNFTreatment} "In our study, higher baseline markers of inflammation predicted lower drug concentrations at week 14, suggesting that higher inflammatory load might contribute to faster drug elimination."
-        \2 proposed model: baseline high SIGLEC10 -> low DAMP levels -> low inflam -> (higher drug conc at w14) -> primary response
-            \3 it is stressed that this is a hypothetical model, no way to suggest causality due to the model used, and this being an uncontrolled cohort study
-\1 not much known about CROCC2 (aka AC104809.3), but it's expression is nc-monocyte specific \url{https://dice-database.org/genes/AC104809.3} \url{https://www.proteinatlas.org/ENSG00000226321-CROCC2}
-    \2 potential source of multiomics data for potential validation is \autocite{imhann20191000IBDProjectMultiomics}, contains drug response phenotypes
-    \2 also, validate using protome/serological data in PANTS, although there is a known disconnect between proteome and transcriptome
-        % expect modules to be more robust, esp since only a handful of hits for some comparisoins
-    % projection techniques into public datasets e.g. GIMATS paper, but blood expressoin datasets needed, % could use some RA ones https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033199
+    \2 cell prop correction
+        \3 overall, adjusting for cc drops number of DGE, and dampens effects, rather than increase, so mediation rather than precision?
+        \3 if the asusmption of mediation is believed, then two complementary interpretations from adjusted and non
+        \3 in general, more consistentcy after correction, but probs due to inflix more reliant on cell props
+        \3 highlight that cell comp makes a big diff: likely mediation
+        %     - estimate will no longer be total effect, but a null-biased effect
+        %         - it is the case that far fewer DGE were identified when cc were included
 
-\1 there ADA-specific downreg of gene modules in PR, especially plasma cell and immunoglobulins
-    \2 includes one of the 3 hits: IGKV1-9
-    \2 B cell genes down -> ??? -> response to anti-TNF
-        \3 consistent, as TNF is involved in T cell-dependent B-cell responses, so inhibiting it should lower B cell response \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6235207/}
-    \2 \textcite{gaujoux2019CellcentredMetaanalysisReveals} find lower props of inflam macrophage and plasma cell in IFX responders in gut biopsy
-    \todo{I have no idea why the effect is stronger in ADA}
-    \2 also, could be due to cell props, as B cell prop used in model is not perfectly correlated with plasma cell freq (see ch3)
-    \2 differences in baseline characteristics between drugs discussed later on in limitations
+    \3 6 main cell types corrected, but doesn't mean that's enough for rare types e.g. see \url{https://www.biorxiv.org/content/10.1101/2020.05.28.120600v1} 
+        \3 and did not sep out effect cell count modification on eQTL effect (e.g. recruitment vs stimulation)
+        \3 need further interaction models like in ch3
+        % TODO: for prediction, i agree with gajoux on not correcting for cell comp
+        % maybe undesirable, and even worth predicting based only on cell counts instaed
+        % there is a strong indication that whether as precision variable or mediators, cc is associated with R
+        %
+        % possible easy use of blood count for prediction, if parimosnious gene set predictor cannot be found
+        % mediation by cell counts suggets cell counts may predict?
 
-% TODO: although 22 more samples for IFX
-% dilution in pooled
-% retaine after cell prop adjustment
-% drug specific fx
-% suggesting that although the sample size is greater for infliximab than adalimumab,
-% it can not be the only factor.
+\textcite{gaujoux2019CellcentredMetaanalysisReveals} noted that adjusting expression for cell composition resulted in gene signatures that were worse at discriminating responders from non-responders.
 
-Down regulation of plasma cells, B cells and immunoglobulin modules: module-level results line up with the three gene-wise hits for the adalimumab-only analysis.
-KCNN3 is annotated to plasma cell surface signature module (LI.S3).
-The expression of both \gene{KCNN3} and \gene{PDIA5} are correlated with blood plasmablast frequencies\autocite{tsang2014GlobalAnalysesHuman}.
-IGKV1-9 encodes the immunoglobulin light chain variable region, and plasma cells are the cell type that secrete immunoglobulins.
+    even within study, far from resolved
 
-even after adjusting: The pooled analysis results at baseline thus be interpreted with caution that some are driven by one drug
+Even for the 
+there are different 
 
-Why in this data does it appear that infliximab primary response is more correlated with baseline cell proportions than adalimumab primary response?
-Difficult to answer here, as due to lack of randomisation infliximab and adalimumab patients differ by more than just the \gls{TNF}.
+Even within  
 
 \1 replication of known baseline signatures
-    \2 TREM1 signal from \textcite{verstockt2019LowTREM1Expression} is not replicated in this study, n.s. and opposite direction of effect
-    \2 TREM1 Direction of effect is upregulated in PR, opposite to \autocite{verstockt2019LowTREM1Expression}, consistent with \autocite{gaujoux2019CellcentredMetaanalysisReveals}
     \2 potential differences in clinical vs endoscopic endpoint between all 3 studies
-        % trem1 is more classical monocyte https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-10-403
-    \2 effect decreases when adding cell proportion covariates: perhaps TREM1 mainly a surrogate for (monocyte) cell props?
+
+similar to drug het, between study het in fx could be due to same reasons
+also subject to differences in the definitions of primary response
+also all cohorts are small.
     \2 the replication is sensitive to covariates, end points, drug
         \3 e.g. \textcite{verstockt2019LowTREM1Expression} did not use any covariates (i.e. t test), so they report an unadjusted effect
-    \2 an aside: just as I examined previously known biomarkers, I expect replication of SIGLEC10 and CROCC2 before putting much credence into them
-    \2 osm, tnf, tnfr2 \autocite{verstockt2019LowTREM1Expression}: consistent not DGE in blood
+
+%     most previously reported gut markers not expressed or DE, expected
+%         except \gene{TNFRSF1B} and \gene{PTGS2} in gut
+%     TREM1 not DE, monocyte?
+
+% Why no replicate
+Whether there are robust baseline markers
+The interpretation is muddied by differences between studies
+Additional to the \gls{PANTS} samples differing in the characteristics described for differences between drugs,
+which also applies in a between-studies context,
+there are differences in the definition of primary response.
+
+    baseline still hard for anti-tnf
+    disrep between us and existing
+    even within study between drugs
+
+further complicated gut vs blood
+
+It is hoped that module associations
+such as
+will be explored further in blood
+
+then, in terms of prediction,
+eskew modules and measure cell counts of relevant populations??
+
+% w14
+%     stronger signal/noise
+%     weaker drug x response interaction
+%     up and down modules similar after adjustment
+%         some new ones: IFN
+%     some baseline gut markers DE now
+% change
+%     most modules mag in R
+%     some similarity in w14 R vs w14 NR and w14 R vs w0 R
+% change mag exceptions
+%     for IFNs, upreg in NR
+% spline
+%     maintained out to w30 and w54
+%     cluster 3 is IFN motifs
+%     subtle effects detected using interaction and spline analysis: uses more data 
+% reQTL
+%     not many reQTLs, beware cell type
+
+
+% w14 and 0 to 14
+%
+changes in large propostions of the transcriptome
+main var explained by anti-TNF drug
+effect baseline diffs are diluted
+hence more consistent
+
+although IFN up for R at baseline
+changes more for NR to w14
+
+% RA: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2875639/
 
 \1 at week 14, difference in transcriptome between R/NR very distinct
     \2 generally more consistent between drugs
@@ -1189,13 +1349,12 @@ Difficult to answer here, as due to lack of randomisation infliximab and adalimu
         % \3 TODO: monocytes as previous markers?
         % \2 using classical / nc markers
     \2 modules: T and B cells up in R \todo{why???}
-
-
 \1 went from few differences at w0 to many differences at w14 between R and NR
     \2 looking at change from baseline to week 14 confirmed mostly magnifying effects in R
         \3 could this suggest that there is a continuum of response?
     \2 the ones that are not consistent: what are they and could they give insights?
     \2 spline analysis confirmed that the diff starting at w14 is maintained at w30 and w54
+    % top hit kremen1, show it here
     \2 \autocite{kennedy2019PredictorsAntiTNFTreatment}: "Continuing standard dosing regimens after primary non-response was rarely helpful; only 14 (12·4\% [95\% CI 6·9–19·9]) of 113 patients entered remission by week 54."
         \3 may be reflected in the transcriptomics too
     \2 attrition or loss to followup bias for reqtl effect
@@ -1217,6 +1376,7 @@ Difficult to answer here, as due to lack of randomisation infliximab and adalimu
 \1 reQTL mapping to identify changes in genetic control of expression over the timepoints
 
 \1 <more limitations: internal validity>
+There are several threats to the internal validity of the study.
 
     \2 a key question for interpreting both the DGE and reQTL results is the definition of visit and study day
         \3 arguably, time is only meaningful wrt to drug naive/on drug, and time since last dose and to next dose i.e. everyone is at trough drug levels
@@ -1253,22 +1413,6 @@ Difficult to answer here, as due to lack of randomisation infliximab and adalimu
         \3 residual confounding may be an issue since this is uncontrolled, unrandomised
         \3 drug prescribe diffs
 
-    \2 cell prop correction
-        \3 overall, adjusting for cc drops number of DGE, and dampens effects, rather than increase, so mediation rather than precision?
-        \3 if the asusmption of mediation is believed, then two complementary interpretations from adjusted and non
-        \3 in general, more consistentcy after correction, but probs due to inflix more reliant on cell props
-        \3 highlight that cell comp makes a big diff: likely mediation
-        %     - estimate will no longer be total effect, but a null-biased effect
-        %         - it is the case that far fewer DGE were identified when cc were included
-        \3 6 main cell types corrected, but doesn't mean that's enough for rare types e.g. see \url{https://www.biorxiv.org/content/10.1101/2020.05.28.120600v1} 
-        \3 and did not sep out effect cell count modification on eQTL effect (e.g. recruitment vs stimulation)
-        \3 need further interaction models like in ch3
-        % TODO: for prediction, i agree with gajoux on not correcting for cell comp
-        % maybe undesirable, and even worth predicting based only on cell counts instaed
-        % there is a strong indication that whether as precision variable or mediators, cc is associated with R
-        %
-        % possible easy use of blood count for prediction, if parimosnious gene set predictor cannot be found
-
     \2 stat issues with missingess: MCAR assumption violated
     % missing at random very unlikely: dropout + seq fail
     % not an issue in ch2, relatively little missingness
@@ -1282,36 +1426,11 @@ Difficult to answer here, as due to lack of randomisation infliximab and adalimu
         \3 DGE analysis also agrees with kennedy2019PredictorsAntiTNFTreatment: once PNR, no point in continuing
 
         \3 continuum of PNR? perhaps model split pheno?
-        % Genetic Loci associated with C-reactive
-        % protein levels and risk of coronary heart disease.
-        %
-        % TODO: there are known loci
-        % This was recently demonstrated by
-        % a GWAS of C-reactive protein (CRP) levels; that study
-        % found that common variants near the HNF1A gene were
-        % associated with variation in CRP.60
 
-        richness of dataset 
-        although
-        other mediators of NR could be modelled using genetic instruments e.g drug level
-
-    \2 blood, not gut
-        % TODO: gaujoux2019CellcentredMetaanalysisReveals "Taken together, the majority of anti-TNF response signature genes are more highly expressed by immune cell subsets, with" suggesting immune cells and not gut tissue is expressing signatures, and blood might be ok
-        % 16 Planell N, Masamunt MC, Leal RF, et al. Usefulness of transcriptional blood biomarkers as a non-invasive surrogate marker of mucosal healing and endoscopic response in ulcerative colitis. J Crohns Colitis 2017;11:1335–46.
-    %
-    % gut biopsy: mucosal as well as infiltrating e.g. macrophages
-    % blood, only circulating, precursor, or downstream
-
-    % It was recently shown that the majority of the genes in a signature for response to anti-TNF in IBD patients show higher expression in immune cell subsets, compared to other cells present in the biopsy tissues, suggesting that resident or infiltrating leucocyte populations represent a good target to investigate responses to anti-TNF therapy. However, a clear cell population has not yet been implicated in the response (215).
-
-% TODO:
-% classical mono
-% These data suggest that activated fibroblasts and endothelial
-% cells within the GIMATS module facilitate the recruitment and
-% transcytosis of blood classical monocytes to the inflamed ileum
-% and their differentiation into pathogenic infl. macs, which in turn
-% further amplify stromal-cell activation through the release of inflammatory
-% cytokines. These
+\1 potential source of multiomics data for potential validation is \autocite{imhann20191000IBDProjectMultiomics}, contains drug response phenotypes
+    \2 also, validate using protome/serological data in PANTS, although there is a known disconnect between proteome and transcriptome
+        % expect modules to be more robust, esp since only a handful of hits for some comparisoins
+    % projection techniques into public datasets e.g. GIMATS paper, but blood expressoin datasets needed, % could use some RA ones https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033199
 
 \1 <reQTL>
     \2 only 6 reQTLs at per-comparison FDR 0.05
@@ -1321,6 +1440,7 @@ Difficult to answer here, as due to lack of randomisation infliximab and adalimu
     \2 biases
         \3 winner's curse caused by combo of low power and a signif threshold?
         % http://www.stat.columbia.edu/~gelman/communication/Button2013.pdf
+    % \2 EE vs EZ model with varying sample size?  https://stephenslab.github.io/mash-application-immune/
 
 since E is diff between R and NR, 
 why not put in an interaction between R and NR, not sure if powered
@@ -1338,7 +1458,7 @@ than losing the averaging effect
         \3 future: add interaction for response status, since no change of E in NR may dilute signal for reQTL, but it is not clear if this would boost power, or decrease due to dicing
 
     \2 given issues about reQTL in bulk discussed in ch3, do not pursue this, but outline future solutions in ch5
-
+    also drugs pooled due to much more power for eqtl required than DGE, may be inappropriate
 
 \1 <conclusion of how the field has moved forward, and future work>
     % sc to get the necessary resolution
@@ -1347,7 +1467,7 @@ than losing the averaging effect
     % unlikely that any one gene should be responsible, focus should be on gene set level analyses
     % by chance, e.g. SIGLEC10 has clearest signal noise ratio
 
-    \2 limited evidence for strong reQTL effects
+    \2 limited evidence for strong reQTL effects, so i have not attempted to evaluate further
     \2 finally, as with results from any single study, future validation needed to generalise outside this cohort, to other CD cohorts, and to IBD and relevance to other IMIDs if any
     \2 given evidence of DGE between R/NR, and the presence of eQTLs, can begin to conceive of potential causal mechanisms 
     \2 and also, how to translate from inference into the language of prediction models (e.g. sensitivity/spec)
@@ -1356,5 +1476,8 @@ than losing the averaging effect
     \2 deliberate avoidance of 'signature'
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
+
+
+% TODO: leveraging RA datasets: shared biology
 
 \end{outline}

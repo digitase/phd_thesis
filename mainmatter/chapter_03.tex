@@ -6,6 +6,8 @@
 \chapter{Genetic factors affecting Pandemrix vaccine response}
 \label{chap:hird_reQTL}
 
+% TODO upreg -> increased expression
+
 \section{Introduction}
 
 \subsection{Genetic factors affecting influenza vaccine response}
@@ -138,7 +140,7 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 \todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
-% TODO it is not the case that serve as their own controls
+% TODO it is not the case people act as their own controls, you can't observe the counterfactual outside of n of 1 trials
 % more like soaking up some of the variation as within individual random effect, allowing more precise
 % also see: https://blog.statsols.com/making-it-personal-n-of-1-trials-allowing-for-individuality-but-not-overdoing-it
 \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
@@ -393,6 +395,8 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 % extreme case: perfectly cell type specific is called a marker gene, and is used in deconv methods to actually get cell estiamtes.
 
 % TODO: Also, \gls{RNAseq} expression estimates are inherently compositional at many levels (blood sample, sequencing) \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
+% There is ultimately no escape from the compositional nature of the assay.
+%
 \Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
 so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample, 
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
@@ -808,6 +812,7 @@ I assume this represents a power advantage from having larger a sample size, rat
         % TODO: 10000?
 
 \subsection{Genotype interactions with cell type abundance}
+\label{subsec:hird_reQTL_methods_cellTypeInteraction}
 
 % TODO: note moderator is more likely, but mediator G -> CC -> E is also possible
 
