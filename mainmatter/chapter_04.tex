@@ -720,6 +720,7 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
 To define transcriptomic differences between primary responders and non-responders to anti-gls{TNF} therapy in the \gls{PANTS} cohort, 
 I analysed whole blood \gls{RNAseq} gene expression measured at up to four timepoints per patient:
 week 0 baseline before commencing anti-\gls{TNF} therapy, and weeks 14, 30 and 54 after commencing anti-\gls{TNF} therapy.
+\todo{Some primary non-responders have loss of response samples. Not sure why.}
 After quality control, expression data was available for 15584 genes and 814 samples (\autoref{fig:multipants_studyDay_boxplots}).
 These samples come from 324 patients, with a median of three samples per patient (\autoref{fig:multipants_visits_upset}).
 
@@ -1230,7 +1231,6 @@ classical monocytes and a newly identified subtype within the intermediate monoc
 The \gene{TREM1} effect is one of the infliximab-specific differentially expressed genes that is much stronger without cell proportion adjustment,
 so it may reflect association of baseline monocyte cell proportions with response.
 
-It remains unclear whether there are any robust single gene associations with anti-\gls{TNF} response.
 There are many factors could explain failures to replicate reported markers, or identification of different markers from study to study.
 Many existing studies pool cohorts with different anti-\gls{TNF} biologics due to the scarcity of large datasets,
 yet even within this study, there is heterogenenity between drugs.
@@ -1291,6 +1291,15 @@ A potential hypothesis is a continuum of response from non-response to response.
 \textcite{gaujoux2019CellcentredMetaanalysisReveals} found changes in cell proportions in response to anti-\gls{TNF} treatment were magnified in responders, also supporting response as continuous phenotype.
 This study confirms a similar trend at the transcriptional level.
 
+% \1 PNR definition
+%     \2 its a very complex binary, but certainly useful
+%         \3 kennedy2019PredictorsAntiTNFTreatment Univariable analysis showed, for both drugs, that the most significant determinant of non-remission at week 54 was clinical status at week 14 (table 4; appendix pp 21–22).
+%         \3 DGE analysis also agrees with kennedy2019PredictorsAntiTNFTreatment: once PNR, no point in continuing
+%     \2 if continuum of PNR? perhaps model decomposed pheno?
+%         \3 e.g. "Genetic Loci associated with C-reactive protein levels and risk of coronary heart disease."
+%         \3 take advantage of richness of dataset
+%     \2 although other mediators of NR could be modelled using genetic instruments e.g drug level
+
 There were some rare exceptions to magnification for genes and modules in the type I interferon pathway.
 These showed upregulation in non-responders from week 0 to week 14,
 yet were either downregulated or not significantly different for responders.
@@ -1299,7 +1308,7 @@ and \gene{STAT2}, a key transcription factor for interferon-stimulated genes\aut
 Genes such as \gene{IFIT3} and \gene{STAT2} are more strongly induced by type I interferons compared to type II \url{https://www.pnas.org/content/109/11/4239}.
 A study of \gls{RA},
 an \gls{IMID} also treated with anti-\gls{TNF} drugs,
-also found increases in type I interferon-regulated gene expression after infliximab treatment associated with poor clinical response \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2875639/}.
+also found increases in type I interferon-regulated gene expression in blood after infliximab treatment associated with poor clinical response \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2875639/}.
 
 A spline model of expression over all four timepoints confirmed the above observations made in week 0 and week 14 samples.
 \todo{move some of this to results section}
@@ -1316,10 +1325,9 @@ In \gls{PANTS}, \enquote{continuing standard dosing regimens after primary non-r
 This phenomenon may have a transcriptomic basis.
 % \textcite{gaujoux2019CellcentredMetaanalysisReveals} suggesting increased drug doses may be effective in treating a non-responsive individual.
 
-Making use of data from later timepoints allows more subtle effects to be detected in the spline analysis.
+Making use of data from later timepoints allowed more subtle effects to be detected in the spline analysis.
 Clusters 2 and 4 are enriched for B cell genes that were not significantly different at the single-gene level in the within week 0 comparison,
 although some downregulation of B cell and plasma cell modules were detected.
-
 % AL353807.3
 % STAT1
 % BATF2
@@ -1387,93 +1395,66 @@ a more statistically powerful approach may be to generate a continuous interfero
 which would then act as the interacting variable,
 similar to the approach of \textcite{davenport2018DiscoveringVivoCytokineeQTL}.
 
-% TODO:
-% am here:
-% time, and what we really want is drug level
-% MCAR violation
-% is binary model most appropriate?
 Several threats to the validity of the study remain to be discussed.
+The most pressing may be the meaning of time in the study.
+For pairwise \gls{DGE} comparisons and \gls{reQTL} mapping, 
+samples were divided into four timepoints that corresponded to the major visits in \gls{PANTS}.
+The \gls{DGE} spline model used study day directly.
+The actual sample study day has substantial variation around the target for later timepoints.
+The particular targets (weeks 14, 30, 54) for post-baseline samples were chosen so that patients on infliximab (8 weeks between doses) and adalimumab (2 weeks between doses) could both be sampled with the same visit structure.
+Drug levels peak sharply after each dose and decline exponentially over time.
+Visits were scheduled to be as close as possible (within a week) to the next scheduled drug dose to capture trough drug levels.
+Neither approach is perfect, as matching patients by timepoint and study day are only attempts to gather samples matched by trough drug level.
 
-    drug level likely to be a mediateor, treated with care like cell counts
+% "A LOR visit should be scheduled any time after week 14 if the LOR criteria are met (page 11) and the patient’s gastroenterologist has escalated steroid, immunomodulatory or anti-TNF therapy. Escalation of anti-TNF therapy includes an increase in the dose, or a shortening of the interval between doses."
+A further complication is the inclusion of loss of response samples in analyses.
+One treatment option after loss of response is dose escalation, which may raise trough drug levels for all subsequent visits for those patients.
+Howeve, since the \gls{PANTS} protocol allows for loss of response visits that coincide with major visits to be labelled as a major visit,
+there is no guarantee that simply excluding samples labelled as loss of response would resolve this.
+The best solution may to explicitly model measured serum drug levels as a covariate, where like cell proportions, it would likely act as a mediator of some associations with response.
+% Overall 319/840 missing corresponding drug levels.
+I did not do this as data missingness would reduce the sample size by about 40\% in this study.
+Finding a suitable normalisation of drug level for use in pooled drug analyses would also be challenging.
+Infliximab and adalimumab have differing pharmokinetics: infliximab has higher peak concentrations, higher peak-trough ratios, and shorter half-life.
+The same serum concentrations of infliximab and adalimumab also have different biological effects due to differing therapeutic windows
+\autocite{tracey2008TumorNecrosisFactor,lichtenstein2013ComprehensiveReviewAntitumor} \url{https://onlinelibrary.wiley.com/doi/full/10.1111/apt.15643}.
 
-    \2 a key question for interpreting both the DGE and reQTL results is the definition of visit and study day
-        \3 arguably, time is only meaningful wrt to drug naive/on drug, and time since last dose and to next dose i.e. everyone is at trough drug levels
-        \3 real drug levels over time will be peaky % TODO: half life \autocite{tracey2008TumorNecrosisFactor,lichtenstein2013ComprehensiveReviewAntitumor}
-        \3 I included LOR and EXIT visits based on a time window, but in reality, patients that have more LOR have 
-        % "A LOR visit should be scheduled any time after week 14 if the LOR criteria are met (page 11) and the patient’s gastroenterologist has escalated steroid, immunomodulatory or anti-TNF therapy. Escalation of anti-TNF therapy includes an increase in the dose, or a shortening of the interval between doses."
-        \3 It should be noted that one option following patient loss of response is dose escalation, so samples from the same patient \emph{after} recorded loss of response may actually represent a different trough drug level to the rest.
-            % TODO: read Sim email
-    \2    % drug_level adjustment
-        \3 why R change E, but NR don't? faster clearance? adjust for drug level to see this
-        \3 but I did not use trough drug level measured on or near the same study day as a covariate
-        \3 this would explain more variance, but
-            %     Drug_Level not considered as a covariate, but Mark did: A lot more missingness, which would drop the sample size even further
-            %     Also: may not be comparable between drugs even if scaled, as dosing pattern diff, spiker for one drug
-            %     TODO: good proxy for time since dose?
-            more missingness, overall 319/840 missing corresponding drug levels, cuts n considerably
-        \3 also, difficulty in pooled drug analyses
-        \3 differ in their pharmokinetics peakiness, IFX has a shorter half life and dose less often \autocite{lichtenstein2013ComprehensiveReviewAntitumor}
-            % TODO
-            % furthermore, cannot pool here even if scaled
-            % distributions of drug level vary between drugs
-            % even after scaling, 0 may not have same interp
-            % http://www.statlit.org/pdf/2013-Knapp-To-pool-or-not-to-pool.pdf "7.  Pooling "scores" on different variables "
-                % needs patient who theoritially got both drugs to solve this equiv
-
-        \3 may need to fit completely drug strat models, that forgo pooling on all params
-        \3 or some clever non-parametric normalisation method
-
-    \2 attrition or loss to followup bias for reqtl effect
-        % https://pubmed.ncbi.nlm.nih.gov/22611167/
-
-        % https://stats.stackexchange.com/questions/354279/can-a-linear-mixed-model-handle-missing-data-that-is-not-missing-at-random
-        % As you say, linear mixed-effects (LME) models are assuming that any missing data are missing at random (MAR). A way to account for suspected violations of the MAR assumption of LME models is to use joint models. Under this framework, the longitudinal response and the survival probability are associated by jointly estimating a single likelihood function. Using a joint model, you can get an estimate of how much a possible difference in survival is affecting the longitudinal response and how much the fluctuations in the longitudinal response are associated with survival.
-
-        % https://sphweb.bumc.bu.edu/otlt/MPH-Modules/EP/EP713_Bias/EP713_Bias3.html
-        % As noted above, the enrollment of subjects will not bias a prospective cohort study, because the outcome has not yet occurred. Therefore, choice cannot be related to both exposure status and outcome status. However, retention of subjects may be differentially related to exposure and outcome, and this has a similar effect that can bias the results, causing either an overestimate or an underestimate of an association.
-        % Again, depending on which category is underreported as a result of differential loss to follow-up, either an underestimate or overestimate of effect (association) can occur.
-
-        % likely direction is conservative since the most NR usually withdraw??
-
-        % TODO: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004310#sec002
-        % Time-Course Gene Set Analysis for Longitudinal Gene Expression Data
-        % In this paper, we present a method to analyze repeated measurements of gene expression using a gene set approach. Provided that the definition of the gene sets is relevant, this method helps with detecting and interpreting subtle changes of gene expression over time.
-
-            \2 stat issues with missingess: MCAR assumption violated
-            % missing at random very unlikely: dropout + seq fail
-            % not an issue in ch2, relatively little missingness
-            % https://rpsychologist.com/lmm-slope-missingness
-
-% \1 PNR definition
-%     \2 its a very complex binary, but certainly useful
-%         \3 kennedy2019PredictorsAntiTNFTreatment Univariable analysis showed, for both drugs, that the most significant determinant of non-remission at week 54 was clinical status at week 14 (table 4; appendix pp 21–22).
-%         \3 DGE analysis also agrees with kennedy2019PredictorsAntiTNFTreatment: once PNR, no point in continuing
-%     \2 if continuum of PNR? perhaps model decomposed pheno?
-%         \3 e.g. "Genetic Loci associated with C-reactive protein levels and risk of coronary heart disease."
-%         \3 take advantage of richness of dataset
-%     \2 although other mediators of NR could be modelled using genetic instruments e.g drug level
-
+Finally, the effects of differential drop out in responders and non-responders has not been explored.
+% https://rpsychologist.com/lmm-slope-missingness
+% Why linear mixed-effects models are probably not the solution to your missing data problems
+% https://stats.stackexchange.com/questions/354279/can-a-linear-mixed-model-handle-missing-data-that-is-not-missing-at-random
+% As you say, linear mixed-effects (LME) models are assuming that any missing data are missing at random (MAR). A way to account for suspected violations of the MAR assumption of LME models is to use joint models. Under this framework, the longitudinal response and the survival probability are associated by jointly estimating a single likelihood function. Using a joint model, you can get an estimate of how much a possible difference in survival is affecting the longitudinal response and how much the fluctuations in the longitudinal response are associated with survival.
+The three main mechanisms of missing data are:
+\gls{MCAR}, probability of data being missing is independent of both observed and missing data;
+\gls{MAR}, probability of data being missing conditional on observed data is independent of missing data;
+and \gls{MNAR}, probability of data being missing depends on missing data \url{https://doi.org/10.1016/B978-0-12-801342-7.00014-9}.
+Even conditional on response status, it's more likely that expression data from more extreme non-responders, so the likely mechanism here is \gls{MNAR},
+and the linear mixed models used in this study may be biased.
+If it is indeed the most extreme non-responders dropping out, the estimation of responder versus non-responder effects may be conservative.
+Note there is no sidestepping a \gls{MNAR} mechanism by analysing only the complete cases, 
+since they will differ systematically from the sample as a whole \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3016756/}.
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
-\1 <conclusion of how the field has moved forward, and future work>
-    % sc to get the necessary resolution
-    \2 DGE at SIGLEC10 and CROCC2 in baseline whole blood, consistent in both drugs
-    \2 ADA-specific plasma cell signature
-    % unlikely that any one gene should be responsible, focus should be on gene set level analyses
-    % by chance, e.g. SIGLEC10 has clearest signal noise ratio
+In conclusion,
+it remains unclear whether there are any robust single-gene markers for anti-\gls{TNF} response in baseline whole blood of \gls{CD} patients.
+Baseline module associations were observed, but there was unexpected heterogenenity between infliximab and adalimumab patients,
+so it remains to be seen if such associations will be replicated in separate cohorts.
+Large upcoming datasets with drug response phenotypes such as the 1000IBD project\autocite{imhann20191000IBDProjectMultiomics} will be invaluable for attempted replication of the associations found in \gls{PANTS}.
+Expression differences between responders and non-responders were more distinct at timepoints after the induction period.
+I found type I interferon genes went against the general trend of greater transcriptomic change from baseline in responders,
+being more upregulated post-treatment in non-responders.
+Given the type I interferon expression in blood has also been associated with anti-\gls{TNF} response in \gls{RA} patients,
+there may be an opportunity to consider the shared biology of anti-\gls{TNF} response in \gls{IBD} and \gls{RA}.
+% and other \glspl{IMID} treated with anti-\gls{TNF} drugs.
+Much work has been done generating and validating signatures for anti-\gls{TNF} response in \gls{RA} \url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033199};
+but not much work on validating \gls{RA} signatures in \gls{IBD} cohorts and vice versa.
 
-    \2 limited evidence for strong reQTL effects, so i have not attempted to evaluate further
-    % TODO: leveraging RA datasets: shared biology
-    \2 finally, as with results from any single study, future validation needed to generalise outside this cohort, to other CD cohorts, and to IBD and relevance to other IMIDs if any
-        \1 potential source of multiomics data for potential validation is \autocite{imhann20191000IBDProjectMultiomics}, contains drug response phenotypes
-            \2 also, validate using protome/serological data in PANTS, although there is a known disconnect between proteome and transcriptome
-                % expect modules to be more robust, esp since only a handful of hits for some comparisoins
-            % projection techniques into public datasets e.g. GIMATS paper, but blood expressoin datasets needed, % could use some RA ones https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033199
-    \2 given evidence of DGE between R/NR, and the presence of eQTLs, can begin to conceive of potential causal mechanisms 
-    \2 and also, how to translate from inference into the language of prediction models (e.g. sensitivity/spec)
-
-    % whilst no causal here, having eqtls for many genes is useful
-\1 how to move to causal inference + prediction further discussed in ch5, due to overlap with ch3
-    \2 deliberate avoidance of 'signature'
+This chapter has been purely descriptive.
+I have deliberately avoided the term \enquote{signature} in my own results, 
+as I have not yet had a chance to assess their predictive capability.
+I also did not find strong evidence for strong \gls{reQTL} effects over time in whole blood, 
+so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls{TNF} response.
+However, the presence of \glspl{eQTL} for most genes and the presence of strong differences in expression post-induction may allow testing for causal mechanisms where genotype affects drug response via expression.
+Strategies for moving onto both prediction and causal inference will be discussed in \autoref{chap:discussion}.
 
 \end{outline}
