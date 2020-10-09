@@ -332,7 +332,9 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 % 3.3.	Mappability has not been considered
 \todo{add software versions}
 % NOTE: Salmon is not pseudo-alignment: "Unlike pseudoalignment, Salmon’s lightweight mapping procedure tracks, by default, the position and orientation of all mapped fragments."
-Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, which internally accounts for transcript length and GC composition.
+% TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6042521/ Limitations of alignment-free tools in total RNA-seq quantification
+Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, 
+which internally corrects for transcript length and GC composition by computing an effective length for each transcript.
 % https://www.biostars.org/p/304552/
 % TODO: check, this should be done after converting TPM to counts with tximport? summing TPMs doesn't make sense
 To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
@@ -348,7 +350,21 @@ To combine technical replicates, as the sum of Poisson distributions remains Poi
 % The ability to detect reliably low copy number transcripts/isoforms depends upon the depth of sequencing and on a sufficiently complex library.
 % For experiments from a typical mammalian tissue or in which sensitivity of detection is important, a minimum depth of 100-200 M 2 x 76 bp or longer reads is currently recommended.
 The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range 20.24-39.14 million), representing a mean mapping rate of 80.73\% (range 75.57-90.10\%), comfortably within sequencing depth recommendations for \gls{DGE} experiments\autocite{liu2014RNAseqDifferentialExpression}.
+% TODO: add exact rule of thumb diminishing returns for DGE after 10M aligned reads
 Relative transcript abundances were summarised to Ensembl gene-level count estimates using tximport (scaledTPM method) to improve statistical robustness and interpretability\autocite{soneson2016DifferentialAnalysesRNAseq}.
+
+% TODO:
+% why use length scaled tpm, not salmon counts directly?
+% We could alternatively generate counts from abundances, using the argument countsFromAbundance, scaled to library size, "scaledTPM", or additionally scaled using the average transcript length, averaged over samples and to library size, "lengthScaledTPM". Using either of these approaches, the counts are not correlated with length, and so the length matrix should not be provided as an offset for downstream analysis packages.
+
+% TODO
+% Two main biases are library composition and feature length in RNAseq
+% TPM would be for within sample norm for both
+% no+use length offset, or scaledTPM, or lengthScaledTPM to get count scaled data that is not correlated with feature length between samples
+%     doesn't matter if you multiply by the same effective length factor for each sample (first multiple by the average effective transcript length over samples)
+%      for lengthScaledTPM,    still corr with length within samples
+% here, outline options from "Swimming downstream"
+% TMM for between sample norm, also need to account for library size (seq depth)
 
 % 5.	Pre-process RNA-seq expression data
 % 5.1.	Pull in tximport counts
