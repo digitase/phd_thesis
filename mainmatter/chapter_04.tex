@@ -180,22 +180,26 @@ although several markers are currently undergoing validation\autocite{noor2020Pe
 
 \subsection{The PANTS cohort}
 
-\gls{PANTS} is a prospective, observational, UK-wide cohort study of response to anti-gls{TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
+\gls{PANTS} is a prospective, observational, UK-wide cohort study of response to anti-\gls{TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
 The study was registered with ClinicalTrials.gov identifier NCT03088449, and the protocol is available at \url{https://www.ibdresearch.co.uk/pants/}.
 % "The eligibility criteria were as follows: age 6 years or older; diagnosis of Crohn’s disease involving the colon, the small intestine, or both; and active luminal disease supported by a C-reactive protein (CRP) of more than 3 mg/L 90 days before the first dose, faecal calprotectin of more than 50 μg/g between 90 days before and 28 days after first dose, or both."
-In brief, total enrollment was 1610 patients, who were at least 6 years old, had active luminal \gls{CD}, and were naive to anti-gls{TNF} therapy.
+Total enrollment was 1610 patients, who were at least 6 years old, had active luminal \gls{CD}, and were naive to anti-\gls{TNF} therapy.
 Patients were invited to attend up to ten major study visits over a maximum follow-up period of three years, or until drug withdrawal.
 
-The anti-\gls{TNF} drugs evaluated were adalimumab and infliximab\footnote{The study also evaluated infliximab biosimilars. Data from patients who received a biosimilar is not included in this chapter}.
+The anti-\gls{TNF} drugs evaluated were adalimumab and infliximab.
+The study also evaluated infliximab biosimilars. 
+Data from patients who received a biosimilar is not included in this chapter.
 All major visits were scheduled immediately prior to a drug dose.
-Although adalimumab and infliximab have different dosing schedules, the timing of major visits was chosen such that the same visit structure could be used for patients on both drugs.
-Additional visits could also be scheduled in case of secondary loss of response, or exit due to drug withdrawal.
+Adalimumab and infliximab have 2-week and-8 week dosing intervals respectively, so the timing of major visits was chosen such that the same visit structure could be used for patients on either drug.
+Additional visits were also scheduled in case of secondary \gls{LOR}, or premature exit due to drug withdrawal, usually replacing the next scheduled major visit.
 
-% Some stats:
 % "1241 patients were assessable at week 14. 
 % Primary nonresponse occurred in 170 (21·9%, 95% CI 19·1–25·0) of 775 patients treated with infliximab and 125 (26·8%, 22·9–31·1) of 466 patients treated with adalimumab (table 2). 
 % After excluding primary non-responders, the estimated proportion of infliximab-treated patients who had loss of response by week 54 was 36·9% (32·7–40·9), and for adalimumab was 34·1% (28·4–39·4; appendix pp 15–16). 
 % At week 54, 469 (60·9%; 57·4–64·0) of 770 infliximab-treated patients were classified as being in non-remission, compared with 295 (66·9%; 62·3–71·3) of 441 adalimumab-treated patients (table 2)."
+The overall rate of primary non-response by week 14 was 21.9\% for infliximab, and 26.8\% for adalimumab.
+The rate of secondary \gls{LOR} by week 54 among primary responders was 36.9\% for infliximab and 34.1\% for adalimumab.
+Remission rate by week 54 was 39.1\% for infliximab and 33.1\% for adalimumab.
 
 \subsection{Definition of timepoints}
 \label{subsubsec:multiPANTS_timepoints_def}
@@ -248,7 +252,7 @@ Additional visits could also be scheduled in case of secondary loss of response,
 % Ie. Infliximab is given as an IV every 8 weeks.  So last dose of infliximab should be 8 weeks prior to the visit
 % Adalimumab is given every 2 weeks. So last dose of adalimumab is 2 weeks prior.
 % The visits are definitely timed just prior to when patient would be receiving drug as the study was designed such that we capture patients at the point of drug infusion so they would not have to come to hospital for an unnecessary visit."
-The expression data for this chapter comes from \gls{PANTS} samples centered around four timepoints from the first year of follow-up: week 0, week 14, week 30, and week 54.
+The \gls{RNAseq} data for this chapter comes from a subset of the cohort sampled around four timepoints from the first year of follow-up: week 0, week 14, week 30, and week 54.
 These are the specified timings for four major visits in the first year.
 Whole blood samples were taken prior to drug administration, and preserved for \gls{RNAseq} in Tempus Blood RNA Tubes.
 The study day that sampling occurred relative to the first drug dose was recorded.
@@ -261,7 +265,7 @@ Samples were mapped according to the following criteria:
     \item Samples taken at additional loss of response or exit visits falling within one of the windows were mapped to that timepoint, unless the patient also had a major visit sample inside that window.
 \end{itemize}
 Only a small minority of major visit samples fell outside their corresponding windows.
-\todo{compute maximum deviation}
+\todo{compute maximum deviation?}
 Inclusion of samples from additional visits was important as they often replaced major visits for patients with primary non-response or loss of response.
 \todo{Still discussing with Sim on the exact def of LOR and exit visits to decide whether this is sensible.}
 Samples included under both criteria should be representative of trough drug levels,
@@ -272,17 +276,23 @@ and exit visits were scheduled for when the next drug dose would have been.
 \label{multiPANTS:PR_definition}
 
 % "there is agreement that primary nonresponse to anti‐TNF drugs should not be assessed prior to 14 weeks following initial induction infusions with use of infliximab, or prior to 12 weeks for adalimumab injections" \autocite{dhaens2011LondonPositionStatement}
-I used a definition of primary non-response based on the decision tree from \textcite{kennedy2019PredictorsAntiTNFTreatment}.
-Primary non-response was assessed at week 12, prior to the week 14 drug dose. The criteria for primary non-response was \emph{either} of the following: 
+The definition of primary response and non-response is based on the clinical decision tree from \textcite{kennedy2019PredictorsAntiTNFTreatment}.
+Primary response status was assessed at week 12, prior to the scheduled week 14 visit. 
+The criteria for primary non-response was \emph{either} of the following: 
 \begin{itemize}
-    \item exit for treatment failure before week 14 (e.g. as decided by physician global assessment), \emph{or} corticosteroid use at week 14 (a continuing or new prescription).
+    \item exit for treatment failure before week 14 (e.g. as decided by physician global assessment), \emph{or} corticosteroid use at week 14 (a continuing or new prescription);
     \item compared to week 0, a decrease in \gls{CRP} by less than 50\% or to >\SI{3}{\milli\gram\per\litre}, \emph{and} a decrease in \gls{HBI} by less than 3 points or to >4.
 \end{itemize}
-In addition, the primary non-responders in the \gls{RNAseq} dataset were selected to exclude patients in remission at week 54.
-As this is an observational study that continues until drug withdrawal, so a patient's clinician may decide to continue anti-gls{TNF} therapy even if a patient has primary non-response.
+As this is an observational study that continues until drug withdrawal, a patient's clinician may have decided to continue anti-\gls{TNF} therapy even if a patient had primary non-response, so it was possible for non-responders to be sampled past week 14.
 
-The definition of primary response was to not have primary non-response, and also have \gls{CRP} \SI{\le 3}{\milli\gram\per\litre} and \gls{HBI} < 4 by week 14.
-Grey zone patients that were intermediate between primary response and non-response were not analysed.
+\todo{fix tense}
+The criteria for primary response was \emph{all} of the following:
+\begin{itemize}
+    \item not classified as a primary non-responder;
+    \item \gls{CRP} \SI{\le 3}{\milli\gram\per\litre} by week 14;
+    \item \gls{HBI} < 4 by week 14.
+\end{itemize}
+Grey zone patients that only met a subset of criteria for either primary response or non-response were excluded.
 
 % Selection criteria for samples from Nick:
 %
@@ -296,6 +306,9 @@ Grey zone patients that were intermediate between primary response and non-respo
 %   )
 % They also had to be 16 years or over and have a baseline serum sample. 
 % Within the infliximab patients, there was propensity matching between PNR/non-PNR based on on_imms_visit_1 + on_steroids_visit_1 + age_at_first_dose + earliest_weight_category_4 + albumin_visit_1 + sex."
+There were additional criteria applicable to just the \gls{RNAseq} subcohort.
+Patients were required to be at least 16 years old, and have an available baseline serum sample.
+Primary non-responders were filtered to exclude patients in remission at week 54.
 
 \subsection{Library preparation and \glsfmtshort{RNAseq}}
 
@@ -341,57 +354,46 @@ were removed.
 A total of 814 samples remained after filtering.
 
 The Ensembl 96 gene annotation contains \SI{58884} genes, many of which are not expressed in whole blood.
-Normalised library sizes were computed using edgeR::calcNormFactors(method='TMM') for use in CPM calculations.
-Genes were filtered to require 
->1.25 CPM in >10\% of samples, where 1.25 CPM is approximately 10 counts at the median library size;
+Normalised library sizes were computed using edgeR::calcNormFactors(method='TMM').
+Between-sample normalisation for library size was done using edgeR::cpm, converting counts to \glspl{CPM}.
+Genes with low expression were filtered,
+requiring >1.25 CPM in >10\% of samples, where 1.25 CPM is approximately 10 counts at the median library size of 8 million assigned read pairs;
 and non-zero expression in >90\% of samples.
+% NOTE: probably don't need to remove these manually in future.
 Globin genes and short ncRNAs were removed.
 A total of 15511 genes remained after filtering.
-Finally, counts were converted to the log2 CPM scale and precision weights to account for the mean-variance relationship were computed for each gene and sample using voomWithDreamWeights.
+Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using limma::voomWithDreamWeights.
 
 \subsection{\glsfmtlong{DGE}}
 
 \subsubsection{Variable selection by variance components analysis}
 \label{subsubsec:multiPANTS_var_selection}
 
-For each gene, the form of the \gls{DGE} regression model has gene expression as the response variable, 
-predictor variables of interest (such as primary non-response, drug, and timepoint),
+For each gene, the \gls{DGE} regression models the response variable, gene expression, 
+as a linear function of predictor variables of interest (primary response status, drug, timepoint),
 and other selected predictor variables.
-Many variables are available 
-Variables in \autoref{fig:multipants_pheno_filtered_ggcorrplot} were included as predictors.
+In estimating the association X\textrightarrow Y, of predictor X to response Y by regression, 
+adjustment for a third variable Z can increase, decrease, or even reverse the effect estimate (the regression coefficient).
+I aimed to select third variables for inclusion into the \gls{DGE} model that are covariates,
+defined here as a Z that is associated with Y, but not with X.
+Such variables are also known as neutral controls\autocite{cinelli2020CrashCourseGood}, precision variables, or prognostic variables,
+At the cost of 1 \gls{df},
+Z explains variation in Y that would otherwise be considered residual,
+so conditioning on Z increases the efficiency of estimating X \textrightarrow Y, but does not change the effect estimate.
 
-\1 In estimating the effect X\textrightarrow Y, of predictor X on response Y by regression, 
-adjustment for a third variable Z can increase, decrease, or even reverse the effect estimate.
-The regression model is agnostic to what causal role Z may play,
-but different types of third variable can be distinguished conceptually if some relationships are actually causal.
-% TODO
-% \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819361/} <<<
-% \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2254615/}
-In this section, I focus on identifying third variables that are covariates for inclusion into the \gls{DGE} model:
-% TODO: note this is the formal def of covariate
-% TODO: read Cinelli2020-CrashCourseBadControls.pdf
-where Z is associated with Y and explains some variation in Y,
-and conditioning on Z increases the efficiency of estimating X \textrightarrow Y.
-% In theory
-conditioning on a covariate that is not associated with the predictor ($X \nleftrightarrow Z \leftrightarrow Y$, aka. a precision variable, prognostic variable in clinical trials lit) reduces variance of the estimate,
-% by explaining some var that would other wise go to error
-
-% TODO note we are not assigning any causality here, so back off in this paragraph with a caveat
-\1 If covariates are also associated with the predictor X, issues can arise depending on their causal role.
-% In theory
-Conditioning on a confounder (X \textleftarrow Z \textrightarrow Y) reduces bias,
-conditioning on a collider (X \textrightarrow Z \textleftarrow Y) induces bias,
-and conditioning on a mediator in the causal path (X \textrightarrow Z \textrightarrow Y) changes the effect estimated by removing the indirect effect mediated by Z.
-
-\1 Here, the predictors in question are primary response status, drug, and study visit; and the response variable is gene expression.
-\1 Many phenotypes and technical variables are available as potential covariates in the \gls{PANTS} cohort;
-\autoref{fig:multipants_pheno_corrplot} shows their correlations with each other, and the predictor variables.
+Many variables were available for selection;
+\autoref{fig:multipants_pheno_corrplot} shows their correlation matrix.
+% Univariable analyses showed the strongest associations with primary non-response to infliximab and adalimumab were with week 14 drug and anti-drug antibody concentrations (table 3; appendix p 17).
+% Primary non-response to infliximab was also associated with older age at first dose, smoking at baseline, non-use of an immunomodulator at baseline, lower baseline albumin concentrations, and higher baseline white cell count.
+% Primary non-response to adalimumab was associated with a higher body-mass index at baseline.
+These included three variables associated with primary response in \textcite{kennedy2019PredictorsAntiTNFTreatment}: baseline immunomodulator use, smoking and \gls{BMI}.
 % From Mark:
 % As a follow-up, here is what Sam shared about estimating cell composition in the data: “We used the Houseman method [bmcbioinformatics.biomedcentral.com], which is implemented with the estimateCellCounts() function from the minfi package in R.”
-These include proportions of six common cell types in whole blood, 
-estimated using the Houseman method (\software{minfi::estimateCellCounts} \url{https://academic.oup.com/bioinformatics/article/30/10/1363/267584}) 
-from whole blood Illumina MethylationEPIC data also collected for the same patients and timepoints.
-% TODO: 1 sentence on houseman method
+Also available were proportions of six common cell types in whole blood 
+(CD4+ T cells, CD8+ T cells, B cells, NK cells, monocytes, granulocytes),
+estimated using the Houseman method (\software{minfi::estimateCellCounts} \url{https://academic.oup.com/bioinformatics/article/30/10/1363/267584})
+from whole blood Illumina MethylationEPIC data collected from the same patients and timepoints.
+The Houseman method uses differentially methylated regions between immune cell types as cell type markers \url{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-86}.
 
 \begin{figure}
     \centering
@@ -400,12 +402,11 @@ from whole blood Illumina MethylationEPIC data also collected for the same patie
     \label{fig:multipants_pheno_filtered_ggcorrplot}
 \end{figure}
 
-% TODO: any need for plot?
-\1 visualised main factors that influence global gene expression by PCA (\autoref{fig:multipants_dream_prcomp})
-    \2 main separation along PC1 is w0 anti-TNF naive samples from all other post-drug start samples 
-    \2 TODO: color other PCs by other variables: sex, response status, library prep protocol
+\todo{I intend to omit the expression PCA. Unless I get time to implement a systematic way to select which variables to color in each plot.}
+% \1 Visualised main factors that influence global gene expression by PCA (\autoref{fig:multipants_dream_prcomp})
+%     \2 main separation along PC1 is w0 anti-TNF naive samples from all other post-drug start samples
 
-% TODO: recolor to 1 page
+% TODO: omit
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.prcomp.pdf}
@@ -413,46 +414,31 @@ from whole blood Illumina MethylationEPIC data also collected for the same patie
     \label{fig:multipants_dream_prcomp}
 \end{figure}
 
-\1 A variance components analysis was conducted to formally quantify the fractions of variation in expression explained by known variables
-using \software{variancePartition}\autocite{hoffman2016VariancePartitionInterpretingDrivers}, which fits a mixed regression model.
-% TODO covariates chosen here are used in all genewise models, we need a unified set.
-Variables in \autoref{fig:multipants_pheno_filtered_ggcorrplot} were included as predictors.
-    % Univariable analyses showed the strongest associations
-    % with primary non-response to infliximab and
-    % adalimumab were with week 14 drug and anti-drug
-    % antibody concentrations (table 3; appendix p 17). Primary
-    % non-response to infliximab was also associated with
-    % older age at first dose, smoking at baseline, non-use of an
-    % immunomodulator at baseline, lower baseline albumin
-    % concentrations, and higher baseline white cell count.
-    % Primary non-response to adalimumab was associated
-    % with a higher body-mass index at baseline.
-    \2 Includes prognostic factors from \autocite{kennedy2019PredictorsAntiTNFTreatment}
-\1 Additional categorical variables were included for patient, \gls{RNAseq} plate, and library prep protocol version.
+A variance components analysis was done to quantify the proportion of expression variance explained by each variable for each gene using \software{variancePartition}\autocite{hoffman2016VariancePartitionInterpretingDrivers}.
+Variables that do not explain much variation in the response are unlikely to improve efficiency if conditioned on.
+The model is a mixed effects regression model.
+Variables in \autoref{fig:multipants_pheno_corrplot} were included as predictors.
+Additional categorical variables were included for patient and \gls{RNAseq} library preparation plate.
 An additional continuous variable consisting of random numbers drawn from the standard normal distribution was also included as a null.
+% The var explained by Gran will be redistributed among highly cor vars anyways.
 Granulocyte proportion estimates were dropped to relieve perfect multicollinearity.
 Categorical variables were coded as random effects, and continuous variables as fixed effects.
 Surprisingly, \textcite{hoffman2016VariancePartitionInterpretingDrivers} showed that variance proportion estimates are unbiased even when coding categorical variables with as few as two categories as random, 
 as long as all model parameters are estimated jointly using \gls{ML} rather than \gls{REML}\footnote{
     \gls{REML} treats random effects as nuisance parameters and estimates fixed effects after first integrating out random effects).
 }.
-It was also shown that this approach also avoids over-estimates of variance proportions that occur if categorical variables with many levels are treated as fixed.
+It was also shown that this approach avoids overestimates of variance proportions that occur if categorical variables with many levels are treated as fixed.
 
-% aim to identify covariates, but will inevitably hit other types
-
-\1 Variables were ranked by median variance proportion across all genes (\autoref{fig:multipants_varPart}).
-The variables that explained the most variance included patient, cell proportions and \gls{RNAseq} plate.
-    \2 most influential on interpretation are cell counts: there are pros and cons to using them
-% should be given    special consideration as likely mediatgor
-    \2 Cell proportions explain a lot of variance: this is expected \url{https://genome.cshlp.org/content/early/2020/06/24/gr.256735.119.abstract?papetoc} and even more so as they change a lot over time (\autoref{fig:multipants_cell_type_proportion_vs_Study_Day})
-    \todo{anova for each cell prop over time for p values}
-    \2 in the case of mediation i.e. PNR -> CC -> R
-    \2 Should rarely find cell prop to be a collider, as in most genes, E -> cell prop is unlikely vs cell prop -> E
-    \2 so keep them in as covariates
-        \3 it's already popular for diff meth, and in DGE, can increase robustness \url{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1878-x}
-    \2 note that we end up with the adjusted effect: upregulation in this context is increase in transcripts because making more per cell, not more in the bulk sample
-        \3 this may not be ideal in prediction context, as each var input needs to be measured, and may even attenuate ability to predict \autocite{gaujoux2019CellcentredMetaanalysisReveals}
-    \todo{don't know if it matters if there are colliders among covariates, since we can't estimate any causal effects in DGE due to lack of a control group?}
+As downstream \gls{DGE} methods require the same set of predictors for all genes, the aim was to select variables that explain a lot of variance for many genes.
+Variables were ordered by the median of genewise variance proportion estimates (\autoref{fig:multipants_varPart}).
+Variables that explained the most variance on average were patient, cell proportions and \gls{RNAseq} plate.
+Some variables that did not explain more variance on average than the null nevertheless had high maximum values, indicating their importance for a relatively small number of genes.
+These included sex, library preparation protocol version, and smoking status, but also response status, a variable of interest,
+so it was difficult to justify excluding all variables with lower median variance explained than the null.
+All non-null variables in (\autoref{fig:multipants_varPart}) were selected as predictors in downstream models apart from \enquote{Ever\_Immunomodulator} 
+(whether the patient had ever had immunomodulator treatment), 
+as that had both low median variance explained and was correlated with baseline immunomodulator use.
+The sample size is large compared to number of \glspl{df} lost by including predictors that may not be relevant for some genes.
 
 \begin{figure}
     \centering
@@ -461,27 +447,32 @@ The variables that explained the most variance included patient, cell proportion
     \label{fig:multipants_varPart}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.cell_type_proportion_vs_Study_Day.pdf}
-    \caption{changes in cell proportions of 6 immune cell types over time}
-    \label{fig:multipants_cell_type_proportion_vs_Study_Day}
-\end{figure}
+How will interpretations of effect sizes of interest be affected by including this suite of other variables, all of which can be considered as third variables?
+If a third variable Z is not a precision variable, but is also associated with X, conditioning changes the effect estimate.
+The regression model is agnostic to causal relationships between variables,
+but distinct types of third variable can be distinguished conceptually by assuming the direction of causal relationships \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819361/}.
+Conditioning on a confounder (X \textleftarrow Z \textrightarrow Y) reduces bias of the effect estimate,
+conditioning on a collider (X \textrightarrow Z \textleftarrow Y) induces bias,
+and conditioning on a mediator in the causal path (X \textrightarrow Z \textrightarrow Y) changes the effect estimated by removing the indirect effect mediated by Z,
+usually biasing the effect estimate towards zero\footnote{It is not easy to determine the direction of bias in general \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7064555/}.}.
+The major influence I consider is including cell proportions.
+\todo{The observational study design does not allow estimation of causal effects, so this is only assumed.}
+The assumed causal relationship is response status \textrightarrow cell proportion \textrightarrow expression
+\footnote{The assumption in the \gls{DGE} model that response status is an intrinsic property of a patient that is causally upstream will be discussed in \label{chap:discussion}.}.
+% They change a lot over time too (\autoref{fig:multipants_cell_type_proportion_vs_Study_Day})
 
-\1 Variables that did not explain more variation on average than the null could still have high maximum values, 
-    indicating their importance for specific genes only, such as genes with sex-specific expression.
-    \2 would be best to customise per gene, but less comparable interpr between genes
-    \2 Included, as we need a consensus set of covariates, and the penalty is only 1 df.
-    \2 final list of covariates is [TODO: basically select all, except Gran, since we have proportions; and ever immunomodulator, which is low in median and max var explained]
-    \todo{the var explained by Gran will be redistributed among highly cor vars anyways}
-% Sex
-% Age
-% BMI
-% Age of Onset
-% Crohn’s Surgery
-% Ever Immunomodulator
-% Current Smoker
-% Proportions of the 6 cell types: CD4+ T cells, CD8+ T cells, B cells, NK cells, monocytes, and granulocytes
+For \gls{DGE} in this chapter, I fit separate models including and excluding cell proportions as predictors, but otherwise identical.
+These have complementary interpretations.
+In models without cell proportions, the effect size of response status could represent up or downregulation, 
+but could also come from differences in cell proportions in the bulk samples associated with response.
+The estimates from models adjusted for cell proportions are more likely to reflect up or downregulation on a per cell basis.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.cell_type_proportion_vs_Study_Day.pdf}
+%     \caption{changes in cell proportions of 6 immune cell types over time}
+%     \label{fig:multipants_cell_type_proportion_vs_Study_Day}
+% \end{figure}
 
 \subsubsection{Contrasts for pairwise group comparisons}
 
