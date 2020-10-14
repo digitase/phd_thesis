@@ -199,7 +199,7 @@ max marker heterozygosity rate within 3 standard deviations of the mean (thresho
 % \todo{see}
 % https://www.nature.com/articles/nrg2344
 % Once armed with a set of called genotypes, the final phase of quality control beckons. Experience has shown that most SNPs showing extreme departures from Hardy–Weinberg equilibrium (HWE) in controls can be safely discarded1, although lesser (but nevertheless quite marked) departures are to be expected under the null hypothesis, given the number of tests performed. Appropriate thresholds for any given study will depend on the sample size and overall data quality, and might best be defined by using the observed distribution of HWE statistics (the WTCCC used this approach to set a threshold at an exact p < 5.7 × 10−7 in controls)1. In any event, HWE is an imprecise tool for quality control purposes. Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
-removal of markers that deviate from Hardy–Weinberg equilibrium (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
+removal of markers that deviate from \gls{HWE} (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
 % TODO
 % We exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because
 %   this can be indicative of a genotyping or genotype-calling error. However,
@@ -576,6 +576,9 @@ Contrasts were defined, testing if linear combinations of estimated coefficients
 % A contrast is defined as the sum of each group mean multiplied by a coefficient for each group
 % In statistics, particularly in analysis of variance and linear regression, a contrast is a linear combination of variables (parameters or statistics) whose coefficients add up to zero, allowing comparison of different treatments.[1][2]
 From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
+% TODO
+% The grand mean or pooled mean is the mean of the means of several subsamples, as long as the subsamples have the same number of data points.
+% \2 NOTE: this is not the same as the same as the mean of means contrast as pooled is not mean of two means
 From model 2, I defined contrasts for the \gls{TRI} specifically at each of the three timepoints.
 % TODO: by merely specifying the model with interactions, we allow them, and thus change the interp. thus both required
 % TODO: did i really define contrasts? put in actual model equation here

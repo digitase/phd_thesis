@@ -15,7 +15,7 @@
 \section{Introduction}
 
 \subsection{\Glsfmtlong{CD} and \glsfmtlong{IBD}}
-\todo{difficult to separate out CD from IBD in literature, section probably needs to decide to focus on CD only or IBD}
+\todo{difficult to separate out CD from IBD in literature, section probably needs to decide to focus on CD only or IBD.}
 
 % \1 <Description>
 \gls{CD} is a chronic, inflammatory disease of the gastrointestinal tract.
@@ -331,7 +331,7 @@ RNA was then quantified with the ThermoFisher QuBit BR RNA (Q10211), RNA integri
 Library preparation was done using the Kapa mRNA HyperPrep Kit, including enrichment for mRNA using magnetic oligo-dT beads, depletion of rRNA and globin mRNA using the QIAseq FastSelect RNA Removal Kit, and adapter ligation with IDT xGEN Dual Index UMI adapters.
 Libraries were sequenced on the Illumina HiSeq 4000 using 75 bp paired-end reads.
 
-\subsection{RNAseq quantification and quality control}
+\subsection{RNAseq quantification and preprocessing}
 
 A total of 1141 samples were initially sequenced.
 Sequencing data was demultiplexed with Picard.
@@ -382,7 +382,7 @@ Z explains variation in Y that would otherwise be considered residual,
 so conditioning on Z increases the efficiency of estimating X \textrightarrow Y, but does not change the effect estimate.
 
 Many variables were available for selection;
-\autoref{fig:multipants_pheno_corrplot} shows their correlation matrix.
+\autoref{fig:multipants_pheno_filtered_ggcorrplot} shows their correlation matrix.
 % Univariable analyses showed the strongest associations with primary non-response to infliximab and adalimumab were with week 14 drug and anti-drug antibody concentrations (table 3; appendix p 17).
 % Primary non-response to infliximab was also associated with older age at first dose, smoking at baseline, non-use of an immunomodulator at baseline, lower baseline albumin concentrations, and higher baseline white cell count.
 % Primary non-response to adalimumab was associated with a higher body-mass index at baseline.
@@ -422,23 +422,21 @@ Additional categorical variables were included for patient and \gls{RNAseq} libr
 An additional continuous variable consisting of random numbers drawn from the standard normal distribution was also included as a null.
 % The var explained by Gran will be redistributed among highly cor vars anyways.
 Granulocyte proportion estimates were dropped to relieve perfect multicollinearity.
-Categorical variables were coded as random effects, and continuous variables as fixed effects.
-Surprisingly, \textcite{hoffman2016VariancePartitionInterpretingDrivers} showed that variance proportion estimates are unbiased even when coding categorical variables with as few as two categories as random, 
-as long as all model parameters are estimated jointly using \gls{ML} rather than \gls{REML}\footnote{
-    \gls{REML} treats random effects as nuisance parameters and estimates fixed effects after first integrating out random effects).
-}.
+Categorical variables were coded as random intecepts, and continuous variables as fixed effects.
+Surprisingly, simulations from \textcite{hoffman2016VariancePartitionInterpretingDrivers} showed that variance proportion estimates are unbiased even when coding categorical variables with as few as two categories as random, 
+and model parameters are estimated using \gls{ML} rather than \gls{REML}, which is commonly used for variance components analysis.
 It was also shown that this approach avoids overestimates of variance proportions that occur if categorical variables with many levels are treated as fixed.
 
 As downstream \gls{DGE} methods require the same set of predictors for all genes, the aim was to select variables that explain a lot of variance for many genes.
 Variables were ordered by the median of genewise variance proportion estimates (\autoref{fig:multipants_varPart}).
 Variables that explained the most variance on average were patient, cell proportions and \gls{RNAseq} plate.
 Some variables that did not explain more variance on average than the null nevertheless had high maximum values, indicating their importance for a relatively small number of genes.
-These included sex, library preparation protocol version, and smoking status, but also response status, a variable of interest,
+These included sex, library preparation protocol version, and smoking status, but also primary response status, a variable of interest,
 so it was difficult to justify excluding all variables with lower median variance explained than the null.
 All non-null variables in (\autoref{fig:multipants_varPart}) were selected as predictors in downstream models apart from \enquote{Ever\_Immunomodulator} 
 (whether the patient had ever had immunomodulator treatment), 
 as that had both low median variance explained and was correlated with baseline immunomodulator use.
-The sample size is large compared to number of \glspl{df} lost by including predictors that may not be relevant for some genes.
+This is a crude approach, but the sample size is large compared to number of \glspl{df} lost by including predictors that may not be relevant for some genes.
 
 \begin{figure}
     \centering
@@ -449,23 +447,26 @@ The sample size is large compared to number of \glspl{df} lost by including pred
 
 How will interpretations of effect sizes of interest be affected by including this suite of other variables, all of which can be considered as third variables?
 If a third variable Z is not a precision variable, but is also associated with X, conditioning changes the effect estimate.
-The regression model is agnostic to causal relationships between variables,
+The regression model is mathematically agnostic to causal relationships between variables,
 but distinct types of third variable can be distinguished conceptually by assuming the direction of causal relationships \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2819361/}.
 Conditioning on a confounder (X \textleftarrow Z \textrightarrow Y) reduces bias of the effect estimate,
 conditioning on a collider (X \textrightarrow Z \textleftarrow Y) induces bias,
 and conditioning on a mediator in the causal path (X \textrightarrow Z \textrightarrow Y) changes the effect estimated by removing the indirect effect mediated by Z,
 usually biasing the effect estimate towards zero\footnote{It is not easy to determine the direction of bias in general \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7064555/}.}.
-The major influence I consider is including cell proportions.
-\todo{The observational study design does not allow estimation of causal effects, so this is only assumed.}
-The assumed causal relationship is response status \textrightarrow cell proportion \textrightarrow expression
+The major influence I consider in this chapter is adjusting for cell proportions.
+From the variance partition analysis (\autoref{fig:multipants_varPart}), cell proportions were the biological factor that explained the most variance for many genes.
+I have not systematically assessed what types of third variable the other selected predictors may act as.
+
+\todo{The observational study design does not allow straightforward estimation of causal effects, so this is only assumed.}
+The assumed causal relationship is response \textrightarrow cell proportion \textrightarrow expression, where cell proportion mediates the association between response and expression.
 \footnote{The assumption in the \gls{DGE} model that response status is an intrinsic property of a patient that is causally upstream will be discussed in \label{chap:discussion}.}.
 % They change a lot over time too (\autoref{fig:multipants_cell_type_proportion_vs_Study_Day})
-
-For \gls{DGE} in this chapter, I fit separate models including and excluding cell proportions as predictors, but otherwise identical.
+I fit separate \gls{DGE} models including and excluding cell proportions as predictors, but otherwise identical.
 These have complementary interpretations.
-In models without cell proportions, the effect size of response status could represent up or downregulation, 
+In models without cell proportions, the effect size of response status could represent up or downregulation on a per cell basis, 
 but could also come from differences in cell proportions in the bulk samples associated with response.
 The estimates from models adjusted for cell proportions are more likely to reflect up or downregulation on a per cell basis.
+\todo{Could cell proportions act as colliders?}
 
 % \begin{figure}
 %     \centering
@@ -476,106 +477,233 @@ The estimates from models adjusted for cell proportions are more likely to refle
 
 \subsubsection{Contrasts for pairwise group comparisons}
 
-\1 model form is E ~ [...] don't forget random fx!
-\1 can we pool drugs with a mean term for this comparison? i.e. move from 8 to 4 means model
-    \2 test interaction between drug and response at w0, and at w14 i.e. is there a diff in the diff between R vs NR between drugs?
-    \2 no significant single gene hits at either timepoint
-    \2 but unclear if preregistered power calculations would extend to this test \url{https://statmodeling.stat.columbia.edu/2018/03/15/need-16-times-sample-size-estimate-interaction-estimate-main-effect/}
+Genewise \gls{DGE} models were fit in \software{dream}\autocite{hoffman2020DreamPowerfulDifferential} in total.
+Models were linear mixed models similar to the variance partition model.
+The model form was:
 
-    \2 there are baseline diffs are evident in clinical data \todo{because this is non-randomised, baseline differences do matter??}
-    \2 “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).” \autocite{kennedy2019PredictorsAntiTNFTreatment}
-    \2 I include many but not all of these covariates in the DGE model
+% TODO: make all terms same names as other listing
+\begin{lstlisting}
+Expression ~ 
+    0 + 
+    concat(Visit, Response, Drug) + 
+    Sex + Age_of_Onset + Disease_Duration + 
+    Smoking_History + Crohns_Surgery + 
+    On_Immunomodulator_At_Baseline + 
+    On_Steroids_At_Baseline + Earliest_BMI +
+    [CD8T + CD4T + Bcell + Mono + NK] + 
+    Library_Prep_Protocol +
+    (1 | RNA_Plate) +
+    (1 | Patient)
+\end{lstlisting}
 
-\1 used \software{dream} hoffman2018DreamPowerfulDifferential
-\1 Group-means parametrisation with 8 means
-    \2 equiv to to 3 way interactions between drug/response/visit
-    \2 no intercept, so each group coef is a mean estimate
-\1 specific hypotheses tested using sum to zero contrasts 
-\1 Model also fit that used Group-means parametrisation with 4 means: pooling the two drugs
-    % TODO
-    % The grand mean or pooled mean is the mean of the means of several subsamples, as long as the subsamples have the same number of data points.
-    % \2 note this is not the same as the same as the mean of means contrast as pooled is not mean of two means
-\1 TODO: model equations
-    \2 for dream analysis, unlike variancePartition, use REML over ML, so use fixed effects for small numbers of levels
-    \2 also, need fixed effects for tested predictors
-    % However, in the lme4 package in R the standards for evaluating significance of
-    % fixed effects in these models (i.e., obtaining p-values) are somewhat vague.
-    % There are good reasons for this, but as researchers who are using these models
-    % are required in many cases to report p-values, some method for evaluating the
-    % significance of the model output is needed.
-    %
-    % The primary motivation for this omission is that in linear mixed models it is
-    % not at all obvious what the appropriate denominator degrees of freedom to use
-    % are, except perhaps for some simple designs and nicely balanced data.
-    \2 to get p values for papers, Dream uses lmerTest approximation Satterthwaite df \url{https://link.springer.com/article/10.3758/s13428-016-0809-y} with REML
-    \2 this combo controls type 1 error for n>144 in lmerTest simulations
-    \2 FDR BH separately per comparison: "The default method="separate" and adjust.method="BH" settings are appropriate for most analyses. method="global" is useful when it is important that the same t-statistic cutoff should correspond to statistical significance for all the contrasts." \url{https://rdrr.io/bioc/limma/man/decideTests.html}
+where the response is expression at a particular visit.
+The 0 indicates there is no all-ones intercept term;
+and concat(Visit, Response, Drug) is experimental group defined by combinations of the predictors of interest:
+    visit (week 0, 14, 30, 54), 
+    response (responder, non-responder), 
+    and drug (infliximab, adalimumab).
+\todo{Alter and move this to ch2}
+This is equivalent to a model with an intercept term and a three-way interaction between visit, response, and drug,
+including all lower order terms (1 + Visit*Response*Drug),
+but is more convenient for testing pairwise expression differences between groups,
+as the coefficient for each term is the estimate of mean expression for that group.
+As the interest is in estimating a single coefficient as each predictor's effect size on expression (rather than estimating variance components), 
+most predictors are modelled as fixed effects.
+RNA\_Plate and Patient are nuisance variables with a large number of levels, so they are modelled as random intercepts.
+% https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html#reml-vs.ml
+% You should use ML when comparing models that differ in their fixed effects
+% [...]
+% In REML (REstricted ML) estimation, our main interest is in estimating the random effects, not the fixed effects.
+% Imagine that we restrict our parameter space by setting the fixed effects parameters in set (i) above to certain plausible values.
+% [...]
+% it should not be used to compare models that differ in their fixed effects structure. You should just use this when comparing models that differ in their random effects.
+%
+% \gls{REML} treats fixed effects as nuisance parameters and estimates random effects after first integrating out fixed effects\autocite{mcneish2017SmallSampleMethods}.
+To avoid small-sample bias in fixed effect standard error estimates, estimation was done with \gls{REML}\autocite{mcneish2017SmallSampleMethods}.
 
-% TODO: confidence intervals for FDR https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-288
-    % https://en.wikipedia.org/wiki/False_coverage_rate
+Two sets of genewise models were fit with and without the cell proportion terms in square brackets.
+Two more sets of genewise models were fit with drugs pooled ($concat(Visit, Response, Drug)$ replaced with $concat(Visit, Response) + Drug$),
+but otherwise identical to the first two sets.
+Specific hypotheses were tested using sum-to-zero contrasts, which are linear combinations of the model coefficients with weights summing to zero.
+For example, to test for \gls{DGE} between responders and non-responders to infliximab at baseline in the non-pooled model,
+I used a contrast where
+the weight for the (week 0, responder, infliximab) group coefficient was 1,
+the weight for the (week 0, non-responder, infliximab) group coefficient was -1,
+and all other coefficient weights were 0.
+Contrasts can be used thuswise to compare any pair of groups, as the coefficients of group terms are group means.
 
-\subsubsection{Spline model for difference over all timepoints}
+% However, in the lme4 package in R the standards for evaluating significance of
+% fixed effects in these models (i.e., obtaining p-values) are somewhat vague.
+% There are good reasons for this, but as researchers who are using these models
+% are required in many cases to report p-values, some method for evaluating the
+% significance of the model output is needed.
+%
+% The primary motivation for this omission is that in linear mixed models it is
+% not at all obvious what the appropriate denominator degrees of freedom to use
+% are, except perhaps for some simple designs and nicely balanced data.
+% 
+% \2 to get p values for papers, Dream uses lmerTest approximation Satterthwaite df with REML
+% \2 this combo controls type 1 error for n>144 in lmerTest simulations \url{https://link.springer.com/article/10.3758/s13428-016-0809-y}
+To get \pvalues, the contrast divided by its standard error is compared to the t distribution using the Satterthwaite approximation for \glspl{df}.
+% \2 FDR BH separately per comparison: "The default method="separate" and
+% adjust.method="BH" settings are appropriate for most analyses.
+% method="global" is useful when it is important that the same t-statistic
+% cutoff should correspond to statistical significance for all the
+% contrasts." \url{https://rdrr.io/bioc/limma/man/decideTests.html}
+\gls{FDR} control was done with the \gls{BH} method, computed separately for each contrast\footnote{
+It could also be computed globally over all contrasts if it was necessary to have the same t-statistic threshold for statistical significance in all contrasts.
+}.
 
-% TODO there are methods, but did not use due to shortness of time series
+% NOTE: to get confidence intervals for FDR https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-288
+% https://en.wikipedia.org/wiki/False_coverage_rate
+
+\subsubsection{Spline model over all timepoints}
+
+% NOTE: there are tailored methods for time series DGE, but I did not use them due to shortness of this time series
 % "Comparative analysis of differential gene expression tools for RNA sequencing time course data"
 % Surprisingly, TC tools were outperformed by the classical pairwise comparison approach on short time series (<8 time points) in terms of overall performance and robustness to noise, mostly because of high number of false positives, with the exception of ImpulseDE2.
+% Also see:
+% Clustering time-course Microarray data using functional Bayesian infinite mixture model
+% clustering folder in downloads
+% https://2-bitbio.com/2017/04/clustering-rnaseq-data-making-heatmaps.html
+% https://hbctraining.github.io/DGE_workshop/lessons/08_DGE_LRT.html
 
-\1 aim is to uses info in samples from other timepoints, avoiding a large number of pairwise comparisons
-    \2 a simple study day x responder interaction over time assumes linear change
-\1 could aosl treat time as categorical visits (like baseline/w14 analysis above), then f test all interactions
-    \2 but there is variation in study day in the visit windows
+The aim was to use expression data from all four timepoints to find genes associated with response,
+while avoiding a large number of pairwise comparisons.
+I fit a natural cubic spline (\software{splines::ns}) to the study day to allow for non-linear trajectories of expression over time.
+The natural cubic spline is continuous function defined piecewise in each successive interval between a set of k knots in the range of the input variable x.
+The k-1 pieces between knots are polynomials of degree 3. 
+As a natural spline, the function is constrained to be linear outside of the boundary (first and last) knots to avoid unpredictable behaviour at the boundaries.
+The model form used was:
 
-\1 spline model tests over all timepoints, are there diff trajectories for R and NR?
-    \2 Internal Knots set at w14 and w30, since drug dose just after the visit, so slope should be allowed to change until next dose
-    \2 cubic between knots, linear outside external knots
-    \2 f test over 3 interaction terms between spline basis and study day
-        \3 can include all data
-        \3 TODO: read this for maths behind basis functions \url{https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-019-0666-3}
+\begin{lstlisting}
+Expression ~
+     1 +
+     Primary_Response * ns(Study_Day, knots=7*c(14, 30)) + 
+     Drug_Generic + 
+     Sex + Age_of_Onset + Disease_Duration +
+     Smoking_History + Crohns_Surgery +
+     On_Immunomodulator_At_Baseline + 
+     On_Steroids_At_Baseline + Earliest_BMI +
+     [CD8T + CD4T + Bcell + Mono + NK] +
+     Library_Prep_Protocol +
+     (1 | RNA_Plate) +
+     (1 | PANTS.ID)
+\end{lstlisting}
 
-        % FDR separate
+The function ns(Study\_Day, knots=7*c(14, 30)) returns a basis matrix for the spline
+with two inner knots set at week 14 and week 30, as expression is expected to change after each drug dose.
+To include all data to within the boundaries, the two boundary knots were set at the minimum and maximum values of study day rather than week 0 and week 54.
+Separate sets of genewise models were again fit with and without cell proportions.
 
+% NOTE: true for poly, not true for ns
+% https://stackoverflow.com/questions/19484053/what-does-the-r-function-poly-really-do
+% Unfortunately there is an undesirable aspect with ordinary polynomials in regression. If we fit a quadratic, say, and then a cubic the lower order coefficients of the cubic are all different than for the quadratic [...]
+% What we would really like is to add the cubic term in such a way that the lower order coefficients that were fit using the quadratic stay the same after refitting with a cubic fit. To do this take linear combinations of the columns of poly(horsepower, 2, raw = TRUE) and do the same with poly(horsepower, 3, raw = TRUE) such that the columns in the quadratic fit are orthogonal to each other and similarly for the cubic fit. That is sufficient to guarantee that the lower order coefficients won't change when we add higher order coefficients.
+% [...]
+% Importantly, since the columns of poly(horsepwer, 2) are just linear combinations of the columnns of poly(horsepower, 2, raw = TRUE) the two quadratic models (orthogonal and raw) represent the same models (i.e. they give the same predictions) and only differ in parameterization.
+%
+% http://www.science.smith.edu/~jcrouser/SDS293/labs/lab12-r.html
+% This syntax fits a linear model, using the lm() function, in order to predict wage using a fourth-degree polynomial in age: poly(age,4). The poly() command allows us to avoid having to write out a long formula with powers of age. The function returns a matrix whose columns are a basis of orthogonal polynomials, which essentially means that each column is a linear combination of the variables age, age^2, age^3 and age^4.
+% If we prefer, we can also use poly() to obtain age, age^2, age^3 and age^4 directly. We can do this by using the raw = TRUE argument to the poly() function. Later we see that this does not affect the model in a meaningful way -- though the choice of basis clearly affects the coefficient estimates, it does not affect the fitted values obtained.
+
+The basis matrix has three columns. \autocite{perperoglou2019ReviewSplineFunction}
+% TODO:
+% The basis used by ns() is a B-spline basis.
+\todo{trying to understand how exactly the B-spline basis for the natural spline works will take a bit more work}
+To test for response-associated differences in the spline parameters, the predictors of interest are the three second-order interactions between response and the basis matrix columns. 
 % TODO
-% f-test
-% is a wald test
+% f-test, is basically a wald test
 % https://support.bioconductor.org/p/6124/
-% The above mentioned statistics are computed for every contrast for each gene. The eBayes() function computes one more useful statistic. The moderated F-statistic (F) combines the t-statistics for all the contrasts for each gene into an overall test of significance for that gene. The moderated F-statistic tests whether any of the contrasts are non-zero for that gene, i.e., whether that gene is differentially expressed on any contrast. The moderated-F has numerator degrees of freedom equal to the number of contrasts and denominator degrees of freedom the same as the moderated-t. Its p-value is stored as fit$F.p.value. It is similar to the ordinary F-statistic from analysis of variance except that the denominator mean squares are moderated across genes.
+% The above mentioned statistics are computed for every contrast for each gene.
+% The eBayes() function computes one more useful statistic. The
+% moderated F-statistic (F) combines the t-statistics for all the
+% contrasts for each gene into an overall test of significance for that
+% gene. The moderated F-statistic tests whether any of the contrasts
+% are non-zero for that gene, i.e., whether that gene is differentially
+% expressed on any contrast. The moderated-F has numerator degrees of
+% freedom equal to the number of contrasts and denominator degrees of
+% freedom the same as the moderated-t. Its p-value is stored as
+% fit$F.p.value. It is similar to the ordinary F-statistic from
+% analysis of variance except that the denominator mean squares are
+% moderated across genes.
+The three terms are tested jointly by F-test, and \gls{FDR} correction was done with the \gls{BH} method separately for each test.
+A significant result indicates a significant difference in the trajectory of expression over study day between responders and non-responders.
 
-\1 TODO: clustering spline hits
-    \2 note more accurate to use partial expression, but complicated for DREAM, so used unadjusted expression
-    % center, no scale
-    % pearson, which is scale invariant on centered data https://www.researchgate.net/publication/26290974_A_new_approach_for_clustering_gene_expression_time_series_data
-    \2 Centroids defined by simple mean in each visit
+\subsubsection{Clustering expression over all timepoints}
 
-less rudimentary
+To aid in interpretation of significant spline hits from the cell proportion adjusted model, I clustered genes by their expression trajectories.
 
-a more direct connection to spline model fit
-e.g. clustering basis function results
-e.g. predicted values of expression
+Expression data was converted to the \gls{CPM} scale using \gls{TMM} normalisation factors, then regressed against cell proportions.
+Residuals were centered and scaled per gene, 
+A distance matrix was computed using 1 - Pearson correlation as the distance metric.
+% which is scale invariant on centered data https://www.researchgate.net/publication/26290974_A_new_approach_for_clustering_gene_expression_time_series_data
+Hierarchical clustering was done with complete agglomeration for inter-cluster distance (fastcluster::hclust(method='complete')).
+The optimal number of clusters was determined using the gap statistic (\software{factoextra::fviz\_nbclust(method='gap\_stat', nboot=500)}),
+which determines when the change in within-cluster dispersions are no longer significantly improved by increasing the number of clusters \url{https://rss.onlinelibrary.wiley.com/doi/epdf/10.1111/1467-9868.00293}.
+The hierarchical clustering tree was then cut into that number of clusters.
 
-how to account for levels of noise in expression data?
+% Other possible approaches with more direct connection to spline model fit?
+% e.g. clustering basis function results
+% e.g. predicted values of expression
+
+% TODO:
+% How to account for levels of noise in expression data?
 % TMixClust
 % measurements come withintrinsic noise which makes their time series clustering a difficult task. Here, we show howto cluster such data with the package TMixClust. TMixClust is a soft-clustering methodwhich employs mixed-effects models with nonparametric smoothing spline fitting and is ableto robustly stratify genes by their complex time series patterns.
 % \url{https://www.nature.com/articles/s41598-018-36135-3}
 
-\subsubsection{Gene set analysis ranked}
+\subsubsection{Ranked gene set enrichment}
 
-% camera is developed to use mod t, but in practice ranks are comparable between t and z.std, even though dream says otherwise
-% https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html#dream-analysis
-\1 TODO: grab tmod paragraph from ch2
-    \2 Genes are ranked by their test statistics, meaning we are ranking by significance
-    % TODO
-    % other more sophisticated ranking methods
-    % Minimum Significant Difference \url{https://link.springer.com/article/10.1186/s12859-017-1674-0#Abs1} \url{https://cran.r-project.org/web/packages/tmod/vignettes/tmod.pdf}
-    % treat method \url{http://web.mit.edu/~r/current/arch/i386_linux26/lib/R/library/limma/html/ebayes.html}
-        \3 practice ranks are comparable between t and z.std, even though dream says otherwise, very high spearman cor
-        % TODO: add spearman rank corr
-    \2 approx 8k genes in the gene set annotation for tmod
+\todo{move this to ch2, then refer to it}
+
+Ranked gene set enrichment analyses were done using \texttt{tmod::tmodCERNOtest}\autocite{weiner3rd2016TmodPackageGeneral}, 
+which assesses the enrichment of small ranks within predefined sets of genes compared to all measured genes after ranking the genes by some metric.
+% https://www.bioconductor.org/packages/devel/bioc/vignettes/variancePartition/inst/doc/dream.html
+% Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the t-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report z.std which is the p-value transformed into a signed z-score. This can be used for downstream analysis.
+% [...]
+% Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the F-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report F.std which is the p-value transformed into an F-statistic with df1=number of coefficiets tested and df2=Inf. This can be used for downstream analysis.
+For each contrast, 
+as the t-statistics are not comparable between genes due to the use of approximate \glspl{df},
+I ranked genes by the signed Z score reported by \software{dream}, which is just a transformation of the \pvalue.
+% TODO
+% More sophisticated ranking methods
+% - tmodLimmaTest: The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
+% - Minimum Significant Difference \url{https://link.springer.com/article/10.1186/s12859-017-1674-0#Abs1} \url{https://cran.r-project.org/web/packages/tmod/vignettes/tmod.pdf}
+% - treat method \url{http://web.mit.edu/~r/current/arch/i386_linux26/lib/R/library/limma/html/ebayes.html}
+% - camera is developed to use mod t
+Similarly, F-statistics from the spline are not comparable between genes, so I used the F statistic from the transformation of the \pvalue.
+
+The CERNO statistic for a gene set is:
+\begin{equation}
+    -2 \sum_{i=1}^{n} \ln \frac{r_i}{N} \sim \chi^2(2N)
+\end{equation}
+where n is the number of genes in the set,
+r is the rank of the ith gene,
+and N is the number of measured genes.
+CERNO is relatively robust to the ranking metric\autocite{zyla2019GeneSetEnrichment}.
+Since CERNO only considered enrichment of small ranks but genes can be down or upregulated, 
+separate tests were done sorting in ascending and descending order,
+and the more significant order was chosen to define whether each gene set was enriched more for small or large genewise test statistics.
+% FDR
+% A data frame with module names, additional statistic (e.g. enrichment or AUC,
+% depending on the test), P value and FDR q-value (P value corrected for
+% multiple testing using the p.adjust function and Benjamini-Hochberg
+% correction.
+\gls{FDR} control for the number of gene sets tested was controlled using \gls{BH} separately for each model.
+
+The gene sets were \glspl{BTM} from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed 'DC') and \textcite{li2013MolecularSignaturesAntibody} (prefixed 'LI').
+Modules are sets of genes with transcriptional and functional similarities across a variety of disease and stimulated conditions.
+The 260 modules from \textcite{chaussabel2008ModularAnalysisFramework} were constructed by unsupervised clustering of 239 \gls{PBMC} transcriptomes from multiple disease datasets,
+then annotated by data mining of gene names in PubMed abstracts.
+% mutual information
+The 334 modules from \textcite{li2013MolecularSignaturesAntibody} were derived from coexpression analysis of approximately \num{30000} blood transcriptomes,
+then annotated making use of Gene Ontology, cell type specific markers, pathway databases, and manual literature search.
+\textcite{li2013MolecularSignaturesAntibody} modules are better annotated in general, and were used for the majority of gene set enrichments in this chapter.
 
 % TODO: add explanation of interaction term column
-    % note interpretation depends on the original signs of effects
-
-The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}
-"DC" (from Chaussabel et al. 2008)
+% Note that we can rank by main effect or interaction Z score.
+% For interactions, interpretation depends on the original signs of effects.
 
 \subsection{Genotyping and genotype data preprocessing}
 
@@ -600,40 +728,39 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
 % and the first within-sample principal component were
 % included as covariates (Supplementary Table 2).
 
-\1 Whole blood samples were collected into EDTA tubes for genotypeing at w0
-\1 TODO: scan Alex's thesis for genotyping and QC details
-% TODO: check no batch effects e.g. chip, which would necc an insample PCA
-    \2 autosomal only
-    \2 TODO describe strange limix behaviour that lead to deduping visits by patient in sample filtering
-    % although it may seem possible to have duplicate patients
-    %     following the stacking logic of TODOcite,
-    %     it estimation of the alternative model log likelihood
-    %     excluding just a 2 duplicates at w14
-    %     makes LL alt much lower
-    %     LRT returns false negatives
-    %
-    %     resulting p value distribution is not well behaved:
-    %     large spike at 1
-    %
-    %     but the betas and stes remain comparable
-    %     since we use mashr to get signif values,
-    %     can keep these in or out.
+\todo{collab note: QC done by Alex}
+Genotype data were subsetted from the full, post-quality control \gls{PANTS} cohort genotypes used in \textcite{sazonovs2019HLADQA105Carriage},
+where the preprocessing pipeline is described in full detail.
+These data are from whole blood samples collected into EDTA tubes at week 0 and genotyped on the Illumina CoreExome microarray.
+Pre-imputation quality control was performed as described in \textcite{delange2017GenomewideAssociationStudy}.
+Imputation was done using the Sanger Imputation Service with the Haplotype Reference Consortium panel.
+Post-imputation, samples that were non-European, related (proportion identity-by-descent > 0.1875), or were outliers in genotype missingness or heterozygosity rate were removed;
+\glspl{SNP} that poorly imputed (INFO score < 0.4), deviated from \gls{HWE} (p < 1e-10), had high missingness (> 5\%), or low \gls{MAF} (< 1\% before subsetting) were removed.
+\todo{I've collected the QC details here from Alex's thesis}
+\num{7503762} \glspl{SNP} remained after filtering.
+Genotypes were converted to dosages of the non-reference allele.
 
+\subsection{\Glsfmtlong{reQTL} mapping}
 
-\subsection{Computing genotype PCs}
+The overall strategy and methods used here are largely identical to \autoref{chap:hird_reQTL}.
+For each timepoint, covariates for the \gls{eQTL} models are computed, \glspl{eQTL} are mapped separately for each timepoint, followed by joint mapping using summary statistics from all timepoints to call \glspl{reQTL}.
+\todo{much of this section is brief, since the same pipeline as ch3}
 
-\1 used weights from akt for 1000G to do projection \autoref{fig:multipants_genotype_akt_1000g_pca}
-    % just cases used. do not use in sample PCs?
-    % TODO: read
-        % Efficient toolkit implementing best practices for
-        % principal component analysis of population
-        % genetic data
-    % would use FlashPCA2 if wanted to do myself e.g. between chip batches
-\1 chose top 5 PCs for use in eQTL model
-    \2 there is less pop structure here than HIRD. in HIRD, i did the PCA myself, and found 4 significant PCs with tracy-widom
-    \2 from EIGENSTRAT paper, results not sensitive to number of PCs anyway, as long as it is sufficient \url{https://www.nature.com/articles/ng1847}
-    % This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
-    % We see that in each SNP category, results are virtually identical for K = 1, 2, 5 or 10.
+\subsubsection{Computing genotype PCs}
+
+Samples were projected onto \glspl{PC} defined by 1000 Genomes Project samples using \gls{SNP} weights from \software{akt} 
+confirming that samples were of European ancestry (\autoref{fig:multipants_genotype_akt_1000g_pca}).
+The first four \glspl{PC} in the 1000G genotype data were found to be significant according to the Tracy-Widom test in \autoref{chap:hird_reQTL}.
+% This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
+% We see that in each SNP category, results are virtually identical for K = 1, 2, 5 or 10.
+Here I chose the first five \glspl{PC} for use downstream, as for the purposes of correcting for large-scale population structure in genetic association models,
+the specific number is not important, as long as there is a sufficient number of \glspl{PC} included to capture population structure\autocite{price2006PrincipalComponentsAnalysis}.
+\glspl{PC} were centered and scaled before downstream use to improve model convergence.
+
+% TODO: read 'Efficient toolkit implementing best practices for principal component analysis of population genetic data.'
+% just cases used. do not use in sample PCs?
+% Must do this myself for tracy-widom.
+% would use FlashPCA2 if wanted to do myself e.g. between chip batches
 
 \begin{figure}
     \centering
@@ -642,27 +769,15 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
     \label{fig:multipants_genotype_akt_1000g_pca}
 \end{figure}
 
-\subsection{reQTL analysis}
-
-\1 same overall strat as ch3
-
-% Alternative:
-% In the ANCOVA approach, the whole focus is on whether one group has a higher mean after the treatment. It’s appropriate when the research question is not about gains, growth, or changes.
-
-% https://www.theanalysisfactor.com/pre-post-data-repeated-measures/
-% ANCOVA vs repeated measures vs mixed model
-
-% The biggest advantage of mixed models is their incredible flexibility.  They can handle clustered patients as well as repeated measures (even in the same model).  They can handle crossed random effects, where there are repeated measures not only on an patient, but also on each stimulus.
-% https://www.theanalysisfactor.com/repeated-measures-approaches/
-
-% Then work out if genetics changes trajectories for any gene i.e. DGE models with a snp as predictor
-% First need to eQTL scan in general with mashr and find the snps in the most reQTLish genes, since this modelling is probably expensive
-
 \subsubsection{Finding hidden confounders in expression data}
 
-\1 PEER (same as ch3)
-    \2 Used DESeq2 vst for between sample norm e.g. sequencing depth 
-    \2 Chose n PEER to maximise cis-eQTLs on chr1 \autoref{fig:multipants_reqtl_PEER_k_choice} 
+Between-sample normalisation and variance stabilisation was applied to the counts matrix (DESeq2::vst), resulting in log2 scale expression estimates.
+Given known factors (response, drug, five scaled genotype \glspl{PC}, cell proportions), 
+\software{PEER} was used to find additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
+This is similar to the process undertaken in \autoref{subsubsec:multiPANTS_var_selection}, but these hidden factors can be unmeasured.
+To maximise efficiency for cis-\gls{eQTL} mapping, 
+the number of PEER factors retained for each timepoint was selected to maximise the number of genes with at least one significant \gls{eQTL} detected on chromosome 1 (\autoref{fig:multipants_reqtl_PEER_k_choice}).
+The selected numbers were 25, 20, 15, and 5 for weeks 0, 14, 30, and 54.
 
 \begin{figure}
     \centering
@@ -671,53 +786,87 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
     \label{fig:multipants_reqtl_PEER_k_choice}
 \end{figure}
 
-\subsubsection{Computing GRMs}
+\subsubsection{Computing kinship matrices}
 
-\1 LDAK, same as ch3
+% NOTE: LDAK can account for genotype uncertainty, but Alex's data are rounded genotypes even for imputed variants.
+\gls{LOCO} kinship matrices were computed on typed \glspl{SNP} for each chromosome using LDAK as in \autoref{subsec:hird_reQTL_LDAK}.
+The kinship matrix will be incorporated into the \gls{eQTL} model to adjust for fine-scaled population structure.
 
-\subsubsection{limix model}
+\subsubsection{Mapping cis-\glsfmtshortpl{eQTL} in each timepoint separately}
 
-\1 same as ch3, limix
-    \2 n at each timepoint was [...]
-    \2 AC thresh 15
-    \2 extra filter to avoid small numbers of minor hom, as without sufficient numbers, leads to data points with high leverage that may be unduely influential on the beta
-    % despite mashr migitation by shrinkage? is it sufficient?
-    % when the whole point is calling signif changes in beta
-    \2 used a >5 min hom filter
-        % gated by lowest n among 4 visits, but 15 to 25 MAF diff only
+\glspl{eQTL} were mapped in each timepoint using a linear mixed model in \software{limix}.
+Within each timepoint, patients with multiple samples (taken on different study days) had the non-major visit sample removed.
+% although it may seem possible to have duplicate patients
+%     following the stacking logic of TODO: cite,
+%     it estimation of the alternative model log likelihood
+%     excluding just a 2 duplicates at w14
+%     makes LL alt much lower
+%     LRT returns false negatives
+%
+%     resulting p value distribution is not well behaved:
+%     large spike at 1
+%
+%     but the betas and stes remain comparable
+%     since we use mashr to get signif values,
+%     can keep these in or out.
+Although the \gls{eQTL} model form does not prohibit duplicate samples,
+it led to strange behaviour in limix where \gls{eQTL} betas and standard errors were comparable to the dedeuplicated results,
+but log-likelihood estimates were abnormally high.
+The deduplicated sample sizes at weeks 0, 14, 30 and 54 were 223, 205, 167, and 84.
 
-\1 find lead eQTL for each gene in any condition by lowest lfsr
-    \2 breaking ties by highest imputation INFO, highest \gls{MAF}, shortest dist to \gls{TSS}, and genomic coordinate.
+% TODO:
+% The number of genes was 15592, which is more than in the DGE. Probably different filtering pipeline versions...
+% The Ensembl gene start and end coordinates correspond to the outermost transcript start and end coordinates.
+For each autosomal gene, cis-\glspl{SNP} within 1 Mb of the Ensembl gene start (gene end on the minus strand),
+were filtered so that the number of samples in the smallest dosage group was at least 5.
+Small group numbers lead to data points with high leverage that may be unduly influential on the beta.
+This is done in place of a per-timepoint \gls{MAF} or minor allele count filter.
+% TODO: gated by lowest n among 4 visits, but 15 to 25 MAF diff only
 
-\subsubsection{mashr joint analysis}
+The limix model for each \gls{SNP}-gene pair had 
+log2 expression as the response variable,
+and genotype dosage as the predictor of interest.
+Other fixed effect predictors were
+the intercept,
+known factors (response, drug, five scaled genotype \glspl{PC}, cell proportions), 
+and PEER hidden factors (timepoint-specific number selected above).
+A random intercept term was included with mean zero and covariance matrix proportional to the \gls{LOCO} kinship matrix for the \gls{SNP}'s chromosome.
 
-\1 same as ch3
-    \2 TODO describe mashr bug for negative betas
-    \2 reQTLs defined by difference in betas test between timepoints
-    \2 BH FDR separate per comparison, not globally
+\subsubsection{Joint \glsfmtshortpl{reQTL} mapping over all timepoints}
 
-\subsubsection{Clustering reQTLs}
+\todo{as with most of this section, this is more explained in ch3}
+Summary statistics from per-timepoint mapping were input to \software{mashr}.
+A total of \num{25908527} \glspl{SNP} were tested in all timepoints.
+% TODO useEstimateNullCorrelationSimple_TRUE
+The null correlation structure of the timepoints was estimated using null tests within a random subset of \num{200000}.
+Data-driven covariance matrices representing patterns of effects across timepoints were estimated using a strong subset of \num{129002} \glspl{eQTL}.
+The strong subset should contain \gls{eQTL} that are likely to have an effect in at least one timepoint.
+For each gene and timepoint, I selected the \gls{eQTL} with the smallest \pvalue, if that \pvalue was < 0.05.
+The mash model was fit on the full random subset, accounting for the computed null correlation and covariance matrices, in exchangeable Z-scores mode.
+Finally, posterior betas and standard errors were computed for all tests using the fitted model parameters.
+A corresponding \gls{lfsr} is also returned, controlling for multiple testing.
+% TODO describe mashr bug for negative betas being capped for lfsr
 
-% TODO
-% Clustering time-course Microarray data using functional Bayesian innite mixture model
-% clustering folder in downloads
-% https://2-bitbio.com/2017/04/clustering-rnaseq-data-making-heatmaps.html
-% https://hbctraining.github.io/DGE_workshop/lessons/08_DGE_LRT.html
+The lead \gls{eQTL} for each gene was chosen as the \gls{eQTL} with the lowest \gls{lfsr} in any condition, 
+\todo{yes, there could be ties in lfsr}
+breaking ties by highest INFO, highest \gls{MAF}, shortest dist to gene start (or end), and smallest genomic coordinate.
+Each lead \gls{eQTL} was assessed for being a significant \gls{reQTL} by a Z test for whether the difference in betas was zero, between the week 0 beta and each of the other three weeks.
+Multiple testing was controlled using the \gls{BH} \gls{FDR} for each of the three pairs separately.
 
-\1 <pipeline>
-    \2 align
-    \2 Centering, no scaling
-        \3 ensure comparability between gene
-        \3 Amplifies noise? Migitate by prefiltering on nominal signif diff between two timepoints
-    % https://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
-    \2 dist\_cor(method='pearson')
-    \2 fastcluster::hclust(method='complete')
-    \2 distance metric 1-cor(pearson)
-    % •	https://www.rdocumentation.org/packages/NbClust/versions/3.0/topics/NbClust
-    % o	Possible statistics: the index to be calculated. This should be one of : "kl", "ch", "hartigan", "ccc", "scott", "marriot", "trcovw", "tracew", "friedman", "rubin", "cindex", "db", "silhouette", "duda", "pseudot2", "beale", "ratkowsky", "ball", "ptbiserial", "gap", "frey", "mcclain", "gamma", "gplus", "tau", "dunn", "hubert", "sdindex", "dindex", "sdbw", "all" (all indices except GAP, Gamma, Gplus and Tau), "alllong" (all indices with Gap, Gamma, Gplus and Tau included).
-    \2 Number of clusters: gap stat fviz\_nbclust
+% \subsubsection{Clustering reQTLs}
 
-\subsubsection{gprofiler}
+% \1 <pipeline>
+%     \2 align
+%     \2 Centering, no scaling
+%         \3 ensure comparability between gene
+%         \3 Amplifies noise? Migitate by prefiltering on nominal signif diff between two timepoints
+%     https://hdbscan.readthedocs.io/en/latest/comparing_clustering_algorithms.html
+%     \2 dist\_cor(method='pearson')
+%     \2 fastcluster::hclust(method='complete')
+%     \2 distance metric 1-cor(pearson)
+%     •	https://www.rdocumentation.org/packages/NbClust/versions/3.0/topics/NbClust
+%     o	Possible statistics: the index to be calculated. This should be one of : "kl", "ch", "hartigan", "ccc", "scott", "marriot", "trcovw", "tracew", "friedman", "rubin", "cindex", "db", "silhouette", "duda", "pseudot2", "beale", "ratkowsky", "ball", "ptbiserial", "gap", "frey", "mcclain", "gamma", "gplus", "tau", "dunn", "hubert", "sdindex", "dindex", "sdbw", "all" (all indices except GAP, Gamma, Gplus and Tau), "alllong" (all indices with Gap, Gamma, Gplus and Tau included).
+%     \2 Number of clusters: gap stat fviz\_nbclust
 
 \section{Results}
 \todo{what to put in results vs discussion. going with the pattern of providing enough info for the reader to intepret the data in the results, then doing a summary and my own interpretation in the discussion}
@@ -792,7 +941,10 @@ I performed ranked gene set analysis in on the gene-wise z-statistics using bloo
 This module-level analysis was also run unadjusted (\autoref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropF}) and adjusted for cell composition (\autoref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}).
 
 Despite only \gene{SAMD10} having a significantly different effect between drugs at the gene-level (an interaction between drug and response at week 0), 
-the large global differences observable in \autoref{fig:multipants_dge_volcano_week_0_R_N} were detected in the module-level analysis\footnote{It is likely the study is not powered to detect gene-level three-way interaction effects between timepoint, drug and response, although I am not aware of which subgroup analyses may have been prespecified during the study design and sample size calculations for the \gls{PANTS} \gls{RNAseq} cohort.}.
+the large global differences observable in \autoref{fig:multipants_dge_volcano_week_0_R_N} were detected in the module-level analysis\footnote{
+It is likely the study is not powered to detect gene-level three-way interaction effects between timepoint, drug and response.
+I am not aware of which subgroup analyses may have been prespecified during the study design and sample size calculations for the \gls{PANTS} \gls{RNAseq} cohort.
+}.
 Without adjusting for cell composition, many of the most significantly upregulated modules in the pooled analysis, 
 including upregulation of monocyte (LI.M11.0, LI.S4), neutrophil (LI.M37.1, LI.M11.2), and dendritic cell (LI.M165, LI.S11),
 appear to be driven by infliximab.
@@ -1171,6 +1323,7 @@ The differences between drugs are puzzling, especially the greater effect of cel
 Baseline patient differences between drugs may offer a partial explanation.
 % Due to lack of randomisation, patients that took infliximab and adalimumab are likely to differ by more than drug.
 In the full \gls{PANTS} cohort, baseline characteristics other than those in \autoref{tab:multipants_table1} differ between patients on different drugs\autocite{kennedy2019PredictorsAntiTNFTreatment}.
+% “Several baseline characteristics were significantly different between the infliximab-treated and adalimumab-treated patients, including age, smoking, body-mass index, disease duration, disease location, and disease behaviour. Patients treated with infliximab had more active disease at baseline than did patients treated with adalimumab, as evidenced by higher serum CRP and faecal calprotectin concentrations (table 1).” \autocite{kennedy2019PredictorsAntiTNFTreatment}
 In particular, lower albumin, higher \gls{CRP}, and higher faecal calprotectin in infliximab patients suggest that they may have had greater disease severity.
 % Nick: “In general, sicker patients have often been given infliximab. At the time, children were rarely given adalimumab, but that doesn’t affect the RNA seq cohort because children were excluded.”
 Differences may be driven by patient or physician preference, for example, patients with more severe disease are often given infliximab rather than adalimumab\footnote{Kennedy, N. A., personal communication, 4 June (2020).}.
@@ -1402,10 +1555,15 @@ similar to the approach of \textcite{davenport2018DiscoveringVivoCytokineeQTL}.
 
 Several threats to the validity of the study remain to be discussed.
 The most pressing may be the meaning of time in the study.
-For pairwise \gls{DGE} comparisons and \gls{reQTL} mapping, 
+% TODO 
+% An alternative option would be to continue to treat timepoint as categorical, then f test all interactions, ignoring variation in study day within timepoints.
+% Which may actually be a good thing, since only up to 7 days before next dose.
+% Study day does not map to expression well when the time is so long.
+% Might be overall more sensible for only 4 timepoints.
+For pairwise \gls{DGE} comparisons, expression trajectory clustering, and \gls{reQTL} mapping, 
 samples were divided into four timepoints that corresponded to the major visits in \gls{PANTS}.
-The \gls{DGE} spline model used study day directly.
-The actual sample study day has substantial variation around the target for later timepoints.
+The \gls{DGE} spline model was fit to study day directly.
+Study day has substantial variation around the target for later timepoints.
 The particular targets (weeks 14, 30, 54) for post-baseline samples were chosen so that patients on infliximab (8 weeks between doses) and adalimumab (2 weeks between doses) could both be sampled with the same visit structure.
 Drug levels peak sharply after each dose and decline exponentially over time.
 Visits were scheduled to be as close as possible (within a week) to the next scheduled drug dose to capture trough drug levels.
