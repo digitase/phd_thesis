@@ -8,6 +8,29 @@
 
 \chapter{Introduction}
 
+% TODO:
+% start with defining genotype, and phenotype
+% define molecular phenotypes
+
+% TODO:
+% section on pathway analyses?
+% GSEA paper
+% https://www.nature.com/articles/ng1180
+% One promising approach to increase power exploits the idea that alterations in
+% gene expression might manifest at the level of biological pathways or
+% coregulated gene sets, rather than individual genes. Subtle but coordinated
+% changes in expression might be detected more readily by combining measurements
+% across multiple members of each gene set. A straightforward strategy for
+% identifying such differences is to examine top-ranking genes in a microarray
+% experiment and then to create hypotheses about pathway membership. This is both
+% subjective and post hoc, however, and thus prone to bias. A more objective set
+% of approaches4,5 tests for enrichment of pathway members among the top-ranking
+% genes in a microarray study, comparing them to a null distribution in which
+% genes are randomly distributed. Because functionally related genes are often
+% coregulated, however, a positive result in such a test can be due solely to
+% intrinsic correlation in gene expression rather than any relationship between
+% expression of pathway members and the phenotype of interest.
+
 \begin{outline}
 
 \section{Structure and diversity of the human genome}
@@ -201,6 +224,19 @@ to controlling the family-wise type I error rate at using the Bonferroni correct
     \2 Resolution: Naturally, these methods assign probabilities assuming the causal variant is in the set of variants observed.
     \2 The causal variant must either be genotyped or confidently imputed. Denser genotyping e.g. by WGS, and larger imputation panels will help.
 
+% \subsection{Polygenic risk scores}
+%
+% Why care? PRS for prediction.
+%
+% First PRS
+% 13. Wray, N.R., Goddard, M.E., and Visscher, P.M. (2007). Prediction of individual genetic risk to disease from genome-wide association studies. Genome Res. 17, 1520–1528.
+%
+% Variable prediction accuracy of polygenic scores within an ancestry group
+% https://elifesciences.org/articles/48376
+%
+% Polygenic background modifies penetrance of monogenic variants conferring risk for coronary artery disease, breast cancer, or colorectal cancer
+% https://www.medrxiv.org/content/10.1101/19013086v1
+
 \section{Gene expression as an intermediate phenotype}
 
 \subsection{From causal variant to target gene}
@@ -239,6 +275,22 @@ many non-coding GWAS loci are thought to affect traits by affecting the regulati
 \2 These enrichments put forth expression as an important intermediate linking non-coding \gls{GWAS} variants to their associated traits (\autoref{fig:intro_sysBio}).
 % TODO: distinguish endophenotypes
 % Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
+
+
+% \subsection{From target gene to candidate drug}
+%
+% \1 gene to drug
+%     \2 Are drug targets with genetic support twice as likely to be approved? Revised estimates of the impact of genetic support for drug mechanisms on the probability of drug approval
+%         \3 \url{https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489}
+%     GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
+%     - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
+%     - Do many of these common causal variants e.g. converge to hit on the same pathways?
+%     - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
+%     \2 how to drug a complex disease with no single 'candidate gene'?
+%         \3 e.g. schizo is usually polygenic, future drug development could benefit from taking a multi-target approach \autocite{visscher201710YearsGWAS}
+%         \3 e.g. of successful GWAS -> drug target
+%             \4 drug targets with genetic support are more likely
+%         \3 building allelic series
 
 \subsection{Expression is a complex trait}
 

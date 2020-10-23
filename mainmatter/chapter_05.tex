@@ -8,100 +8,131 @@
 
 \begin{outline}
 
-summary of chapters
+\1 In this thesis, ... <a summary of the thesis projects>
+    \2 Chapters 2 and 4 focus on describing the transcriptomic response of circulating immune cells to perturbation with uncontrolled longitudinal designs
+        \3 looking at how expression changes over time, and differences in transcriptomic response associated with other phenotypic definitions of response
+        \3 associations are identified at a gene and gene set level
+    \2 Chapter 3 (and the last part of chapter 4) focus on finding common genetic variants associated with transcriptomic response to perturbation
+        \3 reQTLs are identified at lead eQTL variants for each gene
+        \3 this is a first foray into defining causal molecular mechanisms that explain individual variation in response to these perturbations
+    \2 Each chapter discusses the results and limitations of each study.
+    \2 Being very similar studies in design and analysis, they also suffer from a core set of limitations.
+    \2 This chapter discusses these, and the design and analysis of similar longitudinal studies in the future to better understand the biology of immune response to drugs and vaccines.
 
-    baseline prediction might require much larger sample sizes
+\subsection{Increasing the power to detect associations}
 
-    Tie ch 2 to 3 using baseline predictors?
-    A response eqtl is not always a response eqtl
+\1 It has been challenging to find robust single gene-level associations between expression and response, especially at baseline.
+    \2 The biological signal may be small compared to other sources of variation: measurement platform (ch2); drug, response definition (ch4)
+    \2 The obvious thing to do is increase sample size.
+        \3 Under a fixed resource constraints, longitudinal studies tradeoff more samples over time for fewer individuals
+        \3 Multiomic designs further tradeoff against richness/number of layers sampled
+    \2 there are distinct advantages to these designs
+        \3 e.g. repeated measures allows modelling of within patient covariance between timepoints with mixed model DGE (ch2 and ch4)
+        \3 e.g. spline analysis and clustering in ch4 using multiple timepoints to separate responders and nonresponders
+        \3 e.g. ability to test for association between layers (eQTLs), to explore molecular mechanisms
+    \2 especially if considering the small effect of genetic variants, a lesson learnt in the field of complex diseases from years of underpowered candidate gene studies, is that even a single complex phenotype requires large samples
+    \2 systems vaccinology studies have always had these rich datasets, but rarely considered genetics, limited by sample size
+    \2 is it also challenging to collect sufficient sample size in a pharmacogenomic context \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3003940/} 
 
-    Limitations, and the perfect study.
-        recommendations for design of future studies
+\1 with rich datasets, be careful about subgroup analyses, whether done stratified or as interactions; they have lower power
+    \2 e.g. looking for timepoint, responder, cell type interactions
+    \2 be wary of rules of thumb for sample size, subgrouping quickly attenuates your effective sample size
+        \3 e.g. in ch3, the intention was to map eQTLs at each timepoint, look for timepoint x G interaction, but it became apparent that cell proportion interactions were necessary for interpretation
+    \2 prespecify interactions of interest at the power analysis stage in design of new experiments
+    \2 for existing datasets, a workaround like the two stage strategy in ch3, assuming that interactions are only interesting at significant main effects
 
-    suffer from core set of limitations 
+\1 Rather than increasing the sample size, can change the unit of analysis from single gene to multiple genes
+    \2 use information from coordinated changes in multiple genes to detect subtle effects
+    \2 use prior biological knowledge to define set of genes
+    \2 this is the basis for gene set analyses used throughout this thesis
+    \2 tradeoff between better interpretability but worse resolution
 
-What is response?
-why is it so difficult to make reliable response prediction, esp at baseline?
+\1 <reproducibility of gene set vs single gene associations> 
+    \2 reports about any single gene associations e.g. SIGLEC10 in ch4 of this thesis, should be treated with caution pending replication
+    \2 while the rank of a single gene may vary from sample to sample due to sampling noise, a summary measure computed from multiple genes should be more robust
+    \2 it is hoped that the replicability of gene sets will be greater
 
-    need very large 
-        replicability: modules more robust
+\subsection{Responder analysis}
 
-        % caution on reports about any single gene e.g. SIGLEC10 ch4
+\1 <how well these models correspond to reality>
+    % \2 How a responder to a perturbation is modelled is key to the analyses in this thesis.
+    \2 What does it mean to be a responder?
+    \2 this has been discussed on this in the field of personalised medicine in the context of RCTs, but similar issues pertain to response in observational studies. \autocite{senn2018StatisticalPitfallsPersonalized}
+    \2 Is being a responder is a stable personal characteristic of an individual over time, or would the same individual vary in response status over time?
+    % Anchorman: The Legend of Ron Burgundy (2004) - Paul Rudd ...
+    % Brian Fantana : They've done studies, you know. 60% of the time, it works every time. [cheesy grin]. Ron Burgundy : That doesn't make sense ..
+    \2 Observing between individual variation in response for a single measure is not sufficient to imply response is personal.
+    \2 e.g. a hypothetical agent with a 60\% response rate in a group of individuals: \enquote{60\% of the time, it works every time}
+    \2 what does this mean? working 60\% of the time on 100\% of individuals, 100\% of the time on 60\% of individuals, or anything in between would be compatible
+    \2 cannot distinguish with a single measure, yet the assumption is often made at the study design stage that it is the 2nd option
+    \2 1st option means no associations to detect
 
-    improve efficiency
-        move away from dichotomania
-        % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
-        % Responder analysis is a 4-fold loser. It fails to give the needed clinical
-        % interpretation, has poor statistical properties, increases the cost of studies
-        % because binary outcomes require significantly higher sample sizes, and raises
-        % ethical issues because more patients are required to be randomized than would
-            in ch 3, used TRI
-                also need the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
-            in ch 4, 
-                a very complex phenotype
-                May be more powerful to directly with the constituent phenotypes directly (CRP level, HBI score, whether there was escalation in steroid treatment, or exit for treatment failure)
+\1 Need to establish that personal response is likely before trying to find causes for it
+    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to measure treatment effects more than once \autocite{senn2016MasteringVariationVariance}
+    \2 for genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
+    \2 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
+    \2 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326}
+        \3 and have not been done for response to anti-TNFs (the ch4 setting)
+    \2 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
 
-                predictive claims
+\1 <statistical considerations given response is sensible>
+    \2 As discussed in \autoref{subsec:hird_dge_TRI} in ch2, a binary definition of response based on dichotomisation is inefficient and assumes a sharp change in biological relevance at the threshold
+    \2 In ch2, used \gls{TRI}, a continuous change score residualised on the baseline, which gets around the dichotomisation and dependence of change score on baseline
+        \2 two-stage approach here, so df is wrong
+    \2 In multiPANTS, \autoref{multiPANTS:PR_definition} in ch4 uses the binary definition of response, which is complex and based on many inputs
+        \3 having response dichotomies based on multiple inputs can lead to large discontinuities and non-monotonicity in response probabilities under small changes in input \autocite{senn2005DichotomaniaObsessiveCompulsive} 
+    \2 neither approach perfect, but the driving force was pragmatism
+        \3 for DGE, the model traditionally requires the response variable to be gene expression, and a predictor variable to be response status
+        \todo{might be worth subbing predictor for independent and response with dependent in all chapters, but then that gets confused with statistical independence...}
+        \3 thus I needed an approach that generates a single predictor variable to represent response status
+        \3 In ch2, needed to combine pre-post titre data from two assays
+        \3 In ch4, the clinical algorithm already combines many measures into one.
+    \2 having complicated response definitions can hinder replication by adding to interstudy variation e.g. the failure to replicate the TREM1 association in ch4
+    \2 it may be better to directly with the constituent phenotypes: ch2 (log titre levels), ch4 (CRP level, HBI score), but then the fundamental modelling approach for both DGE/eQTL would need to change to not be restricted to a single response x variable 
+    \2 the previous paragraph's discussion also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
 
-                also, similar to beyond Abs
-                response has many definitions: subphenotypes that are both positive and negative may be complex traits with different architectures: immunogenicity, primary response, loss of response, remission rate, adverse fx
+% \1 bias in non-randomised studies
+    % \2 In RCTs, the treatment effect would be defined against the effect in the control group
+    % \2 In prospective cohort studies, the treatment effect is determined between two subgroups within the cohort
 
-    or response itself is the problem?
-        rely of stability of 'responder', 
-            always considered something intrinsic, even in cases where E is temporally prior
-            esp in DGE models (more below)
-            
-            comes from the fact that this is a sensible way to encode if you have e.g. treatment and control groups for DGE
+\subsection{Challenges in the interpretation of bulk expression data}
 
-        "60\% of the time, it works every time"
-            \url{https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262}
-            senn2016MasteringVariationVariance
-            senn2018StatisticalPitfallsPersonalized
+rnaseq tech is cmopositional
 
-            reported failure rates (single-measure) do not necessarily reflect that there is something inherent to an individual that causes it \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC524113/} senn2016MasteringVariationVariance
+raw abundance estimates are often called \enquote{counts}, but actually dimensionless rates
 
-                in ch4: repeated dosing helps guard against this, some hope that NR is stable
-                and n of 1 trials
-            this is where longitudinal comes in
+% but cant get around compositional nature of data, and sep change in prop from up/down true
+% TODO: Also, \gls{RNAseq} expression estimates are inherently compositional at many levels (blood sample, sequencing) \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
+% There is ultimately no escape from the compositional nature of the assay.
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6084572/
+% TODO:
+% https://academic.oup.com/gigascience/article/8/9/giz107/5572529#163672243
+%
+% the output expression levels are interpretable only in comparison to other
+% do not not absolute levels
 
-The design of more longitudinal cohorts in the future
+% TODO: actually By  definition,  TPM  and  RPKM  are  propo rtional .
+% A  co mmon  misconception  is  tha t  RPKM  and  TPM  values  are  alr eady
+% normalized ,   and   thus   should   b e   compar able   across   samples   or
+% R NA-seq   pr oject s.   However,   RPKM   and  TPM  repres ent  the  rela tive
+% ab undance   o f  a  transcri pt  amo ng  a  popul atio n  of  seq uenced
+% transcrip ts,  a nd  ther efore  dep end  on  th e  composition  of  the  RNA
+% popula tion  in  a  sample.  Q
+% https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
+%
 
-    sample size is the main problem
-        complex traits and disease already moved out of candidate gene era
-        vaccine and drug response traits lagging due to sample size requirements
+and bilk data is compositional
 
-        prespecify interactions of interest
+% TODO: farahbod2020UntanglingEffectsCellular
+% bulk samples are a mix
+% observed expression of a gene across samples is a mix of cell type specificness of the gene and composotition (affected by sample error and bio fx)
+% and composition can explain a lot of variance
+% the more cell type specific, the more affected by composition
+% extreme case: perfectly cell type specific is called a marker gene, and is used in deconv methods to actually get cell estiamtes.
 
-    need a strong causal anchor: this is going backwards towards gwas, which requires N
-
-    more n
-        just because n sufficient for eqtl at 1 condition
-        underpowered when looking for interactions (implied for reQTL, even more problematic for e.g. further cell count interatcions)
-        similar to stratified analysis problem in clinical trials
-
-    ofc if avoid bulk, no prob with cell counts:
-        Even if cell type interaction/proxy gene approach
-        Cannot distinguish between correlated cell types
-
-    more chance for in vivo
-        but how to take advantage of it
-
-    systems immunology/vacc still needed: generate mol phenotypes, in the right context,
-    but make sure to include genotypes
-    Moving out of correlation land
-
-    all the change score nonsense
-
-    gone are the days of GWAS marginals (just a screening approach)
-        under time pressure, or convention
-        throwing in covariates
-
-    as     complex disease genetics moves 
-    computation not limits correct stat
-
-what data to get from these trials?
-reQTL on bulk in vivo has huge challenges
+DGE and reQTL on bulk in vivo has huge challenges
 more n won't help
+what data to get from these trials?
 
     composition explains a huge amount of var in bulk farahbod2020UntanglingEffectsCellular
 
@@ -118,10 +149,17 @@ more n won't help
     effect not absent in vitro
         technology itself is proportional, with norm based on ng input, then random sampling during sequencing
 
-    but effect is certainly EXARCERBATED by in vivo
-        heterogeneity is confounded with recruitment!!!
-        not just sample var, but active recuitment changes in cell prop e.g. recruitment
-            why should this be considered a con of in vivo?
+but effect is certainly EXARCERBATED by in vivo
+    heterogeneity is confounded with recruitment!!!
+    not just sample var, but active recuitment changes in cell prop e.g. recruitment
+        why should this be considered a con of in vivo?
+
+dge
+    mediation
+
+reqtl
+    Even if cell type interaction/proxy gene approach
+        Cannot distinguish between correlated cell types
 
     need to recognise 
         bulk and sorted eQTL differ in interp
@@ -142,10 +180,19 @@ more n won't help
     unclear what benefit would outweigh this
         imo, needs consideration for future study design
 
+        non-bulk means more chance for in vivo
+            allows to take advantage of benefits
+
+    A response eqtl is not always a response eqtl
     must no longer be divorced from rigourous statistical theory
 
         statistical considerations from small scale studies
             Two disciplines of statistical genomics : Neither can be neglected
+
+
+            % NOTE: see
+            % Senn: Statistical Issues in Drug Development
+            % 7.2.4 Is clinical relevance a relevant consideration when choosing whether to use change scores or raw outcomes as the efficacy measure?
 
             in chapter 3, i discussed in brief
                 change is not ancova
@@ -160,10 +207,20 @@ more n won't help
         esp when considering biologically meaningful replication of reQTL
             all above must line up
 
-as more n, allows
+    before bridging to pheno, must consider how to interpret G -> E link
+    
+    it ulttimaley depends on the point of the reqtl mapping
+
+    these are issues that cannot be solved by n
+        i.e. do we need to measure the wrong thing more precisely?
+
+\subsection{Finer and finer context}
+
 Finer and finer context
     in the intro: gwas to function pipeline
     now, the future
+
+    sorted cells
 
     More timepoints
     Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
@@ -173,8 +230,6 @@ Finer and finer context
     e.g. 250 condition ASE % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5131815/
     e.g. StructLMM 
         Identifies eQTLs with GxE, where the number of environments in E is large (modelled as a random effect)
-
-        vqtls: e.g. % doi: https://doi.org/10.1101/2020.07.28.225730 
 
     as datasets and conditions get larger, proportion of eGenes is going to be 100pc, then the question is what are the most relevant ones
     % We observed that cis-eQTLs can be detected for 88% of the studied genes in vosa2018UnravelingPolygenicArchitecture
@@ -212,36 +267,28 @@ Finer and finer context
         Subsequently, scRNA-seq data was used to pinpoint the potential cell type in which the response QTL effects manifest themselves
             but really they only looked at cell type specific expression, not sc eqtl mapping
 
-and allows
-more phenotypes
-        
-        disease specific biobanks e.g. ibd bioresource/predicct
+    be aware that as prev discussed, finer contet needs more n
 
-    % Our GWASfor 54 functionally relevantphenotypes oftheadaptiveimmune system in 489 healthy individuals identifieseight genome-wide significant associations explain-ing 6%–20% of variance.
-    % https://www.cell.com/cell-reports/pdf/S2211-1247(18)31493-1.pdf
+% more n allows more phenotypes
+%
+%         disease specific biobanks e.g. ibd bioresource/predicct
+%
+%    Our GWASfor 54 functionally relevantphenotypes oftheadaptiveimmune system in 489 healthy individuals identifieseight genome-wide significant associations explain-ing 6%–20% of variance.
+%         https://www.cell.com/cell-reports/pdf/S2211-1247(18)31493-1.pdf
+%
+%     PheWAS\autocite{verma2017CurrentScopeChallenges}
+%         https://onlinelibrary.wiley.com/doi/full/10.1111/imm.12195
+%         PheWAS has the advantage of identifying genetic variants with pleiotropic properties.
 
-    PheWAS\autocite{verma2017CurrentScopeChallenges}
-    % https://onlinelibrary.wiley.com/doi/full/10.1111/imm.12195
-    PheWAS has the advantage of identifying genetic variants with pleiotropic properties.
-
-BUT basically, Extending the sample size is key
-
-    longitudinal studies are smallish
-
-    but follow very similar trends to complex disease and traits
-        candidate genes identified in small studies
-        GWAS
-
-    be careful not to slice and dice
-
-    take advantage of large resources
-    e.g. biobank
-    e.g. 1000IBD
-    e.g. IBD bioresource
-        TWAS: predicted gene expression, then associate with phenotypes
+\subsection{Prediction is not inference}
 
 finally translation and prediction
     a diff question althogether
+
+    have now discussed both the indep and dependent variables
+    response on right, e on left
+
+    response always considered something intrinsic, even in cases where E is temporally prior
 
     Prediction is not inference (the rift between philosophies, see 2 x 2 schools papers)
         % Calculating the sample size required for developing a clinical prediction model
@@ -316,13 +363,44 @@ finally translation and prediction
 
     might even be said that whole blood biological interps so limited that prediction may be the only feasible goal
 
+    explicitly consider:
+    prediction models require different sample size calcualtions
+
     and to Cost-effectiveness and clinical implementation
         if you can identify NRs, what are you going to do about it?
 
         what does it take for a gene expression pred model to be clinically useful?
             take lessons from cancer
 
-the missing link needed for causality
+\subsection{The missing link for causality}
+
+invert relationship
+
+It's great to have replicable associations with fine context at gene and network levels 
+    But, what we really want to know is causality. 
+    counterfactual
+    intervene
+
+    to get that from uncontrolled study data, need to bring in genetics
+
+    Mechanism is important because of possibility for intervention. Here, causal is important
+    % 'molecular pathogenesis'
+
+    need a strong causal anchor: this is going backwards towards gwas, which requires N
+        first forray is the reqtl analyses, but a link is missing
+        G -> pheno
+
+        sample size a problem here again
+    % \2 take advantage of existing external resources that have very large n
+    %     \2 e.g. instead of mapping eQTLs in sample, use existing eQTL maps in whole blood
+    %     \2 e.g. biobanks
+
+            complex traits and disease already moved out of candidate gene era
+            vaccine and drug response traits lagging due to sample size requirements
+
+        systems immunology/vacc still needed: generate mol phenotypes, in the right context,
+        but make sure to include genotypes
+        Moving out of correlation land
 
     need causal models
 
@@ -368,11 +446,16 @@ the missing link needed for causality
         MRLocus: identifying causal genes mediating a trait through Bayesian estimation of allelic heterogeneity
         \url{https://www.biorxiv.org/content/10.1101/2020.08.14.250720v2}
 
-unification
-    triangulation
-    immunology and vaccine dev: deep phenotyping, small cohorts achieved -> larger cohorts
-    human genetics and gwas: large cohorts achieved -> deeper phenotyping
+\subsection{Triangulating the truth}
 
+% https://www.nature.com/articles/d41586-018-01023-3
+
+unification
+    this thesis only first step
+
+    triangulation
+
+    here's where multiomics comes in
     diff omics layers have diff biases
 
     more intermediates:
@@ -398,57 +481,9 @@ unification
 
     with GWAS of immune phenotypes
 
-% \1 Why care?
-%
-%     \2 polygenic scores, prs: marker for diagnosis
-%
-    % first
-    % 13. Wray, N.R., Goddard, M.E., and Visscher, P.M. (2007). Prediction
-    % of individual genetic risk to disease from genome-wide
-    % association studies. Genome Res. 17, 1520–1528.
-%
-%         \3 use in the clinic
-            % doi: http://dx.doi.org/10.1101/19013086
-%             \4 e.g. polygenic background can modify penetrance
-%
-%         \3 but challenges from:
-%
-%             \4 ancestry effects
-            % https://twitter.com/skathire/status/1202554709107712001?s=09
-%             \4 need expanding into global populations, global biobanks e.g. Gains from Africa H3Africa, japanese biobanks
-%
-            % Variable prediction accuracy of polygenic scores within an ancestry group
-            % https://elifesciences.org/articles/48376
-%             \4 non-ancestry effects
-%
-%     \2 pathway analysis: "the great hairball gambit"
-%
-%     \2 pathway prs
-%         \3 challenge is variant to gene assignment/mapping
-%             \4 e.g. restrictions to fine mapped eQTLs
-%
-%     \2 Understand mech. of causal genes: molecular pathogenesis
-    % word mechanism thrown around
-    % Mechanism is important because of possibility for intervention. Here, causal is important
-
-% \subsection{From target gene to candidate drug}
-%
-% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1008489
-% Are drug targets with genetic support twice as likely to be approved? Revised
-% estimates of the impact of genetic support for drug mechanisms on the
-% probability of drug approval
-    % \2 how to drug a complex disease with no single 'candidate gene'?
-% GWASing and fine-mapping complex diseases like IBD turns out a large number of common causal variants with small-effect sizes.
-% - Is polygenicity a population or individual property? i.e. are most individual IBD cases driven solely by a distribution of small-effects, or do most patients also have 1 or more large-effect rare variants that point out priority targets for their own personalised treatment?
-% - Do many of these common causal variants e.g. converge to hit on the same pathways?
-% - Otherwise, what is the use of these target discovery pipelines that output ranked lists of target genes? Could a drug designed to modulate a single protein target be expected to work for a large number of patients?
-    %
-    % e.g. schizo is usually polygenic, future drug development could benefit from taking a multi-target approach \autocite{visscher201710YearsGWAS}
-    %
-    %     \3 e.g. of successful GWAS -> drug target
-    %         \4 drug targets with genetic support are more likely
-    %
-    %     \3 building allelic series
+    reQTL
+    ASE
+    vqtls: e.g. % doi: https://doi.org/10.1101/2020.07.28.225730 
 
 \end{outline}
 

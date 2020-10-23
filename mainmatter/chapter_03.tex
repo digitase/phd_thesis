@@ -3,7 +3,7 @@
 %
 % Response eQTL-style paper
 
-\chapter{Genetic factors affecting Pandemrix vaccine response}
+\chapter{Genetic architecture of transciptomic response to influenza A (H1N1)pdm09 vaccine}
 \label{chap:hird_reQTL}
 
 % TODO upreg -> increased expression
@@ -96,20 +96,21 @@ Poorly-imputed variants with $\text{INFO} < 0.4$ or post-imputation missingness 
 % Following standard practices, we discarded poorly imputed SNPs, defined as having an information content metric (INFO) score <0.4. We removed SNPs significantly deviated from Hardy-Weinberg equilibrium (P<1×10-10), with a call-rate ≤0.95 or minor allele frequency ≤1%, leaving 7,578,947 variants. PCA and genotype filtering were performed using the Hail framework (version 0.1).6
 
 \subsection{Overall strategy for detecting reQTLs}
+\label{subsec:hird_reQTL_overall_strategy}
 
 Since the aim of this chapter is to identify genetic variation that affects expression response to vaccination, it may seem most direct to model the change in each individual's expression after vaccination as the response variable.
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
-it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
+it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean (??), and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
 %
 % Step 1: why not intra-individual change score, why not ANCOVA, why strat and diff?
 % half a century of debate
 % https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
 % https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
 
-% TODO: Write both as special cases of glm, and highlight their different assumptions
 %
-\todo{upend change score bit}
+\todo{upend change score bit, here expression is a y variable. compare all the options as glms etc.}
+% TODO: Write both as special cases of glm, and highlight their different assumptions
 % TODO: mention: in ch2, used residualised change score, here, different
 % Our data structure is
 % Over all approach is stratified
@@ -137,8 +138,12 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % strat and interaction should ask diff in averages
 % interaction is further borrowing info
 
+% TODO:  
+ % It is imperative to adjust for the baseline value anyway, using regression modeling (for reasons of bias reduction in observational studies and for maximizing power and precision in randomized trials).
+ % Using each patient as her own control through calculation of a change score is worse than using no control if the baseline is noisy. If the correlation between baseline and follow-up measurement is less than 0.5, subtracting the baseline is worse than just analyzing the follow-up measurement.
+ % http://biostat.mc.vanderbilt.edu/wiki/Main/MeasureChange
+
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
-\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong}
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % TODO it is not the case people act as their own controls, you can't observe the counterfactual outside of n of 1 trials
 % more like soaking up some of the variation as within individual random effect, allowing more precise
@@ -388,21 +393,8 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 \subsection{Estimation of cell type abundance from expression}
 \label{subsec:hird_reQTL_xCell}
 
-% TODO: farahbod2020UntanglingEffectsCellular
-% bulk samples are a mix
-% observed expression of a gene across samples is a mix of cell type specificness of the gene and composotition (affected by sample error and bio fx)
-% and composition can explain a lot of variance
-% the more cell type specific, the more affected by composition
-% extreme case: perfectly cell type specific is called a marker gene, and is used in deconv methods to actually get cell estiamtes.
-
-% TODO: Also, \gls{RNAseq} expression estimates are inherently compositional at many levels (blood sample, sequencing) \url{https://www.ncbi.nlm.nih.gov/pubmed/29608657} \url{https://academic.oup.com/gigascience/article/8/9/giz107/5572529}.
-% There is ultimately no escape from the compositional nature of the assay.
-
-% TODO: actually By  definition,  TPM  and  RPKM  are  propo rtional .
-% https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
-%
 \Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
-so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample, 
+so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample.
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
 and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
@@ -700,8 +692,8 @@ and $\mathbf{u}$ is a random effect with zero mean and covariance matrix proport
 PEER factors are automatically weighted such that the variance of factors tends to zero as more factors are estimated, 
 hence continuing to add more and more factors as covariates will not continue to improve \gls{eQTL} detection power, and eventually the model degrees of freedom will be depleted.
 To optimise k, the number of factors to include as covariates%
-% Also see \autocite{demissie2011BiasDueTwostage} % holmes2019ProblemsInterpretingUsing
 \footnote{I avoid the commonly-performed two-stage approach of treating PEER residuals as expression phenotypes, as the degrees of freedom seen downstream will be incorrect, which can have a substantial effect on estimates at this modest sample size.}, 
+% Also see \autocite{demissie2011BiasDueTwostage} % holmes2019ProblemsInterpretingUsing
 Per-timepoint \gls{eQTL} mapping was performed in chromosome 1, iteratively increasing the number of factors until the number of \glspl{eQTL} detected plateaus.
 I settled on a final choice of $k=10$ factors for pre-vaccination, 5 factors for day 1, and 5 factors for day 7 (\autoref{fig:hird_neGenesvsPeerK}).
 \todo{i leave the pcs in to guard against unusually differentiated between pop markers, where random effect alone may not be enough \autocite{price2010NewApproachesPopulation}, \url{https://www.nature.com/articles/srep06874}}
@@ -853,7 +845,11 @@ where tests for interaction are only performed at a subset of tests, often the l
 % Benjamini-Hochberg FDR: kim-hellmuth2017GeneticRegulatoryEffects
 % Benjamini-Hochberg procedure, and a 0.15 FDR threshold: peters2016InsightGenotypePhenotypeAssociations
 %
-% TODO: dodgy, review this paper
+% https://www.jmp.com/support/help/en/15.2/index.shtml#page/jmp/effect-heredity.shtml
+% The principle of effect heredity relates to the inclusion in the model of lower-order components of higher-order effects. The motivation for this principle is observational evidence that factors with small main effects tend not to have significant interaction effects.
+% NOTE: this is not strictly effect heredity, as I do not consider the significance of cell proportion terms
+%
+% TODO: dodgy, review this paper again
 The key to the two-stage approach is that if the estimates for the interaction effect are sufficiently independent from the estimates of the main effect from main-effect only models,
 the type I error can be controlled based on the number of interactions that are actually tested, rather the number of interactions that could have been tested for\autocite{kooperberg2008IncreasingPowerIdentifying,peters2016InsightGenotypePhenotypeAssociations}.
 It is unclear whether this assumption holds, as the size of the main effect may contribute to power for detecting interaction effects.
@@ -1243,3 +1239,10 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 \todo{Overall I feel like the chapter is too descriptive, and falls short of making biological insights into Pandemrix response. Any additional analyses would hope to address that.}
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
+
+% TODO
+% What we have shown is not very interesting
+% Would like to know what cell types for all reqtl, but limited by a trying one by one strategy
+% Always might miss one not tried
+% Not viable for scaling
+% SC rnaseq
