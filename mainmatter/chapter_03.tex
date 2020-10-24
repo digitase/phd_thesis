@@ -108,6 +108,11 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
 % https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
 
+% TODO:
+% in observational: https://www.tandfonline.com/doi/abs/10.1080/00273171.2013.831743?scroll=top&needAccess=true&journalCode=hmbr20
+% in RCT: senn says equiv: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwie_PK6vsvsAhXXRRUIHdUfD_wQFjAAegQIAxAC&url=http%3A%2F%2Fimaging.mrc-cbu.cam.ac.uk%2Fstatswiki%2FFAQ%2Frt1d%3Faction%3DAttachFile%26do%3Dget%26target%3Dsenn.ppt&usg=AOvVaw0Rp28syfyesdecEiQZw9x_
+% pearl says: ?
+% senn in observational: ?? https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2682
 %
 \todo{upend change score bit, here expression is a y variable. compare all the options as glms etc.}
 % TODO: Write both as special cases of glm, and highlight their different assumptions
@@ -137,6 +142,10 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % change score should ask average of individual diffs
 % strat and interaction should ask diff in averages
 % interaction is further borrowing info
+%
+% NOTE: see
+% Senn: Statistical Issues in Drug Development
+% 7.2.4 Is clinical relevance a relevant consideration when choosing whether to use change scores or raw outcomes as the efficacy measure?
 
 % TODO:  
  % It is imperative to adjust for the baseline value anyway, using regression modeling (for reasons of bias reduction in observational studies and for maximizing power and precision in randomized trials).
@@ -824,9 +833,14 @@ I assume this represents a power advantage from having larger a sample size, rat
 % cause cell type affects g->e i.e. symetrically, geno affects c -> e
 % Figure out what DAG model causes a reQTL in bulk to not represent causality of G -> change in e
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
-then an interaction term between genotype and cell type abundance is required, % i.e. the assumption of additivity is baked in
+then an interaction term between genotype and cell type abundance is required,
 \todo{point is, doesn't make sense to assume the genotype effect is the same at all levels of cell type abundance}
-otherwise the regression slope of the \gls{eQTL} term will represent an pooled effect across the abundance range for that cell type term, and vice versa;
+% TODO: what is the effect of genotype going up a unit holding cell props constant? well, actually it depends on the constant....
+% i.e. this is non-addititivty 
+otherwise the regression slope of the \gls{eQTL} term will be biased;
+% TODO: OVB by setting interaction coefficient to zero
+% http://consirt.osu.edu/wp-content/uploads/2014/10/CONSIRT-Working-Papers-Series-9-Mikucka_Sarracino_Dubrow.pdf
+% Most importantly, the figures document thatwrongly  omitting  an  interaction  term  (Figure  3)  can  bias  the  estimates  much  more  thanwrongly including an interaction term (Figure 4).
 one can not adjust for this modification just by including the main effect for cell type abundance.
 % TODO: if the data gen process is so, the simply a misspecification to not have it
 % referred to in econometrics as "functional form misspecification", a special case of OVB.
@@ -1241,7 +1255,14 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
 
 % TODO
-% What we have shown is not very interesting
+% Would like to know what cell types for all reqtl, but limited by a trying one by one strategy
+% Always might miss one not tried
+% Not viable for scaling
+% SC rnaseq
+
+% TODO are these reQTL interesting?
+
+% TODO
 % Would like to know what cell types for all reqtl, but limited by a trying one by one strategy
 % Always might miss one not tried
 % Not viable for scaling
