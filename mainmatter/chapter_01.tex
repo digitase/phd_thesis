@@ -11,6 +11,8 @@
 % TODO:
 % start with defining genotype, and phenotype
 % define molecular phenotypes
+% Add biomarkers section to expression as an intermediate trait section
+% Change final section title to de emphasise genetics
 
 % TODO:
 % section on pathway analyses?
@@ -86,7 +88,8 @@ Traits for which genetic variation explains a non-zero fraction of phenotypic va
 Many measurable human traits are heritable and twin studies provide upper bounds on this heritability \url{https://www.nature.com/articles/ng.3285}.
 Discovering the specific genetic variants that contribute to heritability, through association of variants and phenotypes measured from the same individual, is a mainstay of the field of human genetics.
 Barring somatic mutation, an individual's genome is fixed at conception, providing a causally upstream anchor.
-Genetic association studies have intrinsic resistance to certain types of back-door path effects such as reverse causality, which permeate observational studies of the causes of human phenotypes.
+Genetic association studies have intrinsic resistance to problems like unmeasured confounding and reverse causality, which permeate observational studies of the causes of human phenotypes.
+% TODO: genetic markers are measured with relatively little error
 % TODO: https://twitter.com/GENES_PK/status/1283736619133149185
 \todo{add something sweeping about utility here or elsewhere: e.g. insights into trait biology and clinical translational potential for disease traits, genetically support drug target identification}
 
@@ -276,7 +279,6 @@ many non-coding GWAS loci are thought to affect traits by affecting the regulati
 % TODO: distinguish endophenotypes
 % Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
-
 % \subsection{From target gene to candidate drug}
 %
 % \1 gene to drug
@@ -313,18 +315,19 @@ many non-coding GWAS loci are thought to affect traits by affecting the regulati
     \2 Over many complex traits, a median of 11\% heritability could be explained by mediation of GWAS loci by common (MAF > 0.01) cis-eQTL, 
     and this proportion does not include \textit{trans} or post-transcriptional effects.
 
-\1 With increasing sample size, most genes (60-80\%) have a detectable eQTL \autocite{vandiedonck2017GeneticAssociationMolecular,vosa2018UnravelingPolygenicArchitecture}.
+\1 With increasing sample size, most genes (>60-80\%) have a detectable eQTL \autocite{vandiedonck2017GeneticAssociationMolecular,vosa2018UnravelingPolygenicArchitecture}.
 Assuming that a locus on the genome is associated with both a complex trait and an \gls{eQTL},
 how can we separate the scenario where one variant affects both trait and expression (pleiotropy),
 from coincidental overlap between distinct causal variants that may possibly in \gls{LD}?
 % TODO: read this intro https://www.biorxiv.org/content/10.1101/2020.07.01.182097v1.full.pdf
-Bayesian probabilistic colocalisation methods (e.g. eCAVIAR, Sherlock, coloc \autocite{wallace2020ElicitingPriorsRelaxing}) 
-address this by estimating the posterior probability that the same causal variant is associated with both phenotypes.
+Colocalisation methods address this by extending fine-mapping to multiple phenotypes \autocite{burgess2018InferringCausalRelationships}.
+In particular, Bayesian probabilistic colocalisation methods (e.g. eCAVIAR, Sherlock, coloc \autocite{wallace2020ElicitingPriorsRelaxing}) 
+estimate the posterior probability that the same causal variants are associated with both phenotypes,
 \todo{add uses other vars}
 distinguishing pleiotropy from linkage, 
 but not vertical pleiotropy (mediation) from horizontal pleiotropy (independent effects on trait and expression) \autocite{hemani2018EvaluatingPotentialRole}.
 As colocalisation of a \gls{GWAS} loci with \glspl{eQTL} is is necessary but not sufficient for mediation, 
-it should be supported by complementary lines of evidence from other methods that integrate intermediate phenotypes (TWAS, MR, mediation analysis etc.) \autocite{hemani2018EvaluatingPotentialRole}
+it should be supported by complementary lines of evidence from other methods that integrate intermediate phenotypes (e.g. MR, mediation analysis \autocite{hemani2018EvaluatingPotentialRole})
 to help untangle the multiplex of possible causal pathways from variant to trait.
 % TODO: be specific on what sort of pleiotropy MR can distinguish
 %

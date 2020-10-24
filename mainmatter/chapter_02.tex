@@ -432,7 +432,7 @@ After the application of all filters, expression values were available for 21626
 
 % 6.	Pre-process microarray expression data
 % 6.1.	Annotate Entrez and ENS ids using hgug4112a.db
-% 6.1.1.	The chip is single-channel “Agilent-014850 Whole Human Genome Microarray 4x44K G4112F”
+% 6.1.1.	The chip is single-channel “Agilent-014850 Whole Human Genome Microarray 4x44K G4112F”. Scan_NumChannels is 1 in the raw files.
 % 6.1.2.	Apparently fine to use 4112A db for 4112F https://support.bioconductor.org/p/73193/
 % 6.2.	Redefine responder phenotype to be consistent with RNA-seq and Sobolev paper (>= 4-fold in HAI or MN)
 % 6.3.	Background correction: limma::backgroundCorrect(x, method="normexp")

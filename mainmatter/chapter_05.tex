@@ -10,13 +10,12 @@
 
 \1 In this thesis, ... <a summary of the thesis projects>
     \2 Chapters 2 and 4 focus on describing the transcriptomic response of circulating immune cells to perturbation with uncontrolled longitudinal designs
-        \3 looking at how expression changes over time, and differences in transcriptomic response associated with other phenotypic definitions of response
+        \3 looking at how expression changes over time, and differences in transcriptomic response associated with phenotypic definitions of response
         \3 associations are identified at a gene and gene set level
     \2 Chapter 3 (and the last part of chapter 4) focus on finding common genetic variants associated with transcriptomic response to perturbation
         \3 reQTLs are identified at lead eQTL variants for each gene
         \3 this is a first foray into defining causal molecular mechanisms that explain individual variation in response to these perturbations
-    \2 Each chapter discusses the results and limitations of each study.
-    \2 Being very similar studies in design and analysis, they also suffer from a core set of limitations.
+    \2 Each chapter discusses the results and limitations of each study, but being very similar studies in design and analysis, they also suffer from a core set of limitations.
     \2 This chapter discusses these, and considerations for design and analysis of similar longitudinal studies in the future to better understand the biology of immune response to drugs and vaccines.
 
 \subsection{Increasing the power to detect associations}
@@ -30,13 +29,13 @@
         \3 e.g. repeated measures allows modelling of within patient covariance between timepoints with mixed model DGE (ch2 and ch4)
         \3 e.g. spline analysis and clustering in ch4 using multiple timepoints to separate responders and nonresponders
         \3 e.g. ability to test for association between layers (eQTLs), to explore molecular mechanisms
-    \2 especially if considering the small effect of genetic variants, a lesson learnt in the field of complex diseases from years of underpowered candidate gene studies, is that even a single complex phenotype requires large samples
-    \2 systems vaccinology studies have always had these rich datasets, but rarely considered genetics, limited by sample size
-    \2 is it also challenging to collect sufficient sample size in a pharmacogenomic context \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3003940/} 
+    \2 but especially if the intent is to consider the small effect of genetic variants, a lesson learnt in the field of complex diseases from years of underpowered candidate gene studies, is that even a single complex phenotype requires large samples
+        % \3 systems vaccinology studies have always had these rich datasets, but rarely considered genetics, limited by sample size
+        % \3 it is also challenging to collect sufficient sample size in a pharmacogenomic context \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3003940/}
 
-\1 with rich datasets, be careful about subgroup analyses, whether done stratified or as interactions; they have lower power
+\1 with rich datasets, be careful about subgroup analyses, subgrouping quickly attenuates your effective sample size
     \2 e.g. looking for timepoint, responder, cell type interactions
-    \2 be wary of rules of thumb for sample size, subgrouping quickly attenuates your effective sample size
+    \2 be wary of rules of thumb for sample size,         
         \3 e.g. in ch3, the intention was to map eQTLs at each timepoint, look for timepoint x G interaction, but it became apparent that cell proportion interactions were necessary for interpretation
     \2 prespecify interactions of interest at the power analysis stage in design of new experiments
     \2 for existing datasets, a workaround like the two stage strategy in ch3, assuming that interactions are only interesting at significant main effects
@@ -66,19 +65,19 @@
     \2 cannot distinguish with a single measure, yet the assumption is often made at the study design stage that it is the 2nd option
     \2 1st option means no associations to detect
 
-\1 Need to establish that personal response is likely before trying to find causes for it
-    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to measure treatment effects more than once \autocite{senn2016MasteringVariationVariance}
+\1 Need to establish how consistent response is over time before trying to find individual factors causing it
+    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to perturb the same person more than once \autocite{senn2016MasteringVariationVariance}
+        \3 in ch4, repeated anti-TNF dosing showed expression differences between responders and NR, at least, were stable over time
     \2 for the specific case of genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
-    \2 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
-    \2 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326}
-        \3 and have not been done for response to anti-TNFs (the ch4 setting)
-    \2 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
+        \3 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
+        \3 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326} and have not been done for response to anti-TNFs (the ch4 setting)
+        \3 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
 
 \1 <How a responder to a perturbation was modelled in this thesis>
     \2 As discussed in \autoref{subsec:hird_dge_TRI} in ch2, a binary definition of response based on dichotomisation is inefficient and assumes a sharp change in biological relevance at the threshold
     \2 In ch2, used \gls{TRI}, a continuous change score residualised on the baseline, which gets around the dichotomisation and dependence of change score on baseline
-        \2 two-stage approach here, so df is wrong
-    \2 In multiPANTS, \autoref{multiPANTS:PR_definition} in ch4 uses the binary definition of response, which is complex and based on many inputs
+        \3 two-stage approach here, so df is wrong
+    \2 In multiPANTS, \autoref{multiPANTS:PR_definition} in ch4 sets out the binary definition of response, which is complex and based on many inputs
         \3 having response dichotomies based on multiple inputs can lead to large discontinuities and non-monotonicity in response probabilities under small changes in input \autocite{senn2005DichotomaniaObsessiveCompulsive} 
     \2 neither approach perfect, but the driving force was pragmatism
         \3 for DGE, the model traditionally requires the response variable to be gene expression, and a predictor variable to be response status
@@ -88,7 +87,7 @@
         \3 In ch4, the clinical algorithm already combines many measures into one.
     \2 having complicated response definitions can hinder replication by adding to interstudy variation e.g. the failure to replicate the TREM1 association in ch4
     \2 it may be better to directly with the constituent phenotypes: ch2 (log titre levels), ch4 (CRP level, HBI score), but then the fundamental modelling approach for both DGE/eQTL would need to change to not be restricted to a single response x variable 
-    \2 the previous paragraph's discussion also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
+    \2 also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
 
 % \1 bias in non-randomised studies
     % \2 In RCTs, the treatment effect would be defined against the effect in the control group
@@ -96,9 +95,7 @@
 
 \subsection{Challenges in the interpretation of bulk expression data}
 
-\todo{move and merge this into ch2 section on composition bias in RNAseq}
-% NOTE: HIRD array (Agilent 4x44K v2 Human Whole Genome microarrays) is two-color, units are ratio of intensity between sample and reference hybridised competitively to the same array
-\1 NGS data is compositional, only quantifies relative abundance
+\1 NGS data is compositional, only quantifies relative abundance \todo{move and merge this paragraph into ch2 section on composition bias in RNAseq, it's out of place here}
     % https://academic.oup.com/gigascience/article/8/9/giz107/5572529
     % This property emerges from the sequencer itself; the sequencer, by design, can only sequence a fixed number of nucleotide fragments. 
     % Consequently, the final number of fragments sequenced is constrained to an arbitrary limit so that doubling the input material does not double the total number of counts.
@@ -119,8 +116,8 @@
     \2 for valid DGE, need to decide on the units e.g. mRNA/cell? mRNA/transcriptome? \autocite{soneson2013ComparisonMethodsDifferential}
 
 \1 bulk data is a mixture of cell types with different expression patterns
-    \2 one of the largest sources of variation in bulk expression data is cell proportions \autocite{farahbod2020UntanglingEffectsCellular}
-    \2 the more cell type specific a gene's expression, the more it is affected by \autocite{farahbod2020UntanglingEffectsCellular}
+    \2 one of the largest sources of variation in bulk expression data is cell proportions 
+    \2 the more cell type specific a gene's expression, the more it is affected by cell proportions \autocite{farahbod2020UntanglingEffectsCellular}
         \3 perfectly cell type specific genes are often called marker genes, and are used in deconvolution methods to estimate cell proportions from bulk data when they are not directly measured
     \2 both variation from in true variation in proportions, and sampling noise
     \2 in this thesis, estimated by:
@@ -134,7 +131,7 @@
 
 \1 <eQTL analysis>
     \2 analogous to DGE where independent variable of interest is now genotype
-    \2 consider adjusting for cell proportions, as discussed in \autoref{subsec:hird_reQTL_methods_cellTypeInteraction}, it is model misspecification to not have the genotype x cell proportion interaction if the effect of genotype changes depending on cell proportions
+    \2 as discussed in \autoref{subsec:hird_reQTL_methods_cellTypeInteraction}, it is model misspecification to not have the genotype x cell proportion interaction if the effect of genotype changes depending on cell proportions
         \3 in fact, it is popular to use genotype x cell proportion (or a proxy of) interactions to call cell type specific eQTLs e.g. \autocite{westra2015CellSpecificEQTL,kim-hellmuth2020CellTypeSpecific}
         \3 but you cannot distinguish between correlated cell types this way
 
@@ -158,7 +155,7 @@
         \3 a cell type with a cell type specific eQTL increases in proportion (recruitment) 
         \3 a gene with an eQTL increases in expression (activation or recruitment depending on if you condition by cell proportions)
         \3 the effect of a cell type specific eQTL increases within that cell type (activation)
-    \2 the challenge is distinguishing these scenarios in bulk data to form mechanistic hypotheses for expression response
+    \2 the challenge is distinguishing these scenarios in bulk in vivo data to form mechanistic hypotheses for expression response
 
 \1 future studies should consider alternatives to bulk before they can fully take advantage of benefits of in vivo design
     % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
@@ -208,7 +205,8 @@
         \3 rerun on resulting 102 x 5685 matrix, still a similar error rate
         \3 repeat that process, removing 364 genes. rerun on resulting 102 x 5321 matrix, still a similar error rate
     \2 performance of such purely predictive models is dominated by combining many weak predictors
-    \2 an easier problem than the traditional approach trying to attribute statistical significance to a few strong predictors
+    \2 pure prediction is an easier problem than the traditional approach trying to attribute statistical significance to a few strong predictors
+    \2 this may be why there is sometimes little overlap in the gene signatures from different studies on the same trait
 
 % What sample size?
     % https://www.bmj.com/content/368/bmj.m441
@@ -218,10 +216,9 @@
     \2 Useful to look at examples from cancer, one of the earliest fields where the approach generated interest
     \2 Despite the early gene expression signatures being reported in the early 2000s, only a handful in use \autocite{chibon2013CancerGeneExpression} \url{https://clincancerres.aacrjournals.org/content/21/21/4743}
     \2 many hurdles: need to be accurate enough to base changes in therapy on, but incrementally more accurate than existing clinical markers, and cost effective. \url{https://doi.org/10.1093/annonc/mdw307}
-    \2 what are potential methods?
+    \2 measuring a whole transcriptome is likely not cost effective. what are potential methods that might be?
     \2 for predicting vaccine response from transcriptomic data, popular methods are:
-        \3 DAMIP e.g. \autocite{querec2009SystemsBiologyApproach}
-            % \3 DAMIP gives rulesets composed of small sets of genes, amenable to rapid qPCR assays.
+        \3 DAMIP e.g. \autocite{querec2009SystemsBiologyApproach}, which gives rulesets composed of small sets of genes
         \3 elastic net
         % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2810828/
         % Sparse partial least squares regression for simultaneous dimension reduction and variable selection
@@ -232,103 +229,115 @@
 
 \subsection{From association to causality}
 
-\1 Have addressed describing differences between responders and non-responders, and predicting response.
-    \2 Now define causes of response. Knowing the molecular mechanisms of response are crucial for conceiving of possible interventions.
-    \2 In observational data, a causally upstream anchor is required: genetic variation can play this role
-    \2 Need a formal model linking genotype to response at the transcriptomic level to phenotypic response status
+\1 uncovering \enquote{mechanism}
+    \2 Knowing the molecular mechanisms of response are crucial for conceiving of possible interventions.
+        \3 e.g. ch4 baseline SIGLEC10 expression is associated with anti-TNF response, but would changing baseline SIGLEC10 affect response?
+    \2 In observational data, a causally upstream anchor is required: genetic variation
+    \2 the regression analyses in this thesis:
+        \3 DGE describes expression response association with phenotypic response (such as Ab titre) 
+        \3 reQTLs describe genotype association with expression response
+    \2 Need a model that encodes causal assumptions integrating multiple data layers: genotype -> gene expression -> phenotypic response
+    \2 there are several families of complementary methods that integrate multiple data layers
 
-% families of complementary methods
+\1 <Mendelian randomisation>
+    \2 is a type of IV analysis that uses genetic instruments: can use eQTLs as instrumental variables (IV) to estimate causal effect between expression (exposure) and phenotype (outcome)
+    \2 three assumptions that define a valid IV \autocite{daveysmith2014MendelianRandomizationGenetic,hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference}
+        \3 IV1 SNP is associated with expression i.e. an eQTL (no need to be fine mapped \autocite{daveysmith2014MendelianRandomizationGenetic,burgess2018InferringCausalRelationships})
+        \3 IV2 SNP is not associated with confounders of the expression-phenotype association 
+        \3 IV3 SNP has no association with phenotype except through expression 
+    \2 combined, these assumptions mean that expression is a complete mediator of the causal effect of the SNP on phenotype (a vertical pleiotropy is assumed)
+    \2 two-sample MR is were G -> E and E -> pheno are estimated in two non-overlapping samples \autocite{hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference}, and can come from large existing QTL datasets
+    % \2 Also avoids weak-instrument bias, where G -> E is estimated in a small sample
+        \3 a related family of methods, TWAS, tests association of genetically predicted expression to phenotypes, have their methodological basis in two-sample MR \url{https://link.springer.com/article/10.1007/s40484-020-0207-4}
 
-\1 <causal inference test>
-    option:
-        formally encode causal assumptions in graphical models
-        e.g. other papers that talk about 'integrating' recognise this
-        % franco,
-        % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0180824
-        % devries2020IntegratingGWASBulk
+\1 assumption violations will lead to bias in estimating causal effect of E on pheno
+    \2 IV1 is satisfied by definition of an eQTL
+    \2 IV2 violations are not likely, as genetic variants are unlikely to be associated with environmental confounders \todo{citation needed}
+    \2 IV3 violation is most likely
 
-        Causal Inference Test for a Binary Outcome
+\1 <coloc>
+    \2 IV3 violated by linkage: if the instrument eQTL is actually not causal, but simply correlated with another variant that causally affects phenotype
+        \3 use colocalisation methods to test whether the same variants are associated with E and phenotype \autocite{hemani2018EvaluatingPotentialRole}
 
-        % TODO
-        % https://onlinelibrary.wiley.com/doi/full/10.1002/gepi.22061
-        % The CIT is specifically designed to test whether a variablemediates the association between (and is the only causal linkbetween) a genetic locus and a quantitative trait. It is moreflexible than MR because it does not assume that the geneticvariant is chosen specifically to be an instrument for the medi-ator. Due to the way the test is constructed, the CIT is alsoimmune to problems of pleiotropy and reverse confounding.
-            not tried in ch2 due to low power, power not evaluated for ch4
+\1 <mediation analysis>
+    \2 IV3 violated by horizontal pleiotropy: instrument eQTL causes expression and phenotype independently (e.g. by also being an eQTL for another gene whose expression causally affects pheno), such that expression and phenotype are not causally related
+    \2 use mediation analysis e.g. (CIT\autocite{millstein2009DisentanglingMolecularRelationships}, findr\autocite{wang2017EfficientAccurateCausal}) that model comparison to distinguish between models of horizontal from vertical pleiotropy
+        \3 \autocite{millstein2009DisentanglingMolecularRelationships} used by \textcite{franco2013IntegrativeGenomicAnalysis} in a vaccine response reQTL setting, although they concluded they were underpowered
+    \2 however, requires individual level data, and more susceptible to measurement error than MR \autocite{hemani2018EvaluatingPotentialRole}
 
-            Causal Inference Methods to Integrate Omics and Complex Traits
-            \url{http://m.perspectivesinmedicine.cshlp.org/content/early/2020/08/17/cshperspect.a040493.abstract?s=09}
+\1 IV3 violated by reverse causation: assumed expression -> response, but the causal direction might actually be the reverse: G -> phenotype -> expression
+    \2 if suspected, recommendations to distinguish \autocite{daveysmith2014MendelianRandomizationGenetic,hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5036871/}
+        \3 perform MR in the reverse direction if there are instruments for the phenotype (bi-directional MR)
+        \3 extensions that test the directionality based on variance explained (MR Steiger) \url{https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007081}
+        \3 incorporate biological knowledge, e.g. if eQTL variant is in a TF motif for a gene, more likely G -> E than G -> pheno -> E
 
-            % TODO: mediation can exist in the absence of a 'significant' total effect G -> pheno
-            % http://davidakenny.net/cm/mediate.htm
-            % In the opinion of most though not all analysts, Step 1 is not required. (See the Power section below why the test of c can be low power, even if paths a and b are non-trivial.)
+% NOTE: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7221461/
+% has the nicest MR diagrams to copy.
 
-\1 <TWAS>
+% Mediation can exist in the absence of a 'significant' total effect G -> pheno
+% http://davidakenny.net/cm/mediate.htm
+% In the opinion of most though not all analysts, Step 1 is not required. (See the Power section below why the test of c can be low power, even if paths a and b are non-trivial.)
 
-\1 <Mendellian randomisation>
+% Canalisation/compensation and population stratification affects MR with genetic instruments also.
+% https://www.nature.com/articles/s41576-018-0020-3
+% https://spiral.imperial.ac.uk/bitstream/10044/1/23560/2/SIM%202015_Accepted%20version.pdf
+    % The most likely cause of violation of the third IV assumption is pleiotropy,  which occurswhen a genetic variant influences multiple intermediate phenotypes that separately affectthe outcome of interest.
+    % The assumption can be violated through other mechanisms includ-ing canalization and population stratification.
+    % Developmental canalization occurs when agenetic variant expressed during fetal development or post-natal growth stimulates compen-satory processes that protect against the effect of that variant on the outcome in adulthood[1], while population stratification occurs when ancestral sub-populations with different al-lele frequency and outcome distributions confound theG−Yassociation [1, 5, 6].
 
-    option: MR with expression 
-        instrument variables are really just perfect mediators
+% Leland
+% \autocite{taylor2019IntegrativeAnalysisGene}
+% MR is a statistical framework that uses a genetic association (“the
+    % instrument”) for one trait (“the exposure”) to test for a causal
+    % influence on another trait (“the outcome”).  An MR result, in which the
+    % exposure instrument is associated with the outcome, can arise under four
+    % distinct models (10, 11): (i) there is no causal relationship, but a SNV
+    % that influences the outcome is in linkage disequilibrium (LD) with a SNV
+    % that influences the exposure; (ii) the exposure causally influences the
+    % outcome; (iii) the outcome causally influences the exposure (a reverse
+    % causal relationship); or (iv) the exposure and outcome are not causally
+    % related but share a SNV that influences both the exposure and the outcome
+    % independently (horizontal pleiotropy).
 
-        genetic instruments
-        as demonstrated by e.g. qinqin, use (r)eqtl as genetic instruments
+\subsection{Triangulation}
 
-        e.g. sigeclec10
-        we have eqtls for it, but a bad idea since indep
+\1 Triangulation is the use of methods with different assumptions and biases that address the same question \autocite{munafo2018RobustResearchNeeds}
+    \2 discussed above is one example of triangulation, using complementary methods MR, colocalisation, mediation analysis to tease apart causal mechanisms from G -> E -> pheno
+        % To distinguish among these models, we use four complementary tests (defined
+        % here; Fig. S18): an MR test (consistent with all models), a
+        % colocalization test (distinguishing model i from models ii–iv; Note S1),
+        % the MR Steiger test (distinguishing model ii from model iii), and the
+        % causal inference test (CIT; distinguishing among models ii–iv).
+        \3 e.g. \textcite{taylor2019IntegrativeAnalysisGene}: an example combining MR, coloc (HEIDI), MR Steiger, CIT, to disentangle causal effect of SNPs on DNA Me and expression
+    \2 another example, how G -> E effect changes in response to perturbation
+        \3 combine reQTL mapping (between individuals), dynamic ASE (within heterozygous individuals), (and maybe variance QTLs)
+        % Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
+        \3 dynamic ASE example for multiple T cell activation states \url{https://www.nature.com/articles/s41588-020-0579-4}
+\1 many limitations discussed cannot be solved by increasing n
+\1 triangulation will be key in moving from a descriptive to mechanistic understanding of immune response to perturbation
 
-        does this approach require external datasets?
+\end{outline}
 
-        MRLocus: identifying causal genes mediating a trait through Bayesian estimation of allelic heterogeneity
-        \url{https://www.biorxiv.org/content/10.1101/2020.08.14.250720v2}
-
+%
+% Misc
+%
 % Network analysis
     % https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-13-356
     % Beyond differential expression: the quest for causal mutations and effector molecules
     % In trying to understand why a phenotype changes, one should not merely think “which gene(s) are the most differentially expressed”, but rather “which gene(s) are the most differentially connected.”
     % This insight introduces us to the field of network science.
-
-\subsection{Triangulation}
-
-\1 although I outline benefits to larger n, there are limitations that cannot be solved by increasing n
-    % Robust research needs many lines of evidence
-    % https://www.nature.com/articles/d41586-018-01023-3
-    \2 Triangulation
-
-
-    E -> pheno
-        DGE
-
-    G -> E
-        reQTL
-        ASE
-        % Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
-        % https://www.nature.com/articles/s41588-020-0579-4
-        vqtls: e.g. % doi: https://doi.org/10.1101/2020.07.28.225730 
-
-    G -> E -> pheno
-        coloc
-        MR
-        CIT
-        % Causal effect estimates often considered in 'Mendelian randomization'
-        % approaches [11], can be confounded by pleiotropic effects and reverse
-        % causation [12], thus, these approaches are not generally considered for
-        % problems such as reconstructing transcript regulatory pathways, in
-        % which pleiotropy is common and there may be little a priori information
-        % on the structure of the causal relationship between traits.
-
-        % The CIT is specifically designed to test whether a variablemediates the
-        % association between (and is the only causal linkbetween) a genetic
-        % locus and a quantitative trait. It is moreflexible than MR because it
-        % does not assume that the geneticvariant is chosen specifically to be an
-        % instrument for the medi-ator. Due to the way the test is constructed,
-        % the CIT is alsoimmune to problems of pleiotropy and reverse
-        % confounding.
-
-    G -> E -> protein -> pheno
-        % for protein coding fx
-        MOFA
-        % mRNAs, proteins and the emerging principles of gene expression control
-        % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
-
-% Large resources e.g. dejager2015ImmVarProjectInsights, zalocusky201810000Immunomes
-
-\end{outline}
+%
+% Large resources 
+    % e.g. dejager2015ImmVarProjectInsights, zalocusky201810000Immunomes
+%
+% \1 more layers
+    % \2 different layers have non-redundant readouts
+    % \2 pQTLs
+    % https://www.nature.com/articles/s41576-020-0258-4
+    % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
+    % \2 foreshadowing of eQTL by caQTLs https://www.nature.com/articles/s41588-018-0046-7
+%
+% Longitudinal
+%     Finally, note that a longitudinal design can provide measurements of gene expression at many timepoints
+%     Causal inference with a time-varying exposure is even harder.
 
