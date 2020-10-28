@@ -3,7 +3,7 @@
 %
 % Response eQTL-style paper
 
-\chapter{Genetic architecture of transciptomic response to influenza A (H1N1)pdm09 vaccine}
+\chapter{Genetic architecture of transciptomic response to Pandemrix vaccine}
 \label{chap:hird_reQTL}
 
 % TODO upreg -> increased expression
@@ -54,7 +54,7 @@ The HIRD cohort represents a unique opportunity for detecting genetic contributi
 In \autoref{ch:hird_DGE}, we observed global changes in gene expression after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody response.
 For seasonal influenza vaccines, the contribution is small: antibody responses in adults are largely driven by non-genetic influences such as previous influenza vaccination or infection\autocite{brodin2015VariationHumanImmune}.
 \todo{distinction between expression/ab response is blurry here}
-As the Pandemrix vaccine is against the pdm09 pandemic strain that was not in seasonal circulation at the time the \gls{HIRD} cohort was recruited (2010-11), 
+As the Pandemrix vaccine is against a pandemic strain that was not in seasonal circulation at the time the \gls{HIRD} cohort was recruited (2010-11), 
 with individuals mounting an expression response that was not recall-dominated \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
 the relative contribution of genetic factors to Pandemrix response may be greater.
 
@@ -102,6 +102,9 @@ Since the aim of this chapter is to identify genetic variation that affects expr
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
 Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
 it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean (??), and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
+% NOTE:
+% https://journals.sagepub.com/doi/full/10.1177/1054773816666280
+% Threats to Its Internal Validity and External Validity of One-Group Pretest–Posttest Design include regression to the mean.
 %
 % Step 1: why not intra-individual change score, why not ANCOVA, why strat and diff?
 % half a century of debate
@@ -1101,6 +1104,8 @@ Multiple independent eQTLs are present for a large fraction of eGenes\autocite{z
 As the lead variant for reQTL assessment for each eGene was chosen based on significance across all conditions, I can not detect reQTL that are masked by a stronger shared eQTL at that gene.
 This is not expected to be uncommon, as the effective sample size for shared eQTLs is usually large due to borrowing of information across conditions.
 Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more likely to be enriched in enhancers rather than promoters, and importantly, more context-specific\autocite{vandiedonck2017GeneticAssociationMolecular,dobbyn2018LandscapeConditionalEQTL}.
+% TODO:
+% more distal: https://twitter.com/tuuliel_lab/status/1318979038346620928
 The proportion of genes with reQTL I detect based on only the lead signal likely represents a lower bound.
 
 % list of other missed:
@@ -1265,8 +1270,3 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 
 % TODO are these reQTL interesting?
 
-% TODO
-% Would like to know what cell types for all reqtl, but limited by a trying one by one strategy
-% Always might miss one not tried
-% Not viable for scaling
-% SC rnaseq

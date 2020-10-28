@@ -3,7 +3,7 @@
 %
 % multiPANTS
 
-\chapter{multiPANTS: transcriptomic associations with anti-\glsfmtshort{TNF} biologic drug response in \glsfmtlong{CD} patients}
+\chapter{Transcriptomic associations with anti-\glsfmtshort{TNF} drug response in \glsfmtlong{CD} patients}
 
 % Collab note
 % - PANTS collab
@@ -155,7 +155,7 @@ Recently, larger cohorts have enabled \glspl{GWAS} of anti-\gls{TNF} response in
 % 1.90; 95% confidence interval [CI], 1.60–2.25; P ¼ 5.88  10–13).
 % Both drugs, and regardless of immunomodulator
 % Dominant effect
-In \gls{PANTS}, although no associations to \gls{PNR} were genome-wide significant\footnote{},
+In \gls{PANTS}, although no associations to \gls{PNR} were genome-wide significant\footnote{}\todo{add ref to Alex's ppt},
 HLA-DQA1*05 carriage was associated with higher anti-drug antibody levels \autocite{sazonovs2019HLADQA105Carriage}, which may mediate related phenotypes such as \gls{LOR}.
 
 Overall, small sample sizes and variation in analysis methods, anti-\gls{TNF} drug, response definition, tissues sampled, and disease among studies make a consensus hard to establish.
@@ -671,6 +671,24 @@ The hierarchical clustering tree was then cut into that number of clusters.
 \subsubsection{Rank-based gene set enrichment on gene modules}
 
 \todo{move this to ch2, then refer to it}
+% TODO:
+% intro bit on pathway analyses basic principle??
+% GSEA paper
+% https://www.nature.com/articles/ng1180
+% One promising approach to increase power exploits the idea that alterations in
+% gene expression might manifest at the level of biological pathways or
+% coregulated gene sets, rather than individual genes. Subtle but coordinated
+% changes in expression might be detected more readily by combining measurements
+% across multiple members of each gene set. A straightforward strategy for
+% identifying such differences is to examine top-ranking genes in a microarray
+% experiment and then to create hypotheses about pathway membership. This is both
+% subjective and post hoc, however, and thus prone to bias. A more objective set
+% of approaches4,5 tests for enrichment of pathway members among the top-ranking
+% genes in a microarray study, comparing them to a null distribution in which
+% genes are randomly distributed. Because functionally related genes are often
+% coregulated, however, a positive result in such a test can be due solely to
+% intrinsic correlation in gene expression rather than any relationship between
+% expression of pathway members and the phenotype of interest.
 
 Rank-based gene set enrichment analyses were done using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral}, 
 which assesses the enrichment of small ranks within predefined sets of genes compared to all measured genes after ranking the genes by some metric.

@@ -3,6 +3,9 @@
 %
 % https://tex.stackexchange.com/questions/553/what-packages-do-people-load-by-default-in-latex
 
+% The package defines commands that switch according to the prevailing ‘draft’ or ‘final’ options; each command takes two arguments, the first for the ‘true’, the second for the ‘false’ case.
+\usepackage{ifdraft}
+
 %
 % Typesetting
 %
@@ -64,10 +67,6 @@
 % 1 space after punctuation
 \frenchspacing
 
-% Extensive control of page headers and footers
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-
 % Allow modifications to enumerate lists
 \usepackage{enumitem}
 
@@ -94,8 +93,45 @@
 
 % The package provides an easy and flexible user interface to customize page layout and margins.
 % NOTE: screws with todonotes
-% \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
-% \usepackage[top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
+% https://www.jswilsonandson.co.uk/thesis-binding/
+% 3cm on the binding edge and 2cm on the three remaining edges.
+% Please ensure that fold-outs and diagrams produced have reasonable margins and that page numbers, headers and footers are away from the edges.
+%
+\usepackage[\ifoptiondraft{showframe}{},includehead,top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
+
+%
+% Extensive control of page headers and footers
+%
+% NOTE: also consider the titlesec, titleps, and titletoc trilogy.
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% Clear defaults, then define elements for fancy
+% \fancyhf{}
+% \fancyhead[LE]{\textbf{\thepage}}
+% \fancyhead[RE]{\nouppercase{\leftmark}}
+% \fancyhead[LO]{\nouppercase{\rightmark}}
+% \fancyhead[RO]{\textbf{\thepage}}
+% Redefine plain to remove all but the page numbers
+% \fancypagestyle{plain}{
+%     \fancyhf{}
+%     \fancyhead[LE]{\textbf{\thepage}}
+%     \fancyhead[RO]{\textbf{\thepage}}
+%     \renewcommand{\headrulewidth}{0pt}
+% }
+%
+\usepackage{titleps}
+\renewpagestyle{plain}{
+    \sethead%
+        [\textbf{\thepage}][][]% even
+        {}{}{\textbf{\thepage}}% odd
+}
+\newpagestyle{pagestylemainmatter}{
+    \setheadrule{0.4pt}%
+    \sethead%
+        [\textbf{\thepage}][][\chaptertitle]% even
+        {\thesection\space\sectiontitle}{}{\textbf{\thepage}}% odd
+}
+\pagestyle{pagestylemainmatter}
 
 %
 % Figures and tables
@@ -141,6 +177,12 @@
     backgroundcolor={orange!50!white}
 ]{todonotes}
 % \presetkeys{todonotes}{inline}{}
+%
+% Widen margins for todonotes + geometry combo
+\ifoptionfinal{}{\paperwidth=\dimexpr \paperwidth + 6cm \relax}
+\ifoptionfinal{}{\oddsidemargin=\dimexpr \oddsidemargin + 3cm \relax}
+\ifoptionfinal{}{\evensidemargin=\dimexpr \evensidemargin + 3cm \relax}
+% \ifoptionfinal{}{\marginparwidth=\dimexpr \marginparwidth + 3cm \relax}
 
 % Allow dummy text
 \usepackage{lipsum}
@@ -151,17 +193,11 @@
 % Use symbols for footnotes
 \usepackage[symbol,perpage]{footmisc}
 
-% The package defines commands that switch according to the prevailing ‘draft’ or ‘final’ options; each command takes two arguments, the first for the ‘true’, the second for the ‘false’ case.
-\usepackage{ifdraft}
-
 % This package provides the command \marginnote that may be used instead of \marginpar at almost every place where \marginpar cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package. 
 \usepackage{marginnote}
 
 % The epigraph package can be used to typeset a relevant quotation or saying as an epigraph, usually just after a sectional heading.
 \usepackage{epigraph}
-
-% Show margins
-\ifdraft{\usepackage{showframe}}{}
 
 %
 % Bibliography

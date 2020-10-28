@@ -2,7 +2,17 @@
 % Bibliography
 %
 
+% heading=bibintoc
+% This is is the default heading used by \printbibliography if the heading op-
+% tion is not given. Its default definition depends on the document class. If the
+% class provides a \chapter command, the heading is similar to the bibliography
+% heading of the standard LaTeX book class, i. e., it uses \chapter* to create
+% an unnumbered chapter heading which is not included in the table of
+% contents.
+%
+% heading=bibintoc
+% Similar to bibliography above but adds an entry to the table of contents.
 \printbibliography[
-    heading=bibnumbered,
+    heading=bibintoc,
     title={Bibliography}
 ]

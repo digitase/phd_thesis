@@ -4,7 +4,7 @@
 % Systems vaccinology-style paper.
 
 % The one central and memorable contribution of the paper.
-\chapter{Transcriptomic response to influenza A (H1N1)pdm09 vaccine}
+\chapter{Transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_DGE}
 
 \section{Introduction}
@@ -76,7 +76,8 @@ There have also been few studies of adjuvanted influenza vaccines, despite their
 
 The \gls{HIRD} study conducted by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived with the above limitations in mind.
 The study is an observational, prospective cohort design.
-The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated vaccine against the influenza A (H1N1)pdm09 strain, for which the majority of the cohort at the time would be unlikely to have immunological memory.
+% NOTE: this is the standard WHO name https://www.who.int/influenza/gisrs_laboratory/terminology_ah1n1pdm09/en/
+The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated vaccine against influenza A(H1N1)pdm09 (strain name A/California/07/2009, subtype H1N1), for which the majority of the cohort at the time would be unlikely to have immunological memory.
 A total of 178 individuals were vaccinated with a single dose of Pandemrix, and longitudinal transcriptomic, cellular, antibody
 titre, and adverse event phenotypes were collected.
 Gene expression was profiled using a microarray, and \gls{DGE} analyses detected genes associated with both myeloid and lymphoid effector functions upregulated at day 1, most prominently for genes associated with interferon responses.
@@ -543,7 +544,7 @@ For the array data, as \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} 
 % Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
 % 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
 For the \gls{RNAseq} data, between-sample normalisation factors were computed using the \gls{TMM} method\autocite{evans2018SelectingBetweensampleRNASeq} from edgeR::calcNormFactors\autocite{robinson2010EdgeRBioconductorPackage}; 
-% TODO: define composition bias that TMM corrects, see evans2018SelectingBetweensampleRNASeq
+% TODO: define composition bias that TMM corrects, see evans2018SelectingBetweensampleRNASeq, pull from ch5
 % also see https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
 % TODO: Note: calcNormFactors doesn’t normalize the data, it just calculates normalization factors for use downstream.
 then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisionWeights}, resulting in expression values with units of $\log_2{\text{\gls{CPM}}}$.

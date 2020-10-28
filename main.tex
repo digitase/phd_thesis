@@ -19,15 +19,13 @@
 % - Double-spaced or one-and-a-half spaced (one-and-a-half recommended by general Cambridge guidelines).
 % - Single or double-sided printing (double-sided recommended by general Cambridge guidelines).
 
+% TODO: sub \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{myfig.png}
+
 %
 % Preamble
 %
-\documentclass[
-    11pt,
-    % draft,
-    % final,
-    a4paper,twoside,openright
-]{book}
+\documentclass[11pt,a4paper,twoside,openright]{book}
+%
 % \input{filename} imports the commands from filename.tex into the target file;
 % it's equivalent to typing all the commands from filename.tex right into the
 % current file where the \input line is.
@@ -46,20 +44,25 @@
 \begin{document}
 % \renewcommand{\figureautorefname}{Fig.}
 
-\title{<title>}
+\title{Transcriptomic response to immune perturbation, and its genetic architecture}
 \author{Benjamin Yu Hang Bai}
 \date{\DTMnow}
 
 %
 % Frontmatter
 %
+% https://tex.stackexchange.com/questions/20538/what-is-the-right-order-when-using-frontmatter-tableofcontents-mainmatter
+% \frontmatter turns off chapter numbering and uses roman numerals for page numbers;
 \frontmatter
-
+%
 % \include{filename} essentially does a \clearpage before and after
 % \input{filename}, [...] is primarily useful when you have a big project on a slow
 % computer; changing one of the include targets won't force you to regenerate the
 % outputs of all the rest. [...] but it also can't be nested, can't
 % appear in the preamble, and forces page breaks around the included text.
+%
+%    The \clearpage command ends the current page and causes all figures and
+%    tables that have so far appeared in the input to be printed.
 \include{./frontmatter/title_page}
 % \include{./frontmatter/dedication}
 % \include{./frontmatter/abstract}
@@ -70,6 +73,7 @@
 %
 % Mainmatter, including appendix
 %
+% \mainmatter turns on chapter numbering, resets page numbering and uses arabic numerals for page numbers;
 \mainmatter
 % Intro
 \include{./mainmatter/chapter_01} 
@@ -83,17 +87,23 @@
 \include{./mainmatter/chapter_04}
 % Discussion
 \include{./mainmatter/chapter_05}
-
-\appendix
-\include{./mainmatter/appendices}
+%
+% Appendices
+% NOTE: replace these with a Supplementary Materials chapter if needed
+% \appendix resets chapter numbering, uses letters for chapter numbers and doesn't fiddle with page numbering;
+% \appendix
+% \include{./mainmatter/appendices}
 
 %
 % Backmatter
 %
+%TC:ignore
+% \backmatter turns off chapter numbering and doesn't fiddle with page numbering.
 \backmatter
 \include{./backmatter/bibliography}
 \include{./backmatter/abbreviations}
 \include{./backmatter/TODOs}
+%TC:endignore
 
 \end{document}
 %

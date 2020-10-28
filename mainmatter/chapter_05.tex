@@ -65,10 +65,11 @@
     \2 cannot distinguish with a single measure, yet the assumption is often made at the study design stage that it is the 2nd option
     \2 1st option means no associations to detect
 
-\1 Need to establish how consistent response is over time before trying to find individual factors causing it
-    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to perturb the same person more than once \autocite{senn2016MasteringVariationVariance}
+\1 Need to establish how consistent response is over time
+    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to perturb and measure the same person more than once \autocite{senn2016MasteringVariationVariance}
         \3 in ch4, repeated anti-TNF dosing showed expression differences between responders and NR, at least, were stable over time
-    \2 for the specific case of genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
+        \3 although probably partially due to selection of non-remission by w54
+    \2 note for the specific case of genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
         \3 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
         \3 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326} and have not been done for response to anti-TNFs (the ch4 setting)
         \3 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
@@ -155,6 +156,7 @@
         \3 a cell type with a cell type specific eQTL increases in proportion (recruitment) 
         \3 a gene with an eQTL increases in expression (activation or recruitment depending on if you condition by cell proportions)
         \3 the effect of a cell type specific eQTL increases within that cell type (activation)
+    \2 one could imagine crude ways to falsify each hypothetical model e.g. interaction/coloc with each cell type (ch3), but always at risk of missing a cell type
     \2 the challenge is distinguishing these scenarios in bulk in vivo data to form mechanistic hypotheses for expression response
 
 \1 future studies should consider alternatives to bulk before they can fully take advantage of benefits of in vivo design
@@ -166,6 +168,7 @@
     % What changes, then, is our perception about theworld, not the world itself.
     % \2 control is not intervention
     \2 rather than conditioning on cell proportion, effectively looking at the subset of data with same cell proportions, just control them
+    \2 If you want a mechanistic interpretation, need to control
     \2 single-cell RNAseq has the advantage of getting expression and composition simultaneously, and can be comparable in cost to bulk on FACS sorted cells \url{https://arxiv.org/ftp/arxiv/papers/1909/1909.12550.pdf}
     \2 do DGE/map eQTLs within each cell type 
         \3 combines advantage of in vivo stimulation with the controlled cell composition of in vitro studies
@@ -301,7 +304,7 @@
 
 \subsection{Triangulation}
 
-\1 Triangulation is the use of methods with different assumptions and biases that address the same question \autocite{munafo2018RobustResearchNeeds}
+\1 Triangulation is the use of methods with different assumptions, biases, and limitations that address the same question \autocite{munafo2018RobustResearchNeeds}
     \2 discussed above is one example of triangulation, using complementary methods MR, colocalisation, mediation analysis to tease apart causal mechanisms from G -> E -> pheno
         % To distinguish among these models, we use four complementary tests (defined
         % here; Fig. S18): an MR test (consistent with all models), a
@@ -309,10 +312,20 @@
         % the MR Steiger test (distinguishing model ii from model iii), and the
         % causal inference test (CIT; distinguishing among models ii–iv).
         \3 e.g. \textcite{taylor2019IntegrativeAnalysisGene}: an example combining MR, coloc (HEIDI), MR Steiger, CIT, to disentangle causal effect of SNPs on DNA Me and expression
+        % TODO specific distinguishes
+        \3 \autocite{zheng2019PhenomewideMendelianRandomization} Predicted associations between proteins and phenotypes may indicate four explanations: causality, reverse causality, confounding by LD between the leading SNPs for proteins and phenotypes or horizontal pleiotropy (Supplementary Fig. 3). Given these alternative explanations, we conducted a set of sensitivity analyses to evaluate whether each MR association reflected a causal effect of protein on phenotype: tests of reverse causality using bidirectional MR22 and MR Steiger filtering;23,24 heterogeneity analyses for proteins with multiple instruments25; and colocalization analyses26 to investigate whether the genetic associations with both protein and phenotype shared the same causal variant (Fig. 1). 
     \2 another example, how G -> E effect changes in response to perturbation
         \3 combine reQTL mapping (between individuals), dynamic ASE (within heterozygous individuals), (and maybe variance QTLs)
         % Allele-specific expression changes dynamically during T cell activation in HLA and other autoimmune loci
         \3 dynamic ASE example for multiple T cell activation states \url{https://www.nature.com/articles/s41588-020-0579-4}
+    \1 another example, multiomics integration
+        \2 different layers have non-redundant readouts
+        \2 e.g. pQTLs
+        % https://www.nature.com/articles/s41576-020-0258-4
+        % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
+        \2 e.g. foreshadowing of eQTL by caQTLs 
+        % https://www.nature.com/articles/s41588-018-0046-7
+        \2 network approaches, MOFA
 \1 many limitations discussed cannot be solved by increasing n
 \1 triangulation will be key in moving from a descriptive to mechanistic understanding of immune response to perturbation
 
@@ -329,13 +342,6 @@
 %
 % Large resources 
     % e.g. dejager2015ImmVarProjectInsights, zalocusky201810000Immunomes
-%
-% \1 more layers
-    % \2 different layers have non-redundant readouts
-    % \2 pQTLs
-    % https://www.nature.com/articles/s41576-020-0258-4
-    % Although protein and mRNA levels typically show reasonable correlation, we describe how transcriptomics and proteomics provide useful non-redundant readouts.
-    % \2 foreshadowing of eQTL by caQTLs https://www.nature.com/articles/s41588-018-0046-7
 %
 % Longitudinal
 %     Finally, note that a longitudinal design can provide measurements of gene expression at many timepoints
