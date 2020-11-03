@@ -248,9 +248,10 @@
 % Clickable links
 % NOTE: hyperref should be loaded relatively late, but should be loaded before glossaries-extra
 \usepackage{hyperref}
+%
 % Redefine contextual label in front of the reference for \autoref
 % Package babel supports many languages, therefore you have to put the redefinition into \extrasenglish.
-\addto\extrasenglish{\renewcommand\figureautorefname{Fig.}}
+% \addto\extrasenglish{\renewcommand\figureautorefname{Fig.}}
 %
 % Note label conventions: https://en.wikibooks.org/wiki/LaTeX/Labels_and_Cross-referencing#Sections
 % ch: 	chapter
@@ -272,6 +273,13 @@
 	citecolor={blue!70!black},
 	urlcolor={blue!60!black}
 }
+
+% The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference.
+% NOTE: must be loaded after hyperref
+\usepackage[nameinlink]{cleveref}
+% Customise cross-ref names for figures
+\crefname{figure}{Fig.}{Fig.}
+\Crefname{figure}{Fig.}{Fig.}
 
 %
 % Abbreviations

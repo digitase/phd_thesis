@@ -272,6 +272,13 @@ Total RNA was extracted from \glspl{PBMC} using the Qiagen RNeasy Mini kit, with
 RNA integrity was checked on the Agilent Bioanalyzer and mRNA libraries were prepared with the KAPA Stranded mRNA-Seq Kit (KK8421), which uses poly(A) selection.
 % 7 lanes x 3 plates
 To avoid confounding of timepoint and batch effects from pooling, samples were pooled by library prep plate, ensuring libraries from all timepoints of an individual were in the same pool, and then sequenced across multiple lanes as technical replicates (HiSeq 4000, 75bp paired-end).
+% TODO:
+% examples of failures of RNAseq design https://f1000research.com/articles/4-121/v1
+% TODO: this is deliberate confounding: schielzeth2013NestedDesignModel
+% although patient nested in plate. patient x plate interaction is confounded with main effect of patient
+% we are not interested in this
+% TODO: this is correct:
+% Checking that I understand the sources of technical variability, is it that all the samples in each pool will go through library prep together (e.g. same plate, reagent batch, roughly same time), and then be barcoded and sequenced on the same (lane of the) Novaseq flow cell?
 
 % To get to cram files:
 % From .cram headers:

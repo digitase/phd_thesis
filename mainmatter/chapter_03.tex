@@ -4,7 +4,7 @@
 % Response eQTL-style paper
 
 \chapter{Genetic architecture of transciptomic response to Pandemrix vaccine}
-\label{chap:hird_reQTL}
+\label{ch:hird_reQTL}
 
 % TODO upreg -> increased expression
 
@@ -612,6 +612,18 @@ Given selected known covariates (intercept, sex, four genotype \glspl{PC} from \
 % TODO: sole motivation here is efficiency. not so much confounding. PEER finds factors that explain var. so given factors are included for the sake of downstream modelling interest
 % this is also the primary motivation behind recommendation of including prognostic covariates in RCTs \url{https://trialsjournal.biomedcentral.com/articles/10.1186/1745-6215-15-139}
 PEER was used to estimate additional hidden factors that explain variation in expression matrix.
+% TODO: what might they be?
+% technical
+%  Flow Cell
+%  Lane
+%  Adaptors
+%  Library prep reagents
+%  Same instrument
+%  People!
+%  Day
+%  RNA extraction/purification
+% see https://academic.oup.com/bib/article/12/3/280/258477#3083943
+% or biological, like cell counts
 Factors are assumed to be unmeasured covariates that have global effects on a large fraction of genes, 
 whereas a cis-\gls{eQTL} will typically only have local effects, so including factors as covariates should not introduce dependence with the genotype term,
 but should soak up some of residual variation, improving power to detect cis-\glspl{eQTL}.

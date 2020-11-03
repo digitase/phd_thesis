@@ -4,6 +4,7 @@
 % multiPANTS
 
 \chapter{Transcriptomic associations with anti-\glsfmtshort{TNF} drug response in \glsfmtlong{CD} patients}
+\label{ch:multiPANTS}
 
 % Collab note
 % - PANTS collab
@@ -474,7 +475,7 @@ I have not systematically assessed what types of third variable other selected p
 The assumed causal relationship is response \textrightarrow cell proportion \textrightarrow expression, 
 \todo{The observational study design does not allow straightforward estimation of causal effects, so this is only assumed}
 where cell proportion mediates the association between response and expression \footnote{
-    The assumption in the \gls{DGE} model that response status is an intrinsic property of a patient that is causally upstream will be discussed in \autoref{chap:discussion}.
+    The assumption in the \gls{DGE} model that response status is an intrinsic property of a patient that is causally upstream will be discussed in \autoref{ch:discussion}.
 }.
 % They change a lot over time too (\autoref{fig:multipants_cell_type_proportion_vs_Study_Day})
 I fit separate \gls{DGE} models including and excluding cell proportions as predictors, but otherwise identical.
@@ -779,7 +780,7 @@ Genotypes were converted to dosages of the non-reference allele.
 
 \subsection{\Glsfmtlong{reQTL} mapping}
 
-The overall strategy and methods used were largely identical to \autoref{chap:hird_reQTL}.
+The overall strategy and methods used were largely identical to \autoref{ch:hird_reQTL}.
 For each timepoint, covariates for the \gls{eQTL} models were computed, \glspl{eQTL} were mapped separately for each timepoint, followed by joint mapping using summary statistics from all timepoints to call \glspl{reQTL}.
 \todo{much of this section is brief, since the same pipeline as ch3}
 
@@ -1591,7 +1592,7 @@ which could indicate that expression response to anti-\gls{TNF} has a genetic co
 Out of all significant lead \glspl{eQTL} for 11156 genes, only six \glspl{reQTL} were detected with significantly different effect sizes at baseline versus one of the three post-treatment timepoints.
 Although no enrichment analyses are reported due to the small number of associations, 
 \gene{NMI} and \gene{EPSTI1} are both interferon-induced genes with significant \glspl{reQTL} that have their strongest effect size on expression at week 54.
-Given the issues with doing this \gls{reQTL} analysis in bulk expression data are similar to those encountered in \autoref{chap:hird_reQTL},
+Given the issues with doing this \gls{reQTL} analysis in bulk expression data are similar to those encountered in \autoref{ch:hird_reQTL},
 I did not place emphasis on interpreting these small numbers of associations.
 Before proceeding, I would also like to verify that these significant \glspl{reQTL} are not artifacts from shrinkage of effect sizes in the joint \gls{eQTL} model,
 as their posterior effect sizes from \software{mashr} were very different from the inputs from the timepoint-stratified models.
@@ -1673,7 +1674,7 @@ as I have not yet had a chance to assess their predictive capability.
 I also did not find strong evidence for strong \gls{reQTL} effects over time in whole blood, 
 so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls{TNF} response.
 However, the presence of \glspl{eQTL} for most genes and the presence of strong differences in expression post-induction may allow testing for causal mechanisms where genotype affects drug response via expression.
-Strategies for moving onto both prediction and causal inference will be discussed in \autoref{chap:discussion}.
+Strategies for moving onto both prediction and causal inference will be discussed in \autoref{ch:discussion}.
 
 % TODO: resolution of sets
 % testing the two specific hypotheses/mechs of antiTNF action
