@@ -6,6 +6,7 @@
 \chapter{Genetic architecture of transciptomic response to Pandemrix vaccine}
 \label{ch:hird_reQTL}
 
+% TODO: autoref to cref
 % TODO upreg -> increased expression
 
 \section{Introduction}
@@ -30,7 +31,7 @@ and specific \gls{HLA} alleles \autocite{poland2008ImmunogeneticsSeasonalInfluen
 A potential mechanism through which genetic variation can play a causal role in influenza vaccine response is through altering the expression of genes as \glspl{eQTL}.
 \gls{eQTL} can have condition-specificity: an interaction between their effect on expression and different environmental contexts such as tissue or cell type\autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
 The mechanisms by which \glspl{eQTL} interact with environment are of great interest;
-for example, cell type specificity can inform us about how expression is regulated in a cell type specific manner\autocite{kim-hellmuth2019CellTypeSpecific}.
+for example, cell type-specificity can inform us about how expression is regulated in a cell type-specific manner\autocite{kim-hellmuth2019CellTypeSpecific}.
 In a vaccination context, an important subset of environment-interacting eQTLs are \glspl{reQTL}, defined as an eQTL whose effect interacts with external stimulation or perturbation.
 reQTL have been observed in many human cell types \textit{in vitro}, or in the whole organism \textit{in vivo}.
 \todo{pull in citations from intro}
@@ -65,7 +66,7 @@ then call shared and reQTL effects from a joint model,
 looking for genes where the lead eQTL has a different effect size pre- and post-vaccination.
 Many of the strongest reQTL effects involve opposite signed effects on expression for the same variant at different timepoints.
 I detect a strong day 1 specific reQTL effect at \gene{ADCY3}.
-Through modelling interaction of reQTL with cell type abundance estimates and statistical colocalisation with cell type specific QTL datasets, 
+Through modelling interaction of reQTL with cell type abundance estimates and statistical colocalisation with cell type-specific QTL datasets, 
 the reQTL signal was determined to be a monocyte-specific effect likely driven by increase monocyte abundance at day 1.
 \todo{1 more sentence to round off context}
 
@@ -406,16 +407,16 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 \label{subsec:hird_reQTL_xCell}
 
 \Gls{PBMC} samples are a mixture of immune cells, and a fixed input of RNA extracted from that mixture is used to estimate expression, 
-so estimates for genes that have cell type specific expression depend on the relative proportions of each cell type in each sample.
+so estimates for genes that have cell type-specific expression depend on the relative proportions of each cell type in each sample.
 These proportions shift after Pandemrix vaccination\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
-and \gls{eQTL} effects can also be cell type specific\todo{determine appropriate citations from existing refs in intro}.
+and \gls{eQTL} effects can also be cell type-specific\todo{determine appropriate citations from existing refs in intro}.
 As genotype can be assumed to stay constant, it is valid to compare the effect of genotype on expression between multiple timepoints to call \glspl{reQTL}, 
 but changes in cell type abundance influence this by \todo{??} both expression and the effect of genotype on expression.
 % TODO: https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 Immune cell abundance also varies naturally between healthy individuals\autocite{brodin2015VariationHumanImmune,brodin2017HumanImmuneSystem}, so it is important to model these effects even at baseline.
 
 Cell type abundance directly measured via \gls{FACS} are only available for a small subset of \gls{HIRD} individuals (\autoref{subsec:hird_dge_studyDesign}), so I derived cell type abundance estimates from the expression data as an alternative.
-Such estimates have previously been used in \gls{eQTL} analyses from bulk samples where cell type specific effects are expected\autocite{westra2015CellSpecificEQTL,davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2019CellTypeSpecific}.
+Such estimates have previously been used in \gls{eQTL} analyses from bulk samples where cell type-specific effects are expected\autocite{westra2015CellSpecificEQTL,davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2019CellTypeSpecific}.
 As the estimates are based on the expression of multiple genes, is not entirely circular to use them as covariates in this way for genewise \gls{eQTL} models.
 % https://github.com/dviraran/xCell
 %
@@ -442,7 +443,7 @@ As the estimates are based on the expression of multiple genes, is not entirely 
 % this type of analysis should be performed carefully.  Regarding this issue,
 % scaling the scores by samples is extremely dangerous and will inevitably will
 % result in false interpretations.
-I selected \software{xCell}\autocite{aran2017XCellDigitallyPortraying}, which previously been shown to outperform other deconvolution methods for cell type specific \gls{eQTL} mapping in blood\autocite{kim-hellmuth2019CellTypeSpecific}.
+I selected \software{xCell}\autocite{aran2017XCellDigitallyPortraying}, which previously been shown to outperform other deconvolution methods for cell type-specific \gls{eQTL} mapping in blood\autocite{kim-hellmuth2019CellTypeSpecific}.
 \software{xCell} computes enrichment scores based on the expression ranks of approximately 10000 signature genes derived from purified cell types,
 works for both array and \gls{RNAseq} expression data,
 and implements \enquote{spillover compensation} to reduce dependency of estimates between related cell types\autocite{aran2017XCellDigitallyPortraying}.
@@ -692,7 +693,7 @@ Variants with sample $\text{\gls{AC}} < 15$ within each timepoint were excluded.
 % so sex-specific methods are required \url{http://www.biomedcentral.com/1471-2105/15/392}.
 \todo{add note on treating x chrom variants with caution}
 
-At each of 13570 genes, at all cis-variants within within $\pm \num{1}{Mb}$ of the gene \gls{TSS}, I fit the following model to map \gls{eQTL}:
+At each of 13570 genes, at all cis-variants within within $\pm \SI{1}{\mega\bp}$ of the gene \gls{TSS}, I fit the following model to map \gls{eQTL}:
 % TODO
 % Ensembl GENESEQSTART if fwd strand, otherwise GENESEQEND
  % Like all Ensembl features the start of an exon is always less than or equal to the end of the exon, regardless of the strand it is on. The start of the transcript is the start of the first exon of a transcript on the forward strand or the end of the last exon of a transcript on the reverse strand. The start and end of a gene are defined to be the lowest start value of its transcripts and the highest end value respectively.
@@ -844,7 +845,7 @@ I assume this represents a power advantage from having larger a sample size, rat
 % https://journals.lww.com/epidem/Fulltext/2009/11000/On_the_Distinction_Between_Interaction_and_Effect.16.aspx
 % https://significantlystatistical.wordpress.com/2014/12/12/confounders-mediators-moderators-and-covariates/
 % TODO: why?
-% happens if there is cell type specific relevance of g
+% happens if there is cell type-specific relevance of g
 % cause cell type affects g->e i.e. symetrically, geno affects c -> e
 % Figure out what DAG model causes a reQTL in bulk to not represent causality of G -> change in e
 If the abundance of a particular cell type does truly modify the \gls{eQTL} effect, 
@@ -1223,9 +1224,9 @@ and reQTL were not more likely to be differentially expressed compared to genes 
 % reqtl already tests whether change in e is diff by g, so no need to check DGE too
 % may be no reason to believe that most DGE is also the most reQTL
 One mechanism by which cis-eQTL affect expression is through their impact on \gls{TF} binding affinity to motifs in promoters and enhancers\autocite{pai2015GeneticMechanisticBasis}.
-Immune cells, including monocytes, are regulated by cell type specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
+Immune cells, including monocytes, are regulated by cell type-specific \glspl{TF}\autocite{choudhury2016IdentifyingCellTypeSpecific}.
 \todo{harmonise terminology for 'opposite'}
-Cell type specific expression of different \glspl{TF} have been proposed as a model for explaining magnifying, dampening and opposite reQTL effects;
+cell type-specific expression of different \glspl{TF} have been proposed as a model for explaining magnifying, dampening and opposite reQTL effects;
 \todo{ check "rs2223286 is associated with profound directional effects in the expression of SELL dependent upon genotype, with the minor C allele associated with increased expression of SELL in B-cells and reduced expression of SELL in monocytes " }
 for example, opposite effects can result from \glspl{TF} regulating the same gene, that are activating in one cell type and suppressive in another\autocite{fu2012UnravelingRegulatoryMechanisms}.
 There is evidence that \gls{TF} activity is important for \textit{in vivo} immune reQTL:

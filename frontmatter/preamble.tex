@@ -22,7 +22,8 @@
 
 % Culturally-determined typographical (and other) rules for a wide range of languages
 % e.g. Correct hyphenation. Specify patterns using e.g. \hyphenation{hy-phen-a-tion MATLAB}
-\usepackage[english]{babel}
+% NOTE: english is specified globally as a document class option
+\usepackage{babel}
 
 % Typographic optimisation
 % It doesn't work with latex, you have to use pdflatex instead.
@@ -54,7 +55,9 @@
 % Format si units
 %
 \usepackage{siunitx}
-\sisetup{round-mode=figures, round-precision=3}
+\sisetup{round-mode=figures, round-precision=3, range-phrase=--, range-units=single}
+% Declare units
+\DeclareSIUnit[]\bp{bp}
 
 % Define line spacing
 % Setspace switches off double-spacing at places where even the most die-hard
@@ -390,7 +393,7 @@
 % Custom commands
 %
 
-% Format decimals as percentages
+% Format decimals as percentages with rounding
 % https://tex.stackexchange.com/questions/468597/convert-decimal-to-percentage-value
 \newcommand\percentage[2][round-precision = 1]{% default precision
     \SI[round-mode = places,

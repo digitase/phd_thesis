@@ -6,6 +6,7 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
+% TODO: autoref to cref
 \begin{outline}
 
 \1 In this thesis, ... <a summary of the thesis projects>
@@ -118,22 +119,22 @@
 
 \1 bulk data is a mixture of cell types with different expression patterns
     \2 one of the largest sources of variation in bulk expression data is cell proportions 
-    \2 the more cell type specific a gene's expression, the more it is affected by cell proportions \autocite{farahbod2020UntanglingEffectsCellular}
-        \3 perfectly cell type specific genes are often called marker genes, and are used in deconvolution methods to estimate cell proportions from bulk data when they are not directly measured
+    \2 the more cell type-specific a gene's expression, the more it is affected by cell proportions \autocite{farahbod2020UntanglingEffectsCellular}
+        \3 perfectly cell type-specific genes are often called marker genes, and are used in deconvolution methods to estimate cell proportions from bulk data when they are not directly measured
     \2 both variation from in true variation in proportions, and sampling noise
     \2 in this thesis, estimated by:
         \3 In HIRD ch 3, xcell deconvolution from expression data
         \3 In PANTS ch 4, deconvolution from methylation data
     \2 these are fit as covariates in models
-        \3 could act as precision variables (for sampling noise in non cell type specific genes),
-        \3 but also mediators for cell type specific genes, where the interpretation of DGE effects changes (perturbation -> cell prop -> expression)
+        \3 could act as precision variables (for sampling noise in non cell type-specific genes),
+        \3 but also mediators for cell type-specific genes, where the interpretation of DGE effects changes (perturbation -> cell prop -> expression)
     \2 but coarse grained (just the main cell types) adjustment is not always sufficient, you'll still find associations that are proxies for rare cell types \url{https://www.biorxiv.org/content/10.1101/2020.05.28.120600v1}
         \3 Recommend the use of e.g. PEER, as in ch3/4 eQTL analysis, some of those factors are likely to be rarer cell types
 
 \1 <eQTL analysis>
     \2 analogous to DGE where independent variable of interest is now genotype
     \2 as discussed in \autoref{subsec:hird_reQTL_methods_cellTypeInteraction}, it is model misspecification to not have the genotype x cell proportion interaction if the effect of genotype changes depending on cell proportions
-        \3 in fact, it is popular to use genotype x cell proportion (or a proxy of) interactions to call cell type specific eQTLs e.g. \autocite{westra2015CellSpecificEQTL,kim-hellmuth2020CellTypeSpecific}
+        \3 in fact, it is popular to use genotype x cell proportion (or a proxy of) interactions to call cell type-specific eQTLs e.g. \autocite{westra2015CellSpecificEQTL,kim-hellmuth2020CellTypeSpecific}
         \3 but you cannot distinguish between correlated cell types this way
 
 \1 <in vivo reQTL analysis>
@@ -153,9 +154,9 @@
         but there is after perturbation.
         \todo{I cannot figure out what sort of conditioning would need to be done to block this sort of effect even if you had perfect cell proportion measurements}
     \2 for genotype to explain more variance in bulk expression after perturbation, there are multiple compatible mechanisms
-        \3 a cell type with a cell type specific eQTL increases in proportion (recruitment) 
+        \3 a cell type with a cell type-specific eQTL increases in proportion (recruitment) 
         \3 a gene with an eQTL increases in expression (activation or recruitment depending on if you condition by cell proportions)
-        \3 the effect of a cell type specific eQTL increases within that cell type (activation)
+        \3 the effect of a cell type-specific eQTL increases within that cell type (activation)
     \2 one could imagine crude ways to falsify each hypothetical model e.g. interaction/coloc with each cell type (ch3), but always at risk of missing a cell type
     \2 the challenge is distinguishing these scenarios in bulk in vivo data to form mechanistic hypotheses for expression response
 
@@ -243,6 +244,7 @@
     \2 there are several families of complementary methods that integrate multiple data layers
 
 \1 <Mendelian randomisation>
+    \2 <explain the analogy to RCTs: segregation should be independent of env factors>
     \2 is a type of IV analysis that uses genetic instruments: can use eQTLs as instrumental variables (IV) to estimate causal effect between expression (exposure) and phenotype (outcome)
     \2 three assumptions that define a valid IV \autocite{daveysmith2014MendelianRandomizationGenetic,hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference}
         \3 IV1 SNP is associated with expression i.e. an eQTL (no need to be fine mapped \autocite{daveysmith2014MendelianRandomizationGenetic,burgess2018InferringCausalRelationships})
@@ -255,7 +257,7 @@
 
 \1 assumption violations will lead to bias in estimating causal effect of E on pheno
     \2 IV1 is satisfied by definition of an eQTL
-    \2 IV2 violations are not likely, as genetic variants are unlikely to be associated with environmental confounders \todo{citation needed}
+    \2 IV2 violations are not likely, as genetic variants are unlikely to be associated with environmental confounders \todo{citation needed, try daveysmith2020MendelLawsMendelian}
     \2 IV3 violation is most likely
 
 \1 <coloc>

@@ -6,6 +6,7 @@
 % The one central and memorable contribution of the paper.
 \chapter{Transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_DGE}
+% TODO: autoref to cref
 
 \section{Introduction}
 % TODO add specific flu vaccine immunology here
@@ -165,6 +166,7 @@ However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there wa
 Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
 % TODO: efficiency
 % elaborate fully on why Dichot is bad here for the discussion: definition of response based on dichotomisation is inefficient and assumes a sharp change at the threshold
+% TODO: 4-fold less likely to acheive by high baseline, for biological reasons, also RTM, also the forced negative correlation by cov formula
 
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
 For each assay, a linear regression was fit with the $\log_2{\text{day 63}/\text{day -7}}$ titre fold change as the response, and the $\log_2{\text{day -7}}$ baseline titre as the predictor.
@@ -271,7 +273,7 @@ The top \glspl{PC} separate samples of European, African and Asian ancestry (\au
 Total RNA was extracted from \glspl{PBMC} using the Qiagen RNeasy Mini kit, with on-column DNase treatment.
 RNA integrity was checked on the Agilent Bioanalyzer and mRNA libraries were prepared with the KAPA Stranded mRNA-Seq Kit (KK8421), which uses poly(A) selection.
 % 7 lanes x 3 plates
-To avoid confounding of timepoint and batch effects from pooling, samples were pooled by library prep plate, ensuring libraries from all timepoints of an individual were in the same pool, and then sequenced across multiple lanes as technical replicates (HiSeq 4000, 75bp paired-end).
+To avoid confounding of timepoint and batch effects from pooling, samples were pooled by library prep plate, ensuring libraries from all timepoints of an individual were in the same pool, and then sequenced across multiple lanes as technical replicates (HiSeq 4000, \SI{75}{\bp} paired-end).
 % TODO:
 % examples of failures of RNAseq design https://f1000research.com/articles/4-121/v1
 % TODO: this is deliberate confounding: schielzeth2013NestedDesignModel
