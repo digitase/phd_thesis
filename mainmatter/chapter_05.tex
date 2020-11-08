@@ -19,7 +19,7 @@
     \2 Each chapter discusses the results and limitations of each study, but being very similar studies in design and analysis, they also suffer from a core set of limitations.
     \2 This chapter discusses these, and considerations for design and analysis of similar longitudinal studies in the future to better understand the biology of immune response to drugs and vaccines.
 
-\subsection{Increasing the power to detect associations}
+\section{Increasing the power to detect associations}
 
 \1 It has been challenging to find robust single gene-level associations between expression and response, especially at baseline.
     \2 The biological signal may be small compared to other sources of variation: measurement platform (ch2); drug, response definition (ch4)
@@ -52,7 +52,7 @@
     \2 while the rank of a single gene may vary from sample to sample due to sampling noise, a summary measure computed from multiple genes should be more robust
     \2 it is hoped that the replicability of gene sets will be greater
 
-\subsection{Responder analysis}
+\section{Responder analysis}
 
 \1 <how well these models correspond to reality>
     \2 What does it mean to be a responder?
@@ -95,7 +95,7 @@
     % \2 In RCTs, the treatment effect would be defined against the effect in the control group
     % \2 In prospective cohort studies, the treatment effect is determined between two subgroups within the cohort
 
-\subsection{Challenges in the interpretation of bulk expression data}
+\section{Challenges in the interpretation of bulk expression data}
 
 \1 NGS data is compositional, only quantifies relative abundance \todo{move and merge this paragraph into ch2 section on composition bias in RNAseq, it's out of place here}
     % https://academic.oup.com/gigascience/article/8/9/giz107/5572529
@@ -191,7 +191,7 @@
     % e.g. StructLMM
     %     Identifies eQTLs with GxE, where the number of environments in E is large (modelled as a random effect)
 
-\subsection{From association to prediction}
+\section{From association to prediction}
 
 \1 I have now discussed both the independent and dependent variables used in descriptive models of expression vs response
     \2 so far, always put expression as dependent, and response status as independent, and estimated the effect size of response status on expression
@@ -231,7 +231,7 @@
         \3 sparse partial least squares e.g. \autocite{tsang2014GlobalAnalysesHuman} 
     \2 Note the sparsity assumption for these methods (most genes are not predictive) is in opposition to the idea of combining many weak predictors to maximise predictive power, but will be less costly to translate to clinical practice
 
-\subsection{From association to causality}
+\section{From association to causality}
 
 \1 uncovering \enquote{mechanism}
     \2 Knowing the molecular mechanisms of response are crucial for conceiving of possible interventions.
@@ -253,7 +253,7 @@
     \2 combined, these assumptions mean that expression is a complete mediator of the causal effect of the SNP on phenotype (a vertical pleiotropy is assumed)
     \2 two-sample MR is were G -> E and E -> pheno are estimated in two non-overlapping samples \autocite{hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference}, and can come from large existing QTL datasets
     % \2 Also avoids weak-instrument bias, where G -> E is estimated in a small sample
-        \3 a related family of methods, TWAS, tests association of genetically predicted expression to phenotypes, have their methodological basis in two-sample MR \url{https://link.springer.com/article/10.1007/s40484-020-0207-4}
+        \3 a related family of methods, TWAS \url{https://www.nature.com/articles/ng.3506}, tests association of genetically predicted expression to phenotypes, have their methodological basis in two-sample MR \url{https://link.springer.com/article/10.1007/s40484-020-0207-4}
 
 \1 assumption violations will lead to bias in estimating causal effect of E on pheno
     \2 IV1 is satisfied by definition of an eQTL
@@ -304,7 +304,7 @@
     % related but share a SNV that influences both the exposure and the outcome
     % independently (horizontal pleiotropy).
 
-\subsection{Triangulation}
+\section{Triangulation}
 
 \1 Triangulation is the use of methods with different assumptions, biases, and limitations that address the same question \autocite{munafo2018RobustResearchNeeds}
     \2 discussed above is one example of triangulation, using complementary methods MR, colocalisation, mediation analysis to tease apart causal mechanisms from G -> E -> pheno
