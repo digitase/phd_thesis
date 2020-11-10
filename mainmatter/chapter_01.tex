@@ -68,10 +68,17 @@ Genetic linkage is one source of \gls{LD}: the non-random association of alleles
 \gls{LD} can be quantified by $r^2$, the squared correlation coefficient between alleles in that specific population \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
 
 Recombination events are not distributed uniformly throughout the genome.
+% TODO: Figure 3: The mosaic structure of human genetic variation. https://www.nature.com/articles/nature01400
+% also see: The Structure of Haplotype Blocks in the Human Genome for original data
 The genome is a mosaic of haplotype blocks delimited by recombination hotspots, 
 characterised by strong \gls{LD} within blocks, and little \gls{LD} between blocks \autocite{wall2003HaplotypeBlocksLinkage,theinternationalhapmapconsortium2007SecondGenerationHuman} (\cref{fig:intro_haplotypeBlocks}).
 The structure of correlated haplotypes reflects a population's unique evolutionary history, and can be used to trace the demography of populations back through time \autocite{karczewski2020AnalyticTranslationalGenetics}.
 
+% TODO
+% Figure S1. Haplotype Block Organization in Human Populations
+% https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020121
+% https://doi.org/10.1371/journal.pgen.0020121.sg001
+% (3.6 MB TIF)
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fig_mockup_haplotypeBlocks_Screenshot 2020-05-21 at 17.08.33.png}
@@ -211,7 +218,7 @@ The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \n
 
 \subsection{From locus to causal variant}
 
-\1 By design, a significantly-associated variant from a \gls{GWAS} needs not be a variant that causally affects the trait, and may only tag a causal variant.
+By design, a significantly-associated variant from a \gls{GWAS} needs not be a variant that causally affects the trait, and may only tag a causal variant.
 The resolution of the associated locus depends on the local \gls{LD} structure.
 % The SNP-SNP correlation matrix
 % Fine-mapping is a natural extension of mapping with higher resolution.
@@ -219,7 +226,7 @@ Fine-mapping is the process of determining which of the many correlated variants
 The causal variants in a locus are not necessarily the ones with the strongest associations.
 State-of-the-art Bayesian fine-mapping methods take a variable selection approach, 
 assigning each variant a posterior probability of causality.
-A credible set of variants likely to contain all causal variants in the locus can then be determined
+A credible set of variants likely to contain all causal variants in the locus with some probability can then be determined
 \autocite{schaid2018GenomewideAssociationsCandidate,wang2020SimpleNewApproach} 
 The ability to separate causal and tag variants depends on factors like \gls{LD}, sample size, and the effect size and number of causal variants  \autocite{visscher201710YearsGWAS,schaid2018GenomewideAssociationsCandidate}.
 It is important that the causal variant is observed, by directly genotyped or confident imputation.
@@ -248,9 +255,9 @@ it may not be obvious how to prioritise the target genes through which those var
 % \autocite{visscher201710YearsGWAS}:
 % "For two-thirds of \gls{GWAS}-associated complex trait loci where target genes have been assigned, the implicated gene is not the nearest gene"
 % but this is from SMR and TWAS studies, which may have poor performance for assigning causal genes.
-A reasonable heuristic is to assign the nearest gene \gls{TSS} or body as the target.
+A reasonable heuristic is to assign the nearest gene \gls{TSS} or body as the target, particularly for metabolite traits \autocite{stacey2019ProGeMFrameworkPrioritization}.
 For improved accuracy across a variety of complex traits,
-gene prioritisation methods integrate variant-to-gene distance with numerous other annotations and datasets \autocite{stacey2019ProGeMFrameworkPrioritization,forgetta2020EffectorIndexPredict,ghoussaini2020OpenTargetsGenetics}.
+integrative methods for gene prioritisation combine variant-to-gene distance with other metrics and data types drawn from numerous external sources \autocite{stacey2019ProGeMFrameworkPrioritization,forgetta2020EffectorIndexPredict,ghoussaini2020OpenTargetsGenetics}.
 
 % \subsection{From target gene to candidate drug}
 %
@@ -273,24 +280,47 @@ gene prioritisation methods integrate variant-to-gene distance with numerous oth
 
 % TODO: read cano-gamez2020GWASFunctionUsing
 
-\1 Rather than directly impacting the coding sequence of a gene, 
-many non-coding GWAS loci are thought to affect traits by affecting the regulation of target gene expression \autocite{gallagher2018PostGWASEraAssociation}.
-    \2 Expression, unlike genotype, is dynamic across time and space.
-    \2 <briefly introduce the roles of the following elements in expression regulation that are referenced in the next paragraph>: chromatin, methylation, histones, splicing, UTRs, TF sites in promoters, enhancers
+Gene regulation data are indispensable for gene prioritisation. 
+Rather than directly impacting the coding sequence of a gene, 
+many non-coding \gls{GWAS} loci are hypothesised to affect traits by affecting the regulation of target gene expression \autocite{gallagher2018PostGWASEraAssociation,cano-gamez2020GWASFunctionUsing}.
+Unlike genotype, expression is context-dependent and dynamic across time and space.
+Diverse expression programs are responsible for the myriad of cell and tissue types generated during development,
+and enables adaptation in response to environmental stimuli.
 
-\1 \gls{GWAS} loci are heavily enriched in regulatory elements annotated by functional genomics studies, such as
+Eukaryotic transcription is an intricate multi-step process involving interactions between DNA, RNA, and hundreds of proteins \autocite{cramer2019OrganizationRegulationGene}.
+Transcription is initiated when RNA polymerase and \glspl{TF} form part of a protein complex around the promoter region and \gls{TSS} at the 5' end of a gene.
+\Glspl{TF} can also bind to \textit{cis}-regulatory elements such as enhancers,
+which can be distant from the gene, interacting with the promoter region via DNA looping.
+Transcription can only happen in regions of open chromatin, where the packing of DNA-histone complexes (nucleosomes) is loose enough that the DNA is physically-accessible to the transcriptional machinery.
+Chromatin accessibility is partially determined by histone modifications such as methylation, acetylation, phosphorylation, and ubiquitination \autocite{bannister2011RegulationChromatinHistone}.
+% The histone code maps modifications to activation/repression.
+% The DNA itself can also be modified; methylation at CpG sites in promoters tends to repress transcription \autocite{robertson2000DNAMethylationHealth}.
+% A 5' cap and 3' poly-A tail are added.
+During and post-transcription, introns are removed, and the remaining exons spliced together by spliceosomes that cut and rejoin the RNA at splice sites.
+% Alternative splicing of pre-mRNA transcripts is regulated by a system of trans-acting proteins (activators and repressors) that bind to cis-acting sites or "elements" (enhancers and silencers) on the pre-mRNA transcript itself. These proteins and their respective binding elements promote or reduce the usage of a particular splice site.
+Further post-transcriptional regulation of mature \glspl{mRNA} can occur through RNA editing and regulatory elements in 5' and 3' \glspl{UTR}.
+
+% Functional genomics is a field of molecular biology that attempts to describe gene (and protein) functions and interactions.
+% Functional genomics focuses on the dynamic aspects such as gene transcription, translation, regulation of gene expression and protein–protein interactions, as opposed to the static aspects of the genomic information such as DNA sequence or structures.
+In line with the regulatory hypothesis, \gls{GWAS} variants are heavily enriched in regulatory elements annotated by functional genomics studies, including
+    % In genetics, DNase I hypersensitive sites (DHSs) are regions of chromatin that are sensitive to cleavage by the DNase I enzyme. In these specific regions of the genome, chromatin has lost its condensed structure, exposing the DNA and making it accessible.
     % DNase-I hypersensitive sites sequencing (DNase-seq; [1–4]) and Assays for Transposase-Accessible Chromatin sequencing (ATAC-seq; [5, 6]) are two widely used protocols for genome-wide identification of open chromatin.
+    % The overwhelming majority of disease- and trait-associated variants identified by genome-wide association studies (GWASs) lie in non-coding regions of the genome, and these variants are most strongly enriched in DHSs mapped in disease-relevant cell contexts6,7.
     regions of open chromatin, 
-    splice sites, 
-    UTRs,
     % ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel DNA sequencing to identify the binding sites of DNA-associated proteins.
     histone binding sites, 
-    \gls{TF} binding motifs,
-    and enhancers \autocite{trynka2015DisentanglingEffectsColocalizing,gallagher2018PostGWASEraAssociation} \url{https://genome.cshlp.org/content/22/9/1748.full} \url{https://www.nature.com/articles/s41586-020-2559-3} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3771521/}.
-    % nasser2020GenomewideMapsEnhancer
-\2 For complex diseases, genomic enrichment of GWAS loci within regulatory elements are observed in disease-relevant tissues \autocite{visscher201710YearsGWAS}.
-\2 These enrichments put forth expression as an important intermediate linking non-coding \gls{GWAS} variants to their associated traits.
-% TODO: distinguish endophenotypes
+    \gls{TF} binding sites,
+    enhancers,
+    splice sites,
+    and \glspl{UTR}
+    \autocite{schaub2012LinkingDiseaseAssociations,maurano2012SystematicLocalizationCommon,farh2015GeneticEpigeneticFine,trynka2015DisentanglingEffectsColocalizing,nasser2020GenomewideMapsEnhancer}.
+Furthermore, enrichment is often observed in particular contexts: tissues, cell types, or cell states \autocite{visscher201710YearsGWAS,gallagher2018PostGWASEraAssociation,cano-gamez2020GWASFunctionUsing}.
+% NOTE: cano-gamez2020GWASFunctionUsing contains many examples of genomic feature enrichment methods, including for cell-type and stimulation specific
+An example is the enrichment of fine-mapped \gls{IMID} \glspl{SNP} in CD4\textsuperscript{+} T cell enhancers, particularly to enhancers activated after stimulation \autocite{farh2015GeneticEpigeneticFine}.
+% NOTE: a good example is T1D vs T2D enrichments, see cano-gamez2020GWASFunctionUsing
+These results put forth expression as an important intermediate linking non-coding \gls{GWAS} variants to their associated traits, 
+and help nominate trait-relevant contexts.
+% NOTE: the term endophenotype has a specific definition, so here use intermediate
 % Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
 \subsection{Expression is a complex trait}
@@ -298,7 +328,7 @@ many non-coding GWAS loci are thought to affect traits by affecting the regulati
 % \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
 % \1 <basics of eQTLs> \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}
 \1 Expression in itself, is a molecular phenotype that is heritable and complex architecture \autocite{gaffney2013GlobalPropertiesFunctional}
-    \2 Expression can be assayed by high-throughput technologies e.g. array or RNAseq
+    \2 Expression can be assayed by high-throughput technologies e.g. expression microarray or \gls{RNAseq} 
     \2 The variants associated with assayed expression are called \glspl{eQTL}.
     % \2 The per-variant effect sizes on molecular phenotypes can be large \autocite{visscher201710YearsGWAS}.
     \2 eQTLs can also be cis- or trans- to their target gene \autocite{albert2015RoleRegulatoryVariation}.
@@ -449,7 +479,7 @@ to help untangle the multiplex of possible causal pathways from variant to trait
         % o	reQTLs can show reversal of effect between conditions (Fairfax et al. 2014)
         % •	reQTLs vs expression
         % o	enrichment in DE genes vs eQTLs and non eQTLs (Barreiro et al., 2012)
-        % o	context-specific eQTL are identified because of both treatment-induced regulatory effects and treatment-inducing gene expression to detectable levels (Fairfax et al. 2014)
+        % o	context-dependent eQTL are identified because of both treatment-induced regulatory effects and treatment-inducing gene expression to detectable levels (Fairfax et al. 2014)
         % •	trans effects
         % o	reQTLs develop trans-effects on stimulation (Fairfax et al. 2014)
         % •	reQTLs in pathways
@@ -490,7 +520,7 @@ to help untangle the multiplex of possible causal pathways from variant to trait
 
 \1 <why care about immune reQTLs>
     \2 Exposes differences in regulatory architecture between conditions. 
-    \2 Does not automatically reveal the mechanisms behind those differences, but provides a starting point for forming mechanistic hypotheses e.g. context-specific expression
+    \2 Does not automatically reveal the mechanisms behind those differences, but provides a starting point for forming mechanistic hypotheses e.g. context-dependent expression
 
     \2 Nevertheless useful for interpretation of GWAS signals, providing info on likely contexts that mediate the genetic effect
 
@@ -510,7 +540,7 @@ to help untangle the multiplex of possible causal pathways from variant to trait
 
 \section{Phenotypes of immune response}
 
-\subsection{High-throughput immunology}
+\subsection{Intro to immunology}
 % TODO: read davis 2018 and 2020
 \1 Most \gls{reQTL} studies to date have been conducted on immune cells \textit{in vitro}, 
 not only due to the abundance of immune cells easily accessible in peripheral blood, amenable to separation (e.g. FACS) and stimulation;
@@ -518,8 +548,12 @@ but because the immune system is specialised for responding to environmental per
     % TODO: janeway ch1 and 2
     \2 The immune system consists of many cell types: lymphoid and myeloid linages
     \todo{specifically introduce cell types mentioned in later chapters}
+        \3 pbmcs
     \2 two major components, innate and adaptive.
     \2 complex interactions through cell surface receptors and signalling molecules
+
+
+\subsection{High-throughput immunology}
 
 \1 omics studies of interactions with and between all these layers of the immune system come under the broad umbrella of systems immunology
 % TODO: longitudinal: rules out reverse causal by establishing temporal
@@ -555,7 +589,7 @@ but because the immune system is specialised for responding to environmental per
 %     \2 Genetic regulation is more important for the innate immune system than the adaptive immune system \autocite{patin2018NaturalVariationParameters}.
 %
 % \1 given genetic control of healthy system, perhaps not surprising that immune response to perturbation traits are also complex
-%     \2 also, as discussed in the context section above, context-specific genetic effects may not be apparent in the baseline healthy state, stimulation is required
+%     \2 also, as discussed in the context section above, context-dependent genetic effects may not be apparent in the baseline healthy state, stimulation is required
 %     \2 since a central goal of systems immunology is to establish causal relationships between the many components of the immune system
 %         \3 Natural genetic variation can be leveraged, representing small scale perturbations that are causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
 %     \2 In this context, immune in vivo reQTL studies can be considered as controllable perturbation studies of the activated immune system
