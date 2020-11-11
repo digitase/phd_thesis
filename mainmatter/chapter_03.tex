@@ -837,6 +837,8 @@ I assume this represents a power advantage from having larger a sample size, rat
 
 % TODO: note moderator is more likely, but mediator G -> CC -> E is also possible
 
+% TODO: see kim2020.pdf for causalgraphs for pre-post
+
 % TODO need a DAG on why reqTL in vivo cannot guarantee causality of G on change in E
 
 \todo{be more specific: "moderator", 'modify'?????}
@@ -893,6 +895,9 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 \todo{can we interpret with peer in? add note of CLAIM here that although peer is correlated with xcell, interactions are only formed with xcell, so the interaction term can be interpreted per unit of genotype increase when xcell=0}
 
 \subsection{TODO Statistical colocalisation}
+
+% TODO:
+% WHY: cause you can't separate correlated types
 
 % TODO
 % Choice of method;
@@ -1116,6 +1121,11 @@ Most \gls{eQTL} are shared between conditions and replicate well in GTEx whole b
 Multiple independent eQTLs are present for a large fraction of eGenes\autocite{zeng2019ComprehensiveMultipleEQTL}.
 As the lead variant for reQTL assessment for each eGene was chosen based on significance across all conditions, I can not detect reQTL that are masked by a stronger shared eQTL at that gene.
 This is not expected to be uncommon, as the effective sample size for shared eQTLs is usually large due to borrowing of information across conditions.
+% TODO
+% https://www.biorxiv.org/content/10.1101/129429v2.full.pdf
+% Primary 330eQTL fall closer to the TSS than conditional eQTL (Figure 2): primary eQTL 331occur at a median distance of 70.4 Kb from the TSS versus a median distance of 332302 Kb for conditional eQTL.
+% TODO:
+% It has been noted that distant \glspl{eQTL} have more context-specific effects \autocite{vandiedonck2017GeneticAssociationMolecular}.
 Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more likely to be enriched in enhancers rather than promoters, and importantly, more context-specific\autocite{vandiedonck2017GeneticAssociationMolecular,dobbyn2018LandscapeConditionalEQTL}.
 % TODO:
 % more distal: https://twitter.com/tuuliel_lab/status/1318979038346620928
@@ -1275,11 +1285,15 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
 
-% TODO
+% TODO not scalable
 % Would like to know what cell types for all reqtl, but limited by a trying one by one strategy
 % Always might miss one not tried
 % Not viable for scaling
-% SC rnaseq
+% diff strat might be better like SC rnaseq
 
 % TODO are these reQTL interesting?
+
+% TODO:
+% how to get multi ethnic coloc?
+% how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?
 

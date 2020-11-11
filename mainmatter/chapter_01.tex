@@ -13,7 +13,7 @@
 Observable human characteristics or traits are called phenotypes.
 Variation in phenotype emerges from the interplay of genetics, environment and pure chance.
 The contributions of each vary from phenotype to phenotype.
-Traits for which genetic variation explains a non-zero fraction of phenotypic variation are heritable.
+Traits for which genetic variation explains a non-zero percentage of phenotypic variation are heritable.
 Virtually all phenotypic traits are heritable to some degree, 
 and twin studies provide upper bounds on this heritability by partitioning phenotypic variation into genetic and environmental components \autocite{polderman2015MetaanalysisHeritabilityHuman}.
 
@@ -43,7 +43,7 @@ genetic association has intrinsic resistance to reverse causality, an issue that
 
 The human genome is almost three billion \si{\bp} (base pairs) in length, 
 containing \numrange{20000}{25000} protein-coding genes that span \SIrange{1}{3}{\percent} of its length, with the remaining sequence being non-coding \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA,1000genomesprojectconsortium2015GlobalReferenceHuman}.
-% Some of the remainder is likely dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
+% Some of the remainder is dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
 Each diploid cell contains two copies of the genome, organised into 46 chromosomes comprised of 23 maternal-parental pairs: 22 pairs of homologous autosomes and one pair of sex chromosomes.
 Variation in the genome between individuals in a population exists in the form of \glspl{SNP}, short indels, and structural variants.
 For common population variants with \gls{MAF} \SIrange{>1}{5}{\percent},
@@ -302,7 +302,7 @@ Further post-transcriptional regulation of mature \glspl{mRNA} can occur through
 
 % Functional genomics is a field of molecular biology that attempts to describe gene (and protein) functions and interactions.
 % Functional genomics focuses on the dynamic aspects such as gene transcription, translation, regulation of gene expression and protein–protein interactions, as opposed to the static aspects of the genomic information such as DNA sequence or structures.
-In line with the regulatory hypothesis, \gls{GWAS} variants are heavily enriched in regulatory elements annotated by functional genomics studies, including
+In line with the regulatory hypothesis, \gls{GWAS} variants are heavily enriched in regulatory elements annotated by functional genomics projects (e.g. ENCODE \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}), including
     % In genetics, DNase I hypersensitive sites (DHSs) are regions of chromatin that are sensitive to cleavage by the DNase I enzyme. In these specific regions of the genome, chromatin has lost its condensed structure, exposing the DNA and making it accessible.
     % DNase-I hypersensitive sites sequencing (DNase-seq; [1–4]) and Assays for Transposase-Accessible Chromatin sequencing (ATAC-seq; [5, 6]) are two widely used protocols for genome-wide identification of open chromatin.
     % The overwhelming majority of disease- and trait-associated variants identified by genome-wide association studies (GWASs) lie in non-coding regions of the genome, and these variants are most strongly enriched in DHSs mapped in disease-relevant cell contexts6,7.
@@ -323,41 +323,175 @@ and help nominate trait-relevant contexts.
 % NOTE: the term endophenotype has a specific definition, so here use intermediate
 % Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
-\subsection{Expression is a complex trait}
+\subsection{\Glsfmtfullpl{eQTL}}
 
 % \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
-% \1 <basics of eQTLs> \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}
-\1 Expression in itself, is a molecular phenotype that is heritable and complex architecture \autocite{gaffney2013GlobalPropertiesFunctional}
-    \2 Expression can be assayed by high-throughput technologies e.g. expression microarray or \gls{RNAseq} 
-    \2 The variants associated with assayed expression are called \glspl{eQTL}.
-    % \2 The per-variant effect sizes on molecular phenotypes can be large \autocite{visscher201710YearsGWAS}.
-    \2 eQTLs can also be cis- or trans- to their target gene \autocite{albert2015RoleRegulatoryVariation}.
-    \2 Their effect size declines with distance to the TSS, so the most readily detectable eQTLs are \textit{cis}, and within 1Mb \autocite{vandiedonck2017GeneticAssociationMolecular}
-    % TODO
-    % \2 most heritbaility in expression is trans Table 1. Studies of cis versus trans Heritability
-    % https://www.sciencedirect.com/science/article/pii/S0092867419304003?via%3Dihub#mmc1
+Expression in itself is a complex molecular phenotype with a heritability of \SIrange{15}{30}{\percent} \autocite{gaffney2013GlobalPropertiesFunctional}.
+Genome-wide assays for expression, such as microarrays and \gls{RNAseq}, were among the earliest high-throughput technologies developed for quantifying molecular phenotypes.
+Large-scale efforts such as the Genotype-Tissue Expression (GTEx) project \autocite{thegtexconsortium2020GTExConsortiumAtlas} have pioneered the study of \glspl{eQTL} other \glspl{molQTL} over the past decade \autocite{vandiedonck2017GeneticAssociationMolecular}.
+% Recently more focus on other molQTLs e.g. BLUEPRINT for chromatin marks
 
-\1 GWAS variants are enriched for eQTLs \url{https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888}
-    \2 So GWAS variants that are also eQTL naturally prioritise target genes.
-    \2 Is it a narrow view to assume that the effect of GWAS loci on complex traits not only act through a target gene, but are specifically mediated by eQTL effects?
-        \3 Over many complex traits, a median of 11\% heritability could be explained by mediation of GWAS loci by common (MAF > 0.01) cis-eQTL, 
-        and this proportion does not include \textit{trans} or post-transcriptional effects.
+Genetic loci associated with quantified gene expression are called \glspl{eQTL}.
+Their effect sizes are large relative to variants associated with whole-organism phenotypes,
+with the average \gls{eQTL} explaining \SIrange{5}{18}{\percent} of additive genetic variance for its associated gene \autocite{gaffney2013GlobalPropertiesFunctional}.
+% NOTE: additive genetic variance is only part of observed variance, but a single variant explaining this much is still large. 
+The \glspl{eQTL} with the largest effects tend to be concentrated near the \gls{TSS} of their target gene (\textit{cis}-\glspl{eQTL}), affecting \gls{TF} binding sites and other nearby regulatory elements.
+\glspl{eQTL} further away or on a different chromosome are called \textit{trans}-\glspl{eQTL}.
+The exact threshold separating \textit{cis}- from \textit{trans}- on the same chromosome is arbitrary; \SI{<1}{\mega\bp} and \SI{>5}{\mega\bp} are commonly used thresholds for \textit{cis}- and \textit{trans}-\glspl{eQTL} respectively \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vosa2018UnravelingPolygenicArchitecture}%
+\footnote{
+    Having a threshold is often a matter of practicality to reduce the number of variants tested.
+    Assaying expression is still more costly than array genotyping, so \gls{eQTL} sample sizes are small compared to \gls{GWAS}.
+    Even though \glspl{eQTL} effects are relatively large, \gls{eQTL} mapping genome-wide is still equivalent to performing \glspl{GWAS} thousands of continuous phenotypes,
+    incurring enormous computational and multiple testing burdens.
+    Studies focused specifically on \textit{trans}-\gls{eQTL} mapping reduce the number of tests in other ways, such as testing only trait-associated variants \autocite{vosa2018UnravelingPolygenicArchitecture}.
+}.
+In general, \gls{eQTL} effect size declines with distance to the \gls{TSS}, and \textit{trans}-\glspl{eQTL} have smaller effects compared to \textit{cis}-\glspl{eQTL} \autocite{vandiedonck2017GeneticAssociationMolecular}.
+\textit{Trans}-\gls{eQTL} often manifest from \textit{cis}-\glspl{eQTL} on master regulatory molecules like \glspl{TF} and RNA-binding proteins that regulate many genes in \textit{trans} \autocite{fairfax2012GeneticsGeneExpression,albert2015RoleRegulatoryVariation}.
+Gathering large enough samples to detect \textit{trans}-\glspl{eQTL} remains a priority,
+as most expression heritability is driven by \textit{trans}- rather than \textit{cis}- effects \autocite{liu2019TransEffectsGene}.
+% \2 Currently discovered bulk baseline cis-eQTL also don't explain a lot of complex trait heritability.
+%     \3 Over many complex traits, a median of 11\% heritability could be explained by mediation of GWAS loci by common (MAF > 0.01) cis-eQTL,
+%     and this proportion does not include \textit{trans} or post-transcriptional effects.
+%     https://www.nature.com/articles/s41588-020-0625-2
+%     Averaging across traits, only 11 ± 2% of heritability was mediated by assayed gene expression levels.
 
-\1 <How to use eQTLs to prioritise target genes>
-\2 With increasing sample size, most genes (>60-80\%) have a detectable eQTL \autocite{vandiedonck2017GeneticAssociationMolecular,vosa2018UnravelingPolygenicArchitecture}.
-Assuming that a locus on the genome is associated with both a complex trait and an \gls{eQTL},
-how can we separate the scenario where one variant affects both trait and expression (pleiotropy),
-from coincidental overlap between distinct causal variants that may possibly in \gls{LD}?
+\subsection{Context-dependent \glsfmtshort{eQTL}}
+
+Like expression itself, the effects of \glspl{eQTL} are highly context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
+A non-exhaustive list of environmental contexts that interact with \gls{eQTL} effects includes:
+    sex \autocite{yao2014SexAgeinteractingEQTLs},
+    age \autocite{yao2014SexAgeinteractingEQTLs},
+    ancestry \autocite{dejager2015ImmVarProjectInsights,nedelec2016GeneticAncestryNatural,quach2017LivingAdaptiveWorld},
+    tissue \autocite{nica2011ArchitectureGeneRegulatory,aguet2017GeneticEffectsGene},
+    purified cell type \autocite{dimas2009CommonRegulatoryVariation,dejager2015ImmVarProjectInsights,peters2016InsightGenotypePhenotypeAssociations,chen2016GeneticDriversEpigenetic},
+    cell type composition in bulk samples \autocite{westra2015CellSpecificEQTL,zhernakova2017IdentificationContextdependentExpression,glastonbury2019CellTypeHeterogeneityAdipose,kim-hellmuth2020CellTypeSpecific},
+    cell differentiation stage \autocite{strober2019DynamicGeneticRegulation},
+    disease status \autocite{peters2016InsightGenotypePhenotypeAssociations},
+    and experimental stimulation (see \cref{subsec:intro_reQTL}).
+These contexts are interdependent.
+For example, tissue-dependent effects may arise from a combination of cell type-dependence and varying cell composition between tissues.
+
+\1 A variety of molecular mechanisms might facilitate genotype-environment interactions at \glspl{eQTL}.
+\2 Most basic is not expressed
+    \2 <list of mechanisms related to regulation of gene expression by TFs, enhancers, splice sites etc.>
+        \3 \textcite{fu2012UnravelingRegulatoryMechanisms}: proposes classes of QTL and also TF-based mechanisms for cis-eQTL (here, define mag, damp, flip) (\cref{fig:intro_reQTLmechs})
+for opposig fx: fairfax2012GeneticsGeneExpression
+        \3 \autocite{ackermann2013ImpactNaturalGenetic}: defines static, conditional, additionally dynamic eQTLs
+        \3 \textcite{gaffney2013GlobalPropertiesFunctional,rotival2019CharacterisingGeneticBasis}: suggests info on more regulatory layers will help break down transcriptional and post-transcriptional mechanisms
+        % \3 also, priming at ca level?
+
+% TODO: use fu2012UnravelingRegulatoryMechanisms figure
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fig_mockup_reQTLs_Screenshot 2020-05-21 at 17.08.49.png}
+    \caption{eqtl mech models: magnify, dampen, flip}
+    \label{fig:intro_reQTLmechs}
+\end{figure}
+
+\subsection{Immune \Glsfmtlongpl{reQTL}}
+\label{subsec:intro_reQTL}
+
+\1 A important subclass of context-dependent \gls{eQTL} are \gls{reQTL}, where the interacting environment is experimental stimulation \autocite{vandiedonck2017GeneticAssociationMolecular,huang2019GeneticsGeneExpression}.
+    \2 \textit{In vitro}, potential interacting variables such as cell type, and the nature, length, and intensity of stimulation can be precisely controlled.
+
+\1 A seminal early study was conducted by \autocite{barreiro2012DecipheringGeneticArchitecture}, where eQTLs were mapped separately in monocyte-derived dendritic cells before and after 18h infection with \textit{Mycobacterium tuberculosis}.
+    \2 reQTLs were detected for 198 genes, 102 specific to the uninfected state, and 96 specific to the infected state. 
+
+    \2 Since then, \textit{in vitro} immune reQTL studies have been conducted for a variety of 
+    cell types
+        (e.g. primary CD14+ monocytes \autocite{fairfax2014InnateImmuneActivity}) 
+    and stimulations 
+    (IFN$\gamma$ and LPS \autocite{fairfax2014InnateImmuneActivity}).
+
+    \todo{list a few more types and stims from \autocite{fairfax2014InnateImmuneActivity} until \autocite{alasoo2019GeneticEffectsPromoter}}
+    % schmiedel2018ImpactGeneticPolymorphisms
+    % 	Found reQTLs? So what? Gather take home messages and inspiration for post reQTL analyses
+        % •	reQTL effect characteristation
+        % o	reQTLs can show reversal of effect between conditions (Fairfax et al. 2014)
+        % •	reQTLs vs expression
+        % o	enrichment in DE genes vs eQTLs and non eQTLs (Barreiro et al., 2012)
+        % o	context-dependent eQTL are identified because of both treatment-induced regulatory effects and treatment-inducing gene expression to detectable levels (Fairfax et al. 2014)
+        % •	trans effects
+        % o	reQTLs develop trans-effects on stimulation (Fairfax et al. 2014)
+        % •	reQTLs in pathways
+        % o	Fairfax et al. 2014: reQTLs frequently intersected established canonical pathways of monocyte signaling
+        % •	reQTLs enrichment in relevant GWAS hits
+        % o	Barreiro et al., 2012
+        % o	Fairfax et al. 2014
+        % •	genomic feature enrichment of reQTLs in certain feature classes
+        % o	UTRs (Fu et al., 2012)
+        % •	Overlap of reQTL genes with DE genes
+        % o	Franco et al. 2014
+        % •	Mediation analysis of eQTL -> Ab response (Franco et al. 2014)
+        % •	Colocalisation with GWAS (Kim-Hellmuth et al. 2017)
+        % •	motifs enriched at reQTL binding sites e.g. STATs, IRFs (Caliskan et al. 2015; Davenport et al. 2018)
+        % 	Gather reQTL datasets for coloc
+        % •	Fairfax 2014 stim monocytes
+        % •	CEDAR range of resting cells
+        % •	Schmiedel_2018 stim CD4/8s
+        % •	Alasoo 2018 stim macro
+        % •	… and whole blood meta control
+
+\1 A complementary approach is \textit{in vivo} \gls{reQTL} mapping
+    \2 There are pros to \textit{in vivo} stimulation.
+        \3 the innumerable interactions in the immune system that are absent \textit{in vitro}
+        \2 ability to use whole organism perturbations more suited for in vivo administration
+        \3 ability to get whole organism phenotypes
+        \3 ability to get repeated measures: can reason about change in expression over time
+    \2 Major disadvantages: 
+        \3 the choice of stimulation must be ethical \textit{in vivo}, 
+        \3 and many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be controlled, leading to greater experimental noise (?), and more complex interpretations.
+
+    \2 There are few published \textit{in vivo} \gls{reQTL} studies.
+        \3 \autocite{franco2013IntegrativeGenomicAnalysis}: seasonal \gls{TIV}, whole blood, antigen processing and intracellular trafficking genes, attempted mediation for Ab titres, but concluded they were underpowered
+        % In addition to DIABLO and TRAPPC4 identified above, several genes identified in the epistatic analysis help regulate apoptosis, including FADD,22 ITK23 and REG3A.24
+        \3 \autocite{lareau2016InteractionQuantitativeTrait}: fold-change expression after inactivated vaccinia vaccine, focus was on pairwise epistatic interactions, apoptosis pathways
+        % \3 TODO: \autocite{zhernakova2017IdentificationContextdependentExpression}
+        \3 \autocite{davenport2018DiscoveringVivoCytokineeQTL}: whole blood, IFN status and anti-IL6 drug exposure, reQTL driven by ISRE and IRF4 motifs
+
+\1 <why care about immune reQTLs>
+    \2 Exposes differences in regulatory architecture between conditions. 
+    \2 Does not automatically reveal the mechanisms behind those differences, but provides a starting point for forming mechanistic hypotheses e.g. context-dependent expression
+
+    \2 Nevertheless useful for interpretation of GWAS signals, providing info on likely contexts that mediate the genetic effect
+
+    \2 Immune \textit{in vitro} \gls{reQTL} have been shown to be enriched more so than non-\gls{reQTL} among GWAS loci for immune-related phenotypes such as
+    susceptibility to infectious \autocite{barreiro2012DecipheringGeneticArchitecture,manry2017DecipheringGeneticControl}
+    and immune-mediated diseases \autocite{manry2017DecipheringGeneticControl,kim-hellmuth2017GeneticRegulatoryEffects}.
+        % TODO
+        % \3 some enrichments in specifically stimulated states https://www.nature.com/articles/s41588-019-0505-9
+
+        % TODO
+    % davenport
+    % eQTL interactions with drug interventions or other therapeutically relevant physiologic variables are important to identify as they can point to regulatory mechanisms, such as transcription factors or subclasses of enhancers, acting downstream of the environmental condition of interest and driving groups of eQTL interactions. The IFN status eQTL interactions we identified provide support for this approach.
+
+    \2 Not yet clear whether \textit{in vivo} reQTL have any utility on top of \textit{in vitro} reQTL for interpreting GWAS loci: not that many studies, and complex interpretations.
+
+    \2 Nevertheless, as the number of cell types systems and stimulations both \textit{in vitro} and \textit{in vivo} increases, the number of known reQTLs continues to grow.
+
+\subsection{\Glsfmtshortpl{eQTL} for gene prioritisation}
+
+As \glspl{eQTL} can propose both target gene and mechanism of action,
+where the effect of variant on complex trait is mediated through expression,
+they have proven to be a valuable data type for gene prioritisation.
+\todo{I will mention that they also prioritise state e.g. cell type/tissues in the next subsections}
+\Gls{GWAS} variants are indeed enriched for \glspl{eQTL} \autocite{nicolae2010TraitAssociatedSNPsAre}, but care must be taken to avoid false positives due to the abundance of \glspl{eQTL}.
+At current sample sizes, \SIrange{60}{80}{\percent} of genes have at least one detectable \glspl{eQTL}  \autocite{vandiedonck2017GeneticAssociationMolecular,vosa2018UnravelingPolygenicArchitecture},
+and half of common variants are \textit{cis}-\glspl{eQTL} for at least one gene \autocite{liu2019AbundantAssociationsGene}.
+Assuming that a locus is associated with both a trait of interest and with expression of a particular gene,
+how can we separate the scenario where the same causal variants affect both trait and expression (pleiotropy),
+from coincidental overlap between distinct sets of causal variants that may possibly in \gls{LD}?
+
 % TODO: read this intro https://www.biorxiv.org/content/10.1101/2020.07.01.182097v1.full.pdf
-Bayesian Colocalisation methods address this by extending fine-mapping to multiple phenotypes \autocite{burgess2018InferringCausalRelationships}.
-In particular, Bayesian probabilistic colocalisation methods (e.g. eCAVIAR, Sherlock, coloc \autocite{wallace2020ElicitingPriorsRelaxing}) 
-estimate the posterior probability that the same causal variants are associated with both phenotypes,
+
+Bayesian colocalisation methods address this by extending fine-mapping to multiple phenotypes \autocite{burgess2018InferringCausalRelationships,wallace2020ElicitingPriorsRelaxing,hukku2020ProbabilisticColocalizationGenetic}.
+They estimate the posterior probability that the same causal variants are associated with both phenotypes,
 \todo{add uses other vars}
-distinguishing pleiotropy from linkage, 
+distinguishing pleiotropy from \gls{LD}, 
 but not vertical pleiotropy (mediation) from horizontal pleiotropy (independent effects on trait and expression) \autocite{hemani2018EvaluatingPotentialRole}.
 As colocalisation of a \gls{GWAS} loci with \glspl{eQTL} is is necessary but not sufficient for mediation, 
-it should be supported by complementary lines of evidence from other methods that integrate intermediate phenotypes (e.g. MR, mediation analysis \autocite{hemani2018EvaluatingPotentialRole})
-to help untangle the multiplex of possible causal pathways from variant to trait.
+it should be supported by complementary lines of evidence \autocite{hemani2018EvaluatingPotentialRole} to help untangle the multiplex of possible causal pathways from variant to trait.
+
 % TODO: be specific on what sort of pleiotropy MR can distinguish
 %
 % TODO:
@@ -424,119 +558,12 @@ to help untangle the multiplex of possible causal pathways from variant to trait
 %     pathways, in which pleiotropy is common and there may be little a priori
 %     information on the structure of the causal relationship between traits.
 
-\subsection{Context-dependent eQTL}
-
-\1 Like expression itself, the effects of \glspl{eQTL} are also context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
-    \2 This represents genotype-environment interactions at those eQTL.
-    \2 A non-exhaustive list of environments that \glspl{eQTL} have been found to interact with:
-        \3 sex, age \url{https://academic.oup.com/hmg/article/23/7/1947/655184}
-        \3 ancestry \autocite{dejager2015ImmVarProjectInsights,nedelec2016GeneticAncestryNatural,quach2017LivingAdaptiveWorld}
-        \3 tissue \autocite{nica2011ArchitectureGeneRegulatory,aguet2017GeneticEffectsGene}
-        \3 cell type composition in bulk samples \autocite{westra2015CellSpecificEQTL,zhernakova2017IdentificationContextdependentExpression,glastonbury2019CellTypeHeterogeneityAdipose,kim-hellmuth2019CellTypeSpecific}
-        \3 individual cell type \autocite{dimas2009CommonRegulatoryVariation,dejager2015ImmVarProjectInsights,peters2016InsightGenotypePhenotypeAssociations,chen2016GeneticDriversEpigenetic,kim-hellmuth2019CellTypeSpecific}
-        % TODO: https://www.biorxiv.org/content/10.1101/2020.07.20.212753v1
-        % We identified 26,271 expression quantitative trait loci (QTLs) and 23,121 splicing QTLs in 18 immune cell-types, and analyzed their overlap with trait-associated loci from 72 genome-wide association studies (GWAS). We showed that effects on RNA expression and splicing in immune cells colocalize with an average of 40.4% and 27.7% GWAS loci for immune-related and non-immune traits, respectively. Notably, we found that a large number of loci (mean: 14%) colocalize with splicing QTLs but not expression QTLs.
-        \3 disease status \autocite{peters2016InsightGenotypePhenotypeAssociations},
-        \3 and experimental stimulation (see \cref{subsec:intro_reQTL}).
-
-\1 What molecular mechanisms might facilitate genotype-environment interactions at \glspl{eQTL}?
-    \2 <list of mechanisms related to regulation of gene expression by TFs, enhancers, splice sites etc.>
-        \3 \autocite{ackermann2013ImpactNaturalGenetic}: defines static, conditional, dynamic eQTLs
-        \3 \textcite{fu2012UnravelingRegulatoryMechanisms}: proposes TF-based mechanisms for cis-eQTL (here, define mag, damp, flip) (\cref{fig:intro_reQTLmechs})
-        \3 \textcite{gaffney2013GlobalPropertiesFunctional,rotival2019CharacterisingGeneticBasis}: suggests info on more regulatory layers will help break down transcriptional and post-transcriptional mechanisms
-        % \3 also, priming
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fig_mockup_reQTLs_Screenshot 2020-05-21 at 17.08.49.png}
-    \caption{eqtl mech models: magnify, dampen, flip}
-    \label{fig:intro_reQTLmechs}
-\end{figure}
-
 \1 Given the effect of an eQTL can be starkly different between environments, it is critical to use trait-relevant \gls{eQTL} datasets for target gene prioritisation at GWAS loci.
-    \2 It has already been shown that use of relevant cell-type specific eQTLs increases coloc rates with GWAS hits \autocite{kim-hellmuth2019CellTypeSpecific} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4498151/} \url{https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1}
+    \2 eQTL enrichment in GWAS hits,
+        \3 esp in context specific \autocite{kim-hellmuth2020CellTypeSpecific}
+    \2 It has already been shown that use of relevant cell-type specific eQTLs increases coloc rates with GWAS hits \autocite{kim-hellmuth2020CellTypeSpecific} \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4498151/} \url{https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1}
     \2 Conversely, successful colocalisation of GWAS loci with coloc may prioritise not only the target gene, but the specific environments most relevant to a trait.
     % TODO:  coloc then finemap: also can help fine mapping, as large fx = smaller n required = able to do denser genotypeing by e.g. wgs, so smaller credible sets at much lower sample sizes https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1
-
-\subsection{Immune \Glsfmtlongpl{reQTL}}
-\label{subsec:intro_reQTL}
-
-\1 A important subclass of context-dependent \gls{eQTL} are \gls{reQTL}, where the interacting environment is experimental stimulation \autocite{vandiedonck2017GeneticAssociationMolecular,huang2019GeneticsGeneExpression}.
-    \2 \textit{In vitro}, potential interacting variables such as cell type, and the nature, length, and intensity of stimulation can be precisely controlled.
-
-\1 A seminal early study was conducted by \autocite{barreiro2012DecipheringGeneticArchitecture}, where eQTLs were mapped separately in monocyte-derived dendritic cells before and after 18h infection with \textit{Mycobacterium tuberculosis}.
-    \2 reQTLs were detected for 198 genes, 102 specific to the uninfected state, and 96 specific to the infected state. 
-
-    \2 Since then, \textit{in vitro} immune reQTL studies have been conducted for a variety of 
-    cell types
-        (e.g. primary CD14+ monocytes \autocite{fairfax2014InnateImmuneActivity}) 
-    and stimulations 
-    (IFN$\gamma$ and LPS \autocite{fairfax2014InnateImmuneActivity}).
-
-    \todo{list a few more types and stims from \autocite{fairfax2014InnateImmuneActivity} until \autocite{alasoo2019GeneticEffectsPromoter}}
-    % 	Found reQTLs? So what? Gather take home messages and inspiration for post reQTL analyses
-        % •	reQTL effect characteristation
-        % o	reQTLs can show reversal of effect between conditions (Fairfax et al. 2014)
-        % •	reQTLs vs expression
-        % o	enrichment in DE genes vs eQTLs and non eQTLs (Barreiro et al., 2012)
-        % o	context-dependent eQTL are identified because of both treatment-induced regulatory effects and treatment-inducing gene expression to detectable levels (Fairfax et al. 2014)
-        % •	trans effects
-        % o	reQTLs develop trans-effects on stimulation (Fairfax et al. 2014)
-        % •	reQTLs in pathways
-        % o	Fairfax et al. 2014: reQTLs frequently intersected established canonical pathways of monocyte signaling
-        % •	reQTLs enrichment in relevant GWAS hits
-        % o	Barreiro et al., 2012
-        % o	Fairfax et al. 2014
-        % •	genomic feature enrichment of reQTLs in certain feature classes
-        % o	UTRs (Fu et al., 2012)
-        % •	Overlap of reQTL genes with DE genes
-        % o	Franco et al. 2014
-        % •	Mediation analysis of eQTL -> Ab response (Franco et al. 2014)
-        % •	Colocalisation with GWAS (Kim-Hellmuth et al. 2017)
-        % •	motifs enriched at reQTL binding sites e.g. STATs, IRFs (Caliskan et al. 2015; Davenport et al. 2018)
-        % 	Gather reQTL datasets for coloc
-        % •	Fairfax 2014 stim monocytes
-        % •	CEDAR range of resting cells
-        % •	Schmiedel_2018 stim CD4/8s
-        % •	Alasoo 2018 stim macro
-        % •	… and whole blood meta control
-
-\1 A complementary approach is \textit{in vivo} \gls{reQTL} mapping
-    \2 There are pros to \textit{in vivo} stimulation.
-        \3 the innumerable interactions in the immune system that are absent \textit{in vitro}
-        \2 ability to use whole organism perturbations more suited for in vivo administration
-        \3 ability to get whole organism phenotypes
-        \3 ability to get repeated measures: can reason about change in expression over time
-    \2 Major disadvantages: 
-        \3 the choice of stimulation must be ethical \textit{in vivo}, 
-        \3 and many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be controlled, leading to greater experimental noise (?), and more complex interpretations.
-
-    \2 There are few published \textit{in vivo} \gls{reQTL} studies.
-        \3 \autocite{franco2013IntegrativeGenomicAnalysis}: seasonal \gls{TIV}, whole blood, antigen processing and intracellular trafficking genes, attempted mediation for Ab titres, but concluded they were underpowered
-        % In addition to DIABLO and TRAPPC4 identified above, several genes identified in the epistatic analysis help regulate apoptosis, including FADD,22 ITK23 and REG3A.24
-        \3 \autocite{lareau2016InteractionQuantitativeTrait}: fold-change expression after inactivated vaccinia vaccine, focus was on pairwise epistatic interactions, apoptosis pathways
-        % \3 TODO: \autocite{zhernakova2017IdentificationContextdependentExpression}
-        \3 \autocite{davenport2018DiscoveringVivoCytokineeQTL}: whole blood, IFN status and anti-IL6 drug exposure, reQTL driven by ISRE and IRF4 motifs
-
-\1 <why care about immune reQTLs>
-    \2 Exposes differences in regulatory architecture between conditions. 
-    \2 Does not automatically reveal the mechanisms behind those differences, but provides a starting point for forming mechanistic hypotheses e.g. context-dependent expression
-
-    \2 Nevertheless useful for interpretation of GWAS signals, providing info on likely contexts that mediate the genetic effect
-
-    \2 Immune \textit{in vitro} \gls{reQTL} have been shown to be enriched more so than non-\gls{reQTL} among GWAS loci for immune-related phenotypes such as
-    susceptibility to infectious \autocite{barreiro2012DecipheringGeneticArchitecture,manry2017DecipheringGeneticControl}
-    and immune-mediated diseases \autocite{manry2017DecipheringGeneticControl,kim-hellmuth2017GeneticRegulatoryEffects}.
-        % TODO
-        % \3 some enrichments in specifically stimulated states https://www.nature.com/articles/s41588-019-0505-9
-
-        % TODO
-    % davenport
-    % eQTL interactions with drug interventions or other therapeutically relevant physiologic variables are important to identify as they can point to regulatory mechanisms, such as transcription factors or subclasses of enhancers, acting downstream of the environmental condition of interest and driving groups of eQTL interactions. The IFN status eQTL interactions we identified provide support for this approach.
-
-    \2 Not yet clear whether \textit{in vivo} reQTL have any utility on top of \textit{in vitro} reQTL for interpreting GWAS loci: not that many studies, and complex interpretations.
-
-    \2 Nevertheless, as the number of cell types systems and stimulations both \textit{in vitro} and \textit{in vivo} increases, the number of known reQTLs continues to grow.
 
 \section{Phenotypes of immune response}
 
@@ -546,10 +573,11 @@ to help untangle the multiplex of possible causal pathways from variant to trait
 not only due to the abundance of immune cells easily accessible in peripheral blood, amenable to separation (e.g. FACS) and stimulation;
 but because the immune system is specialised for responding to environmental perturbations in the form of infections.
     % TODO: janeway ch1 and 2
+    \2 two major components, innate and adaptive.
     \2 The immune system consists of many cell types: lymphoid and myeloid linages
     \todo{specifically introduce cell types mentioned in later chapters}
         \3 pbmcs
-    \2 two major components, innate and adaptive.
+        \3 MHC
     \2 complex interactions through cell surface receptors and signalling molecules
 
 

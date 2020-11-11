@@ -172,6 +172,7 @@
     \2 rather than conditioning on cell proportion, effectively looking at the subset of data with same cell proportions, just control them
     \2 If you want a mechanistic interpretation, need to control
     \2 single-cell RNAseq has the advantage of getting expression and composition simultaneously, and can be comparable in cost to bulk on FACS sorted cells \url{https://arxiv.org/ftp/arxiv/papers/1909/1909.12550.pdf}
+        \3 but lower coverage of the transcriptome due to drop out, and smaller sample sizes
     \2 do DGE/map eQTLs within each cell type 
         \3 combines advantage of in vivo stimulation with the controlled cell composition of in vitro studies
     \2 can also be used to annotate bulk reQTLs such as those found in ch3 e.g. find the likely cell types for bulk reQTL effects by looking at eGene expression in single cell data \autocite{devries2020IntegratingGWASBulk}
