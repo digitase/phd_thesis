@@ -154,12 +154,14 @@
         as there is no difference between genotypes at baseline,
         but there is after perturbation.
         \todo{I cannot figure out what sort of conditioning would need to be done to block this sort of effect even if you had perfect cell proportion measurements}
+        % NOTE: protected from vaccine -> E and genotype -> E reverse causality, but still...
     \2 for genotype to explain more variance in bulk expression after perturbation, there are multiple compatible mechanisms
         \3 a cell type with a cell type-specific eQTL increases in proportion (recruitment) 
         \3 a gene with an eQTL increases in expression (activation or recruitment depending on if you condition by cell proportions)
         \3 the effect of a cell type-specific eQTL increases within that cell type (activation)
     \2 one could imagine crude ways to falsify each hypothetical model e.g. interaction/coloc with each cell type (ch3), but always at risk of missing a cell type
     \2 the challenge is distinguishing these scenarios in bulk in vivo data to form mechanistic hypotheses for expression response
+    % \2 Not yet clear whether \textit{in vivo} reQTL have any utility on top of \textit{in vitro} reQTL for interpreting GWAS loci: not that many studies, and complex interpretations.
 
 \1 future studies should consider alternatives to bulk before they can fully take advantage of benefits of in vivo design
     % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
@@ -242,8 +244,78 @@
     \2 the regression analyses in this thesis:
         \3 DGE describes expression response association with phenotypic response (such as Ab titre) 
         \3 reQTLs describe genotype association with expression response
+    % \2 rather than simple overlap,
+    % \2 but the point is to learn if there are genetic effects on response trait VIA expression response, otherwise you'd just do the GWAS
     \2 Need a model that encodes causal assumptions integrating multiple data layers: genotype -> gene expression -> phenotypic response
     \2 there are several families of complementary methods that integrate multiple data layers
+
+% TODO: read this intro https://www.biorxiv.org/content/10.1101/2020.07.01.182097v1.full.pdf
+%
+% TODO: be specific on what sort of pleiotropy MR can distinguish
+%
+% TODO:
+% https://www.nature.com/articles/s41588-020-0682-6?s=09
+% Predicted associations between proteins and phenotypes may indicate four explanations: causality, reverse causality, confounding by LD between the leading SNPs for proteins and phenotypes or horizontal pleiotropy (Supplementary Fig. 3). Given these alternative explanations, we conducted a set of sensitivity analyses to evaluate whether each MR association reflected a causal effect of protein on phenotype: tests of reverse causality using bidirectional MR22 and MR Steiger filtering;23,24 heterogeneity analyses for proteins with multiple instruments25; and colocalization analyses26 to investigate whether the genetic associations with both protein and phenotype shared the same causal variant (Fig. 1).
+%
+% TODO:
+% https://www.sciencedirect.com/science/article/pii/S0168952520302092?s=09
+% In the past few years different methods to jointly evaluate eQTL and GWAS data have been developed. One class of approaches, broadly termed colocalization, focuses on the associated loci themselves. Colocalization approaches test the hypothesis that a shared variant causally impacts on both the disease and gene expression [12., 13., 14., 15.], providing stronger evidence that the regulatory effect underlies the disease mechanism. However, colocalization alone cannot distinguish between a variant that influences expression and disease separately (‘pleiotropy’) and one that affects disease directly via a regulatory effect (‘mediation’) [16]. A complementary set of methods focuses on the associated genes instead of the specific loci. These approaches test the association between genetically influenced gene expression levels and disease, using eQTL data to construct a predictor of gene expression that can be evaluated for association with disease in GWAS studies. In essence, reference eQTL data, that relate genotypes to expression, are employed to interpret GWAS data that relate genotypes to disease but have no direct measurements of gene expression. Notable examples include PrediXcan and TWAS, which compare predicted expression with disease status to prioritize disease genes, and Mendelian randomization, which uses eQTL data as an instrumental variable for two-step least-squares regression to evaluate the effect of gene expression on disease [17., 18., 19., 20.].
+%
+%
+% Other types of methods:
+% Summary: https://sashagusev.github.io/2017-10/twas-vulnerabilities.html
+% transcriptome association (e.g. TWAS)
+%    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6342197/
+%    As TWAS methods were originally proposed as tests for association between
+%    local genetically regulated component of expression and disease with no
+%    causality guarantees [Gamazon, et al. 2015; Gusev, et al. 2016; Mancuso,
+%    et al. 2017a; Mancuso, et al. 2017b; Zhu, et al. 2016], it remains unclear
+%    whether and when TWAS can be interpreted as valid tests of causality.
+%
+%     https://www.nature.com/articles/s41576-018-0020-3
+%     Transcriptome-wide association studies (TWAS) integrating GWAS and eQTLs
+%     data have been proposed to unravel gene–trait associations7,9,10. However,
+%     although these studies aim to identify genes whose (genetically predicted)
+%     expression is significantly associated to complex traits, they do not aim
+%     to estimate the strength of the causal effect and are unable to distinguish
+%     causation from horizontal pleiotropy (i.e., when a genetic variant
+%     influences multiple phenotypes independently).
+%
+%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5986723/
+%     Like other transcriptome-wide association studies (TWASs),32 PrediXcan can be
+%     considered a weighted burden test, where each variant in a gene set is weighted
+%     by its additive allelic effect on expression.
+%
+% PPV of TWAS is low for assigning causal genes
+% https://pubmed.ncbi.nlm.nih.gov/31978332/
+%
+% EDS Framework Complicates eQTL Prioritization of Genes at GWAS Loci
+% https://www.cell.com/ajhg/fulltext/S0002-9297(20)30012-4
+%
+% Mendelian randomisation (e.g. MR-Egger, SMR) under certain assumptions
+%     hemani2018EvaluatingPotentialRole
+%     Of prime focus among the many limitations to MR is the unprovable assumption
+%     that apparent pleiotropic associations are mediated by the exposure (i.e.
+%     reflect vertical pleiotropy), and do not arise due to SNPs influencing the two
+%     traits through independent pathways (‘horizontal pleiotropy’)
+%
+% Mediation
+%     hemani2018EvaluatingPotentialRole
+%     Genetic mediation-based analyses (37–40) are more liable to problems of
+%     confounding and measurement error than MR (41–43), but could potentially
+%     separate between vertical and horizontal pleiotropy in some scenarios.
+%     Use genetic colocalization to eliminate possibility distinct causal variants
+%     (25,30,31); if instruments are available for the outcome then test the reverse
+%     causal effect (110); if not use MR Steiger (43); use genetic mediation-based
+%     analysis (40,111) to try to separate horizontal and vertical pleiotropy
+%
+%     millstein2009DisentanglingMolecularRelationships
+%     Causal effect estimates often
+%     considered in 'Mendelian randomization' approaches [11], can be confounded by
+%     pleiotropic effects and reverse causation [12], thus, these approaches are not
+%     generally considered for problems such as reconstructing transcript regulatory
+%     pathways, in which pleiotropy is common and there may be little a priori
+%     information on the structure of the causal relationship between traits.
 
 \1 <Mendelian randomisation>
     \2 <explain the analogy to RCTs: segregation should be independent of env factors>
@@ -262,9 +334,13 @@
     \2 IV2 violations are not likely, as genetic variants are unlikely to be associated with environmental confounders \todo{citation needed, try daveysmith2020MendelLawsMendelian}
     \2 IV3 violation is most likely
 
+% coloc distinguishes pleiotropy from linkage, but not vertical pleiotropy (mediation) from horizontal pleiotropy (independent effects on trait and expression).
+% As colocalisation of a \gls{GWAS} loci with \glspl{eQTL} is is necessary but not sufficient for mediation,
+% it should be supported by complementary lines of evidence to help untangle the multiplex possible causal pathways from variant to trait \autocite{hemani2018EvaluatingPotentialRole}.
 \1 <coloc>
     \2 IV3 violated by linkage: if the instrument eQTL is actually not causal, but simply correlated with another variant that causally affects phenotype
         \3 use colocalisation methods to test whether the same variants are associated with E and phenotype \autocite{hemani2018EvaluatingPotentialRole}
+        \3 described in ch1, and used in ch3
 
 \1 <mediation analysis>
     \2 IV3 violated by horizontal pleiotropy: instrument eQTL causes expression and phenotype independently (e.g. by also being an eQTL for another gene whose expression causally affects pheno), such that expression and phenotype are not causally related
@@ -307,6 +383,9 @@
     % independently (horizontal pleiotropy).
 
 \section{Triangulation}
+
+% TODO: read Where Are the Disease-Associated eQTLs?
+% https://www.cell.com/trends/genetics/fulltext/S0168-9525(20)30209-2
 
 \1 Triangulation is the use of methods with different assumptions, biases, and limitations that address the same question \autocite{munafo2018RobustResearchNeeds}
     \2 discussed above is one example of triangulation, using complementary methods MR, colocalisation, mediation analysis to tease apart causal mechanisms from G -> E -> pheno
