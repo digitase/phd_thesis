@@ -446,9 +446,9 @@ However, ethical requirements can limit sample size and choice of stimulation.
 Many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be controlled, 
 potentially leading to greater experimental noise, and complicating interpretation of results.
 
-\subsection{\Glsfmtshortpl{eQTL} for gene prioritisation}
+\subsection{Gene prioritisation using \glsfmtshortpl{eQTL}}
 
-\glspl{eQTL} are enormously valuable for target gene prioritisation after \gls{GWAS}.
+\Glspl{eQTL} are enormously valuable for target gene prioritisation after \gls{GWAS}.
 They propose both target gene and mechanism of action, where the effect of variant on complex trait is mediated through expression.
 \todo{Prioritisation of context is mentioned shortly.}
 \Gls{GWAS} variants are indeed enriched for \glspl{eQTL} \autocite{nicolae2010TraitAssociatedSNPsAre}, but care must be taken to avoid false positives due to the abundance of \glspl{eQTL}.
@@ -480,38 +480,112 @@ The increasing number of context-dependent datasets available for large-scale co
 
 \subsection{An overview of the immune system}
 
-\1 essential for defense, but dysregulated
-    % TODO: janeway ch1 and 2
-    \2 The immune system consists of complex interaction of many cell types
-    \2 two lineages, lymphoid and myeloid linages
-    \2 two major arms, innate and adaptive.
-    \todo{specifically introduce cell types mentioned in later chapters}
-        \3 pbmcs
-        \3 MHC
-        \3 humoral and celluar response
-    \2 complex interactions through cell surface receptors and signalling molecules
+Immunology began as study of host defense against infection, distinguishing self from non-self \autocite{murphy2016JanewayImmunobiology}.
+The immune system is also involved in pathogenesis of allergic, autoimmune, and other immune-mediated diseases.
+This subsection provides a basic overview of parts of the immune system relevant to this thesis.
+
+% <two arms>
+The two major arms of the immune response are the innate and adaptive response.
+The innate response is rapid and non-specific, 
+occurring in the first few minute to days after the initial (primary) exposure to infection.
+This triggers the adaptive response, which takes days to weeks to develop, 
+but delivers a powerful pathogen-specific response capable of eliminating pathogens that have evaded the innate response.
+The adaptive response can also create immunological memory lasting years to decades,
+where re-exposure to the same pathogen induces a faster and more powerful adaptive response%
+\footnote{
+    There is increasing evidence the innate immune system also has a form of immunological memory \autocite{dominguez-andres2020SpecificsInnateImmune}.
+}.
+Both arms involve complex interaction of many cell types through surface receptors and signalling molecules.
+
+% <two lineages>
+Immune cell types differentiate from common myeloid progenitor or common lymphoid progenitors,
+which themselves are descended from pluripotent \glspl{HSC} in the bone marrow.
+By in large, the cells of the innate response are of the myeloid lineage, 
+and the cells of the adaptive response are of the lymphoid lineage.
+Immune cells are also called leukocytes or white-blood cells, 
+as many types can be found in peripheral blood, 
+but certain types are more prominent in tissues or the lymphatic system.
+
+% <innate cell types>
+% Macrophages, neutrophils, and dendritic cells are sensor cells
+Innate response begins with the detection of pathogens by phagocytotic sensor cells---
+primarily neutrophils, tissue-resident macrophages, and \glspl{DC}.
+These cells express \glspl{PRR} that recognise conserved \glspl{PAMP} not present in host cells,
+% "Some PRRs are transmembrane proteins, such as the Toll-like receptors (TLRs) that detect PAMPs derived from extracellular bacteria or bacteria taken into vesicular pathways by phagocytosis.
+% Other PRRs are cytoplasmic proteins, such as the NOD-like receptors (NLRs) that sense intracellular bacterial invasion."
+then secrete small proteins (cytokines) that trigger the inflammatory response:
+a massive migration of multiple cell types from blood into infected tissues.
+% Inflammation is usually neutrophils recruited first, then monocytes.
+Recruited neutrophils clear pathogens by phagocytosis, and secrete antimicrobial molecules by degranulation.
+\gls{NK} cells detect and kill virus-infected and tumour cells.
+Circulating monocytes migrate and differentiate into macrophages and \glspl{DC}.
+Macrophages perform phagocytosis, modulate inflammation, and can also engage in antigen-presentation,
+but it is \gls{DC} that are the most specialised \glspl{APC}.
+% Antigen-presenting cells fall into two categories: professional and non-professional.
+% Those that express MHC class II molecules along with co-stimulatory molecules and pattern recognition receptors are often called professional antigen-presenting cells.[1]
+% The non-professional APCs express MHC class I molecules.
+Antigen-presentation is the primary link between the innate and adaptive responses.
+% "The primary lymphoid organs are the bone marrow and the thymus, an organ in the upper chest.
+% The peripheral lymphoid organs comprise the lymph nodes, the spleen, and the mucosal lymphoid tissues of the gut, the nasal and respiratory tract, the urogenital tract, and other mucosa."
+% Antigen-presentation happens in peripheral lymphoid organs.
+
+% Lymphocytes include natural killer cells (which function in cell-mediated, cytotoxic innate immunity),
+% T cells (for cell-mediated, cytotoxic adaptive immunity),
+% and B cells (for humoral, antibody-driven adaptive immunity).[2][3]
+% They are the main type of cell found in lymph, which prompted the name "lymphocyte".[4]
+The main forces of the adaptive response comprise B and T lymphocytes.
+% B and T cells are sources from bone marrow common lymphoid progenitors.
+% B and T cells complete their development to naive lymphocytes in the bone marrow and thymus respectively.
+Naive lymphocytes express antigen receptors that recognise specific antigens.
+When they encounter this antigen, they activate, proliferate (clonal expansion), then differentiate into effector cells.
+To initiate adaptive response,
+% CD8 and CD4 function in antigen recognition by recognizing different regions of MHC molecules and by being involved in the signaling of the T-cell receptor that is engaged with its antigen. Thus, CD4 and CD8 are known as co-receptors and they provide a functional difference between CD8 and CD4 T cells,
+% Because CD8 recognizes a region of the MHC class I protein while CD4 recognizes a region of MHC class II protein, the two co-receptors functionally distinguish T cells. Therefore, CD8 T cells selectively recognize peptides that are bound to MHC class I molecules, while CD4 T cells recognize peptides presented by MHC class II.
+% MHC polymorphism affects antigen recognition by T cells by influencing both peptide binding and the contacts between T-cell receptor and MHC molecule.
+CD4 (helper) T cells recognise antigen fragments presented in a complex with \gls{MHC} class II on the surface of \glspl{APC}.
+% Binding requires TCR (CD3), CD4, MHC class II and costimulatory factors.
+CD4 T cells then differentiate into several subsets that activate and regulate other cell types, including macrophages, CD8 T cells and B cells.
+Activated CD8 (cytotoxic) T cells recognise antigens presented by \gls{MHC} class I on infected cells and directly kill the cell.
+Activated B cells differentiate into plasma cells that secrete large quantities of antibodies that which identify and neutralise pathogens by specific binding to an epitope on the target antigen.
+Antibody-mediated responses are also called humoral immunity,
+whereas T cells and innate immune responses comprise cell-mediated immunity.
+A small subset of activated B and T cells will become memory cells, responsible for immunological memory.
 
 \subsection{High-throughput immunology}
 
-% TODO: read davis 2018 and 2020
-\1 systems immunology systems rather than reductionist approach to study a intricate system
-\1 omics studies of interactions with and between all these layers of the immune system come under the broad umbrella of systems immunology
-% TODO: longitudinal: rules out reverse causal by establishing temporal
-    \2 Longitudinal designs and high-throughput technologies to quantify the components of the immune system at baseline, and in response to perturbations.
-        \3 genomics, epigenomics, transciptomics, proteomics, cell counts
-    \2 Whatever the perturbation, just like for most phenotypes, immune response varies between individuals
-    \2 Main types of study are descriptive:
-        \3 finding correlations between the components of the immune system, and with phenotypic response
-    \2 predictive:
-        \3 Use assayed information to predict phenotypic response from molecular assays
-    \2 causal:
-        \3 Mechanisms of response are important to understand e.g. 
-            \4 what mechanisms promote effective responses to pathogens and vaccines
-            \4 impede dysregulated responses that lead to immune-mediated disease such as IBD.
-    \2 Natural genetic variation can be leveraged, representing small scale perturbations that are causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
-    % TODO: Writ large
-        \3 Overall estimates of the heritability of many immune parameters, such as cell composition and serum protein levels, lies between 20-40\% \autocite{liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,patin2018NaturalVariationParameters,liston2018OriginsDiversityHuman}
-        \3 Genetic regulation is more important for the innate immune system than the adaptive immune system \autocite{patin2018NaturalVariationParameters}.
+% TODO: read pulendran2020ScienceMedicineHuman
+To understand the immune system and its intricate interactions,
+\enquote{systems immunology} proposes a holistic rather than reductionist approach \autocite{davis2017SystemsImmunologyJust,villani2018SystemsImmunologyLearning,pulendran2020ScienceMedicineHuman}.
+The basic principle is the same: experimentally perturb the system and observe its response.
+Drugs and vaccines can be used as safe and synchronised perturbations.
+A range of high-throughput technologies can be applied to measure response at many layers of the immune system (\autoref{fig:intro_sysImmunology}).
+Longitudinal designs are common, profiling the transition from baseline into innate and adaptive response.
+The complexity of the immune response still presents a major challenge:
+the richness of sampling required often restricts sample size due to cost and logistics.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/1-s2.0-S2452310018301197-gr1/1-s2.0-S2452310018301197-gr1_lrg.jpg}
+    \caption{Systems imm}
+    \label{fig:intro_sysImmunology}
+% TODO: "Reprinted from Publication title, Vol /edition number, Author(s), Title of article / title of chapter, Pages No., Copyright (Year), with permission from Elsevier [OR APPLICABLE SOCIETY COPYRIGHT OWNER]." Also Lancet special credit - "Reprinted from The Lancet, Vol. number, Author(s), Title of article, Pages No., Copyright (Year), with permission from Elsevier."
+\end{figure}
+
+There are three major aims of systems immunology.
+Initial studies of a particular response phenotype are often descriptive,
+aiming to find correlations between the components of the immune system and other components, or with phenotypic response.
+Predictive studies then evaluate the ability to use relevant measurements to predict individual response.
+Feature sets that are molecular phenotypes (e.g. gene expression) with validated predictive accuracy are known as molecular signatures.
+Causal inference is the third and most difficult aim.
+Fortunately, the heritability of immune parameters (e.g. cell counts, surface marker expression, serum protein levels) is substantial, 
+between \SIrange{20}{40}{\percent} \autocite{liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,patin2018NaturalVariationParameters,liston2018OriginsDiversityHuman},
+with greater heritability for innate versus adaptive immune parameters \autocite{patin2018NaturalVariationParameters}.
+Much akin to \gls{GWAS} and \gls{QTL} studies, to identify causal links in the immune system,
+one can leverage genetic variation as naturally-occurring perturbations \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
+Controlled variation can also be systematically generated by RNA interference or genome editing \autocite{yosef2016WritLargeGenomic}.
+What interventions can be made to promote effective response to pathogens and vaccines,
+and impede pathways that lead to immune dysregulation?
+Obtaining a causal understanding is essential for clinical translation,
 
 % \subsection{Genetic effects on the healthy immune system}
 %
@@ -531,65 +605,59 @@ The increasing number of context-dependent datasets available for large-scale co
 % \1 given genetic control of healthy system, perhaps not surprising that immune response to perturbation traits are also complex
 %     \2 also, as discussed in the context section above, context-dependent genetic effects may not be apparent in the baseline healthy state, stimulation is required
 %     \2 since a central goal of systems immunology is to establish causal relationships between the many components of the immune system
-%         \3 Natural genetic variation can be leveraged, representing small scale perturbations that are causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
+%         \3 Natural genetic variation can be leveraged as natural perturbations, representing small scale perturbations that are causally anchored \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
 %     \2 In this context, immune in vivo reQTL studies can be considered as controllable perturbation studies of the activated immune system
 %         \3 Studies of natural infection are complicated by e.g. determining exposure, ethics, dose
 %     \2 Simultaneously provides insight in to the biology behind those specific responses
 %     \2 Two immune perturbations considered in this thesis are vaccines and biologic drugs.
 
-        % TODO:
-% \subsection{Leveraging perturbations}
-        % natural and experiemtnal
-
-\subsection{Immune response to vaccination}
+% \subsection{Immune response to vaccination}
 % NOTE: technically vaccines are biologics
-\todo{this is a general systems vaccinology review. specific flu studies are reviewed in ch2}
-
-\1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
+% \todo{"Immune response to vaccination" will be merged with ch2 intro.}
+% \todo{"Immune response to anti-TNFs" will be merged with ch4 intro.}
+%
+% \1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
     % TODO: basic principles here, then deep dive into specifics of the Pandemrix vaccine type
-    \2 <general summary of biology of vaccine response, specific flu vaccine biology goes in ch2>
-        \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
-        \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
-        \3 Non-Ab mediated responses [...]
+%     \2 <general summary of biology of vaccine response, specific flu vaccine biology goes in ch2>
+%         \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
+%         \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
+%         \3 Non-Ab mediated responses [...]
         % \3 <a bit more on innate/adaptive distinction, B/T lineage distinction>
-    \2 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
-    \2 But traditional vaccine dev is empirical (classical "isolate, inactivate, inject" paradigm), often successful vaccine dev does not offer insights into the mechanisms of efficacy 
-    \2 The immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood.
+%     \2 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
+%     \2 But traditional vaccine dev is empirical (classical "isolate, inactivate, inject" paradigm), often successful vaccine dev does not offer insights into the mechanisms of efficacy
+%     \2 The immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood.
     % <For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.>
-    \2 A vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
-    Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno compromised patients, ethnically-diverse populations, and developing countries.
-        \3 e.g. variable vaccine efficacy of rotavirus vaccine
-        \3 e.g. variable efficacy of flu vaccine \url{https://www.sciencedirect.com/science/article/pii/S1473309918304900}
-
+%     \2 A vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
+%     Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno compromised patients, ethnically-diverse populations, and developing countries.
+%         \3 e.g. variable vaccine efficacy of rotavirus vaccine
+%         \3 e.g. variable efficacy of flu vaccine \url{https://www.sciencedirect.com/science/article/pii/S1473309918304900}
+%
 % TODO: figure on innate phase then adaptive response to vacc
-
+%
 % TODO: first year report for sysvacc intro
-\1 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
+% \1 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
     % \2 These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination.
     % \2 Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified.
-    \2 Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza ...], and also to vaccine candidates against [HIV, malaria ...], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
-    \todo{define what a signature is in terms of correlation and prediction}
-        \3 <add more references to lists [...] of what vaccines have been studied>
+%     \2 Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza ...], and also to vaccine candidates against [HIV, malaria ...], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
+%     \todo{define what a signature is in terms of correlation and prediction}
+%         \3 <add more references to lists [...] of what vaccines have been studied>
         % TODO use sysvacc\_review\_docx
-    \2 Has revealed many influences on vaccine response (age, sex, dose, adjuvants, expression signatures, microbiome, strain etc.)
-    \2 So far, studies have been mainly descriptive and predictive.
-    \2 Identifying causal relationships can inform more mechanism-based and cost-effective design (rational paradigm), and the move towards personalised vaccinology.
-    \2 Studies of impact of host genetics on response are underrepresented \autocite{linnik2016ImpactHostGenetic}
-
-\1 Like for other complex traits, from twin studies it's known that vaccine Ab responses are heritable.
-    \2 Moving out of the candidate gene era (e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/}) into GWAS.
-    % TODO: are there mendellian associations?
-    \2 Heritability of vaccine response phenotypes \autocite{oconnor2013CharacterizingVaccineResponses}
-    \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
-    % TODO: add brodin twin study
-    \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
-    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
-    \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
-
-\subsection{Immune response to anti-TNF biologics}
-\todo{cut this section (???)}
-<Considering whether I need a section here on anti-TNFs analogous to the above systems vaccinology section. Much anti-TNF response literature is already reviewed in chapter 4 introduction though, so maybe no point duplicating.>
+%     \2 Has revealed many influences on vaccine response (age, sex, dose, adjuvants, expression signatures, microbiome, strain etc.)
+%     \2 So far, studies have been mainly descriptive and predictive.
+%     \2 Identifying causal relationships can inform more mechanism-based and cost-effective design (rational paradigm), and the move towards personalised vaccinology.
+%     \2 Studies of impact of host genetics on response are underrepresented \autocite{linnik2016ImpactHostGenetic}
 %
+% \1 Like for other complex traits, from twin studies it's known that vaccine Ab responses are heritable.
+%     \2 Moving out of the candidate gene era (e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/}) into GWAS.
+    % TODO: are there mendellian associations?
+%     \2 Heritability of vaccine response phenotypes \autocite{oconnor2013CharacterizingVaccineResponses}
+%     \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
+    % TODO: add brodin twin study
+%     \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
+    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
+%     \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
+
+% \subsection{Immune response to anti-TNF biologics}
 %
 % TODO: merge this into intro ch4
 % \1 <quick anti-tnf summary, specific ADA/IFX biology goes in ch4>
@@ -631,26 +699,33 @@ The increasing number of context-dependent datasets available for large-scale co
 %
 % \1 a lot of studies also done for CD and IBD (described in ch4)
 
-\section{Thesis overview}
+\section{Thesis outline}
 
-\1 My thesis focuses on two specific instances of in vivo immune response: antibody response to pandemic influenza vaccine in healthy individuals, and clinical response to biologic anti-TNF therapy for CD patients.
-\1 <By chapter context-content-conclusion overview.>
-    \2 <ch 2: systems vaccinology study of Pandemrix>
-        \3 context: existing Sobolev study of expression differences between pandemic flu vaccine R/NR had small sample size and binary phenotype
-        \3 content: meta-analysis of existing array with new RNAseq data and continuous phenotype
-        \3 conclusion: distinct innate and adaptive expression response at d1 and d7; heterogeneity between array and RNAseq. significant expression differences between R/NR in meta-analysis at the gene set level
-    \2 <ch 3: in vivo reQTL study of Pandemrix>
-        \3 context: relatively few studies have assessed the impact of genetic variation on expression response to flu vaccine
-        \3 content: reQTL analysis for flu vaccine at d0, d1, d7. many reQTLs including sign flips. no particular gene set enrichments. evidence of cell type interactions at top hits.
-        \3 conclusion: difficult to separate out modifying effect of cell composition. this may be a fundamental flaw in the study design
-    \2 <ch 4: systems immunology and reQTL study of response to anti-TNF treatment in CD>
-        \3 context: studies on expression signatures of anti-TNF PNR have been small
-        \3 content: R/NR comparison with larger n, at baseline, w14, and over time. reQTL analysis over 4 timepoints. 
-        \3 conclusion: a few hits for PNR at baseline. much stronger expression differences stronger at w14, then maintained until w54. Weak evidence for reQTLs, probably due to smaller magnitude of cell proportion changes over time vs the previous chapter.
-    \2 <discussion: limitations, future outlook>
-        \3 main themes and parallels tying together the thesis
-        \3 shared set of limitations permeating all chapters
-        \3 recommendations for future analyses and study design
-        \3 future outlook for the fields of systems studies of immune response% vaccinogenomics and pharmacogenomics
+This thesis examines longitudinal response to \textit{in vivo} immune perturbations by vaccine and drug.
+\autoref{ch:hird_DGE} is a descriptive \gls{DGE} study of transcriptomic and antibody responses to pandemic influenza vaccine in the \gls{HIRD} cohort of healthy adults.
+\autoref{ch:hird_DGE} integrates \gls{HIRD} genotype data to map the regulation of expression responses with an \textit{in vivo} \gls{reQTL} design.
+\autoref{ch:hird_DGE} mirrors the design of the previous two chapters, 
+exploring clinical response to biologic anti-\gls{TNF} therapy for \gls{CD} patients \gls{PANTS} cohort.
+Finally, \autoref{ch:hird_DGE} presents an overview of shared themes and limitations,
+and provides recommendations for future analyses and study designs for immune response phenotypes.
+
+% not so ambitious as systems immunolgoy
+% \1 <By chapter context-content-conclusion overview.>
+%     \2 <ch 2: systems vaccinology study of Pandemrix>
+%         \3 context: existing Sobolev study of expression differences between pandemic flu vaccine R/NR had small sample size and binary phenotype
+%         \3 content: meta-analysis of existing array with new RNAseq data and continuous phenotype
+%         \3 conclusion: distinct innate and adaptive expression response at d1 and d7; heterogeneity between array and RNAseq. significant expression differences between R/NR in meta-analysis at the gene set level
+%     \2 <ch 3: in vivo reQTL study of Pandemrix>
+%         \3 context: relatively few studies have assessed the impact of genetic variation on expression response to flu vaccine
+%         \3 content: reQTL analysis for flu vaccine at d0, d1, d7. many reQTLs including sign flips. no particular gene set enrichments. evidence of cell type interactions at top hits.
+%         \3 conclusion: difficult to separate out modifying effect of cell composition. this may be a fundamental flaw in the study design
+%     \2 <ch 4: systems immunology and reQTL study of response to anti-TNF treatment in CD>
+%         \3 context: studies on expression signatures of anti-TNF PNR have been small
+%         \3 content: R/NR comparison with larger n, at baseline, w14, and over time. reQTL analysis over 4 timepoints.
+%         \3 conclusion: a few hits for PNR at baseline. much stronger expression differences stronger at w14, then maintained until w54. Weak evidence for reQTLs, probably due to smaller magnitude of cell proportion changes over time vs the previous chapter.
+%     \2 <discussion: limitations, future outlook>
+%         \3 main themes and parallels tying together the thesis
+%         \3 shared set of limitations permeating all chapters
+%         \3 recommendations for future analyses and study design
 
 \end{outline}
