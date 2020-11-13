@@ -18,23 +18,16 @@ Virtually all phenotypic traits are heritable to some degree,
 and twin studies provide upper bounds on this heritability by partitioning phenotypic variation into genetic and environmental components \autocite{polderman2015MetaanalysisHeritabilityHuman}.
 
 Genetic variation presents a unique opportunity to probe the causal molecular mechanisms underlying phenotypes.
-A mainstay of the field of human genetics is uncovering the specific genetic variants that contribute to the heritability of phenotypes through statistical association of variants and phenotypes.
-Information encoded in the genome can have phenotypic consequences only after flowing through multiple molecular layers (\cref{fig:intro_sysBio}).
+Information encoded in the genome can have phenotypic consequences only after flowing through multiple molecular layers.
 % NOTE: There are many mechanisms not explicitly mentioned here: PTMs, epigenetic reg, reverse transcription, RNA editing, but the predominant flow of info holds.
 % Also see 
 % Koonin, E.V. Does the central dogma still stand?. Biol Direct 7, 27 (2012). https://doi.org/10.1186/1745-6150-7-27
-This guiding principle is the central dogma, whereby the flow is directed from DNA to RNA to protein via transcription and translation.
+This guiding principle is the central dogma, whereby the flow is directed from DNA to RNA to protein, via transcription and translation.
 Barring somatic mutation, an individual's genome is fixed at conception, thus providing a causally upstream anchor that can be measured with relatively little error.
 % NOTE: This was why MR was introduced in the context of family-based designs, where parent and child are of the same ancestry \autocite{daveysmith2020MendelLawsMendelian}
+A mainstay of the field of human genetics is uncovering the specific genetic variants that contribute to the heritability of phenotypes through statistical association of variants and phenotypes.
 Although not immune to population-level confounders like stratification,
 genetic association has intrinsic resistance to reverse causality, an issue that permeates observational studies on the causes of human phenotypes.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fig_mockup_systemsBio_Screenshot 2020-05-21 at 17.08.47.png}
-    \caption{Information flow through the biological system.}
-    \label{fig:intro_sysBio}
-\end{figure}
 
 \section{Genetic association studies of complex traits}
 \todo{I agree the intro is built around genetics. I have tried to keep the genetics parts concise while elaborating on gene expression more in the later two sections.}
@@ -64,41 +57,47 @@ contiguous stretches of the genome passed through generations via meiotic segreg
 The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and breaking apart haplotypes into shorter ones over evolutionary time.
 Variants that are physically close on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate on the same haplotype (genetic linkage).
 Genetic linkage is one source of \gls{LD}: the non-random association of alleles at two variants, differing from expectation based on their population frequencies and the law of independent assortment.
-% LD decay takes a really long time, but there are also forces at work that generate or maintain it e.g. drift, selection, admixture, population subdivision, bottlenecks \autocite{slatkin2008LinkageDisequilibriumUnderstanding,visscher2012FiveYearsGWAS}.
 \gls{LD} can be quantified by $r^2$, the squared correlation coefficient between alleles in that specific population \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
+% LD decay takes a really long time, but there are also forces at work that generate or maintain it e.g. drift, selection, admixture, population subdivision, bottlenecks \autocite{slatkin2008LinkageDisequilibriumUnderstanding,visscher2012FiveYearsGWAS}.
 
 Recombination events are not distributed uniformly throughout the genome.
-% TODO: Figure 3: The mosaic structure of human genetic variation. https://www.nature.com/articles/nature01400
-% also see: The Structure of Haplotype Blocks in the Human Genome for original data
 The genome is a mosaic of haplotype blocks delimited by recombination hotspots, 
 characterised by strong \gls{LD} within blocks, and little \gls{LD} between blocks \autocite{wall2003HaplotypeBlocksLinkage,theinternationalhapmapconsortium2007SecondGenerationHuman} (\cref{fig:intro_haplotypeBlocks}).
 The structure of correlated haplotypes reflects a population's unique evolutionary history, and can be used to trace the demography of populations back through time \autocite{karczewski2020AnalyticTranslationalGenetics}.
 
-% TODO
+% NOTE: alternative figure
 % Figure S1. Haplotype Block Organization in Human Populations
 % https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020121
 % https://doi.org/10.1371/journal.pgen.0020121.sg001
 % (3.6 MB TIF)
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fig_mockup_haplotypeBlocks_Screenshot 2020-05-21 at 17.08.33.png}
-    \caption{The genomic mosaic: block-like \gls{LD} structure of the genome}
+    \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_01/paabo2003MosaicThatOur/41586_2003_Article_BFnature01400_Fig3_HTML.png}
+    \caption{
+        \textbf{The mosaic structure of human genetic variation.}
+        Large parts of the genome can be divided into haplotype blocks between \SIrange{5}{200}{\kilo\bp} in length, with strong intra-block \gls{LD}.
+        For each block, three to seven common haplotypes (indicated by different colors) represent the majority of variation found in humans.
+        An individual carries two haplotypes per block, one inherited from each parent.
+        The exact structure and diversity of the blocks varies between populations.
+        Information on the haplotypes, their locations in the genome, and their frequencies in different populations form a \enquote{haplotype map} of the genome.
+        Figure reprinted by permission from Springer Nature: Springer Nature, Nature, \textcite{paabo2003MosaicThatOur}, \textcopyright~2003.
+    }
     \label{fig:intro_haplotypeBlocks}
 \end{figure}
 
 \subsection{Lessons from the past fifteen years}
 
-Genetic variants affect heritable traits by impacting the function or regulation of target genes.
-How genetic variation contributes to a particular trait defines it's genetic architecture: 
+Genetic variants can affect heritable traits by impacting the function or regulation of target genes.
+How genetic variation contributes to a particular trait defines its genetic architecture: 
 the number of genes affecting that trait; and the frequencies, effect sizes, and interactions of trait-associated alleles \autocite{visscher2019Fisher1918Paper}.
 The number of genes defines a spectrum of traits from monogenic (where inheritance follows simple Mendelian patterns) to polygenic (where inheritance is complex).
 Proposed architectures differ greatly among complex traits, 
-but all have in common that the number of genes affecting complex trait is large (ranging from dozens to many thousands),
+but all have in common that the number of genes is large (ranging from dozens to many thousands),
 thus the average effect size of each associated variant is small \autocite{hindorff2009PotentialEtiologicFunctional,gibson2011RareCommonVariants,boyle2017ExpandedViewComplex}.
 
 % There are causal variants, but where are they? Two methods that exploit recombination.
 % LOD score plots are very similar in concept to GWAS Manhattan plots
-Since the 1980s, linkage analysis has been used to map the chromosomal position or region (loci) affecting traits by tracing the cosegregation of markers (variants with known position) with the trait in family pedigrees \autocite{altshuler2008GeneticMappingHuman,ott2011FamilybasedDesignsGenomewide,visscher2012FiveYearsGWAS}.
+Since the 1980s, linkage analysis has been used to map the chromosomal positions and regions (loci) affecting traits by tracing the cosegregation of markers (variants with known position) with the trait in family pedigrees \autocite{altshuler2008GeneticMappingHuman,ott2011FamilybasedDesignsGenomewide,visscher2012FiveYearsGWAS}.
 % \autocite{ott2011FamilybasedDesignsGenomewide}
 % Linkage uses a family: since the number of recombinations per generation is small, large chunks of the genome are in linkage in a pedigree. Thus the resolution of linkage is low, but you can cover the genome with just a few hundred markers.
 % Also see: https://www.genome.gov/genetics-glossary/LOD-Score for the test statistic for linkage. 
@@ -108,15 +107,15 @@ These methods saw much success for Mendelian traits, but application to most com
 Small average effect sizes meant penetrance was too low to reliably observe cosegregation problems in pedigrees \autocite{visscher2012FiveYearsGWAS}.
 Early candidate gene studies were also underpowered to detect small effects \autocite{border2019NoSupportHistorical}.
 
-The past fifteen years have seen the rise of \glspl{GWAS} that systematically test common variants selected in a comparatively hypothesis-free manner across the whole genome (\cref{fig:intro_architectureGWAS}).
+The past fifteen years have seen the rise of \glspl{GWAS} that systematically test common variants selected in a comparatively hypothesis-free manner across the whole genome (\cref{fig:intro_effectSizeVsFrequency}).
 Using large sample sizes to overcome small effects and large multiple testing burden, thousands of associations have been discovered for complex traits and diseases,
 many robustly replicated across populations \autocite{visscher2012FiveYearsGWAS,visscher201710YearsGWAS}.
 A number of take-home messages have emerged.
 %
 % Phenotypic variance, usually combines the genotype variance with the environmental variance. Genetic variance has three major components: the additive genetic variance, dominance variance, and epistatic variance.
 % NOTE: Polygenic background modifies penetrance of monogenic variants for tier 1 genomic conditions https://www.nature.com/articles/s41467-020-17374-3
-Most genetic variance is additive, the contribution of dominance and epistatic interactions is small \autocite{visscher2019Fisher1918Paper}, 
-and variants with effects on multiple phenotypes (pleiotropy) are widespread \autocite{visscher2012FiveYearsGWAS}.
+Most genetic variance is additive---the contribution of dominance and epistatic interactions is small \autocite{visscher2019Fisher1918Paper}.
+Variants with effects on multiple phenotypes (pleiotropy) are widespread \autocite{visscher2012FiveYearsGWAS}.
 % It is now appreciated that complex traits have remarkable polygenicity, with many hundreds or thousands of associated loci.
 Even traits that are molecular rather than whole-organism phenotypes can be remarkably polygenic, with hundreds to thousands of associated loci \autocite{sinnott-armstrong2020GWASThreeMolecular}.
 \Gls{GWAS} sample sizes in the millions are increasingly commonplace,
@@ -124,39 +123,43 @@ and the discovery of new associations with ever smaller effects as sample sizes 
 % Now the biological interpretation is the greater challenge.
 % TODO: add any more big take-homes from: \autocite{gallagher2018PostGWASEraAssociation,tam2019BenefitsLimitationsGenomewide}
 
-% TODO: use PLOS https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002822
-%
-    % In general, effect size is inverse to frequency, as it is assumed there are few common variants of large effect.
-%
-% Genetic variants exist along a spectrum of allele frequencies and
-% effect sizes. Most risk variants identified by GWAS lie within the two diagonal lines.
-% Rare variants with small effect sizes are difficult to identify using GWAS, and common
-% variants with large effects are unusual for common complex diseases.
-% tam2019BenefitsLimitationsGenomewide
+% NOTE: see https://www.embopress.org/doi/full/10.15252/emmm.201910316 for a 3D version of this figure.
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/journal.pcbi.1002822.g001.png}
-    \caption{The reach of GWAS. OR vs MAF ala tam2019BenefitsLimitationsGenomewide, extended by imputation, sample size, WGS based genotypes, but may be indistinguishable from noise at the limits}
-    \label{fig:intro_architectureGWAS}
+    \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_01/bush2012Chapter11GenomeWide/journal.pcbi.1002822.g001.png}
+    \caption{
+        \textbf{Effect size and frequency of trait-associated genetic variants.}
+        Complementary methods are suitable for different trait architectures.
+        Linkage analysis is suited to detecting Mendelian variants with large effects.
+        \gls{GWAS} is suited to detecting common variants with small effects.
+        There are few common variants of large effect  due to selection.
+        Rare variants with small effects are hard to distinguish from noise without very large samples.
+        As \gls{LD} depends on frequency, rare variants are poorly tagged by genotyping arrays and difficult to impute.
+        Studies focusing on rare variants often employ \gls{WES} or \gls{WGS}.
+        Figure reproduced from \textcite{bush2012Chapter11GenomeWide} under the CC BY 4.0 license (\url{creativecommons.org/licenses/by/4.0/legalcode}).
+    }
+    \label{fig:intro_effectSizeVsFrequency}
 \end{figure}
 
 \subsection{From complex trait to locus}
 
 \glspl{GWAS} rely on the tendency of common variants on the same haplotype to be in strong \gls{LD}.
-As the number of haplotypes is comparatively few, 
+As the number of haplotypes is relatively few, 
 it is possible to select a subset of tag variants such that all other known common variants are within a certain \gls{LD} threshold of that subset. 
 In practice, there is enough redundancy that the number of variants measured on a modern genotyping array (in the order of \numrange[retain-unity-mantissa=false]{1e5}{1e6}) is sufficient to tag almost all common variants  \autocite{theinternationalhapmapconsortium2005HaplotypeMapHuman,barrett2006EvaluatingCoverageGenomewide}.
-Associations with unmeasured variants are indirectly detected through their strong correlation with a tag variant.
+Associations with unmeasured variants are indirectly detected through correlation with a tag variant.
 Furthermore, as unrelated individuals still share short ancestral haplotypes, 
 study samples can be assigned haplotypes from a panel of haplotypes derived from reference samples by matching on the directly genotyped variants.
 This process of genotype imputation allows ascertainment of many more variants not directly genotyped \autocite{das2018GenotypeImputationLarge},
-but helps to recover rarer variants that are poorly-tagged \autocite{visscher201710YearsGWAS}.
-Modern imputation panels enable cost-effective \glspl{GWAS} testing tens of millions of variants as rare as \SIrange{0.01}{0.1}{\percent} in diverse populations \autocite{taliun2019Sequencing53831}.
+and helps to recover rarer variants that are poorly-tagged \autocite{visscher201710YearsGWAS}.
+Modern imputation panels enable cost-effective \glspl{GWAS} testing tens of millions of variants as rare as \SIrange[parse-numbers=false]{0.01}{0.1}{\percent} in diverse populations \autocite{taliun2019Sequencing53831}.
 
 Testing large numbers of variants incurs a massive multiple testing burden, but acknowledging the correlation between variants due to \gls{LD},
 there are only the equivalent of \textapprox{10^6} independent tests in the European genome, regardless of the number of tests actually performed \autocite{peer2008EstimationMultipleTesting}.
-The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, akin to controlling the type I \gls{FWER} at $\alpha = 0.05$ using the Bonferroni correction\footnote{
-    The Bonferroni correction makes no assumptions about the dependence structure of the \pvalues{}, and is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. In fact it is always conservative unless the \pvalues{} have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
+The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, akin to controlling the type I \gls{FWER} at $\alpha = 0.05$ using the Bonferroni correction%
+\footnote{
+    The Bonferroni correction makes no assumptions about the dependence structure of the \pvalues{}, and is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. 
+    In fact it is always conservative unless the \pvalues{} have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
 }.
 
 % \subsection{Missing heritability}
@@ -224,12 +227,11 @@ The resolution of the associated locus depends on the local \gls{LD} structure.
 % Fine-mapping is a natural extension of mapping with higher resolution.
 Fine-mapping is the process of determining which of the many correlated variants in an associated locus are most likely to be causal.
 The causal variants in a locus are not necessarily the ones with the strongest associations.
-State-of-the-art Bayesian fine-mapping methods take a variable selection approach, 
+Bayesian fine-mapping methods take a variable selection approach, 
 assigning each variant a posterior probability of causality.
-A credible set of variants likely to contain all causal variants in the locus with some probability can then be determined
-\autocite{schaid2018GenomewideAssociationsCandidate,wang2020SimpleNewApproach} 
+A credible set of variants likely to contain all causal variants in the locus with some probability can then be determined \autocite{schaid2018GenomewideAssociationsCandidate,wang2020SimpleNewApproach}.
 The ability to separate causal and tag variants depends on factors like \gls{LD}, sample size, and the effect size and number of causal variants  \autocite{visscher201710YearsGWAS,schaid2018GenomewideAssociationsCandidate}.
-It is important that the causal variant is observed, by directly genotyped or confident imputation.
+It is important that the causal variant is observed, by direct genotyping or confident imputation.
 
 % \subsection{Polygenic risk scores}
 %
@@ -249,15 +251,15 @@ It is important that the causal variant is observed, by directly genotyped or co
 Most causal variants for Mendelian traits are coding variants (nonsense, missense, or frameshift) that impact protein sequence \autocite{chong2015GeneticBasisMendelian}.
 In contrast, over \SI{90}{\percent} of \gls{GWAS} loci fall in non-coding regions \autocite{gallagher2018PostGWASEraAssociation},
 and often too far from the nearest coding region to be in \gls{LD} \autocite{brodie2016HowFarSNP}.
-Even if the causal variants at a \gls{GWAS} locus are fine-mapped, 
-it may not be obvious how to prioritise the target genes through which those variants affect the trait.
+Even if the causal variants at a locus are fine-mapped, 
+one of the greatest challenges following \gls{GWAS} is prioritising the target genes through which those variants affect the trait.
 % NOTE:
 % \autocite{visscher201710YearsGWAS}:
 % "For two-thirds of \gls{GWAS}-associated complex trait loci where target genes have been assigned, the implicated gene is not the nearest gene"
 % but this is from SMR and TWAS studies, which may have poor performance for assigning causal genes.
 A reasonable heuristic is to assign the nearest gene \gls{TSS} or body as the target, particularly for metabolite traits \autocite{stacey2019ProGeMFrameworkPrioritization}.
 For improved accuracy across a variety of complex traits,
-integrative methods for gene prioritisation combine variant-to-gene distance with other metrics and data types drawn from numerous external sources \autocite{stacey2019ProGeMFrameworkPrioritization,forgetta2020EffectorIndexPredict,ghoussaini2020OpenTargetsGenetics}.
+integrative methods gene prioritisation combine variant-to-gene distance with other metrics and data types drawn from numerous external sources \autocite{stacey2019ProGeMFrameworkPrioritization,forgetta2020EffectorIndexPredict,ghoussaini2020OpenTargetsGenetics}.
 
 % \subsection{From target gene to candidate drug}
 %
@@ -283,26 +285,27 @@ integrative methods for gene prioritisation combine variant-to-gene distance wit
 Gene regulation data are indispensable for gene prioritisation. 
 Rather than directly impacting the coding sequence of a gene, 
 many non-coding \gls{GWAS} loci are hypothesised to affect traits by affecting the regulation of target gene expression \autocite{gallagher2018PostGWASEraAssociation,cano-gamez2020GWASFunctionUsing}.
-Unlike genotype, expression is context-dependent and dynamic across time and space.
+Unlike genotype, expression is dynamic across time and space.
 Diverse expression programs are responsible for the myriad of cell and tissue types generated during development,
 and enables adaptation in response to environmental stimuli.
 
-Eukaryotic transcription is an intricate multi-step process involving interactions between DNA, RNA, and hundreds of proteins \autocite{cramer2019OrganizationRegulationGene}.
+Expression is the product of eukaryotic transcription, a multi-step process involving interactions between DNA, RNA, and hundreds of proteins \autocite{cramer2019OrganizationRegulationGene}.
 % RNA polymerase binds to and moves 3'->5' on the non-coding strand, creating an RNA strand that grows in a 5'->3' direction, with a sequence that corresponds to the coding strand.
 Transcription of the pre-\gls{mRNA} is initiated when RNA polymerase and \glspl{TF} form part of a protein complex around the promoter region and \gls{TSS} of a gene.
-\Glspl{TF} can also bind to \textit{cis}-regulatory elements such as enhancers,
-which can be distant from the gene, interacting with the promoter region via DNA looping.
+\Glspl{TF} can also bind to more distant \textit{cis}-regulatory elements such as enhancers and repressors.
+Distant regulatory elements interact with the promoter region via DNA looping.
 Transcription can only happen in regions of open chromatin, where the packing of DNA-histone complexes (nucleosomes) is loose enough that the DNA is physically-accessible to the transcriptional machinery.
 Chromatin accessibility is partially determined by histone modifications such as methylation, acetylation, phosphorylation, and ubiquitination \autocite{bannister2011RegulationChromatinHistone}.
 % The histone code maps modifications to activation/repression.
-% The DNA itself can also be modified; methylation at CpG sites in promoters tends to repress transcription \autocite{robertson2000DNAMethylationHealth}.
-The pre-\gls{mRNA} is capped at the 5' end by a modified nucleotide, and at the 3' end by a poly(A) tail.
+The DNA itself can also be modified; methylation at CpG sites in promoters tends to repress transcription \autocite{robertson2000DNAMethylationHealth}.
+
+To form a mature \gls{mRNA}, the pre-\gls{mRNA} is capped at the 5' end by a modified nucleotide, and at the 3' end by a poly(A) tail.
 % The 3' tail is added after cleaving the pre-mRNA off the rest of the transcribed RNA while the polymerase is still going.
 % Splicing is mostly co-transcriptional.
 Introns are removed, and the exons spliced together by spliceosomes that cut and rejoin the RNA at splice sites.
 Different ways this occurs determines which of many alternatively-spliced transcripts is produced.
 % Alternative splicing of pre-mRNA transcripts is regulated by a system of trans-acting proteins (activators and repressors) that bind to cis-acting sites or "elements" (enhancers and silencers) on the pre-mRNA transcript itself. These proteins and their respective binding elements promote or reduce the usage of a particular splice site.
-Post-transcription, regulation of mature \glspl{mRNA} can occur through RNA editing and regulatory elements in 5' and 3' \glspl{UTR}.
+Post-transcription regulation of mature \glspl{mRNA} is also possible, via RNA editing and regulatory elements in the 5' and 3' \glspl{UTR}.
 
 % Functional genomics is a field of molecular biology that attempts to describe gene (and protein) functions and interactions.
 % Functional genomics focuses on the dynamic aspects such as gene transcription, translation, regulation of gene expression and protein–protein interactions, as opposed to the static aspects of the genomic information such as DNA sequence or structures.
@@ -318,7 +321,7 @@ In line with the regulatory hypothesis, \gls{GWAS} variants are heavily enriched
     splice sites,
     and \glspl{UTR}
     \autocite{schaub2012LinkingDiseaseAssociations,maurano2012SystematicLocalizationCommon,farh2015GeneticEpigeneticFine,trynka2015DisentanglingEffectsColocalizing,nasser2020GenomewideMapsEnhancer}.
-Furthermore, enrichment is often observed in particular contexts: tissues, cell types, or cell states \autocite{visscher201710YearsGWAS,gallagher2018PostGWASEraAssociation,cano-gamez2020GWASFunctionUsing}.
+Furthermore, enrichment is often observed in particular contexts (tissues, cell types, or cell states \autocite{visscher201710YearsGWAS,gallagher2018PostGWASEraAssociation,cano-gamez2020GWASFunctionUsing}).
 % NOTE: cano-gamez2020GWASFunctionUsing contains many examples of genomic feature enrichment methods, including for cell-type and stimulation specific
 An example is the enrichment of fine-mapped \gls{IMID} \glspl{SNP} in CD4\textsuperscript{+} T cell enhancers, particularly to enhancers activated after stimulation \autocite{farh2015GeneticEpigeneticFine}.
 % NOTE: a good example is T1D vs T2D enrichments, see cano-gamez2020GWASFunctionUsing
@@ -330,16 +333,16 @@ and help nominate trait-relevant contexts.
 \subsection{\Glsfmtfullpl{eQTL}}
 
 % \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
-Expression in itself is a complex molecular phenotype with a heritability of \SIrange{15}{30}{\percent} \autocite{gaffney2013GlobalPropertiesFunctional}.
+Expression is a complex molecular phenotype in itself, with a heritability of \SIrange{15}{30}{\percent} \autocite{gaffney2013GlobalPropertiesFunctional}.
 Genome-wide assays for expression, such as microarrays and \gls{RNAseq}, were among the earliest high-throughput technologies developed for quantifying molecular phenotypes.
-Large-scale efforts such as the Genotype-Tissue Expression (GTEx) project \autocite{thegtexconsortium2020GTExConsortiumAtlas} have pioneered the study of \glspl{eQTL} other \glspl{molQTL} over the past decade \autocite{vandiedonck2017GeneticAssociationMolecular}.
+Genetic loci associated with quantified gene expression are called \glspl{eQTL}.
+Large-scale efforts such as the Genotype-Tissue Expression (GTEx) project \autocite{thegtexconsortium2020GTExConsortiumAtlas} have pioneered the study of \glspl{eQTL} and other \glspl{molQTL} over the past decade \autocite{vandiedonck2017GeneticAssociationMolecular}.
 % Recently more focus on other molQTLs e.g. BLUEPRINT for chromatin marks
 
-Genetic loci associated with quantified gene expression are called \glspl{eQTL}.
-Their effect sizes are large relative to variants associated with whole-organism phenotypes,
+\gls{eQTL} effect sizes are large relative to variants associated with whole-organism phenotypes,
 with the average \gls{eQTL} explaining \SIrange{5}{18}{\percent} of additive genetic variance for its associated gene \autocite{gaffney2013GlobalPropertiesFunctional}.
 % NOTE: additive genetic variance is only part of observed variance, but a single variant explaining this much is still large. 
-The \glspl{eQTL} with the largest effects tend to be concentrated near the \gls{TSS} of their target gene (\textit{cis}-\glspl{eQTL}), affecting \gls{TF} binding sites and other nearby regulatory elements.
+The \glspl{eQTL} with the largest effects tend to be concentrated near the \gls{TSS} of their target gene (\textit{cis}-\glspl{eQTL}), affecting \gls{TF} binding sites and other local regulatory elements.
 \glspl{eQTL} further away or on a different chromosome are called \textit{trans}-\glspl{eQTL}.
 The exact threshold separating \textit{cis}- from \textit{trans}- on the same chromosome is arbitrary; \SI{<1}{\mega\bp} and \SI{>5}{\mega\bp} are commonly used thresholds for \textit{cis}- and \textit{trans}-\glspl{eQTL} respectively \autocite{westra2014GenomeFunctionStudying,albert2015RoleRegulatoryVariation,vosa2018UnravelingPolygenicArchitecture}%
 \footnote{
@@ -351,8 +354,8 @@ The exact threshold separating \textit{cis}- from \textit{trans}- on the same ch
 }.
 In general, \gls{eQTL} effect size declines with distance to the \gls{TSS}, and \textit{trans}-\glspl{eQTL} have smaller effects compared to \textit{cis}-\glspl{eQTL} \autocite{vandiedonck2017GeneticAssociationMolecular}.
 \textit{Trans}-\gls{eQTL} often represent \textit{cis}-\glspl{eQTL} of regulatory molecules like \glspl{TF} and RNA-binding proteins that may target many genes in \textit{trans} as master regulators \autocite{fairfax2012GeneticsGeneExpression,albert2015RoleRegulatoryVariation}.
-Gathering large enough samples to detect \textit{trans}-\glspl{eQTL} remains a priority.
-Most expression heritability is driven by \textit{trans}- rather than \textit{cis}- effects,
+Gathering large enough samples to detect \textit{trans}-\glspl{eQTL} remains a priority,
+as most expression heritability is driven by \textit{trans}- rather than \textit{cis}- effects,
 perhaps due to small but wide-reaching effects \autocite{liu2019TransEffectsGene}.
 % \2 Currently discovered bulk baseline cis-eQTL have also failed to explain a lot of complex trait heritability.
 %     \3 Over many complex traits, a median of 11\% heritability could be explained by mediation of GWAS loci by common (MAF > 0.01) cis-eQTL,
@@ -360,7 +363,7 @@ perhaps due to small but wide-reaching effects \autocite{liu2019TransEffectsGene
 %     https://www.nature.com/articles/s41588-020-0625-2
 %     Averaging across traits, only 11 ± 2% of heritability was mediated by assayed gene expression levels.
 
-\subsection{Context-dependent \glsfmtshort{eQTL}}
+\subsection{Context-dependent \glsfmtshortpl{eQTL}}
 
 Like expression itself, the effects of \glspl{eQTL} are highly context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
 A non-exhaustive list of environmental contexts that interact with \gls{eQTL} effects includes:
@@ -377,7 +380,7 @@ These contexts can be interdependent.
 For example, tissue-dependent effects may arise from a combination of cell type-dependence and varying cell composition between tissues.
 
 A multitude of molecular mechanisms could facilitate genotype-environment interactions at \glspl{eQTL}.
-\textcite{fu2012UnravelingRegulatoryMechanisms} mapped \glspl{eQTL} in blood and four non-blood tissues (\autoref{fig:intro_reQTLmechs}), 
+\textcite{fu2012UnravelingRegulatoryMechanisms} mapped \glspl{eQTL} in blood and four non-blood tissues (\cref{fig:intro_reQTLtypes}), 
 and proposed mechanisms that might explain discordant effects of an \gls{eQTL} allele on target gene between tissues,
 assuming the \gls{eQTL} disrupts a regulatory factor's binding site.
 Different effect sizes of same or opposite signs could arise 
@@ -385,28 +388,39 @@ from tissue-dependent effects of the same factor, such as activating expression 
 or from binding of different factors in different tissues at the same site.
 Tissue-specific effects could arise from tissue-specific expression of a regulatory factor.
 A tissue-specific effect could also reflect tissue-specific target gene expression,
-as \gls{eQTL} effect will be zero in a tissue where the target is not expressed e.g. due to chromatin inaccessibility.
+as the \gls{eQTL} effect will be zero in a tissue where the target is not expressed e.g. due to chromatin inaccessibility.
 Tagging of different causal variants in the two tissues, potentially with differing tagging efficiency (\gls{LD}), could generate all the above scenarios.
+
 Furthermore, the complexity of human gene regulation means these mechanisms might be acting at epigenetic, pre-, co-, or post-transcriptional levels \glspl{eQTL} \autocite{gaffney2013GlobalPropertiesFunctional}.
 Detection of context-dependent effects merely exposes differences in regulatory architecture between contexts.
 Determining the underlying mechanisms may well require data types beyond just genotype and expression.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/journal.pgen.1002431.g002.png}
-    \caption{blood vs non blood. Pie charts show the proportion of different types of in pairwise comparisons of blood and four non-blood tissues.}
-    \label{fig:intro_reQTLmechs}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/fu2012UnravelingRegulatoryMechanisms/journal.pgen.1002431.g002.png}
+    \caption{
+        \textbf{Types of tissue-dependent \textit{cis}-\gls{eQTL} effects}.
+        The effect size of an \gls{eQTL} \gls{SNP} on expression can be concordant or discordant between tissues.
+        Discordant effects represent genotype-tissue interactions, and can be classified into four subtypes.
+        Specific regulation refers to a gene with a significant \gls{eQTL} in only one tissue.
+        Alternative regulation refers to regulation of the same gene by independent \glspl{SNP} in the two tissues---genes can have multiple \gls{eQTL} with tissue-specific effects.
+        Different effect size refers to an \gls{eQTL} having tissue-dependent effects with concordant sign but discordant magnitude.
+        Opposite allelic direction is a tissue-dependent effect where the sign is discordant.
+        Pie charts show the proportion of different types of effects in pairwise comparisons of blood and four non-blood tissues by \textcite{fu2012UnravelingRegulatoryMechanisms}.
+        Figure reproduced from \textcite{fu2012UnravelingRegulatoryMechanisms} under the CC BY 4.0 license (\url{creativecommons.org/licenses/by/4.0/legalcode}).
+    }
+    \label{fig:intro_reQTLtypes}
 \end{figure}
 
-\subsection{Immune response \Glsfmtlongpl{reQTL}}
+\subsection{Immune \glsfmtfullpl{reQTL}}
 \label{subsec:intro_reQTL}
 
 A important class of context-dependent \glspl{eQTL} are \glspl{reQTL}, 
 where the interacting environment is experimental stimulation,
-revealing regulatory effects not present at baseline \autocite{vandiedonck2017GeneticAssociationMolecular,huang2019GeneticsGeneExpression}.
+potentially revealing regulatory effects not detectable at baseline \autocite{vandiedonck2017GeneticAssociationMolecular,huang2019GeneticsGeneExpression}.
 The vast majority of \gls{reQTL} studies to date have been conducted on immune cells. 
 This is not only due to the abundance of immune cells easily accessible in peripheral blood, amenable to purification and stimulation,
-but because the immune system is specialised for responding to environmental perturbations in the form of infection.
+but because the immune system is specialised for responding to environmental perturbations.
 Done \textit{in vitro}, variables such as cell type and abundance; and the nature, length, and intensity of stimulation can be precisely controlled.
 
 A seminal study by \textcite{barreiro2012DecipheringGeneticArchitecture} mapped \glspl{eQTL} in monocyte-derived \glspl{DC} before and after \SI{18}{\hour} infection with \textit{Mycobacterium tuberculosis}.
@@ -414,14 +428,14 @@ A seminal study by \textcite{barreiro2012DecipheringGeneticArchitecture} mapped 
 They observed a 1.4-fold enrichment of \glspl{reQTL} among \gls{GWAS} variants associated with susceptibility to pulmonary tuberculosis,
 but no enrichment of \glspl{eQTL} shared between uninfected and infected \glspl{DC}.
 From overlap of \glspl{reQTL} and \gls{GWAS} variants,
-three genes were prioritised as candidates affecting tuberculosis susceptibility.
+three genes (\gene{DUSP14}, \gene{ATP6V0A2}, \gene{RIPK2}) were prioritised as candidates affecting tuberculosis susceptibility.
 Since then, numerous \textit{in vitro} \gls{reQTL} studies have been conducted with a variety of stimulations (often cytokines, pathogens, or \glspl{PAMP}),
 applied to purified \autocite{fairfax2014InnateImmuneActivity,kim2014CharacterizingGeneticBasis,hu2014RegulationGeneExpression,lee2014CommonGeneticVariants,caliskan2015HostGeneticVariation,quach2016GeneticAdaptationNeandertal,kim-hellmuth2017GeneticRegulatoryEffects,alasoo2018SharedGeneticEffects,gate2018GeneticDeterminantsCoaccessible,schmiedel2018ImpactGeneticPolymorphisms,alasoo2019GeneticEffectsPromoter,calderon2019LandscapeStimulationresponsiveChromatin,devries2020IntegratingGWASBulk,huang2020NeonatalGeneticsGene}
 or mixed cell types \autocite{caliskan2015HostGeneticVariation,manry2017DecipheringGeneticControl}.
 
 A complementary approach is \gls{reQTL} mapping with \textit{in vivo} stimulation.
 An \textit{in vitro} mixture of cells cannot hope to replicate the innumerable interactions involved in human immune response.
-\textit{In vivo} designs are more suitable for whole-organism stimulations and response phenotypes,
+\textit{In vivo} designs suit whole-organism stimulations and response phenotypes,
 such as vaccination and vaccine-induced antibody response.
 
 Published \textit{in vivo} \gls{reQTL} studies are comparatively few.
@@ -433,11 +447,11 @@ In \textcite{franco2013IntegrativeGenomicAnalysis}, whole blood \glspl{eQTL} wer
 Twenty genes involved in membrane trafficking and antigen processing were prioritised to be important to vaccine response,
 having \gls{reQTL} or differential expression post-vaccination, and expression correlation with antibody response.
 \textcite{lareau2016InteractionQuantitativeTrait} focused on epistatic effects of \gls{SNP}-\gls{SNP} interactions on expression fold-change after smallpox vaccination in 183 individuals.
-Eleven significant interactions were found where the effect of two independent \glspl{SNP} was non-additive.
+Eleven significant interactions were found where the effect of two independent \glspl{SNP} on expression was non-additive.
 Apoptosis-related genes (e.g. \gene{TRAPPC4}, \gene{ITK}) were enriched among target genes.
 Most recently, \textcite{davenport2018DiscoveringVivoCytokineeQTL}
 mapped whole blood \glspl{eQTL} in 157 \gls{SLE} patients in a phase II clinical trial of an anti-IL-6 monoclonal antibody.
-Nine \glspl{reQTL} where the effect was magnified in drug-exposed (drug arms) versus unexposed (placebo arm and baseline) groups
+Nine \glspl{reQTL} where the effect was magnified in drug-exposed versus unexposed groups
 were found to disrupt the binding site of IRF4,
 highlighting it as key regulatory factor downstream of IL-6.
 
@@ -448,14 +462,14 @@ potentially leading to greater experimental noise, and complicating interpretati
 
 \subsection{Gene prioritisation using \glsfmtshortpl{eQTL}}
 
-\Glspl{eQTL} are enormously valuable for target gene prioritisation after \gls{GWAS}.
+\glspl{eQTL} are enormously valuable for target gene prioritisation after \gls{GWAS}.
 They propose both target gene and mechanism of action, where the effect of variant on complex trait is mediated through expression.
 \todo{Prioritisation of context is mentioned shortly.}
-\Gls{GWAS} variants are indeed enriched for \glspl{eQTL} \autocite{nicolae2010TraitAssociatedSNPsAre}, but care must be taken to avoid false positives due to the abundance of \glspl{eQTL}.
+\Gls{GWAS} variants for many traits are indeed enriched for \glspl{eQTL} \autocite{nicolae2010TraitAssociatedSNPsAre}, but care must be taken to avoid false positives due to the abundance of \glspl{eQTL}.
 At current sample sizes, \SIrange{60}{80}{\percent} of genes have at least one detectable \glspl{eQTL} \autocite{vandiedonck2017GeneticAssociationMolecular,vosa2018UnravelingPolygenicArchitecture},
 and half of common variants are \textit{cis}-\glspl{eQTL} for at least one gene \autocite{liu2019AbundantAssociationsGene}.
 Assuming that a locus is associated with both a trait of interest and with expression of a particular gene,
-how can we separate the scenario where the same causal variants affect both trait and expression (pleiotropy),
+how can one separate the scenario where the same causal variants affect both trait and expression (pleiotropy),
 from coincidental overlap between distinct sets of causal variants that may possibly in \gls{LD}?
 Bayesian colocalisation methods address this by extending fine-mapping to multiple phenotypes \autocite{burgess2018InferringCausalRelationships,wallace2020ElicitingPriorsRelaxing,hukku2020ProbabilisticColocalizationGenetic}.
 Using information from all variants in the locus, 
@@ -467,11 +481,12 @@ Given the effect of an \gls{eQTL} can be starkly context-dependent,
 For instance, immune \textit{in vitro} \gls{reQTL} are enriched more so than non-\gls{reQTL} among \gls{GWAS} associations for immune-related phenotypes such as
 susceptibility to infectious \autocite{barreiro2012DecipheringGeneticArchitecture,manry2017DecipheringGeneticControl}
 and immune-mediated diseases \autocite{manry2017DecipheringGeneticControl,kim-hellmuth2017GeneticRegulatoryEffects}.
-Knowledge of cell type-specific as well as shared \gls{eQTL} effects 
+Knowledge of cell type-specific in addition to shared \gls{eQTL} effects 
 finds many additional colocalisations with complex traits \autocite{kundu2020GeneticAssociationsRegulatory,kim-hellmuth2020CellTypeSpecific}.
-The increasing number of context-dependent datasets available for large-scale colocalisation analyses means \glspl{eQTL} can propose not just target gene and mechanism, but also the specific environments most relevant to a trait.
+The increasing number of context-dependent \gls{eQTL} datasets available for large-scale colocalisation analyses means \glspl{eQTL} can propose not just target gene and mechanism, but also the specific environments most relevant to a trait.
 
-% coloc then finemap
+% NOTE:
+% coloc also helps finemap
 % coloc can also can help fine mapping, as large effect = smaller n required = able to do denser genotype by e.g. wgs, so smaller credible sets at much lower sample sizes
 % "Overall, our findings suggest that fine-mapping applied to disease-colocalising regulatory QTLs can enhance the discovery of putative causal disease variants and provide insights into the underlying causal genes and molecular mechanisms."
 % https://www.biorxiv.org/content/10.1101/2020.01.15.907436v1
@@ -480,8 +495,8 @@ The increasing number of context-dependent datasets available for large-scale co
 
 \subsection{An overview of the immune system}
 
-Immunology began as study of host defense against infection, distinguishing self from non-self \autocite{murphy2016JanewayImmunobiology}.
-The immune system is also involved in pathogenesis of allergic, autoimmune, and other immune-mediated diseases.
+Immunology began as the study of host defense against infection \autocite{murphy2016JanewayImmunobiology}.
+It is now recognised that the immune system is also involved in pathogenesis of allergic, autoimmune, and other immune-mediated diseases.
 This subsection provides a basic overview of parts of the immune system relevant to this thesis.
 
 % <two arms>
@@ -489,13 +504,13 @@ The two major arms of the immune response are the innate and adaptive response.
 The innate response is rapid and non-specific, 
 occurring in the first few minute to days after the initial (primary) exposure to infection.
 This triggers the adaptive response, which takes days to weeks to develop, 
-but delivers a powerful pathogen-specific response capable of eliminating pathogens that have evaded the innate response.
+but delivers a powerful and specific response capable of eliminating pathogens that have evaded the innate response.
 The adaptive response can also create immunological memory lasting years to decades,
 where re-exposure to the same pathogen induces a faster and more powerful adaptive response%
 \footnote{
     There is increasing evidence the innate immune system also has a form of immunological memory \autocite{dominguez-andres2020SpecificsInnateImmune}.
 }.
-Both arms involve complex interaction of many cell types through surface receptors and signalling molecules.
+Both arms distinguish self from non-self through complex interaction of many cell types via surface receptors and signalling molecules.
 
 % <two lineages>
 Immune cell types differentiate from common myeloid progenitor or common lymphoid progenitors,
@@ -504,7 +519,7 @@ By in large, the cells of the innate response are of the myeloid lineage,
 and the cells of the adaptive response are of the lymphoid lineage.
 Immune cells are also called leukocytes or white-blood cells, 
 as many types can be found in peripheral blood, 
-but certain types are more prominent in tissues or the lymphatic system.
+but certain types are confined to tissues or parts of the lymphatic system.
 
 % <innate cell types>
 % Macrophages, neutrophils, and dendritic cells are sensor cells
@@ -517,14 +532,14 @@ then secrete small proteins (cytokines) that trigger the inflammatory response:
 a massive migration of multiple cell types from blood into infected tissues.
 % Inflammation is usually neutrophils recruited first, then monocytes.
 Recruited neutrophils clear pathogens by phagocytosis, and secrete antimicrobial molecules by degranulation.
-\gls{NK} cells detect and kill virus-infected and tumour cells.
+\Gls{NK} cells detect and kill virus-infected and tumour cells.
 Circulating monocytes migrate and differentiate into macrophages and \glspl{DC}.
 Macrophages perform phagocytosis, modulate inflammation, and can also engage in antigen-presentation,
-but it is \gls{DC} that are the most specialised \glspl{APC}.
+but it is \glspl{DC} that are considered specialised \glspl{APC}.
 % Antigen-presenting cells fall into two categories: professional and non-professional.
 % Those that express MHC class II molecules along with co-stimulatory molecules and pattern recognition receptors are often called professional antigen-presenting cells.[1]
 % The non-professional APCs express MHC class I molecules.
-Antigen-presentation is the primary link between the innate and adaptive responses.
+Antigen-presentation by \glspl{DC} is a key link between the innate and adaptive responses.
 % "The primary lymphoid organs are the bone marrow and the thymus, an organ in the upper chest.
 % The peripheral lymphoid organs comprise the lymph nodes, the spleen, and the mucosal lymphoid tissues of the gut, the nasal and respiratory tract, the urogenital tract, and other mucosa."
 % Antigen-presentation happens in peripheral lymphoid organs.
@@ -547,45 +562,51 @@ CD4 (helper) T cells recognise antigen fragments presented in a complex with \gl
 CD4 T cells then differentiate into several subsets that activate and regulate other cell types, including macrophages, CD8 T cells and B cells.
 Activated CD8 (cytotoxic) T cells recognise antigens presented by \gls{MHC} class I on infected cells and directly kill the cell.
 Activated B cells differentiate into plasma cells that secrete large quantities of antibodies that which identify and neutralise pathogens by specific binding to an epitope on the target antigen.
-Antibody-mediated responses are also called humoral immunity,
+Antibody-mediated immunity is also called humoral immunity,
 whereas T cells and innate immune responses comprise cell-mediated immunity.
-A small subset of activated B and T cells will become memory cells, responsible for immunological memory.
+A small subset of activated B and T cells can become memory cells, responsible for long-term immunological memory.
 
 \subsection{High-throughput immunology}
 
 % TODO: read pulendran2020ScienceMedicineHuman
 To understand the immune system and its intricate interactions,
-\enquote{systems immunology} proposes a holistic rather than reductionist approach \autocite{davis2017SystemsImmunologyJust,villani2018SystemsImmunologyLearning,pulendran2020ScienceMedicineHuman}.
+\enquote{systems immunology} studies take a holistic rather than reductionist approach \autocite{davis2017SystemsImmunologyJust,villani2018SystemsImmunologyLearning,pulendran2020ScienceMedicineHuman}.
 The basic principle is the same: experimentally perturb the system and observe its response.
 Drugs and vaccines can be used as safe and synchronised perturbations.
-A range of high-throughput technologies can be applied to measure response at many layers of the immune system (\autoref{fig:intro_sysImmunology}).
-Longitudinal designs are common, profiling the transition from baseline into innate and adaptive response.
+A range of high-throughput technologies can be applied to measure response at many layers of the immune system (\cref{fig:intro_sysImmunology}).
+Longitudinal designs are common, aiming to sample timepoints corresponding to baseline, innate and adaptive immunity.
 The complexity of the immune response still presents a major challenge:
 the richness of sampling required often restricts sample size due to cost and logistics.
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/1-s2.0-S2452310018301197-gr1/1-s2.0-S2452310018301197-gr1_lrg.jpg}
-    \caption{Systems imm}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_01/yu2019SystemsImmunologyIntegrating/1-s2.0-S2452310018301197-gr1_lrg.jpg}
+    \caption{
+        \textbf{High-throughput technologies for systems immunology.}
+        Profiling can be done in multiple humans and model organisms, at multiple levels of the immune system, and at bulk or single-cell resolutions.
+        An additional dimension not shown is profiling at multiple timepoints before and after perturbation.
+        Figure reprinted from \textcite{yu2019SystemsImmunologyIntegrating}, \textcopyright~2019, with permission from Elsevier.
+    }
     \label{fig:intro_sysImmunology}
-% TODO: "Reprinted from Publication title, Vol /edition number, Author(s), Title of article / title of chapter, Pages No., Copyright (Year), with permission from Elsevier [OR APPLICABLE SOCIETY COPYRIGHT OWNER]." Also Lancet special credit - "Reprinted from The Lancet, Vol. number, Author(s), Title of article, Pages No., Copyright (Year), with permission from Elsevier."
 \end{figure}
 
-There are three major aims of systems immunology.
+There are three major themes to systems immunology.
 Initial studies of a particular response phenotype are often descriptive,
 aiming to find correlations between the components of the immune system and other components, or with phenotypic response.
 Predictive studies then evaluate the ability to use relevant measurements to predict individual response.
 Feature sets that are molecular phenotypes (e.g. gene expression) with validated predictive accuracy are known as molecular signatures.
-Causal inference is the third and most difficult aim.
+Causal inference is the third and most difficult goal.
 Fortunately, the heritability of immune parameters (e.g. cell counts, surface marker expression, serum protein levels) is substantial, 
 between \SIrange{20}{40}{\percent} \autocite{liston2016ShapingVariationHuman,brodin2017HumanImmuneSystem,patin2018NaturalVariationParameters,liston2018OriginsDiversityHuman},
 with greater heritability for innate versus adaptive immune parameters \autocite{patin2018NaturalVariationParameters}.
 Much akin to \gls{GWAS} and \gls{QTL} studies, to identify causal links in the immune system,
-one can leverage genetic variation as naturally-occurring perturbations \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}
+one can leverage genetic variation as naturally-occurring perturbations \autocite{tsang2015UtilizingPopulationVariation,villani2018SystemsImmunologyLearning}.
 Controlled variation can also be systematically generated by RNA interference or genome editing \autocite{yosef2016WritLargeGenomic}.
-What interventions can be made to promote effective response to pathogens and vaccines,
-and impede pathways that lead to immune dysregulation?
-Obtaining a causal understanding is essential for clinical translation,
+Obtaining causal understanding is essential for clinical translation,
+to determine the interventions that can be made to promote effective response to pathogens and vaccines,
+and impede pathways that lead to immune dysregulation in disease.
+
+\todo{Subsection "Immune response to vaccination" will be merged with ch2 intro. Subsection "Immune response to anti-TNFs" will be merged with ch4 intro.}
 
 % \subsection{Genetic effects on the healthy immune system}
 %
@@ -613,8 +634,6 @@ Obtaining a causal understanding is essential for clinical translation,
 
 % \subsection{Immune response to vaccination}
 % NOTE: technically vaccines are biologics
-% \todo{"Immune response to vaccination" will be merged with ch2 intro.}
-% \todo{"Immune response to anti-TNFs" will be merged with ch4 intro.}
 %
 % \1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
     % TODO: basic principles here, then deep dive into specifics of the Pandemrix vaccine type
@@ -702,11 +721,11 @@ Obtaining a causal understanding is essential for clinical translation,
 \section{Thesis outline}
 
 This thesis examines longitudinal response to \textit{in vivo} immune perturbations by vaccine and drug.
-\autoref{ch:hird_DGE} is a descriptive \gls{DGE} study of transcriptomic and antibody responses to pandemic influenza vaccine in the \gls{HIRD} cohort of healthy adults.
-\autoref{ch:hird_DGE} integrates \gls{HIRD} genotype data to map the regulation of expression responses with an \textit{in vivo} \gls{reQTL} design.
-\autoref{ch:hird_DGE} mirrors the design of the previous two chapters, 
-exploring clinical response to biologic anti-\gls{TNF} therapy for \gls{CD} patients \gls{PANTS} cohort.
-Finally, \autoref{ch:hird_DGE} presents an overview of shared themes and limitations,
+\Cref{ch:hird_DGE} is a descriptive \gls{DGE} study of transcriptomic and antibody responses to pandemic influenza vaccine in the \gls{HIRD} cohort of healthy adults.
+\Cref{ch:hird_reQTL} integrates \gls{HIRD} genotype data to map the regulation of expression response to vaccine using an \textit{in vivo} \gls{reQTL} design.
+In \cref{ch:multiPANTS} I mirror the design of the previous two chapters, 
+exploring clinical response to biologic anti-\gls{TNF} therapy for \gls{CD} patients in the \gls{PANTS} cohort.
+Finally, \cref{ch:discussion} presents an overview of shared themes and limitations,
 and provides recommendations for future analyses and study designs for immune response phenotypes.
 
 % not so ambitious as systems immunolgoy
