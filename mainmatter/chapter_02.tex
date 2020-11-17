@@ -1,46 +1,106 @@
 %
 % Chapter 2
 %
-% Systems vaccinology-style paper.
+% Systems vaccinology-style HIRD paper.
 
 % The one central and memorable contribution of the paper.
 \chapter{Transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_DGE}
-% TODO: autoref to cref
 
 \section{Introduction}
-% TODO add specific flu vaccine immunology here
-
-% TODO in this ch, I describe E differences associated with 
-
-% TODO upreg -> increased expression
 
 \subsection{Seasonal and pandemic influenza}
 
-Influenza is an infectious disease, generally seasonal, caused by the influenza A and influenza B viruses in humans.
-Influenza A viruses circulate not only in humans, but also in a variety of other birds and mammal hosts.
-They are classified into antigenically-distinct subtypes by the combination of two surface proteins: \gls{HA} and \gls{NA}\autocite{krammer2018Influenza}.
+% <seasonal>
+Influenza is an infectious respiratory disease caused by the influenza virus family (\textit{Orthomyxoviridae}) in a variety of vertebrate hosts.
+% The four genera of Influenza virus that infect vertebrates, which are identified by antigenic differences in their nucleoprotein and matrix protein.
+Human infections are primarily caused by the influenza A and influenza B virus types.
+Each year, seasonal epidemics result in \textapprox{1} billion infections---mostly in children, driving transmission---and \numrange{300000}{500000} deaths worldwide.
+Peak seasonality is defined by low humidity, low temperature, and other climate factors.
+Risk factors for severe illness and death include extremes of age (infants \SI{<1}{\year}, elderly \SI{>65}{\year}), pregnancy, obesity, chronic illness, and host genetics (e.g. mutations in \gene{IFITM3} and \gene{IRF7}) \autocite{krammer2018Influenza}.
 
-There are three classes of influenza vaccine against seasonal strains in use: inactivated vaccines, \glspl{LAIV}, and recombinant \gls{HA} vaccines.
-\todo{why? for diff groups of people}
-These vaccines confer a degree of strain-specific protection, primarily by raising serum antibodies against the \gls{HA} and/or \gls{NA} proteins.
-Antigenic drift, the accumulation of mutations in these surface proteins over time, necessitates the annual reformulation of seasonal influenza vaccines to reflect circulating strains\autocite{houser2015InfluenzaVaccinesChallenges, sautto2018UniversalInfluenzaVaccine}.
-On occasion, a novel subtype against which the majority of the population is immunogically naive can arise suddenly (antigenic shift), often from zoonotic origins.
-A recent example occurred in 2009, when an outbreak of a novel swine-origin strain, eventually termed influenza A (H1N1)pdm09, resulted in a global pandemic, the fourth to occur in the last 100 years\autocite{krammer2018Influenza}.
+% Negative-sense (3′-to-5′) viral RNA is complementary to the viral mRNA, thus a positive-sense RNA must be produced by an RNA-dependent RNA polymerase from it prior to translation.
+Influenza viruses are enveloped viruses with a negative-sense single-stranded RNA genome divided into segments (eight segments for influenza A and B), each encoding one or more viral proteins.
+% Stalk is more conserved.
+There are two glycoproteins both occurring on the surface of the viral envelope that are the main antigens targeted by the host immune system.
+\gls{HA}, with its characteristic head-stalk structure, facilitates viral entry by binding sialic acid-containing receptors on host cells.
+\gls{NA} facilitates viral release, cleaving sialic acid to prevent binding of newly-synthesised viruses back to the dying host cell in the final stages of the viral life cycle.
+The gradual accumulation of mutations in these surface protein genes, especially in the \gls{HA} head domain, is known as antigenic drift,
+and can lead to evasion of antibody-mediated immunity acquired during previous exposures.
+At least 18 \gls{HA} subtypes and 11 \gls{NA} subtypes---all antigenically-distinct---have been defined for influenza A, the virus type with the greatest prevalence, host range, and genetic diversity \autocite{krammer2018Influenza}.
+
+On occasion, reassortment of genome segments between viruses infecting the same cell can quickly generate new strains (antigenic shift).
+Antigenic shifts are associated with pandemics due to lack of pre-existing population immunity \autocite{krammer2018Influenza}.
+% Pandemic severity depends on viral virulence.
+Pandemics have occurred four times in modern history: 1918 (\enquote{Spanish}), 1957 (\enquote{Asian}), 1968 (\enquote{Hong Kong}), and 2009 (\enquote{swine}).
+Each was caused by influenza A, involving reassortment of human and animal strains or zoonotic transmission \autocite{short2018BackFutureLessons}.
+% Conclusive evidence that protective influenza virus-specific antibody responses are indeed long-lived came from the 2009 influenza pandemic. Here, elderly people who were exposed to the 1918 influenza virus (or its immediate descendant), 60–90 years prior to the pandemic of 2009, were protected from infection and severe disease, as they maintained the antibody response that cross-reacted with the 2009 pandemic strain (Yu et al., 2008; Hancock et al., 2009; Ikonen et al., 2010; Reed and Katz, 2010).
 %
-% Describes 2009 H1N1 specifically
-% Antigenic and Genetic Characteristics of Swine-Origin 2009 A(H1N1) Influenza Viruses Circulating in Humans (\url{https://science.sciencemag.org/content/325/5937/197})
-\todo{add a point that 2009h1n1 is now circulating seasonally, this is a common trend}
+The most recent pandemic was due to an influenza A with \gls{HA} subtype 1 and \gls{NA} subtype 1 gene segments from avian and swine lineages \autocite{garten2009AntigenicGeneticCharacteristics}: A(H1N1)pdm09%
+\footnote{
+    \enquote{pdm09} was a unique suffix added to distinguish the 2009 pandemic strain from the circulating seasonal A(H1N1) strains at the time \autocite{worldhealthorganization2011StandardizationTerminologyPandemic}.
+}.
+Pandemic strains tend to enter seasonal circulation post-outbreak, potentially replacing previously-circulating strains;
+A(H1N1)pdm09-like strains are now the predominant seasonal A(H1N1) strain  \autocite{krammer2018Influenza}.
+% See:
+% Mechanisms of replacement of circulating viruses by seasonal and pandemic influenza A viruses
+% PMID: 27569827 DOI: 10.1016/j.ijid.2016.08.012
+%
+% Why Do Influenza Virus Subtypes Die Out? A Hypothesis
+% DOI: 10.1128/mBio.00150-11
 
-\subsection{Quantifying immune response to influenza vaccines}
+\subsection{Influenza vaccines}
 
-The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines\autocite{broadbent2011InfluenzaVirusVaccines}.
+Vaccination is the primary method for prevention and control of influenza.
+Antigenic drift and decline of vaccine-induced immunity over time means repeated vaccination is required.
+% NOTE: strain-specific antibody responses against natural infection are typically long lasting though
+Seasonal vaccines are multivalent, formulated against three (trivalent) or four (quadrivalent) influenza strains anticipated circulate in upcoming seasons.
+\gls{WHO} surveillance programs make recommendations on the most representative strains for the Northern and Southern hemispheres each year.
+
+There are three classes of licensed vaccines against seasonal influenza: \glspl{IIV}, \glspl{LAIV}, and recombinant \gls{HA} vaccines \autocite{houser2015InfluenzaVaccinesChallenges,krammer2019HumanAntibodyResponse}.
+\Glspl{IIV} can be split virion, containing virions disrupted with detergent, or subunit, containing further purified \gls{HA} protein.
+% Egg based vaccines take more time to grow, during which mismatches between vaccine strains and circulating virus strains can occur.
+\Gls{LAIV} contain low-virulence, cold-adapted viruses that replicate well only in the cool upper respiratory tract.
+Recombinant \gls{HA} vaccines contain purified recombinant \gls{HA} expressed in insect cell lines rather than relying on viral propagation in embryonated chicken eggs, hence are faster to manufacture.
+
+% Efficacy can be defined as the performance of an intervention under ideal and controlled circumstances,
+% whereas effectiveness refers to its performance under 'real-world' conditions.
+Efficacy of licensed vaccines is \SIrange{50}{90}{\percent} on average in healthy adults,
+depending greatly on vaccine class, the match between vaccine and circulating strains, and host factors \autocite{dhakal2019HostFactorsImpact}.
+
+% Different vaccines for different people
+% different classes, adjuvants etc.
+
+\subsection{Immune response to influenza vaccines}
+
+Both \glspl{IIV} and recombinant \gls{HA} vaccines primarily induce anti-\gls{HA} serum IgG antibody responses that protect against reinfection.
+\Glspl{LAIV} additionally induce mucosal IgA and T cell responses, more closely approximating natural infection.
+% IgA may lower shedding and transmission? T cell responses help with recovery?
+
+%
+% \1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
+    % TODO: basic principles here, then deep dive into specifics of the Pandemrix vaccine type
+%     \2 <general summary of biology of vaccine response, specific flu vaccine biology goes in ch2>
+%         \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
+%         \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
+%         \3 Non-Ab mediated responses [...]
+        % \3 <a bit more on innate/adaptive distinction, B/T lineage distinction>
+%     \2 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
+%     \2 But traditional vaccine dev is empirical (classical "isolate, inactivate, inject" paradigm), often successful vaccine dev does not offer insights into the mechanisms of efficacy
+%     \2 The immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood.
+    % <For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.>
+%     \2 A vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
+%     Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno compromised patients, ethnically-diverse populations, and developing countries.
+%         \3 e.g. variable vaccine efficacy of rotavirus vaccine
+%         \3 e.g. variable efficacy of flu vaccine \url{https://www.sciencedirect.com/science/article/pii/S1473309918304900}
+
 \todo{Add specific section about pandemrix, it's correlates of protection, it's durability? or maybe in methods}
 \todo{Here, add few points about the immunological response to adjuvanted TIVs i.e. what happens after Pandemrix admin? Involve the innate -> B/CD4T response. Goto plotkins}
 % Efficacy
 % Class and target of abs raised
 % Durability
 % cellular responses
+
 %
 % 2. Characteristics of human antibodies specific for influenza viruses
 % https://www.sciencedirect.com/science/article/pii/S0264410X17311180?via%3Dihub
@@ -48,18 +108,42 @@ The 2009 pandemic motivated the rapid development, trialing, and licensing of se
 Immune response to influenza vaccines in clinical trials is evaluated by assays that measure levels of antibodies specific to the vaccine strain(s).
 The \gls{HAI} assay measures the levels of serum antibodies specific to the \gls{HA} surface protein.
 % \todo{how HA abs work} \autocite{dhakal2019HostFactorsImpact}
+% TODO: what to the numbers mean
 The related \gls{MN} assay measures levels of antibodies (which may or may not be anti-\gls{HA}) that neutralise the infectivity of the virus in cell culture \autocite{klimov2012InfluenzaVirusTitration}.
 Values from these assays can be compared against thresholds for known correlates of protection: markers that associate with whether an individual is protected from the disease.
 For example, \gls{HAI} titres are regarded as the primary correlate of protection for inactivated influenza vaccines.
 Targets that regulatory agencies expect a licensed vaccine to meet are based on thresholds such as the proportion of trial individuals achieving \gls{HAI} titres $\ge 40$ and seroconversion ($\ge$ 4-fold increase in titres)\autocite{plotkin2010CorrelatesProtectionInduced,cox2013CorrelatesProtectionInfluenza}.
 % https://www.sciencedirect.com/science/article/pii/S1045105609000116?via%3Dihub
-% \todo{\url{} how much protective is 40?}
-
-\subsection{Systems vaccinology of influenza vaccines}
+% \todo{\url{} how much protective is 40?} :
+% Nevertheless, haemagglutination
+% inhibition titres have been established as a correlate
+% of protection and are widely accepted as a readout for
+% vaccine efficacy studies by regulatory agencies11,78,79. It is
+% assumed that a 1:40 titre of antibodies with haemagglutination
+% inhibition activity will reduce the risk of getting
+% an infection with seasonal H1N1 virus, H3N2 virus
+% or influenza B viruses by 50%.
+% krammer2019HumanAntibodyResponse
 
 Although \gls{HAI} titres are accepted as established correlates for inactivated seasonal influenza vaccines, they fail to account for alternate mechanisms such as T cell-mediated protection, and correlates for \gls{LAIV} and pandemic influenza vaccines are less reliable\autocite{houser2015InfluenzaVaccinesChallenges}.
 For novel and emerging diseases, there may be no prior knowledge of robust correlates to use in the vaccine development process.
 % Preparing for the Next Influenza Pandemic: The Development of a Universal Influenza Vaccine Michelle C Crank, John R Mascola, Barney S Graham The Journal of Infectious Diseases, Volume 219, Issue Supplement_1, 15 April 2019, Pages S107–S109, https://doi.org/10.1093/infdis/jiz043
+
+\subsection{Systems vaccinology of influenza vaccines}
+
+% TODO: first year report for sysvacc intro
+% \1 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
+    % \2 These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination.
+    % \2 Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified.
+%     \2 Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza ...], and also to vaccine candidates against [HIV, malaria ...], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
+%     \todo{define what a signature is in terms of correlation and prediction}
+%         \3 <add more references to lists [...] of what vaccines have been studied>
+        % TODO use sysvacc\_review\_docx
+%     \2 Has revealed many influences on vaccine response (age, sex, dose, adjuvants, expression signatures, microbiome, strain etc.)
+%     \2 So far, studies have been mainly descriptive and predictive.
+%     \2 Identifying causal relationships can inform more mechanism-based and cost-effective design (rational paradigm), and the move towards personalised vaccinology.
+%     \2 Studies of impact of host genetics on response are underrepresented \autocite{linnik2016ImpactHostGenetic}
+
 In response, the last decade has seen the rise of systems vaccinology studies: the analysis of high-dimensional data measured using multiple technologies in vaccinated individuals, in order to characterise response to vaccination at multiple levels of the biological system\autocite{pulendran2014SystemsVaccinologyProbing}.
 \todo{is there a more recent review?}
 \todo{define 'signature': nvm, remove it}
@@ -70,15 +154,50 @@ These measurements can be correlated to changes in antibody titres after vaccina
 One of the earliest such studies by Zhu et al.\autocite{zhu2010WholeGenomeTranscriptional} found that expression of type 1 interferon-modulated genes was a signature of response to \gls{LAIV}.
 An expression signature including \gene{STAT1}, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{bucasas2011EarlyPatternsGene}; kinase CaMKIV expression is also a strong predictor \autocite{nakaya2011SystemsBiologyVaccination}, as are genes related to B cell proliferation \autocite{tan2014GeneSignaturesRelated}.
 
+%
+% \1 Like for other complex traits, from twin studies it's known that vaccine Ab responses are heritable.
+%     \2 Moving out of the candidate gene era (e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/}) into GWAS.
+    % TODO: are there mendellian associations?
+%     \2 Heritability of vaccine response phenotypes \autocite{oconnor2013CharacterizingVaccineResponses}
+%     \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
+    % TODO: add brodin twin study
+%     \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
+    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
+%     \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
+
+\subsection{The \glsfmtfull{HIRD} study}
+
+% TODO: original antigenic sin
+% Typically,
+% exposure to a new virus variant (or subtype) might
+% also induce antibodies to viruses encountered earlier
+% in life, depending on the relatedness of the two antigens.
+% An antibody response against a novel virus variant in
+% adults might, therefore, be heavily influenced by the
+% individual’s exposure history117,127,128, which is an issue
+% for vaccine development.
+%
+% krammer2019HumanAntibodyResponse
+% proteins. Therefore, first exposure to the
+% 2009 pandemic H1N1 virus triggered a recall response
+% of those B cells that recognized the conserved, shared
+% epitopes, which led to a significant response to the
+% HA stalk (Box 1). This response was observed after
+% both natural infection and vaccination43,113,132–135. It has
+%
 For these studies of seasonal influenza vaccines in adults, responses tend to be biased by recall from past vaccination or infection\autocite{bucasas2011EarlyPatternsGene, nakaya2012SystemsVaccinologyLearning}.
 There have also been few studies of adjuvanted influenza vaccines, despite their superior efficacy in comparison to non-adjuvanted counterparts\autocite{wilkins2017AS03MF59AdjuvantedInfluenza,tregoning2018AdjuvantedInfluenzaVaccines}.
 
-\subsection{The \glsfmtfull{HIRD} study}
+% TODO: on pandemrix efficacy from it's trials
+The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines\autocite{broadbent2011InfluenzaVirusVaccines}.
 
 The \gls{HIRD} study conducted by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived with the above limitations in mind.
 The study is an observational, prospective cohort design.
 % NOTE: this is the standard WHO name https://www.who.int/influenza/gisrs_laboratory/terminology_ah1n1pdm09/en/
 The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated vaccine against influenza A(H1N1)pdm09 (strain name A/California/07/2009, subtype H1N1), for which the majority of the cohort at the time would be unlikely to have immunological memory.
+\footnote{
+    The \gls{WHO} nomenclature for isolates specifies influenza type (A, B, C, D), host of origin (human if omitted), geographical origin, strain number, year of isolation, and isolate subtype (combination of \gls{HA} and \gls{NA} subtypes) \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/}.
+}
 A total of 178 individuals were vaccinated with a single dose of Pandemrix, and longitudinal transcriptomic, cellular, antibody
 titre, and adverse event phenotypes were collected.
 Gene expression was profiled using a microarray, and \gls{DGE} analyses detected genes associated with both myeloid and lymphoid effector functions upregulated at day 1, most prominently for genes associated with interferon responses.
@@ -92,6 +211,8 @@ This is in contrast to several studies of seasonal influenza vaccines, where cer
 \todo{make sure gap and how it is filled is emphed enough}
 
 \subsection{Chapter summary}
+
+% TODO in this ch, I describe E differences associated with 
 
 Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number (46/178) of individuals, potentially limiting power to detect a expression signatures associated with antibody response.
 % TODO: http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf
@@ -129,7 +250,7 @@ The gene expression microarrays were performed in two batches.
 
 In addition to the existing data, array genotypes were generated for 169 individuals; and \gls{RNAseq} data for 75 individuals at days 0, 1, and 7.
 The sets of individuals with gene expression assayed by microarray and \gls{RNAseq} is disjoint, as no biological material for RNA extraction remained for the microarray individuals.
-An overview of datasets is shown in \autoref{fig:hird_design}.
+An overview of datasets is shown in \cref{fig:hird_design}.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/hird_design-crop.pdf}
@@ -172,7 +293,7 @@ Dichotomisation of continuous response variables can also result in loss of stat
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
 For each assay, a linear regression was fit with the $\log_2{\text{day 63}/\text{day -7}}$ titre fold change as the response, and the $\log_2{\text{day -7}}$ baseline titre as the predictor.
 The residuals from the two regressions were each standardized to zero mean and unit variance, then averaged.
-The \gls{TRI} expresses a continuous measure of change in antibody titres across both assays post-vaccination, compared to individuals with a similar baseline titre, and remains comparable to the binary 4-fold change definition (\autoref{fig:hird_tri}).\todo{cite appropriate subfigures here, after adding proper subfigure labels}
+The \gls{TRI} expresses a continuous measure of change in antibody titres across both assays post-vaccination, compared to individuals with a similar baseline titre, and remains comparable to the binary 4-fold change definition (\cref{fig:hird_tri}).\todo{cite appropriate subfigures here, after adding proper subfigure labels}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
@@ -180,8 +301,8 @@ The \gls{TRI} expresses a continuous measure of change in antibody titres across
     \label{fig:hird_tri}
 \end{figure} 
 
-Descriptive statistics for the 114 individuals with both gene expression and antibody titre data are presented in \autoref{tab:hird_table1}.
-Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar ($p = 0.1551$, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher ($p = 0.0002098$, Levene's test), suggesting more extreme antibody response phenotypes are present (\autoref{fig:hird_phenotypes_by_platform}).
+Descriptive statistics for the 114 individuals with both gene expression and antibody titre data are presented in \cref{tab:hird_table1}.
+Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar ($p = 0.1551$, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher ($p = 0.0002098$, Levene's test), suggesting more extreme antibody response phenotypes are present (\cref{fig:hird_phenotypes_by_platform}).
 The cause of this is unknown, there is a possibility that individuals with more extreme phenotypes were prioritised for array transcriptomics in the original \gls{HIRD} study\footnote{Personal communication with authors.}.
 
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_table1.tex}
@@ -204,7 +325,7 @@ In total, 192 samples from 176 individuals in the HIRD cohort were genotyped at 
 Using PLINK (v1.90b3w), genotype data underwent the following quality control procedures to remove poorly genotyped samples and markers:
 max marker missingness across samples $< 5\%$, 
 max sample missingness across markers $< 1\%$, 
-max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \autoref{fig:hird_genotype_sample_hetRate_missingness}),
+max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \cref{fig:hird_genotype_sample_hetRate_missingness}),
 % TODO: recheck if this is really max marker heterozygosity rate, not sample rate
 % TODO: add discordant sex mismatch to indicate possible sample swaps, distribution of F estimates
 % The HWE threshold should depend on the multi-ethnicity of the cohort
@@ -238,7 +359,7 @@ After filtering, 169 samples and 549414 markers remained.
 % TODO: read
 % Efficient toolkit implementing best practices for principal component analysis of population genetic data
 
-As shown in \autoref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
+As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
 Large-scale population structure explains variation in gene expression \autocite{brown2018ExpressionReflectsPopulation}, so including population structure as covariates can increase power.
 Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
 % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0093766
@@ -258,7 +379,7 @@ Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010Integra
 % if there may be related, prefer projection:
 % Principal Components Analysis with Related individuals (PC-AiR) [Conomos, et al. 2015] infers PS in the presence of related individuals. This method identifies an unrelated subset of individuals that represents the ancestral diversity of the sample and computes PCs in this subset and projects PCs onto the remainder of the sample.
 For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
-The top \glspl{PC} separate samples of European, African and Asian ancestry (\autoref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as continuous covariates for ancestry downstream.
+The top \glspl{PC} separate samples of European, African and Asian ancestry (\cref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as continuous covariates for ancestry downstream.
 \todo{Add Tracy-Widom statistics for PCs to justify later choice of 4 PCs for covariates}
 % TODO: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020190
 \todo{nicer version, copy the peer code, facet the hird and hapmap samples}
@@ -305,8 +426,8 @@ To avoid confounding of timepoint and batch effects from pooling, samples were p
 % Genomic origin of reads and gene end biases were assessed using Qualimap, after aligning the reads to the human GRCh38_15_plus_hs38d10 reference transciptome using tophat2.
 \gls{RNAseq} quality metrics were assessed using FASTQC\footnote{\url{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}} and Qualimap\autocite{okonechnikov2015QualimapAdvancedMultisample}, then visualised with MultiQC\autocite{ewels2016MultiQCSummarizeAnalysis}.
 % See log 2017-11-20 for fastqc discussion
-Sequence quality was high (\autoref{fig:hird_fastqc_seqQual}), and duplication levels were low (\autoref{fig:hird_fastqc_seqDupe}).
-The unimodal GC-content distribution suggested negligible levels of non-human contamination (\autoref{fig:fastqc_gc}).
+Sequence quality was high (\cref{fig:hird_fastqc_seqQual}), and duplication levels were low (\cref{fig:hird_fastqc_seqDupe}).
+The unimodal GC-content distribution suggested negligible levels of non-human contamination (\cref{fig:fastqc_gc}).
 
 \begin{figure}
 	\centering
@@ -399,7 +520,7 @@ Genes with short noncoding RNA biotypes\footnote{miRNA, miRNA\_pseudogene, miscR
 % TODO: Also, they can be shorter than the 75 bp read length, should be depeleted by size selection, and are likely to be misassigned
 Globin genes, which are highly expressed in erythrocytes and reticulocytes, cell types expected to be depleted in \gls{PBMC} \autocite{min2010VariabilityGeneExpression}, were also removed.
 % TODO: https://www.nature.com/articles/s41598-020-62801-6
-Given the proportion of removed counts at this stage was low for most samples (\autoref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to have been efficient.
+Given the proportion of removed counts at this stage was low for most samples (\cref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to have been efficient.
 
 
 % TODO: justifications
@@ -416,12 +537,12 @@ Given the proportion of removed counts at this stage was low for most samples (\
     \label{fig:hird_shortncRNA_and_globins}
 \end{figure}
 
-Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\autoref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
+Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\cref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
 Genes were further filtered to require detection (non-zero expression) in at least 95\% of samples, and a minimum of 0.5 \gls{CPM} in at least 20\% of samples.
 % TODO: check number of genes hit by non-zero and write a justification
 The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed\autocite{chen2016ReadsGenesPathways}.
 % TODO \url{https://f1000research.com/articles/5-1408/v3}
-The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\autoref{fig:hird_rnaseq_cpm_filtering}).
+The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\cref{fig:hird_rnaseq_cpm_filtering}).
 
 \begin{figure}
     \centering
@@ -474,7 +595,7 @@ After the application of all filters, expression values were available for 21626
 % 6.4.5.	This also does a log2 transform, so final units are normalized log2 intensity
 %
 Single-channel Agilent 4x44K microarray (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress\footnote{\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}}.
-These arrays were originally processed in two batches, the effect of which is seen in the raw foreground intensities (\autoref{fig:hird_array_boxplots_raw}).
+These arrays were originally processed in two batches, the effect of which is seen in the raw foreground intensities (\cref{fig:hird_array_boxplots_raw}).
 
 \begin{figure}
     \centering
@@ -494,7 +615,7 @@ VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform backgrou
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
 Most genes are targetted by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\texttt{WGCNA::collapseRows(method=MaxMean)}, recommended for probe to gene collapsing\autocite{miller2011StrategiesAggregatingGene}).
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
-The final normalised $\log_2$ intensity values for these 18216 genes over 173 samples is shown in \autoref{fig:hird_array_boxplots_MaxMean}.
+The final normalised $\log_2$ intensity values for these 18216 genes over 173 samples is shown in \cref{fig:hird_array_boxplots_MaxMean}.
 
 \begin{figure}
     \centering
@@ -506,9 +627,9 @@ The final normalised $\log_2$ intensity values for these 18216 genes over 173 sa
 \subsection{\Glsfmtlong{DGE}}
 
 % TODO: https://github.com/matloff/regtools/blob/master/inst/ScalingInPCA.md?s=09
-\gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\autoref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
+\gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\cref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
 % TODO: note no filtering of expression data before pca due to wanting to see batch fx
-Normalisation was also not able to completely remove the batch effect within the array data (\autoref{fig:hird_expression_pcs}a).
+Normalisation was also not able to completely remove the batch effect within the array data (\cref{fig:hird_expression_pcs}a).
 % Also see:
 % Wang, C., Gong, B., Bushel, P. R., Thierry-Mieg, J., Thierry-Mieg, D., Xu, J., Fang, H., Hong, H., Shen, J., Su, Z., Meehan, J., Li, X., Yang, L., Li, H., Łabaj, P. P., Kreil, D. P., Megherbi, D., Gaj, S., Caiment, F., … Tong, W. (2014). The concordance between RNA-seq and microarray data depends on chemical treatment and transcript abundance. Nature Biotechnology, 32(9), 926–932. https://doi.org/10.1038/nbt.3001
 %
@@ -520,7 +641,7 @@ For example, arrays suffer from ratio compression due to cross-hybridisation\aut
 \gls{RNAseq} has a higher dynamic range, resulting less bias at low expression levels, but estimates are more sensitive to changes in depth than array estimates are to changes in intensity \autocite{robinson2015NestedParallelExperiment}.
 There are also differences in the statistical models behind expression quantification and normalisation, as described above\todo{cite relevant preprocessing sections}.
 
-Despite the shortcomings of array data detailed above, the array dataset tends to contain individuals with more extreme antibody response phenotypes (\autoref{fig:hird_phenotypes_by_platform}), and hence the data should not be excluded.
+Despite the shortcomings of array data detailed above, the array dataset tends to contain individuals with more extreme antibody response phenotypes (\cref{fig:hird_phenotypes_by_platform}), and hence the data should not be excluded.
 Given the magnitude of the platform effect, I concluded that the appropriate approach should be a two-stage approach that integrates per-platform \gls{DGE} effect estimates while explicitly accounting for between-platform heterogeneity.
 
 \begin{figure}
@@ -535,7 +656,7 @@ Regarding the batch effect within the array data, a popular adjustment method is
 ComBat is the method used in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
 In comparisons of microarray batch effect adjustment methods, ComBat performs favourably (vs. five other adjustment packages)\autocite{chen2011RemovingBatchEffects} or comparably (vs. batch as a fixed or random effect in the linear model)\autocite{espin-perez2018ComparisonStatisticalMethods}.
 However, where batches are unbalanced in terms of sample size\autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression\autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
-In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\autoref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
+In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\cref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
 In practice, results from the \gls{DGE} analysis were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
 \todo{this is not a very precise justification. actually, if I were to color R/NR in the PCA plot, R/NR doesn't really explain a lot of var in global gene expression. that's probably why the results don't change much.}
 \todo{weaken this. combat is used multiple times in ch3}
@@ -719,7 +840,7 @@ This is equivalent to assuming placing a 95\% prior probability that effects are
 
 \subsubsection{Evaluation of priors}
 
-An example of the empirically estimated hyperparameters for the priors for the day 1 vs. baseline contrast are shown in \autoref{fig:hird_dgeMeta_priors_tau} (for $\tau$) and \autoref{fig:hird_dgeMeta_priors_mu} (for $\mu$).
+An example of the empirically estimated hyperparameters for the priors for the day 1 vs. baseline contrast are shown in \cref{fig:hird_dgeMeta_priors_tau} (for $\tau$) and \cref{fig:hird_dgeMeta_priors_mu} (for $\mu$).
 For $\tau$, the final prior used was $\text{Gamma}(\text{shape}=1.5693, \text{scale}=0.0641)$.
 This is comparable to \autocite{chung2013NondegeneratePenalizedLikelihood}'s default recommendation of a $\text{Gamma}(\text{shape}=2, \text{scale}=\lambda)$ prior where $\lambda$ is small.
 \todo{could also include a table of all sets of parameters here?}
@@ -777,7 +898,7 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
 To gain an overview of how the transcriptome changes after vaccination, linear models were fit to identify genes differentially expressed at day 1 or day 7 compared to baseline (day -7 and day 0) in the \gls{HIRD} array and \gls{RNAseq} expression data, accounting for covariates such as batch effects, sex, age, \gls{TRI}, and ancestry.
 At 13593 genes with expression measured by both platforms, models were fit within each platform, then effect sizes were combined using Bayesian random-effects meta-analysis.
 
-At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857/13593 genes were differentially expressed between any pair of timepoints, with their expression clustering into three main clusters (\autoref{fig:hird_dge_heatmap}).
+At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857/13593 genes were differentially expressed between any pair of timepoints, with their expression clustering into three main clusters (\cref{fig:hird_dge_heatmap}).
 % 692 genes with high expression at day 1, 94 genes with high expression at day 7, and 59 genes with low expression at day 1
  
 \begin{figure}
@@ -788,11 +909,11 @@ At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857
 
 \subsection{Innate immune response at day 1 post-vaccination}
 
-Consistent with global expression at day 1 being markedly different from expression at other timepoints (\autoref{fig:hird_expression_pcs}), the highest numbers of differentially expressed genes are observed at day 1, with 644 genes differentially expressed vs. baseline.
+Consistent with global expression at day 1 being markedly different from expression at other timepoints (\cref{fig:hird_expression_pcs}), the highest numbers of differentially expressed genes are observed at day 1, with 644 genes differentially expressed vs. baseline.
 The majority of these (580/644) were upregulated.
 The gene with the highest \gls{FC} increase at day 1 compared to baseline was \gene{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
 Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \gene{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \gene{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \gene{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
-Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\autoref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by signatures of innate immunity.
+Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\cref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by signatures of innate immunity.
 \todo{can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets}
 64 genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells, with the largest absolute fold change observed for \gene{FGFBP2} ($\log_2\text{\gls{FC}} = -0.9141547$).
 \todo{not sure of interpretation at FGFBP2, it is indeed highly expressed in NKs through \url{https://dice-database.org/genes/FGFBP2}}
@@ -812,16 +933,16 @@ For both up and downregulated genes, there was a tendency to return to baseline 
 The genes with the highest upregulation were the B cell-associated genes \gene{TNFRSF17} ($\log_2\text{\gls{FC}} = 1.7538617$) and \gene{MZB1} ($\log_2\text{\gls{FC}} = 1.7369668$).
 Plasma cell-specific genes including \gene{SDC1} (encodes CD138 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5437827/}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \gene{ELL2} (\url{https://www.nature.com/articles/ni.1786}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
 \todo{finish citing}
-Strongly enriched modules at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\autoref{fig:hird_tmodDotPlot_timepoint}).
+Strongly enriched modules at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\cref{fig:hird_tmodDotPlot_timepoint}).
 Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of an adaptive immune response at day 7.
 
 \subsection{Expression signatures associated with antibody response}
 
 I also looked for genes which have expression associated with baseline-adjusted antibody response, as quantified by \gls{TRI}.
-At the initial frequentist meta-analysis stage, with a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expression associated with \gls{TRI} at baseline, 55 at day 7, and 11 pooling samples across timepoints (\autoref{fig:hird_DGE_effectSizeComparisons_rma}).
+At the initial frequentist meta-analysis stage, with a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expression associated with \gls{TRI} at baseline, 55 at day 7, and 11 pooling samples across timepoints (\cref{fig:hird_DGE_effectSizeComparisons_rma}).
 \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} also identified genes with day 7 expression associated with antibody response, where response was defined as a binary phenotype based on 4-fold change (described in section \todo{add label}).
-They reported 62 significant associations at \gls{FDR} $< 0.05$, of which 58/62 fall into the 13593 genes considered in my meta-analysis (circled, \autoref{fig:hird_DGE_effectSizeComparisons_rma}), and 15/58 replicated, all with the same positive direction of effect (high expression with high \gls{TRI}).
-In the Bayesian meta-analysis, no single gene was detected as significantly associated with \gls{TRI} at $\text{\gls{lfsr}} < 0.05$ at any timepoint, or when pooling samples across all timepoints (\autoref{fig:hird_DGE_effectSizeComparisons_bayesmeta}).
+They reported 62 significant associations at \gls{FDR} $< 0.05$, of which 58/62 fall into the 13593 genes considered in my meta-analysis (circled, \cref{fig:hird_DGE_effectSizeComparisons_rma}), and 15/58 replicated, all with the same positive direction of effect (high expression with high \gls{TRI}).
+In the Bayesian meta-analysis, no single gene was detected as significantly associated with \gls{TRI} at $\text{\gls{lfsr}} < 0.05$ at any timepoint, or when pooling samples across all timepoints (\cref{fig:hird_DGE_effectSizeComparisons_bayesmeta}).
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.effectSizeComparison.pdf}
@@ -836,7 +957,7 @@ In the Bayesian meta-analysis, no single gene was detected as significantly asso
 \end{figure}
 
 Significant enrichments were detected at the gene set level; the strongest effects are seen at day 7, where expression of cell cycle, CD4\textsuperscript{+} T cells, and plasma cells are associated with high \gls{TRI}.
-At day 0, modules related with inflammatory response in myeloid cells are also associated with high \gls{TRI} (\autoref{fig:hird_tmodDotPlot_TRI}).
+At day 0, modules related with inflammatory response in myeloid cells are also associated with high \gls{TRI} (\cref{fig:hird_tmodDotPlot_TRI}).
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.TRI.pdf}
@@ -865,8 +986,8 @@ Although \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} encodes respon
 The same analysis using only the \gls{RNAseq} data replicated 0/62 genes.
 \todo{might have to rerun everything using the original binary R/NR if this line of reasoning isn't strong enough}
 \todo{move numbers to results?}
-The majority of the effects for these genes were simply much stronger in the array dataset than in the RNAseq dataset (\autoref{fig:hird_DGE_effectSizeComparisons_rma}).
-Given that the range of \gls{TRI} is higher in the array individuals (\autoref{tab:hird_table1}), this does not seem unusual that stronger \gls{TRI}-associated effects are observed there.
+The majority of the effects for these genes were simply much stronger in the array dataset than in the RNAseq dataset (\cref{fig:hird_DGE_effectSizeComparisons_rma}).
+Given that the range of \gls{TRI} is higher in the array individuals (\cref{tab:hird_table1}), this does not seem unusual that stronger \gls{TRI}-associated effects are observed there.
 %
 % \todo{TRI (cite) is a bit of a hack too to combine two assays. it seems to be 'residualised change score'}
 % lots of issues in lit, see ch3 section
@@ -877,7 +998,7 @@ Given that the range of \gls{TRI} is higher in the array individuals (\autoref{t
 Only 15/58 signals replicated using frequentist random-effects meta-analysis to combine per-platform estimates.
 I do not consider these hits as robust, as the \gls{REML} estimate of between-platform heterogeneity was zero for 8563/13593 for the day 7 TRI contrast overall, and zero for all 15 of these signals.
 None of these signals replicated in the Bayesian random-effects meta-analysis.
-The Bayesian meta-analysis is in general more conservative, calling fewer differentially expressed genes compared to the frequentist analysis for all contrasts (\autoref{fig:hird_DGE_effectSizeComparisons_bayesmeta}).
+The Bayesian meta-analysis is in general more conservative, calling fewer differentially expressed genes compared to the frequentist analysis for all contrasts (\cref{fig:hird_DGE_effectSizeComparisons_bayesmeta}).
 Prior information about $\tau$ is incorporated, discouraging unrealistic estimates of zero heterogeneity.
 Given the between-platform heterogeneity coming from both platform-specific technical differences and \gls{TRI} phenotype differences, relative to the modest effect size distributions compared to between-timepoint \gls{DGE} comparisons, the data are not well-positioned to identify significant single-gene associations with antibody response.
 %
@@ -910,7 +1031,9 @@ Over the years, a diverse range of gene sets have been found to be baseline pred
 several of which I also observe.
 It should be noted that comparisons with these signatures from existing influenza systems vaccinology studies should caveated, as most existing studies are for non-adjuvanted influenza vaccines.
 Adjuvanted influenza vaccines are considerably more immunogenic, and post-vaccination expression patterns differ to those of non-adjuvanted vaccines \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination,wilkins2017AS03MF59AdjuvantedInfluenza}.
-\todo{could comment on phenotype differences too, i.e. HIRD measure antibodies at d63, much later than is popular in the field: d28 usually}
+% plotkins ch31 inactivated
+% serum antibody levels peak 2 to 4 weeks after vaccination in healthy, previously primed individuals, but may peak 4 weeks or later in unprimed individuals and the elderly.480, 482, 483, 484, 485
+\todo{could comment on phenotype differences too, i.e. HIRD measure antibodies at d63, much later than is popular in the field: d28 usually} 
 \todo{should probably emph sobolev didn't find prevacc signatures, and we did. But it's not exactly fair, as sobolev didn't use gene set enrichment as far as i can tell}
 Hence, it is particularly important that the robustness of these observed baseline expression signatures be validated in an independent cohort for a comparable AS03-adjuvanted influenza vaccine.
 
@@ -985,3 +1108,6 @@ Chapter 3 will examine one hypothesis: the impact of common human genetic variat
 
 % TODO:
 % also need the cellular response, beyond ab titires cao2016SystemsImmunologyAntibody
+% krammer2018Influenza for T cell response
+
+% TODO upreg -> increased expression

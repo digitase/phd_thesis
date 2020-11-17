@@ -1,7 +1,7 @@
 %
 % Chapter 3
 %
-% Response eQTL-style paper
+% Response eQTL-style HIRD paper
 
 \chapter{Genetic architecture of transciptomic response to Pandemrix vaccine}
 \label{ch:hird_reQTL}
@@ -900,6 +900,10 @@ The model specification identical to \autoref{eq:hird_reQTL_limix_model}, with t
 Significance is assessed using the likelihood-ratio test versus the nested model with no interaction terms.
 \todo{can we interpret with peer in? add note of CLAIM here that although peer is correlated with xcell, interactions are only formed with xcell, so the interaction term can be interpreted per unit of genotype increase when xcell=0}
 
+% TODO:
+% o	reQTLs had no enrichment in particular.
+% but in the set of genes with Cell type interactions -> do a tmod (enriched?)
+
 \subsection{TODO Statistical colocalisation}
 
 % TODO:
@@ -1226,6 +1230,10 @@ Nevertheless, as assuming a single genotype where cell type-specific slopes are 
 At 16/1154 reQTLs, the genotype effect was detected to interact with abundance of one or more of the tested cell types (or a correlated cell type).
 At the day 1 \gene{ADCY3} reQTL, the genetic effect can be mainly attributed to the monocyte score-genotype interaction term, further supporting the hypothesis that it is monocyte-specific.
 
+% TODO
+% Basically, a utility of this is identification of cell type specific eQTLs from bulk
+% We need a stimulation. ADCY3 is not detected as cell type eQTL at bulk even with monocyte term
+
 % TODO: Franco replication
 % 20 genes from Franco
 % 12/17 DGE replicated
@@ -1270,6 +1278,9 @@ Finally, I address the prospect that common genetic variation may explain some v
 % in vaccination outcomes in adults, suggesting environmental factors as key drivers [19,20].
 % tsang2020
 I have indirectly demonstrated genotype-dependent effects on expression response by identifying reQTLs with differing effect size between timepoints,
+% TODO
+% Main point is causality is hard to define
+% Even if Detect cell type specific eQTLs, not easy to say if the reQTL is important to vaccine response
 but have not yet to determined resulting genotype-dependent differences in antibody phenotypes.
 Some of the identified reQTLs will undoubtedly affect genes whose expression or post-vaccination expression change correlates with antibody response, 
 but correlation is not transitive\autocite{langford2001PropertyBeingPositively},
@@ -1306,5 +1317,5 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 
 % TODO:
 % how to get multi ethnic coloc?
-% how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?
-
+% o	check ancestries of coloced populations: how does trans-ethnic fine mapping work?
+%  how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?

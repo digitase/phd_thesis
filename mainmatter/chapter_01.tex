@@ -26,7 +26,7 @@ This guiding principle is the central dogma, whereby the flow is directed from D
 Barring somatic mutation, an individual's genome is fixed at conception, thus providing a causally upstream anchor that can be measured with relatively little error.
 % NOTE: This was why MR was introduced in the context of family-based designs, where parent and child are of the same ancestry \autocite{daveysmith2020MendelLawsMendelian}
 A mainstay of the field of human genetics is uncovering the specific genetic variants that contribute to the heritability of phenotypes through statistical association of variants and phenotypes.
-Although not immune to population-level confounders like stratification,
+Although not immune to population-level biases like stratification \autocite{lawson2020PopulationStructureGenetic} and collider bias \autocite{day2016RobustExampleCollider},
 genetic association has intrinsic resistance to reverse causality, an issue that permeates observational studies on the causes of human phenotypes.
 
 \section{Genetic association studies of complex traits}
@@ -37,7 +37,7 @@ genetic association has intrinsic resistance to reverse causality, an issue that
 The human genome is almost three billion \si{\bp} (base pairs) in length, 
 containing \numrange{20000}{25000} protein-coding genes that span \SIrange{1}{3}{\percent} of its length, with the remaining sequence being non-coding \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA,1000genomesprojectconsortium2015GlobalReferenceHuman}.
 % Some of the remainder is dedicated to regulatory activities \autocite{theencodeprojectconsortium2012IntegratedEncyclopediaDNA}.
-Each diploid cell contains two copies of the genome, organised into 46 chromosomes comprised of 23 maternal-parental pairs: 22 pairs of homologous autosomes and one pair of sex chromosomes.
+Each diploid cell contains two copies of the genome, organised into 46 chromosomes comprised of 23 maternal-parental pairs---22 pairs of homologous autosomes and one pair of sex chromosomes.
 Variation in the genome between individuals in a population exists in the form of \glspl{SNP}, short indels, and structural variants.
 For common population variants with \gls{MAF} \SIrange{>1}{5}{\percent},
 the vast majority (\SI{>99.9}{\percent}) are \glspl{SNP} and short indels \autocite{1000genomesprojectconsortium2015GlobalReferenceHuman}.
@@ -52,11 +52,10 @@ Each version of a variant is called an allele; each individual has a maternal an
 % The Law of Dominance: An organism with alternate forms of a gene will express the form that is dominant.
 % Law of Segregation: states that a diploid organism passes a randomly selected allele for a trait to its offspring, such that the offspring receives one allele from each parent.
 % Law of independent assortment: states that genes do not influence each other with regard to the sorting of alleles into gametes; every possible combination of alleles for every gene is equally likely to occur.
-The large number of variants in a population are inherited in a smaller number of haplotypes: 
-contiguous stretches of the genome passed through generations via meiotic segregation.
+The large number of variants in a population are inherited in a smaller number of haplotypes---contiguous stretches of the genome passed through generations via meiotic segregation.
 The fundamental sources of genetic diversity are mutation and meiotic recombination, generating new alleles and breaking apart haplotypes into shorter ones over evolutionary time.
 Variants that are physically close on a chromosome are less likely to flank a recombination event, hence more likely to cosegregate on the same haplotype (genetic linkage).
-Genetic linkage is one source of \gls{LD}: the non-random association of alleles at two variants, differing from expectation based on their population frequencies and the law of independent assortment.
+Genetic linkage is one source of \gls{LD}---the non-random association of alleles at two variants, differing from expectation based on their population frequencies and the law of independent assortment.
 \gls{LD} can be quantified by $r^2$, the squared correlation coefficient between alleles in that specific population \autocite{slatkin2008LinkageDisequilibriumUnderstanding}.
 % LD decay takes a really long time, but there are also forces at work that generate or maintain it e.g. drift, selection, admixture, population subdivision, bottlenecks \autocite{slatkin2008LinkageDisequilibriumUnderstanding,visscher2012FiveYearsGWAS}.
 
@@ -88,8 +87,7 @@ The structure of correlated haplotypes reflects a population's unique evolutiona
 \subsection{Lessons from the past fifteen years}
 
 Genetic variants can affect heritable traits by impacting the function or regulation of target genes.
-How genetic variation contributes to a particular trait defines its genetic architecture: 
-the number of genes affecting that trait; and the frequencies, effect sizes, and interactions of trait-associated alleles \autocite{visscher2019Fisher1918Paper}.
+How genetic variation contributes to a particular trait defines its genetic architecture---the number of genes affecting that trait; and the frequencies, effect sizes, and interactions of trait-associated alleles \autocite{visscher2019Fisher1918Paper}.
 The number of genes defines a spectrum of traits from monogenic (where inheritance follows simple Mendelian patterns) to polygenic (where inheritance is complex).
 Proposed architectures differ greatly among complex traits, 
 but all have in common that the number of genes is large (ranging from dozens to many thousands),
@@ -330,7 +328,7 @@ and help nominate trait-relevant contexts.
 % NOTE: the term endophenotype has a specific definition, so here use intermediate
 % Assessing the utility of intermediate phenotypes for genetic mapping of psychiatric disease https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4961231/
 
-\subsection{\Glsfmtfullpl{eQTL}}
+\subsection{\Glsfmtfirstpl{eQTL}}
 
 % \1 The subset of heritable traits that are not only complex but continuous are called quantitative traits, and genetic associations for those traits are called \glspl{QTL}.
 Expression is a complex molecular phenotype in itself, with a heritability of \SIrange{15}{30}{\percent} \autocite{gaffney2013GlobalPropertiesFunctional}.
@@ -366,7 +364,7 @@ perhaps due to small but wide-reaching effects \autocite{liu2019TransEffectsGene
 \subsection{Context-dependent \glsfmtshortpl{eQTL}}
 
 Like expression itself, the effects of \glspl{eQTL} are highly context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
-A non-exhaustive list of environmental contexts that interact with \gls{eQTL} effects includes:
+A non-exhaustive list of environmental contexts that interact with \gls{eQTL} effects includes
     sex \autocite{yao2014SexAgeinteractingEQTLs},
     age \autocite{yao2014SexAgeinteractingEQTLs},
     ancestry \autocite{dejager2015ImmVarProjectInsights,nedelec2016GeneticAncestryNatural,quach2017LivingAdaptiveWorld},
@@ -496,6 +494,7 @@ The increasing number of context-dependent \gls{eQTL} datasets available for lar
 \subsection{An overview of the immune system}
 
 Immunology began as the study of host defense against infection \autocite{murphy2016JanewayImmunobiology}.
+% TODO: change to ch1
 It is now recognised that the immune system is also involved in pathogenesis of allergic, autoimmune, and other immune-mediated diseases.
 This subsection provides a basic overview of parts of the immune system relevant to this thesis.
 
@@ -551,6 +550,7 @@ Antigen-presentation by \glspl{DC} is a key link between the innate and adaptive
 The main forces of the adaptive response comprise B and T lymphocytes.
 % B and T cells are sources from bone marrow common lymphoid progenitors.
 % B and T cells complete their development to naive lymphocytes in the bone marrow and thymus respectively.
+\todo{each naive lymphocyte is a particular receptor}
 Naive lymphocytes express antigen receptors that recognise specific antigens.
 When they encounter this antigen, they activate, proliferate (clonal expansion), then differentiate into effector cells.
 To initiate adaptive response,
@@ -571,7 +571,7 @@ A small subset of activated B and T cells can become memory cells, responsible f
 % TODO: read pulendran2020ScienceMedicineHuman
 To understand the immune system and its intricate interactions,
 \enquote{systems immunology} studies take a holistic rather than reductionist approach \autocite{davis2017SystemsImmunologyJust,villani2018SystemsImmunologyLearning,pulendran2020ScienceMedicineHuman}.
-The basic principle is the same: experimentally perturb the system and observe its response.
+The basic principle is the same---experimentally perturb the system and observe its response.
 Drugs and vaccines can be used as safe and synchronised perturbations.
 A range of high-throughput technologies can be applied to measure response at many layers of the immune system (\cref{fig:intro_sysImmunology}).
 Longitudinal designs are common, aiming to sample timepoints corresponding to baseline, innate and adaptive immunity.
@@ -631,50 +631,6 @@ and impede pathways that lead to immune dysregulation in disease.
 %         \3 Studies of natural infection are complicated by e.g. determining exposure, ethics, dose
 %     \2 Simultaneously provides insight in to the biology behind those specific responses
 %     \2 Two immune perturbations considered in this thesis are vaccines and biologic drugs.
-
-% \subsection{Immune response to vaccination}
-% NOTE: technically vaccines are biologics
-%
-% \1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
-    % TODO: basic principles here, then deep dive into specifics of the Pandemrix vaccine type
-%     \2 <general summary of biology of vaccine response, specific flu vaccine biology goes in ch2>
-%         \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
-%         \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
-%         \3 Non-Ab mediated responses [...]
-        % \3 <a bit more on innate/adaptive distinction, B/T lineage distinction>
-%     \2 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
-%     \2 But traditional vaccine dev is empirical (classical "isolate, inactivate, inject" paradigm), often successful vaccine dev does not offer insights into the mechanisms of efficacy
-%     \2 The immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood.
-    % <For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.>
-%     \2 A vaccine that is highly efficacious in one human population may have significantly lower efficacy in other populations.
-%     Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno compromised patients, ethnically-diverse populations, and developing countries.
-%         \3 e.g. variable vaccine efficacy of rotavirus vaccine
-%         \3 e.g. variable efficacy of flu vaccine \url{https://www.sciencedirect.com/science/article/pii/S1473309918304900}
-%
-% TODO: figure on innate phase then adaptive response to vacc
-%
-% TODO: first year report for sysvacc intro
-% \1 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
-    % \2 These systems vaccinology studies often consider longitudinal measurements of the transcriptomic, cellular, cytokine, and antibody immune responses following vaccination.
-    % \2 Measurements are taken at multiple molecular levels (e.g. genome, transcriptome, proteome), and molecular signatures that correlate with and predict vaccine-induced immunity are identified.
-%     \2 Systems vaccinology has been successfully applied to a variety of licensed vaccines [yellow fever, influenza ...], and also to vaccine candidates against [HIV, malaria ...], resulting in the identification of early transcriptomic signatures that predict vaccine-induced antibody responses.
-%     \todo{define what a signature is in terms of correlation and prediction}
-%         \3 <add more references to lists [...] of what vaccines have been studied>
-        % TODO use sysvacc\_review\_docx
-%     \2 Has revealed many influences on vaccine response (age, sex, dose, adjuvants, expression signatures, microbiome, strain etc.)
-%     \2 So far, studies have been mainly descriptive and predictive.
-%     \2 Identifying causal relationships can inform more mechanism-based and cost-effective design (rational paradigm), and the move towards personalised vaccinology.
-%     \2 Studies of impact of host genetics on response are underrepresented \autocite{linnik2016ImpactHostGenetic}
-%
-% \1 Like for other complex traits, from twin studies it's known that vaccine Ab responses are heritable.
-%     \2 Moving out of the candidate gene era (e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/}) into GWAS.
-    % TODO: are there mendellian associations?
-%     \2 Heritability of vaccine response phenotypes \autocite{oconnor2013CharacterizingVaccineResponses}
-%     \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
-    % TODO: add brodin twin study
-%     \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
-    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
-%     \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
 
 % \subsection{Immune response to anti-TNF biologics}
 %
