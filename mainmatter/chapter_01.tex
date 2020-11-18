@@ -418,7 +418,7 @@ where the interacting environment is experimental stimulation,
 potentially revealing regulatory effects not detectable at baseline \autocite{vandiedonck2017GeneticAssociationMolecular,huang2019GeneticsGeneExpression}.
 The vast majority of \gls{reQTL} studies to date have been conducted on immune cells. 
 This is not only due to the abundance of immune cells easily accessible in peripheral blood, amenable to purification and stimulation,
-but because the immune system is specialised for responding to environmental perturbations.
+but because the immune system is specialised for mounting different responses depending on the pathogen or perturbation.
 Done \textit{in vitro}, variables such as cell type and abundance; and the nature, length, and intensity of stimulation can be precisely controlled.
 
 A seminal study by \textcite{barreiro2012DecipheringGeneticArchitecture} mapped \glspl{eQTL} in monocyte-derived \glspl{DC} before and after \SI{18}{\hour} infection with \textit{Mycobacterium tuberculosis}.
@@ -495,7 +495,7 @@ The increasing number of context-dependent \gls{eQTL} datasets available for lar
 
 Immunology began as the study of host defense against infection \autocite{murphy2016JanewayImmunobiology}.
 % TODO: change to ch1
-It is now recognised that the immune system is also involved in pathogenesis of allergic, autoimmune, and other immune-mediated diseases.
+It is now recognised that the immune system is also involved in pathogenesis of diverse conditions encompassing allergic, autoimmune, and other immune-mediated diseases.
 This subsection provides a basic overview of parts of the immune system relevant to this thesis.
 
 % <two arms>
@@ -551,17 +551,22 @@ The main forces of the adaptive response comprise B and T lymphocytes.
 % B and T cells are sources from bone marrow common lymphoid progenitors.
 % B and T cells complete their development to naive lymphocytes in the bone marrow and thymus respectively.
 \todo{each naive lymphocyte is a particular receptor}
-Naive lymphocytes express antigen receptors that recognise specific antigens.
+Naive lymphocytes express antigen receptors that recognise parts of specific antigens called epitopes.
 When they encounter this antigen, they activate, proliferate (clonal expansion), then differentiate into effector cells.
 To initiate adaptive response,
 % CD8 and CD4 function in antigen recognition by recognizing different regions of MHC molecules and by being involved in the signaling of the T-cell receptor that is engaged with its antigen. Thus, CD4 and CD8 are known as co-receptors and they provide a functional difference between CD8 and CD4 T cells,
 % Because CD8 recognizes a region of the MHC class I protein while CD4 recognizes a region of MHC class II protein, the two co-receptors functionally distinguish T cells. Therefore, CD8 T cells selectively recognize peptides that are bound to MHC class I molecules, while CD4 T cells recognize peptides presented by MHC class II.
 % MHC polymorphism affects antigen recognition by T cells by influencing both peptide binding and the contacts between T-cell receptor and MHC molecule.
-CD4 (helper) T cells recognise antigen fragments presented in a complex with \gls{MHC} class II on the surface of \glspl{APC}.
+\todo{add TCR}
+CD4\textsuperscript{+} (helper) T cells recognise peptide fragments from the antigen presented in a complex with \gls{MHC} class II on the surface of \glspl{APC}.
 % Binding requires TCR (CD3), CD4, MHC class II and costimulatory factors.
-CD4 T cells then differentiate into several subsets that activate and regulate other cell types, including macrophages, CD8 T cells and B cells.
-Activated CD8 (cytotoxic) T cells recognise antigens presented by \gls{MHC} class I on infected cells and directly kill the cell.
-Activated B cells differentiate into plasma cells that secrete large quantities of antibodies that which identify and neutralise pathogens by specific binding to an epitope on the target antigen.
+CD4\textsuperscript{+} T cells then differentiate into several subsets that activate and regulate other cell types, including macrophages, CD8\textsuperscript{+} T cells and B cells.
+Activated CD8\textsuperscript{+} (cytotoxic) T cells recognise antigens presented by \gls{MHC} class I on infected cells and directly kill the cell.
+\todo{distinguish plasmablast/plasma cell and add long lived plasma cells}
+\todo{add B cell activation mechanism by cd4, BCR}
+Activated B cells differentiate into plasma cells that secrete large quantities of antibodies, the soluble form of the \gls{BCR}.
+% TODO:
+% These bind specifically to the same that which identify and neutralise pathogens by specific binding to an epitope on the target antigen.
 Antibody-mediated immunity is also called humoral immunity,
 whereas T cells and innate immune responses comprise cell-mediated immunity.
 A small subset of activated B and T cells can become memory cells, responsible for long-term immunological memory.
@@ -590,6 +595,9 @@ the richness of sampling required often restricts sample size due to cost and lo
     \label{fig:intro_sysImmunology}
 \end{figure}
 
+% TODO explain each technology
+% include ELIsplot for cytokines
+
 There are three major themes to systems immunology.
 Initial studies of a particular response phenotype are often descriptive,
 aiming to find correlations between the components of the immune system and other components, or with phenotypic response.
@@ -605,6 +613,8 @@ Controlled variation can also be systematically generated by RNA interference or
 Obtaining causal understanding is essential for clinical translation,
 to determine the interventions that can be made to promote effective response to pathogens and vaccines,
 and impede pathways that lead to immune dysregulation in disease.
+
+% TODO: add example study for each theme
 
 \todo{Subsection "Immune response to vaccination" will be merged with ch2 intro. Subsection "Immune response to anti-TNFs" will be merged with ch4 intro.}
 

@@ -7,41 +7,59 @@
 \chapter{Transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_DGE}
 
+% TODO: microarray to expression array harmonise
+
 \section{Introduction}
 
-\subsection{Seasonal and pandemic influenza}
+% collab note
+% anna lorenc
+% sean
+% adrian
 
-% <seasonal>
+\subsection{Influenza}
+
 Influenza is an infectious respiratory disease caused by the influenza virus family (\textit{Orthomyxoviridae}) in a variety of vertebrate hosts.
-% The four genera of Influenza virus that infect vertebrates, which are identified by antigenic differences in their nucleoprotein and matrix protein.
-Human infections are primarily caused by the influenza A and influenza B virus types.
-Each year, seasonal epidemics result in \textapprox{1} billion infections---mostly in children, driving transmission---and \numrange{300000}{500000} deaths worldwide.
+% bresee2018InactivatedInfluenzaVaccines
+% Asymptomatic influenza infections are likely common, and may account for greater than 30% of all influenza infections,62, 63, 64, 65, 66, 67 although estimates have varied considerably depending on methods used to confirm influenza infection and study design.68 Asymptomatically infected persons can shed detectable influenza virus and may transmit influenza to others.69
+Of the four virus types (A, B, C, D) defined by antigenic specificity of the viral nucleoprotein,
+human infections are primarily caused by influenza A and influenza B.
+Each year, seasonal epidemics result in \textapprox{1} billion infections and \numrange{300000}{500000} deaths worldwide.
 Peak seasonality is defined by low humidity, low temperature, and other climate factors.
-Risk factors for severe illness and death include extremes of age (infants \SI{<1}{\year}, elderly \SI{>65}{\year}), pregnancy, obesity, chronic illness, and host genetics (e.g. mutations in \gene{IFITM3} and \gene{IRF7}) \autocite{krammer2018Influenza}.
+Risk factors for severe illness and death include extremes of age (infants \SI{<1}{\year}, elderly \SI{>65}{\year}), pregnancy, obesity, chronic illness, and host genetics (e.g. mutations in \gene{IFITM3} and \gene{IRF7}) \autocite{krammer2018Influenza,dhakal2019HostFactorsImpact}.
 
+Influenza viruses are enveloped viruses with a negative-sense single-stranded RNA genome divided into segments (eight segments in influenza A and B), each encoding one or more viral proteins.
 % Negative-sense (3′-to-5′) viral RNA is complementary to the viral mRNA, thus a positive-sense RNA must be produced by an RNA-dependent RNA polymerase from it prior to translation.
-Influenza viruses are enveloped viruses with a negative-sense single-stranded RNA genome divided into segments (eight segments for influenza A and B), each encoding one or more viral proteins.
-% Stalk is more conserved.
 There are two glycoproteins both occurring on the surface of the viral envelope that are the main antigens targeted by the host immune system.
-\gls{HA}, with its characteristic head-stalk structure, facilitates viral entry by binding sialic acid-containing receptors on host cells.
-\gls{NA} facilitates viral release, cleaving sialic acid to prevent binding of newly-synthesised viruses back to the dying host cell in the final stages of the viral life cycle.
-The gradual accumulation of mutations in these surface protein genes, especially in the \gls{HA} head domain, is known as antigenic drift,
+\gls{HA}, with its characteristic head-stalk structure, facilitates viral entry by binding sialic acid-containing surface receptors on host cells.
+\gls{NA} facilitates viral release, cleaving sialic acids to prevent newly-synthesised viruses aggregating to each other---viral proteins can be sialylated post-translation---and to the dying host cell in the final stages of the viral life cycle.
+The gradual accumulation of mutations in these surface protein genes is known as antigenic drift,
 and can lead to evasion of antibody-mediated immunity acquired during previous exposures.
-At least 18 \gls{HA} subtypes and 11 \gls{NA} subtypes---all antigenically-distinct---have been defined for influenza A, the virus type with the greatest prevalence, host range, and genetic diversity \autocite{krammer2018Influenza}.
+As the virus type with the greatest prevalence, host range, and genetic diversity,
+influenza A is classified into a number of subtypes based on the antigenic properties of its \gls{HA} and \gls{NA}.
+% Defined by double immunodiffusion (DID) reactions
+At least 18 \gls{HA} subtypes and 11 \gls{NA} subtypes exist \autocite{krammer2019HumanAntibodyResponse}.
+Although these \gls{HA} and \gls{NA} subtypes are all antigenically-dissimilar, 
+there can still be cross-reactivity between subtypes, and considerable drift within subtypes \autocite{worldhealthorganization1980RevisionSystemNomenclature}.
+%
+% krammer2019HumanAntibodyResponse
+% The introduction of a new pandemic virus strain, as occurred in 2009 with the pandemic H1N1 virus, poses an extraordinary challenge to the immune system. Before 2009, humans had been widely exposed to seasonal H1N1 viruses. The HA expressed by these seasonal viruses is markedly different from the HA expressed by the 2009 pandemic H1N1 virus, although they are of the same HA subtype. However, the differences are not equally distributed within the H1 HA protein. The head domains of seasonal and pandemic H1 proteins differ greatly (having ~68% amino acid identity), whereas the stalk domains are highly conserved (having ~88% amino acid identity). In addition, some specific epitopes of the head domain are shared between seasonal and pandemic H1 proteins. Therefore, first exposure to the 2009 pandemic H1N1 virus triggered a recall response of those B cells that recognized the conserved, shared epitopes, which led to a significant response to the HA stalk (Box 1). This response was observed after both natural infection and vaccination43,113,132–135. It has been hypothesized that this increase in the production of cross-reactive antibodies led to the disappearance of seasonal H1N1 viruses after the emergence of the 2009 pandemic H1N1 virus43.
+%
+Influenza B viruses are less diverse, classified into two antigenically-distinct lineages: Victoria-like and Yamagata-like \autocite{krammer2018Influenza}.
 
 On occasion, reassortment of genome segments between viruses infecting the same cell can quickly generate new strains (antigenic shift).
 Antigenic shifts are associated with pandemics due to lack of pre-existing population immunity \autocite{krammer2018Influenza}.
 % Pandemic severity depends on viral virulence.
 Pandemics have occurred four times in modern history: 1918 (\enquote{Spanish}), 1957 (\enquote{Asian}), 1968 (\enquote{Hong Kong}), and 2009 (\enquote{swine}).
-Each was caused by influenza A, involving reassortment of human and animal strains or zoonotic transmission \autocite{short2018BackFutureLessons}.
-% Conclusive evidence that protective influenza virus-specific antibody responses are indeed long-lived came from the 2009 influenza pandemic. Here, elderly people who were exposed to the 1918 influenza virus (or its immediate descendant), 60–90 years prior to the pandemic of 2009, were protected from infection and severe disease, as they maintained the antibody response that cross-reacted with the 2009 pandemic strain (Yu et al., 2008; Hancock et al., 2009; Ikonen et al., 2010; Reed and Katz, 2010).
+Each was caused by influenza A, involving reassortment of human and animal strains, or zoonotic transmission of animal strains \autocite{short2018BackFutureLessons}.
+% Conclusive evidence that protective influenza virus-specific antibody responses are indeed long-lived came from the 2009 influenza pandemic. 
+% Here, elderly people who were exposed to the 1918 influenza virus (or its immediate descendant), 60–90 years prior to the pandemic of 2009, were protected from infection and severe disease, as they maintained the antibody response that cross-reacted with the 2009 pandemic strain (Yu et al., 2008; Hancock et al., 2009; Ikonen et al., 2010; Reed and Katz, 2010).
 %
-The most recent pandemic was due to an influenza A with \gls{HA} subtype 1 and \gls{NA} subtype 1 gene segments from avian and swine lineages \autocite{garten2009AntigenicGeneticCharacteristics}: A(H1N1)pdm09%
+For instance, the 2009 pandemic was due to an influenza A strain with \gls{HA} subtype 1 and \gls{NA} subtype 1 gene segments of swine origin \autocite{garten2009AntigenicGeneticCharacteristics}: A(H1N1)pdm09%
 \footnote{
     \enquote{pdm09} was a unique suffix added to distinguish the 2009 pandemic strain from the circulating seasonal A(H1N1) strains at the time \autocite{worldhealthorganization2011StandardizationTerminologyPandemic}.
 }.
 Pandemic strains tend to enter seasonal circulation post-outbreak, potentially replacing previously-circulating strains;
-A(H1N1)pdm09-like strains are now the predominant seasonal A(H1N1) strain  \autocite{krammer2018Influenza}.
+A(H1N1)pdm09-like strains are now the predominant seasonal A(H1N1) strain \autocite{krammer2018Influenza}.
 % See:
 % Mechanisms of replacement of circulating viruses by seasonal and pandemic influenza A viruses
 % PMID: 27569827 DOI: 10.1016/j.ijid.2016.08.012
@@ -49,43 +67,96 @@ A(H1N1)pdm09-like strains are now the predominant seasonal A(H1N1) strain  \auto
 % Why Do Influenza Virus Subtypes Die Out? A Hypothesis
 % DOI: 10.1128/mBio.00150-11
 
-\subsection{Influenza vaccines}
+\subsection{Seasonal influenza vaccines}
 
 Vaccination is the primary method for prevention and control of influenza.
-Antigenic drift and decline of vaccine-induced immunity over time means repeated vaccination is required.
-% NOTE: strain-specific antibody responses against natural infection are typically long lasting though
-Seasonal vaccines are multivalent, formulated against three (trivalent) or four (quadrivalent) influenza strains anticipated circulate in upcoming seasons.
-\gls{WHO} surveillance programs make recommendations on the most representative strains for the Northern and Southern hemispheres each year.
+Antigenic drift and decline of vaccine-induced immunity over time means annual vaccination is recommended.
+Seasonal vaccines are multivalent, usually formulated against three (trivalent) or four (quadrivalent) influenza strains anticipated to circulate in upcoming influenza seasons.
+The \gls{WHO}'s Global Influenza Surveillance Response System (GISRS) makes recommendations on the most representative strains for the Northern and Southern hemispheres each year, about six months before the start of the respective seasons.
 
+% bresee2018InactivatedInfluenzaVaccines
+% Inactivated whole virus vaccines are no longer in use, as split ones are still immunogenic, but less reactogenic.
 There are three classes of licensed vaccines against seasonal influenza: \glspl{IIV}, \glspl{LAIV}, and recombinant \gls{HA} vaccines \autocite{houser2015InfluenzaVaccinesChallenges,krammer2019HumanAntibodyResponse}.
 \Glspl{IIV} can be split virion, containing virions disrupted with detergent, or subunit, containing further purified \gls{HA} protein.
-% Egg based vaccines take more time to grow, during which mismatches between vaccine strains and circulating virus strains can occur.
 \Gls{LAIV} contain low-virulence, cold-adapted viruses that replicate well only in the cool upper respiratory tract.
-Recombinant \gls{HA} vaccines contain purified recombinant \gls{HA} expressed in insect cell lines rather than relying on viral propagation in embryonated chicken eggs, hence are faster to manufacture.
+Recombinant \gls{HA} vaccines contain purified recombinant \gls{HA} expressed in insect cell lines rather than relying on traditional viral propagation in embryonated chicken eggs.
+Cell-based \glspl{IIV} are also available. 
+Cell-based vaccines are faster to manufacture in pandemic situations, not dependent on egg supply, and avoids egg-adaptation (mismatches between vaccine and circulating strains caused by adaptation to growth in eggs).
 
-% Efficacy can be defined as the performance of an intervention under ideal and controlled circumstances,
-% whereas effectiveness refers to its performance under 'real-world' conditions.
-Efficacy of licensed vaccines is \SIrange{50}{90}{\percent} on average in healthy adults,
-depending greatly on vaccine class, the match between vaccine and circulating strains, and host factors \autocite{dhakal2019HostFactorsImpact}.
+Licensed seasonal vaccines are effective and well-tolerated in healthy adults, but particular subclasses of vaccine are recommended for different demographics \autocite{bresee2018InactivatedInfluenzaVaccines,luke2018InfluenzaVaccineLive,ramsay2020InfluenzaGreenBook}.
+\glspl{LAIV} are delivered via nasal spray and are more effective than \glspl{IIV} at mitigating transmission. 
+They are recommended for children---the major drivers of community transmission---but are contraindicated for young children \SI{<2}{\year} at risk of wheezing, and immunocompromised individuals.
+Trials also suggest \gls{LAIV} has superior efficacy compared to \glspl{IIV} in children.
+High-dose and adjuvanted \gls{IIV} vaccines are recommended to enhance immunogenicity in the elderly.
+% Generally, adjuvants improve vaccine responses but may increase reactogenicity.
+Cell-based vaccines are suitable for people with egg allergies.
+No vaccines are licensed for use in infants \SI{<6}{\month}, but passive immunity can be conferred through vaccinating the mother.
 
-% Different vaccines for different people
-% different classes, adjuvants etc.
+Point estimates of seasonal vaccine efficacy range from \SIrange{50}{90}{\percent} in healthy adults in controlled trials.
+Real-world effectiveness can be as low as \SI{10}{\percent}, depending greatly on vaccine class, choice of endpoint, the match between vaccine and circulating strains, and host factors
+% (e.g. age, sex, immune history, pregnancy, obesity, microbiome, genetics)
+\autocite{dhakal2019HostFactorsImpact}.
+In general, efficacy is comparable or better in children versus young adults, and lowest in the elderly due to immunosenescence.
+Females mount higher antibody responses versus males, regardless of age \glspl{IIV}, potentially mediated by sex steroid levels \autocite{dhakal2019HostFactorsImpact}.
+Immune history impacts efficacy due to antigenic seniority (also known as immune imprinting), where the antibody response is biased towards B memory response against strains encountered in childhood over \textit{de novo} response.
+This is beneficial if strains with the same epitopes come back into circulation, but harmful against drifted strains \autocite{henry2018OriginalAntigenicSin,dhakal2019HostFactorsImpact}.
+\todo{add pregnancy, obesity, microbiome}
+Host genetic variation in cytokine genes, immunoglobulin genes and the \gls{HLA} region are associated with antibody responses---reviewed in more depth in \cref{subsec:hird_reQTL_intro_geneticFactorsFluVaccine}.
 
-\subsection{Immune response to influenza vaccines}
+\subsection{Quantifying immune response to influenza vaccines}
 
-Both \glspl{IIV} and recombinant \gls{HA} vaccines primarily induce anti-\gls{HA} serum IgG antibody responses that protect against reinfection.
-\Glspl{LAIV} additionally induce mucosal IgA and T cell responses, more closely approximating natural infection.
-% IgA may lower shedding and transmission? T cell responses help with recovery?
+The efficacy of \glspl{IIV} are mostly mediated by induction of strain-specific anti-\gls{HA} antibodies,
+although other antibodies (e.g. anti-\gls{NA}) may also contribute in the case of non-purified vaccines.
+\Glspl{ASC} in peripheral blood around one week after vaccination, and serum antibodies peak around two to four weeks after vaccination.
+Antibody-mediated protection may last up to a year in healthy adults \autocite{bresee2018InactivatedInfluenzaVaccines,davis2020InfluenzaVaccineInduced}.
+The immunodominance of the \gls{HA} head over the stalk means most anti-\gls{HA} antibodies have epitopes in the head domain.
+Unsurprisingly, the resulting immune selection pressure concentrates antigenic drift in the head domain.
+The stalk domain is relatively conserved, hence anti-stalk antibodies can be broadly neutralising, effective against multiple virus subtypes (heterosubtypic immunity) \autocite{sano2017RoadMoreEffective}.
 
-%
-% \1 One of the earliest applications of systems immunology was to vaccine response, leading to the sub-discipline of systems vaccinology.
-    % TODO: basic principles here, then deep dive into specifics of the Pandemrix vaccine type
-%     \2 <general summary of biology of vaccine response, specific flu vaccine biology goes in ch2>
-%         \3 Vaccines stimulate the immune system with pathogen-derived antigens to induce effector responses (primarily antigen-specific antibodies) and immunological memory against the pathogen itself.
-%         \3 These effector responses are then be rapidly reactivated in cases of future exposure to the pathogen, mediating long-term protection.
-%         \3 Non-Ab mediated responses [...]
-        % \3 <a bit more on innate/adaptive distinction, B/T lineage distinction>
-%     \2 Vaccination has enormous impact on global health \autocite{greenwood2014ContributionVaccinationGlobal}
+The \gls{HAI} assay is an inexpensive method for quantifying strain-specific serum anti-\gls{HA} antibody concentrations. 
+A serial dilution of serum is created and mixed with standardised concentrations of \glspl{RBC} and influenza virus. 
+Without the presence of strain-specific antibodies, the receptor site on the \gls{HA} head binds to membrane-bound sialic acid on \glspl{RBC}, agglutinating them into a lattice that appears as a cloudy red solution.
+Antibodies inhibit agglutination and the \glspl{RBC} settle, creating a clear solution with a dark red pellet. 
+The readout is the least dilute concentration of serum that completely inhibits agglutination \autocite{klimov2012InfluenzaVirusTitration}.
+A \gls{HAI} titre of 40 (1:40 dilution) is deemed seroprotective, and is an accepted correlate of protection for \glspl{IIV},
+% i.e. is seroprotective
+representing \SI{50}{\percent} clinical protection rate against infection \autocite{cox2013CorrelatesProtectionInfluenza,bresee2018InactivatedInfluenzaVaccines}.
+% See nauta2009RelationshipMeanAntibody for modelling the full curve.
+Reliable correlates of protection are useful in vaccine trials to reduce resource requirements (e.g. time, sample size, cost) compared to disease or infection-based endpoints like clinical protection \autocite{pulendran2010SystemsVaccinology}.
+For seasonal \glspl{IIV}, regulatory agencies define target criteria based on the
+minimum proportion of individuals achieving \gls{HAI} seroprotection (\SI{>40}) 
+and seroconversion (\SI{\ge 4}-fold increase in titre after vaccination, indicating the vaccine is immunogenic) \autocite{cox2013CorrelatesProtectionInfluenza,sano2017RoadMoreEffective,krammer2019HumanAntibodyResponse}.
+
+An alternative method is the \gls{MN} assay, which quantifies serum antibodies capable of neutralising viral infectivity.
+Neutralising antibodies may be anti-\gls{HA} antibodies quantifiable by \gls{HAI}, but may also be anti-\gls{HA} stalk antibodies or antibodies with non-\gls{HA} targets not detectable by \gls{HAI} \autocite{krammer2019HumanAntibodyResponse}.
+The assay involves a serial dilution of serum incubated with virus. 
+The serum-virus mixtures are then inoculated into host cells \textit{in vitro}.
+After incubation, an \gls{ELISA} can be run to detect virus-infected cells, the lack of which indicates neutralising activity \autocite{klimov2012InfluenzaVirusTitration}.
+% Computing the value is complicated, see klimov2012InfluenzaVirusTitration
+A \gls{MN} assay value of 160 (1:160 dilution) is considered equivalent to the seroprotective \gls{HAI} value of 40 \autocite{bresee2018InactivatedInfluenzaVaccines}.
+
+Antibodies induced by \glspl{IIV} are primarily serum IgG antibodies.
+\Glspl{LAIV} can induce serum IgG, but also induce mucosal IgA and T cell responses.
+This multifaceted response more closely approximates natural infection \autocite{houser2015InfluenzaVaccinesChallenges,krammer2019HumanAntibodyResponse}.
+% NOTE: this is specifically antibody mediated protection, not going into T cells here
+Antibody-mediated protection also has greater longevity than that provided by \glspl{IIV}, lasting at least a year,
+but still pales in comparison to protection granted by natural infection, which can be lifelong \autocite{luke2018InfluenzaVaccineLive, krammer2019HumanAntibodyResponse}.
+Different responses play different roles in immunity:
+serum IgG is important for limiting severity of systemic infection, 
+mucosal IgA in the upper respiratory tract inhibits initial infection and transmission, 
+CD8\textsuperscript{+} T cells promote viral clearance and recovery,
+and CD4\textsuperscript{+} T cells help induce humoral and CD8\textsuperscript{+} T cells
+\textcite{renegar2004RoleIgAIgG,sano2017RoadMoreEffective,krammer2018Influenza,bresee2018InactivatedInfluenzaVaccines}.
+Correlates of protection for \gls{LAIV} have not been defined;
+licensed \glspl{LAIV} have all been licensed on the basis of clinical protection \autocite{luke2018InfluenzaVaccineLive,krammer2019HumanAntibodyResponse}.
+% NOTE: luke2018InfluenzaVaccineLive
+% It is important to note that although humoral and cellular immune responses to LAIV can be measured, an immune correlate of protection for LAIV has not yet been identified (see “Immune Correlates of Protection for Live Attenuated Influenza Vaccine” later).
+Traditional serological assays ignore antibody isotype, epitope location, non-serum antibodies, and cell-mediated immunity.
+Their comparable efficacy to \glspl{IIV} in adults despite low \gls{HAI} titres and seroconversion rates are presumed to be mediated by these alternative mechanisms \autocite{krammer2019HumanAntibodyResponse}.
+% See crank2019PreparingNextInfluenza for Brief outlook on unknowns in flu vaccination.
+
+\subsection{Systems vaccinology of influenza vaccines}
+
 %     \2 But traditional vaccine dev is empirical (classical "isolate, inactivate, inject" paradigm), often successful vaccine dev does not offer insights into the mechanisms of efficacy
 %     \2 The immunological mechanisms that underpin a specific vaccine's success or failure in a given individual are often poorly understood.
     % <For the majority of licensed vaccines, there is a lack of understanding regarding the molecular mechanisms that underpin this variation in host immune response.>
@@ -93,43 +164,6 @@ Both \glspl{IIV} and recombinant \gls{HA} vaccines primarily induce anti-\gls{HA
 %     Particularly challenging populations for vaccination include the infants and elderly, pregnant, immuno compromised patients, ethnically-diverse populations, and developing countries.
 %         \3 e.g. variable vaccine efficacy of rotavirus vaccine
 %         \3 e.g. variable efficacy of flu vaccine \url{https://www.sciencedirect.com/science/article/pii/S1473309918304900}
-
-\todo{Add specific section about pandemrix, it's correlates of protection, it's durability? or maybe in methods}
-\todo{Here, add few points about the immunological response to adjuvanted TIVs i.e. what happens after Pandemrix admin? Involve the innate -> B/CD4T response. Goto plotkins}
-% Efficacy
-% Class and target of abs raised
-% Durability
-% cellular responses
-
-%
-% 2. Characteristics of human antibodies specific for influenza viruses
-% https://www.sciencedirect.com/science/article/pii/S0264410X17311180?via%3Dihub
-%
-Immune response to influenza vaccines in clinical trials is evaluated by assays that measure levels of antibodies specific to the vaccine strain(s).
-The \gls{HAI} assay measures the levels of serum antibodies specific to the \gls{HA} surface protein.
-% \todo{how HA abs work} \autocite{dhakal2019HostFactorsImpact}
-% TODO: what to the numbers mean
-The related \gls{MN} assay measures levels of antibodies (which may or may not be anti-\gls{HA}) that neutralise the infectivity of the virus in cell culture \autocite{klimov2012InfluenzaVirusTitration}.
-Values from these assays can be compared against thresholds for known correlates of protection: markers that associate with whether an individual is protected from the disease.
-For example, \gls{HAI} titres are regarded as the primary correlate of protection for inactivated influenza vaccines.
-Targets that regulatory agencies expect a licensed vaccine to meet are based on thresholds such as the proportion of trial individuals achieving \gls{HAI} titres $\ge 40$ and seroconversion ($\ge$ 4-fold increase in titres)\autocite{plotkin2010CorrelatesProtectionInduced,cox2013CorrelatesProtectionInfluenza}.
-% https://www.sciencedirect.com/science/article/pii/S1045105609000116?via%3Dihub
-% \todo{\url{} how much protective is 40?} :
-% Nevertheless, haemagglutination
-% inhibition titres have been established as a correlate
-% of protection and are widely accepted as a readout for
-% vaccine efficacy studies by regulatory agencies11,78,79. It is
-% assumed that a 1:40 titre of antibodies with haemagglutination
-% inhibition activity will reduce the risk of getting
-% an infection with seasonal H1N1 virus, H3N2 virus
-% or influenza B viruses by 50%.
-% krammer2019HumanAntibodyResponse
-
-Although \gls{HAI} titres are accepted as established correlates for inactivated seasonal influenza vaccines, they fail to account for alternate mechanisms such as T cell-mediated protection, and correlates for \gls{LAIV} and pandemic influenza vaccines are less reliable\autocite{houser2015InfluenzaVaccinesChallenges}.
-For novel and emerging diseases, there may be no prior knowledge of robust correlates to use in the vaccine development process.
-% Preparing for the Next Influenza Pandemic: The Development of a Universal Influenza Vaccine Michelle C Crank, John R Mascola, Barney S Graham The Journal of Infectious Diseases, Volume 219, Issue Supplement_1, 15 April 2019, Pages S107–S109, https://doi.org/10.1093/infdis/jiz043
-
-\subsection{Systems vaccinology of influenza vaccines}
 
 % TODO: first year report for sysvacc intro
 % \1 Systems vaccinology is the application of -omics technologies to provide a systems-level characterisation of the human immune system after vaccine-perturbation.
@@ -144,26 +178,37 @@ For novel and emerging diseases, there may be no prior knowledge of robust corre
 %     \2 Identifying causal relationships can inform more mechanism-based and cost-effective design (rational paradigm), and the move towards personalised vaccinology.
 %     \2 Studies of impact of host genetics on response are underrepresented \autocite{linnik2016ImpactHostGenetic}
 
+correlates know for many, plotkin2010CorrelatesProtectionInduced
+but
+For novel and emerging diseases including pandemic influenza, there may be no prior knowledge of robust correlates to use for rapid vaccine development and clinical trials.
+
 In response, the last decade has seen the rise of systems vaccinology studies: the analysis of high-dimensional data measured using multiple technologies in vaccinated individuals, in order to characterise response to vaccination at multiple levels of the biological system\autocite{pulendran2014SystemsVaccinologyProbing}.
 \todo{is there a more recent review?}
 \todo{define 'signature': nvm, remove it}
 Such information helps elucidate a vaccine's mode of action, discover \enquote{molecular signatures} predictive of vaccine safety and efficacy, and has become an increasingly important part of the modern vaccine development chain\autocite{hagan2015SystemsVaccinologyEnabling,raeven2019SystemsVaccinologyBig}.
 
 Various systems vaccinology studies of seasonal influenza vaccines have been conducted, taking longitudinal measurements pre-vaccination, and commonly at some subset of days 1, 3, 7, and 28 post-vaccination.
+% TODO
+% corroboate with table in oconnor2013CharacterizingVaccineResponses
 These measurements can be correlated to changes in antibody titres after vaccination to define signatures of antibody response with potential utility as correlates of protection.
 One of the earliest such studies by Zhu et al.\autocite{zhu2010WholeGenomeTranscriptional} found that expression of type 1 interferon-modulated genes was a signature of response to \gls{LAIV}.
 An expression signature including \gene{STAT1}, CD74, and E2F2 correlated with serum antibody titres after vaccination with trivalent inactivated influenza vaccine\autocite{bucasas2011EarlyPatternsGene}; kinase CaMKIV expression is also a strong predictor \autocite{nakaya2011SystemsBiologyVaccination}, as are genes related to B cell proliferation \autocite{tan2014GeneSignaturesRelated}.
 
+% Also adjuvants oconnor2013CharacterizingVaccineResponses
+% Preclinical vaccine studies have also made use of transcriptomic approaches, particularly to gain insight into the workings of vaccine adjuvants [33–35].
+
+% TODO
+% Example of systems vacc working for immunosenescence: dhakal2019HostFactorsImpact
+% adults. Systems biology approaches have found the
+% association of higher baseline innate inflammatory responses in aged adults with
+% diminished antibody responses postimmunization with TIV over five consecutive influenza
+% seasons (34). Re
 %
-% \1 Like for other complex traits, from twin studies it's known that vaccine Ab responses are heritable.
-%     \2 Moving out of the candidate gene era (e.g. \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3570049/}) into GWAS.
-    % TODO: are there mendellian associations?
-%     \2 Heritability of vaccine response phenotypes \autocite{oconnor2013CharacterizingVaccineResponses}
-%     \2 Many loci have been implicated by GWAS e.g. HLA \autocite{oconnor2013CharacterizingVaccineResponses,mooney2013SystemsImmunogeneticsVaccines,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic,scepanovic2018HumanGeneticVariants,dhakal2019HostFactorsImpact}
-    % TODO: add brodin twin study
-%     \todo{find best GWAS ref, probably mooney2013SystemsImmunogeneticsVaccines, then prune and reassign these citations}
-    % \2 Also, phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}
-%     \2 Overall, systems vacc studies that include genetics (sometimes dubbed as vaccinogenomics studies) are nowhere near as mature compared to the trait to gene pipeline described in above e.g. applied to complex disease
+% e.g. sex
+% furman
+% Systems analysis of sex differences
+% reveals an immunosuppressive role for testosterone in the response to
+% influenza vaccination.
 
 \subsection{The \glsfmtfull{HIRD} study}
 
@@ -188,7 +233,9 @@ An expression signature including \gene{STAT1}, CD74, and E2F2 correlated with s
 For these studies of seasonal influenza vaccines in adults, responses tend to be biased by recall from past vaccination or infection\autocite{bucasas2011EarlyPatternsGene, nakaya2012SystemsVaccinologyLearning}.
 There have also been few studies of adjuvanted influenza vaccines, despite their superior efficacy in comparison to non-adjuvanted counterparts\autocite{wilkins2017AS03MF59AdjuvantedInfluenza,tregoning2018AdjuvantedInfluenzaVaccines}.
 
+ % a new influenza A subtype were to emerge with epidemic or pandemic potential (as occurred in 2009 with influenza A(H1N1)v), it is unlikely that the influenza vaccine will be well matched to the emerging strain. In these circumstances, as occurred during the second wave of the 2009 pandemic, a monovalent vaccine against that strain may be developed and implemented.
 % TODO: on pandemrix efficacy from it's trials
+\todo{Add specific section about pandemrix, it's correlates of protection, it's durability, it's immune response, or maybe in methods}
 The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines\autocite{broadbent2011InfluenzaVirusVaccines}.
 
 The \gls{HIRD} study conducted by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived with the above limitations in mind.
@@ -196,7 +243,7 @@ The study is an observational, prospective cohort design.
 % NOTE: this is the standard WHO name https://www.who.int/influenza/gisrs_laboratory/terminology_ah1n1pdm09/en/
 The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated vaccine against influenza A(H1N1)pdm09 (strain name A/California/07/2009, subtype H1N1), for which the majority of the cohort at the time would be unlikely to have immunological memory.
 \footnote{
-    The \gls{WHO} nomenclature for isolates specifies influenza type (A, B, C, D), host of origin (human if omitted), geographical origin, strain number, year of isolation, and isolate subtype (combination of \gls{HA} and \gls{NA} subtypes) \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2395936/}.
+    The \gls{WHO} nomenclature for isolates specifies influenza type (A, B, C, D), host of origin (human if omitted), geographical origin, strain number, year of isolation, and isolate subtype (combination of \gls{HA} and \gls{NA} subtypes) \autocite{worldhealthorganization1980RevisionSystemNomenclature}.
 }
 A total of 178 individuals were vaccinated with a single dose of Pandemrix, and longitudinal transcriptomic, cellular, antibody
 titre, and adverse event phenotypes were collected.
@@ -204,6 +251,7 @@ Gene expression was profiled using a microarray, and \gls{DGE} analyses detected
 % \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
 These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, but the interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine.
 
+% TODO: check plasma cell vs blast in plots
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
 \todo{high variability, recheck this was the reason, or quote them}
 However, due to high variability among the vaccine non-responders in variables such as baseline antibody titres, a consensus predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
@@ -597,6 +645,8 @@ After the application of all filters, expression values were available for 21626
 Single-channel Agilent 4x44K microarray (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress\footnote{\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}}.
 These arrays were originally processed in two batches, the effect of which is seen in the raw foreground intensities (\cref{fig:hird_array_boxplots_raw}).
 
+% TODO: mean variance trend array data?
+
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.pdf}
@@ -862,6 +912,8 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 \subsubsection{Multiple testing correction}
 
 For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
+% The false discovery rate (FDR) is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons. FDR-controlling procedures are designed to control the expected proportion of "discoveries" (rejected null hypotheses) that are false (incorrect rejections of the null).[1] FDR-controlling procedures provide less stringent control of Type I errors compared to familywise error rate (FWER) controlling procedures (such as the Bonferroni correction), which control the probability of at least one Type I error.
+% TODO: fdr separate option see limma manual 13.3 Multiple Testing Across Contrasts
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
 \todo{add note on ositive regression dependency \autocite{goeman2014MultipleHypothesisTesting}}
 For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr}, which are analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.

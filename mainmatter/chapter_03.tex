@@ -12,6 +12,18 @@
 \section{Introduction}
 
 \subsection{Genetic factors affecting influenza vaccine response}
+\label{subsec:hird_reQTL_intro_geneticFactorsFluVaccine}
+
+Many human traits are heritable and complex---response to vaccination is no exception.
+Twin studies have demonstrated approximately \SIrange{30}{90}{\percent} heritability of antibody responses to many vaccines, including smallpox, hepatitis A and B, anthrax, pneumococcal, \textit{Haemophilus influenzae} type b (Hib), diphtheria-tetanus-pertussis (DTP), Bacillus Calmette--Guérin (BCG) \autocite{mooney2013SystemsImmunogeneticsVaccines,oconnor2013CharacterizingVaccineResponses,newport2015GeneticRegulationInfant,brodin2015VariationHumanImmune}.
+Candidate gene studies and \gls{GWAS} have identified multiple genetic associations with antibody response \autocite{mooney2013SystemsImmunogeneticsVaccines,oconnor2013CharacterizingVaccineResponses,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic}, 
+including replicated associations 
+for hepatitis B vaccine in a haplotype block in the \gls{HLA} region encompassing \gene{HLA-DR} and \gene{BTNL2},
+and for measles vaccine in an intron of a receptor known to interact with measles virus, \gene{CD46}.
+For seasonal influenza vaccine, \textcite{brodin2015VariationHumanImmune} found anti-\gls{HA} antibody responses in 105 adult twin pairs (median age, \SI{44}{\year}) had no detectable heritabilty,
+alongside a general decrease in heritability of most immune parameters with age.
+They posited that the genetic contribution to response was overshadowed by environmental factors such as previous influenza vaccination or infection in adults, 
+in contrast to the substantial heritability of other vaccines mentioned above, many of which are against non-circulating pathogens, or are childhood vaccines for which heritability was assessed in young children.
 
 Vaccination is the most effective way by which seasonal influenza is controlled\autocite{houser2015InfluenzaVaccinesChallenges},
 and the mechanism by which influenza vaccines are efficacious is by raising strain-specific antibodies protective against future infection\autocite{nauta2009RelationshipMeanAntibody}.
@@ -24,9 +36,12 @@ but are also a complex trait influenced by host genetics\autocite{mentzer2015Sea
 Genetic variants associated with antibody response have been detected for vaccines such as hepatitis B, influenza, measles, rubella, and smallpox\autocite{linnik2016ImpactHostGenetic,dhakal2019HostFactorsImpact}.
 For antibody response to seasonal influenza vaccines, studies have implicated 
 genetic variation within cytokine genes, cytokine receptors\autocite{poland2008ImmunogeneticsSeasonalInfluenza};
-antigen processing and intracellular trafficking genes\autocite{franco2013IntegrativeGenomicAnalysis}; 
 immunoglobulin heavy-chain variable region loci\autocite{avnir2016IGHV169PolymorphismModulates};
 and specific \gls{HLA} alleles \autocite{poland2008ImmunogeneticsSeasonalInfluenza,moss2013CorrelationHumanLeukocyte}.
+% TODO: add names from linnik2016ImpactHostGenetic
+% check replication
+% add no gwas
+% add gene names
 
 A potential mechanism through which genetic variation can play a causal role in influenza vaccine response is through altering the expression of genes as \glspl{eQTL}.
 \gls{eQTL} can have condition-specificity: an interaction between their effect on expression and different environmental contexts such as tissue or cell type\autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
@@ -37,6 +52,15 @@ reQTL have been observed in many human cell types \textit{in vitro}, or in the w
 \todo{pull in citations from intro}
 As the pre- and post-stimulation environments are separated in time, a possible mechanism that leads to the observation of reQTL is a genotype-dependent change in gene expression between timepoints,
 which may underly genotype-dependent differences in antibody phenotypes.
+
+% Adverse events genetics
+% Also, genetics of phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}, ollila2017GeneticsVaccinationrelatedNarcolepsy
+%
+% TODO
+% Cellular response also genetics
+% DOI: 10.1128/CMR.00084-18
+% Genetics.
+% Different ethnic groups living in the same location have varied responses to vaccination (64, 89, 161–166) and decline of antibodies (89), indicating a genetic influence on vaccine responses. Studies of twins estimate the degree of heritability to be 36 to 90% for humoral responses (167–173) and 39 to 90% for cellular responses, depending on the specific vaccine (167, 169) (Table 3).
 
 \subsection{\Glsfmtlongpl{reQTL} for seasonal influenza vaccination}
 
@@ -54,6 +78,7 @@ Genes involved in intracellular antigen transport and processing were enriched a
 
 % NOTE: Narcolepsy controversy (more evidence for genetic interaction with Pandemrix vaccine response in particular)
 The HIRD cohort represents a unique opportunity for detecting genetic contributions to influenza vaccine response.
+% TODO: the cohort is too small for gWAS, so here expression
 In \autoref{ch:hird_DGE}, we observed global changes in gene expression after Pandemrix vaccination, as well as expression signatures correlated to degree of antibody response.
 For seasonal influenza vaccines, the contribution is small: antibody responses in adults are largely driven by non-genetic influences such as previous influenza vaccination or infection\autocite{brodin2015VariationHumanImmune}.
 \todo{distinction between expression/ab response is blurry here}
