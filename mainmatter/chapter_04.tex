@@ -360,7 +360,7 @@ Reads were mapped to GRCh38 using STAR (2.6.1d) and deduplicated to unique reads
 Gene expression was quantified against the Ensembl 96 gene annotation with featureCounts (1.6.4).
 
 Total number of read pairs, sequence quality, overrepresented sequences, adapter content and sequence duplication rates were checked using FastQC.
-Samples were filtered to remove outliers (>2SD from the mean) according to percentage of aligned reads in coding regions reported by Picard, percentage of unique reads, and number of unique reads.
+Samples were filtered to remove outliers (\num{>2} standard deviations from the mean) according to percentage of aligned reads in coding regions reported by Picard, percentage of unique reads, and number of unique reads.
 Samples that could not be mapped to a timepoint according to \autoref{subsubsec:multiPANTS_timepoints_def} were removed.
 Samples that came from patients with 
 sex mismatch

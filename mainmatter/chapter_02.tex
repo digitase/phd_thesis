@@ -7,8 +7,6 @@
 \chapter{Transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_DGE}
 
-% TODO: microarray to expression array harmonise
-
 \section{Introduction}
 
 % TODO:
@@ -101,7 +99,10 @@ Real-world effectiveness can be as low as \SI{10}{\percent}, depending greatly o
 In general, efficacy is comparable or better in children versus young adults, and lowest in the elderly due to immunosenescence.
 Females mount higher antibody responses than males, regardless of age \glspl{IIV}, potentially mediated by sex steroid levels \autocite{furman2014SystemsAnalysisSex,dhakal2019HostFactorsImpact}.
 Immune history has major effects on vaccine response due to immune memory.
-For example, adults primed by past exposures to seasonal influenza strains have qualitatively different responses to seasonal \gls{LAIV} compared to influenza-naive children, who mount much higher serum antibody responses \autocite{luke2018InfluenzaVaccineLive}. 
+Adults primed by past exposures to seasonal influenza strains have qualitatively different responses to unprimed adults or influenza-naive children.
+For example, 
+influenza-naive children mount much higher serum antibody responses to seasonal \gls{LAIV} than primed adults \autocite{luke2018InfluenzaVaccineLive};
+antibody responses to \gls{IIV} peak later in unprimed individuals, and require two doses to reach optimal concentrations \autocite{bresee2018InactivatedInfluenzaVaccines}.
 Immune history also impacts response via antigenic seniority (also known as immune imprinting), 
 where the antibody response is biased towards recall against strains encountered in early childhood,
 rather than generating a \textit{de novo} response.
@@ -123,10 +124,10 @@ The immunodominance of the \gls{HA} head over the stalk means most anti-\gls{HA}
 Unsurprisingly, the resulting immune selection pressure concentrates antigenic drift in the head domain.
 The stalk domain is relatively conserved, hence anti-stalk antibodies can be broadly neutralising, effective against multiple virus subtypes (heterosubtypic immunity) \autocite{sano2017RoadMoreEffective}.
 
-The \gls{HAI} assay is an inexpensive method for quantifying strain-specific serum anti-\gls{HA} antibody concentrations. 
+The \gls{HAI} assay is an inexpensive method for quantifying serum anti-\gls{HA} antibody concentrations. 
 A serial dilution of serum is created and mixed with standardised concentrations of \glspl{RBC} and influenza virus. 
-Without the presence of strain-specific antibodies, the receptor site on the \gls{HA} head binds to membrane-bound sialic acid on \glspl{RBC}, agglutinating them into a lattice that appears as a cloudy red solution.
-Antibodies inhibit agglutination and the \glspl{RBC} settle, creating a clear solution with a dark red pellet. 
+Without the presence of antibodies, the receptor site on the \gls{HA} head binds to membrane-bound sialic acid on \glspl{RBC}, agglutinating them into a lattice that appears as a cloudy red solution.
+Anti-\gls{HA} antibodies inhibit agglutination, allowing the \glspl{RBC} to settle, creating a clear solution with a dark red pellet. 
 The readout is the least dilute concentration of serum that completely inhibits agglutination \autocite{klimov2012InfluenzaVirusTitration}.
 A \gls{HAI} titre of 40 (1:40 dilution) is deemed seroprotective, and is an accepted correlate of protection for \glspl{IIV},
 % i.e. is seroprotective
@@ -145,25 +146,31 @@ After incubation, an \gls{ELISA} can be run to detect virus-infected cells, the 
 % Computing the value is complicated, see klimov2012InfluenzaVirusTitration
 A \gls{MN} assay value of 160 (1:160 dilution) is considered equivalent to the seroprotective \gls{HAI} value of 40 \autocite{bresee2018InactivatedInfluenzaVaccines}.
 
-Antibodies induced by \glspl{IIV} are primarily serum IgG antibodies.
-\Glspl{LAIV} can induce serum IgG, but also induce mucosal IgA and T cell responses.
-This multifaceted response more closely approximates natural infection \autocite{houser2015InfluenzaVaccinesChallenges,krammer2019HumanAntibodyResponse}.
-% NOTE: this is specifically antibody mediated protection, not going into T cells here
-Antibody-mediated protection also has greater longevity than that provided by \glspl{IIV}, lasting at least a year,
-but still pales in comparison to protection granted by natural infection, which can be lifelong \autocite{luke2018InfluenzaVaccineLive, krammer2019HumanAntibodyResponse}.
-Different responses play different roles in immunity:
+\Glspl{IIV} primarily induces serum antibodies of the IgG isotype.
+The cellular response has not been extensively studied,
+but the induction of CD8\textsuperscript{+} T cells by unadjuvanted subunit \glspl{IIV} is considered poor \autocite{bresee2018InactivatedInfluenzaVaccines,koutsakos2018CirculatingFHCells}.
+In contrast, \glspl{LAIV} can induce serum IgG, but also efficiently induces mucosal IgA and T cell responses \autocite{luke2018InfluenzaVaccineLive}.
+% IIV: Peak serum antibody levels develop within 4 to 6 weeks after vaccination219 and then antibody levels wane by as much as a 50% within 6 months.333
+% LAIV: When the persistence of serum and nasal antibodies induced by TIV or LAIV in seronegative children were compared, LAIV recipients had significantly higher and more sustained levels of both serum and nasal antibodies measured by HAI and ELISA.187, 188 Prolonged humoral immunity may provide protection against antigenic drift variants that emerge. B-cell and T-cell immune responses in children vaccinated with LAIV were sustained for at least 1 year after vaccination.138
+%     [138] is https://doi.org/10.1093/infdis/jiu654
+Protection may also have greater duration than that afforded by \glspl{IIV}, 
+% and more heterosubtypic
+but the longevity still pales in comparison to natural infection, which can grant strain-specific protection that is lifelong \autocite{houser2015InfluenzaVaccinesChallenges,bresee2018InactivatedInfluenzaVaccines,luke2018InfluenzaVaccineLive,krammer2019HumanAntibodyResponse}.
+Different facets of response play different roles in immunity:
 serum IgG is important for limiting severity of systemic infection, 
 mucosal IgA in the upper respiratory tract inhibits initial infection and transmission, 
 CD8\textsuperscript{+} T cells promote viral clearance and recovery,
 and CD4\textsuperscript{+} T cells help induce humoral and CD8\textsuperscript{+} T cells
 \textcite{renegar2004RoleIgAIgG,sano2017RoadMoreEffective,krammer2018Influenza,bresee2018InactivatedInfluenzaVaccines}.
-% T cell responses are also more cross-reactive.
+% T-cells may be more responsible for heterosubtypic immunity
+% "Heterosubtypic T-Cell Immunity to Influenza in Humans: Challenges for Universal T-Cell Influenza Vaccines" 10.3389/fimmu.2016.00195
 Correlates of protection for \gls{LAIV} have not yet been defined;
-licensed \glspl{LAIV} have all been licensed on the basis of clinical protection.
 % NOTE: luke2018InfluenzaVaccineLive
 % It is important to note that although humoral and cellular immune responses to LAIV can be measured, an immune correlate of protection for LAIV has not yet been identified (see “Immune Correlates of Protection for Live Attenuated Influenza Vaccine” later).
+licensed \glspl{LAIV} have all been licensed on the basis of clinical protection.
 Their comparable efficacy to \glspl{IIV} in adults despite low \gls{HAI} titres and seroconversion rates are presumed to be mediated by mucosal and cell-mediated immunity \autocite{luke2018InfluenzaVaccineLive,krammer2019HumanAntibodyResponse}.
 %
+Clearly, a broader view of immunity than granted by serological antibody assays is needed to understand the mechanisms leading to efficacious influenza vaccine responses.
 % Also see crank2019PreparingNextInfluenza for Brief outlook on unknowns in flu vaccination.
 
 \subsection{Systems vaccinology of seasonal influenza vaccines}
@@ -174,16 +181,14 @@ but little understanding on the immunological mechanisms of protection.
 In response, the last decade has seen the rise of systems vaccinology, 
 a subfield of systems immunology dedicated to the analysis of high-throughput data measured at multiple levels of the immune system to characterise response to vaccination
 \autocite{pulendran2010SystemsVaccinology,nakaya2012SystemsVaccinologyLearning,li2013SystemsBiologicalApproaches,pulendran2014SystemsVaccinologyProbing,hagan2015SystemsVaccinologyEnabling,nakaya2015VaccinologyEraHighthroughput,davis2018WillSystemsBiology,raeven2019SystemsVaccinologyBig}.
-%
 % TODO use sysvacc\_review\_docx to list vaccines and vaccine candidates that have been studied.
-%
 % Also study of adjuvants oconnor2013CharacterizingVaccineResponses
 % Preclinical vaccine studies have also made use of transcriptomic approaches, particularly to gain insight into the workings of vaccine adjuvants [33–35].
-%
 Traditional serological assays (e.g. \gls{HAI}, \gls{MN}) are complemented with a raft of other technologies to give a broader view of immune response \autocite{nakaya2012SystemsVaccinologyLearning,li2013SystemsBiologicalApproaches,pulendran2014SystemsVaccinologyProbing,davis2018WillSystemsBiology,raeven2019SystemsVaccinologyBig}.
 Flow (e.g. \gls{FACS}) and mass cytometry (e.g. \gls{CyTOF}) are used to quantify immune cell subpopulations by their surface markers using fluorescent and heavy metal tags.
 These technologies can also be used to quantify intracellular markers (e.g. cytokines) by cell staining.
 Frequencies of cells secreting specific proteins (cytokines or antibodies) can also be quantified (e.g. \gls{ELISPOT}), often used in monitoring cell-mediated immunity.
+% TODO: compare whole blood to PBMCs? List the cell types in PBMC here.
 The transcriptome of peripheral blood is extremely popular to assay (e.g. expression array, \gls{RNAseq}), 
 providing an accessible, global measure of gene expression in dozens of immune cell subtypes without the need to select specific genes of interest in advance.
 Recently, there has been a growing interest in targeted sequencing of B cell and T cell repertoires, responsible for the specificity of the adaptive immune system.
@@ -221,7 +226,7 @@ there is enormous potential for optimising trials to be fast and cost-effective 
 and informing rational, mechanism-based design for diseases that have thus far proved intractable to empirically-designed vaccines (e.g. HIV, malaria, non-childhood tuberculosis)
 \autocite{degregorio2014EmpiricismRationalDesign,blohmke2015UseSystemsBiology,hagan2015SystemsVaccinologyEnabling,raeven2019SystemsVaccinologyBig}.
 
-Seasonal influenza vaccines have been well studied by systems approaches.
+Seasonal influenza vaccines have been well-studied by systems approaches.
 One of the earliest studies by \textcite{zhu2010WholeGenomeTranscriptional} found that expression of type I interferon-modulated genes at day 7 was more prominent for \gls{LAIV} than \gls{TIV} in children (total cohort size $n=85$).
 A subsequent study found that both \gls{LAIV} and \gls{TIV} could induce interferon-related genes in children ($n=37$), but much earlier in \gls{TIV} (day 1) than in \gls{LAIV} (day 7) \autocite{cao2014DifferencesAntibodyResponses}.
 As serum antibody titres are an established correlate for \gls{TIV}, studies have been done to identify its molecular basis.
@@ -259,95 +264,125 @@ The existence of temporally-stable and replicable signatures is, however, encour
 
 \subsection{The \glsfmtfull{HIRD} study}
 
-For studies of seasonal influenza vaccines in adults, responses are dominated by recall of immunological memory built by past vaccination or infection to antigenically-similar strains \autocite{nakaya2012SystemsVaccinologyLearning,sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+For studies of seasonal influenza vaccines in adults, responses are heavily influenced by immunological memory built by past vaccination or infection with antigenically-similar strains \autocite{nakaya2012SystemsVaccinologyLearning,sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+Dependence on exposure is reflected in high variability of baseline vaccine-specific antibody titres and memory B cell numbers \autocite{tsang2014GlobalAnalysesHuman}.
+There have also been few systems vaccinology studies of adjuvanted influenza vaccines, known to have greater immunogenicity and efficacy than non-adjuvanted vaccines in children and the elderly \autocite{nakaya2016SystemsBiologyImmunity, wilkins2017AS03MF59AdjuvantedInfluenza,tregoning2018AdjuvantedInfluenzaVaccines}.
+The \gls{HIRD} study conducted by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived 
+as a unique opportunity to study response to an adjuvanted pandemic influenza vaccine (Pandemrix),
+where responses are more likely to be primary than recall,
+and variability due to prior exposure is minimised.
 
-This is reflected in a to large variability in baseline \autocite{tsang2014GlobalAnalysesHuman}
-
-There have also been few studies of adjuvanted influenza vaccines, despite their superior efficacy in comparison to non-adjuvanted counterparts\autocite{wilkins2017AS03MF59AdjuvantedInfluenza,tregoning2018AdjuvantedInfluenzaVaccines}.
-
- % a new influenza A subtype were to emerge with epidemic or pandemic potential (as occurred in 2009 with influenza A(H1N1)v), it is unlikely that the influenza vaccine will be well matched to the emerging strain. In these circumstances, as occurred during the second wave of the 2009 pandemic, a monovalent vaccine against that strain may be developed and implemented.
-% TODO: on pandemrix efficacy from it's trials
-\todo{Add specific section about pandemrix, it's correlates of protection, it's durability, it's immune response, or maybe in methods}
-The 2009 pandemic motivated the rapid development, trialing, and licensing of several novel vaccines\autocite{broadbent2011InfluenzaVirusVaccines}.
-% e.g. pandermix monovalent?
-
-
-% TODO re read sobolev
-The \gls{HIRD} study conducted by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} was conceived with the above limitations in mind.
-The study is an observational, prospective cohort design.
-% NOTE: this is the standard WHO name https://www.who.int/influenza/gisrs_laboratory/terminology_ah1n1pdm09/en/
-The vaccine studied was Pandemrix, an AS03-adjuvanted, split-virion, inactivated vaccine against influenza A(H1N1)pdm09 (strain name A/California/07/2009, subtype H1N1), for which the majority of the cohort at the time would be unlikely to have immunological memory.
+Pandemrix was one of several vaccines rapidly developed and licensed in response to the 2009 influenza pandemic \autocite{broadbent2011InfluenzaVirusVaccines}.
+It is a monovalent split-virion \gls{IIV} against the pandemic influenza A/California/07/2009 (H1N1)pdm09 strain%
 \footnote{
     The \gls{WHO} nomenclature for isolates specifies influenza type (A, B, C, D), host of origin (human if omitted), geographical origin, strain number, year of isolation, and isolate subtype (combination of \gls{HA} and \gls{NA} subtypes) \autocite{worldhealthorganization1980RevisionSystemNomenclature}.
-}
-A total of 178 individuals were vaccinated with a single dose of Pandemrix, and longitudinal transcriptomic, cellular, antibody
-titre, and adverse event phenotypes were collected.
-Gene expression was profiled using a microarray, and \gls{DGE} analyses detected genes associated with both myeloid and lymphoid effector functions upregulated at day 1, most prominently for genes associated with interferon responses.
-% \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
-These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, but the interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine.
+},
+developed by GlaxoSmithKline,
+containing \SI{3.75}{\micro\gram} \gls{HA}
+and adjuvant AS03 (oil-in-water emulsion with DL-\textalpha-tocopherol, squalene, polysorbate 80).
+Subsequent studies estimated its effectiveness to be \textapprox{\SI{80}{\percent}} after a single dose \autocite{syrjanen2014EffectivenessPandemicSeasonal}.
+As the H1N1 subtype had not circulated since the 1918 pandemic, the majority of the \gls{HIRD} cohort would have been immunologically-naive at the time of sampling (March 2010 to August 2011).
 
+The \gls{HIRD} study is an longitudinal, prospective cohort study.
+A total of 178 healthy adults in the UK were vaccinated with a single dose of Pandemrix.
+Clinical, transcriptomic, immune cell frequency, cytokine level, antibody titre, and adverse event phenotypes were collected.
+Genes associated with both myeloid and lymphoid effector functions had increased expression at day 1 versus baseline, most prominently for genes associated with interferon responses.
+% \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
+These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, 
+but a type II interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine was observed.
+
+Vaccine response was defined as a \num{\ge 4}-fold increase in either \gls{HAI} or \gls{MN} titres after vaccination.
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
-\todo{high variability, recheck this was the reason, or quote them}
-However, due to high variability among the vaccine non-responders in variables such as baseline antibody titres, a consensus predictive model that segregated the two groups could not be built, even considering other measures such as frequencies of immune cell subsets and serum cytokine levels, suggesting there was no single contributing factor that led to vaccine failure.
-This is in contrast to several studies of seasonal influenza vaccines, where certain expression signatures are able to predict vaccine response even pre-vaccination\autocite{furman2013ApoptosisOtherImmune, tsang2014GlobalAnalysesHuman, nakaya2015SystemsAnalysisImmunity, hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
+However, due to high variability among the vaccine non-responders in expression trajectory over time, 
+a predictive model that segregated the two groups could not be built,
+even considering other predictors such as frequencies of immune cell subsets, and serum cytokine levels.
+There appeared to be many \enquote{routes to failure}, rather than any single determining factor leading to poor antibody response.
+% This is in contrast to several studies of seasonal influenza vaccines, where certain expression signatures are able to predict vaccine response even pre-vaccination\autocite{furman2013ApoptosisOtherImmune, tsang2014GlobalAnalysesHuman, nakaya2015SystemsAnalysisImmunity, hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
 
 \subsection{Chapter summary}
 
-\todo{make sure gap and how it is filled is emphed enough}
-% TODO in this ch, I describe E differences associated with 
-% TODO: remove all 'signature'
+Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number of individuals ($n=46$), limiting power to detect expression signatures associated with antibody response.
+In addition, the binary responder versus non-responder definition used does not account for variation in baseline titres, 
+dichotomisation of a continuous variable results in loss of information \autocite{cohen1983CostDichotomization,senn2005DichotomaniaObsessiveCompulsive,fedorov2009ConsequencesDichotomization}.
+\todo{I elaborate on this in the methods}
 
-Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number (46/178) of individuals, potentially limiting power to detect a expression signatures associated with antibody response.
-% TODO: http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf
-% These four variables—power, significance criterion, sample size, and populationeffect size—are related such that when the values of three of these are fixed, thefourth is determined (Cohen, 1988, p. 14).
-% TODO: do not say power when you mean efficiency or sensitivity
-% https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
-In addition, the responder vs. non-responder phenotype definition used does not account for variation in pre-existing baseline titres, and the binary definition can result in loss of information\autocite{cohen1983CostDichotomization, senn2005DichotomaniaObsessiveCompulsive, fedorov2009ConsequencesDichotomization}.
-
-In this chapter, I integrate the original microarray data from \gls{HIRD} with \gls{RNAseq} data on a larger subset (75) of newly sequenced individuals from the same cohort using Bayesian random-effects meta-analysis.
-The overall pattern of expression over time from my meta-analysis agrees with the patterns from the original study \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, with transient innate immune response at day 1 post-vaccination, progressing to adaptive immune response by day 7.
-\todo{needs 1 more punchline sentence here}
-
-From existing \gls{HAI} and \gls{MN} data, I compute a baseline-adjusted, continuous measure of antibody response to vaccination, the \gls{TRI}\autocite{bucasas2011EarlyPatternsGene}.
-% TODO: mention TRI alternatives e.g. adjMFC
-Effect sizes of genes with expression that correlated with \gls{TRI} were very dependent on measurement platform (array or \gls{RNAseq}), and no robust hits were detected in the meta-analysis.
-Leveraging the greater power that rank-based gene set enrichment analyses affords, I find modules of coexpressed genes that correlate with antibody response, with the strongest effects observed for adaptive immune modules at day 7, but also in inflammatory modules at baseline.
-% TODO: The power of a binary hypothesis test is the probability that the test rejects the null hypothesis ( H 0 {\displaystyle H_{0}} H_{0}) when a specific alternative hypothesis ( H 1 {\displaystyle H_{1}} H_{1}) is true. The statistical power ranges from 0 to 1, and as statistical power increases, the probability of making a type II error (wrongly failing to reject the null hypothesis) decreases.
-% TODO: For comparing significance tests, a meaningful measure of efficiency can be defined based on the sample size required for the test to achieve a given task power.[9]
+In this chapter, I combine the existing array data with newly generated \gls{RNAseq} data ($n=75$) on additional individuals from the \gls{HIRD} cohort, 
+using Bayesian random-effects meta-analysis to account for between-platform heterogeneity.
+I also compute a baseline-adjusted, continuous phenotype of antibody response to vaccination, the \gls{TRI} \autocite{bucasas2011EarlyPatternsGene}.
+Leveraging the greater sample size,
+more efficient definition of vaccine response,
+and greater sensitivity of rank-based gene set enrichment analysis over gene-wise analysis,
+I identify gene expression modules associated with antibody response.
+The strongest effects are seen at day 7, but also significant module associations are also observed at baseline.
+\todo{no longer spoils results}
 
 \section{Methods}
 
-\subsection{Existing \glsfmtshort{HIRD} study data and additional data}
+\subsection{Existing \glsfmtshort{HIRD} data and additional data generation}
 \label{subsec:hird_dge_studyDesign}
 
-The design of the \gls{HIRD} study is described in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
-In brief, the study enrolled 178 healthy adult volunteers in the UK.
-The vaccine dose was administered after blood sampling on day 0; five other longitudinal blood samples were taken on days -7, 0, 1, 7, 14 and 63.
-\todo{why blood? ready easy supply of immune cells, despite delivery being muscle?}
-% \autocite{brodin2015VariationHumanImmune}
-% Although blood is not an immunological organ per se, it is the conduit for most immune cells circulating in the body, especially after an immunological stimulus such as vaccination (FIG. 1).
-Serological responses were measured on days -7 and 63 using the \gls{HAI} and \gls{MN} assays, and various subsets of the cohort were also profiled for serum cytokine levels (Luminex panel, days -7, 0, 1 and 7), immune cell subset counts (\gls{FACS} panels, all days), and \gls{PBMC} gene expression (microarray, days -7, 0, 1 and 7).
-% TODO: why PBMC fraction? list important cell types here
-% TODO: Check range of inflenza hai and MN titres.  Indicate min max
-The gene expression microarrays were performed in two batches.
+The design of the \gls{HIRD} study is fully described in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+In brief, blood samples were collected from each individual on each of six visits:
+two pre-vaccination (days -7 and 0), and four post-vaccination (days 1, 7, 14 and 63).
+The Pandemrix dose was administered after blood sampling on day 0.
+Serum antibodies were measured for all individuals ($n=178$) on days -7 and 63 using both \gls{HAI} and \gls{MN} assays. 
+\gls{PBMC} gene expression was profiled for 46 individuals by expression array on days -7, 0, 1 and 7.
 
-In addition to the existing data, array genotypes were generated for 169 individuals; and \gls{RNAseq} data for 75 individuals at days 0, 1, and 7.
-The sets of individuals with gene expression assayed by microarray and \gls{RNAseq} is disjoint, as no biological material for RNA extraction remained for the microarray individuals.
+In addition to the existing data, 
+\gls{PBMC} \gls{RNAseq} data was generated for 75 individuals at days 0, 1, and 7;
+and 169 individuals were genotyped.
+The sets of individuals with gene expression assayed by array and \gls{RNAseq} are disjoint, 
+as no biological material for RNA extraction remained for the array individuals.
 An overview of datasets is shown in \cref{fig:hird_design}.
+\todo{yes, this paragraph is needed here to accompany the figure}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/hird_design-crop.pdf}
-    \caption{Data types, timepoints, and sample sizes. Individuals were vaccinated after day 0 sampling. Antibodies to the vaccine strain were measured by \gls{HAI} and \gls{MN} assays. Array and \gls{RNAseq} gene expression measured in the \gls{PBMC} compartment.}
+    \caption{
+        \textbf{Overview of \gls{HIRD} data.}
+        The total cohort size was 178 individuals.
+        % Individuals were vaccinated after day 0 sampling.
+        Serum cytokines were quantified by 16-plex Luminex panel.
+        Immune cell subsets were quantified by \gls{FACS}.
+        Serum antibodies were quantified by both \gls{HAI} and \gls{MN} assays.
+        Array and \gls{RNAseq} gene expression were quantified in the \gls{PBMC} compartment.
+    }
     \label{fig:hird_design}
 \end{figure}
 
 \subsection{Computing baseline-adjusted measures of antibody response}
 \label{subsec:hird_dge_TRI}
 
-In \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, Pandemrix responders were defined as individuals with $\ge$4-fold titre increases in either the \gls{HAI} or \gls{MN} assays.
-This is a threshold for seroconversion set out by the U.S. Food and Drug Administration\autocite{foodanddrugadministration2007GuidanceIndustryClinical}, and is used in many studies of seasonal influenza vaccines\autocite{hagan2015SystemsVaccinologyEnabling}.
-The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres available at baseline (day -7) and post-vaccination (day 63) were computed according to this definition.
-\todo{atm I'm not using R/NR. wording here implys I am}
+% TODO: Check min and max of influenza HAI and MN titres
+
+% TODO: The power of a binary hypothesis test is the probability that the test rejects the null hypothesis ( H 0 {\displaystyle H_{0}} H_{0}) when a specific alternative hypothesis ( H 1 {\displaystyle H_{1}} H_{1}) is true. The statistical power ranges from 0 to 1, and as statistical power increases, the probability of making a type II error (wrongly failing to reject the null hypothesis) decreases.
+% TODO: For comparing significance tests, a meaningful measure of efficiency can be defined based on the sample size required for the test to achieve a given task power.[9]
+
+% TODO: http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf
+% These four variables—power, significance criterion, sample size, and populationeffect size—are related such that when the values of three of these are fixed, thefourth is determined (Cohen, 1988, p. 14).
+% TODO: do not say power when you mean efficiency or sensitivity
+% https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
+
+% TRI alternatives e.g. adjusted maximum fold change \autocite{hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}
+
+\textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} defined Pandemrix vaccine responders as individuals with $\ge$4-fold titre increases from day -7 to day 63 in either the \gls{HAI} or \gls{MN} assays.
+This is a typical threshold for \gls{HAI} and \gls{MN} seroconversion used to assess the immunogenicity of seasonal \glspl{IIV} \autocite{krammer2019HumanAntibodyResponse}, 
+and has also been recommended for pandemic \glspl{IIV} \autocite{foodanddrugadministration2007GuidanceIndustryClinical}.
+\todo{heterogeneity: well of course there was}
+% TODO: here correct only for 2 things: dicot and RTM of change scores
+However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
+% TODO: TRI is a residualised change score \url{https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20}
+\todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}}
+\todo{this is due to within-individual RTM , which is why we residualise}%\url{https://academic.oup.com/ije/article/34/1/215/638499#10889734}
+\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong} % https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2011.00509.x
+\todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
+% TODO: also cite https://academic.oup.com/ije/article/34/1/215/638499 : ANCOVA to adjust for regression to the mean
+Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization,senn2005DichotomaniaObsessiveCompulsive,fedorov2009ConsequencesDichotomization}.
+% TODO: efficiency
+% elaborate fully on why Dichot is bad here for the discussion: definition of response based on dichotomisation is inefficient and assumes a sharp change at the threshold
+% TODO: 4-fold less likely to acheive by high baseline, for biological reasons, also RTM, also the forced negative correlation by cov formula
+
+%
 % \begin{outline}
 % \1 Pre-process phenotypes
 %     \2 Compute responder status (>= 4-fold in HAI or MN)
@@ -359,24 +394,13 @@ The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres
 %             \4 Note that log2(post-pre) does not make sense mathematically, as post-pre may well be negative
 %             \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
 % \end{outline}
-\todo{heterogeneity: well of course there was}
-% TODO: here correct only for 2 things: dicot and RTM of change scores
-However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
-% TODO: TRI is a residualised change score \url{https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20}
-\todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}}
-\todo{this is due to within-individual RTM , which is why we residualise}%\url{https://academic.oup.com/ije/article/34/1/215/638499#10889734}
-\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong} % https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2011.00509.x
-\todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
-% TODO: also cite https://academic.oup.com/ije/article/34/1/215/638499 : ANCOVA to adjust for regression to the mean
-Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization, fedorov2009ConsequencesDichotomization}.
-% TODO: efficiency
-% elaborate fully on why Dichot is bad here for the discussion: definition of response based on dichotomisation is inefficient and assumes a sharp change at the threshold
-% TODO: 4-fold less likely to acheive by high baseline, for biological reasons, also RTM, also the forced negative correlation by cov formula
-
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
 For each assay, a linear regression was fit with the $\log_2{\text{day 63}/\text{day -7}}$ titre fold change as the response, and the $\log_2{\text{day -7}}$ baseline titre as the predictor.
 The residuals from the two regressions were each standardized to zero mean and unit variance, then averaged.
 The \gls{TRI} expresses a continuous measure of change in antibody titres across both assays post-vaccination, compared to individuals with a similar baseline titre, and remains comparable to the binary 4-fold change definition (\cref{fig:hird_tri}).\todo{cite appropriate subfigures here, after adding proper subfigure labels}
+
+The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres available at baseline (day -7) and post-vaccination (day 63) were computed according to this definition.
+\todo{atm I'm not using R/NR. wording here implys I am}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
@@ -399,7 +423,7 @@ The cause of this is unknown, there is a possibility that individuals with more 
 \subsection{Genotype data generation}
 
 \todo{Add to collab note that extractions were done at KCL}
-DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was performed using on the Infinium CoreExome-24 BeadChip (Illumina).
+DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was done using on the Infinium CoreExome-24 BeadChip array (Illumina).
 In total, 192 samples from 176 individuals in the HIRD cohort were genotyped at 550601 markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
 
 \subsection{Genotype data preprocessing}
@@ -677,7 +701,7 @@ After the application of all filters, expression values were available for 21626
 % 6.4.4.	Also see this “StatQuest: Quantile Normalization” https://www.youtube.com/watch?v=ecjN6Xpv6SE
 % 6.4.5.	This also does a log2 transform, so final units are normalized log2 intensity
 %
-Single-channel Agilent 4x44K microarray (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress\footnote{\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}}.
+Single-channel Agilent 4x44K expression array (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress\footnote{\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}}.
 These arrays were originally processed in two batches, the effect of which is seen in the raw foreground intensities (\cref{fig:hird_array_boxplots_raw}).
 
 % TODO: mean variance trend array data?
@@ -739,7 +763,7 @@ Given the magnitude of the platform effect, I concluded that the appropriate app
 Regarding the batch effect within the array data, a popular adjustment method is ComBat\autocite{johnson2007AdjustingBatchEffects}, which estimates centering and scaling parameters by pooling information across all genes using empirical Bayes.
 \todo{combat does have a pro in that it can do per gene scaling, that fixed fx won't do}
 ComBat is the method used in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
-In comparisons of microarray batch effect adjustment methods, ComBat performs favourably (vs. five other adjustment packages)\autocite{chen2011RemovingBatchEffects} or comparably (vs. batch as a fixed or random effect in the linear model)\autocite{espin-perez2018ComparisonStatisticalMethods}.
+In comparisons of array batch effect adjustment methods, ComBat performs favourably (vs. five other adjustment packages)\autocite{chen2011RemovingBatchEffects} or comparably (vs. batch as a fixed or random effect in the linear model)\autocite{espin-perez2018ComparisonStatisticalMethods}.
 However, where batches are unbalanced in terms of sample size\autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression\autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
 In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\cref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
 In practice, results from the \gls{DGE} analysis were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
@@ -862,7 +886,7 @@ This meta-analysis is restricted to 13593 genes assayed by both the array and \g
 
 Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects\autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
 Given k studies, the fixed-effect model assumes a common population effect size shared across all studies, with observed variation explained only by sampling error.
-The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$ (\gls{SD} $\tau$), representing an additional source of variation termed the between-studies heterogeneity, reducing to the fixed-effect model when $\tau=0$.
+The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation termed the between-studies heterogeneity, reducing to the fixed-effect model when $\tau=0$.
 In the \gls{HIRD} data, there are $k=2$ 'studies' (array and \gls{RNAseq}), where the platform differences described in section\todo{add label} contribute to considerable between-studies heterogeneity.
 The assumption of $\tau=0$ is unrealistic, hence a random-effects model is more appropriate.
 \todo{make all the notation in this section consistent with, and add the equation 2.1. The normal-normal hierarchical model, \autocite{rover2017BayesianRandomeffectsMetaanalysis}}
@@ -1000,7 +1024,7 @@ Consistent with global expression at day 1 being markedly different from express
 The majority of these (580/644) were upregulated.
 The gene with the highest \gls{FC} increase at day 1 compared to baseline was \gene{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
 Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \gene{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \gene{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \gene{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
-Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\cref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by signatures of innate immunity.
+Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\cref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by innate immunity.
 \todo{can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets}
 64 genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells, with the largest absolute fold change observed for \gene{FGFBP2} ($\log_2\text{\gls{FC}} = -0.9141547$).
 \todo{not sure of interpretation at FGFBP2, it is indeed highly expressed in NKs through \url{https://dice-database.org/genes/FGFBP2}}
@@ -1023,7 +1047,7 @@ Plasma cell-specific genes including \gene{SDC1} (encodes CD138 \url{https://www
 Strongly enriched modules at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\cref{fig:hird_tmodDotPlot_timepoint}).
 Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of an adaptive immune response at day 7.
 
-\subsection{Expression signatures associated with antibody response}
+\subsection{Expression modules associated with antibody response}
 
 I also looked for genes which have expression associated with baseline-adjusted antibody response, as quantified by \gls{TRI}.
 At the initial frequentist meta-analysis stage, with a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expression associated with \gls{TRI} at baseline, 55 at day 7, and 11 pooling samples across timepoints (\cref{fig:hird_DGE_effectSizeComparisons_rma}).
@@ -1053,7 +1077,7 @@ At day 0, modules related with inflammatory response in myeloid cells are also a
 \end{figure}
 \todo{figure x labels here should be TRI, not R.vs.NR}
 
-\subsection{Identifying expression signatures for predicting antibody response [probably cut this section and just add to discussion]}
+\subsection{Identifying expression modules for predicting antibody response [probably cut this section and just add to discussion]}
 
 \section{Discussion}
 
@@ -1064,8 +1088,11 @@ This response is transient, with most such genes returning to baseline expressio
 \todo{lit search for downregulation interpretation paper, and downreg T cell paper}
 % TODO: TMM norm guards this
 Upregulation of cell cycle/proliferation, activated CD4\textsuperscript{+} T cell, and B (plasma) cell genes and modules were detected at day 7.
-This is likely a signature indicating the shift to an adaptive immune response, involving CD4\textsuperscript{+} T cell-supported differention and proliferation of antibody-secreting plasmablasts and plasma cells\autocite{murphy2016JanewayImmunobiology}.
+This indicate a shift to the adaptive immune response, involving CD4\textsuperscript{+} T cell-supported differention and proliferation of antibody-secreting plasmablasts and plasma cells\autocite{murphy2016JanewayImmunobiology}.
 These patterns of expression change between timepoints in the \gls{RNAseq} data are consistent with the patterns in the array data in the original study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, and with expansions of monocyte and plasma cell populations seen in the \gls{FACS} data at days 1 and 7 respectively in the original \gls{HIRD} study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+
+% Point is, it's consistent over time, but i do more
+% The overall pattern of expression over time from my meta-analysis agrees with the patterns from the original study \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, with transient innate immune response at day 1 post-vaccination, progressing to adaptive immune response by day 7.
 
 In contrast, I was not able to fully replicate the originally reported single gene-level associations between day 7 expression and antibody response in the \gls{RNAseq} data and subsequent and meta-analyses.
 In \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, 62 genes were reported as differentially expressed between vaccine responders and non-responders.
@@ -1099,7 +1126,7 @@ Given the between-platform heterogeneity coming from both platform-specific tech
 % - other measures of seroconversion \url{https://www.who.int/biologicals/vaccines/Annex_2_WHO_TRS_963-3.pdf}
 % - https://bmcinfectdis.biomedcentral.com/articles/10.1186/s12879-019-4049-5 Seroconversion may not correspond well to protection...
 
-Expression signatures of antibody response were, however, observed at the gene set level, for modules of coexpressed genes that are associated with \gls{TRI} as a whole.
+Expression associations with antibody response were, however, observed at the gene set level, for modules of coexpressed genes that are associated with \gls{TRI} as a whole.
 The strongest effects were observed at day 7, where expression of adaptive immune response modules (cell cycle, stimulated CD4\textsuperscript{+} cell, plasma cell modules) were positively associated with \gls{TRI}.
 These are the same modules observed to be upregulated at day 7 compared to baseline; it seems that those individuals with the greatest antibody response to vaccination are most able to upregulate these gene sets by day 7 post-vaccination.
 
@@ -1116,13 +1143,13 @@ Over the years, a diverse range of gene sets have been found to be baseline pred
     enriched in B cells, T cell activation\autocite{nakaya2015SystemsAnalysisImmunity};
     B cell receptor signalling, inflammatory response, platelet activation \autocite{hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}; 
 several of which I also observe.
-It should be noted that comparisons with these signatures from existing influenza systems vaccinology studies should caveated, as most existing studies are for non-adjuvanted influenza vaccines.
+It should be noted that comparisons with existing influenza systems vaccinology studies should caveated, as most existing studies are for non-adjuvanted influenza vaccines.
 Adjuvanted influenza vaccines are considerably more immunogenic, and post-vaccination expression patterns differ to those of non-adjuvanted vaccines \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination,wilkins2017AS03MF59AdjuvantedInfluenza}.
 % plotkins ch31 inactivated
 % serum antibody levels peak 2 to 4 weeks after vaccination in healthy, previously primed individuals, but may peak 4 weeks or later in unprimed individuals and the elderly.480, 482, 483, 484, 485
 \todo{could comment on phenotype differences too, i.e. HIRD measure antibodies at d63, much later than is popular in the field: d28 usually} 
 \todo{should probably emph sobolev didn't find prevacc signatures, and we did. But it's not exactly fair, as sobolev didn't use gene set enrichment as far as i can tell}
-Hence, it is particularly important that the robustness of these observed baseline expression signatures be validated in an independent cohort for a comparable AS03-adjuvanted influenza vaccine.
+Hence, it is particularly important that the robustness of these observed baseline expression associations be validated in an independent cohort for a comparable AS03-adjuvanted influenza vaccine.
 
 %
 % Sobolev:
@@ -1144,6 +1171,7 @@ Hence, it is particularly important that the robustness of these observed baseli
 % AS03-adjuvanted split-virion influenza A/H5N1 vaccine: (\gene{GBP1}, \gene{IRF1}, and \gene{STAT1}) expressions are up in adjuvanted (\url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0167488}), three genes that play a role in interferon and antiviral response.
 %
 % A study of the MF59-adjuvanted \gls{TIV} \autocite{nakaya2016SystemsBiologyImmunity}
+% nakaya2016SystemsBiologyImmunity for MF59 adjuvanted TIV
 %
 
 % TODO: prediction will be discussed in ch5

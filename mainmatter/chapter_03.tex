@@ -413,7 +413,7 @@ The simple inclusion of an intercept term in the \gls{eQTL} model already achiev
 Not performing any rank-based transform does lose the advantage of reining in outliers.
 The expression data have already been preprocessed to remove low-expression outliers in \autoref{subsec:hird_dge_rnaseq_quantAndFilter}, 
 % TODO: note for a large number of samples
-but automatic outlier exclusion based on \gls{SD} thresholds at the \gls{eQTL} mapping step could be considered in future implementations\autocite{vosa2018UnravelingPolygenicArchitecture}.
+but automatic outlier exclusion based on standard deviation thresholds at the \gls{eQTL} mapping step could be considered in future implementations\autocite{vosa2018UnravelingPolygenicArchitecture}.
 Note that many preprocessing steps done prior to this stage in the pipeline (e.g. variance-stabilisation, ComBat batch effect correction) are also expression transformations,
 but I only consider the preservation of \gls{reQTL} effects defined from expression values post-adjustment for those technical effects to be important.
 
@@ -1342,8 +1342,11 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 % diff strat might be better like SC rnaseq
 
 % TODO are these reQTL interesting?
+% In vivo reqtl Design can find genes and contexts that are somewhat relevant to post vacc
+% But does it find ones that are causally important???
 
 % TODO:
 % how to get multi ethnic coloc?
 % o	check ancestries of coloced populations: how does trans-ethnic fine mapping work?
 %  how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?
+
