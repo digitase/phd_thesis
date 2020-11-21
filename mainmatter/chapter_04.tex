@@ -371,7 +371,7 @@ were removed.
 A total of 814 samples remained after filtering.
 
 The Ensembl 96 gene annotation contains \SI{58884} genes, many of which are not expressed in whole blood.
-Normalised library sizes were computed using \software{edgeR::calcNormFactors(method='TMM')}.
+Effective library sizes were computed using \software{edgeR::calcNormFactors(method='TMM')}.
 Between-sample normalisation for library size was done using edgeR::cpm, converting counts to \gls{CPM}.
 Genes with low expression were filtered,
 requiring >1.25 CPM in >10\% of samples (1.25 CPM was approximately 10 counts at the median library size of 8 million assigned read pairs),
@@ -498,6 +498,11 @@ The estimates from models adjusted for cell proportions are more likely to refle
 
 \subsubsection{Contrasts for pairwise group comparisons}
 
+% TODO
+% https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html
+% Limma has a built-in approach for analyzing repeated measures data using duplicateCorrelation(). The model can handle a single random effect, and forces the magnitude of the random effect to be the same across all genes.
+% ...
+% The duplicateCorrelation method estimates a single variance term genome-wide even though the donor contribution of a particular gene can vary substantially from the genome-wide trend.
 gene-wise \gls{DGE} models were fit in \software{dream} \autocite{hoffman2020DreamPowerfulDifferential}.
 Like the variance partition model models were linear mixed models:
 

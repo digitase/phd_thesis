@@ -55,7 +55,7 @@
 % Format si units
 %
 \usepackage{siunitx}
-\sisetup{round-mode=figures, round-precision=3, range-phrase=--, range-units=single}
+\sisetup{round-mode=places, round-precision=2, range-phrase=--, range-units=single}
 % Declare units
 \DeclareSIUnit\bp{bp}
 \DeclareSIUnit\year{yr}
@@ -281,7 +281,7 @@
 
 % The package enhances LaTeX's cross-referencing features, allowing the format of references to be determined automatically according to the type of reference.
 % NOTE: must be loaded after hyperref
-\usepackage[nameinlink]{cleveref}
+\usepackage[nameinlink,capitalise]{cleveref}
 % Customise cross-ref names for figures
 \crefname{figure}{Fig.}{Fig.}
 \Crefname{figure}{Fig.}{Fig.}
@@ -391,6 +391,7 @@
 \newabbreviation[longplural=degrees of freedom,shortplural=df]{df}{df}{degree of freedom}
 \newabbreviation[]{HWE}{HWE}{Hardy-Weinberg equilibrium}
 \newabbreviation[]{mRNA}{mRNA}{messenger RNA}
+\newabbreviation[]{ncRNA}{ncRNA}{non-coding RNA}
 \newabbreviation[]{UTR}{UTR}{untranslated region}
 \newabbreviation[]{HSC}{HSC}{hematopoietic stem cell}
 \newabbreviation[]{APC}{APC}{antigen-presenting cell}
@@ -425,6 +426,7 @@
 \newcommand{\gene}[1]{\textit{#1}}
 
 % Format 'p-value'
+% Call using \pvalue{} to get space after.
 \newcommand{\pvalue}{\textit{p}-value}
 \newcommand{\pvalues}{\textit{p}-values}
 

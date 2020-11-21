@@ -101,26 +101,6 @@
 
 \section{Challenges in the interpretation of bulk expression data}
 
-\1 NGS data is compositional, only quantifies relative abundance \todo{move and merge this paragraph into ch2 section on composition bias in RNAseq, it's out of place here}
-    % https://academic.oup.com/gigascience/article/8/9/giz107/5572529
-    % This property emerges from the sequencer itself; the sequencer, by design, can only sequence a fixed number of nucleotide fragments. 
-    % Consequently, the final number of fragments sequenced is constrained to an arbitrary limit so that doubling the input material does not double the total number of counts.
-    % This constraint also means that an increase in the presence of any 1 nucleotide fragment necessarily decreases the observed abundance of all other transcripts [9], and applies to bulk and single-cell sequencing data alike.
-    % It is especially problematic when comparing cells that produce more total RNA than their comparator (e.g., high–c-Myc cells, which up-regulate 90% of all transcripts without commensurate down-regulation [10]).
-    % However, even if a sequencer could directly sequence every RNA molecule within a cell, the cells themselves are compositional because of the volume and energy constraints that limit RNA synthesis, as evidenced by the observation that smaller cells of a single type contain proportionally less total messenger RNA (mRNA) [11].
-    % [..]
-    % First, statistical models that assume independence between features are flawed because of the mutual dependency between components [15]. Second, distances between samples are misleading and erratically sensitive to the arbitrary inclusion or exclusion of components [16]. Third, components can appear definitively correlated even when they are statistically independent [17].
-    \2 raw abundance estimates are often called \enquote{counts}, but actually dimensionless proportions, interpretable only compared to other genes in the same sample (composition)
-    % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6084572/
-    % Compositional data measure each sample as a composition, a vector of non-zero positive values (i.e. components) carrying relative information (Aitchison, 1986).
-    % Compositional data have two unique properties. First, the total sum of all component values (i.e. the library size) is an artifact of the sampling procedure (van den Boogaart and Tolosana-Delgado, 2008). Second, the difference between component values is only meaningful proportionally [e.g. the difference between 100 and 200 counts carries the same information as the difference between 1000 and 2000 counts (van den Boogaart and Tolosana-Delgado, 2008)].
-    \2 a fixed number of reads is sequenced: if a gene's counts go up, another will go down
-    % https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
-    \2 naive normalisations such as CPM, TPM, RPKM are still rates (per transcriptome), and cannot be compared across samples, as they still depend on composition
-    \2 normalisation such as TMM tries to account for composition by normalising on non DE genes, to allow for valid DGE analysis
-    \2 getting absolute measures is difficult without spike-ins
-    \2 for valid DGE, need to decide on the units e.g. mRNA/cell? mRNA/transcriptome? \autocite{soneson2013ComparisonMethodsDifferential}
-
 \1 bulk data is a mixture of cell types with different expression patterns
     \2 one of the largest sources of variation in bulk expression data is cell proportions 
     \2 the more cell type-specific a gene's expression, the more it is affected by cell proportions \autocite{farahbod2020UntanglingEffectsCellular}

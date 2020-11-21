@@ -326,6 +326,10 @@ and compute measures of significance per condition.
 
 \subsection{Controlling for population structure with \glsfmtlongpl{LMM}}
 
+As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) in genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
+% https://www.nature.com/articles/nrg3382
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6307707/#pgen.1007309.e061
+
 There is population structure due to ancestry in the \gls{HIRD} cohort,
 which was incorporated in \gls{DGE} analyses by treating the top \glspl{PC} of the genotype matrix as continuous covariates for large-scale population structure (\autoref{subsec:hird_dge_genotype_pc}).
 In the context of \gls{eQTL} mapping (and genetic association studies in general), 
@@ -637,6 +641,7 @@ Weighing the downside of having imperfect estimates of cell type abundance again
 % PANAMA/LIMMI, by PEER authors
 % Detecting regulatory gene–environment interactions with unmeasured environmental factors
 %
+% TODO: add where it branches from ch2 pipeline
 Apart from cell type abundance, a myriad of other unmeasured variables contribute to expression variation.
 Hidden determinants of expression variation were learnt using \software{PEER}\autocite{stegle2012UsingProbabilisticEstimation}.
 As suggested by \autocite{stegle2012UsingProbabilisticEstimation}, between-sample normalisation and variance stabilisation on \gls{RNAseq} count data was performed using \software{DESeq2::vst}.
@@ -679,6 +684,14 @@ Given the severity of the batch effect in this dataset, especially between platf
     \label{fig:hird_peer_corMatrix_v2_mega}
 \end{figure}
 \todo{remake this with only top k factors, and prune the possible covariates}
+
+% TODO: if we use PEER, why also use LMM?
+% PEER only ajusts for large sclae e.g. YRI vs EU
+% not finer scale e.g within EU
+% \autocite{brown2018ExpressionReflectsPopulation}
+% Interestingly, we found that using PEER rather than regression for batch correction also
+% removed the separation between the YRI and EUR individuals, while leaving the structure
+% within the EUR populations in tact (Fig 5A).
 
 \subsection{\glsfmtshort{eQTL} mapping per timepoint}
 

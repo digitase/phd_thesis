@@ -11,9 +11,13 @@
 
 % TODO:
 % collab note from first year report acknowledgements
+% data from HIRD
 % anna lorenc
 % sean
 % adrian
+% dna and rna extraction by theo
+% genotyping done by
+% rnaseq done by
 
 \subsection{Influenza}
 
@@ -84,15 +88,15 @@ Cell-based vaccines are faster to manufacture in pandemic situations, not depend
 
 Licensed seasonal vaccines are effective and well-tolerated in healthy adults, but particular subclasses of vaccine are recommended for different demographics \autocite{bresee2018InactivatedInfluenzaVaccines,luke2018InfluenzaVaccineLive,poland2018PersonalizedVaccinologyReview,ramsay2020InfluenzaGreenBook}.
 \glspl{LAIV} are delivered via nasal spray and are more effective than \glspl{IIV} at mitigating transmission. 
-They are recommended for children---the major drivers of community transmission---but are contraindicated for young children \SI{<2}{\year} at risk of wheezing, and immunocompromised individuals.
+They are recommended for children---the major drivers of transmission due to high viral loads and prolonged shedding \autocite{krammer2018Influenza,bresee2018InactivatedInfluenzaVaccines}---but are contraindicated for young children \SI{<2}{\year} at risk of wheezing, and immunocompromised individuals.
 Trials also suggest \gls{LAIV} has superior efficacy compared to \glspl{IIV} in children.
 High-dose and adjuvanted \gls{IIV} vaccines are recommended to enhance immunogenicity in the elderly.
 % Generally, adjuvants improve vaccine responses but may increase reactogenicity.
-Cell-based vaccines are suitable for people with egg allergies.
+Cell-based and egg-free vaccines are suitable for people with egg allergies.
 No vaccines are licensed for use in infants \SI{<6}{\month}, but passive immunity can be conferred through vaccinating the mother.
 
 Point estimates of seasonal vaccine efficacy range from \SIrange{50}{90}{\percent} in healthy adults in controlled trials.
-% \todo{add efficacy vs odds ratio footnote}
+% TODO: add efficacy footnote
 Real-world effectiveness can be as low as \SI{10}{\percent}, depending greatly on vaccine class, choice of endpoint, the match between vaccine and circulating strains, and host factors
 % (e.g. age, sex, immune history, pregnancy, obesity, microbiome, genetics)
 \autocite{dhakal2019HostFactorsImpact}.
@@ -111,7 +115,7 @@ This is beneficial if strains with the same epitopes come back into circulation,
 and harmful against strains still similar enough to trigger immune memory, but with drifted epitopes \autocite{henry2018OriginalAntigenicSin,dhakal2019HostFactorsImpact}.
 % OAS may be more prominent for repeated flu infection rather than repeated vaccination https://www.jimmunol.org/content/183/5/3294
 % Also see "Original antigenic sin: A comprehensive review" https://doi.org/10.1016/j.jaut.2017.04.008
-\todo{add pregnancy, obesity, microbiome}
+% TODO: add pregnancy, obesity, microbiome
 Host genetic variation in cytokine genes, immunoglobulin genes and the \gls{HLA} region are associated with antibody responses---reviewed in more depth in \cref{subsec:hird_reQTL_intro_geneticFactorsFluVaccine}.
 
 \subsection{Quantifying immune response to influenza vaccines}
@@ -128,8 +132,9 @@ The \gls{HAI} assay is an inexpensive method for quantifying serum anti-\gls{HA}
 A serial dilution of serum is created and mixed with standardised concentrations of \glspl{RBC} and influenza virus. 
 Without the presence of antibodies, the receptor site on the \gls{HA} head binds to membrane-bound sialic acid on \glspl{RBC}, agglutinating them into a lattice that appears as a cloudy red solution.
 Anti-\gls{HA} antibodies inhibit agglutination, allowing the \glspl{RBC} to settle, creating a clear solution with a dark red pellet. 
-The readout is the least dilute concentration of serum that completely inhibits agglutination \autocite{klimov2012InfluenzaVirusTitration}.
-A \gls{HAI} titre of 40 (1:40 dilution) is deemed seroprotective, and is an accepted correlate of protection for \glspl{IIV},
+The titre value is the least dilute concentration of serum that completely inhibits agglutination \autocite{klimov2012InfluenzaVirusTitration}.
+The value is relative to the concentrations of reagents, requiring standardised protocols for comparability.
+A standardised \gls{HAI} titre of 40 (1:40 dilution) is deemed seroprotective, and is an accepted correlate of protection for \glspl{IIV},
 % i.e. is seroprotective
 representing \SI{50}{\percent} clinical protection rate against infection \autocite{cox2013CorrelatesProtectionInfluenza,bresee2018InactivatedInfluenzaVaccines}.
 % See nauta2009RelationshipMeanAntibody for modelling the full curve.
@@ -138,7 +143,7 @@ For seasonal \glspl{IIV}, regulatory agencies define target criteria based on th
 minimum proportion of individuals achieving \gls{HAI} seroprotection (\SI{\ge 40}) 
 and seroconversion (\SI{\ge 4}-fold increase in titre after vaccination, indicating the vaccine is immunogenic) \autocite{cox2013CorrelatesProtectionInfluenza,sano2017RoadMoreEffective,krammer2019HumanAntibodyResponse}.
 
-An alternative method is the \gls{MN} assay, which quantifies serum antibodies capable of neutralising viral infectivity.
+An alternative method is the \gls{MN} assay, which quantifies concentrations of serum antibodies capable of neutralising viral infectivity.
 Neutralising antibodies may be anti-\gls{HA} antibodies quantifiable by \gls{HAI}, but may also be anti-\gls{HA} stalk antibodies or antibodies with non-\gls{HA} targets not detectable by \gls{HAI} \autocite{krammer2019HumanAntibodyResponse}.
 The assay involves a serial dilution of serum incubated with virus. 
 The serum-virus mixtures are then inoculated into host cells \textit{in vitro}.
@@ -187,7 +192,7 @@ a subfield of systems immunology dedicated to the analysis of high-throughput da
 Traditional serological assays (e.g. \gls{HAI}, \gls{MN}) are complemented with a raft of other technologies to give a broader view of immune response \autocite{nakaya2012SystemsVaccinologyLearning,li2013SystemsBiologicalApproaches,pulendran2014SystemsVaccinologyProbing,davis2018WillSystemsBiology,raeven2019SystemsVaccinologyBig}.
 Flow (e.g. \gls{FACS}) and mass cytometry (e.g. \gls{CyTOF}) are used to quantify immune cell subpopulations by their surface markers using fluorescent and heavy metal tags.
 These technologies can also be used to quantify intracellular markers (e.g. cytokines) by cell staining.
-Frequencies of cells secreting specific proteins (cytokines or antibodies) can also be quantified (e.g. \gls{ELISPOT}), often used in monitoring cell-mediated immunity.
+Frequencies of cells secreting specific proteins (e.g. cytokines or antibodies) can also be quantified (e.g. \gls{ELISPOT}), useful for monitoring activated cell populations involved in both humoral and cell-mediated.
 % TODO: compare whole blood to PBMCs? List the cell types in PBMC here.
 The transcriptome of peripheral blood is extremely popular to assay (e.g. expression array, \gls{RNAseq}), 
 providing an accessible, global measure of gene expression in dozens of immune cell subtypes without the need to select specific genes of interest in advance.
@@ -203,7 +208,7 @@ Finally, although not often considered due to small cohort sizes, host genetic v
 
 Longitudinal study design is key, not only to profile different stages of innate and adaptive immunity, but also for determining correlates of protection.
 % NOTE: do not distinguish surrogates and correlates here.
-Correlates are known only for a subset of established vaccines \autocite{plotkin2010CorrelatesProtectionInduced}.
+Correlates are known for some but not all established vaccines \autocite{siegrist2018VaccineImmunology,plotkin2018CorrelatesProtection}.
 For novel and emerging diseases, there may be no prior knowledge of correlates for use in vaccine development.
 The term \textit{molecular signature} was coined to refer to transcriptomic responses induced early after vaccination that correlate with, and importantly, are predictive of later immune phenotypes (e.g. antibody titres) \autocite{pulendran2010SystemsVaccinology}.
 Non-transcriptomic data types can also be used to form signatures.
@@ -290,6 +295,7 @@ Genes associated with both myeloid and lymphoid effector functions had increased
 % \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
 These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, 
 but a type II interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine was observed.
+\todo{add age effect on early response}
 
 Vaccine response was defined as a \num{\ge 4}-fold increase in either \gls{HAI} or \gls{MN} titres after vaccination.
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
@@ -303,17 +309,18 @@ There appeared to be many \enquote{routes to failure}, rather than any single de
 
 Transcriptomic measurements in the original \gls{HIRD} study were restricted to a relatively small number of individuals ($n=46$), limiting power to detect expression signatures associated with antibody response.
 In addition, the binary responder versus non-responder definition used does not account for variation in baseline titres, 
-dichotomisation of a continuous variable results in loss of information \autocite{cohen1983CostDichotomization,senn2005DichotomaniaObsessiveCompulsive,fedorov2009ConsequencesDichotomization}.
+and dichotomisation of a continuous variable loses information,
+implies a discontinuity in response at the cutoff.
 \todo{I elaborate on this in the methods}
 
 In this chapter, I combine the existing array data with newly generated \gls{RNAseq} data ($n=75$) on additional individuals from the \gls{HIRD} cohort, 
 using Bayesian random-effects meta-analysis to account for between-platform heterogeneity.
 I also compute a baseline-adjusted, continuous phenotype of antibody response to vaccination, the \gls{TRI} \autocite{bucasas2011EarlyPatternsGene}.
 Leveraging the greater sample size,
-more efficient definition of vaccine response,
+more statistically efficient definition of vaccine response,
 and greater sensitivity of rank-based gene set enrichment analysis over gene-wise analysis,
-I identify gene expression modules associated with antibody response.
-The strongest effects are seen at day 7, but also significant module associations are also observed at baseline.
+I identify gene expression modules associated with magnitude of antibody response.
+The strongest associations are seen at day 7, but also significant module associations are also seen at baseline.
 \todo{no longer spoils results}
 
 \section{Methods}
@@ -339,8 +346,8 @@ An overview of datasets is shown in \cref{fig:hird_design}.
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/hird_design-crop.pdf}
     \caption{
-        \textbf{Overview of \gls{HIRD} data.}
-        The total cohort size was 178 individuals.
+        \textbf{Overview of study data.}
+        The total \gls{HIRD} cohort size was 178 individuals.
         % Individuals were vaccinated after day 0 sampling.
         Serum cytokines were quantified by 16-plex Luminex panel.
         Immune cell subsets were quantified by \gls{FACS}.
@@ -359,28 +366,42 @@ An overview of datasets is shown in \cref{fig:hird_design}.
 % TODO: For comparing significance tests, a meaningful measure of efficiency can be defined based on the sample size required for the test to achieve a given task power.[9]
 
 % TODO: http://www.dokeefe.net/pub/okeefe07cmm-posthoc.pdf
-% These four variables—power, significance criterion, sample size, and populationeffect size—are related such that when the values of three of these are fixed, thefourth is determined (Cohen, 1988, p. 14).
+% These four variables—power, significance criterion, sample size, and population effect size—are related such that when the values of three of these are fixed, the fourth is determined (Cohen, 1988, p. 14).
+
 % TODO: do not say power when you mean efficiency or sensitivity
 % https://discourse.datamethods.org/t/responder-analysis-loser-x-4/1262
 
 % TRI alternatives e.g. adjusted maximum fold change \autocite{hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}
 
+There were 166/178 individuals with \gls{HAI} and \gls{MN} titres available at both baseline (day -7) and post-vaccination (day 63).
 \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} defined Pandemrix vaccine responders as individuals with $\ge$4-fold titre increases from day -7 to day 63 in either the \gls{HAI} or \gls{MN} assays.
 This is a typical threshold for \gls{HAI} and \gls{MN} seroconversion used to assess the immunogenicity of seasonal \glspl{IIV} \autocite{krammer2019HumanAntibodyResponse}, 
 and has also been recommended for pandemic \glspl{IIV} \autocite{foodanddrugadministration2007GuidanceIndustryClinical}.
-\todo{heterogeneity: well of course there was}
-% TODO: here correct only for 2 things: dicot and RTM of change scores
-However, \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} noted there was heterogeneity in the baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres made the fixed 4-fold threshold hard to achieve.\todo{cite appropriate subfigures here}
-% TODO: TRI is a residualised change score \url{https://www.tandfonline.com/doi/abs/10.1080/02732173.1991.9981960?journalCode=usls20}
-\todo{change score is usually negatively correlated to baseline \autocite{clifton2019CorrelationBaselineScore}}
-\todo{this is due to within-individual RTM , which is why we residualise}%\url{https://academic.oup.com/ije/article/34/1/215/638499#10889734}
-\todo{the variable is not used as an inclusion/exclusion criterion for the study, otherwise regression to the mean will be strong} % https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1740-9713.2011.00509.x
-\todo{upend change score bit, the only thing we are concerned wtih here is clifton2019CorrelationBaselineScore}
-% TODO: also cite https://academic.oup.com/ije/article/34/1/215/638499 : ANCOVA to adjust for regression to the mean
-Dichotomisation of continuous response variables can also result in loss of statistical power \autocite{cohen1983CostDichotomization,senn2005DichotomaniaObsessiveCompulsive,fedorov2009ConsequencesDichotomization}.
-% TODO: efficiency
-% elaborate fully on why Dichot is bad here for the discussion: definition of response based on dichotomisation is inefficient and assumes a sharp change at the threshold
-% TODO: 4-fold less likely to acheive by high baseline, for biological reasons, also RTM, also the forced negative correlation by cov formula
+However, they also noted there was \enquote{a complete spectrum} of baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres \enquote{enhancements by \num{\ge4}-fold harder to achieve}.
+This may be referring to the dynamic range of the assays.
+In the full data, the range of \gls{HAI} titres  is \num{8}{4096}, and the range of \gls{MN} titres is \num{10}{5120} (\cref{fig:hird_tri}a, \cref{fig:hird_tri}b).
+In just the day -7 baseline titres, the range of \gls{HAI} titres is \num{8}{512}, and the range of \gls{MN} titres is \num{10}{5120}%
+\footnote{
+    The distribution of pre-existing titres would be expected to be higher if this were a seasonal vaccine \autocite{tsang2014GlobalAnalysesHuman}.
+}.
+% NOTE: based on tsang2014GlobalAnalysesHuman, presumably the distribution of pre-existing titres would be higher if this was a seasonal vaccine.
+For example, it is impossible for an individual with higher than 1280 \gls{MN} at day -7 to achieve a 4-fold increase in \gls{MN} after vaccination if the maximum \gls{MN} value is \num{5120}.
+This ceiling effect can been seen in \cref{fig:hird_tri}d, where for a given baseline \gls{MN} titre, there is a limit to the maximum observable fold change.
+
+Another perspective is to consider that day 63/day -7 fold change is a change score on the log scale.
+It is well-known that change scores are usually negatively correlated to baseline.
+This can be due to individual-level regression to the mean%
+\footnote{
+    \textit{Cf.} Group-level regression to the mean, which is prominent if the baseline measurement is used as a selection criteria for follow-up \autocite{barnett2004RegressionMeanWhat,senn2011FrancisGaltonRegression}.
+}, 
+where an extreme observation is more likely to be followed by less extreme ones in the same individual \autocite{barnett2004RegressionMeanWhat},
+but is also due to the mathematical relationship between change score and baseline when the variance of the post-test score is large compared to the variance of the baseline \autocite{clifton2019CorrelationBaselineScore}.
+The negative correlation of titre fold change and baseline is visible in the \gls{HIRD} data (\cref{fig:hird_tri}c, \cref{fig:hird_tri}d).
+
+Dichotomisation of continuous variables can also result in loss of information \autocite{cohen1983CostDichotomization,senn2005DichotomaniaObsessiveCompulsive,altman2006CostDichotomisingContinuous,fedorov2009ConsequencesDichotomization}.
+\textcite{cohen1983CostDichotomization} presents a classic example where 
+dichotomising a continuous independent variable reduces statistical power akin to throwing away a third of the samples---and this is the optimal case when the cutpoint is the mean.
+Lastly, a discontinuous cutpoint is biologically implausible, implying that a 4.01-fold antibody titre change would be dramatically more protective than a 3.99-fold change.
 
 %
 % \begin{outline}
@@ -389,111 +410,149 @@ Dichotomisation of continuous response variables can also result in loss of stat
 %     \2 Compute TRI (based on Bucasas 2009)
 %         \3 “We related the change in titer between pre- and postvaccination measurements (response variable) to the prevaccination titer (explanatory variable) using a simple linear model”
 %         \3 “We next determined the residuals from the above linear regressions and used them as the input values for the individual response scores.”
-%         \3 “we standardized the residuals by dividing by the residual standard deviation for each component”
+%         \3 “we standardised the residuals by dividing by the residual standard deviation for each component”
 %             \4 Based on their axis ranges, it appears they are plotting log2(post)-log2(pre)), equivalently log2(post/pre), a.k.a. log2 fold-change; against log2(pre)
 %             \4 Note that log2(post-pre) does not make sense mathematically, as post-pre may well be negative
 %             \4 The negative relationship indicates lower initial titres are more amenable to high fold-change increases, which is exactly what TRI is designed to correct for
 % \end{outline}
 To address these concerns, I computed the \gls{TRI} as defined in \textcite{bucasas2011EarlyPatternsGene}.
 For each assay, a linear regression was fit with the $\log_2{\text{day 63}/\text{day -7}}$ titre fold change as the response, and the $\log_2{\text{day -7}}$ baseline titre as the predictor.
-The residuals from the two regressions were each standardized to zero mean and unit variance, then averaged.
-The \gls{TRI} expresses a continuous measure of change in antibody titres across both assays post-vaccination, compared to individuals with a similar baseline titre, and remains comparable to the binary 4-fold change definition (\cref{fig:hird_tri}).\todo{cite appropriate subfigures here, after adding proper subfigure labels}
-
-The responder status for 166 individuals with both \gls{HAI} and \gls{MN} titres available at baseline (day -7) and post-vaccination (day 63) were computed according to this definition.
-\todo{atm I'm not using R/NR. wording here implys I am}
+The residuals from the two regressions were each standardised to zero mean and unit variance, then averaged with equal weight.
+% NOTE: 
+% This is residualised change score.
+% \gls{ANCOVA} is one approach to adjusting for regression to the mean \autocite{barnett2004RegressionMeanWhat}.
+The \gls{TRI} is a single variable that expressed a continuous measure of change in antibody titres averaged across both assays post-vaccination, 
+compared to individuals with a similar baseline titre. 
+It is no longer correlated with baseline (\cref{fig:hird_tri}e, \cref{fig:hird_tri}f),
+and remains comparable to the original binary definition (\cref{fig:hird_tri}g, \cref{fig:hird_tri}h).
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
-    \caption{Comparison of \gls{TRI} to \gls{HAI} (left column) and \gls{MN} (right column) titres and binary responder/non-responder status (colored) in 166 \gls{HIRD} individuals. Row 1: baseline titres are positively correlated to post-vaccination titres. Row 2: baseline titres are negatively correlated to fold change. Row 3: \gls{TRI} regresses out the correlation between baseline titre and response. Row 4: \gls{TRI} is still comparable in ordering to binary response status.}
+    \caption{
+        \textbf{Antibody titre data and responder definitions.}
+        Titre values are on the $\log_2$ scale.
+        Individuals are colored by binary responder status: \num{\ge 4}-fold increase in either \gls{HAI} or \gls{MN} titres from baseline (day -7) to post-vaccination (day 63).
+        Dashed lines show the \num{\ge 4}-fold thresholds.
+        \textbf{(a, b)} \gls{HAI} and \gls{MN} titres are correlated at baseline (\textbf{a}) and post-vaccination (\textbf{b}).
+        Comparison of \gls{TRI} to \gls{HAI} (left column) and \gls{MN} (right column) titres and binary responder/non-responder status (colored) in 166 \gls{HIRD} individuals. Row 1: baseline titres are positively correlated to post-vaccination titres. 
+        \textbf{(c, d)} Baseline titres are negatively correlated to fold change. 
+        \textbf{(e, f)} \gls{TRI} is computed from the standardised residuals from \textbf{c} and \textbf{d}, adjusting for baseline titre.
+        \textbf{(g, h)} \gls{TRI} remains comparable in ordering to binary response status.
+    }
     \label{fig:hird_tri}
 \end{figure} 
 
 Descriptive statistics for the 114 individuals with both gene expression and antibody titre data are presented in \cref{tab:hird_table1}.
-Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar ($p = 0.1551$, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher ($p = 0.0002098$, Levene's test), suggesting more extreme antibody response phenotypes are present (\cref{fig:hird_phenotypes_by_platform}).
-The cause of this is unknown, there is a possibility that individuals with more extreme phenotypes were prioritised for array transcriptomics in the original \gls{HIRD} study\footnote{Personal communication with authors.}.
+Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar (\pvalue{} = \num{0.1551}, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher (\pvalue{} = \num{0.0002098}, Levene's test), suggesting more extreme antibody response phenotypes are present (\cref{fig:hird_phenotypes_by_platform}).
+The cause of this is unknown, there is a possibility that individuals with more extreme phenotypes were prioritised for array transcriptomics in the original \gls{HIRD} study\footnote{Personal communication with \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} authors.}.
 
+% NOTE: this table contains manual edits
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_table1.tex}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.pheno_boxplots.pdf}
-    \caption{Distribution of \gls{TRI}, stratified by platform used to measure expression.}
+    \caption{\textbf{Distribution of \gls{TRI}, stratified by platform.}}
     \label{fig:hird_phenotypes_by_platform}
 \end{figure}
 
 \subsection{Genotype data generation}
 
-\todo{Add to collab note that extractions were done at KCL}
 DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was done using on the Infinium CoreExome-24 BeadChip array (Illumina).
-In total, 192 samples from 176 individuals in the HIRD cohort were genotyped at 550601 markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
+In total, 192 samples from 176 individuals in the \gls{HIRD} cohort were genotyped at \num{550601} markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
+\todo{192 and 176 should be correct, 169 is the number after QC.}
 
 \subsection{Genotype data preprocessing}
 \label{subsec:hird_dge_genotype_preproc}
 
-Using PLINK (v1.90b3w), genotype data underwent the following quality control procedures to remove poorly genotyped samples and markers:
-max marker missingness across samples $< 5\%$, 
-max sample missingness across markers $< 1\%$, 
-max marker heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exlude outliers, \cref{fig:hird_genotype_sample_hetRate_missingness}),
-% TODO: recheck if this is really max marker heterozygosity rate, not sample rate
-% TODO: add discordant sex mismatch to indicate possible sample swaps, distribution of F estimates
-% The HWE threshold should depend on the multi-ethnicity of the cohort
-% \todo{see}
-% https://www.nature.com/articles/nrg2344
-% Once armed with a set of called genotypes, the final phase of quality control beckons. Experience has shown that most SNPs showing extreme departures from Hardy–Weinberg equilibrium (HWE) in controls can be safely discarded1, although lesser (but nevertheless quite marked) departures are to be expected under the null hypothesis, given the number of tests performed. Appropriate thresholds for any given study will depend on the sample size and overall data quality, and might best be defined by using the observed distribution of HWE statistics (the WTCCC used this approach to set a threshold at an exact p < 5.7 × 10−7 in controls)1. In any event, HWE is an imprecise tool for quality control purposes. Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
-removal of markers that deviate from \gls{HWE} (\texttt{-{}-hwe} option, $\text{p} < 0.00001$).
-% TODO
-% We exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because
-%   this can be indicative of a genotyping or genotype-calling error. However,
-%   deviations from HWE may also indicate selection; accordingly,
-%   if a case sample shows deviations from HWE at loci associated with disease,
-%   it would obviously be counterproductive to remove these loci from further investigation.
-%   Therefore, only control samples should be used when testing for deviations for HWE.
-  
+\todo{still some missing software versions and references}
+
+Using PLINK (v1.90b3w), genotype data underwent the following quality control filters to remove poorly genotyped samples and markers:
+\begin{itemize}
+    \item maximum marker missingness across samples \SI{< 5}{\percent};
+    \item maximum sample missingness across markers \SI{< 1}{\percent} (\cref{fig:hird_genotype_sample_hetRate_missingness});
+    \item maximum sample heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exclude outliers, \cref{fig:hird_genotype_sample_hetRate_missingness});
+    \item sample sex mismatches based on X chromosome marker heterozygosity (\texttt{-{}-check-sex} option);
+    % NOTE: \autocite{mccarthy2008GenomewideAssociationStudies}
+    % Once armed with a set of called genotypes, the final phase of quality control beckons. Experience has shown that most SNPs showing extreme departures from Hardy–Weinberg equilibrium (HWE) in controls can be safely discarded1, although lesser (but nevertheless quite marked) departures are to be expected under the null hypothesis, given the number of tests performed. 
+    % Appropriate thresholds for any given study will depend on the sample size and overall data quality, and might best be defined by using the observed distribution of HWE statistics (the WTCCC used this approach to set a threshold at an exact p < 5.7 × 10−7 in controls)1. In any event, HWE is an imprecise tool for quality control purposes. Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
+    %
+    % NOTE: \autocite{anderson2010DataQualityControl}
+    % Most GWA studies choose to exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because this can be indicative of a genotyping or genotype calling error. However, deviations from Hardy-Weinberg equilibrium may also indicate selection, so a case sample can show deviations from HWE at loci associated with disease, and it would obviously be counter-productive to remove these loci from further investigation 18. Therefore, only control samples should be used when testing for deviations for HWE.
+    % The significance threshold for declaring SNPs to be in Hardy-Weinberg equilibrium has varied greatly between studies (p-value thresholds between 0.001 and 5.7 × 10−7 have been reported in the literature3,19).
+    \item and marker deviation from \gls{HWE}, an indication of genotyping or genotype calling errors \autocite{mccarthy2008GenomewideAssociationStudies,anderson2010DataQualityControl} (\texttt{-{}-hwe} option, \pvalue{} \SI[scientific-notation=true]{< 0.00001})%
+        \footnote{
+            A wide range of thresholds for the \gls{HWE} marker filter in controls between \num{1.0e-3} and \num{5.7e-7} are reported in the literature \autocite{anderson2010DataQualityControl}.
+            The quality control pipeline thresholds used here are from \textcite{delange2017GenomewideAssociationStudy}. 
+            Since the \gls{HIRD} cohort is two orders of magnitude smaller in size, this is a relaxed threshold, so additional vigilance for genotyping errors downstream is required.
+            In principle, it may be possible to select a more appropriate threshold from the empirical distribution of \gls{HWE} \pvalues{} \autocite{mccarthy2008GenomewideAssociationStudies}.
+        }.
+\end{itemize}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc2.pdf}
-    \caption{Sample filters for missingness and heterozygosity rate. Samples outside the central rectangle were excluded.}
+    \caption{
+        \textbf{Sample filters for marker missingness and marker heterozygosity rate.}
+        Thresholds for missingness (\SI{1}{\percent}) and heterozygosity rate (mean $\pm$ 3 standard deviations) are shown by dashed lines.
+    }
     \label{fig:hird_genotype_sample_hetRate_missingness}
 \end{figure}
 
-To exclude highly-related individuals and deduplicate replicate samples, pairwise kinship coefficients were computed on \gls{MAF} $< 0.05$ pruned genotypes using KING (v1.4).
+To exclude closely-related individuals and deduplicate samples from the same individual, 
+pairwise kinship coefficients were computed using KING (v1.4).
+As rare variation is not generally required to determine relatedness, 
+markers were filtered to \gls{MAF} \num{> 0.05} for computational efficiency.
 For each pair of samples with pairwise kinship coefficient $> 0.177$ (first-degree relatives or closer), the sample with lower marker missingness was selected.
-
-After filtering, 169 samples and 549414 markers remained.
+After all filters, 169/176 samples and \num{549414/550601} markers remained.
 
 \subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
 \label{subsec:hird_dge_genotype_pc}
 
-% TODO: read
-% Efficient toolkit implementing best practices for principal component analysis of population genetic data
-
-As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic, hence there is potential for confounding by population structure (sample structure due to genetic background) and genetic association studies \autocite{price2006PrincipalComponentsAnalysis,eu-ahsunthornwattana2014ComparisonMethodsAccount}.
-Large-scale population structure explains variation in gene expression \autocite{brown2018ExpressionReflectsPopulation}, so including population structure as covariates can increase power.
-Treating HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are likely to be ancestry, \gls{PCA} was performed using smartpca (v8000) on \gls{LD}-pruned genotypes (\texttt{PLINK -{}-indep-pairwise 50 5 0.2}).
-% https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0093766
-% TODO: Prior to PCA, thinning of the SNPs by LD and removal of regions with known high LD or other artefacts such as inversions have been recommended [1], [15], as high correlations between the SNPs can distort the resulting eigenvectors.
-% TODO
-% price2006PrincipalComponentsAnalysis supp note
-% Linkage disequilibrium and choice of markers. Genome-wide data sets containing hundreds of thousands of markers are likely to exhibit substantial linkage disequilibrium (LD) between markers, even in the case of markers chosen to optimally tag all variation in the genome. Thus,
-% Page 6inferring population structure from the set of all markers has two potential problems. The first problem is that, due to varying levels of LD, some regions will have more redundant markers than others and will thus be overrepresented. The second problem is that strong LD at a given locus which affects many markers could result in an axis of variation which corresponds to genetic variation specifically at that locus, rather than to genome-wide ancestry. Nonetheless, we recommend inferring population structure using all markers. This recommendation is based on an analysis of HapMap8 data which suggests that these potential problems will not affect results in practice, even on a data set with over 3 million markers
-% TODO: why exclude long range/prune
-% https://www.nature.com/articles/ejhg201348
-% Very strong and/or long-range LD at a particular locus can even result in PCs that only reflect genetic variation at that specific locus.6, 7
-% We thus conclude that both excluding long-range LD regions and LD pruning are necessary when studying a relatively small population, which may consist of overlapping subpopulations.
-\gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
+As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic.
+Large-scale population structure explains variation in gene expression \autocite{stegle2012UsingProbabilisticEstimation,brown2018ExpressionReflectsPopulation}, 
+so including genotype \glspl{PC} that reflect that structure as covariates can increase statistical efficiency for detecting associations with expression.
+I used HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are ancestry.
+Genotypes were first \gls{LD}-pruned (PLINK \texttt{-{}-indep-pairwise 50 5 0.2} i.e. in a sliding window of \SI{50}{\kilo\bp}, step size of 5 variants, remove variants at each step until no pair of variants has \gls{LD} \num{>0.2}), 
+to avoid regions with many redundant markers being overrepresented \autocite{price2006PrincipalComponentsAnalysis,abdellaoui2013PopulationStructureMigration}.
+% /lustre/scratch119/realdata/mdt2/teams/barrett/coreex_gaibdc/refs/high-LD-regions.txt
+% 1 48000000 52000000 1
+% 2 86000000 100500000 2
+% 2 183000000 190000000 3
+% 3 47500000 50000000 4
+% 3 83500000 87000000 5
+% 5 44500000 50500000 6
+% 5 129000000 132000000 7
+% 6 25500000 33500000 8
+% 6 57000000 64000000 9
+% 6 140000000 142500000 10
+% 7 55000000 66000000 11
+% 8 8000000 12000000 12
+% 8 43000000 50000000 13
+% 8 112000000 115000000 14
+% 10 37000000 43000000 15
+% 11 87500000 90500000 16
+% 12 33000000 40000000 17
+% 20 32000000 34500000 18
+Eighteen genomic regions with especially strong and/or long-range \gls{LD} that contain many highly correlated markers were excluded, otherwise some \glspl{PC} may reflect those just regions rather than genome-wide ancestry \autocite{price2006PrincipalComponentsAnalysis,prive2020EfficientToolkitImplementing}.
+\gls{PCA} was performed using smartpca (v8000),
+then \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
+%
 % TODO: this vs in-sample pca
-% TODO http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf % If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
-% TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6007879/#!po=31.2500
-% if there may be related, prefer projection:
-% Principal Components Analysis with Related individuals (PC-AiR) [Conomos, et al. 2015] infers PS in the presence of related individuals. This method identifies an unrelated subset of individuals that represents the ancestral diversity of the sample and computes PCs in this subset and projects PCs onto the remainder of the sample.
-For non-genotyped individuals, \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
-The top \glspl{PC} separate samples of European, African and Asian ancestry (\cref{fig:hird_genotype_pca_withHapmap}), hence these \glspl{PC} can be used as continuous covariates for ancestry downstream.
-\todo{Add Tracy-Widom statistics for PCs to justify later choice of 4 PCs for covariates}
-% TODO: https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.0020190
-\todo{nicer version, copy the peer code, facet the hird and hapmap samples}
+% http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf 
+% If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
+For non-genotyped individuals with expression data, 
+\gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
+The top \glspl{PC} indeed separate samples by ancestry (\cref{fig:hird_genotype_pca_withHapmap}).
+% Thus, we expect that the theoretical covariance matrix (approximated by the sample covariance) will have K − 1 “large” eigenvalues, with the remainder small and reflecting the sampling variance.
+Significant \glspl{PC} with large eigenvalues unlikely to be due to sampling noise were selected by Tracy-Widom test \autocite{patterson2006PopulationStructureEigenanalysis}.
+The fourth \gls{PC} had an eigenvalue of \num{1.005305} (\pvalue{} = \num{0.0238744}), 
+so the top four \glspl{PC} were retained as continuous covariates for ancestry downstream.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
-    \caption{\gls{HIRD} samples (cyan) projected onto \gls{PC}1 and \gls{PC}2 axes defined by \gls{PCA} of HapMap 3 samples. The first two \glspl{PC} separate European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left) individuals.}
+    \caption{
+        \textbf{\gls{HIRD} samples (cyan) projected onto \gls{PC}1 and \gls{PC}2 axes defined by \gls{PCA} of HapMap 3 samples.}
+        The first two \glspl{PC} separate individuals of European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left) .
+    }
     \label{fig:hird_genotype_pca_withHapmap}
 \end{figure}
 
@@ -502,14 +561,19 @@ The top \glspl{PC} separate samples of European, African and Asian ancestry (\cr
 Total RNA was extracted from \glspl{PBMC} using the Qiagen RNeasy Mini kit, with on-column DNase treatment.
 RNA integrity was checked on the Agilent Bioanalyzer and mRNA libraries were prepared with the KAPA Stranded mRNA-Seq Kit (KK8421), which uses poly(A) selection.
 % 7 lanes x 3 plates
-To avoid confounding of timepoint and batch effects from pooling, samples were pooled by library prep plate, ensuring libraries from all timepoints of an individual were in the same pool, and then sequenced across multiple lanes as technical replicates (HiSeq 4000, \SI{75}{\bp} paired-end).
+To avoid confounding of timepoint and technical effects from library preparation and sequencing,
+samples were pooled by library prep plate (three pools) ensuring libraries from all timepoints of an individual were in the same pool, 
+then sequenced across multiple lanes as technical replicates (HiSeq 4000, \SI{75}{\bp} paired-end).
 % TODO:
 % examples of failures of RNAseq design https://f1000research.com/articles/4-121/v1
 % TODO: this is deliberate confounding: schielzeth2013NestedDesignModel
 % although patient nested in plate. patient x plate interaction is confounded with main effect of patient
 % we are not interested in this
 % TODO: this is correct:
-% Checking that I understand the sources of technical variability, is it that all the samples in each pool will go through library prep together (e.g. same plate, reagent batch, roughly same time), and then be barcoded and sequenced on the same (lane of the) Novaseq flow cell?
+% Checking that I understand the sources of technical variability, is it that
+% all the samples in each pool will go through library prep together (e.g. same
+% plate, reagent batch, roughly same time), and then be barcoded and sequenced
+% on the same (lane of the) Novaseq flow cell?
 
 % To get to cram files:
 % From .cram headers:
@@ -529,35 +593,42 @@ To avoid confounding of timepoint and batch effects from pooling, samples were p
 % 8.1.	/lustre/scratch117/core/sciops_repository/references/Homo_sapiens/GRCh38_15_plus_hs38d1/all/fasta/Homo_sapiens.GRCh38_15_plus_hs38d1.fa
 % 9.	NOTE: Note lots of intermediate biobambam 2.0.76 and scramble processing steps, not all are listed.
 
-\todo{Can add other fastqc plots e.g. kmers, overrepresented seqs, seq length}
+% TODO: Can add other fastqc plots e.g. kmers, overrepresented seqs, seq length
 % Genomic origin of reads and gene end biases were assessed using Qualimap, after aligning the reads to the human GRCh38_15_plus_hs38d10 reference transciptome using tophat2.
-\gls{RNAseq} quality metrics were assessed using FASTQC\footnote{\url{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}} and Qualimap\autocite{okonechnikov2015QualimapAdvancedMultisample}, then visualised with MultiQC\autocite{ewels2016MultiQCSummarizeAnalysis}.
+\gls{RNAseq} quality metrics were assessed using FastQC\footnote{\url{https://www.bioinformatics.babraham.ac.uk/projects/fastqc/}} and Qualimap \autocite{okonechnikov2015QualimapAdvancedMultisample}, then visualised with MultiQC \autocite{ewels2016MultiQCSummarizeAnalysis}.
 % See log 2017-11-20 for fastqc discussion
-Sequence quality was high (\cref{fig:hird_fastqc_seqQual}), and duplication levels were low (\cref{fig:hird_fastqc_seqDupe}).
+Sequence quality was high, as measured by mean per-base Phred scores across sample reads (\cref{fig:hird_fastqc_seqQual}).
+% Sequence duplication levels were acceptable for \gls{RNAseq} (\cref{fig:hird_fastqc_seqDupe}).
 The unimodal GC-content distribution suggested negligible levels of non-human contamination (\cref{fig:fastqc_gc}).
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_base_sequence_quality_plot_1.pdf}
-    \caption{FastQC sequence quality versus read position for \gls{HIRD} \gls{RNAseq} samples.}
+    \caption{
+        \textbf{FastQC per-base sequence quality (Phred scores) versus read position for \gls{RNAseq} samples.}
+        Visualised with MultiQC \autocite{ewels2016MultiQCSummarizeAnalysis}.
+    }
 	\label{fig:hird_fastqc_seqQual}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_sequence_duplication_levels_plot_1.pdf}
-	\caption{FastQC sequence duplication levels for \gls{HIRD} \gls{RNAseq} samples.}
-	\label{fig:hird_fastqc_seqDupe}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_sequence_duplication_levels_plot_1.pdf}
+%     \caption{FastQC sequence duplication levels for \gls{HIRD} \gls{RNAseq} samples.}
+%     \label{fig:hird_fastqc_seqDupe}
+% \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_sequence_gc_content_plot_Counts.pdf}
-	\caption{FastQC GC profile for \gls{HIRD} \gls{RNAseq} samples.}
+    \caption{
+        \textbf{FastQC per-read GC distributions for \gls{RNAseq} samples.}
+        Visualised with MultiQC \autocite{ewels2016MultiQCSummarizeAnalysis}.
+}
 	\label{fig:fastqc_gc}
 \end{figure}
 
-\subsection{\glsfmtshort{RNAseq} quantification and filtering}
+\subsection{\glsfmtshort{RNAseq} quantification and preprocessing}
 \label{subsec:hird_dge_rnaseq_quantAndFilter}
 
 % 1.	Quantification (Salmon --libType ISR, which is equiv to TopHat -fr-firststrand with paired end data)
@@ -577,14 +648,12 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 % 3.2.	GC bias affects both technologies: somewhat alleviated by Salmon using effective length (see the salmon paper)
 % NOTE:
 % 3.3.	Mappability has not been considered
-\todo{add software versions}
+%
 % NOTE: Salmon is not pseudo-alignment: "Unlike pseudoalignment, Salmon’s lightweight mapping procedure tracks, by default, the position and orientation of all mapped fragments."
-% TODO: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6042521/ Limitations of alignment-free tools in total RNA-seq quantification
-Reads were quantified against the Ensembl reference transcriptome (GRCh38) using Salmon\autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, 
+% TODO: Add pros and cons vs regular alignment
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6042521/ Limitations of alignment-free tools in total RNA-seq quantification
+Reads were quantified against the Ensembl reference transcriptome (GRCh38.p15) using Salmon \autocite{patro2017SalmonProvidesFast} in quasi-mapping-based mode, 
 which internally corrects for transcript length and GC composition by computing an effective length for each transcript.
-% https://www.biostars.org/p/304552/
-% TODO: check, this should be done after converting TPM to counts with tximport? summing TPMs doesn't make sense
-To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
 % Also see:
 %
 % https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8
@@ -596,22 +665,14 @@ To combine technical replicates, as the sum of Poisson distributions remains Poi
 % Experiments whose purpose is to evaluate the similarity between the transcriptional profiles of two polyA+ samples may require only modest depths of sequencing (e.g. 30M pair-end reads of length > 30NT, of which 20-25M are 3mappable to the genome or known transcriptome, Experiments whose purpose is discovery of novel transcribed elements and strong quantification of known transcript isoforms requires more extensive sequencing.
 % The ability to detect reliably low copy number transcripts/isoforms depends upon the depth of sequencing and on a sufficiently complex library.
 % For experiments from a typical mammalian tissue or in which sensitivity of detection is important, a minimum depth of 100-200 M 2 x 76 bp or longer reads is currently recommended.
-The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range 20.24-39.14 million), representing a mean mapping rate of 80.73\% (range 75.57-90.10\%), comfortably within sequencing depth recommendations for \gls{DGE} experiments\autocite{liu2014RNAseqDifferentialExpression}.
-% TODO: add exact rule of thumb diminishing returns for DGE after 10M aligned reads
-Relative transcript abundances were summarised to Ensembl gene-level count estimates using tximport (scaledTPM method) to improve statistical robustness and interpretability\autocite{soneson2016DifferentialAnalysesRNAseq}.
-
-% TODO:
-% why use length scaled tpm, not salmon counts directly?
+The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range 20.24-39.14 million), representing a mean mapping rate of 80.73\% (range 75.57-90.10\%), within sequencing depth recommendations for \gls{DGE} experiments (e.g. diminishing returns after 10 million single-end reads \autocite{liu2014RNAseqDifferentialExpression}) and mapping rate expectations (e.g. \SIrange{70}{90}{\percent} \autocite{conesa2016SurveyBestPractices}).
+% NOTE: Two biases are library composition and feature length in RNAseq
+% scaledTPM or lengthScaledTPM is still adjusted for feature length
+%
 % We could alternatively generate counts from abundances, using the argument countsFromAbundance, scaled to library size, "scaledTPM", or additionally scaled using the average transcript length, averaged over samples and to library size, "lengthScaledTPM". Using either of these approaches, the counts are not correlated with length, and so the length matrix should not be provided as an offset for downstream analysis packages.
-
-% TODO
-% Two main biases are library composition and feature length in RNAseq
-% TPM would be for within sample norm for both
-% no+use length offset, or scaledTPM, or lengthScaledTPM to get count scaled data that is not correlated with feature length between samples
-%     doesn't matter if you multiply by the same effective length factor for each sample (first multiple by the average effective transcript length over samples)
-%      for lengthScaledTPM,    still corr with length within samples
-% here, outline options from "Swimming downstream"
-% TMM for between sample norm, also need to account for library size (seq depth)
+Relative transcript abundances were summarised to Ensembl gene-level (release 90) count estimates using tximport (\texttt{scaledTPM} method, which scales Salmon \glspl{TPM} up to the library size \autocite{soneson2016DifferentialAnalysesRNAseq,love2018SwimmingDownstreamStatistical}) to improve statistical robustness and interpretability \autocite{soneson2016DifferentialAnalysesRNAseq}.
+% NOTE: in future, just combine technical replicates at the read level
+To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
 
 % 5.	Pre-process RNA-seq expression data
 % 5.1.	Pull in tximport counts
@@ -619,52 +680,103 @@ Relative transcript abundances were summarised to Ensembl gene-level count estim
 % 5.2.	Add gene annotation based on EnsDb.Hsapiens.v86
 % 5.3.	Low-count filtering (>0.5 CPM in 10% of 223 samples i.e. 22 samples)
 % Max zero prop: need to be stringent as limma doesn't account for neg bin
-% 5.4.	Remove globin genes and short non-coding RNAs
+% 5.4.	Remove globin genes and short 
 % 5.4.1.	Human globins: https://en.wikipedia.org/wiki/Globin#Examples
 % 5.4.2.	Short non-coding GENEBIOTYPES: https://www.gencodegenes.org/pages/biotypes.html
 % 5.5.	NOTE: we have not yet removed GENEBIOTYPE=NA. These may be retired ids.
-Genes with short noncoding RNA biotypes\footnote{miRNA, miRNA\_pseudogene, miscRNA, miscRNA pseudogene, Mt rRNA, Mt tRNA, rRNA, scRNA, snlRNA, snoRNA, snRNA, tRNA, tRNA\_pseudogene. List from \url{https://www.ensembl.org/Help/Faq?id=468}} were removed, as they are generally not polyadenylated, and expression estimates can be biased by misassignment of counts from overlapping protein-coding or lncRNA genes\autocite{zhao2018EvaluationTwoMain}.
-% TODO: Also, they can be shorter than the 75 bp read length, should be depeleted by size selection, and are likely to be misassigned
-Globin genes, which are highly expressed in erythrocytes and reticulocytes, cell types expected to be depleted in \gls{PBMC} \autocite{min2010VariabilityGeneExpression}, were also removed.
-% TODO: https://www.nature.com/articles/s41598-020-62801-6
-Given the proportion of removed counts at this stage was low for most samples (\cref{fig:hird_shortncRNA_and_globins}), poly(A) selection and \gls{PBMC} isolation procedures were deemed to have been efficient.
-
-
-% TODO: justifications
-            % 1.25 CPM = 10 counts based on median lib size
-            % Count of zero will be dominated by pseudo-count before log transform
-            % using a pseudo-counts based approach for norm
-            % globins should not be expressed in immune cells
-            % counts in short ncRNAs can be misassignments
+Genes with short \gls{ncRNA} biotypes\footnote{miRNA, miRNA\_pseudogene, miscRNA, miscRNA pseudogene, Mt rRNA, Mt tRNA, rRNA, scRNA, snlRNA, snoRNA, snRNA, tRNA, tRNA\_pseudogene. List from \url{https://www.ensembl.org/Help/Faq?id=468}} were filtered out.
+% They are not well captured by regular RNAseq protocols
+These are generally not polyadenylated, depleted by size selection during library preparation, and shorter than the \SI{75}{\bp} read length, so expression estimates for these genes can reflect misassignment of counts from overlapping protein-coding or long \gls{ncRNA} genes \autocite{zhao2018EvaluationTwoMain}.
+% Reticulocytes are immature red blood cells (RBCs).
+%
+% Globins
+% ENSG00000161544,CYGB
+% ENSG00000206172,HBA1
+% ENSG00000188536,HBA2
+% ENSG00000244734,HBB
+% ENSG00000223609,HBD
+% ENSG00000213931,HBE1
+% ENSG00000213934,HBG1
+% ENSG00000196565,HBG2
+% ENSG00000206177,HBM
+% ENSG00000086506,HBQ1
+% ENSG00000130656,HBZ
+% ENSG00000198125,MB
+Globin genes, which are highly expressed in \glspl{RBC} and reticulocytes, cell types expected to be depleted in \gls{PBMC}  \autocite{min2010VariabilityGeneExpression}, were also filtered out.
+\todo{no in both cases, I mean the genes are removed from the analysis, no use increasing the multiple testing burden}
+Given the proportion of removed counts at this stage was low for most samples (\cref{fig:hird_shortncRNA_and_globins}), 
+poly(A) selection and \gls{PBMC} isolation were deemed to have been efficient.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.per_sample.short_ncRNA_globin_levels_hist.pdf}
-    \caption{Distributions of removed short ncRNA and globin counts as a proportion of total counts in \gls{RNAseq} samples.}
+    \caption{\textbf{Distributions of removed short \gls{ncRNA} and globin counts as a proportion of total counts in \gls{RNAseq} samples.}}
     \label{fig:hird_shortncRNA_and_globins}
 \end{figure}
 
-Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\cref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}
-Genes were further filtered to require detection (non-zero expression) in at least 95\% of samples, and a minimum of 0.5 \gls{CPM} in at least 20\% of samples.
-% TODO: check number of genes hit by non-zero and write a justification
-The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed\autocite{chen2016ReadsGenesPathways}.
-% TODO \url{https://f1000research.com/articles/5-1408/v3}
-The change in the distribution of gene expressions among samples before and after filtering shows a substantial number of low expression genes are removed (\cref{fig:hird_rnaseq_cpm_filtering}).
+Many of the genes in the reference transcriptome are not expressed in \gls{PBMC} (\cref{fig:hird_rnaseq_filtering_zeroProp}), and many genes are expressed at counts too low for statistical analysis of \gls{DGE}.
+% NOTE: no TMM was done before this CPM calculation
+Genes were filtered to require a minimum of 0.5 \gls{CPM} in at least \SI{20}{\percent} of samples.
+The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed \autocite{chen2016ReadsGenesPathways,law2018RNAseqAnalysisEasy}.
+Genes were further filtered to require detection (non-zero expression) in at least \SI{95}{\percent} of samples to lessen the impact of low-expression outliers.
+The change in the distributions of gene expression among samples before and after filtering shows a substantial number of low expression genes are removed (\cref{fig:hird_rnaseq_cpm_filtering}).
 
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.gene_zero_prop.pdf}
-    \caption{Distribution of the proportion of samples in which genes were detected (non-zero expression). Many genes are not detected in any samples. Vertical line shows 5\% threshold below which genes were discarded.}
+    \caption{
+        \textbf{Distribution of the proportion of samples in which genes were detected (non-zero expression).}
+        Many genes are not detected in any samples (left-hand side). 
+        Vertical line shows 5\% threshold below which genes were discarded.
+    }
     \label{fig:hird_rnaseq_filtering_zeroProp}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/rnaseq_data_setup.sample_cpm_density_filtered.pdf}
-    \caption{Distribution of gene expressions for \gls{RNAseq} samples before and after filtering no expression and low expression genes. Vertical line shown at \gls{CPM} = 0.5 threshold.}
+    \caption{
+        \textbf{Distributions of gene expression for \gls{RNAseq} samples before and after filtering low expression and non-detected genes.}
+        Vertical line shows \gls{CPM} = 0.5 threshold.
+    }
     \label{fig:hird_rnaseq_cpm_filtering}
 \end{figure}
 
-After the application of all filters, expression values were available for 21626 genes over 223 samples (75/75 individuals on day 0, 73/75 on day 1, and 75/75 on day 7).
+% 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
+% Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
+% 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
+%
+% \1 NGS data is compositional, only quantifies relative abundance (without spike-ins of known conc)
+%     https://academic.oup.com/gigascience/article/8/9/giz107/5572529
+%     This property emerges from the sequencer itself; the sequencer, by design, can only sequence a fixed number of nucleotide fragments.
+%     Consequently, the final number of fragments sequenced is constrained to an arbitrary limit so that doubling the input material does not double the total number of counts.
+%     This constraint also means that an increase in the presence of any 1 nucleotide fragment necessarily decreases the observed abundance of all other transcripts [9], and applies to bulk and single-cell sequencing data alike.
+%    It is especially problematic when comparing cells that produce more total RNA than their comparator (e.g., high–c-Myc cells, which up-regulate 90% of all transcripts without commensurate down-regulation [10]).
+%     However, even if a sequencer could directly sequence every RNA molecule within a cell, the cells themselves are compositional because of the volume and energy constraints that limit RNA synthesis, as evidenced by the observation that smaller cells of a single type contain proportionally less total messenger RNA (mRNA) [11].
+%     [..]
+%     First, statistical models that assume independence between features are flawed because of the mutual dependency between components [15]. Second, distances between samples are misleading and erratically sensitive to the arbitrary inclusion or exclusion of components [16]. Third, components can appear definitively correlated even when they are statistically independent [17].
+%     \2 raw abundance estimates are often called \enquote{counts}, but actually dimensionless proportions, interpretable only compared to other genes in the same sample (composition)
+%     https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6084572/
+%     Compositional data measure each sample as a composition, a vector of non-zero positive values (i.e. components) carrying relative information (Aitchison, 1986).
+%     Compositional data have two unique properties. First, the total sum of all component values (i.e. the library size) is an artifact of the sampling procedure (van den Boogaart and Tolosana-Delgado, 2008). Second, the difference between component values is only meaningful proportionally [e.g. the difference between 100 and 200 counts carries the same information as the difference between 1000 and 2000 counts (van den Boogaart and Tolosana-Delgado, 2008)].
+%     \2 a fixed number of reads is sequenced: if a gene's counts go up, another will go down
+%     https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
+%     \2 naive normalisations such as CPM, TPM, RPKM are still rates (per transcriptome), and cannot be compared across samples, as they still depend on composition
+%     \2 normalisation such as TMM tries to account for composition by normalising on non DE genes, to allow for valid DGE analysis
+%     \2 getting absolute measures is difficult without spike-ins
+%     \2 for valid DGE, need to decide on the units e.g. mRNA/cell? mRNA/transcriptome? \autocite{soneson2013ComparisonMethodsDifferential}
+%
+\gls{RNAseq} produces compositional data due to sequencing a fixed number of reads per library; if one gene's expression goes up that a library, another's must go down.
+It is important to account for composition bias, the dependence of expression estimates on the expression properties of other genes in the library \autocite{robinson2010ScalingNormalizationMethod}.
+Effective library sizes were computed as between-sample normalisation factors using the \gls{TMM} method \autocite{robinson2010ScalingNormalizationMethod,evans2018SelectingBetweensampleRNASeq} from edgeR::calcNormFactors \autocite{robinson2010EdgeRBioconductorPackage}.
+% NOTE:voom just does t(log2(t(counts + 0.5)/(lib.size + 1) * 1e+06)), where lib.size considers norm.factors, it does not variance-stabilise.
+% The idea is to use precision weights for each observation instead.
+Precision weights for each (gene by sample) observation were computed with voom\autocite{law2014VoomPrecisionWeights} to account for the mean-variance relationship in \gls{RNAseq} data;
+voom also transforms expression values to the $\log_2{\text{\gls{CPM}}}$ scale, accounting for composition bias using effective library sizes.
+
+Finally, 15 samples were excluded for having missing \gls{HAI} or \gls{MN} data.
+% From n=225-2 sequencing fails=223 (75/75 individuals on day 0, 73/75 on day 1, and 75/75 on day 7)
+After the application of all filters, expression values were available for \num{21626} genes over 208 samples
+(70/75 individuals on day 0, 68/75 on day 1, and 70/75 on day 7).
 
 \subsection{Array data preprocessing}
 \label{subsec:hird_dge_array_preproc}
@@ -701,98 +813,107 @@ After the application of all filters, expression values were available for 21626
 % 6.4.4.	Also see this “StatQuest: Quantile Normalization” https://www.youtube.com/watch?v=ecjN6Xpv6SE
 % 6.4.5.	This also does a log2 transform, so final units are normalized log2 intensity
 %
-Single-channel Agilent 4x44K expression array (G4112F) data for 173 samples from \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress\footnote{\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}}.
-These arrays were originally processed in two batches, the effect of which is seen in the raw foreground intensities (\cref{fig:hird_array_boxplots_raw}).
-
-% TODO: mean variance trend array data?
+Single-channel Agilent 4x44K expression array (G4112F) data for 173 samples from \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were downloaded from ArrayExpress (\url{https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-2313/}).
+These arrays were originally processed in two batches, the effect of which can be seen in the raw foreground intensities (\cref{fig:hird_array_boxplots_raw}).
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.pdf}
-    \caption{Raw foreground intensities for 173 \gls{HIRD} array samples. Colored by array processing batch.}
+    \caption{
+        \textbf{Raw foreground intensities for 173 \gls{HIRD} array samples.}
+        Colored by array processing batch.
+    }
     \label{fig:hird_array_boxplots_raw}
 \end{figure}
 
-% Actually uses:
+% TODO: why does array data have a mean-variance relationship?
+% Standard statistical techniques often assume that data are normally distributed, with constant variance not depending on the mean of the data. Data that violate these assumptions can often be brought in line with the assumptions by application of a transformation. Gene-expression microarray data have a complicated error structure, with a variance that changes with the mean in a non-linear fashion.
+% https://academic.oup.com/bioinformatics/article/18/suppl_1/S105/231903
+%
+% Note that the vsn algorithm performs background correction and normalization simultaneously.
+% Does affine transformation, then glog2
+% An affine transformation is simply a shifting and scaling of the data.
 % The so-called glog2 (short for generalised logarithm) is a function that is like the logarithm (base 2) for large values (large compared to the amplitude of the background noise), but is less steep for smaller values.
-VSN\autocite{huber2002VarianceStabilizationApplied} was used to perform background correction, between-array normalisation, and variance-stabilisation of intensity values, resulting in expression values on a $\log_2$ scale.
+\texttt{VSN::normalizeVSN} \autocite{huber2002VarianceStabilizationApplied} was used to simultaneously perform 
+background correction, 
+between-array normalisation (affine transformation, centers and scales each array to control for systematic experimental factors), 
+and variance-stabilisation (generalised logarithm, similar to $\log_2$ with better performance for small values) of intensity values, 
+resulting in expression values on a $\log_2$ scale.
+As systematic experimental factors might differ between batches, requiring different centering and scaling factors, normalisation was done per-batch, then the two batches were merged.
 
 % 6.5.	Summarise probes (into loci): WGCNA::collapseRows(rowGroup=Ensembl ID, method="MaxMean", connectivityBasedCollapsing=FALSE)
 % 6.5.1.	https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3166942/
 % 6.5.1.1.	“For example, we find that in most microarray experiments performed on brain tissue it is best to choose the probe with the maximum mean expression per gene, whereas when choosing a single gene to represent a co-expression module, the optimal collapsing method depends on the goal of the analysis.”
 % 6.5.1.2.	“In the case of collapsing probes to their respective gene symbols, for example, we find that the 1.max strategy (implemented by setting method = "MaxMean" and connectivityBasedCollapsing = FALSE) produces the most robust results.”
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
-Most genes are targetted by multiple array probes; 31208 probes were collapsed into 18216 Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\texttt{WGCNA::collapseRows(method=MaxMean)}, recommended for probe to gene collapsing\autocite{miller2011StrategiesAggregatingGene}).
+Probes were matched to genes using \texttt{hgug4112a.db}\footnote{\url{https://bioconductor.org/packages/release/data/annotation/html/hgug4112a.db.html}}.
+Most genes were targeted by multiple array probes; \num{31208} probes were collapsed into \num{18216} Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\texttt{WGCNA::collapseRows(method=MaxMean)}, a method recommended for probe to gene collapsing by \textcite{miller2011StrategiesAggregatingGene}).
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
-The final normalised $\log_2$ intensity values for these 18216 genes over 173 samples is shown in \cref{fig:hird_array_boxplots_MaxMean}.
+The final normalised $\log_2$ intensity values for these \num{18216} genes over 173 samples is shown in \cref{fig:hird_array_boxplots_MaxMean}.
+% Also used arrayWeights as precision weight inputs to lmFit
+% See: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-261#Bib1
+% The method successfully assigns lower weights to less reproducible arrays from different experiments. Down-weighting the observations from suspect arrays increases the power to detect differential expression.
+Finally, \texttt{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArrayQuality} was used to compute per-sample quality weights used to downweight unreliable arrays (samples) in the \gls{DGE} analyses.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.MaxMean.pdf}
-    \caption{Array intensity estimates after VSN normalisation and collapsing of probes to genes. Colored by array processing batch.}
+    \caption{
+        \textbf{Array intensity estimates after normalisation and collapsing of probes to genes.}
+        Colored by array processing batch.
+    }
     \label{fig:hird_array_boxplots_MaxMean}
 \end{figure}
 
-\subsection{\Glsfmtlong{DGE}}
+\subsection{\Glsfmtfull{DGE}}
 
-% TODO: https://github.com/matloff/regtools/blob/master/inst/ScalingInPCA.md?s=09
-\gls{PCA} of the expression data reveals although samples separate by experimental timepoint along \gls{PC}3 (\cref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
-% TODO: note no filtering of expression data before pca due to wanting to see batch fx
+\subsubsection{Platform and batch effects}
+\label{subsubsec:hird_dge_platform_and_batch_effects}
+
+Combining the normalised array and \gls{RNAseq} data resulted in expression values for \num{13593} genes assayed in both platforms, and a total of 374 samples.
+\gls{PCA} revealed that although samples separate by experimental timepoint along \gls{PC}3 (\cref{fig:hird_expression_pcs}d), measurement platform is by far the largest source of variation.
 Normalisation was also not able to completely remove the batch effect within the array data (\cref{fig:hird_expression_pcs}a).
-% Also see:
-% Wang, C., Gong, B., Bushel, P. R., Thierry-Mieg, J., Thierry-Mieg, D., Xu, J., Fang, H., Hong, H., Shen, J., Su, Z., Meehan, J., Li, X., Yang, L., Li, H., Łabaj, P. P., Kreil, D. P., Megherbi, D., Gaj, S., Caiment, F., … Tong, W. (2014). The concordance between RNA-seq and microarray data depends on chemical treatment and transcript abundance. Nature Biotechnology, 32(9), 926–932. https://doi.org/10.1038/nbt.3001
-%
-% TODO: THE rnaseq review paper: https://www.nature.com/articles/nrg2484
-% Figure 2: Quantifying expression levels: RNA-Seq and microarray compared.
-% The CBM paper intro has a good summary too. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5510692/
 The large platform effect likely stems from systematic technological differences in how each platform measures expression.
-For example, arrays suffer from ratio compression due to cross-hybridisation\autocite{draghici2006ReliabilityReproducibilityIssues}.
+% NOTE: only relevant to fold changes
+% For example, arrays suffer from ratio compression due to cross-hybridisation \autocite{draghici2006ReliabilityReproducibilityIssues,ma2017JointBayesianModel}.
 \gls{RNAseq} has a higher dynamic range, resulting less bias at low expression levels, but estimates are more sensitive to changes in depth than array estimates are to changes in intensity \autocite{robinson2015NestedParallelExperiment}.
-There are also differences in the statistical models behind expression quantification and normalisation, as described above\todo{cite relevant preprocessing sections}.
+Agreement between the two platforms is poor at extremes of expression \autocite{wang2009RNASeqRevolutionaryTool,ma2017JointBayesianModel}.
+The preprocessing done for the two platforms (\cref{subsec:hird_dge_rnaseq_quantAndFilter,subsec:hird_dge_array_preproc}) is also vastly different.
 
-Despite the shortcomings of array data detailed above, the array dataset tends to contain individuals with more extreme antibody response phenotypes (\cref{fig:hird_phenotypes_by_platform}), and hence the data should not be excluded.
-Given the magnitude of the platform effect, I concluded that the appropriate approach should be a two-stage approach that integrates per-platform \gls{DGE} effect estimates while explicitly accounting for between-platform heterogeneity.
+Despite the shortcomings of array data detailed above, the array dataset contains individuals with more extreme antibody response phenotypes (\cref{fig:hird_phenotypes_by_platform}), hence the data should not be excluded.
+Given the magnitude of the platform effect, I concluded that the appropriate approach should be a two-stage approach that meta-analyses per-platform \gls{DGE} effect estimates while explicitly accounting for between-platform heterogeneity.
 
+% TODO: 
+% should you scale before PCA?
+% https://github.com/matloff/regtools/blob/master/inst/ScalingInPCA.md?s=09
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.E_pca.pdf}
-    \caption{First four \glspl{PC} in the \gls{HIRD} expression data, colored by platform and batch (left), and timepoint (right).}
+    \caption{
+        \textbf{First four standardised \glspl{PC} in the expression data, colored by array batch/\gls{RNAseq} pool (a, c), and timepoint (b, d) and binary response status (e, f).}
+        Expression of each gene was standardised across samples within each platform before \gls{PCA}.
+    }
     \label{fig:hird_expression_pcs}
 \end{figure}
 
-% Also see: https://support.bioconductor.org/p/72815/
-Regarding the batch effect within the array data, a popular adjustment method is ComBat\autocite{johnson2007AdjustingBatchEffects}, which estimates centering and scaling parameters by pooling information across all genes using empirical Bayes.
-\todo{combat does have a pro in that it can do per gene scaling, that fixed fx won't do}
-ComBat is the method used in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
-In comparisons of array batch effect adjustment methods, ComBat performs favourably (vs. five other adjustment packages)\autocite{chen2011RemovingBatchEffects} or comparably (vs. batch as a fixed or random effect in the linear model)\autocite{espin-perez2018ComparisonStatisticalMethods}.
-However, where batches are unbalanced in terms of sample size\autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression\autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
-In our data, sample size and timepoint groups are fairly balanced between the two array batches, but the proportion of responders is not\cref{tab:hird_batch_balance}, hence I elect not to use ComBat to pre-adjust the array expression data, and model the batches as fixed effects.
-In practice, results from the \gls{DGE} analysis were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
-\todo{this is not a very precise justification. actually, if I were to color R/NR in the PCA plot, R/NR doesn't really explain a lot of var in global gene expression. that's probably why the results don't change much.}
-\todo{weaken this. combat is used multiple times in ch3}
-\todo{be more specific about how combat works i.e. estimates factors per gene per batch?}
+Regarding the batch effect within the array data, a popular adjustment method is ComBat \autocite{johnson2007AdjustingBatchEffects}, which estimates per-gene, per-batch centering and scaling parameters, which are shrunk towards the per-batch mean parameters over all genes using empirical Bayes to improve robustness.
+ComBat was the method used by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+In comparisons of array batch effect adjustment methods, ComBat performed favourably (versus five other adjustment packages) \autocite{chen2011RemovingBatchEffects} or comparably (versus fitting batch as a fixed or random effect in the linear model, which are centering-only corrections) \autocite{espin-perez2018ComparisonStatisticalMethods}.
+However, where batches are unbalanced in terms of sample size \autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression \autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
+In our data, sample size and timepoint groups are fairly balanced between the two array batches (\cref{tab:hird_batch_balance});
+The proportion of responders is not, but response status does not have as prominent an impact on global expression as timepoint (\cref{fig:hird_expression_pcs}).
+For the \gls{DGE} analyses in this chapter, I chose to model batches (array batch and \gls{RNAseq} pool) as fixed effects rather than pre-adjusting with Combat, ensuring the \glspl{df} in the \gls{DGE} model were correct.
+In practice, results from the analyses were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
+%
+% https://support.bioconductor.org/p/72815/ "batch effect : comBat or blocking in limma ?"
+% In general, I would prefer to model batch effects by including them in the design matrix and modeling the unadjusted data. This ensures that the linear model properly accounts for the degress of freedom associated with modeling the batch effect, so that it uses the proper number of residual df. This prevents the linear model from overestimating significance because it thinks there are more residual df than there really are.
 
+% NOTE: this table contains manual edits
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
 
-\subsubsection{Per-platform \glsfmtlong{DGE} model}
+\subsubsection{Per-platform \glsfmtshort{DGE} model}
 
-% Also used arrayWeights as precision weight inputs to lmFit
-% See: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-261#Bib1
-% The method successfully assigns lower weights to less reproducible arrays from different experiments. Down-weighting the observations from suspect arrays increases the power to detect differential expression.
-For the array data, as \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} demonstrated no significant global differences in expression between day -7 and day 0, I likewise merge these two timepoints into a single \enquote{day 0} baseline timepoint in the following \gls{DGE} models.
-
-% 5.6.	Between-sample normalization of library size: Trimmed mean of M-values (TMM)
-% Selecting between-sample RNA-Seq normalization methods from the perspective of their assumptions https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6171491/
-% 5.6.1.	edgeR::calcNormFactors generates norm.factors for each sample
-For the \gls{RNAseq} data, between-sample normalisation factors were computed using the \gls{TMM} method\autocite{evans2018SelectingBetweensampleRNASeq} from edgeR::calcNormFactors\autocite{robinson2010EdgeRBioconductorPackage}; 
-% TODO: define composition bias that TMM corrects, see evans2018SelectingBetweensampleRNASeq, pull from ch5
-% also see https://rnajournal.cshlp.org/content/early/2020/04/13/rna.074922.120.full.pdf
-% TODO: Note: calcNormFactors doesn’t normalize the data, it just calculates normalization factors for use downstream.
-then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisionWeights}, resulting in expression values with units of $\log_2{\text{\gls{CPM}}}$.
-\todo{this is DGE specific normalisation, which is why it goes here, not in the preprocessing section}
-% TODO:
-% voom does t(log2(t(counts + 0.5)/(lib.size + 1) * 1e+06)), where lib.size considers norm.factors, it does not variance-stabilise.
-% The idea is to use precision weights for each observation instead.
-
+As a meta-analysis is proposed, \gls{DGE} analyses are restricted to the 13593 genes assayed by both the array and \gls{RNAseq} platforms.
+%
 % 7.	Differential expression (limma)
 % 7.2.	Create contrasts
 % 7.3.	Estimate within-block correlation (duplicateCorrelation), using individuals as blocks
@@ -808,17 +929,17 @@ then variance-stabilisation was performed using voom\autocite{law2014VoomPrecisi
 % 7.8.1.1.1.1.	When lfc=0, treat is identical to eBayes, except that F-statistics and B-statistics are not computed.
 % 7.8.1.1.2.	https://academic.oup.com/bioinformatics/article/25/6/765/251641 The TREAT fold-change threshold should be set to a low value below which no fold-change is likely to be of genuine interest. Researchers should be mindful that genes will need to exceed this threshold by some way, depending on the data, before being declared statistically significant. Our experience suggests a minimal value, such as a 10% fold-change, corresponding to τ=log2(1.1)=0.13 on the log2-scale. It would be better to interpret the threshold as ‘the fold-change below which we are definitely not interested in the gene’ rather than ‘the fold-change above which we are interested in the gene’.
 % 7.9.	(decideTests)
-Linear models were fit using limma\autocite{ritchie2015LimmaPowersDifferential}, which is computationally fast, and performs well for sufficiently large ($n \ge 3$ per group) sample sizes\autocite{soneson2013ComparisonMethodsDifferential}.
-For each gene, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
-% TODO: age is assumed linear here
-\todo{link to papers justifying sex, age, ancestry as significant effects on immune gene expression}
-\todo{add equation from ch3. especially justify having TRI in as predictor, by noting equiv of traditional lm to contrasts}
-% TODO: The peril of adjusting for baseline when using change as a predictor
-% https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html
-% Limma has a built-in approach for analyzing repeated measures data using duplicateCorrelation(). The model can handle a single random effect, and forces the magnitude of the random effect to be the same across all genes.
-% ...
-% The duplicateCorrelation method estimates a single variance term genome-wide even though the donor contribution of a particular gene can vary substantially from the genome-wide trend.
-Within-individual correlations for the random effect were estimated using limma::duplicateCorrelation.
+Linear models were fit using limma \autocite{ritchie2015LimmaPowersDifferential}, 
+which is computationally fast, 
+performs well for sufficiently large ($n \ge 3$ per group) sample sizes \autocite{soneson2013ComparisonMethodsDifferential},
+and internally considers the precision weights computed for \gls{RNAseq} observations in \cref{subsec:hird_dge_rnaseq_quantAndFilter},
+and the array quality weights computed for array samples in \cref{subsec:hird_dge_array_preproc}.
+As \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} found there was no global dissimilarity in array expression between day -7 and day 0,
+for the \gls{DGE} analyses in this chapter, 
+array day -7 and day 0 are treated as repeated baseline measurements.
+
+For each gene and platform, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch/pool, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
+Within-individual correlations for the random effect were estimated using \texttt{limma::duplicateCorrelation}.
 A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
 %
 % See: https://stats.stackexchange.com/questions/151730/test-if-two-coefficients-are-statistically-different-in-logistic-regression
@@ -826,6 +947,7 @@ Contrasts were defined, testing if linear combinations of estimated coefficients
 % TODO: What is a contrast? A contrast is essentially a difference in regression coefficients. We have seen that the regression coefficients can express a difference in means or a single mean, as well as the slope and intercept of a line. A contrast is a way of testing more general hypotheses about population means.
 % A contrast is defined as the sum of each group mean multiplied by a coefficient for each group
 % In statistics, particularly in analysis of variance and linear regression, a contrast is a linear combination of variables (parameters or statistics) whose coefficients add up to zero, allowing comparison of different treatments.[1][2]
+
 From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
 % TODO
 % The grand mean or pooled mean is the mean of the means of several subsamples, as long as the subsamples have the same number of data points.
@@ -839,12 +961,10 @@ From model 2, I defined contrasts for the \gls{TRI} specifically at each of the 
 % es_se <- sqrt(fit2$s2.post) * fit2$stdev.unscaled
 Corresponding coefficients and standard errors for the contrasts were extracted from the linear models, which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
-\subsubsection{Choice of \glsfmtlong{DGE} meta-analysis method}
+\subsubsection{Choice of \glsfmtshort{DGE} meta-analysis method}
 \label{subsubsec:hird_dge_meta_methodChoice}
 
-In the section \todo{add section labels}, I concluded that a two-stage meta-analysis approach would be appropriate.
-This meta-analysis is restricted to 13593 genes assayed by both the array and \gls{RNAseq} platforms.
-% While there is abundant literature on single-plaform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
+% While there is abundant literature on single-platform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
 %
 % Examples from literature
 %
@@ -884,17 +1004,18 @@ This meta-analysis is restricted to 13593 genes assayed by both the array and \g
 % Mayday seasight:
 % - Uses a rank product model internally
 
-Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects\autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
-Given k studies, the fixed-effect model assumes a common population effect size shared across all studies, with observed variation explained only by sampling error.
+Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects \autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
+Given k studies, the fixed-effect model assumes a common population effect size shared across all studies $\mu$, with observed variation explained only by sampling error $\sigma_i$, where $i = 1, \dots, k$.
+% TODO: rover notation, hyperparameters
 The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation termed the between-studies heterogeneity, reducing to the fixed-effect model when $\tau=0$.
-In the \gls{HIRD} data, there are $k=2$ 'studies' (array and \gls{RNAseq}), where the platform differences described in section\todo{add label} contribute to considerable between-studies heterogeneity.
-The assumption of $\tau=0$ is unrealistic, hence a random-effects model is more appropriate.
-\todo{make all the notation in this section consistent with, and add the equation 2.1. The normal-normal hierarchical model, \autocite{rover2017BayesianRandomeffectsMetaanalysis}}
+In the \gls{HIRD} data, there are $k=2$ studies: array and \gls{RNAseq}.
+The between-platform differences described in \cref{subsubsec:hird_dge_platform_and_batch_effects} represent considerable between-studies heterogeneity,
+so the assumption of $\tau=0$ is unrealistic, and a random-effects model is more appropriate.
 
-Unfortunately, there is no optimal solution for directly estimating $\tau$ in random-effects meta-analyses with small k\autocite{bender2018MethodsEvidenceSynthesis}, in the case of $k=2$ especially\autocite{gonnermann2015NoSolutionCombining}.
-Many estimators are available\autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and often results in boundary values of $\tau = 0$ that are incompatible with the assumed positive heterogeneity\autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
-In such circumstances, the most sensible choice may be to incorporate prior information about model hyperparameters in a Bayesian random-effects framework\autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
-For this study, I use the implementation in bayesmeta \autocite{rover2017BayesianRandomeffectsMetaanalysis}, which requires priors for both effect size and between-studies heterogeneity.
+Unfortunately, there is no optimal solution for directly estimating $\tau$ in random-effects meta-analyses with small k \autocite{bender2018MethodsEvidenceSynthesis}, and especially in the case of $k=2$ \autocite{gonnermann2015NoSolutionCombining}.
+Many estimators are available \autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and often results in boundary values of $\tau = 0$ that are incompatible with the assumed positive heterogeneity \autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
+In such circumstances, the most sensible approach may be to incorporate prior information about model hyperparameters in a Bayesian random-effects framework \autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+For this study, I use the implementation in \texttt{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}, which requires priors for both effect size and between-studies heterogeneity.
 
 \subsubsection{Prior for between-studies heterogeneity}
 
@@ -931,7 +1052,7 @@ While the choice of prior on $\tau$ is influential when k is small, there is usu
 \texttt{bayesmeta} implements both flat and normal priors for $\mu$.
 %
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
-% For example, it is common to expect realistic effect sizes to be of order of magnitude 0.1 on a standardized scale (for example, an educational innovation that might improve test scores by 0.1 standard deviations). In that case, a prior of N(0,1) could be considered very strong, in that it puts most of its mass on parameter values that are unrealistically large in absolute value. When we say this prior is "weakly informative," what we mean is that, if there's a reasonably large amount of data, the likelihood will dominate, and the prior will not be important. If the data are weak, though, this "weakly informative prior" will strongly influence the posterior inference. The phrase "weakly informative" is implicitly in comparison to a default flat prior.
+% For example, it is common to expect realistic effect sizes to be of order of magnitude 0.1 on a standardised scale (for example, an educational innovation that might improve test scores by 0.1 standard deviations). In that case, a prior of N(0,1) could be considered very strong, in that it puts most of its mass on parameter values that are unrealistically large in absolute value. When we say this prior is "weakly informative," what we mean is that, if there's a reasonably large amount of data, the likelihood will dominate, and the prior will not be important. If the data are weak, though, this "weakly informative prior" will strongly influence the posterior inference. The phrase "weakly informative" is implicitly in comparison to a default flat prior.
 % Weakly informative prior should contain enough information to regularize: the idea is that the prior rules out unreasonable parameter values but is not so strong as to rule out values that might make sense
 % Weakly informative rather than fully informative: the idea is that the loss in precision by making the prior a bit too weak (compared to the true population distribution of parameters or the current expert state of knowledge) is less serious than the gain in robustness by including parts of parameter space that might be relevant. It's been hard for us to formalize this idea.
 % One principle: write down what you think the prior should be, then spread it out. The idea is that the cost of setting the prior too narrow is more severe than the cost of setting it too wide. I've been having trouble formalizing this idea.
@@ -1090,6 +1211,8 @@ This response is transient, with most such genes returning to baseline expressio
 Upregulation of cell cycle/proliferation, activated CD4\textsuperscript{+} T cell, and B (plasma) cell genes and modules were detected at day 7.
 This indicate a shift to the adaptive immune response, involving CD4\textsuperscript{+} T cell-supported differention and proliferation of antibody-secreting plasmablasts and plasma cells\autocite{murphy2016JanewayImmunobiology}.
 These patterns of expression change between timepoints in the \gls{RNAseq} data are consistent with the patterns in the array data in the original study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, and with expansions of monocyte and plasma cell populations seen in the \gls{FACS} data at days 1 and 7 respectively in the original \gls{HIRD} study\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+
+% concur with max change at day 1 \autocite{bucasas2011EarlyPatternsGene}
 
 % Point is, it's consistent over time, but i do more
 % The overall pattern of expression over time from my meta-analysis agrees with the patterns from the original study \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}, with transient innate immune response at day 1 post-vaccination, progressing to adaptive immune response by day 7.
