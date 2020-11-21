@@ -820,7 +820,7 @@ These arrays were originally processed in two batches, the effect of which can b
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.pdf}
     \caption{
-        \textbf{Raw foreground intensities for 173 \gls{HIRD} array samples.}
+        \textbf{Distribution of raw foreground intensities for 173 \gls{HIRD} array samples.}
         Colored by array processing batch.
     }
     \label{fig:hird_array_boxplots_raw}
@@ -859,7 +859,7 @@ Finally, \texttt{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArrayQu
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.MaxMean.pdf}
     \caption{
-        \textbf{Array intensity estimates after normalisation and collapsing of probes to genes.}
+        \textbf{Distribution of per-sample expression estimates after normalisation and collapsing of probes to genes.}
         Colored by array processing batch.
     }
     \label{fig:hird_array_boxplots_MaxMean}
@@ -924,7 +924,7 @@ As a meta-analysis is proposed, \gls{DGE} analyses are restricted to the 13593 g
 % 7.5.1.2.	“voom performs the following specific calculations. First, the counts are converted to logCPM values, adding 0.5 to all the counts to avoid taking the logarithm of zero. The matrix of logCPM values is then optionally normalized. The lmFit function is used to fit row-wise linear models. The lowess function is then used to fit a trend to the square-root-standard-deviations as a function of average logCPM. The trend line is then used to predict the variance of each logCPM value as a function of its fitted value, and the inverse variances become the estimated precision weights.”
 % 7.6.	(lmFit)
 % 7.7.	(contrasts.fit)
-% 7.8.	(eBayes/treat)
+% 7.8.	(eBayes/treat(robust=T))
 % 7.8.1.1.1.	https://rdrr.io/bioc/limma/man/ebayes.html
 % 7.8.1.1.1.1.	When lfc=0, treat is identical to eBayes, except that F-statistics and B-statistics are not computed.
 % 7.8.1.1.2.	https://academic.oup.com/bioinformatics/article/25/6/765/251641 The TREAT fold-change threshold should be set to a low value below which no fold-change is likely to be of genuine interest. Researchers should be mindful that genes will need to exceed this threshold by some way, depending on the data, before being declared statistically significant. Our experience suggests a minimal value, such as a 10% fold-change, corresponding to τ=log2(1.1)=0.13 on the log2-scale. It would be better to interpret the threshold as ‘the fold-change below which we are definitely not interested in the gene’ rather than ‘the fold-change above which we are interested in the gene’.
@@ -934,37 +934,51 @@ which is computationally fast,
 performs well for sufficiently large ($n \ge 3$ per group) sample sizes \autocite{soneson2013ComparisonMethodsDifferential},
 and internally considers the precision weights computed for \gls{RNAseq} observations in \cref{subsec:hird_dge_rnaseq_quantAndFilter},
 and the array quality weights computed for array samples in \cref{subsec:hird_dge_array_preproc}.
-As \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} found there was no global dissimilarity in array expression between day -7 and day 0,
+As \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} already found there was no global dissimilarity in array expression between day -7 and day 0,
 for the \gls{DGE} analyses in this chapter, 
-array day -7 and day 0 are treated as repeated baseline measurements.
+array day -7 and day 0 are treated as repeated measurements taken at a single \enquote{baseline} timepoint.
 
-For each gene and platform, I fit a model (model 1) with expression as the response variable; with timepoint (baseline, day 1, day 7), \gls{TRI}, batch/pool, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors; and individual as a random-effect predictor.
+For each gene and platform, I fit a model (model 1) with expression as the response variable; 
+with an intercept, timepoint (baseline, day 1, day 7), \gls{TRI}, batch/pool, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors;
+and individual as a random-effect predictor.
 Within-individual correlations for the random effect were estimated using \texttt{limma::duplicateCorrelation}.
-A second model (model 2) was also fit, including 3 additional terms for the interactions between each timepoint and \gls{TRI}.
+A second model (model 2) was also fit, the only difference being two additional predictors for the multiplicative interactions between day 1 and day 7 with \gls{TRI}.
 %
 % See: https://stats.stackexchange.com/questions/151730/test-if-two-coefficients-are-statistically-different-in-logistic-regression
-Contrasts were defined, testing if linear combinations of estimated coefficients are different from zero.
+Model 1 was used for testing differences in expression between pairs timepoints, and for testing association between \gls{TRI} and expression overall.
+Model 2 was used for testing association between \gls{TRI} and expression at specific timepoints.
+
+Contrasts were used, testing if linear combinations of estimated model coefficients are different from zero.
 % TODO: What is a contrast? A contrast is essentially a difference in regression coefficients. We have seen that the regression coefficients can express a difference in means or a single mean, as well as the slope and intercept of a line. A contrast is a way of testing more general hypotheses about population means.
 % A contrast is defined as the sum of each group mean multiplied by a coefficient for each group
 % In statistics, particularly in analysis of variance and linear regression, a contrast is a linear combination of variables (parameters or statistics) whose coefficients add up to zero, allowing comparison of different treatments.[1][2]
-
-From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
-% TODO
-% The grand mean or pooled mean is the mean of the means of several subsamples, as long as the subsamples have the same number of data points.
-% \2 NOTE: this is not the same as the same as the mean of means contrast as pooled is not mean of two means
-From model 2, I defined contrasts for the \gls{TRI} specifically at each of the three timepoints.
-% TODO: by merely specifying the model with interactions, we allow them, and thus change the interp. thus both required
-% TODO: did i really define contrasts? put in actual model equation here
 %
+From model 1, I defined contrasts for day 1 vs. baseline, day 7 vs. baseline, day 7 vs. day 1, \gls{TRI}, sex, and age.
+For example, 
+to test for association between \gls{TRI} and expression, 
+    I used a contrast where
+    the weight for the \gls{TRI} coefficient was 1,
+    with all other coefficient weights set to 0;
+to test for differences between day 7 vs. day 1,
+    I used a contrast where
+    the weight for the day 7 coefficient was 1,
+    the weight for the day 1 coefficient was -1,
+    and all other coefficient weights were 0.
+From model 2, I defined contrasts for the \gls{TRI}, \gls{TRI}-day 1, and \gls{TRI}-day 7 interaction terms,
+    which test for association between \gls{TRI} and expression at specifically at baseline, day 1, and day 7.
+%
+% NOTE: moderated
 % https://support.bioconductor.org/p/70175/
 % es <- fit2$coefficients
 % es_se <- sqrt(fit2$s2.post) * fit2$stdev.unscaled
-Corresponding coefficients and standard errors for the contrasts were extracted from the linear models, which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
+Corresponding coefficients and standard errors for the contrasts were extracted from the \texttt{limma} models, 
+which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
 \subsubsection{Choice of \glsfmtshort{DGE} meta-analysis method}
 \label{subsubsec:hird_dge_meta_methodChoice}
 
 % While there is abundant literature on single-platform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
+% TODO: add reasons why these don't solve the problem
 %
 % Examples from literature
 %
@@ -1005,22 +1019,45 @@ Corresponding coefficients and standard errors for the contrasts were extracted 
 % - Uses a rank product model internally
 
 Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects \autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
-Given k studies, the fixed-effect model assumes a common population effect size shared across all studies $\mu$, with observed variation explained only by sampling error $\sigma_i$, where $i = 1, \dots, k$.
-% TODO: rover notation, hyperparameters
-The random-effects model assumes the k study-specific effect sizes are drawn from some distribution with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation termed the between-studies heterogeneity, reducing to the fixed-effect model when $\tau=0$.
+The fixed-effect model assumes a single true effect size $\theta$ common to all studies.
+Given $k$ studies ($i = 1, \dots, k$), the observed effect size in the $i$th 
+study is commonly assumed to be $y_i \sim \mathcal{N}(\theta,\sigma^2_i)$, where observed variation is explained only by within-study sampling error $\sigma_i$.
+In meta-analysis, the effects are combined with some weighting, commonly the inverse variance (precision) $1/\sigma^2_i$.
+
+The random-effects model assumes a distribution of true effects centered around a common mean $\mu$.
+Each of the $k$ studies estimates its own study-specific true effect size $\theta_i$.
+These are distributed around $\mu$ with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation: the between-studies heterogeneity.
+Then we have 
+$y_i \sim \mathcal{N}(\theta_i,\sigma^2_i)$ for the first level of variation,
+$\theta_i \sim \mathcal{N}(\mu,\tau^2)$ for the second level of variation,
+and assuming these distributions, we have a normal-normal multilevel model \autocite{rover2017BayesianRandomeffectsMetaanalysis}.
+Study weights include both within and between-study variance $1/(\sigma^2_i + \tau^2)$, reducing to the fixed-effect model when $\tau=0$.
+
+The choice of fixed or random effects depends on whether it is tenable to assume studies are identical enough that they all estimate a common effect% 
+\footnote{
+    A common misinterpretation is that random-effects meta-analysis assumes studies \textit{themselves} are sampled from a population of studies,
+    This is rarely appropriate since the design of new studies is influenced by existing studies \autocite{higgins2009ReevaluationRandomeffectsMetaanalysis}.
+    % Formally, a sequence is exchangeable if its joint probability distribution is a symmetric function of its n arguments.
+    % Intuitively it means we can swap around, or reorder, variables in the sequence without changing their joint distribution.
+    % https://stats.stackexchange.com/questions/3520/can-someone-explain-the-concept-of-exchangeability
+    The required assumption is exchangability of study \textit{effects}, which informally states
+    % IID (independent, identically distributed) -> exchangability -> identically distributed
+    effects are neither completely identical nor completely independent, but \enquote{similar} \autocite{higgins2009ReevaluationRandomeffectsMetaanalysis}.
+}.
 In the \gls{HIRD} data, there are $k=2$ studies: array and \gls{RNAseq}.
-The between-platform differences described in \cref{subsubsec:hird_dge_platform_and_batch_effects} represent considerable between-studies heterogeneity,
+The between-platform differences described in \cref{subsubsec:hird_dge_platform_and_batch_effects} represent considerable sources of between-study heterogeneity,
 so the assumption of $\tau=0$ is unrealistic, and a random-effects model is more appropriate.
 
 Unfortunately, there is no optimal solution for directly estimating $\tau$ in random-effects meta-analyses with small k \autocite{bender2018MethodsEvidenceSynthesis}, and especially in the case of $k=2$ \autocite{gonnermann2015NoSolutionCombining}.
 Many estimators are available \autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and often results in boundary values of $\tau = 0$ that are incompatible with the assumed positive heterogeneity \autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
-In such circumstances, the most sensible approach may be to incorporate prior information about model hyperparameters in a Bayesian random-effects framework \autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
-For this study, I use the implementation in \texttt{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}, which requires priors for both effect size and between-studies heterogeneity.
+In such circumstances, the most sensible approach may be to incorporate prior information about hyperparameters $\mu$ and $\tau$ in a Bayesian random-effects framework \autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+For this study, I use the implementation in \texttt{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}.
 
 \subsubsection{Prior for between-studies heterogeneity}
 
-The choice of prior for between-studies heterogeneity is influential when k is small\autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
-\textcite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on implausibly large estimates of $\tau$, and recommends a weakly informative prior that acts to regularise the posterior distribution.
+The choice of prior for between-studies heterogeneity $\tau$ is influential when k is small \autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+\textcite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on implausibly large estimates of $\tau$, and recommends a weakly informative prior that acts to regularise the posterior distribution, constraining it away from implausible values.
+%
 % Gelman 
 % - weak as in deliberately weaker than known knowledge, just serves to constrain
 % - cauchy for the gentle slope in tails
@@ -1035,20 +1072,23 @@ The choice of prior for between-studies heterogeneity is influential when k is s
 % - With full Bayes the boundary shouldn't be a problem (as long as you have any proper prior).
 % - But with modal estimation, the estimate can be on the boundary, which can create problems in posterior predictions. For example, consider a varying-intercept varying-slope multilevel model which has an intercept and slope for each group. Suppose you fit marginal maximum likelihood and get a modal estimate of 1 for the group-level correlation. Then in your predictions the intercept and slope will be perfectly correlated, which in general will be unrealistic.
 % Chung, Y., Rabe-Hesketh, S., Dorie, V., Gelman, A., & Liu, J. (2013). A Nondegenerate Penalized Likelihood Estimator for Variance Parameters in Multilevel Models. Psychometrika, 78(4), 685–709. https://doi.org/10.1007/s11336-013-9328-2
-Since I assumed zero estimates for $\tau$ are unrealistic, I use a weakly-informative gamma prior recommended by \autocite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$, increasing gently as $\tau$ increases.
-% TODO: the key point is to not constrain the value of tau to be a single estimate from 2 data points, but assume that other genes may be informative of plausible values
+Since I assumed zero estimates for $\tau$ are unrealistic, I use a weakly informative gamma prior, as recommended by
+\textcite{chung2013NondegeneratePenalizedLikelihood}, which has zero density at $\tau = 0$ but increase gently as $\tau$ increases (a positive constant derivative at zero).
 This constrains $\tau$ to be positive, but still permits estimates close to zero if the data support it.
-This is in constrast to priors used in other studies from the log-normal (e.g. \autocite{pullenayegum2011InformedReferencePrior,turner2015PredictiveDistributionsBetweenstudy}) or inverse-gamma (e.g. \autocite{higgins1996BorrowingStrengthExternal}) families that have derivatives or zero close to zero, thus ruling out small values of $\tau$ no matter what the data suggest; and in contrast to half-t family priors (e.g. \autocite{gelman2006PriorDistributionsVariance,seide2019LikelihoodbasedRandomeffectsMetaanalysis}), which have their mode at zero, and do not rule out $\tau=0$.
+This is in contrast to priors used in other studies from the log-normal (e.g \autocite{pullenayegum2011InformedReferencePrior,turner2015PredictiveDistributionsBetweenstudy}) or inverse-gamma (e.g. \autocite{higgins1996BorrowingStrengthExternal}) families that have zero density at zero and derivatives of zero close to zero, ruling out small values of $\tau$ no matter what the data suggest; 
+and in contrast to half-\textit{t} family priors (e.g. \autocite{gelman2006PriorDistributionsVariance,seide2019LikelihoodbasedRandomeffectsMetaanalysis}), which have their mode at zero, and do not rule out $\tau=0$.
 
+Instead of constraining the value of $\tau$ for a gene's effect size to be a single, unreliable estimate from $k=2$ data points,
+assuming a prior distribution recognises that other genes may be informative of the range of plausible values for between-platform heterogeneity.
 % rma.uni function
 % By default, the starting value is set equal to the value of the Hedges (HE) estimator and the algorithm terminates when the change in the estimated value of \tau2 is smaller than 10^-5 from one iteration to the next.
-To estimate the appropriate shape and scale parameters for the gamma empirically, a frequentist random-effects model using the \gls{REML} estimator for $\tau$ (recommended for continuous effects\autocite{veroniki2016MethodsEstimateBetweenstudy}) was first for each gene using \texttt{metafor::rma}.
-Genes with small estimates of $\tau < 0.01$ were excluded, and a gamma distribution was fit to the remaining estimates using \texttt{fitdistrplus}.
+To estimate the appropriate shape and scale parameters for the gamma empirically, a frequentist random-effects model using the \gls{REML} estimator for $\tau$ (recommended for continuous effects \autocite{veroniki2016MethodsEstimateBetweenstudy}) was fit for each gene using \texttt{metafor::rma.uni} \autocite{viechtbauer2010ConductingMetaAnalysesMetafor}.
+Genes with small estimates of $\tau < 0.01$ were excluded, and a gamma distribution was fit to the remaining estimates using \texttt{fitdistrplus} \autocite{delignette-muller2015FitdistrplusPackageFitting}.
 
 \subsubsection{Prior for effect size}
 
 While the choice of prior on $\tau$ is influential when k is small, there is usually enough data to estimate the effect size $\mu$ such that any reasonable non-informative prior can be used \autocite{gelman2006PriorDistributionsVariance,friede2017MetaanalysisFewSmall}.
-\todo{why is this? is it having well powered studies? gelman is vague}
+% TODO why is this? is it having well powered studies? gelman is vague
 \texttt{bayesmeta} implements both flat and normal priors for $\mu$.
 %
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
@@ -1064,63 +1104,116 @@ Assuming that most genes are not differentially expressed with effect sizes dist
 % Another Cauchy example:
 % Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
 % - Cauchy 2.5
-Heavy-tailed Cauchy priors have been proposed for effect size distributions in \gls{DGE} experiments to avoid over-shrinkage of true large effects in the tails\autocite{zhu2019HeavytailedPriorDistributions}.
-Since \texttt{bayesmeta} does not implement a Cauchy prior, to avoid over-shrinkage, I flatten the normal prior considerably by scaling up the variance to $N(0, 100\sigma^2)$.
-This is equivalent to assuming placing a 95\% prior probability that effects are less extreme than approximately $20\sigma$.\todo{the derivation here is qnorm(0.975, mean=0, sd=1*10) = 1*19.59964, bit iffy, double check this is correct}
+Heavy-tailed Cauchy priors have been proposed for effect size distributions in \gls{DGE} experiments to avoid over-shrinkage of true large effects in the tails \autocite{zhu2019HeavytailedPriorDistributions}.
+Since \texttt{bayesmeta} does not implement a Cauchy prior, to avoid over-shrinkage, I flatten the normal prior considerably by scaling up the standard deviation by a factor of 10: $N(0, (10\sigma)^2)$.
+This places a 95\% prior probability that effects are less extreme than approximately 20 times the observed $\sigma$, sufficient to allow for extreme fold-changes.
+% NOTE:
+% The derivation here is qnorm(0.975, mean=0, sd=sqrt(100*1)) = 1*19.59964
+% Alternatively: pnorm(19.59964, mean=0, sd=sqrt(100*1)) - pnorm(-19.59964, mean=0, sd=sqrt(100*1)) = 0.95
 
 \subsubsection{Evaluation of priors}
 
 An example of the empirically estimated hyperparameters for the priors for the day 1 vs. baseline contrast are shown in \cref{fig:hird_dgeMeta_priors_tau} (for $\tau$) and \cref{fig:hird_dgeMeta_priors_mu} (for $\mu$).
 For $\tau$, the final prior used was $\text{Gamma}(\text{shape}=1.5693, \text{scale}=0.0641)$.
-This is comparable to \autocite{chung2013NondegeneratePenalizedLikelihood}'s default recommendation of a $\text{Gamma}(\text{shape}=2, \text{scale}=\lambda)$ prior where $\lambda$ is small.
-\todo{could also include a table of all sets of parameters here?}
+This is comparable to the default recommendation from \textcite{chung2013NondegeneratePenalizedLikelihood} of a $\text{Gamma}(\text{shape}=2, \text{scale}=\lambda)$ prior where $\lambda$ is small.
+% TODO: add table with priors for all contrasts
 For $\mu$, the final prior used was $N(0, (0.3240*10)^2)$.
 The tails of the non-scaled normal fit (black) are light compared to the Cauchy fit (red), which may lead to over-shrinkage, especially since there are many genes with high positive fold changes for the day 1 vs. baseline effect.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Gamma prior for $\tau$ used for \texttt{bayesmeta} (blue), compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma} estimates for $\tau$, for the day 1 vs. baseline effect (small estimates of $\tau < 0.01$ excluded). Empirical log-normal fit also shown (red).}
+    \caption{
+        \textbf{Gamma prior for $\tau$ (blue) used for \texttt{bayesmeta} analyses of the day 1 vs. baseline effect, compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma.uni} estimates for $\tau$.}
+        Genes with small estimates of $\tau < 0.01$ were first excluded.
+        Empirical log-normal fit also shown (red).
+        Distribution parameters are listed.
+    }
     \label{fig:hird_dgeMeta_priors_tau}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{Normal prior for $\mu$ used for \texttt{bayesmeta} (blue), compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma} estimates for $\tau$, for the day 1 vs. baseline effect. The non-scaled normal fit is shown (black), as well as a Cauchy fit (red).}
+    \caption{
+        \textbf{Normal prior for $\mu$ (blue) used for \texttt{bayesmeta} analyses of the day 1 vs. baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma.uni} estimates for $\tau$.}
+        Genes with small estimates of $\tau < 0.01$ were first excluded.
+        The original non-scaled normal fit is shown (black), as well as a Cauchy fit (red).
+        Distribution parameters are listed.
+        Alternative estimate of the Normal standard deviation more robust to outliers using a quantile matching method from \texttt{DESeq2} \autocite{love2014ModeratedEstimationFold} is also shown.
+        In this case, it was comparable to the \gls{ML} estimate from \texttt{fitdistrplus}.
+    }
     \label{fig:hird_dgeMeta_priors_mu}
 \end{figure}
 
 \subsubsection{Multiple testing correction}
 
-For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using the \gls{BH} procedure (\texttt{p.adjust} in R).
 % The false discovery rate (FDR) is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons. FDR-controlling procedures are designed to control the expected proportion of "discoveries" (rejected null hypotheses) that are false (incorrect rejections of the null).[1] FDR-controlling procedures provide less stringent control of Type I errors compared to familywise error rate (FWER) controlling procedures (such as the Bonferroni correction), which control the probability of at least one Type I error.
-% TODO: fdr separate option see limma manual 13.3 Multiple Testing Across Contrasts
+For per-platform \gls{DGE}, \gls{FDR} control was done with \texttt{limma::decideTests} using the \gls{BH} procedure.
+For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using \texttt{p.adjust(method='BH')} in R.
+
+% NOTE: FDR BH assumes:
+% "One assumption of the usual method is that the set of comparisons are either independent or have "Positive dependency""
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
-\todo{add note on ositive regression dependency \autocite{goeman2014MultipleHypothesisTesting}}
-For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr}, which are analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
-\todo{add comment on symmetry}
+%
+For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr} under the assumption that effects are unimodal.
+% TODO: what about symmetry?
+\gls{lfsr} is analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
+"Of course, being confident in the sign of an effect logically implies that we are confident it is non-zero ..."
 %
 % bayesmeta
 % Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.
 % Do not confuse with ma05$pposterior(mu=0), which is evaluation of the posterior distribution at a particular value.
+% NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
+%
+Unless otherwise stated, correction was done at the \SI{5}{\percent} level separately for each contrast,
+as control is for the proportion of positives expected to be false positives,
+which is scalable to multiple contrasts.
 
 \subsection{Gene set enrichment analysis using \glsfmtlongpl{BTM}}
+\label{subsec:hird_dge_geneSetEnrichment}
 
-Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest}\autocite{weiner3rd2016TmodPackageGeneral}, which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \texttt{bayesmeta}.
-% TODO: alternative
-% The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
-%
-% or TREAT from limma, or equiv testing
+The gene sets used were \glspl{BTM} from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed 'DC') and \textcite{li2013MolecularSignaturesAntibody} (prefixed 'LI').
+Modules are sets of genes with transcriptional and functional similarities across a variety of healthy, diseased and stimulated conditions.
+The 260 modules from \textcite{chaussabel2008ModularAnalysisFramework} were constructed by unsupervised clustering of 239 \gls{PBMC} transcriptomes from multiple disease datasets,
+then annotated by data mining of gene names in PubMed abstracts.
+The 334 modules from \textcite{li2013MolecularSignaturesAntibody} were constructed from coexpression analysis of approximately \num{30000} blood transcriptomes,
+then annotated making use of Gene Ontology terms, cell type-specific markers, pathway databases, and manual literature searches.
+These datasets are particularly suitable for systems vaccinology studies, given their focus on the blood transcriptome.
+\textcite{li2013MolecularSignaturesAntibody} modules are better annotated in general, and were used for the majority of gene set enrichments in this chapter.
 
 % FDR
 % A data frame with module names, additional statistic (e.g. enrichment or AUC, depending on the test), P value and FDR q-value (P value corrected for multiple testing using the p.adjust function and Benjamini-Hochberg correction.
+Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral}, 
+which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \texttt{bayesmeta}.
+%
+% TODO
+% More sophisticated ranking methods
+% - tmodLimmaTest: The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
+% - Minimum Significant Difference \url{https://link.springer.com/article/10.1186/s12859-017-1674-0#Abs1} \url{https://cran.r-project.org/web/packages/tmod/vignettes/tmod.pdf}
+% - treat method \url{http://web.mit.edu/~r/current/arch/i386_linux26/lib/R/library/limma/html/ebayes.html}
+% - camera is developed to use mod t
+% - equivalence testing
+%
+The CERNO statistic for a gene set is:
+\begin{equation}
+    -2 \sum_{i=1}^{n} \ln \frac{r_i}{N} \sim \chi^2(2N)
+\end{equation}
+where $n$ is the number of genes in the set,
+$r$ is the rank of the $i$th gene in the set,
+and $N$ is the number of measured genes.
+CERNO is relatively robust to the ranking metric \autocite{zyla2019GeneSetEnrichment}.
+\gls{FDR} control for the number of gene sets tested was done using \gls{BH}, again separately for each contrast.
+% NOTE: also see zyla2017RankingMetricsGene
 
- % TODO: write up method for data mining, write up how redundant similarly named modules are
-
-The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntibody}, which are annotated sets of coexpressed genes mined from publicly available human blood transcriptomic data, and provide sets tailored for enrichment analyses in blood cells.
-% TODO: why use cerno https://academic.oup.com/bioinformatics/article/35/24/5146/5511403
-% TODO: which ranking metric: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-017-1674-0
-
-% TODO: add math, and comment on how CAMERA addresses assumption of correlations
+The effect size is given by the \gls{AUC}.
+It can be computed from $U$, the test statistic from a Mann-Whitney U test (also known as the Wilcoxon rank-sum test):
+\begin{equation}
+    U = nN + \frac{n(n + 1)}{2} - \sum_{i=1}^{n} \frac{r_i}{N}
+\end{equation}
+This is a non-parametric test for whether genes in the set have smaller ranks than genes not in the set on average.
+Finally, \gls{AUC} is $U/(nN)$, which takes values from 0.5 to 1.
+Since \texttt{tmod::tmodCERNOtest} only considers enrichment of small ranks, but genes can be down or upregulated, 
+separate tests were done sorting in ascending and descending order,
+and the more significant result was used to determine the overall direction of effect for each gene set.
 
 \section{Results}
 \todo{more text}
@@ -1128,7 +1221,7 @@ The gene sets used were \glspl{BTM} from\autocite{li2013MolecularSignaturesAntib
 \subsection{Extensive global changes in expression after vaccination}
 
 To gain an overview of how the transcriptome changes after vaccination, linear models were fit to identify genes differentially expressed at day 1 or day 7 compared to baseline (day -7 and day 0) in the \gls{HIRD} array and \gls{RNAseq} expression data, accounting for covariates such as batch effects, sex, age, \gls{TRI}, and ancestry.
-At 13593 genes with expression measured by both platforms, models were fit within each platform, then effect sizes were combined using Bayesian random-effects meta-analysis.
+At the \num{13593} genes with expression measured by both platforms, models were fit within each platform, then effect sizes were combined using Bayesian random-effects meta-analysis.
 
 At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857/13593 genes were differentially expressed between any pair of timepoints, with their expression clustering into three main clusters (\cref{fig:hird_dge_heatmap}).
 % 692 genes with high expression at day 1, 94 genes with high expression at day 7, and 59 genes with low expression at day 1
@@ -1358,3 +1451,4 @@ Chapter 3 will examine one hypothesis: the impact of common human genetic variat
 % krammer2018Influenza for T cell response
 
 % TODO upreg -> increased expression
+

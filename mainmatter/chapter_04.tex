@@ -551,7 +551,8 @@ Two more sets of gene-wise models were fit with drugs pooled (i.e. $concat(Visit
 but otherwise identical to the first two sets.
 
 Specific hypotheses were tested using sum-to-zero contrasts, which are linear combinations of the model coefficients with weights summing to zero.
-For example, to test for \gls{DGE} between responders and non-responders to infliximab at baseline in the non-pooled model,
+For example, 
+to test for \gls{DGE} between responders and non-responders to infliximab at baseline in the non-pooled model,
 I used a contrast where
 the weight for the (week 0, responder, infliximab) group coefficient was 1,
 the weight for the (week 0, non-responder, infliximab) group coefficient was -1,
@@ -570,7 +571,7 @@ and all other coefficient weights were 0.
 % 
 % \2 to get p values for papers, Dream uses lmerTest approximation Satterthwaite df with REML
 % \2 this combo controls type 1 error for n>144 in lmerTest simulations \url{https://link.springer.com/article/10.3758/s13428-016-0809-y}
-To get \pvalues, the contrast divided by its standard error was compared to the t distribution using the Satterthwaite approximation for \glspl{df}.
+To get \pvalues{}, the contrast divided by its standard error was compared to the t distribution using the Satterthwaite approximation for \glspl{df}.
 % \2 FDR BH separately per comparison: "The default method="separate" and
 % adjust.method="BH" settings are appropriate for most analyses.
 % method="global" is useful when it is important that the same t-statistic
@@ -700,52 +701,17 @@ The hierarchical clustering tree was then cut into that number of clusters.
 % intrinsic correlation in gene expression rather than any relationship between
 % expression of pathway members and the phenotype of interest.
 
-Rank-based gene set enrichment analyses were done using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral}, 
-which assesses the enrichment of small ranks within predefined sets of genes compared to all measured genes after ranking the genes by some metric.
+Rank-based gene set enrichment analyses were done using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral} and \glspl{BTM}, as described in \cref{subsec:hird_dge_geneSetEnrichment}.
+%
 % https://www.bioconductor.org/packages/devel/bioc/vignettes/variancePartition/inst/doc/dream.html
 % Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the t-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report z.std which is the p-value transformed into a signed z-score. This can be used for downstream analysis.
 % [...]
 % Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the F-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report F.std which is the p-value transformed into an F-statistic with df1=number of coefficiets tested and df2=Inf. This can be used for downstream analysis.
 For each contrast, 
 as the t-statistics are not comparable between genes due to the use of approximate \glspl{df},
-I ranked genes by the signed Z score reported by \software{dream}, which is a monotonic transformation of the \pvalue.
-% TODO
-% More sophisticated ranking methods
-% - tmodLimmaTest: The ordering of the genes according to a certain metric is the fundament for gene enrichment analysis. tmodLimmaTest allows three orderings: p-values, "MSD" and log fold changes. The default MSD ("minimal significant difference") is the lower boundary of the 95confidence interval for positive log fold changes, and 0 minus the upper boundary of the 95better than ordering by p-value or by log fold change. See discussion in the package vignette.
-% - Minimum Significant Difference \url{https://link.springer.com/article/10.1186/s12859-017-1674-0#Abs1} \url{https://cran.r-project.org/web/packages/tmod/vignettes/tmod.pdf}
-% - treat method \url{http://web.mit.edu/~r/current/arch/i386_linux26/lib/R/library/limma/html/ebayes.html}
-% - camera is developed to use mod t
-Similarly, moderated F-statistics from the spline are not comparable between genes, so I used the signed F-statistic from the transformation of the \pvalue.
+I ranked genes by the signed Z score reported by \software{dream}, which is a monotonic transformation of the \pvalue{}.
+Similarly, moderated F-statistics from the spline are not comparable between genes, so I used the signed F-statistic from the transformation of the \pvalue{}.
 % TODO: clarify how the transformations work
-
-The CERNO statistic for a gene set is:
-\begin{equation}
-    -2 \sum_{i=1}^{n} \ln \frac{r_i}{N} \sim \chi^2(2N)
-\end{equation}
-where n is the number of genes in the set,
-r is the rank of the ith gene,
-and N is the number of measured genes.
-CERNO is relatively robust to the ranking metric \autocite{zyla2019GeneSetEnrichment}.
-Since CERNO only considered enrichment of small ranks but genes can be down or upregulated, 
-separate tests were done sorting in ascending and descending order,
-and the more significant result was used to determine the overall direction of effect for each gene set.
-% FDR
-% A data frame with module names, additional statistic (e.g. enrichment or AUC,
-% depending on the test), P value and FDR q-value (P value corrected for
-% multiple testing using the p.adjust function and Benjamini-Hochberg
-% correction.
-\gls{FDR} control for the number of gene sets tested was controlled using \gls{BH} separately for each model.
-% TODO: explain CERNO to AUC conversion
-
-The gene sets used were \glspl{BTM} from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed 'DC') and \textcite{li2013MolecularSignaturesAntibody} (prefixed 'LI').
-Modules are sets of genes with transcriptional and functional similarities across a variety of healthy, diseased and stimulated conditions.
-% TODO: add particularly appealing for vaccine studies after moving to ch2
-The 260 modules from \textcite{chaussabel2008ModularAnalysisFramework} were constructed by unsupervised clustering of 239 \gls{PBMC} transcriptomes from multiple disease datasets,
-then annotated by data mining of gene names in PubMed abstracts.
-% mutual information
-The 334 modules from \textcite{li2013MolecularSignaturesAntibody} were constructed from coexpression analysis of approximately \num{30000} blood transcriptomes,
-then annotated making use of Gene Ontology terms, cell type-specific markers, pathway databases, and manual literature searches.
-\textcite{li2013MolecularSignaturesAntibody} modules are better annotated in general, and were used for the majority of gene set enrichments in this chapter.
 
 % TODO: add explanation of interaction term column
 % Note that we can rank by main effect or interaction Z score.
@@ -890,7 +856,7 @@ A total of \num{25908527} \glspl{SNP} were tested in all timepoints.
 The null correlation structure of the timepoints was estimated using null tests within a random subset of \num{200000}.
 Data-driven covariance matrices representing patterns of effects across timepoints were estimated using a strong subset of \num{129002} \glspl{eQTL}.
 The strong subset should contain \gls{eQTL} that are likely to have an effect in at least one timepoint.
-For each gene and timepoint, I selected the \gls{eQTL} with the smallest \pvalue, if that \pvalue was < 0.05.
+For each gene and timepoint, I selected the \gls{eQTL} with the smallest \pvalue{}, if that \pvalue{} was < 0.05.
 The mash model was fit on the full random subset, accounting for the computed null correlation and covariance matrices, in exchangeable Z-scores mode.
 Finally, posterior betas and standard errors were computed for all tests using the fitted model parameters.
 A corresponding \gls{lfsr} is also returned, controlling for multiple testing.

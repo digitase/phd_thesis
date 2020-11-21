@@ -154,9 +154,10 @@ Modern imputation panels enable cost-effective \glspl{GWAS} testing tens of mill
 
 Testing large numbers of variants incurs a massive multiple testing burden, but acknowledging the correlation between variants due to \gls{LD},
 there are only the equivalent of \textapprox{10^6} independent tests in the European genome, regardless of the number of tests actually performed \autocite{peer2008EstimationMultipleTesting}.
-The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, akin to controlling the type I \gls{FWER} at $\alpha = 0.05$ using the Bonferroni correction%
+The field has thus converged on a fixed discovery threshold of $0.05 / 10^6 = \num{5e-8}$ for genome-wide significance in European populations \autocite{jannot2015108HasEmerged}, akin to controlling the type I \gls{FWER} to below $\alpha = 0.05$ using the Bonferroni correction%
 \footnote{
-    The Bonferroni correction makes no assumptions about the dependence structure of the \pvalues{}, and is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. 
+    The Bonferroni correction makes no assumptions about the dependence structure of the \pvalues{}, controlling the \gls{FWER} (probability of at least one type I error) exactly under any structure.
+    It is conservative (i.e. controls the \gls{FWER} at a stricter level than the chosen $\alpha$) even for independent tests. 
     In fact it is always conservative unless the \pvalues{} have strong negative correlations \autocite{goeman2014MultipleHypothesisTesting}.
 }.
 
