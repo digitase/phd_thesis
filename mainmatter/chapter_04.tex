@@ -8,6 +8,8 @@
 
 % TODO: 2020-11-11_2020-10-28_195616_main_CAA.pdf is the relevant file
 
+% TODO: check up/down reg and increase/decrease always referes to teh right thing
+
 % TODO: autoref to cref
 % Collab note
 % - PANTS collab
@@ -701,7 +703,7 @@ The hierarchical clustering tree was then cut into that number of clusters.
 % intrinsic correlation in gene expression rather than any relationship between
 % expression of pathway members and the phenotype of interest.
 
-Rank-based gene set enrichment analyses were done using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral} and \glspl{BTM}, as described in \cref{subsec:hird_dge_geneSetEnrichment}.
+Rank-based gene set enrichment analyses were done using \software{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral} and \glspl{BTM}, as described in \cref{subsec:hird_dge_geneSetEnrichment}.
 %
 % https://www.bioconductor.org/packages/devel/bioc/vignettes/variancePartition/inst/doc/dream.html
 % Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the t-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report z.std which is the p-value transformed into a signed z-score. This can be used for downstream analysis.
@@ -1162,7 +1164,7 @@ FDR=\num{1.355467e-13}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.evidencePlots_C_3_1_Interferon.pdf}
     % TODO: only 8-9k genes
-    \caption{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders. Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. The ranks of genes in interferon-related modules are indicated by colored rug plots. Colored curves show the cumulative fraction of genes in each module. For non-responders, these modules are enriched for large ranks (large, positive z-statistics). The area between the colored curves and the null of randomly-distributed ranks (grey diagonal line) is the effect size (AUC).}
+    \caption{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders. Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. The ranks of genes in interferon-related modules are indicated by colored rug plots. Colored curves show the cumulative fraction of genes in each module. For non-responders, these modules are enriched for large ranks (large, positive z-statistics). The area under the colored curves are the effect sizes (\glspl{AUC}). The null of randomly-distributed ranks is the grey diagonal line.}
     \label{fig:multipants_dge_evidencePlots_C_3_1_Interferon}
 \end{figure}
 

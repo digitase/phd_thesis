@@ -795,7 +795,7 @@ then further filtered to only nominally significant tests, resulting in a strong
     \label{fig:hird_mashr_strongSubset_Z_mega}
 \end{figure}
 
-The mash model was trained on a random subset of 200000 tests, using the Exchangeable Z-scores model\autocite{urbut2018FlexibleStatisticalMethods}.
+The \software{mashr} model was trained on a random subset of 200000 tests, using the Exchangeable Z-scores model\autocite{urbut2018FlexibleStatisticalMethods}.
 The correlation of null tests between conditions, critical to account for due to the repeated measures structure of the data, was estimated using \software{mashr::estimate\_null\_correlation}.
 \todo{note this is critical, since we know a priori not independent due to eqtl sharing}
 The fitted model was used as a prior to compute posterior effects and standard errors for all tests through shrinkage.
@@ -806,8 +806,10 @@ The fitted model was used as a prior to compute posterior effects and standard e
 % type s error rates for classical and bayesian single and multiple comparison procedures
 % Why We (Usually) Don’t Have to Worry About Multiple Comparisons (2012)
 % Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors (2014)
-A condition-specific Bayesian measure of significance \gls{lfsr} is returned, which can be interpreted as the the probability given the data, that the declared sign of the effect is incorrect.
-\todo{move lfsr explanation prior to ashr in dge chapter}
+A condition-specific Bayesian measure of significance \gls{lfsr} is returned, 
+the probability that the declared sign of the effect is incorrect \autocite{stephens2016FalseDiscoveryRates}.
+Note that \software{mashr} is the multiple-condition extension of \software{ashr}, 
+previously used in \cref{subsubsec:hird_dge_multipleTestingCorrection} for computing posterior effects and their significance in \gls{DGE} analyses.
 
 \subsection{Defining shared and response eQTLs}
 

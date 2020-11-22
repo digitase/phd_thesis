@@ -249,7 +249,7 @@ A gene module enriched in apoptosis-related genes measured at baseline was found
 % NOTE: tsang2014GlobalAnalysesHuman includes 2009 seasonal and pandemic vaccines
 \textcite{tsang2014GlobalAnalysesHuman} used not gene expression, but \gls{FACS} measurements to establish signatures for day 70 neutralising antibody titres ($n=63$).
 Frequencies of several B cell, myeloid \gls{DC}, CD4\textsuperscript{+} memory T cell, and a number of other activated T cell populations were not only predictive, but also stable over a period of two months. 
-\autocite{nakaya2015SystemsAnalysisImmunity} used data collected over five consecutive seasons ($n=212$) to identify associations between B cell (positive ), T cell (positive), and monocyte (negative) baseline expression modules with day 28 \gls{HAI}.
+\autocite{nakaya2015SystemsAnalysisImmunity} used data collected over five consecutive seasons ($n=212$) to identify associations between B cell (positive), T cell (positive), and monocyte (negative) baseline expression modules with day 28 \gls{HAI}.
 They were able to replicate these associations using published data from \textcite{franco2013IntegrativeGenomicAnalysis} and \textcite{furman2013ApoptosisOtherImmune}.
 Another multi-cohort, multi-season study ($n > 500$) \autocite{hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals} found baseline expression of genes (\gene{RAB24}, \gene{GRB2}, \gene{DPP3}, \gene{ACTB}, \gene{MVP}, \gene{DPP7}, \gene{ARPC4}, \gene{PLEKHB2}, \gene{ARRB1}) and gene modules to be associated with antibody response.
 Again, the authors were able to validate the associations in an independent cohort.
@@ -291,13 +291,18 @@ As the H1N1 subtype had not circulated since the 1918 pandemic, the majority of 
 The \gls{HIRD} study is an longitudinal, prospective cohort study.
 A total of 178 healthy adults in the UK were vaccinated with a single dose of Pandemrix.
 Clinical, transcriptomic, immune cell frequency, cytokine level, antibody titre, and adverse event phenotypes were collected.
-Genes associated with both myeloid and lymphoid effector functions had increased expression at day 1 versus baseline, most prominently for genes associated with interferon responses.
+Genes associated with both myeloid and lymphoid effector functions had increased expression at day 1 versus baseline, 
+most prominently for genes associated with the interferon response.
+Day 1 gene expression was impacted by age.
+Significant global differences were observed in individuals older than \SIrange{30}{40}{\year}, 
+considerably earlier than usually considered in studies of immunosenescence in old age.
+% CCL4, also known as Macrophage inflammatory protein-1β (MIP-1β) is a CC chemokine with specificity for CCR5 receptors. It is a chemoattractant for natural killer cells, monocytes and a variety of other immune cells.[3]
+The early myeloid responses---increase in blood monocyte levels and cytokines associated with innate activation e.g. CCL4---were overall consistent with studies of unadjuvanted seasonal influenza vaccines.
 % \enquote{biggest fold-change was in interferon-γ (IFN-γ), a cytokine associated with type 1 helper T cells (TH1 cells), cytolytic T cells, γδ T cells, natural killer T (NKT) cells, NK cells and type 1 innate lymphoid cells (Fig. 1e).}
-These early myeloid responses were consistent with studies of unadjuvanted seasonal influenza vaccines, 
-but a type II interferon gamma-associated lymphoid response was unique to this adjuvanted vaccine was observed.
-\todo{add age effect on early response}
+% type II interferon
+However, the early lymphoid responses---driven by a five-fold increase in serum interferon gamma levels at day 1---were unique to this adjuvanted pandemic vaccine.
 
-Vaccine response was defined as a \num{\ge 4}-fold increase in either \gls{HAI} or \gls{MN} titres after vaccination.
+Vaccine (antibody) response was defined as a \num{\ge 4}-fold increase in either \gls{HAI} or \gls{MN} titres after vaccination.
 Genes related to plasma cell development and antibody production were more highly expressed in 23 vaccine responders compared to 18 non-responders at day 7 post-vaccination.
 However, due to high variability among the vaccine non-responders in expression trajectory over time, 
 a predictive model that segregated the two groups could not be built,
@@ -471,7 +476,7 @@ Using PLINK (v1.90b3w), genotype data underwent the following quality control fi
     \item maximum marker missingness across samples \SI{< 5}{\percent};
     \item maximum sample missingness across markers \SI{< 1}{\percent} (\cref{fig:hird_genotype_sample_hetRate_missingness});
     \item maximum sample heterozygosity rate within 3 standard deviations of the mean (threshold selected visually to exclude outliers, \cref{fig:hird_genotype_sample_hetRate_missingness});
-    \item sample sex mismatches based on X chromosome marker heterozygosity (\texttt{-{}-check-sex} option);
+    \item sample sex mismatches based on X chromosome marker heterozygosity (\software{-{}-check-sex} option);
     % NOTE: \autocite{mccarthy2008GenomewideAssociationStudies}
     % Once armed with a set of called genotypes, the final phase of quality control beckons. Experience has shown that most SNPs showing extreme departures from Hardy–Weinberg equilibrium (HWE) in controls can be safely discarded1, although lesser (but nevertheless quite marked) departures are to be expected under the null hypothesis, given the number of tests performed. 
     % Appropriate thresholds for any given study will depend on the sample size and overall data quality, and might best be defined by using the observed distribution of HWE statistics (the WTCCC used this approach to set a threshold at an exact p < 5.7 × 10−7 in controls)1. In any event, HWE is an imprecise tool for quality control purposes. Tests of departure from HWE are underpowered for the detection of genotyping error75,76, whereas overenthusiastic use of HWE as a quality criterion can prove to be counterproductive given that modest disequilibrium (in cases particularly) can be a signature of true association.
@@ -479,7 +484,7 @@ Using PLINK (v1.90b3w), genotype data underwent the following quality control fi
     % NOTE: \autocite{anderson2010DataQualityControl}
     % Most GWA studies choose to exclude markers that show extensive deviation from Hardy-Weinberg equilibrium (HWE) because this can be indicative of a genotyping or genotype calling error. However, deviations from Hardy-Weinberg equilibrium may also indicate selection, so a case sample can show deviations from HWE at loci associated with disease, and it would obviously be counter-productive to remove these loci from further investigation 18. Therefore, only control samples should be used when testing for deviations for HWE.
     % The significance threshold for declaring SNPs to be in Hardy-Weinberg equilibrium has varied greatly between studies (p-value thresholds between 0.001 and 5.7 × 10−7 have been reported in the literature3,19).
-    \item and marker deviation from \gls{HWE}, an indication of genotyping or genotype calling errors \autocite{mccarthy2008GenomewideAssociationStudies,anderson2010DataQualityControl} (\texttt{-{}-hwe} option, \pvalue{} \SI[scientific-notation=true]{< 0.00001})%
+    \item and marker deviation from \gls{HWE}, an indication of genotyping or genotype calling errors \autocite{mccarthy2008GenomewideAssociationStudies,anderson2010DataQualityControl} (\software{-{}-hwe} option, \pvalue{} \SI[scientific-notation=true]{< 0.00001})%
         \footnote{
             A wide range of thresholds for the \gls{HWE} marker filter in controls between \num{1.0e-3} and \num{5.7e-7} are reported in the literature \autocite{anderson2010DataQualityControl}.
             The quality control pipeline thresholds used here are from \textcite{delange2017GenomewideAssociationStudy}. 
@@ -511,7 +516,7 @@ As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic.
 Large-scale population structure explains variation in gene expression \autocite{stegle2012UsingProbabilisticEstimation,brown2018ExpressionReflectsPopulation}, 
 so including genotype \glspl{PC} that reflect that structure as covariates can increase statistical efficiency for detecting associations with expression.
 I used HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are ancestry.
-Genotypes were first \gls{LD}-pruned (PLINK \texttt{-{}-indep-pairwise 50 5 0.2} i.e. in a sliding window of \SI{50}{\kilo\bp}, step size of 5 variants, remove variants at each step until no pair of variants has \gls{LD} \num{>0.2}), 
+Genotypes were first \gls{LD}-pruned (PLINK \software{-{}-indep-pairwise 50 5 0.2} i.e. in a sliding window of \SI{50}{\kilo\bp}, step size of 5 variants, remove variants at each step until no pair of variants has \gls{LD} \num{>0.2}), 
 to avoid regions with many redundant markers being overrepresented \autocite{price2006PrincipalComponentsAnalysis,abdellaoui2013PopulationStructureMigration}.
 % /lustre/scratch119/realdata/mdt2/teams/barrett/coreex_gaibdc/refs/high-LD-regions.txt
 % 1 48000000 52000000 1
@@ -670,7 +675,7 @@ The mean number of mapped read pairs per sample after summing was 27.09 million 
 % scaledTPM or lengthScaledTPM is still adjusted for feature length
 %
 % We could alternatively generate counts from abundances, using the argument countsFromAbundance, scaled to library size, "scaledTPM", or additionally scaled using the average transcript length, averaged over samples and to library size, "lengthScaledTPM". Using either of these approaches, the counts are not correlated with length, and so the length matrix should not be provided as an offset for downstream analysis packages.
-Relative transcript abundances were summarised to Ensembl gene-level (release 90) count estimates using tximport (\texttt{scaledTPM} method, which scales Salmon \glspl{TPM} up to the library size \autocite{soneson2016DifferentialAnalysesRNAseq,love2018SwimmingDownstreamStatistical}) to improve statistical robustness and interpretability \autocite{soneson2016DifferentialAnalysesRNAseq}.
+Relative transcript abundances were summarised to Ensembl gene-level (release 90) count estimates using tximport (\software{scaledTPM} method, which scales Salmon \glspl{TPM} up to the library size \autocite{soneson2016DifferentialAnalysesRNAseq,love2018SwimmingDownstreamStatistical}) to improve statistical robustness and interpretability \autocite{soneson2016DifferentialAnalysesRNAseq}.
 % NOTE: in future, just combine technical replicates at the read level
 To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
 
@@ -834,7 +839,7 @@ These arrays were originally processed in two batches, the effect of which can b
 % Does affine transformation, then glog2
 % An affine transformation is simply a shifting and scaling of the data.
 % The so-called glog2 (short for generalised logarithm) is a function that is like the logarithm (base 2) for large values (large compared to the amplitude of the background noise), but is less steep for smaller values.
-\texttt{VSN::normalizeVSN} \autocite{huber2002VarianceStabilizationApplied} was used to simultaneously perform 
+\software{VSN::normalizeVSN} \autocite{huber2002VarianceStabilizationApplied} was used to simultaneously perform 
 background correction, 
 between-array normalisation (affine transformation, centers and scales each array to control for systematic experimental factors), 
 and variance-stabilisation (generalised logarithm, similar to $\log_2$ with better performance for small values) of intensity values, 
@@ -846,14 +851,14 @@ As systematic experimental factors might differ between batches, requiring diffe
 % 6.5.1.1.	“For example, we find that in most microarray experiments performed on brain tissue it is best to choose the probe with the maximum mean expression per gene, whereas when choosing a single gene to represent a co-expression module, the optimal collapsing method depends on the goal of the analysis.”
 % 6.5.1.2.	“In the case of collapsing probes to their respective gene symbols, for example, we find that the 1.max strategy (implemented by setting method = "MaxMean" and connectivityBasedCollapsing = FALSE) produces the most robust results.”
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
-Probes were matched to genes using \texttt{hgug4112a.db}\footnote{\url{https://bioconductor.org/packages/release/data/annotation/html/hgug4112a.db.html}}.
-Most genes were targeted by multiple array probes; \num{31208} probes were collapsed into \num{18216} Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\texttt{WGCNA::collapseRows(method=MaxMean)}, a method recommended for probe to gene collapsing by \textcite{miller2011StrategiesAggregatingGene}).
+Probes were matched to genes using \software{hgug4112a.db}\footnote{\url{https://bioconductor.org/packages/release/data/annotation/html/hgug4112a.db.html}}.
+Most genes were targeted by multiple array probes; \num{31208} probes were collapsed into \num{18216} Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\software{WGCNA::collapseRows(method=MaxMean)}, a method recommended for probe to gene collapsing by \textcite{miller2011StrategiesAggregatingGene}).
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
 The final normalised $\log_2$ intensity values for these \num{18216} genes over 173 samples is shown in \cref{fig:hird_array_boxplots_MaxMean}.
 % Also used arrayWeights as precision weight inputs to lmFit
 % See: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-261#Bib1
 % The method successfully assigns lower weights to less reproducible arrays from different experiments. Down-weighting the observations from suspect arrays increases the power to detect differential expression.
-Finally, \texttt{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArrayQuality} was used to compute per-sample quality weights used to downweight unreliable arrays (samples) in the \gls{DGE} analyses.
+Finally, \software{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArrayQuality} was used to compute per-sample quality weights used to downweight unreliable arrays (samples) in the \gls{DGE} analyses.
 
 \begin{figure}
     \centering
@@ -941,7 +946,7 @@ array day -7 and day 0 are treated as repeated measurements taken at a single \e
 For each gene and platform, I fit a model (model 1) with expression as the response variable; 
 with an intercept, timepoint (baseline, day 1, day 7), \gls{TRI}, batch/pool, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors;
 and individual as a random-effect predictor.
-Within-individual correlations for the random effect were estimated using \texttt{limma::duplicateCorrelation}.
+Within-individual correlations for the random effect were estimated using \software{limma::duplicateCorrelation}.
 A second model (model 2) was also fit, the only difference being two additional predictors for the multiplicative interactions between day 1 and day 7 with \gls{TRI}.
 %
 % See: https://stats.stackexchange.com/questions/151730/test-if-two-coefficients-are-statistically-different-in-logistic-regression
@@ -971,7 +976,7 @@ From model 2, I defined contrasts for the \gls{TRI}, \gls{TRI}-day 1, and \gls{T
 % https://support.bioconductor.org/p/70175/
 % es <- fit2$coefficients
 % es_se <- sqrt(fit2$s2.post) * fit2$stdev.unscaled
-Corresponding coefficients and standard errors for the contrasts were extracted from the \texttt{limma} models, 
+Corresponding coefficients and standard errors for the contrasts were extracted from the \software{limma} models, 
 which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
 \subsubsection{Choice of \glsfmtshort{DGE} meta-analysis method}
@@ -1051,7 +1056,7 @@ so the assumption of $\tau=0$ is unrealistic, and a random-effects model is more
 Unfortunately, there is no optimal solution for directly estimating $\tau$ in random-effects meta-analyses with small k \autocite{bender2018MethodsEvidenceSynthesis}, and especially in the case of $k=2$ \autocite{gonnermann2015NoSolutionCombining}.
 Many estimators are available \autocite{veroniki2016MethodsEstimateBetweenstudy}, but lack of information with small k causes estimation to be imprecise, and often results in boundary values of $\tau = 0$ that are incompatible with the assumed positive heterogeneity \autocite{chung2013NondegeneratePenalizedLikelihood,friede2017MetaanalysisFewSmall}.
 In such circumstances, the most sensible approach may be to incorporate prior information about hyperparameters $\mu$ and $\tau$ in a Bayesian random-effects framework \autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
-For this study, I use the implementation in \texttt{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}.
+For this study, I use the implementation in \software{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}.
 
 \subsubsection{Prior for between-studies heterogeneity}
 
@@ -1082,14 +1087,14 @@ Instead of constraining the value of $\tau$ for a gene's effect size to be a sin
 assuming a prior distribution recognises that other genes may be informative of the range of plausible values for between-platform heterogeneity.
 % rma.uni function
 % By default, the starting value is set equal to the value of the Hedges (HE) estimator and the algorithm terminates when the change in the estimated value of \tau2 is smaller than 10^-5 from one iteration to the next.
-To estimate the appropriate shape and scale parameters for the gamma empirically, a frequentist random-effects model using the \gls{REML} estimator for $\tau$ (recommended for continuous effects \autocite{veroniki2016MethodsEstimateBetweenstudy}) was fit for each gene using \texttt{metafor::rma.uni} \autocite{viechtbauer2010ConductingMetaAnalysesMetafor}.
-Genes with small estimates of $\tau < 0.01$ were excluded, and a gamma distribution was fit to the remaining estimates using \texttt{fitdistrplus} \autocite{delignette-muller2015FitdistrplusPackageFitting}.
+To estimate the appropriate shape and scale parameters for the gamma empirically, a frequentist random-effects model using the \gls{REML} estimator for $\tau$ (recommended for continuous effects \autocite{veroniki2016MethodsEstimateBetweenstudy}) was fit for each gene using \software{metafor::rma.uni} \autocite{viechtbauer2010ConductingMetaAnalysesMetafor}.
+Genes with small estimates of $\tau < 0.01$ were excluded, and a gamma distribution was fit to the remaining estimates using \software{fitdistrplus} \autocite{delignette-muller2015FitdistrplusPackageFitting}.
 
 \subsubsection{Prior for effect size}
 
 While the choice of prior on $\tau$ is influential when k is small, there is usually enough data to estimate the effect size $\mu$ such that any reasonable non-informative prior can be used \autocite{gelman2006PriorDistributionsVariance,friede2017MetaanalysisFewSmall}.
 % TODO why is this? is it having well powered studies? gelman is vague
-\texttt{bayesmeta} implements both flat and normal priors for $\mu$.
+\software{bayesmeta} implements both flat and normal priors for $\mu$.
 %
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
 % For example, it is common to expect realistic effect sizes to be of order of magnitude 0.1 on a standardised scale (for example, an educational innovation that might improve test scores by 0.1 standard deviations). In that case, a prior of N(0,1) could be considered very strong, in that it puts most of its mass on parameter values that are unrealistically large in absolute value. When we say this prior is "weakly informative," what we mean is that, if there's a reasonably large amount of data, the likelihood will dominate, and the prior will not be important. If the data are weak, though, this "weakly informative prior" will strongly influence the posterior inference. The phrase "weakly informative" is implicitly in comparison to a default flat prior.
@@ -1105,7 +1110,7 @@ Assuming that most genes are not differentially expressed with effect sizes dist
 % Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
 % - Cauchy 2.5
 Heavy-tailed Cauchy priors have been proposed for effect size distributions in \gls{DGE} experiments to avoid over-shrinkage of true large effects in the tails \autocite{zhu2019HeavytailedPriorDistributions}.
-Since \texttt{bayesmeta} does not implement a Cauchy prior, to avoid over-shrinkage, I flatten the normal prior considerably by scaling up the standard deviation by a factor of 10: $N(0, (10\sigma)^2)$.
+Since \software{bayesmeta} does not implement a Cauchy prior, to avoid over-shrinkage, I flatten the normal prior considerably by scaling up the standard deviation by a factor of 10: $N(0, (10\sigma)^2)$.
 This places a 95\% prior probability that effects are less extreme than approximately 20 times the observed $\sigma$, sufficient to allow for extreme fold-changes.
 % NOTE:
 % The derivation here is qnorm(0.975, mean=0, sd=sqrt(100*1)) = 1*19.59964
@@ -1123,7 +1128,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
     \caption{
-        \textbf{Gamma prior for $\tau$ (blue) used for \texttt{bayesmeta} analyses of the day 1 vs. baseline effect, compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma.uni} estimates for $\tau$.}
+        \textbf{Gamma prior for $\tau$ (blue) used for \software{bayesmeta} analyses of the day 1 vs. baseline effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
         Genes with small estimates of $\tau < 0.01$ were first excluded.
         Empirical log-normal fit also shown (red).
         Distribution parameters are listed.
@@ -1134,44 +1139,52 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
     \caption{
-        \textbf{Normal prior for $\mu$ (blue) used for \texttt{bayesmeta} analyses of the day 1 vs. baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \texttt{metafor::rma.uni} estimates for $\tau$.}
+        \textbf{Normal prior for $\mu$ (blue) used for \software{bayesmeta} analyses of the day 1 vs. baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
         Genes with small estimates of $\tau < 0.01$ were first excluded.
         The original non-scaled normal fit is shown (black), as well as a Cauchy fit (red).
         Distribution parameters are listed.
-        Alternative estimate of the Normal standard deviation more robust to outliers using a quantile matching method from \texttt{DESeq2} \autocite{love2014ModeratedEstimationFold} is also shown.
-        In this case, it was comparable to the \gls{ML} estimate from \texttt{fitdistrplus}.
+        Alternative estimate of the Normal standard deviation more robust to outliers using a quantile matching method from \software{DESeq2} \autocite{love2014ModeratedEstimationFold} is also shown.
+        In this case, it was comparable to the \gls{ML} estimate from \software{fitdistrplus}.
     }
     \label{fig:hird_dgeMeta_priors_mu}
 \end{figure}
 
 \subsubsection{Multiple testing correction}
+\label{subsubsec:hird_dge_multipleTestingCorrection}
 
 % The false discovery rate (FDR) is a method of conceptualizing the rate of type I errors in null hypothesis testing when conducting multiple comparisons. FDR-controlling procedures are designed to control the expected proportion of "discoveries" (rejected null hypotheses) that are false (incorrect rejections of the null).[1] FDR-controlling procedures provide less stringent control of Type I errors compared to familywise error rate (FWER) controlling procedures (such as the Bonferroni correction), which control the probability of at least one Type I error.
-For per-platform \gls{DGE}, \gls{FDR} control was done with \texttt{limma::decideTests} using the \gls{BH} procedure.
-For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using \texttt{p.adjust(method='BH')} in R.
-
+%
 % NOTE: FDR BH assumes:
 % "One assumption of the usual method is that the set of comparisons are either independent or have "Positive dependency""
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
+For per-platform \gls{DGE}, \gls{FDR} control was done with \software{limma::decideTests} using the \gls{BH} procedure.
+For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using \software{p.adjust(method='BH')} in R.
+
 %
-For the Bayesian random-effects meta-analysis, posterior effect sizes and standard errors are supplied to \texttt{ashr}, which estimates the \glspl{lfsr} under the assumption that effects are unimodal.
-% TODO: what about symmetry?
-\gls{lfsr} is analogous to \gls{FDR}, but quantifies the probability of calling the wrong sign for an effect rather than than the confidence of a non-zero effect\autocite{stephens2016FalseDiscoveryRates}.
-"Of course, being confident in the sign of an effect logically implies that we are confident it is non-zero ..."
-%
-% bayesmeta
+% There is no simple way to get p values from bayesmeta.
 % Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.
 % Do not confuse with ma05$pposterior(mu=0), which is evaluation of the posterior distribution at a particular value.
-% NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
-%
+For the Bayesian random-effects meta-analysis, 
+the effect sizes and standard errors from the per-gene meta-analysis output from \software{bayesmeta} were supplied to \software{ashr},
+which models the distribution of effects under the assumption of unimodality \autocite{stephens2016FalseDiscoveryRates}.
+% TODO: what about symmetry?
+\software{ashr} applies empirical Bayes shrinkage to improve the accuracy of effect estimation (e.g. against winner's curse),
+returning posterior effect sizes, posterior standard errors, and their significance (\gls{lfsr}).
+\gls{lfsr} is analogous to \gls{FDR}, but quantifies the probability, given the data, of calling the wrong sign for an effect,
+rather than the confidence of a non-zero effect \autocite{stephens2016FalseDiscoveryRates}.
+% "Of course, being confident in the sign of an effect logically implies that we are confident it is non-zero ..."
 Unless otherwise stated, correction was done at the \SI{5}{\percent} level separately for each contrast,
 as control is for the proportion of positives expected to be false positives,
 which is scalable to multiple contrasts.
+% NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
 
 \subsection{Gene set enrichment analysis using \glsfmtlongpl{BTM}}
 \label{subsec:hird_dge_geneSetEnrichment}
 
-The gene sets used were \glspl{BTM} from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed 'DC') and \textcite{li2013MolecularSignaturesAntibody} (prefixed 'LI').
+% Other sets
+% TODO: can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets
+
+The gene sets used were \glspl{BTM} from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed \enquote{DC}) and \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
 Modules are sets of genes with transcriptional and functional similarities across a variety of healthy, diseased and stimulated conditions.
 The 260 modules from \textcite{chaussabel2008ModularAnalysisFramework} were constructed by unsupervised clustering of 239 \gls{PBMC} transcriptomes from multiple disease datasets,
 then annotated by data mining of gene names in PubMed abstracts.
@@ -1182,8 +1195,8 @@ These datasets are particularly suitable for systems vaccinology studies, given 
 
 % FDR
 % A data frame with module names, additional statistic (e.g. enrichment or AUC, depending on the test), P value and FDR q-value (P value corrected for multiple testing using the p.adjust function and Benjamini-Hochberg correction.
-Gene set enrichment analyses were conducted using \texttt{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral}, 
-which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \texttt{bayesmeta}.
+Gene set enrichment analyses were conducted using \software{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral}, 
+which assesses the enrichment of small ranks within specific sets of genes compared to all genes, when the genes are ranked by some metric---here I used effect sizes from \software{bayesmeta}.
 %
 % TODO
 % More sophisticated ranking methods
@@ -1199,104 +1212,211 @@ The CERNO statistic for a gene set is:
 \end{equation}
 where $n$ is the number of genes in the set,
 $r$ is the rank of the $i$th gene in the set,
-and $N$ is the number of measured genes.
+and $N$ is the number of measured genes (intersection between genes in the experiment and genes in the set of \glspl{BTM} used).
 CERNO is relatively robust to the ranking metric \autocite{zyla2019GeneSetEnrichment}.
 \gls{FDR} control for the number of gene sets tested was done using \gls{BH}, again separately for each contrast.
+Since \software{tmod::tmodCERNOtest} only considers enrichment of small ranks which computing significance, 
+but genes can be down or upregulated, 
+separate tests were done sorting in ascending and descending order,
+and the more significant result was used to determine the overall direction of effect for each gene set.
+As the approach is rank-based and considers all measured genes, no filters on effect size were applied before testing.
 % NOTE: also see zyla2017RankingMetricsGene
 
-The effect size is given by the \gls{AUC}.
+The effect size of an enrichment is given by the \gls{AUC}.
 It can be computed from $U$, the test statistic from a Mann-Whitney U test (also known as the Wilcoxon rank-sum test):
 \begin{equation}
     U = nN + \frac{n(n + 1)}{2} - \sum_{i=1}^{n} \frac{r_i}{N}
 \end{equation}
 This is a non-parametric test for whether genes in the set have smaller ranks than genes not in the set on average.
-Finally, \gls{AUC} is $U/(nN)$, which takes values from 0.5 to 1.
-Since \texttt{tmod::tmodCERNOtest} only considers enrichment of small ranks, but genes can be down or upregulated, 
-separate tests were done sorting in ascending and descending order,
-and the more significant result was used to determine the overall direction of effect for each gene set.
+Finally, $\text{\gls{AUC}} = U/(nN)$, which takes values from 0 to 1.
+% NOTE: Significant AUCs from tmodCERNOtest are always >0.5
 
 \section{Results}
-\todo{more text}
 
 \subsection{Extensive global changes in expression after vaccination}
 
 To gain an overview of how the transcriptome changes after vaccination, linear models were fit to identify genes differentially expressed at day 1 or day 7 compared to baseline (day -7 and day 0) in the \gls{HIRD} array and \gls{RNAseq} expression data, accounting for covariates such as batch effects, sex, age, \gls{TRI}, and ancestry.
 At the \num{13593} genes with expression measured by both platforms, models were fit within each platform, then effect sizes were combined using Bayesian random-effects meta-analysis.
 
-At a $\text{\gls{lfsr}} < 0.05$ and absolute $\text{\gls{FC}} > 1.5$ cutoff, 857/13593 genes were differentially expressed between any pair of timepoints, with their expression clustering into three main clusters (\cref{fig:hird_dge_heatmap}).
-% 692 genes with high expression at day 1, 94 genes with high expression at day 7, and 59 genes with low expression at day 1
+Vaccination induced changes in a large proportion of the \gls{PBMC} transcriptome; \num{6257/13593} gene were differentially expressed between any pair of timepoints ($\text{\gls{lfsr}} < 0.05$).
+Using an absolute $\text{\gls{FC}} > 1.5$ cutoff identified 857 genes with the strongest effects.
+Their expression clustered into three general patterns:
+    upregulation from baseline to day 1, then downregulation from day 1 to day 7 back to baseline levels;
+    upregulation from baseline to day 1, sustained at day 7; 
+    and downregulation from baseline to day 1, the upregulation from day 1 to day back to baseline levels (\cref{fig:hird_dge_heatmap}).
+%
+%               sign
+% coef.name   -1   1
+%   d1.vs.d0  64 580
+%   d7.vs.d0   0  59
+%   d7.vs.d1 679 140
  
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/plot_dge_eqtl.heatmap_dge.pdf}
-    \caption{Normalised gene expression for genes differentially expressed between any pair of timepoints ($\text{lfsr} < 0.05$, $\text{absolute fold change} > 1.5$) across \gls{HIRD} samples, clustered by gene (Manhattan distance metric).}
+    \caption{
+        \textbf{Normalised gene expression for 857 genes differentially expressed between any pair of timepoints ($\text{lfsr} < 0.05$, $\lvert\text{\gls{FC}}\rvert > 1.5$).}
+        Rows are genes; columns are samples.
+        Genes were standardised within-platform, hierarchically-clustered by Manhattan distance.
+        Baseline timepoints were days -7 and 0.
+        Row annotations show \gls{DGE} between pairs of timepoints.
+        Column annotations show sample platform and timepoint.
+    }
     \label{fig:hird_dge_heatmap}
 \end{figure}
 
-\subsection{Innate immune response at day 1 post-vaccination}
+\subsubsection{Innate immune response at day 1 post-vaccination}
 
 Consistent with global expression at day 1 being markedly different from expression at other timepoints (\cref{fig:hird_expression_pcs}), the highest numbers of differentially expressed genes are observed at day 1, with 644 genes differentially expressed vs. baseline.
 The majority of these (580/644) were upregulated.
-The gene with the highest \gls{FC} increase at day 1 compared to baseline was \gene{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways\autocite{bin2016AnkyrinRepeatDomain}.
-Other key genes in the interferon signalling pathway\autocite{schneider2014InterferonStimulatedGenesComplex} such as \gene{STAT1} ($\log_2\text{\gls{FC}} = 2.1693060$), \gene{STAT2}   ($\log_2\text{\gls{FC}} = 0.9489341$), and \gene{IRF9} ($\log_2\text{\gls{FC}} = 0.8153674$) are also upregulated at day 1.
-Gene set enrichment analysis using \texttt{tmod} revealed that genes with the high \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, toll-like receptor and inflammatory signalling (\cref{fig:hird_tmodDotPlot_timepoint}), confirming that day 1 responses are dominated by innate immunity.
-\todo{can also add MSigDB hallmark sets, which include interferon sets; and of course gene ontology sets}
-64 genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells, with the largest absolute fold change observed for \gene{FGFBP2} ($\log_2\text{\gls{FC}} = -0.9141547$).
-\todo{not sure of interpretation at FGFBP2, it is indeed highly expressed in NKs through \url{https://dice-database.org/genes/FGFBP2}}
-For both up and downregulated genes, there was a tendency to return to baseline expression levels by day 7.
-\todo{any point in a table of e.g. top 20 DE genes, or is the gene set analysis already enough?}
+The gene with the highest \gls{FC} increase at day 1 compared to baseline was \gene{ANKRD22} ($\log_2\text{\gls{FC}} = \num{4.489150}$), an interferon-induced gene in monocytes and \glspl{DC} involved in antiviral innate immune pathways \autocite{bin2016AnkyrinRepeatDomain}.
+Other key genes in the interferon signalling pathway \autocite{schneider2014InterferonStimulatedGenesComplex} such as \gene{STAT1} ($\log_2\text{\gls{FC}} = \num{2.1693060}$), \gene{STAT2} ($\log_2\text{\gls{FC}} = \num{0.9489341}$), and \gene{IRF9} ($\log_2\text{\gls{FC}} = \num{0.8153674}$) are also upregulated at day 1.
+\todo{will get to consistency of top hits in the next section when i discuss meta-analysis results}
+Rank-based gene set enrichment analysis using \software{tmod} \autocite{weiner3rd2016TmodPackageGeneral} revealed that genes with the highest \gls{FC} increases at day 1 were enriched in modules associated with activated \glspl{DC}, monocytes, \glspl{TLR}, and inflammatory signalling (\cref{fig:hird_tmodDotPlot_timepoint}).
+\textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} reported only a 1.6-fold ($\log_2 1.6 = \num{0.6780719}$) increase in blood monocytes from baseline to day 1, as measured by \gls{FACS}, so these changes reflect active, per-cell upregulation as well as proliferation.
+
+Sixty-four genes were downregulated at day 1, enriched in modules associated with T cells and \gls{NK} cells.
+The largest absolute fold change observed for \gene{FGFBP2} ($\log_2\text{\gls{FC}} = \num{-0.9141547}$), 
+which encodes Ksp37, a secretory protein unique to CD8\textsuperscript{+} T cells and \gls{NK} cells \autocite{ogawa2001NovelSerumProtein}.
+Again, the fold changes in expression were of greater magnitude than observed for the abundance of these cell types, suggesting active downregulation \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
+
+As can be seen in \cref{fig:hird_dge_heatmap}, there was a general tendency for expression to return to baseline levels by day 7.
+This was the case for 566/644 upregulated genes and 44/64 downregulated genes,
+indicating the innate phase of response likely peaks in the first few days.
+%   d1.vs.d0 d7.vs.d0 d7.vs.d1 count
+%      <dbl>    <dbl>    <dbl> <int>
+% 1       -1       NA        1    44
+% 2       -1       NA       NA    20
+% 3        1        1       NA     1
+% 4        1       NA       -1   566
+% 5        1       NA       NA    13
+% 6       NA        1        1    54
+% 7       NA        1       NA     4
+% 8       NA       NA       -1   113
+% 9       NA       NA        1    42
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.timepoint.pdf}
-    \caption{Transcriptomic modules significantly up or downregulated post-vaccination. Size of circle indicates effect size. Color of circle indicates significance and direction of effect (red = upregulation, blue = downregulation).}
+    \caption{
+        \textbf{Transcriptomic modules up or downregulated post-vaccination.}
+        The top ten most significant modules for each contrast are shown.
+        Size of circle indicates absolute effect size (\gls{AUC}). 
+        Color of circle indicates significance ($\gls{FDR} < 0.05$) and direction of effect (red = upregulation, blue = downregulation).
+        Absence of circle indicates non-significance.
+    }
     \label{fig:hird_tmodDotPlot_timepoint}
 \end{figure}
-\todo{change x axis labels to baseline, specify top 10 procedure in figure caption}
 
-\subsection{Adaptive immune response at day 7 post-vaccination}
+\subsubsection{Adaptive immune response at day 7 post-vaccination}
 
-59 genes were differentially expressed at day 7 vs. baseline, with expression fold changes more modest than those at day 1.
-The genes with the highest upregulation were the B cell-associated genes \gene{TNFRSF17} ($\log_2\text{\gls{FC}} = 1.7538617$) and \gene{MZB1} ($\log_2\text{\gls{FC}} = 1.7369668$).
-Plasma cell-specific genes including \gene{SDC1} (encodes CD138 \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5437827/}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \gene{ELL2} (\url{https://www.nature.com/articles/ni.1786}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
-\todo{finish citing}
+Fifty-nine genes were differentially expressed at day 7 vs. baseline.
+The genes with the highest upregulation were genes associated with B cell differentiation and maturation: \gene{TNFRSF17} (marginal zone B and B1 cell specific protein, $\log_2\text{\gls{FC}} = 1.7538617$) and \gene{MZB1} (B-cell maturation antigen, $\log_2\text{\gls{FC}} = 1.7369668$).
+Plasma cell-specific 
+Genes specific to plasma cells, including \gene{SDC1} (which encodes CD138, required for plasma cell maturation \autocite{mccarron2017CD138MediatesSelection}) ($\log_2\text{\gls{FC}} = 1.3673081$) and \gene{ELL2} (mediates antibody secretion \autocite{martincic2009TranscriptionElongationFactor}) ($\log_2\text{\gls{FC}} = 0.8679659$) were also prominently upregulated.
+This matches an almost 5-fold increase in plasma cell abundance at day 7 compared to baseline \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
 Strongly enriched modules at day 7 were related to mitosis and cell proliferation, particularly in CD4\textsuperscript{+} T cells (\cref{fig:hird_tmodDotPlot_timepoint}).
-Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of an adaptive immune response at day 7.
+Both the CD4\textsuperscript{+} T cell and plasma cell response are indications of a shift toward an adaptive and primarily humoral immune response by day 7.
 
 \subsection{Expression modules associated with antibody response}
 
-I also looked for genes which have expression associated with baseline-adjusted antibody response, as quantified by \gls{TRI}.
-At the initial frequentist meta-analysis stage, with a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expression associated with \gls{TRI} at baseline, 55 at day 7, and 11 pooling samples across timepoints (\cref{fig:hird_DGE_effectSizeComparisons_rma}).
-\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} also identified genes with day 7 expression associated with antibody response, where response was defined as a binary phenotype based on 4-fold change (described in section \todo{add label}).
-They reported 62 significant associations at \gls{FDR} $< 0.05$, of which 58/62 fall into the 13593 genes considered in my meta-analysis (circled, \cref{fig:hird_DGE_effectSizeComparisons_rma}), and 15/58 replicated, all with the same positive direction of effect (high expression with high \gls{TRI}).
-In the Bayesian meta-analysis, no single gene was detected as significantly associated with \gls{TRI} at $\text{\gls{lfsr}} < 0.05$ at any timepoint, or when pooling samples across all timepoints (\cref{fig:hird_DGE_effectSizeComparisons_bayesmeta}).
+Using only array expression data, \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} identified a set of 62 genes with day 7 expression associated with antibody response, 
+where response was defined as a binary phenotype based on 4-fold increases in \gls{HAI} or \gls{MN} titres from day -7 to day 63.
+Many of these genes were related to plasma cell development and antibody production.
+I also aimed to find genes associated with antibody response in the meta-analysis of array and \gls{RNAseq} expression data.
+I tested for association with a baseline-adjusted, continuous measure of antibody response, the \gls{TRI} \autocite{bucasas2011EarlyPatternsGene}.
+The \gls{TRI} was comparable to the binary definition (\cref{fig:hird_tri}g, \cref{fig:hird_tri}h), but improves statistical efficiency to detect associations.
+
+A frequentist random-effects meta-analysis was initially run.
+With a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expression associated with \gls{TRI} at baseline (\cref{fig:hird_DGE_effectSizeComparisons_rma}f), 55 at day 7 (\cref{fig:hird_DGE_effectSizeComparisons_rma}h), and 11 pooling samples over all timepoints (\cref{fig:hird_DGE_effectSizeComparisons_rma}e).
+Of the day 7-specific associations reported by \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
+58/62 fell into the \num{13593} genes considered in my meta-analysis (circled in \cref{fig:hird_DGE_effectSizeComparisons_rma}h), and 15/58 replicated, all with the same positive direction of effect (high expression with high \gls{TRI}).
+However, these significant results are driven more by higher effect sizes in the array compared to the \gls{RNAseq} samples, with the majority of the 15 genes lying above the diagonal.
+This is in contrast to the associations identified with timepoint, where significant genes have mostly consistent effects between platforms (\cref{fig:hird_DGE_effectSizeComparisons_rma}b,c,d).
+
+In the Bayesian meta-analysis, 
+which more robustly models between-platform heterogeneity with an empirical prior, 
+no single gene was detected as significantly associated with \gls{TRI} at $\text{\gls{lfsr}} < 0.05$ at any single timepoint, or when pooling samples across all timepoints (\cref{fig:hird_DGE_effectSizeComparisons_bayesmeta}e,f,g,h).
+The frequentist meta-analysis is likely to use poor estimates of the between-platform heterogeneity, as there are only being two input to estimate it from.
+Indeed, all 15 genes associated with \gls{TRI} in the frequentist meta-analysis
+had unrealistic between-platform heterogeneity estimates of exactly zero
+(\label{fig:hird_DGE_sobolev2016hits_tauComparison}).
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.effectSizeComparison.pdf}
-    \caption{DGE effect sizes estimated in array vs. \gls{RNAseq}. Significance colored by frequentist random effects meta-analysis FDR < 0.05. Genes with day 7 expression associated with responder/non-responder status in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.}
+    \caption{
+        \textbf{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in frequentist random effects meta-analysis using \software{rma.uni} at $\text{\gls{BH} \gls{FDR}} < 0.05$.}
+    Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
+    }
     \label{fig:hird_DGE_effectSizeComparisons_rma}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.effectSizeComparison.pdf}
-    \caption{DGE effect sizes estimated in array vs \gls{RNAseq}. Significance colored by Bayesian random effects meta-analysis lfsr < 0.05. Genes with day 7 expression associated with responder/non-responder status in \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.}
+    \caption{
+        \textbf{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in Bayesian random effects meta-analysis using \software{bayesmeta} at \software{ashr} $\text{\gls{lfsr}} < 0.05$.}
+    Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
+    }
     \label{fig:hird_DGE_effectSizeComparisons_bayesmeta}
 \end{figure}
 
-Significant enrichments were detected at the gene set level; the strongest effects are seen at day 7, where expression of cell cycle, CD4\textsuperscript{+} T cells, and plasma cells are associated with high \gls{TRI}.
-At day 0, modules related with inflammatory response in myeloid cells are also associated with high \gls{TRI} (\cref{fig:hird_tmodDotPlot_TRI}).
+\begin{figure}
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.sobolev2016_d7R.vs.d7NR.tauComparison.pdf}
+    \caption{
+        \textbf{Estimates of between-platform heterogeneity $\tau$ from frequentist and Bayesian meta-analysis, for the 58 genes with a significant association between day 7 expression and binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.}
+        Estimates from the frequentist method cover a wide range and can be zero.
+        All significant results occur when the estimate is zero.
+        Estimates from the Bayesian method are in a narrow range and constrained away from zero by the empirical prior.
+    }
+    \label{fig:hird_DGE_sobolev2016hits_tauComparison}
+\end{figure}
+
+Using effect sizes from the Bayesian meta-analysis,
+significant enrichments were detected at the gene set level;
+the strongest effects were seen at day 7, where expression of modules related to 
+the cell cycle (e.g. LI.M4.1, LI.M4.2, LI.M4.0), 
+cell division in CD4\textsuperscript{+} T cells (e.g. LI.M46, LI.M4.5), 
+and plasma cells (e.g. LI.S3, LI.M156.1) were associated with high \gls{TRI} (\cref{fig:hird_tmodDotPlot_TRI}).
+Associations with \gls{TRI} were also detected at baseline, notably for
+modules related to proinflammatory processes.
+These include 
+\enquote{chemokines and inflammatory molecules in myeloid cells} (LI.M86.0, $\text{\gls{FDR}} = \num{2.252190e-11}$),
+\enquote{proinflammatory cytokines and chemokines} (LI.M29, $\text{\gls{FDR}} = \num{1.216638e-10}$),
+and \enquote{myeloid, dendritic cell activation via NFkB (I)} (LI.M43.0, $\text{\gls{FDR}} = \num{4.675413e-07}$),
+all having positive association with antibody response.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.TRI.pdf}
-    \caption{Transcriptomic modules enriched in genes with expression associated with antibody response (\gls{TRI}) at each day. Size of circle indicates effect size. Color of circle indicates significance and direction of effect (red = expression positively correlated with TRI, blue = negative).}
+    \caption{
+        \textbf{Gene expression modules associated with antibody response (\gls{TRI}).}
+        Enrichments were performed with timepoints pooled, and at each day specifically.
+        The top ten most significant modules for each contrast are shown.
+        Size of circle indicates absolute effect size (\gls{AUC}). 
+        Color of circle indicates significance ($\gls{FDR} < 0.05$) and direction of effect (red = expression positively correlated with TRI, blue = negatively correlated).
+        Absence of circle indicates non-significance.
+    }
     \label{fig:hird_tmodDotPlot_TRI}
 \end{figure}
-\todo{figure x labels here should be TRI, not R.vs.NR}
-
-\subsection{Identifying expression modules for predicting antibody response [probably cut this section and just add to discussion]}
 
 \section{Discussion}
 
+% discussion bait
+% most change at day 1, consistent with seasonal and hird
+% match the dcrease in cell frequ of T cells at day 1
+% and heavy incrase in mono esp cd16+
+
+% lessons: this is same cohort, diff tech
+% between cohorts,
+% single gene may nto be robust, esp is the effect sizes ar small vs between platform noise
+% like with TRI, not timepoint
+
+% general pattern consistent with sys vacc
+% particularly with
+% nakaya2016SystemsBiologyImmunity ATIV consistent d1
+%
+% with TRI,
+% nakaya2015SystemsAnalysisImmunity baseline consistent
+
 There is extensive transcriptomic response to Pandemrix vaccination in the \gls{HIRD} cohort.
-Upregulation of genes and modules related to the interferon signalling pathway, monocytes, inflammatory response, and other aspects of innate immunity were detected at day 1.
+Upregulation of genes and modules related to the interferon signalling, monocytes, inflammatory response, and other aspects of innate immunity were detected at day 1.
 This response is transient, with most such genes returning to baseline expression by day 7.
 \todo{Not sure if there is a biological interpretion of downreg of T cells and NK cells gene sets at day 1, since it could be due to increase in other cell types in the sample. similar findings in \autocite{nakaya2016SystemsBiologyImmunity} though}
 \todo{lit search for downregulation interpretation paper, and downreg T cell paper}
@@ -1366,6 +1486,11 @@ Adjuvanted influenza vaccines are considerably more immunogenic, and post-vaccin
 \todo{could comment on phenotype differences too, i.e. HIRD measure antibodies at d63, much later than is popular in the field: d28 usually} 
 \todo{should probably emph sobolev didn't find prevacc signatures, and we did. But it's not exactly fair, as sobolev didn't use gene set enrichment as far as i can tell}
 Hence, it is particularly important that the robustness of these observed baseline expression associations be validated in an independent cohort for a comparable AS03-adjuvanted influenza vaccine.
+
+% TODO: not adjusted for cell comp
+% We do not know if upreg or recruit
+% can adjust, using HIRD FACS, or by deconv in ch 3
+% or PBMC stim in vitro with vaccine \autocite{querec2009SystemsBiologyApproach}
 
 %
 % Sobolev:
@@ -1438,8 +1563,6 @@ Chapter 3 will examine one hypothesis: the impact of common human genetic variat
 \todo{At no point in this chapter are we estimating causal effects: add point on why not CIT (lower n than franco)}
 \todo{found signatures, but so what? Feels like chapter lacks a punchline?}
 
-% TODO: not adjusted for cell comp, but not necc bad
-% in ch4, I adjust
 
 % TODO: add a whilst we were not able to X in the intro, the field has advanced by Y, future Z needed
 
