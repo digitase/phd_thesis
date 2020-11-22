@@ -1,0 +1,80 @@
+          ID                                                                    Title      cerno  N1       AUC      cES      P.Value    adj.P.Val coef.name.dge direction signed.log10.FDR
+1   LI.M86.0        chemokines and inflammatory molecules in myeloid cells (LI.M86.0)  169.30593  20 0.9106421 4.232648 7.661930e-18 2.651028e-15           All         1        14.576586
+2     LI.M29                        proinflammatory cytokines and chemokines (LI.M29)  112.94602  10 0.9909218 5.647301 5.683716e-15 9.832829e-13           All         1        12.007322
+3   LI.M89.0                                      putative targets of PAX3 (LI.M89.0)  117.33104  14 0.9132540 4.190394 6.649981e-13 7.444660e-11           All         1        10.128155
+4     LI.M51                                                   cell adhesion (LI.M51)  159.11861  26 0.8096404 3.059973 8.606543e-13 7.444660e-11           All         1        10.128155
+5     LI.M31                                    cell cycle and growth arrest (LI.M31)   99.16833  11 0.8899490 4.507651 9.010625e-12 6.235352e-10           All         1         9.205139
+6     LI.M94 growth factor induced, enriched in nuclear receptor subfamily 4 (LI.M94)   95.10777  11 0.9796043 4.323080 4.564101e-11 2.631965e-09           All         1         8.579720
+7   LI.M47.1                                      enriched in B cells (II) (LI.M47.1)  163.99175  33 0.8206890 2.484723 2.633130e-10 1.158924e-08           All         1         7.935945
+8   LI.M86.1         proinflammatory dendritic cell, myeloid cell response (LI.M86.1)  101.70067  14 0.8502508 3.632167 2.679594e-10 1.158924e-08           All         1         7.935945
+9   LI.M89.1                                      putative targets of PAX3 (LI.M89.1)   81.96382   9 0.9148293 4.553546 3.875663e-10 1.489977e-08           All         1         7.826820
+10   LI.M196                            platelet activation - actin binding (LI.M196)  102.19328  15 0.8790409 3.406443 8.337707e-10 2.884847e-08           All         1         7.539877
+11 LI.M177.0                                                          TBA (LI.M177.0)  114.50988  32 0.6596686 1.789217 1.080341e-04 3.447340e-03           All        -1        -2.462516
+12   LI.M163                                   enriched in neutrophils (II) (LI.M163)   64.83442  13 0.7687882 2.493632 3.633336e-05 1.396816e-03           All        -1        -2.854861
+13   LI.M4.0                                   cell cycle and transcription (LI.M4.0)  801.73290 311 0.5990626 1.288960 1.348835e-06 5.833710e-05           All        -1        -4.234055
+14 LI.M118.0                                   enriched in monocytes (IV) (LI.M118.0)  192.51934  53 0.6480686 1.816220 5.680732e-07 2.807904e-05           All        -1        -4.551618
+15   LI.M124                                  enriched in membrane proteins (LI.M124)   87.48794  16 0.6693227 2.733998 4.728899e-07 2.726998e-05           All        -1        -4.564315
+16   LI.M2.1                                      extracellular matrix (II) (LI.M2.1)  135.43966  31 0.6248401 2.184511 2.154166e-07 1.490683e-05           All        -1        -4.826615
+17 LI.M114.0                                                          TBA (LI.M114.0)  170.43812  36 0.6648708 2.367196 5.867127e-10 5.075065e-08           All        -1        -7.294558
+18     LI.S4                                       Monocyte surface signature (LI.S4)  310.26423  82 0.6992566 1.891855 4.219551e-11 4.866549e-09           All        -1        -8.312779
+19  LI.M11.0                                    enriched in monocytes (II) (LI.M11.0)  647.91034 181 0.6916393 1.789808 1.741735e-18 3.013201e-16           All        -1       -15.520972
+20  LI.M37.0                           immune activation - generic cluster (LI.M37.0) 1044.85165 307 0.6069816 1.701713 6.762699e-25 2.339894e-22           All        -1       -21.630804
+21  LI.M86.0        chemokines and inflammatory molecules in myeloid cells (LI.M86.0)  145.56206  20 0.8845055 3.639051 6.509219e-14 2.252190e-11      Baseline         1        10.647395
+22    LI.M29                        proinflammatory cytokines and chemokines (LI.M29)  100.93818  10 0.9814454 5.046909 8.554085e-13 1.216638e-10      Baseline         1         9.914839
+23    LI.M51                                                   cell adhesion (LI.M51)  158.52935  26 0.8156408 3.048641 1.054889e-12 1.216638e-10      Baseline         1         9.914839
+24   LI.M196                            platelet activation - actin binding (LI.M196)  106.09172  15 0.9033518 3.536391 1.979434e-10 1.712211e-08      Baseline         1         7.766443
+25  LI.M89.0                                      putative targets of PAX3 (LI.M89.0)   98.17176  14 0.8422206 3.506134 1.000047e-09 6.920324e-08      Baseline         1         7.159874
+26  LI.M47.0                                       enriched in B cells (I) (LI.M47.0)  181.25270  42 0.8117907 2.157770 4.162110e-09 2.400150e-07      Baseline         1         6.619762
+27  LI.M86.1         proinflammatory dendritic cell, myeloid cell response (LI.M86.1)   92.40627  14 0.8397547 3.300224 8.307200e-09 4.106130e-07      Baseline         1         6.386567
+28  LI.M43.0               myeloid, dendritic cell activation via NFkB (I) (LI.M43.0)   84.66411  12 0.7828957 3.527671 1.081020e-08 4.675413e-07      Baseline         1         6.330180
+29    LI.M81                         enriched in myeloid cells and monocytes (LI.M81)  147.89840  32 0.6435773 2.310913 1.365935e-08 5.251260e-07      Baseline         1         6.279737
+30    LI.M94 growth factor induced, enriched in nuclear receptor subfamily 4 (LI.M94)   79.69412  11 0.9416221 3.622460 1.819128e-08 6.294184e-07      Baseline         1         6.201061
+31    LI.M46                           cell division stimulated CD4+ T cells (LI.M46)   90.78739  26 0.7357132 1.745911 7.015200e-04 2.422545e-02      Baseline        -1        -1.615728
+32    LI.M16                                  TLR and inflammatory signaling (LI.M16)  133.77480  42 0.6259768 1.592557 4.528854e-04 1.741093e-02      Baseline        -1        -1.759178
+33   LI.M4.1                                                 cell cycle (I) (LI.M4.1)  361.27690 137 0.6289343 1.318529 3.123785e-04 1.351037e-02      Baseline        -1        -1.869333
+34 LI.M114.0                                                          TBA (LI.M114.0)  123.48151  36 0.6207945 1.715021 1.539656e-04 7.610301e-03      Baseline        -1        -2.118598
+35 LI.M177.0                                                          TBA (LI.M177.0)  115.77873  32 0.6385637 1.809043 7.970974e-05 4.596595e-03      Baseline        -1        -2.337564
+36   LI.M236                                                            TBA (LI.M236)   66.50859  13 0.8392429 2.558023 2.108724e-05 1.459237e-03      Baseline        -1        -2.835874
+37     LI.S4                                       Monocyte surface signature (LI.S4)  251.32679  82 0.6345342 1.532480 1.353531e-05 1.170804e-03      Baseline        -1        -2.931516
+38  LI.M11.0                                    enriched in monocytes (II) (LI.M11.0)  496.87097 181 0.6122491 1.372572 3.063930e-06 3.533733e-04      Baseline        -1        -3.451766
+39   LI.M4.0                                   cell cycle and transcription (LI.M4.0)  812.20397 311 0.6253698 1.305794 3.854101e-07 6.667595e-05      Baseline        -1        -4.176031
+40  LI.M37.0                           immune activation - generic cluster (LI.M37.0)  847.18276 307 0.5628769 1.379776 1.125330e-09 3.893643e-07      Baseline        -1        -6.409644
+41    LI.M20                               AP-1 transcription factor network (LI.M20)   82.53879  13 0.8548692 3.174569 8.468390e-08 2.930063e-05         Day 1         1         4.533123
+42  LI.M89.0                                      putative targets of PAX3 (LI.M89.0)   81.85496  14 0.8306865 2.923392 3.521877e-07 5.824869e-05         Day 1         1         4.234714
+43  LI.M27.0                                         chemokine cluster (I) (LI.M27.0)   84.07120  15 0.7712087 2.802373 5.050464e-07 5.824869e-05         Day 1         1         4.234714
+44  LI.M86.0        chemokines and inflammatory molecules in myeloid cells (LI.M86.0)   97.36534  20 0.8087159 2.434134 1.093599e-06 9.459635e-05         Day 1         1         4.024126
+45  LI.M89.1                                      putative targets of PAX3 (LI.M89.1)   60.08709   9 0.8800482 3.338172 1.980816e-06 1.370725e-04         Day 1         1         3.863050
+46  LI.M37.1                                   enriched in neutrophils (I) (LI.M37.1)  171.54195  49 0.6915486 1.750428 6.306163e-06 3.636554e-04         Day 1         1         3.439310
+47   LI.M172                            enriched for TF motif TTCNRGNNNNTTC (LI.M172)   52.51790   8 0.9065403 3.282369 9.033282e-06 4.141328e-04         Day 1         1         3.382860
+48  LI.M35.0                                      signaling in T cells (I) (LI.M35.0)   72.04993  14 0.8083927 2.573212 9.575324e-06 4.141328e-04         Day 1         1         3.382860
+49    LI.M94 growth factor induced, enriched in nuclear receptor subfamily 4 (LI.M94)   60.97585  11 0.8021039 2.771630 1.600901e-05 6.154576e-04         Day 1         1         3.210802
+50    LI.M73                                     enriched in monocytes (III) (LI.M73)   59.00056  12 0.7980590 2.458357 8.827572e-05 3.054340e-03         Day 1         1         2.515083
+51   LI.M124                                  enriched in membrane proteins (LI.M124)   65.03862  16 0.6454045 2.032457 4.939851e-04 1.718472e-02         Day 1        -1        -1.764858
+52   LI.M4.3               myeloid cell enriched receptors and transporters (LI.M4.3)  100.11901  29 0.6162561 1.726190 4.966681e-04 1.718472e-02         Day 1        -1        -1.764858
+53   LI.M105                                                            TBA (LI.M105)   71.82067  17 0.7085082 2.112373 1.616273e-04 6.990383e-03         Day 1        -1        -2.155499
+54   LI.M188                                                            TBA (LI.M188)   58.07565  10 0.7568215 2.903782 1.407811e-05 6.958609e-04         Day 1        -1        -3.157478
+55   LI.M2.1                                      extracellular matrix (II) (LI.M2.1)  134.51900  31 0.6950625 2.169661 2.795813e-07 1.612252e-05         Day 1        -1        -4.792567
+56 LI.M114.0                                                          TBA (LI.M114.0)  150.37947  36 0.6938143 2.088604 1.820939e-07 1.260090e-05         Day 1        -1        -4.899599
+57   LI.M4.0                                   cell cycle and transcription (LI.M4.0)  823.58598 311 0.5954325 1.324093 9.339988e-08 8.079090e-06         Day 1        -1        -5.092638
+58     LI.S4                                       Monocyte surface signature (LI.S4)  284.85571  82 0.6443876 1.736925 1.509914e-08 1.741434e-06         Day 1        -1        -5.759093
+59  LI.M37.0                           immune activation - generic cluster (LI.M37.0)  892.49050 307 0.5563561 1.453568 1.216792e-12 2.105050e-10         Day 1        -1        -9.676738
+60  LI.M11.0                                    enriched in monocytes (II) (LI.M11.0)  589.32443 181 0.6531625 1.627968 4.069071e-13 1.407899e-10         Day 1        -1        -9.851429
+61   LI.M4.1                                                 cell cycle (I) (LI.M4.1)  824.08645 137 0.8681752 3.007615 1.967663e-56 6.808113e-54         Day 7         1        53.166973
+62   LI.M4.0                                   cell cycle and transcription (LI.M4.0) 1156.83180 311 0.6252672 1.859858 1.223231e-34 2.116189e-32         Day 7         1        31.674446
+63   LI.M4.2                                          PLK1 signaling events (LI.M4.2)  210.75815  31 0.9056989 3.399325 4.332275e-18 4.996558e-16         Day 7         1        15.301329
+64     LI.M6                                            mitotic cell division (LI.M6)  185.75667  29 0.8859174 3.202701 2.716237e-15 2.349545e-13         Day 7         1        12.629016
+65     LI.S3                                    Plasma cell surface signature (LI.S3)  125.55945  14 0.9352474 4.484266 2.576826e-14 1.783164e-12         Day 7         1        11.748809
+66   LI.M103                                               cell cycle (III) (LI.M103)  236.17922  50 0.7669157 2.361792 4.979266e-13 2.871377e-11         Day 7         1        10.541910
+67    LI.M46                           cell division stimulated CD4+ T cells (LI.M46)  158.58720  26 0.8276472 3.049754 1.034039e-12 5.111107e-11         Day 7         1        10.291485
+68 LI.M156.1                                plasma cells, immunoglobulins (LI.M156.1)   85.44978   8 0.9617497 5.340612 1.708556e-11 7.389503e-10         Day 7         1         9.131385
+69   LI.M4.5                   mitotic cell cycle in stimulated CD4 T cells (LI.M4.5)  168.12191  33 0.7393496 2.547302 7.292974e-11 2.803743e-09         Day 7         1         8.552262
+70     LI.M8                                 E2F transcription factor network (LI.M8)  115.57084  17 0.8602523 3.399142 8.121765e-11 2.810131e-09         Day 7         1         8.551273
+71   LI.M140                               extracellular matrix, complement (LI.M140)   51.33046  12 0.8074384 2.138769 9.558170e-04 3.674586e-02         Day 7        -1        -1.434792
+72   LI.M5.0         regulation of antigen presentation and immune response (LI.M5.0)  216.27818  77 0.5985345 1.404404 6.976479e-04 3.017327e-02         Day 7        -1        -1.520378
+73     LI.S4                                       Monocyte surface signature (LI.S4)  243.89264  82 0.6525529 1.487150 5.147264e-05 2.544219e-03         Day 7        -1        -2.594446
+74   LI.M124                                  enriched in membrane proteins (LI.M124)   76.56647  16 0.7384259 2.392702 1.613889e-05 9.306758e-04         Day 7        -1        -3.031202
+75   LI.M7.2                                       enriched in NK cells (I) (LI.M7.2)  163.88200  45 0.7438472 1.820911 3.202275e-06 2.215974e-04         Day 7        -1        -3.654435
+76   LI.M188                                                            TBA (LI.M188)   73.36913  10 0.7650000 3.668457 5.084820e-08 4.398369e-06         Day 7        -1        -5.356708
+77   LI.M2.1                                      extracellular matrix (II) (LI.M2.1)  148.37309  31 0.7194747 2.393114 4.854436e-09 5.598783e-07         Day 7        -1        -6.251906
+78  LI.M11.0                                    enriched in monocytes (II) (LI.M11.0)  578.71173 181 0.6921015 1.598651 3.203102e-12 5.541366e-10         Day 7        -1        -9.256383
+79  LI.M37.0                           immune activation - generic cluster (LI.M37.0)  906.32414 307 0.5979042 1.476098 1.293254e-13 4.474657e-11         Day 7        -1       -10.349240

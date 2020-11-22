@@ -1,0 +1,59 @@
+          ID                                                      Title      cerno  N1       AUC      cES       P.Value     adj.P.Val  coef.name.dge direction signed.log10.FDR
+1   LI.M11.0                      enriched in monocytes (II) (LI.M11.0) 1235.88491 181 0.9439339 3.414047  7.043719e-96  2.437127e-93 Day 1/Baseline         1        92.613122
+2    LI.M4.0                     cell cycle and transcription (LI.M4.0) 1199.49759 311 0.6407214 1.928453  4.803557e-39  8.310153e-37 Day 1/Baseline         1        36.080391
+3      LI.S4                         Monocyte surface signature (LI.S4)  481.79611  82 0.8787920 2.937781  5.262946e-33  6.069932e-31 Day 1/Baseline         1        30.216816
+4   LI.M37.0             immune activation - generic cluster (LI.M37.0) 1119.09590 307 0.6635400 1.822632  6.203897e-32  5.366371e-30 Day 1/Baseline         1        29.270319
+5     LI.M16                    TLR and inflammatory signaling (LI.M16)  319.61511  42 0.9483241 3.804942  3.524052e-29  2.438644e-27 Day 1/Baseline         1        26.612852
+6    LI.M165       enriched in activated dendritic cells (II) (LI.M165)  253.97993  33 0.9188420 3.848181  7.481758e-24  4.314481e-22 Day 1/Baseline         1        21.365071
+7  LI.M118.0                     enriched in monocytes (IV) (LI.M118.0)  320.36584  53 0.8916989 3.022319  2.164801e-23  1.070030e-21 Day 1/Baseline         1        20.970604
+8    LI.M4.3 myeloid cell enriched receptors and transporters (LI.M4.3)  214.38458  29 0.9388065 3.696286  8.650224e-20  3.741222e-18 Day 1/Baseline         1        17.426987
+9   LI.M37.1                     enriched in neutrophils (I) (LI.M37.1)  274.33940  49 0.8701098 2.799382  1.279239e-18  4.917964e-17 Day 1/Baseline         1        16.308215
+10    LI.M75                           antiviral IFN signature (LI.M75)  173.35711  22 0.8927651 3.939934  2.898952e-17  1.003038e-15 Day 1/Baseline         1        14.998683
+11   LI.M223                         enriched in T cells (II) (LI.M223)   90.22538  11 0.9456047 4.101154  3.137519e-10  1.085581e-08 Day 1/Baseline        -1        -7.964338
+12    LI.M18            T cell differentiation via ITK and PKC (LI.M18)   93.31236  11 0.9636471 4.241471  9.301402e-11  3.575872e-09 Day 1/Baseline        -1        -8.446618
+13    LI.M14                            T cell differentiation (LI.M14)  106.64415  12 0.9803068 4.443506  2.163530e-12  9.357267e-11 Day 1/Baseline        -1       -10.028851
+14   LI.M7.4                          T cell activation (III) (LI.M7.4)  115.32720  14 0.9087963 4.118829  1.454570e-12  7.189734e-11 Day 1/Baseline        -1       -10.143287
+15   LI.M7.3                           T cell activation (II) (LI.M7.3)  172.41197  29 0.8110311 2.972620  2.749694e-13  1.585657e-11 Day 1/Baseline        -1       -10.799791
+16     LI.S1                          NK cell surface signature (LI.S1)  204.37690  37 0.7397293 2.761850  3.743409e-14  2.590439e-12 Day 1/Baseline        -1       -11.586627
+17  LI.M61.0                       enriched in NK cells (II) (LI.M61.0)  134.77653  13 0.9864390 5.183713  1.201886e-16  1.039631e-14 Day 1/Baseline        -1       -13.983121
+18   LI.M7.1                            T cell activation (I) (LI.M7.1)  327.24177  47 0.8815430 3.481295  1.507681e-27  1.738859e-25 Day 1/Baseline        -1       -24.759736
+19   LI.M7.0                          enriched in T cells (I) (LI.M7.0)  439.27967  55 0.9289153 3.993452  6.643850e-41  1.149386e-38 Day 1/Baseline        -1       -37.939534
+20   LI.M7.2                         enriched in NK cells (I) (LI.M7.2)  433.13712  45 0.9347316 4.812635  2.426995e-46  8.397403e-44 Day 1/Baseline        -1       -43.075855
+21   LI.M4.1                                   cell cycle (I) (LI.M4.1) 1088.22840 137 0.9620485 3.971637  2.038177e-97  7.052093e-95 Day 7/Baseline         1        94.151682
+22   LI.M4.0                     cell cycle and transcription (LI.M4.0) 1401.72569 311 0.5765082 2.253578  4.812698e-62  8.325967e-60 Day 7/Baseline         1        59.079565
+23   LI.M4.2                            PLK1 signaling events (LI.M4.2)  264.34132  31 0.9818350 4.263570  8.317548e-27  9.592906e-25 Day 7/Baseline         1        24.018050
+24   LI.M103                                 cell cycle (III) (LI.M103)  324.69483  50 0.8942293 3.246948  1.498140e-25  1.295891e-23 Day 7/Baseline         1        22.887431
+25     LI.M6                              mitotic cell division (LI.M6)  243.60578  29 0.9763833 4.200100  1.342910e-24  9.292934e-23 Day 7/Baseline         1        22.031847
+26    LI.M46             cell division stimulated CD4+ T cells (LI.M46)  199.13687  26 0.8557124 3.829555  4.406138e-19  2.540873e-17 Day 7/Baseline         1        16.595017
+27   LI.M4.5     mitotic cell cycle in stimulated CD4 T cells (LI.M4.5)  220.15820  33 0.8164380 3.335730  1.797264e-18  8.883618e-17 Day 7/Baseline         1        16.051410
+28   LI.M4.4             mitotic cell cycle - DNA replication (LI.M4.4)  197.85863  30 0.9041974 3.297644  1.263645e-16  5.465264e-15 Day 7/Baseline         1        14.262389
+29     LI.M8                   E2F transcription factor network (LI.M8)  142.59813  17 0.9681729 4.194063  2.965712e-15  1.140152e-13 Day 7/Baseline         1        12.943037
+30   LI.M4.6          cell division in stimulated CD4 T cells (LI.M4.6)  152.24702  20 0.9602657 3.806175  5.321497e-15  1.841238e-13 Day 7/Baseline         1        12.734890
+31    LI.M66                                               TBA (LI.M66)  108.11532  16 0.8602811 3.378604  3.440214e-10  1.190314e-08 Day 7/Baseline        -1        -7.924338
+32     LI.M3                  regulation of signal transduction (LI.M3)  182.27063  39 0.7918872 2.336803  2.505190e-10  9.631063e-09 Day 7/Baseline        -1        -8.016326
+33  LI.M37.1                     enriched in neutrophils (I) (LI.M37.1)  246.25476  49 0.8405247 2.512804  9.563114e-15  4.136047e-13 Day 7/Baseline        -1       -12.383415
+34   LI.M4.3 myeloid cell enriched receptors and transporters (LI.M4.3)  193.93211  29 0.9142247 3.343657  1.495965e-16  8.626731e-15 Day 7/Baseline        -1       -14.064154
+35    LI.M16                    TLR and inflammatory signaling (LI.M16)  238.32738  42 0.9020462 2.837231  1.060914e-16  7.341524e-15 Day 7/Baseline        -1       -14.134214
+36  LI.M37.0             immune activation - generic cluster (LI.M37.0) 1019.60367 307 0.6138296 1.660592  1.194178e-22  1.032964e-20 Day 7/Baseline        -1       -19.985915
+37 LI.M118.0                     enriched in monocytes (IV) (LI.M118.0)  329.74808  53 0.9113304 3.110831  8.794632e-25  1.014314e-22 Day 7/Baseline        -1       -21.993827
+38     LI.S4                         Monocyte surface signature (LI.S4)  496.77918  82 0.9054263 3.029141  3.455704e-35  5.978369e-33 Day 7/Baseline        -1       -32.223417
+39  LI.M11.0                      enriched in monocytes (II) (LI.M11.0) 1211.45289 181 0.9199991 3.346555  3.943384e-92  1.364411e-89 Day 7/Baseline        -1       -88.865055
+40   LI.M4.1                                   cell cycle (I) (LI.M4.1)  738.33248 137 0.8630896 2.694644  2.821278e-44  9.761620e-42    Day 7/Day 1         1        41.010478
+41   LI.M7.2                         enriched in NK cells (I) (LI.M7.2)  360.28491  45 0.9233469 4.003166  5.107947e-34  8.323935e-32    Day 7/Day 1         1        31.079671
+42   LI.M7.0                          enriched in T cells (I) (LI.M7.0)  395.65329  55 0.9180533 3.596848  7.217284e-34  8.323935e-32    Day 7/Day 1         1        31.079671
+43   LI.M7.1                            T cell activation (I) (LI.M7.1)  303.74184  47 0.8747477 3.231296  6.390368e-24  5.527668e-22    Day 7/Day 1         1        21.257458
+44     LI.M6                              mitotic cell division (LI.M6)  177.05379  29 0.8943566 3.052652  5.612933e-14  3.884150e-12    Day 7/Day 1         1        11.410704
+45   LI.M103                                 cell cycle (III) (LI.M103)  240.26380  50 0.8126050 2.402638  1.479526e-13  8.531932e-12    Day 7/Day 1         1        11.068953
+46 LI.M156.1                  plasma cells, immunoglobulins (LI.M156.1)   94.35134   8 0.9321910 5.896959  3.921383e-13  1.695998e-11    Day 7/Day 1         1        10.770575
+47   LI.M4.5     mitotic cell cycle in stimulated CD4 T cells (LI.M4.5)  183.45929  33 0.8527336 2.779686  5.309877e-13  2.041353e-11    Day 7/Day 1         1        10.690082
+48  LI.M61.0                       enriched in NK cells (II) (LI.M61.0)  108.81310  13 0.9703871 4.185119  4.212123e-12  1.457395e-10    Day 7/Day 1         1         9.836423
+49    LI.M75                           antiviral IFN signature (LI.M75)  172.73368  22 0.8902052 3.925765  3.674877e-17  1.271507e-15    Day 7/Day 1        -1       -14.895681
+50   LI.M4.3 myeloid cell enriched receptors and transporters (LI.M4.3)  219.42128  29 0.9448087 3.783126  1.325279e-20  5.094962e-19    Day 7/Day 1        -1       -18.292859
+51  LI.M37.1                     enriched in neutrophils (I) (LI.M37.1)  295.38979  49 0.8921617 3.014182  1.151373e-21  4.979688e-20    Day 7/Day 1        -1       -19.302798
+52   LI.M165       enriched in activated dendritic cells (II) (LI.M165)  256.99423  33 0.9326470 3.893852  2.408556e-24  1.190515e-22    Day 7/Day 1        -1       -21.924265
+53 LI.M118.0                     enriched in monocytes (IV) (LI.M118.0)  347.49772  53 0.9189504 3.278280  1.836934e-27  1.059299e-25    Day 7/Day 1        -1       -24.974981
+54   LI.M4.0                     cell cycle and transcription (LI.M4.0) 1096.78075 311 0.5105861 1.763313  9.521170e-29  6.588649e-27    Day 7/Day 1        -1       -26.181204
+55    LI.M16                    TLR and inflammatory signaling (LI.M16)  327.42817  42 0.9544525 3.897954  1.892391e-30  1.636918e-28    Day 7/Day 1        -1       -27.785973
+56  LI.M37.0             immune activation - generic cluster (LI.M37.0) 1147.13499 307 0.6519722 1.868298  9.556132e-35  1.102141e-32    Day 7/Day 1        -1       -31.957763
+57     LI.S4                         Monocyte surface signature (LI.S4)  514.82480  82 0.8996741 3.139176  7.378678e-38  1.276511e-35    Day 7/Day 1        -1       -34.893975
+58  LI.M11.0                      enriched in monocytes (II) (LI.M11.0) 1283.37729 181 0.9538654 3.545241 2.993542e-103 1.035765e-100    Day 7/Day 1        -1       -99.984739
