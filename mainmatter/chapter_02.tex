@@ -9,8 +9,8 @@
 
 \section{Introduction}
 
-% TODO:
-% collab note from first year report acknowledgements
+% TODO: collab note 
+% from first year report acknowledgements
 % data from HIRD
 % anna lorenc
 % sean
@@ -99,7 +99,7 @@ Point estimates of seasonal vaccine efficacy range from \SIrange{50}{90}{\percen
 % TODO: add efficacy footnote
 Real-world effectiveness can be as low as \SI{10}{\percent}, depending greatly on vaccine class, choice of endpoint, the match between vaccine and circulating strains, and host factors
 % (e.g. age, sex, immune history, pregnancy, obesity, microbiome, genetics)
-\autocite{dhakal2019HostFactorsImpact}.
+\autocite{dhakal2019HostFactorsImpact,zimmermann2019FactorsThatInfluence}.
 In general, efficacy is comparable or better in children versus young adults, and lowest in the elderly due to immunosenescence.
 Females mount higher antibody responses than males, regardless of age \glspl{IIV}, potentially mediated by sex steroid levels \autocite{furman2014SystemsAnalysisSex,dhakal2019HostFactorsImpact}.
 Immune history has major effects on vaccine response due to immune memory.
@@ -1342,6 +1342,7 @@ with a significance threshold of $\text{\gls{FDR}} < 0.05$, 6 genes had expressi
 Of the day 7-specific associations reported by \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} (circled in \cref{fig:hird_DGE_effectSizeComparisons_rma}h), 
 15/58 replicated, all with the same positive direction of effect (high expression with high \gls{TRI}).
 However, almost all significant results displayed higher effect sizes in the array compared to \gls{RNAseq} (13/15 genes).
+\todo{no formal tests for heterogeneity of effect here, i don't think it's worth the effort unless reviewer 2 says so.}
 This is in contrast to the associations identified with timepoint, where significant genes had more consistent effects between platforms along the diagonal (\cref{fig:hird_DGE_effectSizeComparisons_rma}b,c,d).
 The likely cause is the presence of more extreme antibody response phenotypes (higher \gls{TRI} range) in the array versus the \gls{RNAseq} dataset (\cref{fig:hird_phenotypes_by_platform}).
 This represents an additional source of between-platform variation not due to technical factors, but inherent to the samples themselves.

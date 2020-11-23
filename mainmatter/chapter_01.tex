@@ -365,9 +365,15 @@ perhaps due to small but wide-reaching effects \autocite{liu2019TransEffectsGene
 %     Averaging across traits, only 11 ± 2% of heritability was mediated by assayed gene expression levels.
 
 \subsection{Context-dependent \glsfmtshortpl{eQTL}}
+\label{subsec:intro_contextDependenteQTL}
 
 Like expression itself, the effects of \glspl{eQTL} are highly context-dependent \autocite{albert2015RoleRegulatoryVariation,vandiedonck2017GeneticAssociationMolecular}.
-A non-exhaustive list of environmental contexts that interact with \gls{eQTL} effects includes
+When the effect size of an \gls{eQTL} is not the same in all environments, 
+but differs depending on the environment, 
+the \gls{eQTL} is said to interact with those environments.
+This can manifest as a \textit{statistical} interaction in a regression model with a multiplicative genotype-environment term,
+where the effects of environment and genotype on expression are not additive at the chosen scale for measuring expression.
+A non-exhaustive list of environmental contexts that have been found to interact with \glspl{eQTL} includes
     sex \autocite{yao2014SexAgeinteractingEQTLs},
     age \autocite{yao2014SexAgeinteractingEQTLs},
     ancestry \autocite{dejager2015ImmVarProjectInsights,nedelec2016GeneticAncestryNatural,quach2017LivingAdaptiveWorld},
@@ -462,6 +468,7 @@ Many environmental factors (e.g. diet, lifestyle, immune exposures) cannot be co
 potentially leading to greater experimental noise, and complicating interpretation of results.
 
 \subsection{Gene prioritisation using \glsfmtshortpl{eQTL}}
+\label{subsec:intro_genePrioritisationUsingeQTL}
 
 \glspl{eQTL} are enormously valuable for target gene prioritisation after \gls{GWAS}.
 They propose both target gene and mechanism of action, where the effect of variant on complex trait is mediated through expression.
@@ -541,7 +548,7 @@ Macrophages perform phagocytosis, modulate inflammation, and can also engage in 
 but it is \glspl{DC} that are considered specialised \glspl{APC}.
 % Antigen-presenting cells fall into two categories: professional and non-professional.
 % Those that express MHC class II molecules along with co-stimulatory molecules and pattern recognition receptors are often called professional antigen-presenting cells.[1]
-% The non-professional APCs express MHC class I molecules.
+% The non-professional APCs express MHC class I molecules, just like most human cells.
 Antigen-presentation by \glspl{DC} is a key link between the innate and adaptive responses.
 % "The primary lymphoid organs are the bone marrow and the thymus, an organ in the upper chest.
 % The peripheral lymphoid organs comprise the lymph nodes, the spleen, and the mucosal lymphoid tissues of the gut, the nasal and respiratory tract, the urogenital tract, and other mucosa."
