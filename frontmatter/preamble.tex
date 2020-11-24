@@ -298,8 +298,10 @@
 % non-expandable commands in PDF bookmarks. The command gets ignored (hyperref
 % tells you this in the "removing `\Glsentrytext'" part of the warning) so you
 % end up with just the expandable part (the label) in the bookmark.
+% NOTE: If you want \glsglossarymark to use \MakeUppercase in the header, use the ucmark option described below.
 \usepackage[
     abbreviations,
+    ucmark,
     % nohypertypes={abbreviations}
 ]{glossaries-extra}
 %

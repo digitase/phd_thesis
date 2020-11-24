@@ -210,7 +210,7 @@ Longitudinal study design is key, not only to profile different stages of innate
 % NOTE: do not distinguish surrogates and correlates here.
 Correlates are known for some but not all established vaccines \autocite{siegrist2018VaccineImmunology,plotkin2018CorrelatesProtection}.
 For novel and emerging diseases, there may be no prior knowledge of correlates for use in vaccine development.
-The term \textit{molecular signature} was coined to refer to transcriptomic responses induced early after vaccination that correlate with, and importantly, are predictive of later immune phenotypes (e.g. antibody titres) \autocite{pulendran2010SystemsVaccinology}.
+The term \enquote{molecular signature} was coined to refer to transcriptomic responses induced early after vaccination that correlate with, and importantly, are predictive of later immune phenotypes (e.g. antibody titres) \autocite{pulendran2010SystemsVaccinology}.
 Non-transcriptomic data types can also be used to form signatures.
 The ultimate goal is baseline prediction, where the immune state immediately prior to vaccination predicts response, 
 and could potentially be modulated to enhance response in a similar manner to adjuvanting the vaccine itself \autocite{tsang2020ImprovingVaccineinducedImmunity}. 
@@ -263,8 +263,11 @@ The existence of temporally-stable and replicable signatures is, however, encour
 % NOTE: none of these have expression apart from tsang
 % 10. Tsang, J.S. et al. (2014) Global analyses of human immune variation reveal baseline predictors of postvaccination responses.  Cell 157, 499–513
 % 23. Frasca, D. et al. (2012) Unique biomarkers for B-cell function predict the serum response to pandemic H1N1 influenza vaccine. Int. Immunol. 24, 175–182
+    % https://academic.oup.com/intimm/article/24/3/175/769626
 % 24. Kennedy, R.B. et al. (2016) The composition of immune cells serves as a predictor of adaptive immunity in a cohort of 50- to 74-year-old adults. Immunology 148, 266–275
+    % https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4913285/
 % 25. Jurchott, K. et al. (2016) Highly predictive model for a protective immune response to the A(H1N1)pdm2009 influenza strain after seasonal vaccination. PLoS One 11, e0150812
+    % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0150812
 
 \subsection{The \glsfmtfull{HIRD} study}
 
@@ -460,6 +463,7 @@ The cause of this is unknown, there is a possibility that individuals with more 
 \end{figure}
 
 \subsection{Genotype data generation}
+\label{subsec:hird_dge_genotype_data_generation}
 
 DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was done using on the Infinium CoreExome-24 BeadChip array (Illumina).
 In total, 192 samples from 176 individuals in the \gls{HIRD} cohort were genotyped at \num{550601} markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
@@ -1037,12 +1041,12 @@ Study weights include both within and between-study variance $1/(\sigma^2_i + \t
 
 The choice of fixed or random effects depends on whether it is tenable to assume studies are identical enough that they all estimate a common effect% 
 \footnote{
-    A common misinterpretation is that random-effects meta-analysis assumes studies \textit{themselves} are sampled from a population of studies,
+    A common misinterpretation is that random-effects meta-analysis assumes studies \emph{themselves} are sampled from a population of studies,
     This is rarely appropriate since the design of new studies is influenced by existing studies \autocite{higgins2009ReevaluationRandomeffectsMetaanalysis}.
     % Formally, a sequence is exchangeable if its joint probability distribution is a symmetric function of its n arguments.
     % Intuitively it means we can swap around, or reorder, variables in the sequence without changing their joint distribution.
     % https://stats.stackexchange.com/questions/3520/can-someone-explain-the-concept-of-exchangeability
-    The required assumption is exchangability of study \textit{effects}, which informally states
+    The required assumption is exchangability of study \emph{effects}, which informally states
     % IID (independent, identically distributed) -> exchangability -> identically distributed
     effects are neither completely identical nor completely independent, but \enquote{similar} \autocite{higgins2009ReevaluationRandomeffectsMetaanalysis}.
 }.
@@ -1312,6 +1316,7 @@ indicating the innate phase of response likely peaks in the first few days.
 \end{figure}
 
 \subsubsection{Adaptive immune response at day 7 post-vaccination}
+\label{subsec:hird_dge_adaptive_immune_day7}
 
 Fifty-nine genes were differentially expressed at day 7 vs. baseline.
 The genes with the highest upregulation were genes associated with B cell differentiation and maturation: \gene{TNFRSF17} (marginal zone B and B1 cell specific protein, $\log_2\text{\gls{FC}} = 1.7538617$) and \gene{MZB1} (B-cell maturation antigen, $\log_2\text{\gls{FC}} = 1.7369668$).
