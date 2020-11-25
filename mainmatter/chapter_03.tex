@@ -988,27 +988,61 @@ Significance is assessed using the likelihood-ratio test versus the nested model
 % o	reQTLs had no enrichment in particular.
 % but in the set of genes with Cell type interactions -> do a tmod (enriched?)
 
-\subsection{TODO Statistical colocalisation}
+\subsection{Statistical colocalisation}
+\label{subsec:hird_reQTL_coloc}
 
-% TODO:
-% WHY: cause you can't separate correlated types
+Multi-trait Bayesian colocalisation was performed using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization}.
+It can be s
 
 % TODO
 % Choice of method;
 % See coloc_comparisons in notes for a summary
 % Coloc and assumptions; Hypercoloc and assumptions
 %
-\todo{this analysis is incomplete, and is one of the things I would suggest to round off this chapter}
+dataset
+\gls{eQTL} from sorted immune cell populations from \textcite{schmiedel2018ImpactGeneticPolymorphisms},
+monocyte count \gls{QTL} from \textcite{astle2016AllelicLandscapeHuman},
+and \gls{IBD} \gls{GWAS} from \textcite{delange2017GenomewideAssociationStudy}.
+download and liftover
+compute se
+%
+\software{HyPrColoc} implements a branch and bound divisive clustering algorithm. 
+
+% assumptions
 - if adding coloc analysis, add \url{https://github.com/jrs95/hyprcoloc} methods here
 - cannot deal with multiple causal within each group
+% If interest lies in identifying sets of colocalized traits above a certain posterior probability, more stringent regional and alignment threshold parameters can be chosen.
+%
+% - the posterior probability that these traits are colocalized
+% - a 'large' regional association probability is evidence that one or more snps in the region have shared associations across the traits, always > posterior
+% - how much of the posterior the candidate SNP explains
+
+not critical
+
+
+The choice of priors is influential.
+
+is analogous to
+is analogous to
+
+% Coloc
+% \2 Biases from ethnicity-derived differences in LD?
+% Assumptions
+% multiethnic
+% 1 causal per (cluster/trait), untrue in any bulk
+
+
+% TODO:
+% WHY: cause you can't separate correlated types
 
 \section{Results}
 
-\subsection{Mapping reQTLs to Pandemix vaccination}
+\subsection{Mapping reQTLs in the HIRD cohort}
 
 To characterise the effect of common host genetic variation on expression response to Pandemrix,
 I mapped cis-\glspl{eQTL} for each gene (\SI{\pm1}{\mega\bp} of the \gls{TSS}) within each timepoint condition (baseline, day 1, and day 7),
 then conducted joint analysis of all three timepoints with \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods} to obtain per-timepoint posterior effect sizes, posterior standard errors, and measures of significance (\gls{lfsr}).
+\todo{quick note on mega-analysis and GTEx replication here}
 At \gls{lfsr} < 0.05, \num{6887/13570} genes (\percentage{0.5075166}) were eGenes (genes with a significant \gls{eQTL}) in at least one timepoint.
 The most significant tested variant over all timepoints was selected as the lead variant for each gene,
 then \Glspl{reQTL} were defined by comparing the effect size of this lead variant between each pair of timepoints.
@@ -1215,7 +1249,9 @@ baseline (\gene{SLAMF8}, \gene{CSE1L}, \gene{MAST1}, \gene{DLGAP1}),
 day 1 (\gene{ZNF519}, \gene{LPAR1}, \gene{ADCY3}, \gene{NAA20}, \gene{EPB41L5}),
 or day 7 (\gene{APOL6}, \gene{ADAR}, \gene{ADAM17}, \gene{UHRF2}, \gene{MST1}, \gene{CUL1}).
 % \gene{SMDT1} at both d0 and d7
-It is feasible that the mechanism generating \gls{reQTL} at the remainder of these genes involves cell type-specific \gls{eQTL} effects, although I have not yet determined the likely cell types at genes other than \gene{ADCY3}.
+It is feasible that the mechanism generating \gls{reQTL} at the remainder of these genes also involve cell type-specific \gls{eQTL} effects, 
+but unlike at \gene{ADCY3}, 
+I have not yet examined which of the three cell abundance scores have the greatest contribution.
 
 % \subsection{TODO Genotype by platform interaction effects}
 %
@@ -1229,21 +1265,19 @@ It is feasible that the mechanism generating \gls{reQTL} at the remainder of the
 %
 % \todo{Need to consider Nikos' comment that there are too many (1069/13570 significant BH FDR) genotype-platform interactions to use mega-analysis. Consider filtering.}
 
-\subsection{TODO Colocalisation of reQTLs with known \textit{in vitro} condition-specific immune eQTLs}
+\subsection{Colocalisation with external QTL datasets at the \gene{ADCY3} locus}
 
-Aside from monocytes, \gene{ADCY3} is also expressed a wide range of immune cells: CD4\textsuperscript{+} T cells, CD8\textsuperscript{+} T cells, B cells, and \gls{NK} cells (\cref{fig:hird_eQTL_ADCY3_expression_DICE}).
-
-The \gene{ADCY3} locus 
-has not only
-but
-implicated in disease risk for \glspl{IMID}
-
-The genotype by cell type interaction model cannot distinguish between cell types with highly correlated abundances \autocite{kim-hellmuth2020CellTypeSpecific},
-and the high contributions to the same \gls{PC} monocyte, CD4\textsuperscript{+} T cell, and CD8\textsuperscript{+} T cell xCell scores indicate these abundances are correlated in \gls{HIRD} (\cref{fig:hird_xCell_cos2}).
-
-To try and resolve cell type
-and see shared cell type contexts with IMID
-coloc
+The day 1 \gene{ADCY3} \gls{reQTL} is of particular interest,
+as similar blood \gls{reQTL} after stimulation with \gls{TIV} \autocite{franco2013IntegrativeGenomicAnalysis}, rhinovirus \autocite{caliskan2015HostGeneticVariation}, and \textit{Mycobacterium leprae} \autocite{manry2017DecipheringGeneticControl}.
+% NOTE: Also in obesity and T2D
+The locus that contains the \gene{ADCY3} \gls{reQTL} has also been implicated in disease risk for \glspl{IMID} such as \gls{IBD} \autocite{delange2017GenomewideAssociationStudy},
+and \gene{ADCY3} expression in immune cells in gut mucosa has been suggested to contribute to \gls{CD} risk (a subtype of \gls{IBD}) \autocite{marigorta2017TranscriptionalRiskScores}.
+Aside from monocytes, \gene{ADCY3} is expressed in a wide range of immune cells---CD4\textsuperscript{+} T cells, CD8\textsuperscript{+} T cells, B cells, and \gls{NK} cells (\cref{fig:hird_eQTL_ADCY3_expression_DICE}).
+Identifying cell type-dependent \gls{eQTL} through genotype-cell type abundance interaction terms cannot distinguish between cell types with highly correlated abundances \autocite{kim-hellmuth2020CellTypeSpecific}.
+The high contributions to the same \gls{PC} for monocyte, CD4\textsuperscript{+} T cell, and CD8\textsuperscript{+} T cell xCell scores in the \gls{PCA} xCell scores indicates cell types with high \gene{ADCY3} expression are indeed correlated in \gls{HIRD} (\cref{fig:hird_xCell_cos2}).
+Given the locus is associated with response to a wide range of immune stimuli, and also an \gls{IMID},
+I conducted colocalisation analysis to test if shared causal variants 
+may be driving these associations and to determine which of the correlated cell types expressing \gene{ADCY3} are mostly likely responsible.
 
 \begin{figure}
     \centering
@@ -1254,41 +1288,90 @@ coloc
     \label{fig:hird_eQTL_ADCY3_expression_DICE}
 \end{figure}
 
-\begin{outline}
-
-\todo{this analysis is incomplete, and is one of the things I would suggest to round off this chapter}
-
-\1 Colocalisation is used to understand the molecular basis of GWAS associations (of a variety of human disease traits) (Giambartolome, 2014)
-\1 Here the inverse: coloc is used to understand the biological relevance of observed reQTL by coloc with known immune QTL
-
 % rs916485_SNP_chr2_24859404_T_C
-\1 In a 500 Mb window around the lead \gene{ADCY3} variant rs916485, \software{HyPrColoc} to colocalise with existing datasets and fine map.
+In a \SI{\pm 500}{\mega\bp} window around the lead \gls{reQTL} variant rs916485,
+I performed Bayesian multi-trait colocalisation (\software{HyPrColoc} \autocite{foley2019FastEfficientColocalization}) of
+the three per-timepoint \gene{ADCY3} \gls{eQTL} summary statistics with external datasets:
+\gene{ADCY3} \gls{eQTL} from 15 sorted immune cell populations from \textcite{schmiedel2018ImpactGeneticPolymorphisms},
+monocyte count \gls{QTL} from \textcite{astle2016AllelicLandscapeHuman},
+and \gls{IBD} \gls{GWAS} from \textcite{delange2017GenomewideAssociationStudy}.
+There were 1054 variants present in all 20 sets of summary statistics.
 
-\1 Day 1 HIRD colocs with BLUEPRINT and Fairfax monocytes (both stim and non stim), but not with Quach or Schmiedel monocytes (\cref{fig:hird_eQTL_coloc_ADCY3})
-\2 Biases from ethnicity-derived differences in LD?
-\2 Also, priors need tuning?
-% e.g. Assess priors at adcy3, Then coloc all
+\software{HyPrColoc} identifies clusters of traits that colocalise at different causal variants in the locus.
+As Bayesian colocalisation can be sensitive to the choice of priors,
+I performed a sensitivity analysis iterating over combinations of prior parameters, ranging from default to more stringent parameter values.
+Two stable clusters were identified across 100 configurations of parameters (\cref{fig:hird_reQTL_coloc_ADCY3_sensitivityPlotCustom}).
+A set of three traits---\gene{ADCY3} expression in \gls{HIRD} day 1 and in naive classical and non-classical monocytes---clustered in \textapprox{\SI{65}{\percent}} of tested configurations.
+A set of nine traits---\gls{IBD} and expression in eight naive and memory CD4+ T cell subsets---clustered in \textapprox{\SI{90}{\percent}} of tested configurations.
+The remaining traits did not robustly cluster with any other traits over the tested configurations,
+except for the rare inclusion of \gls{HIRD} baseline \gene{ADCY3} expression into the larger cluster for less stringent configurations.
 
-% fine mapped to 2_24874775_A_G, nearest gene (45,064 bp downstream to canonical TSS): ADCY3 TSS is at 24919839, rev strand
-\1 \software{HyPrColoc} fine maps the signal to rs13407913 (credible set size=1, PP = 1), an intronic variant 45064 bp downstream of the TSS.
-    \2 note not accurate due to MAF issues
+% ADCY3 TSS is at 24919839, rev strand
+%
+% posterior_prob regional_prob candidate_snp posterior_explained_by_snp
+%
+% IBD T cell
+% 0.9778        1.0000  2_24935139_C                          1
+% rs713586 2:24935139 T C 
+% 15300 upstream
+%
+% HIRD monocyte
+% 0.9424        1.0000  2_24874083_C                          1
+% rs7567997 2:24874083 T C
+% 45756 downstream
+%
+The value of \software{prior.2} (the probability that a variant associated with at least one trait is not associated with any additional traits) was subsequently set to 0.99 (default = 0.98), 
+sufficient to prevent clustering of baseline \gls{HIRD} expression with T cell and \gls{IBD}
+The values of other priors were left at their defaults.
+Under this configuration, the posterior probability that all traits in the cluster share a causal variant was \num{0.9778} for the larger cluster, 
+and \num{0.9424} for the smaller cluster.
+Distinct candidate causal variants were proposed for each cluster (\cref{fig:hird_reQTL_coloc_ADCY3_locusPlot}).
+For the larger cluster, rs713586, a variant \SI{15}{\kilo\bp} upstream of the canonical \gene{ADCY3} \gls{TSS};
+and for the smaller cluster, rs7567997, an intronic variant \SI{45}{\kilo\bp} downstream of the \gls{TSS}.
+In both cases, the variant explained all of the posterior probability for the cluster, 
+but as the analysis is restricted to the 1054 variants present in all datasets, there is ample chance the true causal variants were not included.
 
-% note in 2019-06-17_team_meeting.pptx, originally was rs10185143
-\todo{FYI the IBD/T cell coloc fine maps to chr2:24935139 T C (rs713586) with PP=1}
-\todo{add obesity GWAS}
-
-% Assumptions
-% multiethnic
-% 1 causal per (cluster/trait), untrue in any bulk
-
-\end{outline}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.sensitivityPlot_custom.pdf}
+    \caption{
+        \textbf{Sensitivity analysis for multi-trait colocalisation at the \gene{ADCY3} locus.}
+        Colocalisation done using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} for trait datasets described in \cref{subsec:hird_reQTL_coloc}.
+        Heatmap shows the proportion of configurations in which two traits colocalise in the same cluster over 100 configurations of prior parameters
+        \software{reg.thresh}, \software{align.thresh}, and \software{prior.2} (range of values listed in \cref{subsec:hird_reQTL_coloc}).
+        \software{prior.1} set at \num{1e-4} (default).
+        Rows and columns hierarchically-clustered.
+    }
+    \label{fig:hird_reQTL_coloc_ADCY3_sensitivityPlotCustom}
+\end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.locusPlot.pdf}
-    \caption{Multi-trait colocalisation of HIRD reQTL signal at ADCY3 (500 Kb window), with QTL studies from IHEC, BLUEPRINT, eQTL Catalogue, and GWAS Catalogue. Plots are colored by colocalised cluster. Black indicates non-colocalised datasets.}
-    \label{fig:hird_eQTL_coloc_ADCY3}
+    \caption{
+        \textbf{Multi-trait colocalisation at the \gene{ADCY3} locus.}
+        Colocalisation done using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} (vertical grey line).
+        Traits are monocyte cell count (\textcite{astle2016AllelicLandscapeHuman}), \gene{ADCY3} expression in sorted immune cell subsets (\textcite{schmiedel2018ImpactGeneticPolymorphisms}), \gene{ADCY3} expression in \gls{HIRD} timepoints, and \gls{IBD} (\textcite{delange2017GenomewideAssociationStudy}).
+        Locus plots show summary statistics for 1054 variants present in all datasets.
+        Traits in red and green represent two distinct clusters each hypothesised to be driven by a shared causal variant (vertical red and green lines).
+        Non-colocalising traits are shown in black.
+        Horizontal dashed line shows p = 0.05.
+        Default priors used, except \software{prior.2} = 0.99.
+    }
+    \label{fig:hird_reQTL_coloc_ADCY3_locusPlot}
 \end{figure}
+
+Nevertheless, the two main clusters being distinct from one another, and from unclustered traits across many configurations,
+still supports the existence of distinct causal variants, even if they may be unobserved.
+For \gls{HIRD} day 1 expression of \gene{ADCY3}, the more relevant cell type appears to be monocytes, not a correlated cell type like CD4\textsuperscript{+} T cells---and vice versa for \gls{IBD}.
+The clustering was robust despite the data containing no stimulated monocyte subsets.
+This \gls{eQTL} effect is readily observable at baseline, and appears to be more significant in naive classical than non-classical monocytes in the \autocite{schmiedel2018ImpactGeneticPolymorphisms} data (\cref{fig:hird_reQTL_coloc_ADCY3_locusPlot}).
+No colocalisation with monocyte count was observed, so association between genotype and \gene{ADCY3} expression mediated by monocyte abundance is not implicated, 
+although an association mediated by ability to increase monocyte counts post-vaccination remains a possibility.
+I hypothesise that a plausible mechanism generating the day 1 \gls{reQTL} signal in \gls{HIRD}
+is an increase in abundance of classical monocytes at day 1 post-vaccination,
+increasing the proportion of \gene{ADCY3} transcripts in the bulk data originating from monocytes,
+thus making an \gls{eQTL} specific to all monocytes--not just stimulated monocytes---more readily detectable.
 
 \section{Discussion}
 
@@ -1296,6 +1379,9 @@ coloc
 % map reqtl
 % test some mechanisms
 % at adcy3 pin down to naive monocytes
+
+The \gls{HIRD} 
+vaccination revealed \gls{reQTL}
 
 In the \gls{HIRD} cohort, 
 \gls{eQTL} were detected for \percentage{0.5075166} of genes in at least one timepoint, day 0, day 1, or day 7.
@@ -1360,11 +1446,17 @@ in \gls{HIRD}, I find
 39/819 (\percentage{0.04761905}) at day 1,
 and 211/1002 (\percentage{0.2105788}) at day 7.
 % TODO comment on n tissues
+% TODO: why important? small and opposite effects may be more prevalant than expected
+% best to detect them in a joint framework like mashr
 The enrichment of opposite sign effects in \gls{HIRD} is also apparent at day 7.
 \todo{I'm not exactly sure why at the moment. Enrichment analyses so far have not turned up much. Up regulation of cell cycle TFs is a possibility.}
 The strongest reQTL at day 7 is one such opposite sign effect;
 \gene{SH2D4A} has constitutive expression in T cells, B cells, macrophages, and \glspl{DC}, 
 encoding a adapter protein involved in intracellular signal transduction\footnote{\url{https://doi.org/10.1111/j.1600-065X.2009.00829.x}}.
+
+% TODO: segue here
+% A less paltable is these are false positives
+
 An approach for validating these opposite sign \gls{reQTL} using the existing \gls{HIRD} \gls{RNAseq} data is \gls{ASE} (e.g. \autocite{kumasaka2016FinemappingCellularQTLs}),
 % \todo{switch to Allele-Specific QTL Fine Mapping with PLASMA}
 where one would expect true opposite sign \gls{reQTL} effects would also be recapitulated as opposite directions of expression imbalance.
@@ -1397,6 +1489,10 @@ in whole blood \textit{in vivo} day 1 after vaccination with seasonal \gls{TIV}\
 and in whole blood after stimulation with \text{M. leprae antigen} for 26-32 h\autocite{manry2017DecipheringGeneticControl}.
 % TODO: but do we see the upreg they see here?
 Given the diversity of stimulations and tissue types, the effect is likely a consequence of general immune activation, rather than a Pandemrix-specific response.
+
+Given correlated
+
+Still do not know causal variant
 
 Statistical colocalisation suggests that the day 1 reQTL signal identified here is likely to be a monocyte-specific effect---and independent to the IBD signal, which colocalises with T cell and macrophage datasets.
 The proportion of monocytes in the PBMC increase at day 1, supported by both FACS\autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} measurements, and an increase in monocyte xCell score.
@@ -1539,6 +1635,8 @@ for example, colocalisation with existing GWAS summary statistics for antibody r
 %Tfairfax european 
 % gtex largely eu before v8
 
-
 % TODO: add tmod section to method
 % add gprinfiler
+
+\todo{re: the original issue of discussing only top hits: hard to resolve due to the lack of gene set enrichments and time, but hopefully talking about sets of genes with shared generating mechanisms might work}
+
