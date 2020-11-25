@@ -19,6 +19,8 @@
 % genotyping done by
 % rnaseq done by
 
+\todo{intro completely rewritten}
+
 \subsection{Influenza}
 
 Influenza is an infectious respiratory disease caused by the influenza virus family (\textit{Orthomyxoviridae}) in a variety of vertebrate hosts.
@@ -234,7 +236,7 @@ and informing rational, mechanism-based design for diseases that have thus far p
 Seasonal influenza vaccines have been well-studied by systems approaches.
 One of the earliest studies by \textcite{zhu2010WholeGenomeTranscriptional} found that expression of type I interferon-modulated genes at day 7 was more prominent for \gls{LAIV} than \gls{TIV} in children (total cohort size $n=85$).
 A subsequent study found that both \gls{LAIV} and \gls{TIV} could induce interferon-related genes in children ($n=37$), but much earlier in \gls{TIV} (day 1) than in \gls{LAIV} (day 7) \autocite{cao2014DifferencesAntibodyResponses}.
-As serum antibody titres are an established correlate for \gls{TIV}, studies have been done to identify its molecular basis.
+As serum antibody titres are an established correlate for \gls{TIV}, studies have been carried out to identify its molecular basis.
 \textcite{bucasas2011EarlyPatternsGene} ($n=119$) found a 494-gene expression signature (including \gene{STAT1}, \gene{CD74}, and \gene{E2F2}) measured at day 1 and 3 correlated with serum antibody titres measured 14 and 28 days after vaccination.
 Signatures including day 3 kinase \gene{CaMKIV} expression are a strong predictor of day 28 \gls{HAI} antibody titres in independent trials over three consecutive influenza seasons ($n=67$) \autocite{nakaya2011SystemsBiologyVaccination}.
 Expression of gene sets related to B cell proliferation at day 7 are also predictive of day 28 \gls{HAI} ($n=15$) \autocite{tan2014GeneSignaturesRelated}.
@@ -384,10 +386,11 @@ There were 166/178 individuals with \gls{HAI} and \gls{MN} titres available at b
 \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} defined Pandemrix vaccine responders as individuals with $\ge$4-fold titre increases from day -7 to day 63 in either the \gls{HAI} or \gls{MN} assays.
 This is a typical threshold for \gls{HAI} and \gls{MN} seroconversion used to assess the immunogenicity of seasonal \glspl{IIV} \autocite{krammer2019HumanAntibodyResponse}, 
 and has also been recommended for pandemic \glspl{IIV} \autocite{foodanddrugadministration2007GuidanceIndustryClinical}.
+\todo{elaboration of TRI over binary here}
 However, they also noted there was \enquote{a complete spectrum} of baseline titres of non-responders, citing \enquote{glass ceiling} non-responders whose high baseline titres \enquote{enhancements by \num{\ge4}-fold harder to achieve}.
 This may be referring to the dynamic range of the assays.
-In the full data, the range of \gls{HAI} titres  is \num{8}{4096}, and the range of \gls{MN} titres is \num{10}{5120} (\cref{fig:hird_tri}a, \cref{fig:hird_tri}b).
-In just the day -7 baseline titres, the range of \gls{HAI} titres is \num{8}{512}, and the range of \gls{MN} titres is \num{10}{5120}%
+In the full data, the range of \gls{HAI} titres is \numrange{8}{4096}, and the range of \gls{MN} titres is \numrange{10}{5120} (\cref{fig:hird_tri}a, \cref{fig:hird_tri}b).
+In just the day -7 baseline titres, the range of \gls{HAI} titres is \numrange{8}{512}, and the range of \gls{MN} titres is \numrange{10}{5120}%
 \footnote{
     The distribution of pre-existing titres would be expected to be higher if this were a seasonal vaccine \autocite{tsang2014GlobalAnalysesHuman}.
 }.
@@ -541,7 +544,7 @@ to avoid regions with many redundant markers being overrepresented \autocite{pri
 % 12 33000000 40000000 17
 % 20 32000000 34500000 18
 Eighteen genomic regions with especially strong and/or long-range \gls{LD} that contain many highly correlated markers were excluded, otherwise some \glspl{PC} may reflect those just regions rather than genome-wide ancestry \autocite{price2006PrincipalComponentsAnalysis,prive2020EfficientToolkitImplementing}.
-\gls{PCA} was performed using smartpca (v8000),
+\Gls{PCA} was performed using smartpca (v8000),
 then \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 \gls{PCA} eigenvectors.
 %
 % TODO: this vs in-sample pca
@@ -907,8 +910,9 @@ In comparisons of array batch effect adjustment methods, ComBat performed favour
 However, where batches are unbalanced in terms of sample size \autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression \autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
 In our data, sample size and timepoint groups are fairly balanced between the two array batches (\cref{tab:hird_batch_balance});
 The proportion of responders is not, but response status does not have as prominent an impact on global expression as timepoint (\cref{fig:hird_expression_pcs}).
-For the \gls{DGE} analyses in this chapter, I chose to model batches (array batch and \gls{RNAseq} pool) as fixed effects rather than pre-adjusting with Combat, ensuring the \glspl{df} in the \gls{DGE} model were correct.
+For the \gls{DGE} analyses in this chapter, I chose to model batches (array batch and \gls{RNAseq} pool) as fixed effects rather than pre-adjusting with Combat in a separate step, ensuring the \glspl{df} in the \gls{DGE} model were correct.
 In practice, results from the analyses were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
+\todo{new justification of not using combat here}
 %
 % https://support.bioconductor.org/p/72815/ "batch effect : comBat or blocking in limma ?"
 % In general, I would prefer to model batch effects by including them in the design matrix and modeling the unadjusted data. This ensures that the linear model properly accounts for the degress of freedom associated with modeling the batch effect, so that it uses the proper number of residual df. This prevents the linear model from overestimating significance because it thinks there are more residual df than there really are.
@@ -955,6 +959,7 @@ Model 1 was used for testing differences in expression between pairs timepoints,
 Model 2 was used for testing association between \gls{TRI} and expression at specific timepoints.
 
 Contrasts were used, testing if linear combinations of estimated model coefficients are different from zero.
+\todo{new explanation of contrasts used}
 % TODO: What is a contrast? A contrast is essentially a difference in regression coefficients. We have seen that the regression coefficients can express a difference in means or a single mean, as well as the slope and intercept of a line. A contrast is a way of testing more general hypotheses about population means.
 % A contrast is defined as the sum of each group mean multiplied by a coefficient for each group
 % In statistics, particularly in analysis of variance and linear regression, a contrast is a linear combination of variables (parameters or statistics) whose coefficients add up to zero, allowing comparison of different treatments.[1][2]
@@ -1025,6 +1030,7 @@ which represent effect size in units of $\log_2$ expression fold change per unit
 % - Uses a rank product model internally
 
 Two popular frameworks for effect size meta-analysis are fixed-effect and random-effects \autocite{cohn2003HowMetaanalysisIncreases,borenstein2010BasicIntroductionFixedeffect}.
+\todo{new lead in bit on FE vs RE}
 The fixed-effect model assumes a single true effect size $\theta$ common to all studies.
 Given $k$ studies ($i = 1, \dots, k$), the observed effect size in the $i$th 
 study is commonly assumed to be $y_i \sim \mathcal{N}(\theta,\sigma^2_i)$, where observed variation is explained only by within-study sampling error $\sigma_i$.
@@ -1183,7 +1189,7 @@ as control is for the proportion of positives expected to be false positives,
 which is scalable to multiple contrasts.
 % NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
 
-\subsection{Gene set enrichment analysis using \glsfmtlongpl{BTM}}
+\subsection{Ranked gene set enrichment analysis using \glsfmtlongpl{BTM}}
 \label{subsec:hird_dge_geneSetEnrichment}
 
 % Other sets
@@ -1238,6 +1244,7 @@ Finally, $\text{\gls{AUC}} = U/(nN)$, which takes values from 0 to 1.
 % NOTE: Significant AUCs from tmodCERNOtest are always >0.5
 
 \section{Results}
+\todo{heavy rewrites all throughout results}
 
 \subsection{Extensive global changes in expression after vaccination}
 
@@ -1428,6 +1435,7 @@ Negative associations for these same modules were also maintained at day 1--- \e
 \end{figure}
 
 \section{Discussion}
+\todo{heavy rewrites all throughout discussion}
 
 A meta-analysis of array and \gls{RNAseq} data revealed extensive transcriptomic response to Pandemrix vaccination in the \gls{HIRD} cohort.
 %
