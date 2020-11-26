@@ -19,6 +19,10 @@
 % - Double-spaced or one-and-a-half spaced (one-and-a-half recommended by general Cambridge guidelines).
 % - Single or double-sided printing (double-sided recommended by general Cambridge guidelines).
 
+% TODO: CCC at end of each chapter
+% response variable confusion
+% \todo{make sure package versions are in, and package names are monospace}
+% \todo{add automatic rounding to x decimal places using num and sisetup}
 % TODO: sub \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{myfig.png}
 % TODO: set spell
 % TODO: 'done' to something else
@@ -29,11 +33,13 @@
 % TODO: harmonised software name formatting
 % TODO: check PDF bookmarks look ok
 % TODO: separate software and texttt for parameters
+% TODO: list of figures, shorten to first sentence
+% TODO labeling convention hird eqtl -> reqtl
 
 %
 % Preamble
 %
-\documentclass[english,11pt,a4paper,twoside,openright]{book}
+\documentclass[draft,english,11pt,a4paper,twoside,openright]{book}
 %
 % \input{filename} imports the commands from filename.tex into the target file;
 % it's equivalent to typing all the commands from filename.tex right into the
@@ -119,7 +125,7 @@
 \backmatter
 \include{./backmatter/bibliography}
 \include{./backmatter/abbreviations}
-\include{./backmatter/TODOs}
+% \include{./backmatter/TODOs}
 %TC:endignore
 
 \end{document}

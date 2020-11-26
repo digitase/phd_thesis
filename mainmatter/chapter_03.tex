@@ -130,7 +130,8 @@ In \cref{ch:hird_DGE}, I characterised differential gene expression induced by P
 % As the Pandemrix vaccine is against a pandemic strain that was not in seasonal circulation at the time the \gls{HIRD} cohort was recruited (2010-11),
 % with individuals mounting an expression response that was not recall-dominated \autocite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination},
 % the relative contribution of genetic factors to Pandemrix response may be greater.
-In this chapter, I apply the \textit{in vivo} \gls{reQTL} framework to \gls{HIRD} data, 
+In this chapter---given that \gls{HIRD} is too small for a direct \gls{GWAS} of antibody response---I focus on the genetic contribution to expression response.
+I apply the \textit{in vivo} \gls{reQTL} framework, 
 aiming to characterise the association of common genetic variants with expression across multiple timepoints,
 and pinpoint genes important to Pandemrix response.
 % I map cis-\gls{eQTL} within each timepoint, accounting for ancestry, cell type composition, and unmeasured covariates, then call shared and \gls{reQTL} effects across timepoints from a joint model.
@@ -502,6 +503,7 @@ Cell type abundance directly measured via \gls{FACS} are only available for a sm
 % TODO: these citations, separate out deconv from proxy methods for generating covariates to interact with
 Such estimates have previously been used in \gls{eQTL} analyses from bulk samples where cell type-specific effects are expected\autocite{westra2015CellSpecificEQTL,zhernakova2017IdentificationContextdependentExpression,davenport2018DiscoveringVivoCytokineeQTL,kim-hellmuth2020CellTypeSpecific}.
 As the estimates are based on the expression of multiple genes, is not entirely circular to use them as covariates in this way for genewise \gls{eQTL} models.
+The adjustment effect will however be stronger for genes that are more cell-type specific, with larger weights in the xCell signatures.
 % https://github.com/dviraran/xCell
 %
 % xCell uses the expression levels ranking and not the actual values, thus
@@ -566,7 +568,10 @@ Finally, enrichment scores were standardised, so that a score of zero estimates 
 %     \label{fig:hird_xCell_scores_heatmap_rnaseq}
 % \end{figure}
 
+% TODO: actually, it's just the separation that's difficult,
+% xcell estimates not proportions but enrichment scores
 As with actual cell type abundances, the enrichment scores are correlated.
+Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as indepedent variables in regression downstream.
 Multicollinearity will be a problem for interpreting effect size estimates when these scores are used as indepedent variables in regression downstream.
 % TODO not the sizes
 % \todo{does not bias least squares regression, but unstable (vary sample to sample) to changes in data due to sampling var, and more std error of estimates will be high (tending to inf if perfect multi)}
@@ -595,13 +600,13 @@ The choice to use the actual cell type scores over principal components directly
         \centering
         \includegraphics[width=1.0\textwidth,page=8]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_array.plots.pdf}
         \caption{Array estimates.}
-    \end{subfigure}%
-    \vspace{1em}
+    \end{subfigure}
+    \bigskip\vfill
     \begin{subfigure}[b]{0.6\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=9]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
         \caption{\gls{RNAseq} estimates.}
-    \end{subfigure}%
+    \end{subfigure}
     \caption{Quality of representation (cos2) for each input variable in each \gls{PC} dimension after \gls{PCA} of xCell scores. Higher cos2 represents higher contribution of that variable to that dimension.}
     \label{fig:hird_xCell_cos2}
 \end{figure}
@@ -631,19 +636,19 @@ Weighing the downside of having imperfect estimates of cell type abundance again
         \centering
         \includegraphics[width=1.0\textwidth,page=6]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
         \caption{Monocytes.}
-    \end{subfigure}%
-    \vspace{1em}\vfill%
+    \end{subfigure}
+    \bigskip\vfill
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=3]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
         \caption{\gls{NK} cells.}
-    \end{subfigure}%
-    \vspace{1em}\vfill%
+    \end{subfigure}
+    \bigskip\vfill
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
         \caption{Plasma cells.}
-    \end{subfigure}%
+    \end{subfigure}
     \caption{Correlation between standarised xCell scores and normalised \gls{FACS} measurements for a similar immune subset, in the subset of individuals with \gls{FACS} data.}
     \label{fig:hird_xCell_vs_FACS}
 \end{figure}
@@ -1204,6 +1209,8 @@ genes with \gls{reQTL} were more likely to be upregulated
 (\percentage{0.02195609} for genes with reQTL, \percentage{0.01068966} for genes with shared eQTLs, Fisher's test p < \num{0.005015}).
 Twenty-two genes with both day 7 \gls{reQTL} and upregulated expression were strongly enriched within gene sets related to the cell cycle
 (e.g. \enquote{mitotic cell cycle}, Gene Ontology biological process term GO:0000278, term size = 914, intersection size = 12, \software{gprofiler2::gost} adj. p = \num{0.0001419083}).
+% Small and oppopste between cell types, can we find enrichment?
+\todo{do a quick tmodHD test}
 However, these 22 genes previously appeared in \cref{fig:hird_eQTL_zSharing_vs_TSSdist_mega},
 all having \gls{reQTL} with decreased or opposite effect at day 7 versus baseline,
 making it implausible the generating mechanism is increased detection power due to upregulation.
@@ -1453,14 +1460,19 @@ Gene set enrichment analyses to identify shared biological processes among targe
 Genes targeted by \gls{reQTL} that explained more variation in expression post-vaccination were enriched for immune activation, with weaker enrichments related to \gls{APC}.
 This misses the full picture though, as many of the strongest \gls{reQTL} were those with opposite sign effects at baseline and post-vaccination not captured by changes in \gls{PVE}.
 Prevalence of opposite sign effects between pairs of conditions has been previously described in multi-tissue studies;
-in \textcite{fu2012UnravelingRegulatoryMechanisms}, the proportion of opposite sign effects among all reQTLs was \percentage{0.044}.
+in \textcite{fu2012UnravelingRegulatoryMechanisms}, the proportion of opposite sign effects among all reQTLs between five tissues was \percentage{0.044}.
 In \gls{HIRD}, I found an unexpectedly high proportion:
 39/819 (\percentage{0.04761905}) for day 1 \gls{reQTL},
 and 211/1002 (\percentage{0.2105788}) for day 7 \gls{reQTL}.
+% TODO: get fairfax2012GeneticsGeneExpression figure
 % TODO: recheck no cell type enrichments in these two sets of reQTL
 % but it is unclear how this may lead to generation of opposite effects, and
-% \todo{ check "rs2223286 is associated with profound directional effects in the expression of SELL dependent upon genotype, with the minor C allele associated with increased expression of SELL in B-cells and reduced expression of SELL in monocytes " }
-Given the larger global changes in expression vs. baseline at day 1 compared to day 7 described in \cref{ch:hird_DGE}, 
+% \todo{ check "rs2223286 is associated with profound directional effects in
+% the expression of SELL dependent upon genotype, with the minor C allele
+% associated with increased expression of SELL in B-cells and reduced
+% expression of SELL in monocytes " }
+Given the larger global changes in expression vs. baseline at day 1 compared to
+day 7 described in \cref{ch:hird_DGE}, 
 the larger number of strong \glspl{reQTL} at day 7 was also unexpected.
 % In \autocite{mizuno2019BiologicalCharacterizationExpression}, the proportion of opposite sign effects as a percentage of all eGenes was \percentage{0.074} (48 tissues);
 % in \gls{HIRD}, I find
@@ -1489,6 +1501,7 @@ Small and opposite effects generated by noise may be frequent enough for \softwa
 This might explain the clear separation of the distribution of z-statistics for difference in beta between \gls{reQTL} and shared eQTLs.
 Conversely, it may be that small and opposite effects are more prevalent than expected, and this is the best framework for detecting them.
 % This may be a consequence of the beta comparison approach, as opposite sign of effect tends to result in greater difference in betas.
+% TODO: need to consider changes in effect and sign, not just significance
 To confirm either way, it may be necessary to repeat the \gls{reQTL} calling without the benefit of \software{mashr} shrinkage in a different modelling framework,
 such as a timepoint-genotype interaction term \autocite{davenport2018DiscoveringVivoCytokineeQTL}.
 A complementary approach for validating these opposite sign \gls{reQTL} using the existing \gls{RNAseq} data might be within-individual \gls{ASE} (e.g. RASQUAL \autocite{kumasaka2016FinemappingCellularQTLs}),
@@ -1522,7 +1535,7 @@ in whole blood \textit{in vivo} day 1 after vaccination with seasonal \gls{TIV} 
 % identified.
 and in whole blood after stimulation with \text{M. leprae antigen} for 26-32 h \autocite{manry2017DecipheringGeneticControl}.
 % TODO:
-% Aside from \gene{ADCY3}, I also replicate\autocite{caliskan2015HostGeneticVariation} a day 1 reQTL at \gene{SLFN5} (PVE increase from \num{0.27048709} to \num{3.386358e-01}, p diff = \num{4.882379e-02}). , but no upreg
+% Aside from \gene{ADCY3}, I also see \autocite{caliskan2015HostGeneticVariation} a day 1 reQTL at \gene{SLFN5} (PVE increase from \num{0.27048709} to \num{3.386358e-01}, p diff = \num{4.882379e-02}). , but no upreg
 %
 Given the diversity of stimulations and tissue types, the effect is likely a consequence of general immune activation, rather than a Pandemrix-specific response.
 
@@ -1540,7 +1553,7 @@ The strength of the \gene{ADCY3} \gls{reQTL} at day 1 was found to be modified b
 The xCell score are imperfect; compared to FACS measurements in a cohort subset, the xCell scores were only weakly correlated.
 Some discrepancy is expected, as the cell types as defined in the xCell signatures do not directly correspond to the combinations of surface markers used for FACS.
 The FACS gating strategy also meant that for some cell populations, the only available FACS measure was a proportion of the previously gated population,
-whereas xCell attempts to estimate scores that represent proportions of the whole mixture.
+whereas xCell attempts to estimate scores that represent enrichments in the whole mixture.
 The accuracy of the built-in signatures is lower when applied to the expression matrix for a stimulated state,
 likely because the enrichment-based method can not distinguish differential expression of signature genes due to stimulation from actual changes in cell abundance.
 % A custom signature matrix can be used for xCell, but this would need to be drawn from an independent study under the same stimulation conditions as \gls{HIRD}, and would not solve the issue of coupled DE and cell abundance.
@@ -1557,6 +1570,25 @@ Colocalisation is also not restricted to stimulated monocytes.
 The probable mechanism is simply an increased proportion of the bulk sample taken up by monocytes at day 1 providing more monocyte-derived \gene{ADCY3} transcripts,
 rather than a upregulation-driven increase in detection power,
 or a vaccine-induced activation of the locus at day 1.
+% Although multi-trait colocalisation proved to be a crucial part
+
+%
+% TODO:
+% how to get multi ethnic coloc?
+% o	check ancestries of coloced populations: how does trans-ethnic fine mapping work?
+%  how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?
+%
+%Tastle european
+%Third multi, 70% eu
+%Tdice is multi ethnic san diego, 50% white eu, 
+%Tfairfax european 
+% gtex largely eu before v8
+% Coloc
+% \2 Biases from ethnicity-derived differences in LD?
+    % T cell vs monocyte distinghish since both same from DICE
+% Assumptions
+% multiethnic
+% 1 causal per (cluster/trait), untrue in any bulk
 % \todo{re: the issue of discussing only top hits: hard to resolve due to the lack of gene set enrichments and time, but hopefully discussion about sets of genes with shared generating mechanisms might work}
 
 % TODO: need to consider more cell types one by one?
@@ -1568,6 +1600,9 @@ or a vaccine-induced activation of the locus at day 1.
 
 Overall, cell type interactions were only detected at 16/1154 reQTLs,
 so the question of molecular mechanisms underlie the majority of reQTL still remains.
+Although lower power  it is unknown how much
+but there are 
+% TODO: get rid of remains
 % the genotype effect was detected to interact with abundance of one or more of the tested cell types (or a correlated cell type).
 % A pressing question remains: what molecular mechanisms underlie the \gene{ADCY3} \gls{reQTL}, and indeed the remainder of the \glspl{reQTL}?
 One mechanism by which cis-eQTL can affect expression is through their impact on \gls{TF} binding affinity to motifs in promoters and enhancers \autocite{pai2015GeneticMechanisticBasis}, 
@@ -1621,6 +1656,7 @@ Secondary \gls{eQTL} signals tend to be weaker, more distal to the TSS, more lik
 The proportion of genes with reQTL I detect based on only the lead signal likely represents a lower bound.
 Step-wise conditional analyses at each lead variant will be required to uncover secondary associations, 
 which then can be compared across timepoints in the same manner as the primary associations.
+These associations, although weaker on average, may actually have more variable effects between timepoints.
 
 % TODO: this is a only first step towards causality of delta expression
 Finally, I address the prospect that common genetic variation may explain some variation in antibody response to Pandemrix.
@@ -1641,13 +1677,11 @@ and a formal tests such as the \gls{CIT} \autocite{millstein2009DisentanglingMol
 \textcite{franco2013IntegrativeGenomicAnalysis} realised this, but concluded that they had insufficient power with a greater sample size and comparable study design to \gls{HIRD}.
 The \gls{HIRD} cohort is also too small for a direct \gls{GWAS} of Pandemrix antibody response.
 % TODO: after all that Intro about gwas to function, we unfortunately lack the gwas part here
-% https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
-% The basic problem with underpowered studies is that, although the rate of false positives (type I error) in hypothesis tests is fixed, the rate of true positives (power) goes down. Hence, a positive (= significant) result is less likely to be a true positive in an underpowered study. This idea is expressed in the false discovery rate [2], see also [3]. This seems what the quote refers to.
-% An additional issue often named regarding underpowered studies is that they lead to overestimated effect sizes. The reasons is that a) with lower power, your estimates of the true effects will become more variable (stochastic) around their true value, and b) only the strongest of those effects will pass the significance filter when the power is low. One should add though that this is a reporting problem that could easily be fixed by discussing and reporting all and not only significant effects.
 A suitable approach for prioritising reQTL that contribute to the antibody response to Pandemrix will be to leverage external genetic associations to similar phenotypes,
 for example, colocalisation with existing GWAS summary statistics for antibody response to a similar type of adjuvanted, inactivated vaccine.
 %
 % Even if ADCY3 is real is it interesting?
+% is it important to vaccine response?
 % TODO:
 % \todo{need to consider: if this kind of thing is what bulk in vivo reQTL can find, they what is the additional value over FACS?}
 % pressing 2: why even in vivo reqtl?
@@ -1662,6 +1696,7 @@ Due to the number of possible generating mechanisms for bulk reQTL \textit{in vi
 careful interpretation is required to gain any insight into the biology of the stimulation in question.
 \cref{ch:discussion} will continue the discussion on the methodologies, experimental designs and upcoming technologies 
 required to complement the \textit{in vivo} \gls{reQTL} design.
+% TODO: add contribution to the field
 \todo{i hope i can think of something convincing :p}
 
 % TODO: another possiblility
@@ -1685,25 +1720,4 @@ required to complement the \textit{in vivo} \gls{reQTL} design.
 % The \glspl{eQTL} with the highest \gls{PVE}\footnote{TODO: add to methods \url{https://journals.plos.org/plosone/article/file?type=supplementary&id=info:doi/10.1371/journal.pone.0120758.s001}}
 % \todo{put pve formula in methods, include point that pve is (very rough) norm to var(y), so can compare between timepoints and genes with different MAF and raw variance}
 % \todo{actually, i've found that my PVE approximation is basically rescaled abs(Z), so pve is a bit pointless if we already have z, and doesn't really help with comparability between genes with diff var/MAF}
-
-% TODO:
-% how to get multi ethnic coloc?
-% o	check ancestries of coloced populations: how does trans-ethnic fine mapping work?
-%  how to get coloc priors, fgwas (cano 2020), enloc (kim-hell 2020)?
-%
-%Tastle european
-%Third multi, 70% eu
-%Tdice is multi ethnic san diego, 50% white eu, 
-%Tfairfax european 
-% gtex largely eu before v8
-% Coloc
-% \2 Biases from ethnicity-derived differences in LD?
-    % T cell vs monocyte distinghish since both same from DICE
-% Assumptions
-% multiethnic
-% 1 causal per (cluster/trait), untrue in any bulk
-
-% TODO: add tmod section to method
-% add gprinfiler
-
 

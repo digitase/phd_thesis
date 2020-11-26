@@ -6,13 +6,11 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
-% TODO: read Where Are the Disease-Associated eQTLs?
-% https://www.cell.com/trends/genetics/fulltext/S0168-9525(20)30209-2
-
-% TODO: autoref to cref
 % TODO: check each section provides some solutions
 \begin{outline}
 
+\gls{HIRD}
+\gls{PANTS}
 \1 In this thesis, ... <a summary of the thesis projects>
     \2 Chapters 2 and 4 focus on describing the transcriptomic response of circulating immune cells to perturbation with uncontrolled longitudinal designs
         \3 looking at how expression changes over time, and differences in transcriptomic response associated with phenotypic definitions of response
@@ -23,82 +21,114 @@
     \2 Each chapter discusses the results and limitations of each study, but being very similar studies in design and analysis, they also suffer from a core set of limitations.
     \2 This chapter discusses these, and considerations for design and analysis of similar longitudinal studies in the future to better understand the biology of immune response to drugs and vaccines.
 
-\section{Increasing the power to detect associations}
+\section{Detecting robust associations between expression and phenotype}
 
-\1 It has been challenging to find robust single gene-level associations between expression and response, especially at baseline.
-    \2 The biological signal may be small compared to other sources of variation: measurement platform (ch2); drug, response definition (ch4)
-    \2 The obvious thing to do is increase sample size.
-        \3 Under a fixed resource constraints, longitudinal studies tradeoff more samples over time for fewer individuals
-        \3 Multiomic designs further tradeoff against richness/number of layers sampled
-    \2 there are distinct advantages to these designs
-        \3 e.g. repeated measures allows modelling of within patient covariance between timepoints with mixed model DGE (ch2 and ch4)
-        \3 e.g. spline analysis and clustering in ch4 using multiple timepoints to separate responders and nonresponders
-        \3 e.g. ability to test for association between layers (eQTLs), to explore molecular mechanisms
-    \2 but especially if the intent is to consider the small effect of genetic variants, a lesson learnt in the field of complex diseases from years of underpowered candidate gene studies, is that even a single complex phenotype requires large samples
-        % \3 systems vaccinology studies have always had these rich datasets, but rarely considered genetics, limited by sample size
-        % \3 it is also challenging to collect sufficient sample size in a pharmacogenomic context \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3003940/}
+In both \cref{ch:hird_DGE,ch:hird_reQTL}, I focused on identifying genes with robust differential expression over time after immune perturbation, 
+or expression associated with phenotypic response variables: antibody titres or clinical anti-\gls{TNF} response.
+The perturbations had strong effects on large proportions of the blood immune transcriptome, 
+often resulting in thousands of highly significant associations when comparing pre- and post- perturbation timepoints.
+In comparison, it was much more challenging to identify robust single gene associations with response phenotypes.
+In \cref{ch:hird_DGE}, associations of day 7 expression with antibody response from \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were replicated in my analysis of the array data, but not in \gls{RNAseq}, or in a meta-analysis.
+In \cref{ch:multiPANTS}, baseline associations with anti-\gls{TNF} from the literature,
+including at \gene{TREM1}, previously reported by two independent groups \autocite{gaujoux2019CellcentredMetaanalysisReveals,verstockt2019LowTREM1Expression}, were not replicated in my analysis of the \gls{PANTS} cohort.
+The biological effect size of expression on response is likely to be small, eclipsed by other sources of variation: 
+measurement platform, response definitions, sample characteristics, and noise.
+Power calculations for \gls{DGE} are non-trivial,
+and it is often not known what a reasonable effect size to assume might be for exploratory studies.
+Many experiments choose parameters like sample size and sequencing depth based on rules of thumb \autocite{conesa2016SurveyBestPractices}, or to be comparable to existing ones in the field.
+The idealistic suggestion is to increase sample size, 
+but resource and ethical constraints mean samples are often just the largest that can be feasibly obtained.
+Rather than creating new cohorts, a logistically-efficient strategy is is collecting samples from individuals enrolled in drug and vaccine trials,
+but care must be taken to ensure the trial is powered both for its primary endpoints,
+and for planned transcriptomic analyses.
+% NOTE:
+% https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
+% The basic problem with underpowered studies is that, although the rate of false positives (type I error) in hypothesis tests is fixed, the rate of true positives (power) goes down. Hence, a positive (= significant) result is less likely to be a true positive in an underpowered study. This idea is expressed in the false discovery rate [2], see also [3]. This seems what the quote refers to.
+% An additional issue often named regarding underpowered studies is that they lead to overestimated effect sizes. The reasons is that a) with lower power, your estimates of the true effects will become more variable (stochastic) around their true value, and b) only the strongest of those effects will pass the significance filter when the power is low. One should add though that this is a reporting problem that could easily be fixed by discussing and reporting all and not only significant effects.
+In cases where high power is not guaranteed and small effects are possible,
+when reporting and interpreting associations that have been determined to be significant based on some threshold, 
+one should always be cognizant of winner's curse \autocite{huang2018PowerFalseDiscovery}.
+% This is doubly the case when effect sizes are known to be small,
+% as years of failed replications from underpowered candidate gene studies of complex traits have demonstrated \autocite{border2019NoSupportHistorical}.
+% Likely plays a part in why early systems vaccinology studies didn't include host genetics.
 
-\1 with rich datasets, be careful about subgroup analyses, subgrouping quickly attenuates your effective sample size
-    \2 e.g. looking for timepoint, responder, cell type interactions
-    \2 be wary of rules of thumb for sample size,         
-        \3 e.g. in ch3, the intention was to map eQTLs at each timepoint, look for timepoint x G interaction, but it became apparent that cell proportion interactions were necessary for interpretation
-    \2 prespecify interactions of interest at the power analysis stage in design of new experiments
-    \2 for existing datasets, a workaround like the two stage strategy in ch3, assuming that interactions are only interesting at significant main effects
+Another consideration is how best to distribute a fixed sample size between depth (number of individuals) and richness (number of timepoints, phenotypes, data types).
+For a phenotype as dynamic as immune response, longitudinal sampling is required.
+In \cref{ch:hird_DGE}, sampling demonstrated a distinct jump from day 1 innate to day 7 adaptive immune expression profiles,
+but the kinetics of the transition are not clear. 
+In hindsight, responses could have peaked earlier or later in different individuals,
+and variation in the speed of response can not be examined without denser sampling.
+In \cref{ch:multiPANTS}, expression differences between responders and non-responders were apparent from week 14, but it is not known if differences actually appear much earlier.
+Future analysis of a (small) number of available samples from day 3 after initiating anti-\gls{TNF} treatment may uncover associations in the early innate immune response.
 
-\1 Rather than increasing the sample size, can change the unit of analysis from single gene to multiple genes
-% \2 throughout this thesis I make extensive use of tmod
-    \2 use information from coordinated changes in multiple genes to detect subtle effects
-    \2 use prior biological knowledge to define set of genes
-    \2 this is the basis for gene set analyses used throughout this thesis
-    \2 tradeoff between better interpretability but worse resolution
+Rich sampling also offers analytical advantages.
+Having repeated measures from the same individuals allowed modelling of within-individual covariance in \cref{ch:hird_DGE,ch:multiPANTS}, improving statistical efficiency.
+The spline model in \cref{ch:multiPANTS} enabled separation of responders and non-responders based on expression trajectory over multiple timepoints.
+However, in each case models only incorporated two data types: expression and phenotypic response.
+Studies in the systems vaccinology field have demonstrated how integrating networks of multiple data types identifies correlates and predictors of response not only in the transcriptome, 
+but in multiple layers of the immune system \autocite{li2017MetabolicPhenotypesResponse}.
+In \gls{HIRD}, longitudinal \gls{FACS} and cytokine measurements are available for this form of integrative modelling.
 
-\1 <reproducibility of gene set vs single gene associations> 
-    \2 reports about any single gene associations e.g. SIGLEC10 in ch4 of this thesis, should be treated with caution pending replication
-    \2 while the rank of a single gene may vary from sample to sample due to sampling noise, a summary measure computed from multiple genes should be more robust
-    \2 it is hoped that the replicability of gene sets will be greater
-% resolution, overlap between modules, so complementary
-    % celltypes form natural sets
+% \1 Even if the raw number of samples goes up, subgrouping quickly attenuates the effective sample size.
+%     \2 e.g. looking for timepoint, responder, cell type interactions
+%     \2 pre-specify interactions of interest at the power analysis stage in design of new experiments
+%     \2 for existing datasets, a workaround like the two stage strategy in ch3, assuming that interactions are only interesting at significant main effects
 
-    % temporal stability doesnt matter so much?
+Fortunately, systems immunology studies quantify on a global scale.
+Genes in the immune system are not independent; just as variation increases uncertainty, covariation reduces it\footnote{Exploratory Data Analysis. R for Data Science. \url{https://r4ds.had.co.nz/exploratory-data-analysis.html}}.
+In \cref{ch:hird_DGE}, estimates from multiple genes were used to build an informative empirical prior for between-platform heterogeneity.
+Throughout the thesis, I make extensive use of enrichment analyses with gene sets defined by prior biological knowledge,
+to detect subtle but coordinated changes based on the expression of multiple genes.
+General purpose gene sets may be less relevant in immune cells, 
+so I used \glspl{BTM} \autocite{chaussabel2008ModularAnalysisFramework,li2013MolecularSignaturesAntibody} tailored for immune gene expression in blood.
+Many significant associations with vaccine antibody response and clinical drug response were identified in \cref{ch:hird_DGE,ch:multiPANTS},
+and my expectation is that these should be more replicable than any single gene associations I reported (e.g. \gene{SIGLEC10} from \cref{ch:multiPANTS}).
+While the effect size of a single gene may vary from sample to sample due to noise, 
+a summary measure computed from multiple genes should be more robust.
+Indeed, some module associations between baseline expression and antibody response found in \cref{ch:hird_DGE} were reported in previous studies of seasonal influenza vaccines.
+Most systems vaccinology studies aiming to identify consistent associations with vaccine response over multiple cohorts and sampling years,
+focus their analyses at the gene set level \autocite{tsang2020ImprovingVaccineinducedImmunity}.
+Gene set analyses cannot, however, be divorced from examining the genes within them,
+as the genes that drive set associations can differ between apparent replications,
+and the mapping between genes and sets is one-to-many.
 
 \section{Responder analysis}
 
-\1 <how well these models correspond to reality>
-    \2 What does it mean to be a responder?
-    \2 this has been discussed on this in the field of personalised medicine in the context of RCTs, but similar issues pertain to response in observational studies. \autocite{senn2018StatisticalPitfallsPersonalized}
-    \2 Is being a responder is a stable personal characteristic of an individual over time, or would the same individual vary in response status over time?
-    % Anchorman: The Legend of Ron Burgundy (2004) - Paul Rudd ...
-    % Brian Fantana : They've done studies, you know. 60% of the time, it works every time. [cheesy grin]. Ron Burgundy : That doesn't make sense ..
-    \2 Observing between individual variation in response for a single measure is not sufficient to imply response is personal.
-    \2 e.g. a hypothetical agent with a 60\% response rate in a group of individuals: \enquote{60\% of the time, it works every time}
-    \2 what does this mean? working 60\% of the time on 100\% of individuals, 100\% of the time on 60\% of individuals, or anything in between would be compatible
-    \2 cannot distinguish with a single measure, yet the assumption is often made at the study design stage that it is the 2nd option
-    \2 1st option means no associations to detect
+A key determinant of how well the models in this thesis might correspond to reality lies in the assumed model for phenotypic response.
+This has been extensively discussed in the context of randomised controlled trials, but similar issues pertain to response definitions in observational studies \autocite{senn2018StatisticalPitfallsPersonalized}.
+Assume a hypothetical drug or vaccine where 60\% of a sample of individuals have observed: \enquote{60\% of the time, it works every time}\footnote{Apatow, J., McKay, A. \& Ferrell, W. Anchorman: The Legend of Ron Burgundy (2004).}.
+This is compatible with a stable 60\% success rate in 100\% of individuals (variation in observed response is entirely due to chance);
+or a stable 100\% success rate in 60\% of individuals and 0\% in the other 40\% (response is highly personal)---most likely the truth is somewhere in between.
+In the first scenario, it is difficult to imagine identifying robust baseline associations with response.
 
-\1 Need to establish how consistent response is over time
-    \2 to determine within-individual variation, needs replication at the level of the individual, i.e. need to perturb and measure the same person more than once \autocite{senn2016MasteringVariationVariance}
-        \3 in ch4, repeated anti-TNF dosing showed expression differences between responders and NR, at least, were stable over time
-        \3 although probably partially due to selection of non-remission by w54
-    \2 note for the specific case of genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
-        \3 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
-        \3 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326} and have not been done for response to anti-TNFs (the ch4 setting)
-        \3 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
+One needs to establish how correlated phenotypic response is over time within the same individual,
+\todo{I mean phenotypic response here, not (biological or technical) variation in expression measurements}
+and to compute within-individual variation requires replication at the level of the individual.
+% \2 also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
+The same individual must be \emph{perturbed and measured} more than once \autocite{senn2016MasteringVariationVariance}.
+This is not always possible in practice.
+In \cref{ch:hird_DGE}, antibody response was defined based on a single measurement after a single dose.
+but measuring response after a hypothetical second dose would quantify a different phenotype: 
+the secondary immune response based on vaccine-induced immune memory.
+In \cref{ch:multiPANTS}, all patients received repeated doses interspersed with sampling timepoints,
+and the expression differences between clinical responders and non-responders seen at week 14 (just after clinical response was assessed) were maintained at week 30 and week 54,
+suggesting the initial designation of non-responders is not due to chance, but some characteristic of those patients' disease states.
+%
+% \2 note for the specific case of genetic factors, the field of complex trait genetics has long had a solution for this: twin studies are analogous to measuring the same individual twice
+%     \3 For phenotypes like vaccine response in ch2 that can be, twin studies have already demonstrated heritability of certain response phenos like influenza vaccine Ab titres \autocite{brodin2015VariationHumanImmune}
+%     \3 In pharmocogenetics, twin studies are less common \url{https://www.sciencedirect.com/science/article/abs/pii/S0928098719300326} and have not been done for response to anti-TNFs (the ch4 setting)
+%     \3 repeated crossover trials can be a feasible alternative to twin studies \url{https://www.researchgate.net/profile/Laszlo_Endrenyi/publication/13553486_Hypothesis_Comparisons_of_inter-_and_intra-individual_variations_can_substitute_for_twin_studies_in_drug_research/links/59e97c2e458515c36370e6a7/Hypothesis-Comparisons-of-inter-and-intra-individual-variations-can-substitute-for-twin-studies-in-drug-research.pdf} \autocite{senn2016MasteringVariationVariance}
 
-\1 <How a responder to a perturbation was modelled in this thesis>
-    \2 As discussed in \autoref{subsec:hird_dge_TRI} in ch2, a binary definition of response based on dichotomisation is inefficient and assumes a sharp change in biological relevance at the threshold
-    \2 In ch2, used \gls{TRI}, a continuous change score residualised on the baseline, which gets around the dichotomisation and dependence of change score on baseline
-        \3 two-stage approach here, so df is wrong
-    \2 In multiPANTS, \autoref{multiPANTS:PR_definition} in ch4 sets out the binary definition of response, which is complex and based on many inputs
-        \3 having response dichotomies based on multiple inputs can lead to large discontinuities and non-monotonicity in response probabilities under small changes in input \autocite{senn2005DichotomaniaObsessiveCompulsive} 
-    \2 neither approach perfect, but the driving force was pragmatism
-        \3 for DGE, the model traditionally requires the response variable to be gene expression, and a predictor variable to be response status
-        \todo{might be worth subbing predictor for independent and response with dependent in all chapters, but then that gets confused with statistical independence...}
-        \3 thus I needed an approach that generates a single predictor variable to represent response status
-        \3 In ch2, needed to combine pre-post titre data from two assays
-        \3 In ch4, the clinical algorithm already combines many measures into one.
-    \2 having complicated response definitions can hinder replication by adding to interstudy variation e.g. the failure to replicate the TREM1 association in ch4
-    \2 it may be better to directly with the constituent phenotypes: ch2 (log titre levels), ch4 (CRP level, HBI score), but then the fundamental modelling approach for both DGE/eQTL would need to change to not be restricted to a single response x variable 
-    \2 also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
+Even if response is actually a stable personal characteristic, one still needs to select an appropriate mathematical definition.
+As discussed in \cref{subsec:hird_dge_TRI}, a binary definition of response based on dichotomisation is inefficient and biologically implausible.
+I instead used the \gls{TRI} in \cref{ch:hird_DGE,ch:hird_reQTL}, a continuous change score combining \gls{HAI} and \gls{MN} titres, residualised on the baseline titres.
+In \cref{ch:multiPANTS}, the binary clinical response phenotype is based on a complex decision tree with many inputs.
+Defining dichotomies based on multiple inputs can lead to discontinuities and non-monotonicity in response probabilities under small changes in inputs \autocite{senn2005DichotomaniaObsessiveCompulsive}.
+Neither approach is ideal, but pragmatism did come into play.
+For \gls{DGE}, the simplest models encode phenotypic response variable as a single independent variable, with expression as the sole dependent variable.
+Both \gls{TRI} and the \gls{PANTS} clinical response definition provided that single independent variable.
+In hindsight, variation in response definitions likely contributes to difficulties in replicating associations between studies,
+so it may be more sensible to model on the components phenotypes themselves (e.g. log \gls{HAI} and \gls{MN} titres, \gls{CRP} levels and \gls{HBI} scores).
 
 % \1 bias in non-randomised studies
     % \2 In RCTs, the treatment effect would be defined against the effect in the control group
@@ -120,9 +150,12 @@
     \2 but coarse grained (just the main cell types) adjustment is not always sufficient, you'll still find associations that are proxies for rare cell types \url{https://www.biorxiv.org/content/10.1101/2020.05.28.120600v1}
         \3 Recommend the use of e.g. PEER, as in ch3/4 eQTL analysis, some of those factors are likely to be rarer cell types
 
+% TODO: read Where Are the Disease-Associated eQTLs?
+% https://www.cell.com/trends/genetics/fulltext/S0168-9525(20)30209-2
+
 \1 <eQTL analysis>
     \2 analogous to DGE where independent variable of interest is now genotype
-    \2 as discussed in \autoref{subsec:hird_reQTL_methods_cellTypeInteraction}, it is model misspecification to not have the genotype x cell proportion interaction if the effect of genotype changes depending on cell proportions
+    \2 as discussed in \cref{subsec:hird_reQTL_methods_cellTypeInteraction}, it is model misspecification to not have the genotype x cell proportion interaction if the effect of genotype changes depending on cell proportions
         \3 in fact, it is popular to use genotype x cell proportion (or a proxy of) interactions to call cell type-specific eQTLs e.g. \autocite{westra2015CellSpecificEQTL,kim-hellmuth2020CellTypeSpecific}
         \3 but you cannot distinguish between correlated cell types this way
 
@@ -195,6 +228,7 @@
         \3 also assumes it is measured without error, otherwise would stray into the realm of error in variables models
     \2 but might also want to consider if given expression, you could predict response (probability) as a dependent variable
     \2 this is also directly relevant to clinical goal of predicting patient response from baseline expression
+    % bulk data doesn't matter
     
 \1 a large p >> n prediction problem
     \2 given the few gene-level associations with response is it futile to try?
@@ -235,6 +269,9 @@
 % TODO are these reQTL interesting?
 % In vivo reqtl Design can find genes and contexts that are somewhat relevant to post vacc
 % But does it find ones that are causally important???
+
+% gwas often not possible
+% direct signal would have helped unlock more traditional pipeline start starts anchored in causality
 
 \1 uncovering \enquote{mechanism}
     \2 Knowing the molecular mechanisms of response are crucial for conceiving of possible interventions.
@@ -409,12 +446,25 @@
 \1 many limitations discussed cannot be solved by increasing n
 \1 triangulation will be key in moving from a descriptive to mechanistic understanding of immune response to perturbation
 
+FINAL CCC
+This thesis only scratches the surface
+WHY DID IT IN FIRST PLACE
+...
+HOW CONTRBUTE TO FIELD
 % TODO
 %        \3 future outlook for the fields of systems studies of immune response% vaccinogenomics and pharmacogenomics
 % there is benefit in the GWAS approach meeting the sysvacc approach once sample sizes are enough
 
 \end{outline}
 
+old adage
+principles of immunology,  perturb observe and understand
+    larger samples
+    rich sapmling designs
+    better analysis
+    new tech
+long road from perturbation to understanding indeed
+will be 
 
 %
 % Misc

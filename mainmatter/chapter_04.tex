@@ -11,11 +11,13 @@
 % TODO: check up/down reg and increase/decrease always referes to teh right thing
 
 % TODO: autoref to cref
+% work heere carreid out in collaboration with exeter and abbive and colleges at sanger
 % Collab note
 % - PANTS collab
 % - RNAseq gen and quant
 % - Cell count estimates
 % - Alex's genotype QC
+
 
 \section{Introduction}
 \todo{No chapter 4 corrections have been made yet.}
@@ -1513,7 +1515,9 @@ The trajectories of expression for genes in these cluster 1 and 5 confirmed chan
 and in addition demonstrates that post-induction expression differences between responders and non-responders are sustained
 in samples taken around week 30 and week 54 during the anti-\gls{TNF} maintenance period.
 In \gls{PANTS}, \enquote{continuing standard dosing regimens after primary non-response was rarely helpful} for inducing remission by week 54 \autocite{kennedy2019PredictorsAntiTNFTreatment}.
-This phenomenon may have a transcriptomic basis.
+This phenomenon may have a transcriptomic basis,
+but non-responders in the \gls{PANTS} \gls{RNAseq} data were selected to exclude patients in remission by week 54,
+so trajectories for non-responders at week 14 that eventually achieved remission could not be observed.
 % \textcite{gaujoux2019CellcentredMetaanalysisReveals} suggesting increased drug doses may be effective in treating a non-responsive individual.
 
 Making use of data from later timepoints allowed more subtle effects to be detected in the spline analysis.
@@ -1650,10 +1654,13 @@ there may be an opportunity to consider the shared biology of anti-\gls{TNF} res
 Much work has been done generating and validating signatures for anti-\gls{TNF} response in \gls{RA} \url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0033199}; but not much work on validating \gls{RA} signatures in \gls{IBD} cohorts and vice versa.
 
 This chapter has been purely descriptive.
+Although there are expression differences at many genes between responders and non-responders,
+I do not know which cause non-response,
+and which are a consequence of disease reduction in responders.
 I have deliberately avoided the term \enquote{signature} in my own results, 
-as I have not yet had a chance to assess their predictive capability.
-I also did not find strong evidence for strong \gls{reQTL} effects over time in whole blood, 
-so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls{TNF} response.
+as I have not yet had a chance to assess the predictive capability of associated gene modules.
+I also did not find evidence for many strong and interpretable \gls{reQTL} effects over time in whole blood, 
+so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls{TNF} response via expression.
 However, the presence of \glspl{eQTL} for most genes and the presence of strong differences in expression post-induction may allow testing for causal mechanisms where genotype affects drug response via expression.
 Strategies for moving onto both prediction and causal inference will be discussed in \autoref{ch:discussion}.
 
