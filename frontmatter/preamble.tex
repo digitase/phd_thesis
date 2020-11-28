@@ -102,7 +102,7 @@
 % 3cm on the binding edge and 2cm on the three remaining edges.
 % Please ensure that fold-outs and diagrams produced have reasonable margins and that page numbers, headers and footers are away from the edges.
 %
-\usepackage[\ifoptiondraft{showframe}{},includehead,top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
+\usepackage[\ifoptionfinal{}{showframe},includehead,top=20mm,bottom=20mm,inner=30mm,outer=20mm]{geometry}
 
 %
 % Extensive control of page headers and footers
@@ -280,7 +280,7 @@
 % \usepackage{bookmark}
 \hypersetup{
 	colorlinks,
-	linkcolor={red!50!black},
+	linkcolor={red!70!black},
 	citecolor={blue!70!black},
 	urlcolor={blue!60!black}
 }
@@ -323,6 +323,7 @@
 %
 % \newabbreviation[options]{label}{short}{long}
 \newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
+\newabbreviation[longplural=transcriptome-wide association studies]{TWAS}{TWAS}{transcriptome-wide association study}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
 \newabbreviation[longplural=expression quantitative trait loci]{eQTL}{eQTL}{expression quantitative trait locus}
 \newabbreviation[longplural=response expression quantitative trait loci]{reQTL}{reQTL}{response expression quantitative trait locus}
@@ -330,6 +331,7 @@
 \newabbreviation[]{HIRD}{HIRD}{Human Immune Response Dynamics}
 \newabbreviation[]{TRI}{TRI}{titre response index}
 \newabbreviation[]{RNAseq}{RNA-seq}{RNA-sequencing}
+\newabbreviation[]{scRNAseq}{scRNA-seq}{single-cell RNA-sequencing}
 \newabbreviation[]{DGE}{DGE}{differential gene expression}
 \newabbreviation[]{HAI}{HAI}{haemagglutination inhibition}
 \newabbreviation[]{MN}{MN}{microneutralisation}
@@ -414,6 +416,8 @@
 \newabbreviation[]{RBC}{RBC}{red blood cell}
 \newabbreviation[]{AUC}{AUC}{area under the curve}
 \newabbreviation[]{CDR}{CDR}{complementarity-determining region}
+\newabbreviation[]{MR}{MR}{Mendelian randomisation}
+\newabbreviation[]{IV}{IV}{instrumental variable}
 % \newabbreviation[]{bp}{bp}{base pair}
 % \newabbreviation[]{}{}{}
 %
