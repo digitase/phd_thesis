@@ -239,6 +239,9 @@ Theoretically, there may be effects unobservable without \textit{in vivo} intera
 but a systematic comparison of \gls{reQTL} detected in \textit{in vivo} and \textit{in vitro} stimulation experiments has not been performed.
 \textit{In vivo} \gls{reQTL} studies are certainly not ineffectual at their stated goals, 
 but cell composition does add considerable complexity to their interpretation.
+Although insights into the biological mechanism of the stimulation response is easier to gain when cell type abundance is controlled \textit{in vitro},
+a basic utility of \textit{in vivo} stimulation is allowing the detection of additional cell type-specific \gls{eQTL} effects in bulk data using genotype-cell type abundance interaction terms;
+a methodology already well-established in non-stimulated bulk samples (e.g. \autocite{westra2015CellSpecificEQTL}).
 
 % \2 control is not intervention
 % http://bayes.cs.ucla.edu/PRIMER/ch3-preview.pdf
@@ -439,6 +442,7 @@ train predictive models of expression from \gls{eQTL} data,
 then apply those models in \gls{GWAS} cohorts to test the association of genetically-predicted expression with phenotype.
 \gls{TWAS} methods have methodological similarities to two-sample \gls{MR} \autocite{zhu2020TranscriptomewideAssociationStudies}.
 
+% NOTE: nice figure in https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0613-2/figures/1
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_05/zhu2020TranscriptomewideAssociationStudies/Screenshot 2020-11-27 at 22.54.30.png}
