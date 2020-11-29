@@ -210,11 +210,15 @@ for the non-monocyte-specific gene \gene{ADCY3},
 was a plausible mechanism underlying the strongest day 1 \gls{reQTL}.
 
 An aim of the \textit{in vivo} \gls{reQTL} design is to find host genetic variants with a causal effect on response to perturbation.
-The question is whether such an interpretation is justifiable: whether a difference in group-level \gls{eQTL} regression slopes between baseline and post-perturbation
+The crux of the issue is whether such an interpretation is justifiable: whether a difference in group-level \gls{eQTL} regression slopes between baseline and post-perturbation
 necessarily entails a causal effect of genotype on change in expression from baseline to post-perturbation at the individual level.
 For the specific case of \gene{ADCY3} day 1 \gls{reQTL}, I believe so.
 Individuals homozygous for the effect allele do tend to have strongly increased expression at day 1.
 Individuals homozygous for the non-effect allele do tend to have decreased expression at day 1.
+If you were to change the genotype of an individual from homozygous effect to homozygous non-effect,
+you \textit{would} change their post-vaccination increase of \gene{ADCY3},
+because the exact same increase in monocyte count from baseline to day 1
+would provide fewer \gene{ADCY3} transcripts.
 The effects cancel on average, thus the gene is not differentially expressed between day 1 and baseline overall.
 % There may indeed be some causal effect of genotype on ability to
 % TODO: actually measure is not expression, but some proportion...
@@ -244,8 +248,9 @@ but cell composition does add considerable complexity to their interpretation.
 % When we condition on a variable, we change nothing; we merely narrow our focus to the subset of cases in which the variable takes the value we are interested in.
 % What changes, then, is our perception about the world, not the world itself.
 To truly control for cell composition, the best option is to control it at the study design stage.
-Adjusting for cell abundance in regression only attempts to estimate the effect of other predictors if cell abundance were held constant---it is a change of viewpoint, not data.
-It also cannot distinguish cell types with correlated abundance estimates.
+Adjusting for cell abundance in regression only attempts to estimate the effect of other predictors if cell abundance were held constant.
+It does not change the cell abundances to be equal---it is a change of viewpoint, not a change of data.
+Adjusting for abundance also cannot distinguish cell types with correlated abundance estimates.
 \Gls{scRNAseq} after \textit{in vivo} perturbation would quantify per-cell expression and cell abundance simultaneously.
 The technology is emerging as an alternative to bulk sequencing of \gls{FACS}-sorted cells, with comparable cost,
 and the additional advantage of not requiring pre-defined marker sets \autocite{vanderwijst2020SinglecellEQTLGenConsortium}.
@@ -286,7 +291,7 @@ In \cref{ch:hird_DGE,ch:multiPANTS},
 I observed few significant single-gene associations with response at baseline.
 It is first useful to consider what implications this has on the move from association from prediction in this data.
 
-Prediction from genome-wide transcriptomic data is currently a p >> n prediction problem,
+Prediction from genome-wide transcriptomic data is currently a $p \gg n$ prediction problem,
 where the number of potential predictors p dwarfs the sample size n.
 \textcite{efron2020PredictionEstimationAttribution} provides a fascinating case study on predicting prostate cancer status from expression array data (p=6033 genes) in 
 samples from 52 prostate cancer patients and 50 controls (n=102).

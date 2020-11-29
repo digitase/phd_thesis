@@ -153,6 +153,7 @@ After incubation, an \gls{ELISA} can be run to detect virus-infected cells, the 
 % Computing the value is complicated, see klimov2012InfluenzaVirusTitration
 A \gls{MN} assay value of 160 (1:160 dilution) is considered equivalent to the seroprotective \gls{HAI} value of 40 \autocite{bresee2018InactivatedInfluenzaVaccines}.
 
+% TODO: how does it do that? what is the e.g. PAMP?
 \Glspl{IIV} primarily induces serum antibodies of the IgG isotype.
 The cellular response has not been extensively studied,
 but the induction of CD8\textsuperscript{+} T cells by unadjuvanted subunit \glspl{IIV} is considered poor \autocite{bresee2018InactivatedInfluenzaVaccines,koutsakos2018CirculatingFHCells}.
@@ -521,7 +522,7 @@ After all filters, 169/176 samples and \num{549414/550601} markers remained.
 As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic.
 Large-scale population structure explains variation in gene expression \autocite{stegle2012UsingProbabilisticEstimation,brown2018ExpressionReflectsPopulation}, 
 so including genotype \glspl{PC} that reflect that structure as covariates can increase statistical efficiency for detecting associations with expression.
-I used HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population where the major axes of variation in genotypes are ancestry.
+I used HapMap 3 samples \autocite{theinternationalhapmap3consortium2010IntegratingCommonRare} as a reference population of unrelated individuals where the major axes of variation in genotypes are ancestry.
 Genotypes were first \gls{LD}-pruned (PLINK \software{-{}-indep-pairwise 50 5 0.2} i.e. in a sliding window of \SI{50}{\kilo\bp}, step size of 5 variants, remove variants at each step until no pair of variants has \gls{LD} \num{>0.2}), 
 to avoid regions with many redundant markers being overrepresented \autocite{price2006PrincipalComponentsAnalysis,abdellaoui2013PopulationStructureMigration}.
 % /lustre/scratch119/realdata/mdt2/teams/barrett/coreex_gaibdc/refs/high-LD-regions.txt
@@ -550,6 +551,7 @@ then \gls{HIRD} sample \glspl{PC} were computed by projection onto the HapMap 3 
 % TODO: this vs in-sample pca
 % http://www.biostatgen.org/wp-content/uploads/2018/09/bby081.pdf 
 % If we assume that the correlation structure itselfdiffers between cases and controls, then it makes sense to do thePCA on controls and then project its results on cases as discussedin [71]. However, if we assume that the structure itself may bethe same, but just the factor values are different, then we coulduse the entire group for the PCA to have a larger sample sizeand obtain more stable results.
+A projection is used instead of in-sample \gls{PCA}, as cryptic relatedness in \gls{HIRD} may be reflected in the resulting \glspl{PC} instead of ancestry \autocite{price2010NewApproachesPopulation}.
 For non-genotyped individuals with expression data, 
 \gls{PC} values were imputed as the mean value for all genotyped individuals with the same self-reported ancestry.
 The top \glspl{PC} indeed separate samples by ancestry (\cref{fig:hird_genotype_pca_withHapmap}).
