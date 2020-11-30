@@ -123,13 +123,18 @@ as the genes that drive set associations can differ between apparent replication
 and the mapping between genes and sets is one-to-many.
 
 \section{Responder analysis}
+\label{sec:discussion_responderAnalysis}
 
 A key determinant of how well the models in this thesis might correspond to reality lies in the assumed model for phenotypic response.
-This has been extensively discussed in the context of randomised controlled trials, but similar issues pertain to response definitions in observational studies \autocite{senn2018StatisticalPitfallsPersonalized}.
-Assume a hypothetical drug or vaccine where 60\% of a sample of individuals have an observed response phenotype: \enquote{60\% of the time, it works every time}\footnote{Apatow, J., McKay, A. \& Ferrell, W. Anchorman: The Legend of Ron Burgundy (2004).}.
+By encoding response as an independent variable, an assumption is made that it is a stable characteristic of an individual that is measured without error%
+\footnote{The regression framework can accommodate measurement error in the context of errors-in-variables models.}.
+This may not be an accurate assumption.
+Imagine a hypothetical drug or vaccine where 60\% of a sample of individuals have an observed response phenotype: \enquote{60\% of the time, it works every time}\footnote{Apatow, J., McKay, A. \& Ferrell, W. Anchorman: The Legend of Ron Burgundy (2004).}.
 This is compatible with a stable 60\% success rate in 100\% of individuals (variation in observed response is entirely due to chance);
 or a stable 100\% success rate in 60\% of individuals and 0\% in the other 40\% (response is highly personal)---most likely the truth is somewhere in between.
 In the first scenario, it is difficult to imagine identifying robust baseline associations with response.
+This has been extensively discussed in the context of randomised controlled trials \autocite{senn2018StatisticalPitfallsPersonalized}, 
+but similar issues pertain to response definitions in observational studies.
 
 One needs to establish how correlated phenotypic response is over time within the same individual,
 \todo{I mean phenotypic response here, not (biological or technical) variation in expression measurements}
@@ -287,7 +292,7 @@ but progress in the field has been nothing but rapid.
 
 In the \gls{DGE} regression models I used to test for association of expression with phenotypic response,
 expression was always placed as the dependent variable, 
-and response as an independent variable---assumed to be stable and measured without error\footnote{The regression framework can accommodate measurement error in the context of errors-in-variables models.}.
+and response as an independent variable.
 In a clinical setting, a more relevant concern is prediction of patient response from expression (ideally baseline expression),
 reversing the roles of expression and response in the model.
 In \cref{ch:hird_DGE,ch:multiPANTS},

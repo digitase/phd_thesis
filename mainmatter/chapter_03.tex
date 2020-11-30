@@ -752,6 +752,7 @@ These scores can distinguish large changes in cell abundances between days, but 
 \end{figure}
 
 \subsection{Finding unmeasured covariates using factor analysis}
+\label{subsec:hird_reQTL_PEER}
 
 % If RANKINT, why RANKINT before PEER?
 %
@@ -846,6 +847,7 @@ particularly in the context of \textit{cis}-\gls{eQTL} mapping where the variant
 \end{figure}
 
 \subsection{\glsfmtshort{eQTL} mapping per timepoint}
+\label{subsec:hird_reQTL_limix}
 
 % 2.5.	Preprocess genotypes for limix
 % 2.5.1.	Convert MAF filtered VCF -> 012 -> hdf5 format
@@ -875,10 +877,10 @@ At each of \gene{13570} genes, at all cis-variants within within $\pm \SI{1}{\me
 % NOTE: used Ensembl GENESEQSTART if fwd strand, otherwise GENESEQEND
 % Like all Ensembl features the start of an exon is always less than or equal to the end of the exon, regardless of the strand it is on. The start of the transcript is the start of the first exon of a transcript on the forward strand or the end of the last exon of a transcript on the reverse strand. The start and end of a gene are defined to be the lowest start value of its transcripts and the highest end value respectively.
 \begin{equation}
-\begin{split}
-Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} + \beta G + \mathbf{u} + \epsilon
-\end{split}
-\label{eq:hird_reQTL_limix_model}
+    \begin{split}
+    Y = 1 + sex + \sum_{i=1}^{4}{PC_i} + \sum_{}^{3}{xCell} + \sum_{i=1}^{k}{PC_i} + \beta G + \mathbf{u} + \epsilon
+    \end{split}
+    \label{eq:hird_reQTL_limix_model}
 \end{equation}
 % TODO: check mathbf for vector notation, add timepoint subscript
 where the \gls{eQTL} effect size of interest is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper};
@@ -899,13 +901,14 @@ I settled on a final choice of 10 factors for pre-vaccination, 5 factors for day
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/count_eGenes.signif_eGenes_vs_PEER_n.dataset_mega.chr_chr1.pdf}
     \caption{
         \textbf{Number of significant genes with an \gls{eQTL} detected on chromosome 1, as a function of the number of PEER factors included as covariates.}
-        \gls{FDR} computed with hierarchical Bonferroni-\gls{BH} \autocite{huang2018PowerFalseDiscovery} and threshold set at 0.05.
+        \gls{FDR} computed with hierarchical Bonferroni-\gls{BH} \autocite{huang2018PowerFalseDiscovery} with significance threshold set at 0.05.
         The number of eGenes stabilises since higher number PEER factors explain less and less variance in expression, so have less and less influence on the regression.
     }
     \label{fig:hird_neGenesvsPeerK}
 \end{figure}
 
 \subsection{Joint \glsfmtshort{eQTL} analysis across timepoints}
+\label{subsec:hird_reQTL_mashr}
 
 % 2.10.	mashr
 % 2.10.1.	Apply mashr to per-day meta-analysis beta/beta_ste results
@@ -978,12 +981,14 @@ Note that even a nominal $p < 0.05$ threshold is still more stringent than calli
 % Effects are only compared if at least one of the two effects has lfsr < 0.05, to avoid sharing being driven by null effects.
 
 Another statistic that quantifies the strength of an \gls{eQTL} is the \gls{PVE} by the variant.
-This was approximated using the following formula from \textcite{shim2015MultivariateGenomeWideAssociation}:
+This was approximated using the following formula from \textcite{shim2015MultivariateGenomeWideAssociation} for variant $X$ and expression $Y$:
 \begin{equation}
-    \frac{\beta_p^2 2 p q}{\beta_p^2 2 p q + \sigma_p^2 2N p q}
+    \text{PVE} = \frac{\beta^2 \text{Var}(X)}{\text{Var}(Y)} = \frac{\beta^2 \text{Var}(X)}{\beta^2 \text{Var}(X) + \sigma_{\epsilon}^2} \approx \frac{\beta_p^2 2 p q}{\beta_p^2 2 p q + \sigma_p^2 2N p q}
 \end{equation}
-where $\beta_p$ is the posterior beta from mashr,
-$\sigma_p$ is its posterior standard error,
+where $\beta$ is the beta from a simple linear regression of $Y$ on $X$,
+$\sigma_{\epsilon}^2$ is the residual error,
+$\beta_p$ is the posterior beta from mashr,
+$\sigma_p$ is its posterior standard error from mashr,
 $N$ is the sample size,
 $p$ is the sample \gls{MAF}, and $q=1-p$.
 % The idea is that the \gls{SNP} is approximately $Binomial(2N, p)$ assuming \gls{HWE}, which has variance $2Npq$.

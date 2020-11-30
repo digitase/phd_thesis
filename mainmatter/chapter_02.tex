@@ -182,6 +182,7 @@ Clearly, a broader view of immunity than granted by serological antibody assays 
 % Also see crank2019PreparingNextInfluenza for Brief outlook on unknowns in flu vaccination.
 
 \subsection{Systems vaccinology of seasonal influenza vaccines}
+\label{subsec:hird_dge_intro_systemsVaccFlu}
 
 Vaccinology has historically been driven by the \enquote{isolate-inactivate-inject} paradigm \autocite{degregorio2014EmpiricismRationalDesign}.
 Many vaccines have been developed and licensed through expensive, large-scale, and largely empirical trials that deliver highly effective vaccines, 
@@ -328,7 +329,7 @@ using Bayesian random-effects meta-analysis to account for between-platform hete
 I also compute a baseline-adjusted, continuous phenotype of antibody response to vaccination, the \gls{TRI} \autocite{bucasas2011EarlyPatternsGene}.
 Leveraging the greater sample size,
 more statistically efficient definition of vaccine response,
-and greater sensitivity of rank-based gene set enrichment analysis over gene-wise analysis,
+and greater sensitivity of rank-based gene set enrichment analysis over per-gene analysis,
 I identify gene expression modules associated with magnitude of antibody response.
 The strongest associations are seen at day 7, but also significant module associations are also seen at baseline.
 \todo{no longer spoils results}
@@ -953,6 +954,11 @@ array day -7 and day 0 are treated as repeated measurements taken at a single \e
 For each gene and platform, I fit a model (model 1) with expression as the response variable; 
 with an intercept, timepoint (baseline, day 1, day 7), \gls{TRI}, batch/pool, sex, age, and the first 4 genotype \glspl{PC} as fixed-effect predictors;
 and individual as a random-effect predictor.
+% NOTE:
+% https://bioconductor.org/packages/release/bioc/vignettes/variancePartition/inst/doc/dream.html
+% Limma has a built-in approach for analyzing repeated measures data using duplicateCorrelation(). The model can handle a single random effect, and forces the magnitude of the random effect to be the same across all genes.
+% ...
+% The duplicateCorrelation method estimates a single variance term genome-wide even though the donor contribution of a particular gene can vary substantially from the genome-wide trend.
 Within-individual correlations for the random effect were estimated using \software{limma::duplicateCorrelation}.
 A second model (model 2) was also fit, the only difference being two additional predictors for the multiplicative interactions between day 1 and day 7 with \gls{TRI}.
 %
@@ -1117,7 +1123,7 @@ While the choice of prior on $\tau$ is influential when k is small, there is usu
 % Don't use uniform priors, or hard constraints more generally, unless the bounds
 % represent true constraints (such as scale parameters being restricted to be
 % positive, or correlations restricted to being between -1 and 1).
-Assuming that most genes are not differentially expressed with effect sizes distributed randomly around zero, I selected a normal prior with $N(\mu=0, \sigma^2)$, over a flat prior. As in the section above, to determine an appropriate scale, a normal distribution with mean $\mu = 0$ was fit to the distribution of effect sizes from the gene-wise frequentist models to empirically estimate $\sigma$.
+Assuming that most genes are not differentially expressed with effect sizes distributed randomly around zero, I selected a normal prior with $N(\mu=0, \sigma^2)$, over a flat prior. As in the section above, to determine an appropriate scale, a normal distribution with mean $\mu = 0$ was fit to the distribution of effect sizes from the per-gene frequentist models to empirically estimate $\sigma$.
 
 % Another Cauchy example:
 % Gelman, A., Jakulin, A., Pittau, M. G., & Su, Y.-S. (2008). A weakly informative default prior distribution for logistic and other regression models. The Annals of Applied Statistics, 2(4), 1360–1383. https://doi.org/10.1214/08-AOAS191
@@ -1171,7 +1177,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 % "One assumption of the usual method is that the set of comparisons are either independent or have "Positive dependency""
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
 For per-platform \gls{DGE}, \gls{FDR} control was done with \software{limma::decideTests} using the \gls{BH} procedure.
-For the frequentist random-effects meta-analysis, nominal gene-wise \pvalues{} are converted to \gls{FDR} estimates using \software{p.adjust(method='BH')} in R.
+For the frequentist random-effects meta-analysis, nominal per-gene \pvalues{} are converted to \gls{FDR} estimates using \software{p.adjust(method='BH')} in R.
 
 %
 % There is no simple way to get p values from bayesmeta.
@@ -1231,7 +1237,7 @@ CERNO is relatively robust to the ranking metric \autocite{zyla2019GeneSetEnrich
 % TODO: consider global correction, if the aim is to identify which day is most associated
 Since \software{tmod::tmodCERNOtest} only considers enrichment of small ranks which computing significance, 
 but genes can be down or upregulated, 
-separate tests were done sorting in ascending and descending order,
+separate tests were done sorting genes in ascending and descending order,
 and the more significant result was used to determine the overall direction of effect for each gene set.
 As the approach is rank-based and considers all measured genes, no filters on effect size were applied before testing.
 % NOTE: also see zyla2017RankingMetricsGene
