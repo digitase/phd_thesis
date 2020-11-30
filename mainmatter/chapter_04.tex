@@ -1274,8 +1274,9 @@ and DC.M5.12 (FDR=\num{1.355467e-13})
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.evidencePlots_C_3_1_Interferon.pdf}
+    \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.evidencePlots_C_3_1_Interferon.pdf}
     % TODO: only 8-9k genes
+    % TODO: add module names
     \caption{
         \textbf{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders.}
         Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. 
@@ -1284,6 +1285,7 @@ and DC.M5.12 (FDR=\num{1.355467e-13})
         For non-responders, these modules are enriched for large ranks (large, positive z-statistics). 
         The area under the colored curves are the effect sizes (\glspl{AUC}). 
         The null of randomly-distributed ranks is the grey diagonal line.
+        PR = primary responder, PNR = primary non-responder.
     }
     \label{fig:multipants_dge_evidencePlots_C_3_1_Interferon}
 \end{figure}
@@ -1323,6 +1325,7 @@ Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_tra
         \textbf{Normalised expression over the timepoints for genes in the six identified clusters.}
         Log scaled expression for each gene was standardised before clustering.
         Error bars are the expression mean and standard deviation for the genes at each timepoint in primary responders and non-responders.
+        PR = primary responder, PNR = primary non-responder.
     }
     \label{fig:multipants_dge_spline_cluster_trajectories}
 \end{figure}
@@ -1339,9 +1342,9 @@ The spline analysis highlighted that expression differences at week 14 are maint
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_venns.pdf}
+    \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_venns.pdf}
     \caption{
-        \textbf{Venn diagrams showing which genes in each spline cluster were also significant in the week 14 responder versus non-responder contrast, or the interaction between week 0 to week 14 change and response status.}
+        \textbf{Venn diagrams showing which genes in each spline cluster were also significant in the week 14 responder versus non-responder contrast (w14), or the interaction between week 0 to week 14 change and response status (w14-w0).}
     }
     \label{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}
 \end{figure}

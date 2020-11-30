@@ -19,25 +19,19 @@
 % - Double-spaced or one-and-a-half spaced (one-and-a-half recommended by general Cambridge guidelines).
 % - Single or double-sided printing (double-sided recommended by general Cambridge guidelines).
 
-% TODO: CCC at end of each chapter
-% TODO: was done were done
-% response -> dependent
-% predictors -> Explanatory
-% make figures interpretable without reference to text, do not repeat too much data from text to figures
-% \todo{make sure package versions are in, and package names are monospace}
+% shorten abstract to 1 page
 % TODO: harmonise software name formatting, separate software and texttt
-% \todo{add automatic rounding to x decimal places using num and sisetup}
+% TODO: response -> dependent predictors -> Explanatory
 % TODO: sub \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{myfig.png}
 % TODO: set spell
-% TODO: 'done' to something else
+% TODO: list of figures, shorten to first sentence
+% TODO: check upreg and increased expression are consistent
 % TODO: all cis and trans to textit
 % TODO: convert all \% to SI
 % TODO: convert all large numbers to \num
 % TODO: remove abbreviations not used more than twice
 % TODO: check PDF bookmarks look ok
-% TODO: list of figures, shorten to first sentence
 % TODO labeling convention hird_eqtl -> reqtl
-% TODO check upreg and increased expression are consistent
 
 %
 % Preamble
@@ -91,8 +85,10 @@
 %    The \clearpage command ends the current page and causes all figures and
 %    tables that have so far appeared in the input to be printed.
 \include{./frontmatter/title_page}
-\include{./frontmatter/dedication}
+\include{./frontmatter/declaration}
 \include{./frontmatter/abstract}
+% \include{./frontmatter/dedication}
+\include{./frontmatter/epigraph}
 \include{./frontmatter/acknowledgements}
 \include{./frontmatter/toc}
 %TC:endignore

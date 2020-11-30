@@ -86,7 +86,7 @@ To my knowledge, there is only one such study: by \textcite{franco2013Integrativ
 In each cohort, peripheral blood gene expression was measured by expression array on day 0 (baseline); and on days 1, 3, and 14 post-vaccination.
 Serum \gls{HAI} and \gls{MN} titres were measured at days 0, 14, and 28 against each of the three vaccine components.
 The \gls{TRI} \autocite{bucasas2011EarlyPatternsGene} was computed from these titres as a single measure of antibody response adjusted for baseline titres.
-Genotyping was done by genotyping array.
+Individuals were genotyped by genotyping array.
 
 \textit{Cis}-\gls{eQTL} were mapped using a linear mixed model jointly over all four days,
 with day, genotype, day-genotype interaction, and a random intercept for individual as predictors; and gene expression the response variable.
@@ -253,10 +253,10 @@ with kinship matrices estimated by \software{LDAK} \autocite{speed2012ImprovedHe
 
 Since the aim of this chapter is to identify genetic variation that affects expression response to vaccination, it may seem most direct to model the change in each individual's expression after vaccination as the response variable.
 This approach has been applied for identification of condition-specific \gls{eQTL}, typically with the response taking units of log fold change between conditions (e.g. \autocite{maranville2011InteractionsGlucocorticoidTreatment,ackermann2013ImpactNaturalGenetic,shpak2014EQTLAnalysisHuman}).
-Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions\autocite{ackermann2013ImpactNaturalGenetic}, 
+Although potentially powerful if \gls{eQTL} effects are small and opposite between conditions \autocite{ackermann2013ImpactNaturalGenetic}, 
 % TODO: although ackermann2013ImpactNaturalGenetic distinguishes dynamic, there is no structural diff between using the
 % fold change vs interaction vs stratified, for example, suppose different individuals pre and post, it's really a matter of assumptions and efficiency.
-it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance\autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
+it is analogous to the \enquote{change score} approach, which can suffer from regression to the mean, and increased uncertainty from the variance sum law if effects between conditions have positive covariance \autocite{allison1990ChangeScoresDependent,clifton2019CorrelationBaselineScore}.
 % NOTE:
 % https://journals.sagepub.com/doi/full/10.1177/1054773816666280
 % Threats to Its Internal Validity and External Validity of One-Group Pretest–Posttest Design include regression to the mean.
@@ -265,7 +265,7 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % half a century of debate
 % https://digscholarship.unco.edu/cgi/viewcontent.cgi?article=1239&context=dissertations
 % https://ruor.uottawa.ca/bitstream/10393/35843/3/Lemay_Julien_2017_Thesis.pdf
-
+%
 % TODO:
 % in observational: https://www.tandfonline.com/doi/abs/10.1080/00273171.2013.831743?scroll=top&needAccess=true&journalCode=hmbr20
 % in RCT: senn says equiv: https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwie_PK6vsvsAhXXRRUIHdUfD_wQFjAAegQIAxAC&url=http%3A%2F%2Fimaging.mrc-cbu.cam.ac.uk%2Fstatswiki%2FFAQ%2Frt1d%3Faction%3DAttachFile%26do%3Dget%26target%3Dsenn.ppt&usg=AOvVaw0Rp28syfyesdecEiQZw9x_
@@ -289,14 +289,14 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % Mixed is flexible, but overall aim aligns with change score
 %
 % Simplest application of developed eqtl methods
-
+%
 % joint method over interaction
 %     large numbers of conditions, not practical to use interactions
-
+%
 % pros for split
 %     limix not ok with repeated samples in kinship matrix
 %     peer not directly applicable
-    
+%
 % change score should ask average of individual diffs
 % strat and interaction should ask diff in averages
 % interaction is further borrowing info
@@ -304,19 +304,19 @@ it is analogous to the \enquote{change score} approach, which can suffer from re
 % NOTE: see
 % Senn: Statistical Issues in Drug Development
 % 7.2.4 Is clinical relevance a relevant consideration when choosing whether to use change scores or raw outcomes as the efficacy measure?
-
+%
 % TODO:  
  % It is imperative to adjust for the baseline value anyway, using regression modeling (for reasons of bias reduction in observational studies and for maximizing power and precision in randomized trials).
  % Using each patient as her own control through calculation of a change score is worse than using no control if the baseline is noisy. If the correlation between baseline and follow-up measurement is less than 0.5, subtracting the baseline is worse than just analyzing the follow-up measurement.
  % http://biostat.mc.vanderbilt.edu/wiki/Main/MeasureChange
-
+%
 Instead, I map \glspl{eQTL} within each of three timepoint conditions (day 0 pre-vaccination, day 1, and day 7), and find \glspl{reQTL} by looking for \glspl{eQTL} that have different effects between conditions.
 % TODO: would use ANCOVA here i.e. equiv to continuous covar in regression
 % TODO it is not the case people act as their own controls, you can't observe the counterfactual outside of n of 1 trials
 % more like soaking up some of the variation as within individual random effect, allowing more precise
 % also see: https://blog.statsols.com/making-it-personal-n-of-1-trials-allowing-for-individuality-but-not-overdoing-it
 % \todo{Can this really demonstrate genotype-dependent change in gene expression between timepoints? i.e. need understand how the change score/ANCOVA approaches differ from repeated measures ANOVA differ from the interaction/stratified approach I take?}
-Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions\autocite{clogg1995StatisticalMethodsComparing}
+Unlike a test for difference implemented using a genotype-condition interaction term in a joint regression model, homoscedasticity of errors is not assumed for all conditions \autocite{clogg1995StatisticalMethodsComparing}.
 % See PMC4425538 : The method we have used did not account for heteroscedasticity while estimating the standard errors of the interaction term, which may lead to inflated statistics.
 % TODO: equivalence is not straightforward, since of joint mashr downstream
 
@@ -395,13 +395,12 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % 2.9.1.	Per day
 % 2.9.1.1.	Use eigenMT estimates to apply local Bonferroni per gene
 % 2.9.1.2.	Compute global BH FDR
-Within each timepoint, recall the the \gls{HIRD} dataset includes expression measured by both array and \gls{RNAseq}.
+Within each timepoint, the \gls{HIRD} dataset includes expression measured by both array and \gls{RNAseq}.
 As discussed in \cref{subsubsec:hird_dge_meta_methodChoice}, it is difficult to directly estimate the between-studies heterogeneity when the number of studies is small, 
 and Bayesian meta-analysis was preferred for combining array and \gls{RNAseq} \gls{DGE} estimates.
 % \todo{why I didn't just do a mega-analysis in chapter 2 then, given I haven't any evidence if it's better or worse than Bayesian meta-analysis in that context.}
 That method does not scale to \gls{eQTL} analysis, where the number of tests is large, in the order of thousands of tests per gene, versus the handful \gls{DGE} contrasts per gene performed in \cref{ch:hird_DGE}.
 Instead, I perform a mega-analysis within each timepoint, first merging array and \gls{RNAseq} expression estimates into a single matrix with ComBat \autocite{johnson2007AdjustingBatchEffects}.
-TODO: related to previous paragraph
 For comparison purposes, analyses were also run in the array and \gls{RNAseq} samples separately.
 % \todo{add -7 note as with ch2}
 
@@ -409,8 +408,8 @@ Defining whether an \gls{eQTL} is shared between conditions can be a tricky busi
 Naively, one can map \glspl{eQTL} separately in each condition, then assess the overlap of significant associations between conditions.
 This underestimates sharing due to the difficulty of distinguishing true lack of sharing from missed discoveries,
 as a consequence of incomplete power within each condition \autocite{flutre2013StatisticalFrameworkJoint,peters2016InsightGenotypePhenotypeAssociations}.
-Condition-by-condition analysis also cannot borrow information across conditions for mapping shared associations\autocite{flutre2013StatisticalFrameworkJoint,urbut2018FlexibleStatisticalMethods,li2018HTeQTLIntegrativeExpression}.
-Counterintuitively, a joint multivariate analysis may be more powerful even when associations are not shared across all conditions\autocite{stephens2013UnifiedFrameworkAssociation}.
+Condition-by-condition analysis also cannot borrow information across conditions for mapping shared associations \autocite{flutre2013StatisticalFrameworkJoint,urbut2018FlexibleStatisticalMethods,li2018HTeQTLIntegrativeExpression}.
+Counterintuitively, a joint multivariate analysis may be more powerful even when associations are not shared across all conditions \autocite{stephens2013UnifiedFrameworkAssociation}.
 
 % 2018-07-25 log: HIRD eQTL modelling possibilities
 % General pattern of development:
@@ -442,8 +441,7 @@ Joint mapping has been repeatedly demonstrated to be more powerful than conditio
 and recent methods are now computationally efficient when scaling to large numbers of conditions and variants tested (e.g. RECOV \autocite{duong2017ApplyingMetaanalysisGenotypetissue}, mashr \autocite{urbut2018FlexibleStatisticalMethods}, HT-eQTL \autocite{li2018HTeQTLIntegrativeExpression}).
 In this chapter, I apply \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods} for the estimation of \gls{eQTL} effects across my three timepoints.
 \software{mashr} learns patterns of correlation among multiple conditions empirically from condition-by-condition summary statistics,
-then applies shrinkage to provide improved posterior effect size estimates,
-and compute measures of significance per condition. 
+then applies shrinkage to provide improved posterior effect size estimates and compute measures of significance per condition. 
 
 % TODO
 % mashr: builds on traditional metaanalysis methodology (see urbut)
@@ -485,7 +483,7 @@ but I only consider the preservation of \gls{reQTL} effects defined from express
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/simulate_expression_transforms.pdf}
+    \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_03/simulate_expression_transforms.pdf}
     \caption{
         \textbf{Simulating the effect of data transformation on detection of \gls{reQTL} effects.}
         Expression values on the log scale were simulated for 200 individuals (100 with each genotype) at a baseline and day 1 post-vaccination timepoint.
@@ -1077,7 +1075,7 @@ then apply the \gls{BH} \gls{FDR}, as used by others\autocite{peters2016InsightG
 Models with interactions between genotype and other predictors were fit using \software{lme4qtl} \autocite{ziyatdinov2018Lme4qtlLinearMixed}.
 The model specification was identical to \cref{eq:hird_reQTL_limix_model} except the addition of three interaction terms between genotype and each xCell score.
 Significance was assessed using the \gls{LRT} versus the nested model with no interaction terms.
-Note that although PEER factors are correlated with xCell scores (\cref{fig:}), 
+Note that although PEER factors are correlated with xCell scores (\cref{fig:hird_peer_corMatrix_v2_mega}), 
 \textcite{kim-hellmuth2020CellTypeSpecific} also used this approach, claiming that interaction term between genotype and xCell scores should still be interpretable.
 I attribute their claim to the fact that there are no interaction terms between genotype and PEER factors, so the coefficients for each genotype-xCell scores interactions still have their standard interpretation: $\beta_x + \beta_{cx}c$ increase in log2 expression per unit of effect allele dosage, where $\beta_x$ is the main effect of genotype, $\beta_{cx}$ is the interaction effect, and $c$ is xCell score.
 
@@ -1494,7 +1492,7 @@ When it comes to fine mapping, it will be more appropriate to perform it in the 
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.sensitivityPlot_custom.pdf}
     \caption{
         \textbf{Sensitivity analysis for multi-trait colocalisation at the \gene{ADCY3} locus.}
-        Colocalisation done using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} for trait datasets described in \cref{subsec:hird_reQTL_coloc}.
+        Colocalisation performed using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} for trait datasets described in \cref{subsec:hird_reQTL_coloc}.
         Heatmap shows the proportion of configurations in which two traits colocalise in the same cluster over 100 configurations of algorithm parameters
         \software{reg.thresh}, \software{align.thresh}, and \software{prior.2} (range of values listed in \cref{subsec:hird_reQTL_coloc}).
         \software{prior.1} set at \num{1e-4} (default).
@@ -1508,7 +1506,7 @@ When it comes to fine mapping, it will be more appropriate to perform it in the 
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.locusPlot.pdf}
     \caption{
         \textbf{Multi-trait colocalisation at the \gene{ADCY3} locus.}
-        Colocalisation done using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} (vertical grey line).
+        Colocalisation performed using \software{HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a 500 Kb window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} (vertical grey line).
         Traits are monocyte cell count (\textcite{astle2016AllelicLandscapeHuman}), \gene{ADCY3} expression in sorted immune cell subsets (\textcite{schmiedel2018ImpactGeneticPolymorphisms}), \gene{ADCY3} expression in \gls{HIRD} timepoints, and \gls{IBD} (\textcite{delange2017GenomewideAssociationStudy}).
         Locus plots show summary statistics for 1054 variants present in all datasets.
         Traits in red and green represent two distinct clusters each hypothesised to be driven by a shared causal variant (vertical red and green lines).

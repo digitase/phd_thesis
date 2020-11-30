@@ -243,7 +243,7 @@ As serum antibody titres are an established correlate for \gls{TIV}, studies hav
 \textcite{bucasas2011EarlyPatternsGene} ($n=119$) found a 494-gene expression signature (including \gene{STAT1}, \gene{CD74}, and \gene{E2F2}) measured at day 1 and 3 correlated with serum antibody titres measured 14 and 28 days after vaccination.
 Signatures including day 3 kinase \gene{CaMKIV} expression are a strong predictor of day 28 \gls{HAI} antibody titres in independent trials over three consecutive influenza seasons ($n=67$) \autocite{nakaya2011SystemsBiologyVaccination}.
 Expression of gene sets related to B cell proliferation at day 7 are also predictive of day 28 \gls{HAI} ($n=15$) \autocite{tan2014GeneSignaturesRelated}.
-Work has also been done to understand the heterogeneity in response due to host factors like 
+Work has also been conducted to understand the heterogeneity in response due to host factors like 
 sex \autocite{furman2014SystemsAnalysisSex}
 and age \autocite{frasca2010IntrinsicDefectsCell,nakaya2015SystemsAnalysisImmunity,nakaya2016SystemsBiologyImmunity,hipc-chisignaturesprojectteam2017MulticohortAnalysisReveals}.
 %
@@ -434,7 +434,7 @@ It is no longer correlated with baseline (\cref{fig:hird_tri}e, \cref{fig:hird_t
 and remains comparable to the original binary definition (\cref{fig:hird_tri}g, \cref{fig:hird_tri}h).
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
+    \includegraphics[width=0.95\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
     \caption{
         \textbf{Antibody titre data and responder definitions.}
         Titre values are on the $\log_2$ scale.
@@ -465,7 +465,7 @@ The cause of this is unknown, there is a possibility that individuals with more 
 \subsection{Genotype data generation}
 \label{subsec:hird_dge_genotype_data_generation}
 
-DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was done using on the Infinium CoreExome-24 BeadChip array (Illumina).
+DNA was extracted from frozen blood using the Blood and Tissue DNeasy kit (Qiagen), and genotyping was performed using on the Infinium CoreExome-24 BeadChip array (Illumina).
 In total, 192 samples from 176 individuals in the \gls{HIRD} cohort were genotyped at \num{550601} markers, including replicate samples submitted for individuals where extracted DNA concentrations were low.
 
 \subsection{Genotype data preprocessing}
@@ -848,7 +848,7 @@ background correction,
 between-array normalisation (affine transformation, centers and scales each array to control for systematic experimental factors), 
 and variance-stabilisation (generalised logarithm, similar to $\log_2$ with better performance for small values) of intensity values, 
 resulting in expression values on a $\log_2$ scale.
-As systematic experimental factors might differ between batches, requiring different centering and scaling factors, normalisation was done per-batch, then the two batches were merged.
+As systematic experimental factors might differ between batches, requiring different centering and scaling factors, normalisation was performed per-batch, then the two batches were merged.
 
 % 6.5.	Summarise probes (into loci): WGCNA::collapseRows(rowGroup=Ensembl ID, method="MaxMean", connectivityBasedCollapsing=FALSE)
 % 6.5.1.	https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3166942/
@@ -885,7 +885,7 @@ Normalisation was also not able to completely remove the batch effect within the
 The large platform effect likely stems from systematic technological differences in how each platform measures expression.
 \gls{RNAseq} has a higher dynamic range, resulting less bias at low expression levels, but estimates are more sensitive to changes in depth than array estimates are to changes in intensity \autocite{robinson2015NestedParallelExperiment}.
 Agreement between the two platforms is poor at extremes of expression \autocite{wang2009RNASeqRevolutionaryTool,ma2017JointBayesianModel}.
-The preprocessing done for the two platforms (\cref{subsec:hird_dge_rnaseq_quantAndFilter,subsec:hird_dge_array_preproc}) is also vastly different.
+The preprocessing steps for the two platforms (\cref{subsec:hird_dge_rnaseq_quantAndFilter,subsec:hird_dge_array_preproc}) is also vastly different.
 
 Despite the shortcomings of array data detailed above, the array dataset contains individuals with more extreme antibody response phenotypes (\cref{fig:hird_phenotypes_by_platform}), hence the data should not be excluded.
 Given the magnitude of the platform effect, I concluded that the appropriate approach should be a two-stage approach that meta-analyses per-platform \gls{DGE} effect estimates while explicitly accounting for between-platform heterogeneity.
@@ -1168,7 +1168,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 % NOTE: FDR BH assumes:
 % "One assumption of the usual method is that the set of comparisons are either independent or have "Positive dependency""
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
-For per-platform \gls{DGE}, \gls{FDR} control was done with \software{limma::decideTests} using the \gls{BH} procedure.
+For per-platform \gls{DGE}, \gls{FDR} control was conducted with \software{limma::decideTests} using the \gls{BH} procedure.
 For the frequentist random-effects meta-analysis, nominal per-gene \pvalues{} are converted to \gls{FDR} estimates using \software{p.adjust(method='BH')} in R.
 
 %
@@ -1184,7 +1184,7 @@ returning posterior effect sizes, posterior standard errors, and their significa
 \gls{lfsr} is analogous to \gls{FDR}, but quantifies the probability, given the data, of calling the wrong sign for an effect,
 rather than the confidence of a non-zero effect \autocite{stephens2016FalseDiscoveryRates}.
 % "Of course, being confident in the sign of an effect logically implies that we are confident it is non-zero ..."
-Unless otherwise stated, correction was done at the \SI{5}{\percent} level separately for each contrast,
+Unless otherwise stated, \gls{FDR} was controlled at the \SI{5}{\percent} level separately for each contrast,
 as control is for the proportion of positives expected to be false positives,
 which is scalable to multiple contrasts.
 % NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
@@ -1225,11 +1225,11 @@ where $n$ is the number of genes in the set,
 $r$ is the rank of the $i$th gene in the set,
 and $N$ is the number of measured genes (intersection between genes in the experiment and genes in the set of \glspl{BTM} used).
 CERNO is relatively robust to the ranking metric \autocite{zyla2019GeneSetEnrichment}.
-\gls{FDR} control for the number of gene sets tested was done using \gls{BH}, again separately for each contrast.
+\gls{FDR} control for the number of gene sets tested was performed using \gls{BH}, again separately for each contrast.
 % TODO: consider global correction, if the aim is to identify which day is most associated
 Since \software{tmod::tmodCERNOtest} only considers enrichment of small ranks which computing significance, 
 but genes can be down or upregulated, 
-separate tests were done sorting genes in ascending and descending order,
+separate tests were performed sorting genes in ascending and descending order,
 and the more significant result was used to determine the overall direction of effect for each gene set.
 As the approach is rank-based and considers all measured genes, no filters on effect size were applied before testing.
 % NOTE: also see zyla2017RankingMetricsGene
@@ -1314,7 +1314,7 @@ indicating the innate phase of response likely peaks in the first few days.
         \textbf{Transcriptomic modules up or downregulated post-vaccination.}
         The top ten most significant modules for each contrast are shown.
         Size of circle indicates absolute effect size (\gls{AUC}). 
-        Color of circle indicates significance ($\gls{FDR} < 0.05$) and direction of effect (red = upregulation, blue = downregulation).
+        Color of circle indicates significance (\gls{FDR} < 0.05) and direction of effect (red = upregulation, blue = downregulation).
         Absence of circle indicates non-significance.
     }
     \label{fig:hird_tmodDotPlot_timepoint}
