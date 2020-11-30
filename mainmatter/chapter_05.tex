@@ -6,8 +6,6 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
-% TODO: check each section provides some solutions
-
 % not so ambitious as systems immunology
 % \1 <By chapter context-content-conclusion overview.>
 %     \2 <ch 2: systems vaccinology study of Pandemrix>
@@ -58,17 +56,16 @@ Vaccine and drug perturbation had strong effects on large proportions of the blo
 resulting in thousands of highly significant associations when comparing pre- and post- perturbation timepoints.
 In comparison, it was much more challenging to identify robust single gene associations with response phenotypes.
 In \cref{ch:hird_DGE}, associations of day 7 expression with antibody response from \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} were replicated in my analysis of the array data, but not in \gls{RNAseq} data, or in a meta-analysis.
-In \cref{ch:multiPANTS}, baseline associations with anti-\gls{TNF} from the literature---including at \gene{TREM1}, previously reported by two independent groups \autocite{gaujoux2019CellcentredMetaanalysisReveals,verstockt2019LowTREM1Expression}---were not replicated in my analysis of the \gls{PANTS} cohort.
-The biological effect size of expression on response is likely to be small, eclipsed by other sources of variation: 
-measurement platform, response definitions, sample characteristics, and noise.
+In \cref{ch:multiPANTS}, baseline associations with anti-\gls{TNF} response from the literature---including at \gene{TREM1}, previously reported by two independent groups \autocite{gaujoux2019CellcentredMetaanalysisReveals,verstockt2019LowTREM1Expression}---were not significant in my analysis of the \gls{PANTS} cohort.
+The biological effect size of a single gene's expression on phenotypic response is likely to be small, eclipsed by other sources of variation: 
+measurement platform, difference in response definitions, sample characteristics, and noise.
 
 The idealistic suggestion is to increase sample size, 
-but resource and ethical constraints mean samples are often just the largest that can be feasibly obtained.
-Rather than creating new cohorts, a logistically-efficient strategy is sampling from from individuals enrolled in drug and vaccine trials,
+but resource and ethical constraints will always exist.
+Rather than creating new cohorts, a logistically-efficient strategy is sampling from individuals enrolled in drug and vaccine trials,
 but care must be taken to ensure the trial is powered both for its primary endpoints,
 and for planned transcriptomic analyses.
-Power calculations for \gls{DGE} are non-trivial,
-and it is often not known what a reasonable effect size to assume might be for exploratory studies.
+Power calculations for \gls{DGE} are non-trivial and often it is not known what a reasonable effect size to assume might be.
 Many experiments choose parameters like sample size and sequencing depth based on rules of thumb \autocite{conesa2016SurveyBestPractices}, or to be comparable to existing ones in the field.
 % NOTE:
 % https://stats.stackexchange.com/questions/176384/do-underpowered-studies-have-increased-likelihood-of-false-positives
@@ -137,12 +134,11 @@ This has been extensively discussed in the context of randomised controlled tria
 but similar issues pertain to response definitions in observational studies.
 
 One needs to establish how correlated phenotypic response is over time within the same individual,
-\todo{I mean phenotypic response here, not (biological or technical) variation in expression measurements}
-and to compute within-individual variation requires replication at the level of the individual.
+and to compute within-individual variation requires replicates at the level of the individual.
 % \2 also applies to continuous measures of response, as what is being considered is that it only makes sense to talk about response if the response measure is tightly correlated within an individual over time
 The same individual must be \emph{perturbed and measured} more than once \autocite{senn2016MasteringVariationVariance}.
 This is not always possible in practice.
-In \cref{ch:hird_DGE}, antibody response was defined based on a single measurement after a single dose.
+In \cref{ch:hird_DGE}, antibody response was defined based on a single measurement after a single dose,
 but measuring response after a hypothetical second dose would quantify a different phenotype: 
 the secondary immune response based on vaccine-induced immune memory.
 In \cref{ch:multiPANTS}, all patients received repeated doses interspersed with sampling timepoints,
@@ -160,7 +156,7 @@ I instead used the \gls{TRI} in \cref{ch:hird_DGE,ch:hird_reQTL}, a continuous c
 In \cref{ch:multiPANTS}, the binary clinical response phenotype is based on a complex decision tree with many inputs.
 Defining dichotomies based on multiple inputs can lead to discontinuities and non-monotonicity in response probabilities under small changes in inputs \autocite{senn2005DichotomaniaObsessiveCompulsive}.
 Pragmatism did come into play when choosing these definitions.
-For \gls{DGE}, the simplest models encode phenotypic response variable as a single independent variable, with expression as the sole dependent variable.
+For \gls{DGE}, the most widespread models have expression as the sole dependent variable, and encodes phenotypic response variables as independent variables.
 Both \gls{TRI} and the \gls{PANTS} clinical response definition provided that single independent variable.
 In hindsight, variation in response definitions likely contributes to difficulties in replicating associations between studies,
 so it may be more sensible to model on the components phenotypes themselves (e.g. log \gls{HAI} and \gls{MN} titres, \gls{CRP} levels and \gls{HBI} scores).
@@ -184,7 +180,7 @@ cell abundance estimates act as precision variables for sampling noise,
 but additionally as mediators of the perturbation's effect on expression.
 % Many \gls{DGE} and \gls{eQTL} mapping methods require the same set of covariates for all genes.
 In \cref{ch:multiPANTS}, I chose to run two sets of models with and without including estimates of five major immune cell proportions,
-gaining some information on which effects are driven by cell abundance, and which are driven by per-cell up or downregulation.
+gaining some information on which effects are likely driven by cell abundance, and which are driven by per-cell up or downregulation of transcription.
 
 Using major cell populations for correction misses the contribution of rare populations \autocite{pellegrinocoppola2020CorrectionBothCommon}.
 For cis-\gls{eQTL} mapping in \cref{ch:hird_reQTL,ch:multiPANTS}, where the main concern was maximising the number of \gls{eQTL} detected,
@@ -199,7 +195,7 @@ As discussed in \cref{subsec:hird_reQTL_methods_cellTypeInteraction},
 it is model misspecification to omit genotype-cell abundance interactions if the effect of genotype changes depending on cell abundance.
 In fact, it is popular to use such interaction terms between genotype and cell abundance (or a proxy of cell abundance) 
 to discover cell type-specific \gls{eQTL} \autocite{westra2015CellSpecificEQTL,kim-hellmuth2020CellTypeSpecific}.
-\textit{In vivo}, cell abundances are causally affected by the perturbation, due to active recruitment, differentiation, proliferation of immune cells.
+\textit{In vivo}, cell abundances are causally affected by the perturbation, due to active recruitment, differentiation, and proliferation of immune cells.
 Consider the case where vaccine perturbation causes active proliferation of a rare cell type that is near absent at baseline, 
 but forms a greatly increased proportion of the bulk mixture after perturbation.
 Any baseline \gls{eQTL} specific to this cell type will appear as a \gls{reQTL} in the post-perturbation timepoint, 
@@ -218,19 +214,18 @@ was a plausible mechanism underlying the strongest day 1 \gls{reQTL}.
 An aim of the \textit{in vivo} \gls{reQTL} design is to find host genetic variants with a causal effect on response to perturbation.
 The crux of the issue is whether such an interpretation is justifiable: whether a difference in group-level \gls{eQTL} regression slopes between baseline and post-perturbation
 necessarily entails a causal effect of genotype on change in expression from baseline to post-perturbation at the individual level.
-For the specific case of \gene{ADCY3} day 1 \gls{reQTL}, I believe so.
-Individuals homozygous for the effect allele do tend to have strongly increased expression at day 1.
-Individuals homozygous for the non-effect allele do tend to have decreased expression at day 1.
-If you were to change the genotype of an individual from homozygous effect to homozygous non-effect,
+For the specific case of the \gene{ADCY3} day 1 \gls{reQTL}, I believe so.
+% Individuals homozygous for the effect allele do tend to have strongly increased expression at day 1.
+% Individuals homozygous for the non-effect allele do tend to have decreased expression at day 1.
+% Probably due to T cell decreases, which have high ADCY3 expression.
+% The effects cancel on average, thus the gene is not differentially expressed between day 1 and baseline overall.
+As the variant is an \gls{eQTL} in monocytes,
+individuals with more copies of the effect allele have higher \gene{ADCY3} expression per-monocyte on average.
+If you were to change the genotype of an individual from homozygous non-effect to homozygous effect,
 you \textit{would} change their post-vaccination increase of \gene{ADCY3},
-because the exact same increase in monocyte count from baseline to day 1
-would provide fewer \gene{ADCY3} transcripts.
-The effects cancel on average, thus the gene is not differentially expressed between day 1 and baseline overall.
-% There may indeed be some causal effect of genotype on ability to
-% TODO: actually measure is not expression, but some proportion...
-
-In the general case, I am unsure.
-There are many possible mechanisms at each \gls{reQTL}:
+because the exact same increase in monocyte abundance from baseline to day 1
+would provide more \gene{ADCY3} transcripts.
+It is less clear in the general case, as there are many possible mechanisms at each \gls{reQTL}:
 a gene with an \gls{eQTL} not expressed at baseline becoming detectable (power),
 a cell type with a cell type-specific \gls{eQTL} increasing in proportion (recruitment or proliferation),
 a effect of a cell type-specific \gls{eQTL} increasing within that cell type (activation, the canonical scenario for \textit{in vitro} stimulation),
@@ -272,6 +267,7 @@ As an emerging technology, \gls{scRNAseq} still faces many limitations, such as
     difficulties in defining robust cell type clusters,
     and sample processing effects on the transcriptome,
 but progress in the field has been nothing but rapid.
+% \todo{Carl's comment: There is also the issue of cell/transcriptome preservation, which is much more complicated than for bulk (where one can simply put blood samples in buffer that lyses the cells and the preserves the RNA.}
 
 % more n allows more phenotypes
 %
@@ -298,7 +294,7 @@ In a clinical setting, a more relevant concern is prediction of patient response
 reversing the roles of expression and response in the model.
 In \cref{ch:hird_DGE,ch:multiPANTS},
 I observed few significant single-gene associations with response at baseline.
-It is first useful to consider what implications this has on the move from association from prediction in this data.
+It is first useful to consider what implications this has on the move from association to prediction in this data.
 
 Prediction from genome-wide transcriptomic data is currently a $p \gg n$ prediction problem,
 where the number of potential predictors p dwarfs the sample size n.
@@ -310,13 +306,14 @@ Repeating over many random splits showed this high predictive performance was no
 Random forests have embedded feature selection, assigning their predictors an importance score, 
 with a positive importance score indicating that a predictor was utilised by the model.
 After removing all 348 genes with positive importance scores in the first model from the dataset and repeating the process with remaining p=5685 n=102 matrix,
-another model was produced where a set of 364 genes with positive importance---completely disjoint from the first 348---predicted cancer status with a \emph{similar error rate}.
+another model was produced where a set of 364 genes with positive importance---completely disjoint from the first 348---predicted cancer status with a similar error rate.
 This process could be repeated multiple times, each time producing a model with similar error rate, using none of the \enquote{important} genes from the previous models.
-The performance of pure prediction models appears to be dominated by the confluence of many weak predictors,
-thus it is still feasible to consider prediction in datasets where attribution of significance to individual strong predictors may be impossible.
+Although these error rates come from internal validation, which have an optimistic bias,
+the performance of pure prediction models does appear to be dominated by the confluence of many weak predictors.
+Therefore it is still feasible to consider prediction in datasets where attribution of significance to individual strong predictors may be impossible.
 
 A large part of systems vaccinology in the last decade has been building models to predict vaccine-induced antibody and cellular responses from high-dimensional data.
-The methods used span the full gamut of traditional and modern machine learning algorithms, including
+The methods used span the full gamut of statistical and machine learning algorithms, including
 classification to nearest centroid (ClaNC) \autocite{querec2009SystemsBiologyApproach},
 discriminant analysis via mixed integer programming (DAMIP) \autocite{querec2009SystemsBiologyApproach,nakaya2011SystemsBiologyVaccination,nakaya2015SystemsAnalysisImmunity,kazmin2017SystemsAnalysisProtective},
 nearest shrunken centroid algorithm (PAM) \autocite{vahey2010ExpressionGenesAssociated},
@@ -374,11 +371,11 @@ The case for personalised vaccinology lies mostly in building understanding of t
 \section{From association to causality}
 
 Knowing the causal mechanisms of immune response to perturbation are crucial for conceiving of possible interventions.
-For example, assuming the baseline association of \gene{SIGLEC10} with anti-\gls{TNF} response identified in \cref{ch:multiPANTS} is real,
+For example, assuming the baseline association of \gene{SIGLEC10} with anti-\gls{TNF} response identified in \cref{ch:multiPANTS} is a true association,
 would intervening on baseline \gene{SIGLEC10} expression affect probability of response?
-The study designs used in this thesis are uncontrolled, but still provide useful guarantees against reverse causality:
-post-perturbation phenotypic or expression measurements cannot cause baseline gene expression,
-and neither can cause genotype.
+The study designs used in this thesis are uncontrolled, but still provide useful guarantees against reverse causality.
+Post-perturbation phenotypic or expression measurements cannot cause baseline gene expression.
+Post-conception phenotypic or expression measurements cannot cause genotype.
 To estimate causal effects of expression on phenotype,
 what is needed are models that encode causal relationships as testable hypotheses.
 There are several families of such methods, and as I shall now describe, they should be used in combination.
@@ -432,9 +429,9 @@ the first assumption (IV1) is that variant should be associated with the exposur
 The term \gls{MR} comes from an analogy to randomised controlled trials;
 meiotic segregation is largely independent of environmental confounders, 
 so different \gls{eQTL} alleles can be thought to randomly assign different \enquote{doses} of expression \autocite{daveysmith2014MendelianRandomizationGenetic}.
-The second assumption (IV2) is that the variant is not associated with unmeasured confounders of the expression-phenotype association, such as ancestry.
+The second assumption (IV2) is that the variant is not associated with unmeasured confounders of the expression-phenotype association (e.g. population structure).
 The third assumption (IV3) is that the variant has no association with phenotype except through expression. 
-Combined, these assumptions place expression as complete mediator (vertical pleiotropy) of the effect of the \gls{eQTL} on phenotype (\cref{fig:discussion_MR_assumptions}).
+Combined, these assumptions place expression as a complete mediator (vertical pleiotropy) of the effect of the \gls{eQTL} on phenotype (\cref{fig:discussion_MR_assumptions}).
 The effects of variant on expression and expression on phenotype can be estimated in the same sample, 
 or in non-overlapping samples (two-sample \gls{MR} \autocite{hemani2018EvaluatingPotentialRole,neumeyer2020StrengtheningCausalInference}).
 Two-sample \gls{MR} can leverage existing large \gls{eQTL} catalogues,
@@ -468,7 +465,7 @@ then apply those models in \gls{GWAS} cohorts to test the association of genetic
 Violation of \gls{MR} assumptions can result in estimating a causal effect of expression on phenotype where there is none.
 The most troublesome assumption of \gls{MR} is IV3.
 If there is no temporal ordering of exposure and outcome,
-for instance, when evaluating the causal effect of day 7 post-vaccination gene expression on day 7 CD4\textsuperscript T cell abundance,
+for instance, when evaluating the causal effect of day 7 post-vaccination gene expression on day 7 CD4\textsuperscript{+} T cell abundance,
 IV3 can be violated by reverse causation,
 where the association between variant and expression might be mediated by the cell abundance phenotype.
 If this is suspected, 
@@ -480,9 +477,9 @@ IV3 can be violated by linkage if the eQTL does not actually have any effect on 
 but simply is in \gls{LD} with another variant that does;
 and can also be violated by the existence of horizontal pleiotropy, 
 where the effect of the variant on expression and phenotype are independent (\cref{fig:discussion_MR_assumptions}).
-Colocalisation methods, as used in \cref{ch:hird_reQTL}, can be used to test whether the same causal variant affects expression and phenotype, distinguishing pleiotropy from linkage;
-however, colocalisation is necessary but not sufficient for mediation,
-thus does not distinguish mediation (vertical pleiotropy) from horizontal pleiotropy \autocite{hemani2018EvaluatingPotentialRole}.
+Colocalisation methods, as used in \cref{ch:hird_reQTL}, can be used to test whether the same causal variant affects expression and phenotype, distinguishing pleiotropy from linkage.
+However, colocalisation is necessary but not sufficient for mediation,
+thus it does not distinguish mediation (vertical pleiotropy) from horizontal pleiotropy \autocite{hemani2018EvaluatingPotentialRole}.
 %
 % Mediation can exist in the absence of a 'significant' total effect G -> pheno
 % http://davidakenny.net/cm/mediate.htm
@@ -516,7 +513,7 @@ As discussed above, \gls{MR}, colocalisation, and mediation analysis can be seen
 %
 % allelic series in drug discovery
 % https://www.nature.com/articles/nrd4051
-A combination of methods addresses limitations that cannot be solved by increasing sample size alone.
+A combination of methods addresses limitations that cannot be solved by increasing sample size.
 Triangulation will be critical in moving from a descriptive to a mechanistic understanding of immune response to perturbations.
 
 \section{Concluding remarks}
@@ -531,7 +528,7 @@ yet still lie at the beginning of a long road leading to a full understanding of
 The goal must be to not only observe the immune response to perturbation,
 but to be able to predict it,
 and to understand the causal relationships within the immune system that will ultimately guide the rational design and administration of vaccines and drugs.
-For this we need study designs and analysis strategies to detect robust and replicable associations with sensible response phenotypes.
+For this, we need study designs and analysis strategies to detect robust and replicable associations with sensible response phenotypes.
 We need need technologies that quantify the immune system with great richness and resolution, yet remain affordable enough to do so without sacrificing sample size.
 We need triangulation via multiple lines of evidence, 
 requiring confluence of methodology and collaboration of minds.

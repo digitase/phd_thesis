@@ -6,19 +6,19 @@
 \chapter{Transcriptomic associations with anti-\glsfmtshort{TNF} drug response in \glsfmtlong{CD} patients}
 \label{ch:multiPANTS}
 
-% TODO:
-% Collab note
-% work heere carreid out in collaboration with exeter and abbive and colleges at sanger
-% Pants study run by authors
-%   clinical and phenotypeic
-% abbvie:
-%     libprep   % RNAseq,
-% mark , sam lent
-%     initial read quality control, read mapping and quantification, and flagging of samples using picard, sex mismatch
-% abbvie: 
-    % genome wide me array and estimating the Houseman method (\software{minfi::estimateCellCounts} \url{https://academic.oup.com/bioinformatics/article/30/10/1363/267584})
-%  genotype data from sazo
-%      where genotype qc done by alex
+\textit{
+    The work presented in this chapter is a collaboration between 
+    the Wellcome Sanger Institute,
+    the Royal Devon and Exeter Hospital National Health Service (NHS) Foundation Trust,
+    the University of Exeter,
+    and AbbVie.
+    I would like to thank 
+    Nicholas Kennedy and Tariq Ahmad for kindly extending the opportunity to collaborate on the PANTS cohort;
+    Mark Reppell, Samantha Lent, and others at AbbVie, for performing the RNA-seq library preparation and sequencing, initial quality control, alignment and quantification, and estimation of cell proportions from methylation data;
+    Simeng Lin, for advice on the sample structure of PANTS;
+    Aleksejs Sazonovs, for performing the genotype quality control;
+    and other individuals in the Sanger-AbbVie-Exeter PANTS working group, for their feedback during our video conferences.
+}
 
 \section{Introduction}
 
@@ -58,7 +58,6 @@ Within 10 years of diagnosis, approximately 50\% of patients with CD develop fur
 Given the rising prevelance and large impact on quality of life, there is active research into developing treatment regimes with the goal of inducing complete mucosal healing \autocite{levin2016MechanismActionAntiTNF,roda2020CrohnDisease}.
 
 \subsection{Anti-\glsfmtshort{TNF} therapies for \glsfmtlong{CD}}
-\todo{the subsection on anti-TNFs in the intro chapter may be merged here}
 
 % <What is TNF>
 \Gls{TNF}, also known by the archaic name \gls{TNF}\nobreakdash-\textalpha, is a proinflammatory cytokine produced mainly by immune cells such as monocytes, macrophages, \gls{NK} cells, T cells, and B cells.
@@ -785,7 +784,8 @@ Gene set overrepresentation analyses with the hypergeometric test were conducted
 % drug type (infliximab or adalimumab), immunomodulator use,
 % and the first within-sample principal component were
 % included as covariates (Supplementary Table 2).
-
+%
+% NOTE: QC details here also from Alex's thesis
 Genotype data were subsetted from the post-quality control \gls{PANTS} cohort genotypes used in \textcite{sazonovs2019HLADQA105Carriage},
 where the preprocessing pipeline is described in full detail.
 These data are from whole blood samples collected into EDTA tubes at week 0 and genotyped on the Illumina CoreExome genotyping array.
@@ -793,9 +793,7 @@ Pre-imputation quality control was performed as described in \textcite{delange20
 Imputation was performed using the Sanger Imputation Service with the Haplotype Reference Consortium panel.
 Post-imputation, samples that were non-European, related (proportion identity-by-descent > 0.1875), or were outliers in genotype missingness or heterozygosity rate were removed;
 \glspl{SNP} that were poorly imputed (INFO score < 0.4), deviated from \gls{HWE} (p < 1e-10), had high missingness (> 5\%), or low \gls{MAF} (< 1\% before subsetting) were removed.
-\todo{I've collected the QC details here from Alex's thesis}
 \num{7503762} \glspl{SNP} remained after filtering.
-\todo{precision for integers}
 Genotypes were converted to dosages of the non-reference allele.
 
 \subsection{\Glsfmtlong{reQTL} mapping}
@@ -945,7 +943,6 @@ week 0 baseline before commencing anti-\gls{TNF} therapy, and weeks 14, 30 and 5
 % \todo{Some primary non-responders have loss of response samples. Not sure why.}
 After quality control, expression data was available for 15584 genes and 814 samples.
 These samples come from 324 patients, whose characteristics are shown in \cref{tab:multipants_table1}.
-\todo{add caption and label after finalising table data}
 The proportion of primary non-responders is high (43.8\%) compared to the overall proportion in the \gls{PANTS} cohort (23.8\%, \autocite{kennedy2019PredictorsAntiTNFTreatment}).
 This is due to sample selection for \gls{RNAseq} to balance the sample size for each combination of drug and primary response status.
 
@@ -1128,7 +1125,6 @@ and the numbers of significant genes drop to 379, 177, and 1302 for infliximab, 
 This again suggests many effects are mediated by differences in immune cell composition between responders and non-responders.
 
 % TODO: add module names
-% TODO: add up reg modules
 Modules including generic immune activation, monocytes, TLR and inflammatory signalling, and neutrophils were downregulated in responders; 
 whereas B cell and plasma cell modules were upregulated (\cref{fig:multipants_dge_panelPlot_week_14_R_N_cellPropF}).
 These modules remained differentially expressed with the same direction of effect after adjusting for cell composition (\cref{fig:multipants_dge_panelPlot_week_14_R_N_cellPropT}), 
@@ -1298,7 +1294,6 @@ As \gls{PANTS} is an observational study, it was able to include some patients w
 even after meeting the definition of primary non-response at week 14.
 For both responders and non-responders, expression data was also available from blood samples around week 30 and week 54, and at additional visits scheduled in the event of secondary LOR.
 
-% TODO: may not be expressed right
 I fit a natural cubic spline to the expression of each gene as a function of study day, and tested for general differences in expression over time between responders and non-responders.
 This analysis was performed only with drugs pooled due to lower sample sizes for later timepoints.
 Without adjusting for cell composition, 
@@ -1315,7 +1310,8 @@ Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_tra
     \caption{
         \textbf{Gap statistic versus cluster number $k$.}
         Error bars derived from 500 bootstraps. 
-        The optimal number of clusters is defined as the smallest $k$ after which the gap statistic does not significantly increase at $k+1$.
+        The optimal number of clusters is defined as the smallest $k$ where Gap($k$) is greater than the lower bound of Gap($k+1$) \autocite{tibshirani2001EstimatingNumberClusters}.
+        Here, the optimal $k$ is six.
     }
     \label{fig:multipants_dge_spline_fviz_nbclust_gap_stat}
 \end{figure}
@@ -1323,9 +1319,9 @@ Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_tra
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_trajectories.pdf}
-    % TODO: normalised?
     \caption{
         \textbf{Normalised expression over the timepoints for genes in the six identified clusters.}
+        Log scaled expression for each gene was standardised before clustering.
         Error bars are the expression mean and standard deviation for the genes at each timepoint in primary responders and non-responders.
     }
     \label{fig:multipants_dge_spline_cluster_trajectories}
@@ -1417,7 +1413,6 @@ However, direct interpretation of these reQTLs is complicated by changing cell c
 %     \label{fig:multipants_dge_}
 % \end{figure}
 
-% \todo{any need to add w14 to plot?}
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_dge_eqtl.pm_w30_vs_w0_and_w54_vs_w0}
@@ -1531,6 +1526,11 @@ part of an antigen presentation pathway that senses bacterial DNA and activates 
 Type I interferons have pathogenic or protective roles in many \glspl{IMID} \autocite{ivashkiv2014RegulationTypeInterferon}.
 It has been suggested that type I interferon responses induced via TLR7 and TLR8 can suppress colitis in mouse models, and play a role in maintaining gut homeostasis \autocite{lu2018TolllikeReceptorsInflammatory,corridoni2018EmergingMechanismsInnate},
 so upregulation here may again represent a less severe baseline disease in future responders.
+% TODO
+% https://www.nature.com/articles/s41467-018-07841-3
+% Interestingly, Oncostatim M (OSM21) and TREM122 previously associated with anti-TNF response were within our corticosteroid response gene signature (Fig. 4g), and this signature PC1 showed a high correlation with OSM and TREM1 (0.79 and 0.89, P < 0.0001). We also noted a substantial overlap between the genes from the PROTECT corticosteroid response gene signature and previously described anti-TNF response genes21 (Fig. 4g).
+% ...
+% Notably, the corticosteroid response gene signature showed a substantial overlap with genes previously associated with anti-TNF response, and exhibited a similar difference between responders and nonresponders to anti-TNF or anti-integrin α4β7 therapies. These similarities support an emerging concept in the field that the mucosal inflammatory state as measured by gene expression may better define the likelihood of response to current treatment approaches than conventional clinical measures of severity.
 
 Most previously reported baseline markers in blood and gut biopsies were non-significant in this study.
 % One exception is \gene{PTGS2}, which is also specific to Mono3 in \textcite{villani2017SinglecellRNAseqReveals}.
@@ -1560,6 +1560,7 @@ Set-based association tests that draw on changes in multiple genes,
 % such as the cell abundance module associations reported for gut biospies by \textcite{martin2019SingleCellAnalysisCrohn},
 such as the expression module associations for blood in this study,
 may be more reproducible compared to single-gene markers. 
+% TODO: TREM1 look at the drug level achievement argument from verstockt
 
 Although this study is purely descriptive, a future aim will be to see if the identified baseline module associations also imply that response status can be predicted from baseline expression.
 % Correction for cell proportions has thus far provided complementary interpretations of total effect and effects not mediated by cell count.
@@ -1603,15 +1604,11 @@ this does demonstrate that gut markers can coincide with blood markers if expres
 
 When considering the interaction between change from week 0 to week 14 and response,
 the general pattern is magnification in responders,
-where the same expression changes occurring in both responders and non-responders tend to have greater magnitude in responders.
+where the same expression changes occur with greater magnitude than in non-responders.
 A potential hypothesis is a continuum of response from non-response to response.
 \textcite{gaujoux2019CellcentredMetaanalysisReveals} found changes in cell proportions in response to anti-\gls{TNF} treatment were magnified in responders, 
 also supporting response as continuous phenotype.
 This study confirms a similar trend at the transcriptional level.
-% TODO
-% https://www.nature.com/articles/s41467-018-07841-3
-% Notably, the corticosteroid response gene signature showed a substantial overlap with genes previously associated with anti-TNF response, and exhibited a similar difference between responders and nonresponders to anti-TNF or anti-integrin α4β7 therapies. These similarities support an emerging concept in the field that the mucosal inflammatory state as measured by gene expression may better define the likelihood of response to current treatment approaches than conventional clinical measures of severity.
-% (Oncostatim M (OSM) and TREM122)
 
 % \1 PNR definition
 %     \2 its a very complex binary, but certainly useful
@@ -1671,7 +1668,7 @@ or prediction of primary response status.
 % If one assumes the model where response and non-response lie along a phenotypic continuum,
 % it may be less likely that the opposing directions of regulation can be explained by unmodelled variables such as serum drug level being higher in responders.
 % Or indeed TNF being lower in responders.
-% \todo{not entirely sure this this is statistically rigourous due to third var effects?}
+% \todo{not entirely sure this this is statistically rigorous due to third var effects?}
 Since the difference is maintained until week 54, by which time patients would have received many doses of drug,
 it is also more likely that response is due to some biological property of an individual patient.
 Studies of anti-\gls{TNF} response in \gls{RA} patients have also 
@@ -1793,10 +1790,3 @@ so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls
 However, the presence of \glspl{eQTL} for most genes and the presence of strong differences in expression post-induction may allow testing for causal mechanisms where genotype affects drug response via expression.
 Strategies for moving onto both prediction and causal inference will be discussed in \cref{ch:discussion}.
 
-% TODO: resolution of sets
-% testing the two specific hypotheses/mechs of antiTNF action
-% in this ch, not possible
-
-% TODO replace cell proportions with cell composition, except in methods
-
-% TODO: TREM1 look at the drug level achievement argument from last paper
