@@ -1085,11 +1085,15 @@ Note that although PEER factors are correlated with xCell scores (\cref{fig:}),
 I attribute their claim to the fact that there are no interaction terms between genotype and PEER factors, so the coefficients for each genotype-xCell scores interactions still have their standard interpretation: $\beta_x + \beta_{cx}c$ increase in log2 expression per unit of effect allele dosage, where $\beta_x$ is the main effect of genotype, $\beta_{cx}$ is the interaction effect, and $c$ is xCell score.
 
 \subsection{Gene set enrichment analyses}
+\label{subsec:hird_reQTL_geneSetEnrichment}
 
 Ranked gene set enrichment analyses with \software{tmod::tmodCERNOtest} were conducted as described in \cref{subsec:hird_dge_geneSetEnrichment},
 using \glspl{BTM} from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
 
-Gene set overrepresentation analyses were run with \software{gprofiler2::gost} \autocite{raudvere2019ProfilerWebServer},
+Gene set overrepresentation analyses were run with 
+\software{tmod::tmodHGtest} which implements the hypergeometric test for enrichment in \glspl{BTM}, with \gls{BH} \gls{FDR} control at 0.05.
+Gene set overrepresentation analyses were also run with 
+\software{gprofiler2::gost} \autocite{raudvere2019ProfilerWebServer},
 which derives gene sets from
     Gene Ontology,
     pathway databases (KEGG, Reactome, WikiPathways),
@@ -1097,8 +1101,10 @@ which derives gene sets from
     pathway databases (KEGG, Reactome, WikiPathways),
     protein databases (Human Protein Atlas, CORUM),
     and phenotype ontologies (HP).
-The 13570 genes assayed by both array and \gls{RNAseq} were used as a custom background set (\texttt{domain\_scope='custom'}).
-The default g:SCS method was used to control for multiple testing while accounting for the hierarchical structure of certain gene set databases like the Gene Ontology.
+The default \software{gprofiler2} g:SCS method was used to control for multiple testing while accounting for the hierarchical structure of certain gene set databases like the Gene Ontology.
+In both tests, 
+the 13570 genes assayed by both array and \gls{RNAseq} were used as a custom background set.
+% (\texttt{domain\_scope='custom'}) for gprofiler
 
 \subsection{Statistical colocalisation}
 \label{subsec:hird_reQTL_coloc}
