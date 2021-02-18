@@ -116,6 +116,7 @@ This may undertreat patients that require more aggressive therapy, allowing the 
 An inverted approach begins at biologic therapies, then steps-down the pyramid if possible.
 This risks exposing patients to aggressive therapies they may not have needed \autocite{flamant2018InflammatoryBowelDisease}.
 The best approach would be to predict whether a particular treatment will be required and effective for a patient, especially given the costliness and patient risks associated with therapies near the top of the pyramid.
+% TODO: e.g. dose optimisation, combination therapy with steroids or immunomodulators
 Baseline prediction would be especially valuable for stratifying patients to specific therapies.
 
 \subsection{Predicting response to anti-\glsfmtshortpl{TNF}}
@@ -205,7 +206,8 @@ with the aim of identifying common genetic variants controlling expression respo
 
 \subsection{The PANTS cohort}
 
-\gls{PANTS} is a prospective, observational, UK-wide, cohort study of response to anti-\gls{TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
+% NOTE: cohort studies are observational
+\gls{PANTS} is a UK-wide, prospective, observational cohort study of response to anti-\gls{TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
 The study was registered with ClinicalTrials.gov identifier NCT03088449, and the protocol is available at \url{https://www.ibdresearch.co.uk/pants/}.
 % "The eligibility criteria were as follows: age 6 years or older; diagnosis of Crohn’s disease involving the colon, the small intestine, or both; and active luminal disease supported by a C-reactive protein (CRP) of more than 3 mg/L 90 days before the first dose, faecal calprotectin of more than 50 μg/g between 90 days before and 28 days after first dose, or both."
 Total enrollment was 1610 patients, who were at least 6 years old, had active luminal \gls{CD}, and were naive to anti-\gls{TNF} therapy.
@@ -322,14 +324,15 @@ The criteria for primary non-response was \emph{either} of the following:
     \item compared to week 0, a decrease in \gls{CRP} by less than 50\% or to >\SI{3}{\milli\gram\per\litre}, \emph{and} a decrease in \gls{HBI} by less than 3 points or to >4.
 \end{itemize}
 As \gls{PANTS} was an observational study that continued until drug withdrawal, a patient's clinician may have decided to continue anti-\gls{TNF} therapy even if a patient had primary non-response, so it was possible for non-responders to be sampled past week 14.
-The criteria for primary response was \emph{all} of the following:
+The criteria I used to define primary response\footnote{These are the criteria used by \textcite{kennedy2019PredictorsAntiTNFTreatment} to define week 14 remission.} was \emph{all} of the following:
 \begin{itemize}
     \item not classified as a primary non-responder;
     \item \gls{CRP} \SI{\le 3}{\milli\gram\per\litre} by week 14;
-    \item \gls{HBI} < 4 by week 14.
+    \item \gls{HBI} \SI{\le 4} by week 14.
 \end{itemize}
-Grey zone patients that only met a subset of criteria for either primary response or non-response were excluded.
+Patients that only met a subset of criteria for either primary response or primary non-response were excluded.
 
+% TODO: check this section. PNR is right, but PR is not  PNR is right, but PR is not "Response" on the flowchart, but "Remission"
 % Selection criteria for samples from Nick:
 %
 % "~200 for each drug, ~100 PNR, 100 remission. PNR had to be PNR at week 14 and non-remission at week 54 (or unknown at week 54). 
@@ -404,14 +407,14 @@ The number of samples per patient ranged from one to four, with a median of thre
 
 The Ensembl 96 gene annotation contains \SI{58884} genes, many of which are not expressed in whole blood.
 Effective library sizes were computed using the \gls{TMM} method in \software{edgeR} \autocite{robinson2010EdgeRBioconductorPackage}.
-Between-sample normalisation for library size was performed using \texttt{edgeR::cpm}, converting counts to \gls{CPM}.
+Between-sample normalisation for library size was performed using \software{edgeR::cpm}, converting counts to \gls{CPM}.
 Genes with low expression were filtered,
 requiring >1.25 CPM in >10\% of samples (1.25 \gls{CPM} was approximately 10 counts at the median library size of 8 million unique mapped read pairs),
 and non-zero expression in >90\% of samples.
 % NOTE: probably don't need to remove these manually in future.
 Globin genes and short \glspl{ncRNA} were removed.
 A total of \num{15511} genes remained after filtering.
-Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using \texttt{voomWithDreamWeights} from \software{variancePartition} \autocite{hoffman2016VariancePartitionInterpretingDrivers}.
+Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using \software{voomWithDreamWeights} from \software{variancePartition} \autocite{hoffman2016VariancePartitionInterpretingDrivers}.
 
 \subsection{\Glsfmtlong{DGE}}
 
@@ -495,7 +498,7 @@ This is a crude approach, but the sample size is large compared to number of \gl
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.plotVarPart.pdf}
     \caption{
-        \textbf{Variance partition analysis showing distribution of per-gene percentage of variance in expression explained by each variable.}
+        \textbf{Variance components analysis showing distribution of per-gene percentage of variance in expression explained by each variable.}
         Variables are ordered by the median of per-gene variance proportion estimates.
         random\_numbers is the null, drawn from the standard normal distribution.
         PANTS.ID = patient ID, NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4+ T cell, CD8 = CD8+ T cell.
@@ -677,7 +680,7 @@ I set two inner knots at week 14 and week 30, as expression is expected to chang
 To include all data to within the boundaries, the two boundary knots were set at the minimum and maximum values of study day rather than week 0 and week 54.
 % "Function ns() from package splines indeed implements a natural cubic spline (aka restricted cubic spline) but using a B-splines basis representation. This provides an equivalent fit but it is not the same as the expansion you wrote in math. This expansion is implemented in function rcs() from the package rms."
 % The function ns(Study\_Day, knots=7*c(14, 30)) returns a basis matrix for the spline with 3 \gls{df} (3 columns).
-A basis matrix \autocite{perperoglou2019ReviewSplineFunction} was computed with \texttt{ns(Study\_Day, knots=7*c(14, 30))},
+A basis matrix \autocite{perperoglou2019ReviewSplineFunction} was computed with \software{ns(Study\_Day, knots=7*c(14, 30))},
 which is a matrix with 3 columns, each column being a transformation of the input, study day.
 The columns are fit in the regression model in place of study day to allow for non-linear effects of study day on expression.
 The model form used was as in \cref{eq:multiPANTS_dge_model},
@@ -742,7 +745,7 @@ The hierarchical clustering tree was then cut into that number of clusters.
 % measurements come withintrinsic noise which makes their time series clustering a difficult task. Here, we show howto cluster such data with the package TMixClust. TMixClust is a soft-clustering methodwhich employs mixed-effects models with nonparametric smoothing spline fitting and is ableto robustly stratify genes by their complex time series patterns.
 % \url{https://www.nature.com/articles/s41598-018-36135-3}
 
-\subsubsection{Rank-based gene set enrichment on gene modules}
+\subsubsection{Gene set enrichment analyses}
 
 Rank-based gene set enrichment analyses were conducted using \software{tmod::tmodCERNOtest} \autocite{weiner3rd2016TmodPackageGeneral} and \glspl{BTM}, as described in \cref{subsec:hird_dge_geneSetEnrichment}.
 %
@@ -803,7 +806,7 @@ Differences are described below.
 
 \subsubsection{Computing genotype PCs}
 
-Samples were projected onto \glspl{PC} defined by 1000 Genomes Project samples using \gls{SNP} weights from \software{akt},
+Samples were projected onto \glspl{PC} defined by 1000 Genomes Project samples using \gls{SNP} weights from {akt}\footnote{\url{https://github.com/Illumina/akt}},
 confirming that samples were of European ancestry (\cref{fig:multipants_genotype_akt_1000g_pca}).
 % The first four \glspl{PC} in the HapMap 3 were found to be significant according to the Tracy-Widom test in \cref{subsec:hird_dge_genotype_pc}.
 % This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
@@ -829,7 +832,7 @@ This should be sufficient, as the \gls{PANTS} cohort is less ethnically diverse 
 Between-sample normalisation and variance stabilisation was applied to the counts matrix (DESeq2::vst), resulting in log2 scale expression estimates.
 As described in \cref{sec:hird_reQTL_methods},
 given known factors (response, drug, five scaled genotype \glspl{PC}, five cell proportions), 
-\software{PEER} was used to find additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
+{PEER} was used to find additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
 This is similar to the process undertaken in \cref{subsubsec:multiPANTS_var_selection}, but these hidden factors can be unmeasured.
 To maximise efficiency for cis-\gls{eQTL} mapping, 
 the number of PEER factors retained for each timepoint was selected to maximise the number of genes with at least one significant \gls{eQTL} detected on chromosome 1 (\cref{fig:multipants_reqtl_PEER_k_choice}).
@@ -1367,7 +1370,7 @@ the genes in cluster 4 are coordinately downregulated as a set in primary respon
 % APOL2
 % APOL1
 Cluster 3 is also of interest, enriched for type I interferon response (LI.M127, FDR=\num{0.005680666}) and interferon (DC.M3.4, FDR=\num{0.0005266239}) modules,
-as well as genes that contain putative transcription factor binding motifs for interferon regulatory factors \gene{IRF7} (\software{g:Profiler} term ID TF:M00453\_1, adj. p value=\num{0.0050514484}) 
+as well as genes that contain putative transcription factor binding motifs for interferon regulatory factors \gene{IRF7} ({g:Profiler} term ID TF:M00453\_1, adj. p value=\num{0.0050514484}) 
 and \gene{IRF8} (TF:M11684\_1, adj. p value=\num{0.0077680709}; TF:M11685\_1, adj. p=\num{0.0103433288}).
 The cluster trajectory shows direction of expression change is opposing in responders and non-responders from week 0 to week 14, followed by sustained differences at week 30 and week 54.
 The trajectory and interferon-related gene set enrichments are consistent with those identified in \cref{subsec:multipants_dge_opposing_interferon}.
@@ -1406,7 +1409,7 @@ Most eSNPs were shared across timepoints;
 only six eSNPs-eGene pairs were significant at BH FDR < 0.05:
 with 1/6 for week 30 versus week 0 and 5/6 for week 54 versus week 0 (\cref{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}).
 Of the six pairs, \gene{NMI} and \gene{EPSTI1} both had magnified \gls{eQTL} effects at week 54 compared to week 0,
-and both are annotated to contain putative binding motifs for \gene{IRF8} and \gene{IRF2} (\software{g:Profiler} term IDs TF:M11685\_1 and TF:M11665\_1).
+and both are annotated to contain putative binding motifs for \gene{IRF8} and \gene{IRF2} ({g:Profiler} term IDs TF:M11685\_1 and TF:M11665\_1).
 However, direct interpretation of these reQTLs is complicated by changing cell composition in bulk expression data (discussed in \cref{subsec:hird_reQTL_methods_cellTypeInteraction} and \cref{sec:discussion_bulkData}).
 
 % \begin{figure}
@@ -1529,6 +1532,9 @@ part of an antigen presentation pathway that senses bacterial DNA and activates 
 Type I interferons have pathogenic or protective roles in many \glspl{IMID} \autocite{ivashkiv2014RegulationTypeInterferon}.
 It has been suggested that type I interferon responses induced via TLR7 and TLR8 can suppress colitis in mouse models, and play a role in maintaining gut homeostasis \autocite{lu2018TolllikeReceptorsInflammatory,corridoni2018EmergingMechanismsInnate},
 so upregulation here may again represent a less severe baseline disease in future responders.
+% TODO: what about the main IFN flip result then?
+% see "Expression of these genes was higher in responders at week 0 and lower at all post-treatment timepoints."
+%
 % TODO
 % https://www.nature.com/articles/s41467-018-07841-3
 % Interestingly, Oncostatim M (OSM21) and TREM122 previously associated with anti-TNF response were within our corticosteroid response gene signature (Fig. 4g), and this signature PC1 showed a high correlation with OSM and TREM1 (0.79 and 0.89, P < 0.0001). We also noted a substantial overlap between the genes from the PROTECT corticosteroid response gene signature and previously described anti-TNF response genes21 (Fig. 4g).

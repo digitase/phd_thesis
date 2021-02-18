@@ -52,15 +52,6 @@
 % Format numbers using e.g. \numprint{2.742647826672E-01}
 \usepackage{numprint}
 
-% Format si units
-%
-\usepackage{siunitx}
-\sisetup{round-mode=places, round-precision=2, range-phrase=--, range-units=single}
-% Declare units
-\DeclareSIUnit\bp{bp}
-\DeclareSIUnit\year{yr}
-\DeclareSIUnit\month{mo}
-
 % Define line spacing
 % Setspace switches off double-spacing at places where even the most die-hard
 % official would doubt its utility (footnotes, figure captions, and so on); it’s
@@ -230,6 +221,7 @@
     giveninits=true,
 	uniquename=false,
 	sorting=none,
+    intitle=true,
 	date=year,
 	url=false,
 	doi=true,
@@ -321,7 +313,6 @@
 %
 % Abbreviation definitions
 %
-% \newabbreviation[options]{label}{short}{long}
 \newabbreviation[longplural=genome-wide association studies]{GWAS}{GWAS}{genome-wide association study}
 \newabbreviation[longplural=transcriptome-wide association studies]{TWAS}{TWAS}{transcriptome-wide association study}
 \newabbreviation[longplural=quantitative trait loci]{QTL}{QTL}{quantitative trait locus}
@@ -418,9 +409,19 @@
 \newabbreviation[]{CDR}{CDR}{complementarity-determining region}
 \newabbreviation[]{MR}{MR}{Mendelian randomisation}
 \newabbreviation[]{IV}{IV}{instrumental variable}
-% \newabbreviation[]{bp}{bp}{base pair}
+\newabbreviation[]{GO}{GO}{Gene Ontology}
 % \newabbreviation[]{}{}{}
+% \newabbreviation[options]{label}{short}{long}
 %
+
+% Format si units
+%
+\usepackage{siunitx}
+\sisetup{round-mode=places, round-precision=2, range-phrase=--, range-units=single}
+% Declare units
+\DeclareSIUnit\bp{bp}
+\DeclareSIUnit\year{yr}
+\DeclareSIUnit\month{mo}
 
 %
 % Custom commands
@@ -436,6 +437,7 @@
 
 % Format software package names
 \newcommand{\software}[1]{\texttt{#1}}
+% \newcommand{\software}[1]{{#1}}
 
 % Format gene names
 \newcommand{\gene}[1]{\textit{#1}}
