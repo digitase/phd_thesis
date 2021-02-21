@@ -173,7 +173,7 @@ One of the largest sources of variation in bulk blood expression data is variati
 The more cell type-specific a gene's expression, the more its measurement in bulk is affected by cell composition \autocite{farahbod2020UntanglingEffectsCellular}.
 Highly cell type-specific genes can be treated as marker genes, 
 used in deconvolution methods to estimate cell proportions in bulk samples when they are not directly measured.
-In \cref{ch:hird_reQTL}, xCell---while not technically a deconvolution method---was used to estimate cell type enrichment scores from array and \gls{RNAseq} data.
+In \cref{ch:hird_reQTL}, \software{xCell}---while not technically a deconvolution method---was used to estimate cell type enrichment scores from array and \gls{RNAseq} data.
 In \cref{ch:multiPANTS}, estimates of cell proportions were computed by deconvolution of matched genome-wide methylation data.
 When fit as covariates in linear regression, 
 cell abundance estimates act as precision variables for sampling noise, 
@@ -183,7 +183,7 @@ In \cref{ch:multiPANTS}, I chose to run two sets of models with and without incl
 gaining some information on which effects are likely driven by cell abundance, and which are driven by per-cell up or downregulation of transcription.
 
 Using major cell populations for correction misses the contribution of rare populations \autocite{pellegrinocoppola2020CorrectionBothCommon}.
-For cis-\gls{eQTL} mapping in \cref{ch:hird_reQTL,ch:multiPANTS}, where the main concern was maximising the number of \gls{eQTL} detected,
+For \textit{cis}-\gls{eQTL} mapping in \cref{ch:hird_reQTL,ch:multiPANTS}, where the main concern was maximising the number of \gls{eQTL} detected,
 hidden factors from PEER were included into models in addition to known cell abundance estimates.
 PEER factors were correlated with known cell abundance, so it is likely they capture additional variation from rarer cell types.
 If having interpretable covariates for cell abundance is unimportant,

@@ -829,12 +829,12 @@ This should be sufficient, as the \gls{PANTS} cohort is less ethnically diverse 
 
 \subsubsection{Finding hidden confounders in expression data}
 
-Between-sample normalisation and variance stabilisation was applied to the counts matrix (DESeq2::vst), resulting in log2 scale expression estimates.
+Between-sample normalisation and variance stabilisation was applied to the counts matrix (DESeq2::vst), resulting in $\log_2$ scale expression estimates.
 As described in \cref{sec:hird_reQTL_methods},
 given known factors (response, drug, five scaled genotype \glspl{PC}, five cell proportions), 
 {PEER} was used to find additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
 This is similar to the process undertaken in \cref{subsubsec:multiPANTS_var_selection}, but these hidden factors can be unmeasured.
-To maximise efficiency for cis-\gls{eQTL} mapping, 
+To maximise efficiency for \textit{cis}-\gls{eQTL} mapping, 
 the number of PEER factors retained for each timepoint was selected to maximise the number of genes with at least one significant \gls{eQTL} detected on chromosome 1 (\cref{fig:multipants_reqtl_PEER_k_choice}).
 The selected numbers were 25, 20, 15, and 5 factors for weeks 0, 14, 30, and 54 respectively.
 
@@ -854,7 +854,7 @@ The selected numbers were 25, 20, 15, and 5 factors for weeks 0, 14, 30, and 54 
 \Gls{LOCO} kinship matrices were computed on typed \glspl{SNP} for each chromosome using LDAK as described in \cref{subsec:hird_reQTL_LDAK}.
 % The kinship matrix will be incorporated into the \gls{eQTL} model to adjust for fine-scale population structure.
 
-\subsubsection{Mapping cis-\glsfmtshortpl{eQTL} in each timepoint separately}
+\subsubsection{Mapping \textit{cis}-\glsfmtshortpl{eQTL} in each timepoint separately}
 
 As described in \cref{sec:hird_reQTL_methods},
 \glspl{eQTL} were mapped in each timepoint using a linear mixed model in \software{limix}.
@@ -883,7 +883,7 @@ The sample sizes with both genotype and expression data available for \gls{eQTL}
 % OR is it 15040?
 %
 % The Ensembl gene start and end coordinates correspond to the outermost transcript start and end coordinates.
-For each autosomal gene, cis-\glspl{SNP} within 1 Mb of the Ensembl gene start (gene end on the minus strand),
+For each autosomal gene, \textit{cis}-\glspl{SNP} within 1 Mb of the Ensembl gene start (gene end on the minus strand),
 were filtered to keep \glspl{SNP} where the number of samples homozygous for the minor allele was at least 5.
 Small group numbers lead to data points with high leverage that may be unduly influential on the genotype beta.
 % This is done in place of a per-timepoint \gls{MAF} or minor allele count filters.
@@ -892,7 +892,7 @@ $\sqrt{5/(223\times2)} = \num{0.1058809}$ in the timepoint with the largest samp
 and $\sqrt{5/(84\times2)} = \num{0.1725164}$ in the timepoint with the smallest sample size (week 54).
 
 The limix model for each \gls{SNP}-gene pair had 
-log2 expression as the response variable
+$\log_2$ expression as the response variable
 and genotype dosage as the predictor of interest.
 Other fixed effect predictors were
 the intercept,
@@ -963,23 +963,24 @@ To identify differences in baseline gene expression associated with future prima
 I fit per-gene linear models at 15511 genes, comparing week 0 gene expression in primary responders with primary non-responders.
 Comparisons were performed both within infliximab-only and adalimumab-only subgroups, and with both drugs pooled.
 Models were run both adjusting for cell composition estimates of six immune cell types, and without adjustment.
-Throughout this section, the significance threshold was set at FDR < 0.05 for each comparison, and positive logFCs indicate increased expression in responders versus non-responders.
+% TODO: make FDR= after this all consistent formatting
+Throughout this section, the significance threshold was set at $\text{\gls{FDR}} < 0.05$ for each comparison, and positive $\log_2\text{\glspl{FC}}$ indicate increased expression in responders versus non-responders.
 
 Without adjusting for cell composition, the largest effects were infliximab-only, with 859 genes differentially expressed.
-Only \gene{KCNN3} (log2FC=\num{-0.843455423}) was significant for the adalimumab-only comparison, 
+Only \gene{KCNN3} ($\log_2\text{\gls{FC}}=\num{-0.843455423}$) was significant for the adalimumab-only comparison, 
 % logFC      AveExpr         t      P.Value   adj.P.Val     z.std
 % 0.34597454 6.55605 4.9264804 1.094745e-06 0.016980595 4.8737951
 % 0.31379161 6.55605 4.6913403 3.384743e-06 0.050291627 4.6459748
-and only \gene{SIGLEC10} (log2FC=\num{0.34597454}) was significant in the pooled analysis (\cref{fig:multipants_dge_volcano_week_0_R_N}).
+and only \gene{SIGLEC10} ($\log_2\text{\gls{FC}} = \num{0.34597454}$) was significant in the pooled analysis (\cref{fig:multipants_dge_volcano_week_0_R_N}).
 
 After adjustment for cell composition, there were no longer any significant genes in the infliximab-only analysis, 
 with 856/859 genes that were significant before the comparison having a dampened effect size after correction (smaller absolute effect and same sign), suggesting many effects may be mediated by cell composition.
-\gene{SIGLEC10} in the combined analysis was also non-significant after adjustment (adjusted log2FC=\num{0.31379161}, FDR=\num{0.050291627}).
+\gene{SIGLEC10} in the combined analysis was also non-significant after adjustment (adjusted $\log_2\text{\gls{FC}} = \num{0.31379161}$, FDR=\num{0.050291627}).
 Conversely, at three genes downregulated in the adalimumab-only analysis that were the only significant genes post-adjustment, I observed increased significance:
 %       logFC  AveExpr          t      P.Value  adj.P.Val      z.std
 % -0.33495771 2.569096 -4.5040835 7.723531e-06 0.05989985 -4.4727077
 % -0.35115926 2.569096 -5.0627658 5.212334e-07 0.00677703 -5.0183272
-\gene{PDIA5} (unadjusted log2FC=\num{-0.33495771}, adjusted log2FC=\num{-0.35115926}), 
+\gene{PDIA5} (unadjusted $\log_2\text{\gls{FC}} = \num{-0.33495771}$, adjusted $\log_2\text{\gls{FC}} = \num{-0.35115926}$), 
 % -0.843455423 -0.2360221 -4.7304059 2.689467e-06 0.04171633 -4.69321336
 % -0.879776701 -0.2360221 -4.9610155 8.738353e-07 0.00677703 -4.91811062
 \gene{KCNN3} (\num{-0.843455423}, \num{-0.879776701}), 
@@ -1095,10 +1096,10 @@ The directions of effect in both cases are opposite to this study, but compariso
 
 A previously identified marker in blood, \gene{TREM1} was found to have opposing effects in two studies by \textcite{gaujoux2019CellcentredMetaanalysisReveals} (n=22) and \textcite{verstockt2019LowTREM1Expression} (n=54).
 \gene{TREM1} had the strongest differences between responders and non-responders at baseline in infliximab subcohort, 
-but did not reach significance before (logFC=\num{0.29283535}, FDR=\num{0.0595323})
+but did not reach significance before ($\log_2\text{\gls{FC}} = \num{0.29283535}$, FDR=\num{0.0595323})
 %      logFC  AveExpr          t    P.Value adj.P.Val      z.std
 % 0.29283535 7.668094  2.8665957 0.00429233 0.0595323  2.8558388
-nor after adjusting for cell composition (logFC=\num{0.04625626}, FDR=\num{0.9864125}).
+nor after adjusting for cell composition ($\log_2\text{\gls{FC}} = \num{0.04625626}$, FDR=\num{0.9864125}).
 % 0.04625626 7.668094  0.6661333 0.50560221 0.9864125  0.6657010
 The combined sample size in this study for the infliximab subcohort at baseline was is n=145 (\cref{fig:multipants_studyDay_boxplots}), so it is expected the power in this study is greater.
 
@@ -1143,7 +1144,7 @@ This is in contrast to the baseline responder vs. non-responder comparison,
 where many of the strongest effects in the pooled analysis were driven by stronger effects in one drug.
 
 \gene{SIGLEC10} from the baseline analysis retains its significant association with primary response post-induction, 
-with the same direction of effect (adjusted logFC=\num{0.36610032}).
+with the same direction of effect (adjusted $\log_2\text{\gls{FC}} = \num{0.36610032}$).
 % \todo{highlight a few more individual genes specific to this analysis too? not sure how to pick them at the moment.}
 Some genes previously proposed as baseline markers of response in gut mucosa: \gene{G0S2}, \gene{TNFAIP6}, \gene{S100A8} and \gene{S100A9} by \textcite{arijs2010PredictiveValueEpithelial}; and \gene{OSM} by \textcite{west2017OncostatinDrivesIntestinal},
 were differentially expressed in post-induction blood in this study.
@@ -1208,7 +1209,7 @@ the same genes have larger fold-changes in the same direction for primary respon
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.logFC_C_3R_1R_vs_logFC_C_3N_1N.pdf}
     \caption{
-        \textbf{Expression logFC from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
+        \textbf{Expression $\log_2\text{\gls{FC}}$ from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
         for genes that are differentially expressed from week 0 to week 14 in both responders and non-responders, with a significantly different effect size in responders and non-responders.
         }
         Results adjusted (right) and unadjusted (left) for cell proportions are shown.
@@ -1388,7 +1389,7 @@ and in the spline analysis, with the support of additional data from week 30 and
 
 Given the substantial changes in expression from baseline to post-induction after starting the drug, and the differing trajectories observed in responders and non-responders, 
 I performed \gls{eQTL} mapping to identity common genetic variants associated with expression that may contribute to these differences.
-Variants cis (within \SI{1}{\mega b} of the TSS) to 15040 genes were tested for association.
+Variants \textit{cis} (within \SI{1}{\mega b} of the TSS) to 15040 genes were tested for association.
 Mapping was performed within each timepoint (weeks 0, 14, 30, and 54),
 followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and control for multiple testing using \software{mashr}.
 
@@ -1398,8 +1399,8 @@ followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and co
 % TODO: see https://www.nature.com/articles/nature24277#Sec5
 % for classic U-curve for sharing
 
-The majority 11156/15040 (\percentage{0.74175531914}) of genes were eGenes (a gene with at least one significant cis-eQTL) in at least 1 timepoint (\gls{lfsr} < 0.05).
-The variant with the lowest lfsr over all timepoints for each gene was 
+The majority 11156/15040 (\percentage{0.74175531914}) of genes were eGenes (a gene with at least one significant \textit{cis}-\gls{eQTL}) in at least 1 timepoint (\gls{lfsr} < 0.05).
+The variant with the lowest \gls{lfsr} over all timepoints for each gene was 
 chosen as the lead variant (eSNP) for that gene.
 Most eSNPs were significant in multiple timepoints: 999 significant in 1 timepoint, 381 significant in 2 timepoints, 526 significant in 3 timepoints, 9250 significant in all 4 timepoints.
 I compared eSNP effect sizes between week 0 and each of weeks 14, 30 and 54,

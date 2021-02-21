@@ -946,6 +946,7 @@ In practice, results from the analyses were not substantially affected by the ch
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
 
 \subsubsection{Per-platform \glsfmtshort{DGE} model}
+\label{subsubsec:hird_dge_per_platform_dge_model}
 
 As a meta-analysis was performed, \gls{DGE} analyses were restricted to the \num{13593} genes assayed by both the array and \gls{RNAseq} platforms.
 %
@@ -1204,8 +1205,8 @@ For the frequentist random-effects meta-analysis, nominal per-gene \pvalues{} we
 % Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.
 % Do not confuse with ma05$pposterior(mu=0), which is evaluation of the posterior distribution at a particular value.
 For the Bayesian random-effects meta-analysis, 
-the effect sizes and standard errors from the per-gene meta-analysis output from \software{bayesmeta} were supplied to \software{ashr},
-which models the distribution of effects under the assumption of unimodality \autocite{stephens2016FalseDiscoveryRates}.
+the effect sizes and standard errors from the per-gene meta-analysis output from \software{bayesmeta} were supplied to \software{ashr} \autocite{stephens2016FalseDiscoveryRates},
+which models the distribution of effects under the assumption of unimodality.
 % TODO: what about symmetry?
 \software{ashr} applies empirical Bayes shrinkage to improve the accuracy of effect estimation (e.g. against winner's curse),
 returning posterior effect sizes, posterior standard errors, and their significance (\gls{lfsr}).
