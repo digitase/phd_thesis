@@ -757,7 +757,7 @@ Rank-based gene set enrichment analyses were conducted using \software{tmod::tmo
 For each contrast, 
 as the $t$-statistics are not comparable between genes due to the use of approximate \glspl{df},
 I ranked genes by the signed Z score reported by \software{dream}, which is a monotonic transformation of the \pvalue{}.
-Similarly, moderated F-statistics from the spline are not comparable between genes, so I used the signed F-statistic reported by \software{dream} from the transformation of the \pvalue{}.
+Similarly, moderated $F$-statistics from the spline are not comparable between genes, so I used the signed F-statistic reported by \software{dream} from the transformation of the \pvalue{}.
 
 Gene set overrepresentation analyses with the hypergeometric test were conducted with \software{tmod::tmodHGtest} as detailed in \cref{subsec:hird_reQTL_geneSetEnrichment}.
 
@@ -989,7 +989,7 @@ Conversely, at three genes downregulated in the adalimumab-only analysis that we
 and \gene{IGKV1-9} (\num{-1.1529588}, \num{-1.2231591}).
 
 To identify coordinately up and downregulated gene sets and increase sensitivity for detecting differences between responders and non-responders,
-I performed rank-based gene set analysis in on the per-gene z-statistics using blood transcriptomic modules: annotated sets of coexpressed genes in peripheral whole blood from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
+I performed rank-based gene set analysis in on the per-gene $z$-statistics using blood transcriptomic modules: annotated sets of coexpressed genes in peripheral whole blood from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
 This module-level analysis was also run unadjusted (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropF}) and adjusted for cell composition (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}).
 
 Despite only \gene{SAMD10} having a significantly different effect between drugs at the gene-level (a significant interaction between drug and response at week 0), 
@@ -1286,7 +1286,7 @@ and DC.M5.12 (FDR=\num{1.355467e-13})
         Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. 
         The ranks of genes in interferon-related modules are indicated by colored rug plots. 
         Colored curves show the cumulative fraction of genes in each module. 
-        For non-responders, these modules are enriched for large ranks (large, positive z-statistics). 
+        For non-responders, these modules are enriched for large ranks (large, positive $z$-statistics). 
         The area under the colored curves are the effect sizes (\glspl{AUC}). 
         The null of randomly-distributed ranks is the grey diagonal line.
         PR = primary responder, PNR = primary non-responder.
@@ -1799,4 +1799,4 @@ I also did not find evidence for many strong and interpretable \gls{reQTL} effec
 so was unable to form hypotheses on the genetic mechanisms influencing anti-\gls{TNF} response via expression.
 However, the presence of \glspl{eQTL} for most genes and the presence of strong differences in expression post-induction may allow testing for causal mechanisms where genotype affects drug response via expression.
 Strategies for moving onto both prediction and causal inference will be discussed in \cref{ch:discussion}.
-
+%
