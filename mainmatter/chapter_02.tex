@@ -883,7 +883,7 @@ As systematic experimental factors might differ between batches, requiring diffe
 % 6.5.1.2.	“In the case of collapsing probes to their respective gene symbols, for example, we find that the 1.max strategy (implemented by setting method = "MaxMean" and connectivityBasedCollapsing = FALSE) produces the most robust results.”
 % 6.5.1.3.	i.e. choose the probe with the highest mean of expression over the samples
 Probes were matched to genes using \software{hgug4112a.db}\footnote{\url{https://bioconductor.org/packages/release/data/annotation/html/hgug4112a.db.html}}.
-Most genes were targeted by multiple array probes; \num{31208} probes were collapsed into \num{18216} Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\software{WGCNA::collapseRows(method=MaxMean)}, recommended for probe to gene collapsing by \textcite{miller2011StrategiesAggregatingGene}).
+Most genes were targeted by multiple array probes; \num{31208} probes were collapsed into \num{18216} Ensembl genes using by selecting the probe with the highest mean intensity for each gene (\software{WGCNA::collapseRows(method = \enquote{MaxMean})}, recommended for probe to gene collapsing by \textcite{miller2011StrategiesAggregatingGene}).
 While it would be optimal to select a collapsing method to maximise the concordance between array and \gls{RNAseq} expression values, there were no samples assayed by both platforms in the \gls{HIRD} dataset.
 The final normalised $\log_2$ intensity values for these \num{18216} genes over 173 samples is shown in \cref{fig:hird_array_boxplots_MaxMean}.
 % Also used arrayWeights as precision weight inputs to lmFit
@@ -1199,7 +1199,7 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 % "One assumption of the usual method is that the set of comparisons are either independent or have "Positive dependency""
 % https://stats.stackexchange.com/questions/111756/the-meaning-of-positive-dependency-as-a-condition-to-use-the-usual-method-for
 For per-platform \gls{DGE}, \gls{FDR} was controlled with \software{limma::decideTests} using the \gls{BH} procedure.
-For the frequentist random-effects meta-analysis, nominal per-gene \pvalues{} were converted to \gls{FDR} estimates using \software{p.adjust(method=\enquote{BH})} in R.
+For the frequentist random-effects meta-analysis, nominal per-gene \pvalues{} were converted to \gls{FDR} estimates using \software{p.adjust(method = \enquote{BH})} in R.
 %
 % There is no simple way to get p values from bayesmeta.
 % Posterior predictive checks are implemented in the pppvalue() to generate pvalues by MCMC.

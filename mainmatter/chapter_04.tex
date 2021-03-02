@@ -217,19 +217,19 @@ The study was registered with ClinicalTrials.gov identifier NCT03088449, and the
 Total enrollment was 1610 patients, who were at least 6 years old, had active luminal \gls{CD}, and were naive to anti-\gls{TNF} therapy.
 Patients were invited to attend up to ten major study visits over a maximum follow-up period of three years, or until drug withdrawal.
 
-The anti-\gls{TNF} drugs evaluated were adalimumab and infliximab.
-The study also evaluated infliximab biosimilars; data from patients who received a biosimilar is not included in this chapter.
+The anti-\gls{TNF} drugs evaluated were adalimumab (ADA) and infliximab (IFX).
+The study also evaluated infliximab biosimilars; data from patients who received a biosimilar are not included in this chapter.
 All major visits were scheduled immediately prior to a drug dose.
 Adalimumab and infliximab have 2-week and 8-week dosing intervals respectively, so the timing of major visits was chosen such that the same visit structure could be used for patients on either drug.
-Additional visits were scheduled in case of secondary \gls{LOR}, or premature exit due to drug withdrawal, usually replacing the next scheduled major visit.
+Additional visits were scheduled in case of secondary \gls{LOR} or premature study exit due to drug withdrawal, usually replacing the next scheduled major visit.
 
 % "1241 patients were assessable at week 14. 
 % Primary nonresponse occurred in 170 (21·9%, 95% CI 19·1–25·0) of 775 patients treated with infliximab and 125 (26·8%, 22·9–31·1) of 466 patients treated with adalimumab (table 2). 
 % After excluding primary non-responders, the estimated proportion of infliximab-treated patients who had loss of response by week 54 was 36·9% (32·7–40·9), and for adalimumab was 34·1% (28·4–39·4; appendix pp 15–16). 
 % At week 54, 469 (60·9%; 57·4–64·0) of 770 infliximab-treated patients were classified as being in non-remission, compared with 295 (66·9%; 62·3–71·3) of 441 adalimumab-treated patients (table 2)."
-The overall rate of primary non-response by week 14 was 21.9\% for infliximab, and 26.8\% for adalimumab.
+The overall rate of primary non-response by week 14 was 21.9\% for infliximab and 26.8\% for adalimumab.
 The rate of secondary \gls{LOR} by week 54 among primary responders was 36.9\% for infliximab and 34.1\% for adalimumab.
-Remission rate by week 54 was 39.1\% for infliximab and 33.1\% for adalimumab.
+Rate of remission by week 54 was 39.1\% for infliximab and 33.1\% for adalimumab.
 
 \subsection{Definition of timepoints}
 \label{subsubsec:multiPANTS_timepoints_def}
@@ -288,18 +288,19 @@ The week 0 major visit is the visit immediately prior to the first dose of drug.
 % The study day that sampling on occurs is relative to the day the first drug dose was taken.
 Week 0 to week 14 is the induction period.
 After week 14, patients continued to take their drug according to the prescribed schedule (a dose every 8 weeks for infliximab, and every 2 weeks for adalimumab).
-Whole blood samples at major visits were taken prior to the scheduled drug doses that aligned with those visits, labelled with the visits name, and preserved for \gls{RNAseq} in Tempus Blood RNA Tubes.
+Whole blood samples at major visits were taken prior to the scheduled drug doses that aligned with those visits, labelled with the visit's name, and preserved for \gls{RNAseq} in Tempus Blood RNA Tubes.
+As sampling was always done prior to a scheduled dose, the measured transcriptome reflects the state at trough drug levels.
 
-To measure the transcriptome at trough drug levels, I mapped samples from major and additional visits to four discrete timepoints centered around the four major visits.
-As it could not be guaranteed that visits occurred on the exact day specified in the protocol, I considered the visit windows defined by \textcite{kennedy2019PredictorsAntiTNFTreatment}: week 0 (week \numrange{-4}{0}), week 14 (week \numrange{10}{20}), week 30 (week \numrange{22}{38}), and week 54 (week \numrange{42}{66})\footnote{Negative weeks/days in the actual data indicate the patient was first sampled at least a day before the day they took the first drug dose.}.
+I mapped samples from major and additional visits to four discrete timepoints centered around the four major visits.
+As it could not be guaranteed that visits occurred on the exact day specified in the protocol, I considered the visit windows defined by \textcite{kennedy2019PredictorsAntiTNFTreatment}: week 0 (week \numrange{-4}{0})\footnote{Samples at negative weeks or study days indicate the patient was first sampled before the day they took the first drug dose (week or day 0).}, week 14 (week \numrange{10}{20}), week 30 (week \numrange{22}{38}), and week 54 (week \numrange{42}{66}).
 Samples were mapped to timepoints based on their sample label and study day according to the following mapping criteria:
 \begin{itemize}
     \item Labelled major visit samples were mapped to the corresponding timepoint, regardless of whether they fell within the corresponding window i.e. a sample \emph{labelled} week 54 was always mapped to the week 54 timepoint.
-    \item Samples taken at additional (\gls{LOR} or exit) visits falling within one of the windows were mapped to that timepoint, unless the patient also had a major visit sample inside that window (avoiding any patient having multiple samples in a single timepoint).
+    \item Samples taken at additional (\gls{LOR} or exit) visits falling within one of the windows were mapped to that timepoint, unless the patient also had a major visit sample inside that window. This avoided any patient having multiple samples for a single timepoint.
 \end{itemize}
 Only a small minority of major visit samples fell outside their corresponding windows, mostly for later timepoints where there was more variation around the target day.
-Inclusion of samples from additional visits was important as they often replaced major visits for patients with primary non-response or \gls{LOR}.
-For example, a patient who develops primary-response by week 14 and decides to exit the study will not have a labelled week 14 major visit, but may still have a sample taken at that time labelled as an additional exit visit.
+Inclusion of samples from additional visits was important, as they often replaced major visits for patients with \gls{PNR} or \gls{LOR}.
+For example, a patient who developed \gls{PNR} by week 14 and decided to exit the study would not have a labelled week 14 major visit, but may still have a sample taken at that time labelled as an additional exit visit.
 % \todo{Still discussing with Sim on the exact def of LOR and exit visits to decide whether this is sensible.}
 The mapping of samples to timepoints is shown in \cref{fig:multipants_studyDay_boxplots}.
 Samples included under both of the above mapping criteria should be representative of trough drug levels,
@@ -310,33 +311,32 @@ and exit visits were scheduled for when the next drug dose would have been.
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Study_Day_vs_Visit_Label.pdf}
     \caption{
-        \textbf{Number and sample day distribution for \gls{RNAseq} samples in each timepoint.}
-        Windows for the four major visits are colored in grey. Samples mostly come from major visits, but a small number of \gls{LOR} and exit visit samples were included according to the criteria in \cref{subsubsec:multiPANTS_timepoints_def}.
+        \textbf{Sample size and study day distribution for \gls{RNAseq} samples, stratified by timepoint and study group.}
+        Windows from \textcite{kennedy2019PredictorsAntiTNFTreatment} for the four major \gls{PANTS} visits are colored in grey. 
+        Samples mostly come from major visits, but a small number of \gls{LOR} and exit visit samples were included according to the criteria in \cref{subsubsec:multiPANTS_timepoints_def}.
     }
     \label{fig:multipants_studyDay_boxplots}
 \end{figure}
 
-\subsection{Definition of primary response and non-response}
+\subsection{Definition of primary response and primary non-response}
 \label{multiPANTS:PR_definition}
 
 % "there is agreement that primary nonresponse to anti‐TNF drugs should not be assessed prior to 14 weeks following initial induction infusions with use of infliximab, or prior to 12 weeks for adalimumab injections" \autocite{dhaens2011LondonPositionStatement}
 The definition of primary response and non-response was based on the clinical decision tree from \textcite{kennedy2019PredictorsAntiTNFTreatment}.
-Primary response status was assessed at week 12, prior to the scheduled week 14 visit. 
+Primary response and non-response could be assessed from week 12, with a final classification made by the scheduled week 14 visit. 
+% NOTE: i.e. PNR in the flowchart
 The criteria for primary non-response was \emph{either} of the following: 
 \begin{itemize}
     \item exit for treatment failure before week 14 (e.g. as decided by physician global assessment), \emph{or} corticosteroid use at week 14 (a continuing or new prescription);
-    \item compared to week 0, a decrease in \gls{CRP} by less than 50\% or to >\SI{3}{\milli\gram\per\litre}, \emph{and} a decrease in \gls{HBI} by less than 3 points or to >4.
+    \item compared to week 0, a decrease in \gls{CRP} by \SI{<50}{\percent} or to \SI{>3}{\milli\gram\per\litre}, \emph{and} a decrease in \gls{HBI} by \num{<3} points or to \num{>4}.
 \end{itemize}
-As \gls{PANTS} was an observational study that continued until drug withdrawal, a patient's clinician may have decided to continue anti-\gls{TNF} therapy even if a patient had primary non-response, so it was possible for non-responders to be sampled past week 14.
-The criteria I used to define primary response\footnote{These are the criteria used by \textcite{kennedy2019PredictorsAntiTNFTreatment} to define week 14 remission.} was \emph{all} of the following:
+% NOTE: i.e. Response or Remission in the flowchart
+The criteria used to define primary response was \emph{all} of the following:
 \begin{itemize}
     \item not classified as a primary non-responder;
-    \item \gls{CRP} \SI{\le 3}{\milli\gram\per\litre} by week 14;
-    \item \gls{HBI} \SI{\le 4} by week 14.
+    \item compared to week 0, a decrease in \gls{CRP} by \SI{\ge 50}{\percent} or to \SI{\le 3}{\milli\gram\per\litre}, \emph{and} a decrease in \gls{HBI} by \num{\ge 3} points or to \num{\le 4}.
 \end{itemize}
-Patients that only met a subset of criteria for either primary response or primary non-response were excluded.
 
-% TODO: check this section. PNR is right, but PR is not  PNR is right, but PR is not "Response" on the flowchart, but "Remission"
 % Selection criteria for samples from Nick:
 %
 % "~200 for each drug, ~100 PNR, 100 remission. PNR had to be PNR at week 14 and non-remission at week 54 (or unknown at week 54). 
@@ -349,9 +349,14 @@ Patients that only met a subset of criteria for either primary response or prima
 %   )
 % They also had to be 16 years or over and have a baseline serum sample. 
 % Within the infliximab patients, there was propensity matching between PNR/non-PNR based on on_imms_visit_1 + on_steroids_visit_1 + age_at_first_dose + earliest_weight_category_4 + albumin_visit_1 + sex."
-There were additional inclusion criteria applicable to just the \gls{RNAseq} subcohort analyses in this chapter.
-Patients were required to be at least 16 years old, and have an available baseline serum sample.
-Primary non-responders were filtered to exclude patients in remission at week 54.
+Grey zone patients that only partially met the criteria for either primary non-response or response were excluded in this chapter.
+There were also additional selection criteria used to choose the subcohort of \gls{PANTS} patients put forward for \gls{RNAseq}.
+Patients were required to be at least 16 years old, and to have an available baseline serum sample.
+Within the patients on infliximab, there was propensity score matching between primary non-responders and other patients based on baseline immunomodulator use, baseline steroid use, age, sex, and \gls{BMI}.
+As \gls{PANTS} was an observational study that continued until drug withdrawal, a patient's clinician may have decided to continue anti-\gls{TNF} therapy even if a patient demonstrated primary non-response, so it was possible for primary non-responders to remain in the study past week 14.
+Primary non-responders were selected excluding patients known to be in remission at week 54.
+Primary responders were selected from patients known to be in remission by week 30 or week 54.
+The primary non-responders and responders in the \gls{RNAseq} subcohort thus represent phenotypic extremes of response.
 
 \subsection{Library preparation and \glsfmtshort{RNAseq}}
 
@@ -372,30 +377,28 @@ Total RNA was extracted following the Qiagen QIAsymphony instrument protocol (RN
 RNA was quantified with the ThermoFisher QuBit BR RNA (Q10211), 
 and RNA integrity assessed with the Agilent RNA ScreenTape assay (5067-5579, 5067-5577, 5067-5576) on the Agilent 4200 TapeStation.
 
-Library preparation was performed using the Kapa mRNA HyperPrep Kit, including enrichment for mRNA using magnetic oligo-dT beads, depletion of rRNA and globin mRNA using the QIAseq FastSelect RNA Removal Kit, and adapter ligation with IDT xGEN Dual Index UMI adapters.
-Libraries were sequenced on the Illumina HiSeq 4000 with \si{75}{bp} paired-end reads.
+Library preparation was performed using the Kapa mRNA HyperPrep Kit, including enrichment for \gls{mRNA} using magnetic oligo-dT beads, depletion of \gls{rRNA} and globin \gls{mRNA} using the QIAseq FastSelect RNA Removal Kit, and adapter ligation with IDT xGEN Dual Index UMI adapters.
+Libraries were sequenced on the Illumina HiSeq 4000 with \SI{75}{\bp} paired-end reads.
 
 \subsection{RNAseq quantification and preprocessing}
 
-A total of 1141 samples from 396 patients were initially sequenced to a median depth of \textapprox{20} million read pairs.
-Sequencing data was demultiplexed with Picard.
-Total number of read pairs, sequence quality, overrepresented sequences, adapter content and sequence duplication rates were checked using FastQC.
+A total of 1141 samples from 396 patients were sequenced to a median depth of \textapprox{20} million read pairs.
+Sequencing data was demultiplexed with Picard\footnote{\url{https://broadinstitute.github.io/picard/}}.
+Sequence quality, overrepresented sequences, adapter content, and sequence duplication rates were checked using FastQC \autocite{simonandrews2010FastQCQualityControl}.
 % "To demultiplex and annotate the reads with the UMI information we use the Picard commands outlined in the attached file. We align using STAR (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/ [ncbi.nlm.nih.gov]), mark and remove duplicates using UMITools (https://github.com/CGATOxford/UMI-tools [github.com]), and get our gene counts using featureCounts (http://subread.sourceforge.net/ [subread.sourceforge.net]). For QC we use fastQC, Picard, and compile the results together using MultiQC."
 %
 % "With the UMI protocol, raw fastq files are generated per sample/per lane, so there are 8 files per sample and they don’t actually contain the UMI information, so they are probably not ideal for starting your work. We should speak about where along the pipeline you are comfortable with us sending you the PANTS RNAseq
 % Roughly the pipeline:
 % Raw .bcl files -> demultiplexed unaligned .bam file per sample/per lane (8 files per sample) ->  fastq without UMI information per sample/per lane -> alignment -> aligned .bam files without UMI information per sample/per lane -> merge aligned .bam with unaligned .bam including UMI information -> merge .bam files for a sample across lane (1 file per sample) -> mark duplicates using UMIs -> create deduplicated .bam file -> create counts matrix and run QC -> optional creation of fastq files with UMIs in read names
-Reads were mapped to GRCh38 using STAR (2.6.1d) and deduplicated to unique reads using UMI-tools.
-Gene expression was quantified against the Ensembl 96 gene annotation with featureCounts (1.6.4).
+Reads were mapped to GRCh38 using STAR (v2.6.1d) \autocite{dobin2013STARUltrafastUniversal} and deduplicated to unique reads using UMI-tools \autocite{smith2017UMItoolsModelingSequencing}.
+Gene expression was quantified against the Ensembl 96 gene annotation with \software{featureCounts} (v1.6.4) \autocite{liao2014FeatureCountsEfficientGeneral}.
 
 Samples were filtered to remove outliers (\num{>2} standard deviations from the mean) according to percentage of aligned reads in coding regions reported by Picard, percentage of unique reads, and number of unique reads.
 Samples that could not be mapped to a timepoint according to \cref{subsubsec:multiPANTS_timepoints_def} were removed.
-Samples that came from patients with 
-sex mismatch,
+Samples with sex mismatch were removed.
 % based on Y chromosome gene expression,
-grey zone primary response, 
-or missing data for variables considered in the variable selection process (\cref{subsubsec:multiPANTS_var_selection}),
-were removed.
+Samples from patients with grey zone primary response were removed.
+Samples for which there was missingness in the data matrix for variables considered in the variable selection process (\cref{subsubsec:multiPANTS_var_selection}) were removed.
 A total of 814 samples remained after filtering.
 The number of samples mapping to each timepoint as defined in \cref{subsubsec:multiPANTS_timepoints_def} is shown in \cref{fig:multipants_studyDay_boxplots}.
 The number of samples per patient ranged from one to four, with a median of three (\cref{fig:multipants_visits_upset}).
@@ -409,41 +412,40 @@ The number of samples per patient ranged from one to four, with a median of thre
     \label{fig:multipants_visits_upset}
 \end{figure}
 
-The Ensembl 96 gene annotation contains \SI{58884} genes, many of which are not expressed in whole blood.
-Effective library sizes were computed using the \gls{TMM} method in \software{edgeR} \autocite{robinson2010EdgeRBioconductorPackage}.
-Between-sample normalisation for library size was performed using \software{edgeR::cpm}, converting counts to \gls{CPM}.
+The Ensembl 96 gene annotation contains \num{58884} genes, many of which are not expressed in whole blood.
+Effective library sizes were computed using the \gls{TMM} method in \software{edgeR} \autocite{robinson2010EdgeRBioconductorPackage},
+then between-sample normalisation for library size was performed using \software{edgeR::cpm}, converting counts to \gls{CPM}.
 Genes with low expression were filtered,
-requiring >1.25 CPM in >10\% of samples (1.25 \gls{CPM} was approximately 10 counts at the median library size of 8 million unique mapped read pairs),
-and non-zero expression in >90\% of samples.
+requiring \num{>1.25} \gls{CPM} in \SI{>10}{\percent} of samples (1.25 \gls{CPM} being approximately 10 counts at the median library size of 8 million unique mapped read pairs)
+and non-zero expression in \SI{>90}{\percent} of samples.
 % NOTE: probably don't need to remove these manually in future.
 Globin genes and short \glspl{ncRNA} were removed.
 A total of \num{15511} genes remained after filtering.
-Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using \software{voomWithDreamWeights} from \software{variancePartition} \autocite{hoffman2016VariancePartitionInterpretingDrivers}.
+Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using \software{variancePartition::voomWithDreamWeights} \autocite{hoffman2016VariancePartitionInterpretingDrivers}.
 
 \subsection{\Glsfmtlong{DGE}}
 
 \subsubsection{Variable selection by variance components analysis}
 \label{subsubsec:multiPANTS_var_selection}
 
-% TODO: arrows are directed causal effects, so remove these if talking about association
-For each gene, the \gls{DGE} model was a regression expressing the response variable, gene expression, 
+For each gene, the \gls{DGE} model was a regression expressing the response variable (gene expression), 
 as a linear function of predictor variables of interest (primary response status, drug, timepoint),
 and other selected predictor variables.
-In estimating the association of predictor X to response Y by regression, 
-adjustment for a third variable Z can increase, decrease, or even reverse the effect estimate of X (the regression coefficient).
+In estimating the association of predictor $X$ to response $Y$ by regression, 
+adjustment for a third variable $Z$ can increase, decrease, or even reverse the effect estimate for $X$ (the regression coefficient).
 I aimed to select third variables for inclusion into the \gls{DGE} model that were covariates,
-defined here as a Z that is associated with Y, but not with X.
-Such variables are also known as neutral controls \autocite{cinelli2020CrashCourseGood}, precision variables, or prognostic variables,
-At the cost of 1 \gls{df},
-Z explains variation in Y that would otherwise be considered residual,
-so conditioning on Z increases the efficiency of estimating the effect of X on Y, but does not change the effect estimate.
+defined here as a $Z$ that is associated with $Y$, but not with $X$.
+Such variables are also known as neutral controls \autocite{cinelli2020CrashCourseGood}, precision variables, or prognostic variables.
+At the cost of one \gls{df},
+$Z$ explains variation in $Y$ that would otherwise be considered residual,
+so conditioning on $Z$ increases the efficiency of estimating the effect of $X$ on $Y$, but does not change the effect estimate.
 
 Many variables were available for selection;
 \cref{fig:multipants_pheno_filtered_ggcorrplot} shows their correlation matrix.
 % Univariable analyses showed the strongest associations with primary non-response to infliximab and adalimumab were with week 14 drug and anti-drug antibody concentrations (table 3; appendix p 17).
 % Primary non-response to infliximab was also associated with older age at first dose, smoking at baseline, non-use of an immunomodulator at baseline, lower baseline albumin concentrations, and higher baseline white cell count.
 % Primary non-response to adalimumab was associated with a higher body-mass index at baseline.
-These included three variables associated with primary response in \textcite{kennedy2019PredictorsAntiTNFTreatment}: baseline immunomodulator use, smoking and \gls{BMI}.
+These included three variables associated with primary response in \textcite{kennedy2019PredictorsAntiTNFTreatment}: baseline immunomodulator use, smoking, and \gls{BMI}.
 % From Mark:
 % As a follow-up, here is what Sam shared about estimating cell composition in the data: “We used the Houseman method [bmcbioinformatics.biomedcentral.com], which is implemented with the estimateCellCounts() function from the minfi package in R.”
 Also available were proportions of six common cell types in whole blood 
@@ -452,13 +454,12 @@ estimated using the Houseman method (\software{minfi::estimateCellCounts} \autoc
 from whole blood Illumina MethylationEPIC methylation array data collected from the same patients and timepoints.
 The Houseman method uses differentially methylated regions between immune cell types as cell type markers \autocite{houseman2012DNAMethylationArrays}.
 
-% TODO: labels here don't match listings
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.ggcorrplot.pdf}
     \caption{
-        \textbf{Correlation matrix of variables measured in \gls{PANTS} that were considered as potential independent variables.}
-        NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4+ T cell, CD8 = CD8+ T cell.
+        \textbf{Correlation matrix of variables measured in \gls{PANTS} that were considered as potential predictor variables.}
+        NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4\textsuperscript{+} T cell, CD8 = CD8\textsuperscript{+} T cell.
     }
     \label{fig:multipants_pheno_filtered_ggcorrplot}
 \end{figure}
@@ -477,17 +478,17 @@ A variance components analysis was performed to quantify the proportion of expre
 Variables that do not explain much variation in the response are unlikely to improve efficiency if conditioned on.
 The model was a mixed effects regression model with variables in \cref{fig:multipants_pheno_filtered_ggcorrplot} included as predictors.
 Additional categorical variables were included for patient and \gls{RNAseq} library preparation plate.
-An additional continuous variable consisting of random numbers drawn from the standard normal distribution was also included as a null.
+An additional continuous variable consisting of random numbers drawn from the standard normal distribution was included as a null.
 % The var explained by Gran will be redistributed among highly cor vars anyways.
 Granulocyte proportion estimates were dropped to relieve perfect multicollinearity.
-Categorical variables were coded as random intecepts, and continuous variables as fixed effects.
-Surprisingly, simulations from \textcite{hoffman2016VariancePartitionInterpretingDrivers} showed variance proportion estimates were unbiased even when coding categorical variables with as few as two categories as random effects. 
-This was the case as long as model parameters were estimated using \gls{ML} rather than \gls{REML}. 
+Categorical variables were coded as random intercepts, and continuous variables as fixed effects.
+Surprisingly, simulations from \textcite{hoffman2016VariancePartitionInterpretingDrivers} showed variance proportion estimates were unbiased even when coding categorical variables with as few as two categories as random effects,
+as long as model parameters were estimated using \gls{ML} rather than \gls{REML}. 
 % which is commonly used for variance components analysis.
 It was also shown this approach avoids overestimates of variance proportions that occur if categorical variables with many levels are treated as fixed.
 
-As downstream \gls{DGE} methods require the same set of predictors for all genes, the aim was to select variables that explain a lot of variance for many genes.
-Variables that explained the most variance on average were patient, cell proportions and \gls{RNAseq} plate (\cref{fig:multipants_varPart}).
+As downstream \gls{DGE} methods require the same set of predictors for all genes, I aimed to select variables that explained a lot of variance for many genes.
+Variables that explained the most variance on average were patient, cell proportions, and \gls{RNAseq} plate (\cref{fig:multipants_varPart}).
 Some variables that did not explain more variance on average than the null nevertheless had high maximum values, indicating their importance for a relatively small number of genes.
 These included sex, library preparation protocol version, and smoking status.
 However primary response status---a variable of interest---also fell into this group,
@@ -502,37 +503,37 @@ This is a crude approach, but the sample size is large compared to number of \gl
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.plotVarPart.pdf}
     \caption{
-        \textbf{Variance components analysis showing distribution of per-gene percentage of variance in expression explained by each variable.}
-        Variables are ordered by the median of per-gene variance proportion estimates.
-        random\_numbers is the null, drawn from the standard normal distribution.
-        PANTS.ID = patient ID, NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4+ T cell, CD8 = CD8+ T cell.
+        \textbf{Variance components analysis showing the distribution of per-gene percentage of variance in expression explained by each variable.}
+        Variables are ordered by the median of per-gene variance explained estimates.
+        random\_numbers is a null drawn from the standard normal distribution.
+        PANTS.ID = patient ID, NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4\textsuperscript{+} T cell, CD8 = CD8\textsuperscript{+} T cell.
 }
     \label{fig:multipants_varPart}
 \end{figure}
 
 How might interpretations of effect sizes of interest be affected by including this suite of other variables, all of which can be considered as third variables?
-If a third variable Z is not a precision variable, but is also associated with X, conditioning changes the effect estimate.
+If a third variable $Z$ is not a precision variable, but is also associated with $X$, conditioning on $Z$ changes the effect estimate of $X$ on $Y$.
 The regression model is mathematically agnostic to causal relationships between variables,
 but distinct types of third variable can be distinguished conceptually by assuming the direction of causal relationships \autocite{mackinnon2000EquivalenceMediationConfounding}.
 Conditioning on a confounder ($X \leftarrow Z \rightarrow Y$) reduces bias of the effect estimate,
 conditioning on a collider ($X \rightarrow Z \leftarrow Y$) induces bias,
-and conditioning on a mediator in the causal path ($X \rightarrow Z \rightarrow Y$) changes the effect estimated by removing the indirect effect mediated by Z,
+and conditioning on a mediator in the causal pathway ($X \rightarrow Z \rightarrow Y$) changes the effect estimated by removing the indirect effect mediated by $Z$,
 usually biasing the effect estimate towards zero\footnote{It is not easy to determine the direction of bias (positive or negative) for any of these cases in general \autocite{suzuki2020CausalDiagramsPitfalls}.}.
 
-From the variance partition analysis (\cref{fig:multipants_varPart}), cell proportions were among the biological factors that explained the most variance on average,
+From the variance components analysis shown in \cref{fig:multipants_varPart}, cell proportions were among the biological factors that explained the most variance on average;
 they are one of the largest sources of variation in bulk blood expression data, 
-and are a major driver of immune response to perturbations \autocite{piasecka2018DistinctiveRolesAge}.
+and are a major driver of transcriptional response to immune perturbations \autocite{piasecka2018DistinctiveRolesAge}.
 % They change a lot over time too (\cref{fig:multipants_cell_type_proportion_vs_Study_Day})
 Thus I decided to I fit two sets of separate \gls{DGE} models including and excluding cell proportions as predictors, but otherwise identical.
 Assuming that cell proportions act as a mediator of the drug's effect on gene expression, these models have complementary interpretations.
-In models without cell proportions included, differential expression after drug perturbation could represent up or downregulation on a per cell basis, 
+In models without cell proportions included, differential expression after drug perturbation could represent up or downregulation on a per-cell basis, 
 but could also come from differences in cell proportions induced by the drug.
-The estimates from models adjusted for cell proportions are more likely to reflect up or downregulation on a per cell basis.
+The estimates from models adjusted for cell proportions are more likely to reflect up or downregulation on a per-cell basis.
 % \todo{Could cell proportions act as colliders?}
 When comparing expression between responders and non-responders,
 one might also assume cell proportions can mediate the effect of a patient's response status on expression%
 \footnote{
-    The assumption that response status is a stable property of a patient that can be treated as an independent variable will be discussed in \cref{sec:discussion_responderAnalysis}.
+    The assumption that response status is a stable property of a patient that can be treated as a predictor/independent variable will be discussed in \cref{sec:discussion_responderAnalysis}.
 }.
 Analogously, estimates of expression differences between responders and non-responders from the two sets of models 
 also have complementary interpretations: total difference, and per-cell differences not due to differences in cell proportions.
@@ -548,7 +549,7 @@ Throughout this chapter, I interpret the estimates from both sets of models acco
 \subsubsection{Contrasts for pairwise group comparisons}
 
 Per-gene \gls{DGE} models were fit in \software{dream} \autocite{hoffman2020DreamPowerfulDifferential}.
-Like the variance partition model models, these \gls{DGE} models were linear mixed models:
+Like the variance components analysis models, these \gls{DGE} models were linear mixed models:
 %
 % \begin{lstlisting}
 % Expression ~
@@ -570,7 +571,7 @@ y = 0 + \beta_{trd} G_{trd} + \sum_{}^{9}{\beta_Z Z} + (\sum_{}^{5}{\beta_C C}) 
 \end{equation}
 where:
 \begin{itemize}
-    \item the response variable is gene expression $y$.
+    \item The response variable is gene expression $y$.
     \item 0 indicates there is no intercept term.
     \item $G_{trd}$ is a fixed effect for experimental group defined by combinations of the predictors of interest:
         timepoint (week 0, 14, 30, 54), 
@@ -590,14 +591,14 @@ where:
         \gls{BMI} at baseline (Earliest\_BMI),
         and library preparation protocol version (Library\_Prep\_Protocol).
     \item $\sum_{}^{5}{\beta_C C}$ are the cell proportion fixed effects chosen in \cref{subsubsec:multiPANTS_var_selection},
-        for \gls{NK} cells, monocytes, B cells, CD4+ T cells, and CD8+ T cells.
+        for \gls{NK} cells, monocytes, B cells, CD4\textsuperscript{+} T cells, and CD8\textsuperscript{+} T cells.
     \item $u$ is a random intercept for \gls{RNAseq} plate (RNA\_Plate).
     \item $v$ is a random intercept for patient (PANTS.ID), nested inside \gls{RNAseq} plate.
 \end{itemize}
 
-As the interest was in estimating a single coefficient for each predictor's effect size on expression (rather than estimating variance components), 
+As the interest is in estimating a single coefficient for each predictor's effect size on expression (rather than estimating variance components), 
 most predictors above are modelled as fixed effects.
-Since \gls{RNAseq} plate and patient are nuisance variables with a large number of levels they are modelled as random intercepts.
+Since \gls{RNAseq} plate and patient are nuisance variables with a large number of levels, they are modelled as random intercepts.
 A total of four sets of per-gene models were fit,
 with and without the cell proportion terms $\sum_{}^{5}{\beta_C C}$,
 and replacing $\beta_{trd} G_{trd}$ (separate drug models) with $\beta_{tr} G_{tr} + \beta_d d$ (pooled drug models) or not.
@@ -610,15 +611,15 @@ and replacing $\beta_{trd} G_{trd}$ (separate drug models) with $\beta_{tr} G_{t
 % it should not be used to compare models that differ in their fixed effects structure. You should just use this when comparing models that differ in their random effects.
 %
 % \gls{REML} treats fixed effects as nuisance parameters and estimates random effects after first integrating out fixed effects \autocite{mcneish2017SmallSampleMethods}.
-As we are no longer performing variance components analysis,
+Unlike with variance components analysis,
 to avoid small-sample bias in estimates of fixed effect standard errors, \gls{REML} was used for estimation \autocite{mcneish2017SmallSampleMethods}.
 
-Specific hypotheses were tested using sum-to-zero contrasts, which are linear combinations of the model coefficients with weights summing to zero.
+Specific hypotheses were tested using sum-to-zero contrasts, which are linear combinations of model coefficients with weights summing to zero.
 For example, 
 to test for \gls{DGE} between responders and non-responders to infliximab at baseline in the non-pooled model,
 I used a contrast where
-the weight for the (week 0, responder, infliximab) group coefficient was 1,
-the weight for the (week 0, non-responder, infliximab) group coefficient was -1,
+the weight for the week 0/responder/infliximab group coefficient was 1,
+the weight for the week 0/non-responder/infliximab group coefficient was -1,
 and all other coefficient weights were 0.
 % Contrasts can be used thuswise to compare any pair of groups, as the coefficients of group terms are group means.
 %
@@ -640,9 +641,7 @@ To get \pvalues{}, the contrast divided by its standard error was compared to th
 % method="global" is useful when it is important that the same t-statistic
 % cutoff should correspond to statistical significance for all the
 % contrasts." \url{https://rdrr.io/bioc/limma/man/decideTests.html}
-\Gls{FDR} was controlled with the \gls{BH} method, threshold set at 0.05, computed separately for each contrast\footnote{
-It could also have been computed globally over all contrasts if it were necessary to have the same $t$-statistic threshold for statistical significance in all contrasts.
-}.
+\Gls{FDR} was controlled with the \gls{BH} method, with threshold set at 0.05, computed separately for each contrast\footnote{\Gls{FDR} could also have been computed globally over all contrasts if it were necessary to have the same $t$-statistic threshold for statistical significance in all contrasts.}.
 
 % NOTE: to get confidence intervals for FDR https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-288
 % https://en.wikipedia.org/wiki/False_coverage_rate
@@ -660,7 +659,7 @@ It could also have been computed globally over all contrasts if it were necessar
 
 The aim was to use expression data from all four timepoints to find genes associated with response,
 while avoiding a large number of pairwise comparisons.
-I fit a natural cubic spline (\software{splines::ns}) to the study day to allow for non-linear trajectories of expression over time.
+I fit a natural cubic spline (\software{splines::ns}, R 3.6.2) to the study day to allow for non-linear trajectories of expression over time.
 A cubic spline is a continuous function defined piecewise in each successive interval between a set of $k$ knots in the range of the input variable.
 The $k-1$ pieces between knots are polynomials of degree 3. 
 For a natural spline, the function is constrained to be linear outside of the boundary (first and last) knots to avoid unpredictable behaviour at the boundaries \autocite{perperoglou2019ReviewSplineFunction}.
@@ -681,7 +680,7 @@ For a natural spline, the function is constrained to be linear outside of the bo
 % \end{lstlisting}
 %
 I set two inner knots at week 14 and week 30, as expression is expected to change after each drug dose.
-To include all data to within the boundaries, the two boundary knots were set at the minimum and maximum values of study day rather than week 0 and week 54.
+To include all data within the boundaries, the two boundary knots were set at the minimum and maximum values of study day rather than week 0 and week 54.
 % "Function ns() from package splines indeed implements a natural cubic spline (aka restricted cubic spline) but using a B-splines basis representation. This provides an equivalent fit but it is not the same as the expansion you wrote in math. This expansion is implemented in function rcs() from the package rms."
 % The function ns(Study\_Day, knots=7*c(14, 30)) returns a basis matrix for the spline with 3 \gls{df} (3 columns).
 A basis matrix \autocite{perperoglou2019ReviewSplineFunction} was computed with \software{ns(Study\_Day, knots=7*c(14, 30))},
@@ -691,6 +690,7 @@ The model form used was as in \cref{eq:multiPANTS_dge_model},
 except with $\beta_{trd} G_{trd}$
 replaced by $\beta_r r + \sum_{}^{3}{\beta_b b} + \sum_{}^{3}{\beta_{rb} rb} + \beta_d d$,
 where $r$ is response status,
+$d$ is drug,
 $\sum_{}^{3}{\beta_b b}$ are the three columns of the basis matrix,
 and $\sum_{}^{3}{\beta_{rb} rb}$ are the second-order interaction terms between response status and the basis matrix columns.
 Separate sets of per-gene models were again fit with and without cell proportions $\sum_{}^{5}{\beta_C C}$.
@@ -706,7 +706,7 @@ Separate sets of per-gene models were again fit with and without cell proportion
 % This syntax fits a linear model, using the lm() function, in order to predict wage using a fourth-degree polynomial in age: poly(age,4). The poly() command allows us to avoid having to write out a long formula with powers of age. The function returns a matrix whose columns are a basis of orthogonal polynomials, which essentially means that each column is a linear combination of the variables age, age^2, age^3 and age^4.
 % If we prefer, we can also use poly() to obtain age, age^2, age^3 and age^4 directly. We can do this by using the raw = TRUE argument to the poly() function. Later we see that this does not affect the model in a meaningful way -- though the choice of basis clearly affects the coefficient estimates, it does not affect the fitted values obtained.
 
-To test for response-associated differences in the spline parameters, 
+When testing for response-associated differences in the spline parameters, 
 the predictors of interest are the interaction terms $\sum_{}^{3}{\beta_{rb} rb}$. 
 % TODO F-test to p value
 % f-test, is basically a wald test
@@ -723,22 +723,38 @@ the predictors of interest are the interaction terms $\sum_{}^{3}{\beta_{rb} rb}
 % fit$F.p.value. It is similar to the ordinary F-statistic from
 % analysis of variance except that the denominator mean squares are
 % moderated across genes.
-The three terms are tested jointly with an F-test, and \gls{FDR} correction was performed with the \gls{BH} method, with the threshold set at 0.05.
-A significant result indicates a significant difference in the trajectory of expression over study day between responders and non-responders, which may be non-linear.
+The three terms were tested jointly with an $F$-test, and \gls{FDR} correction was performed with the \gls{BH} method, with the threshold set at 0.05.
+A significant result indicates a significant difference in the trajectory of expression over study day between responders and non-responders.
 
 \subsubsection{Clustering expression over all timepoints}
 
-I clustered genes by their expression trajectories,
-to define sets of genes with similar trajectories over time for input into gene set enrichment analyses.
-This was done to aid interpretation of significant genes from the cell proportion adjusted spline model.
+I clustered genes by their expression trajectories to define sets of genes with similar trajectories over time.
+This was done to aid the interpretation of significant genes from the cell proportion-adjusted spline model using gene set enrichment analysis.
 Expression data was converted to the \gls{CPM} scale using \gls{TMM} normalisation factors, then regressed against cell proportions.
-Residuals were centered and scaled per gene, 
-A distance matrix was computed using 1 - Pearson correlation as the distance metric.
+Residuals were centered and scaled per gene.
+A distance matrix was computed using $1 - r$ as the distance metric, where $r$ is the Pearson correlation.
 % which is scale invariant on centered data https://www.researchgate.net/publication/26290974_A_new_approach_for_clustering_gene_expression_time_series_data
-Hierarchical clustering was performed with complete agglomeration for inter-cluster distance (fastcluster::hclust(method='complete')).
-The optimal number of clusters was determined using the gap statistic (\software{factoextra::fviz\_nbclust(method='gap\_stat', nboot=500)}),
+Hierarchical clustering was performed with complete agglomeration for inter-cluster distance (\software{fastcluster::hclust(method = \enquote{complete})}, \autocite{mullner2013FastclusterFastHierarchical}).
+The optimal number of clusters was assessed by the gap statistic (\software{factoextra::fviz\_nbclust(method = \enquote{gap\_stat}, nboot = 500)}\footnote{\url{https://rpkgs.datanovia.com/factoextra/index.html}}),
 which determines when the change in within-cluster dispersions are no longer significantly improved by increasing the number of clusters \autocite{tibshirani2001EstimatingNumberClusters}.
-The hierarchical clustering tree was then cut into that number of clusters.
+%
+% https://stats.stackexchange.com/questions/140711/why-does-gap-statistic-for-k-means-suggest-one-cluster-even-though-there-are-ob
+% The default method "firstSEmax" looks for the smallest k such that its value f(k) is not more than 1 standard error away from the first local maximum.
+%
+% https://rdrr.io/cran/factoextra/src/R/fviz_nbclust.R
+% Find local maximum of Gap(k) at k=nc
+%     decr <- diff(f) <= 0
+%     nc <- if (any(decr)) which.max(decr) else K
+% From 1 to nc, find the first Gap(k) that is greater or equal to Gap(nc) minus its standard error
+%     if (any(mp <- f[seq_len(nc - 1)] >= f[nc] - fSE[nc])) which(mp)[1] else nc
+The default \software{firstSEmax} criteria was used to choose the optimal number of clusters $k$,
+which finds the first local maximum at $m$ clusters where $\text{Gap}(m) \ge \text{Gap}(m+1)$,
+then finds the smallest $k : 1 \le k \le m$ such that $\text{Gap}(k)$ is not less than $\text{Gap}(m)$ minus the bootstrapped standard error of $\text{Gap}(m)$.
+%
+% NOTE: alternatively, the Tibs2001SEmax method
+% The optimal number of clusters is defined as the smallest $k$ where Gap($k$) is greater than the lower bound of Gap($k+1$) \autocite{tibshirani2001EstimatingNumberClusters}.
+%
+The hierarchical clustering tree was then cut into $k$ clusters.
 
 % Other possible approaches with more direct connection to spline model fit?
 % e.g. clustering basis function results
@@ -760,8 +776,8 @@ Rank-based gene set enrichment analyses were conducted using \software{tmod::tmo
 % Since dream uses an estimated degrees of freedom value for each hypothsis test, the degrees of freedom is different for each gene here. Therefore, the F-statistics are not directly comparable since they have different degrees of freedom. In order to be able to compare test statistics, we report F.std which is the p-value transformed into an F-statistic with df1=number of coefficiets tested and df2=Inf. This can be used for downstream analysis.
 For each contrast, 
 as the $t$-statistics are not comparable between genes due to the use of approximate \glspl{df},
-I ranked genes by the signed Z score reported by \software{dream}, which is a monotonic transformation of the \pvalue{}.
-Similarly, moderated $F$-statistics from the spline are not comparable between genes, so I used the signed F-statistic reported by \software{dream} from the transformation of the \pvalue{}.
+I ranked genes by the signed $z$-score reported by \software{dream}, which is a monotonic transformation of the \pvalue{}.
+Similarly, moderated $F$-statistics from the spline model are not comparable between genes, so I used the signed $F$-statistic reported by \software{dream} from the transformation of the \pvalue{}.
 
 Gene set overrepresentation analyses with the hypergeometric test were conducted with \software{tmod::tmodHGtest} as detailed in \cref{subsec:hird_reQTL_geneSetEnrichment}.
 
@@ -793,19 +809,19 @@ Gene set overrepresentation analyses with the hypergeometric test were conducted
 % included as covariates (Supplementary Table 2).
 %
 % NOTE: QC details here also from Alex's thesis
-Genotype data were subsetted from the post-quality control \gls{PANTS} cohort genotypes used in \textcite{sazonovs2019HLADQA105Carriage},
-where the preprocessing pipeline is described in full detail.
-These data are from whole blood samples collected into EDTA tubes at week 0 and genotyped on the Illumina CoreExome genotyping array.
-Pre-imputation quality control was performed as described in \textcite{delange2017GenomewideAssociationStudy}.
+Genotype data were subsetted from the post-quality control \gls{PANTS} cohort genotypes generated by \textcite{sazonovs2019HLADQA105Carriage},
+where the genotyping and preprocessing pipeline is fully described.
+In brief, whole blood samples were collected into EDTA tubes at week 0 and genotyped on the Illumina CoreExome genotyping array.
+Pre-imputation quality control was performed in accordance with \textcite{delange2017GenomewideAssociationStudy}.
 Imputation was performed using the Sanger Imputation Service with the Haplotype Reference Consortium panel.
-Post-imputation, samples that were non-European, related (proportion identity-by-descent > 0.1875), or were outliers in genotype missingness or heterozygosity rate were removed;
-\glspl{SNP} that were poorly imputed (INFO score < 0.4), deviated from \gls{HWE} (p < 1e-10), had high missingness (> 5\%), or low \gls{MAF} (< 1\% before subsetting) were removed.
+Post-imputation, samples that were non-European, related ($\text{proportion identity-by-descent} > 0.1875$), or were outliers in genotype missingness or heterozygosity rate were removed;
+\glspl{SNP} that were poorly imputed ($\text{INFO score} < 0.4$), deviated from \gls{HWE} ($p < \num{1e-10}$), had high missingness (\SI{>5}{\percent}), or low \gls{MAF} (\SI{<1}{\percent} before subsetting) were removed.
 \num{7503762} \glspl{SNP} remained after filtering.
 Genotypes were converted to dosages of the non-reference allele.
 
 \subsection{\Glsfmtlong{reQTL} mapping}
 
-The overall strategy and methods used were largely identical those those used in \cref{ch:hird_reQTL}, laid out in \cref{sec:hird_reQTL_methods}.
+The overall strategy and methods used were largely identical those to those used in \cref{ch:hird_reQTL}, laid out in \cref{sec:hird_reQTL_methods}.
 Differences are described below.
 
 \subsubsection{Computing genotype PCs}
@@ -815,8 +831,8 @@ confirming that samples were of European ancestry (\cref{fig:multipants_genotype
 % The first four \glspl{PC} in the HapMap 3 were found to be significant according to the Tracy-Widom test in \cref{subsec:hird_dge_genotype_pc}.
 % This implies that EIGENSTRAT results are not sensitive to the number of axes of variation used, as long as there is a sufficient number of axes to capture true population structure effects.
 % We see that in each SNP category, results are virtually identical for K = 1, 2, 5 or 10.
-Here I chose the first five \glspl{PC} for use downstream, one more than was chosen in \cref{subsec:hird_dge_genotype_pc} by Tracy-Widom test.
-This should be sufficient, as the \gls{PANTS} cohort is less ethnically diverse than the \gls{HIRD} cohort.
+Here I chose the first five \glspl{PC} for use as covariates in \gls{eQTL} mapping downstream, one more than was chosen in \cref{subsec:hird_dge_genotype_pc} for \gls{HIRD} by the Tracy-Widom test.
+This should be sufficient to adjust for large-scale population structure, as the \gls{PANTS} cohort is less ethnically diverse than the \gls{HIRD} cohort.
 % the specific number is not important, as long as a sufficient number of \glspl{PC} are included to capture large-scale population structure \autocite{price2006PrincipalComponentsAnalysis}.
 \glspl{PC} were centered and scaled before downstream use to improve model convergence.
 
@@ -824,7 +840,7 @@ This should be sufficient, as the \gls{PANTS} cohort is less ethnically diverse 
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/pants_samples.sampleids_cleaned_to_lowercase.filtered.GRCh38.sorted.multiPANTS.projection_1000G_pca.pdf}
     \caption{
-        \textbf{1000G samples and PANTS samples projected onto 1000G genotype PC1 and PC2 axes, colored by superpopulation (a) and population (b).}
+        \textbf{1000 Genomes Project (1000G) samples and PANTS samples projected onto 1000G genotype PC1 and PC2 axes, colored by (a) superpopulation and (b) population.}
         1000G superpopulations: AFR = African, AMR = Ad Mixed American, EAS = East Asian, EUR = European, SAS = South Asian.
         1000G European populations: CEU = Utah Residents (CEPH) with Northern and Western European Ancestry, FIN = Finnish in Finland, GBR = British in England and Scotland, IBS = Iberian Population in Spain, TSI = Toscani in Italia.
     }
@@ -832,21 +848,22 @@ This should be sufficient, as the \gls{PANTS} cohort is less ethnically diverse 
 \end{figure}
 
 \subsubsection{Finding hidden confounders in expression data}
+\label{subsec:multiPANTS_reQTL_PEER}
 
-Between-sample normalisation and variance stabilisation was applied to the counts matrix (DESeq2::vst), resulting in $\log_2$ scale expression estimates.
-As described in \cref{sec:hird_reQTL_methods},
+Between-sample normalisation and variance stabilisation was applied to the counts matrix (\software{DESeq2::vst} \autocite{love2014ModeratedEstimationFold}), resulting in $\log_2$ scale expression estimates.
+Akin to \cref{sec:hird_reQTL_methods},
 given known factors (response, drug, five scaled genotype \glspl{PC}, five cell proportions), 
-{PEER} was used to find additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
-This is similar to the process undertaken in \cref{subsubsec:multiPANTS_var_selection}, but these hidden factors can be unmeasured.
+{PEER} \autocite{stegle2012UsingProbabilisticEstimation} was used to infer additional hidden factors that explain variance in the expression matrix for a large fraction of genes.
+This is similar in principle to the variance components analysis carried out in \cref{subsubsec:multiPANTS_var_selection}, except hidden factors can be unmeasured.
 To maximise efficiency for \textit{cis}-\gls{eQTL} mapping, 
-the number of PEER factors retained for each timepoint was selected to maximise the number of genes with at least one significant \gls{eQTL} detected on chromosome 1 (\cref{fig:multipants_reqtl_PEER_k_choice}).
-The selected numbers were 25, 20, 15, and 5 factors for weeks 0, 14, 30, and 54 respectively.
+the number of PEER factors retained for each timepoint was selected to maximise the number of genes with at least one significant \gls{eQTL} (eGenes) detected on chromosome 1 (\cref{fig:multipants_reqtl_PEER_k_choice}).
+The selected numbers were 25, 20, 15, and 5 factors; for weeks 0, 14, 30, and 54 respectively.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/count_eGenes.signif_eGenes_vs_PEER_n.dataset_multiPANTS.chr_1.pdf}
     \caption{
-        \textbf{Number of eGenes significant on chr1 vs. number of PEER factors included in \gls{eQTL} mapping as covariates.}
+        \textbf{Number of eGenes on chromosome 1 vs. number of PEER factors included in \gls{eQTL} mapping as covariates.}
         \gls{FDR} computed with hierarchical Bonferroni-\gls{BH} \autocite{huang2018PowerFalseDiscovery} with significance threshold set at 0.05.
     }
     \label{fig:multipants_reqtl_PEER_k_choice}
@@ -855,13 +872,13 @@ The selected numbers were 25, 20, 15, and 5 factors for weeks 0, 14, 30, and 54 
 \subsubsection{Computing kinship matrices}
 
 % NOTE: LDAK can account for genotype uncertainty, but Alex's data are rounded genotypes even for imputed variants.
-\Gls{LOCO} kinship matrices were computed on typed \glspl{SNP} for each chromosome using LDAK as described in \cref{subsec:hird_reQTL_LDAK}.
+Akin to \cref{subsec:hird_reQTL_LDAK}, \gls{LOCO} kinship matrices were computed on typed \glspl{SNP} for each chromosome using LDAK \autocite{speed2012ImprovedHeritabilityEstimation}.
 % The kinship matrix will be incorporated into the \gls{eQTL} model to adjust for fine-scale population structure.
 
 \subsubsection{Mapping \textit{cis}-\glsfmtshortpl{eQTL} in each timepoint separately}
 
-As described in \cref{sec:hird_reQTL_methods},
-\glspl{eQTL} were mapped in each timepoint using a linear mixed model in \software{limix}.
+As in \cref{sec:hird_reQTL_methods},
+\glspl{eQTL} were mapped in each timepoint using a linear mixed model in {LIMIX} \autocite{lippert2014LIMIXGeneticAnalysis}.
 % Within each timepoint, patients with multiple samples (taken on different study days) had the non-major visit sample removed.
 % although it may seem possible to have duplicate patients
 %     following the stacking logic of TODO: cite,
@@ -887,41 +904,40 @@ The sample sizes with both genotype and expression data available for \gls{eQTL}
 % OR is it 15040?
 %
 % The Ensembl gene start and end coordinates correspond to the outermost transcript start and end coordinates.
-For each autosomal gene, \textit{cis}-\glspl{SNP} within 1 Mb of the Ensembl gene start (gene end on the minus strand),
-were filtered to keep \glspl{SNP} where the number of samples homozygous for the minor allele was at least 5.
+For each autosomal gene, \textit{cis}-\glspl{SNP} within \SI{1}{\mega\bp} of the Ensembl gene start (or gene end on the minus strand),
+were filtered to keep \glspl{SNP} where the number of samples homozygous for the minor allele was at least five.
 Small group numbers lead to data points with high leverage that may be unduly influential on the genotype beta.
 % This is done in place of a per-timepoint \gls{MAF} or minor allele count filters.
 Assuming \gls{HWE}, this is equivalent to a \gls{MAF} filter of 
 $\sqrt{5/(223\times2)} = \num{0.1058809}$ in the timepoint with the largest sample size (week 0),
 and $\sqrt{5/(84\times2)} = \num{0.1725164}$ in the timepoint with the smallest sample size (week 54).
 
-The limix model for each \gls{SNP}-gene pair had 
+The {LIMIX} model for each \gls{SNP}-gene pair had 
 $\log_2$ expression as the response variable
 and genotype dosage as the predictor of interest.
 Other fixed effect predictors were
 the intercept,
 known factors (response, drug, five scaled genotype \glspl{PC}, cell proportions), 
-and PEER hidden factors (timepoint-specific number selected above).
+and PEER hidden factors (timepoint-specific number of PEER factors selected in \cref{subsec:multiPANTS_reQTL_PEER}).
 A random intercept term was also included with mean zero and covariance matrix proportional to the \gls{LOCO} kinship matrix for the \gls{SNP}'s chromosome.
 
 \subsubsection{Joint \glsfmtshortpl{reQTL} mapping over all timepoints}
 
-As described in \cref{sec:hird_reQTL_methods},
-summary statistics from per-timepoint mapping were input to \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods} to map \gls{eQTL} jointly over all timepoints.
-A total of \num{25908527} \glspl{SNP} were tested in all timepoints.
-% TODO useEstimateNullCorrelationSimple_TRUE
-The null correlation structure of the timepoints was estimated using null tests within a random subset of \num{200000} tests.
+Analogously to \cref{sec:hird_reQTL_methods},
+summary statistics from per-timepoint mapping were input to \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods} to map \glspl{eQTL} jointly over all timepoints.
+A total of \num{25908527} \glspl{SNP} were testable at all four timepoints.
+The null correlation structure of the timepoints was estimated using null tests within a random subset of \num{200000} tests (\software{mashr::estimate\_null\_correlation\_simple}).
 Data-driven covariance matrices representing patterns of effects across timepoints were estimated using a strong subset of tests.
-As the strong subset should contain \gls{eQTL} that are likely to have an effect in at least one timepoint,
-for each gene and timepoint, I selected the \gls{eQTL} with the smallest \pvalue{}, if that \pvalue{} was < 0.05, resulting in a strong subset of \num{129002} tests.
-The mash model was fit on the full random subset, accounting for the computed null correlation and covariance matrices, in exchangeable Z-scores mode.
-Finally, posterior betas and standard errors were computed for all tests using the fitted model parameters.
-A corresponding \gls{lfsr} is also returned, controlling for multiple testing.
+As the strong subset should contain \glspl{eQTL} that are likely to have an effect in at least one timepoint,
+at each timepoint, for each gene with at least one nominally significant \gls{eQTL} ($p < 0.05$), I selected the \gls{eQTL} with the smallest \pvalue{}, resulting in a strong subset of \num{129002} tests.
+The \software{mashr} model was then fit on the full random subset in exchangeable $Z$ (EZ) mode, accounting for the computed null correlation and covariance matrices.
+Finally, posterior betas, standard errors, and \glspl{lfsr} were computed for all tests using the fitted model parameters.
+% Multiple testing was accounted for using the corresponding \gls{lfsr} values.
 % TODO describe mashr bug for negative betas being capped for lfsr
 
 The lead \gls{eQTL} for each gene was chosen as the \gls{eQTL} with the lowest \gls{lfsr} in any condition, 
-breaking ties by highest INFO, highest \gls{MAF}, shortest dist to gene start (or end), and smallest genomic coordinate.
-Each lead \gls{eQTL} was assessed for being a significant \gls{reQTL} by a Z test for whether the difference in betas was zero, between the week 0 beta and each of the other three weeks.
+breaking ties by highest INFO score, highest \gls{MAF}, shortest distance to gene start (or end), and smallest genomic coordinate.
+Each lead \gls{eQTL} was assessed for being a significant \gls{reQTL} by a $z$-test for whether the difference in betas was zero, between the week 0 beta and each of the other three timepoints.
 Multiple testing for the number of genes was controlled using the \gls{BH} \gls{FDR} for each of the three comparisons separately.
 
 % \subsubsection{Clustering reQTLs}
@@ -948,9 +964,9 @@ To define transcriptomic differences between primary responders and non-responde
 I analysed whole blood \gls{RNAseq} gene expression measured at up to four timepoints per patient:
 week 0 baseline before commencing anti-\gls{TNF} therapy, and weeks 14, 30 and 54 after commencing anti-\gls{TNF} therapy.
 % \todo{Some primary non-responders have loss of response samples. Not sure why.}
-After quality control, expression data was available for 15584 genes and 814 samples.
+After quality control, expression data was available for \num{15584} genes and 814 samples.
 These samples come from 324 patients, whose characteristics are shown in \cref{tab:multipants_table1}.
-The proportion of primary non-responders is high (43.8\%) compared to the overall proportion in the \gls{PANTS} cohort (23.8\%, \autocite{kennedy2019PredictorsAntiTNFTreatment}).
+The proportion of primary non-responders is high (43.8\%) compared to the overall proportion in the \gls{PANTS} cohort (23.8\% \autocite{kennedy2019PredictorsAntiTNFTreatment}).
 This is due to sample selection for \gls{RNAseq} to balance the sample size for each combination of drug and primary response status.
 
 % Table 1. 
@@ -958,16 +974,12 @@ This is due to sample selection for \gls{RNAseq} to balance the sample size for 
 
 \subsection{Baseline gene expression associated with primary response}
 
-% TODO: increased expression vs upreg: make this all consistent
-% TODO: after primary response mentioned, just drop primary 
-
 Patient primary response to anti-\gls{TNF} was defined at week \numrange{12}{14} (after the induction period) according to the clinical decision algorithm from \textcite{kennedy2019PredictorsAntiTNFTreatment} described in \cref{multiPANTS:PR_definition}, 
-which integrates clinician assessment with change in \gls{CRP} level and \gls{HBI} score.
+which integrates clinician assessment with changes in \gls{CRP} level and \gls{HBI} score.
 To identify differences in baseline gene expression associated with future primary response, 
-I fit per-gene linear models at 15511 genes, comparing week 0 gene expression in primary responders with primary non-responders.
+I fit per-gene linear models at \num{15511} genes, comparing week 0 gene expression in primary responders with week 0 gene expression in primary non-responders.
 Comparisons were performed both within infliximab-only and adalimumab-only subgroups, and with both drugs pooled.
 Models were run both adjusting for cell composition estimates of six immune cell types, and without adjustment.
-% TODO: make FDR= after this all consistent formatting
 Throughout this section, the significance threshold was set at $\text{\gls{FDR}} < 0.05$ for each comparison, and positive $\log_2\text{\glspl{FC}}$ indicate increased expression in responders versus non-responders.
 
 Without adjusting for cell composition, the largest effects were infliximab-only, with 859 genes differentially expressed.
@@ -976,11 +988,11 @@ Only \gene{KCNN3} ($\log_2\text{\gls{FC}}=\num{-0.843455423}$) was significant f
 % 0.34597454 6.55605 4.9264804 1.094745e-06 0.016980595 4.8737951
 % 0.31379161 6.55605 4.6913403 3.384743e-06 0.050291627 4.6459748
 and only \gene{SIGLEC10} ($\log_2\text{\gls{FC}} = \num{0.34597454}$) was significant in the pooled analysis (\cref{fig:multipants_dge_volcano_week_0_R_N}).
-
+%
 After adjustment for cell composition, there were no longer any significant genes in the infliximab-only analysis, 
 with 856/859 genes that were significant before the comparison having a dampened effect size after correction (smaller absolute effect and same sign), suggesting many effects may be mediated by cell composition.
-\gene{SIGLEC10} in the combined analysis was also non-significant after adjustment (adjusted $\log_2\text{\gls{FC}} = \num{0.31379161}$, FDR=\num{0.050291627}).
-Conversely, at three genes downregulated in the adalimumab-only analysis that were the only significant genes post-adjustment, I observed increased significance:
+\gene{SIGLEC10} in the combined analysis was also non-significant after adjustment (adjusted $\log_2\text{\gls{FC}} = \num{0.31379161}$, $\text{\gls{FDR}}=\num{0.050291627}$).
+Conversely, at the three genes downregulated in the adalimumab-only analysis that were the only significant genes post-adjustment, I observed increased significance:
 %       logFC  AveExpr          t      P.Value  adj.P.Val      z.std
 % -0.33495771 2.569096 -4.5040835 7.723531e-06 0.05989985 -4.4727077
 % -0.35115926 2.569096 -5.0627658 5.212334e-07 0.00677703 -5.0183272
@@ -993,36 +1005,35 @@ Conversely, at three genes downregulated in the adalimumab-only analysis that we
 and \gene{IGKV1-9} (\num{-1.1529588}, \num{-1.2231591}).
 
 To identify coordinately up and downregulated gene sets and increase sensitivity for detecting differences between responders and non-responders,
-I performed rank-based gene set analysis in on the per-gene $z$-statistics using blood transcriptomic modules: annotated sets of coexpressed genes in peripheral whole blood from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
-This module-level analysis was also run unadjusted (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropF}) and adjusted for cell composition (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}).
+I performed rank-based gene set enrichment analyses on the per-gene $z$-statistics using \glspl{BTM}: annotated sets of coexpressed genes in peripheral whole blood from \textcite{li2013MolecularSignaturesAntibody} (prefixed \enquote{LI}).
+This module-level analysis was also run both unadjusted (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropF}) and adjusted for cell composition (\cref{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}).
 
-Despite only \gene{SAMD10} having a significantly different effect between drugs at the gene-level (a significant interaction between drug and response at week 0), 
+Despite only \gene{SAMD10} having a significantly different effect between drugs at the gene level (a significant interaction between drug and response at week 0), 
 the large global differences observable in \cref{fig:multipants_dge_volcano_week_0_R_N} were detected in the module-level analysis\footnote{
-It is likely the study is not powered to detect gene-level three-way interaction effects between timepoint, drug and response.
-I am not aware of which subgroup analyses may have been prespecified during the study design and sample size calculations for the \gls{PANTS} \gls{RNAseq} cohort.
+    It is likely the \gls{PANTS} \gls{RNAseq} study is not powered to detect gene-level three-way interaction effects between timepoint, drug and response.
+    I am not aware of which subgroup analyses may have been prespecified during the study design and sample size calculations for the \gls{PANTS} \gls{RNAseq} cohort.
 }.
-Without adjusting for cell composition, many of the most significantly upregulated modules in the pooled analysis, 
-including upregulation of monocyte (LI.M11.0, LI.S4), neutrophil (LI.M37.1, LI.M11.2), and dendritic cell (LI.M165, LI.S11),
-appear to be driven an infliximab-specific effect.
-These modules have heavily reduced significance after adjusting for cell composition.
-The new modules that are most upregulated in the pooled analysis after adjustment have more consistent effects between drugs, such as
-MHC-TLR7-TLR8 cluster (LI.M146), antigen presentation (LI.M71, LI.M95.0), and myeloid cell enriched receptors and transporters (LI.M4.3).
+Without adjusting for cell composition, many of the most significantly upregulated modules in the pooled analysis---%
+including upregulation of monocyte (LI.M11.0, LI.S4), neutrophil (LI.M37.1, LI.M11.2), and dendritic cell (LI.M165, LI.S11) modules---%
+appear to be driven by an infliximab-specific effect.
+These modules had heavily reduced significance after adjusting for cell composition.
+The new modules that were most upregulated in the pooled analysis after adjustment had more consistent effects between drugs, 
+such as MHC-TLR7-TLR8 cluster (LI.M146), antigen presentation (LI.M71, LI.M95.0), and myeloid cell enriched receptors and transporters (LI.M4.3).
 
 For downregulated modules before adjustment, I observed infliximab-specific effects for NK cell (LI.M7.2) and T cell (LI.M7.0, LI.M7.1) modules.
-Adalimumab-specific effects were observed for plasma cell, B cell and immunoglobulin modules (LI.M156.0, LI.M156.0, LI.S3); and cell cycle and transcription modules (LI.M4.0, LI.M4.1).
+Adalimumab-specific effects were observed for plasma cell, B cell and immunoglobulin modules (LI.M156.0, LI.M156.0, LI.S3), and cell cycle and transcription modules (LI.M4.0, LI.M4.1).
 After adjustment, the significance of infliximab-specific modules was reduced, 
 but the significance of adalimumab-specific modules and the corresponding interaction effects was increased.
 % \todo{Carl's comment here: What happens to the significance of cell-type specific gene-sets when you condition on that cell-type. Do they uniformly decrease? Do you think this could mean that these signals (and others) are driven by differences in cell composition, but that you have cell composition imperfectly estimated and thus are not fully correcting for variance in cell composition?}
-In both gene-level and module-level results, where comparing baseline expression between responders and non-responders, there is a striking heterogeneity between patients on infliximab and adalimumab that is only partially reduced by cell proportion adjustment.
+For both gene-level and module-level comparisons of baseline expression between responders and non-responders, there is a striking heterogeneity between patients on infliximab and adalimumab that is only partially reduced by cell proportion adjustment.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_simple_C_1RI_1NI,C_1RA_1NA,C_1R_1N.pdf}
     \caption{
-        \textbf{Volcano plots of \gls{DGE} between primary responders and non-responders at week 0; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
+        \textbf{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 0; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
         Annotated genes include significant associations from this study and previously reported associations from \autoref{subsec:multiPANTS_intro_predicting_response}.
-        Dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        Dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_volcano_week_0_R_N}
 \end{figure}
@@ -1038,10 +1049,9 @@ In both gene-level and module-level results, where comparing baseline expression
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.cell_prop_correction_FALSE.pdf}
     \caption{
-        \textbf{Top modules differentially expressed between primary responders and non-responders at week 0, unadjusted for cell composition.}
-        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab-adalimumab difference and pooled analyses. 
-        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, unadjusted for cell composition.}
+        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
+        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_0_R_N_cellPropF}
 \end{figure}
@@ -1050,10 +1060,9 @@ In both gene-level and module-level results, where comparing baseline expression
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.cell_prop_correction_TRUE.pdf}
     \caption{
-        \textbf{Top modules differentially expressed between primary responders and non-responders at week 0, adjusted for cell composition.}
-        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab-adalimumab difference and pooled analyses. 
-        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, adjusted for cell composition.}
+        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
+        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_0_R_N_cellPropT}
 \end{figure}
@@ -1090,22 +1099,22 @@ In both gene-level and module-level results, where comparing baseline expression
 %         # 'LAIR2' 'ASAH1', 'APOBEC3A', 'TSPAN14', 'LIPA' # mono2 from https://science.sciencemag.org/content/356/6335/eaah4573
 %     )
 % )
-In addition to hits from this study, \cref{fig:multipants_dge_volcano_week_0_R_N} is annotated with genes whose expression in gut biopsies or blood has been previously evaluated for baseline prediction of primary response \autocite{arijs2009MucosalGeneSignatures,arijs2010PredictiveValueEpithelial,verstockt2019LowTREM1Expression,salvador-martin2020GeneSignaturesEarly}.
+In addition to significant genes from this study, \cref{fig:multipants_dge_volcano_week_0_R_N} is annotated with genes whose expression in gut biopsies or blood has been previously evaluated for baseline prediction of primary response \autocite{arijs2009MucosalGeneSignatures,arijs2010PredictiveValueEpithelial,verstockt2019LowTREM1Expression,salvador-martin2020GeneSignaturesEarly}.
 Some genes expressed in gut mucosa (e.g. \gene{IL13RA2}) were not appreciably expressed in this whole blood dataset, 
 and most other genes that were expressed were not significantly differentially expressed.
-Only \gene{TNFRSF1B} and \gene{PTGS2} were associated with primary response, upregulated in at baseline in responders, specifically in the infliximab-only comparison, unadjusted for cell composition.
+Only \gene{TNFRSF1B} and \gene{PTGS2} were associated with primary response, being upregulated at baseline in responders, specifically in the infliximab-only comparison, unadjusted for cell composition.
 \gene{TNFRSF1B} was found by \textcite{verstockt2019LowTREM1Expression} to be downregulated in baseline inflamed mucosal biopsies of responders to anti-\gls{TNF} therapy in \gls{IBD} patients ($n=44$, $\text{\gls{FC}}=0.72$, $p=0.008$).
 \gene{PTGS2} was found by \textcite{arijs2009MucosalGeneSignatures} to be downregulated in baseline mucosal biopsies of responders to infliximab for Crohn's colitis ($n=46$).
 The directions of effect in both cases are opposite to this study, but comparisons are hard to draw between blood and mucosal biopsies.
 
 A previously identified marker in blood, \gene{TREM1} was found to have opposing effects in two studies by \textcite{gaujoux2019CellcentredMetaanalysisReveals} ($n=22$) and \textcite{verstockt2019LowTREM1Expression} ($n=54$).
-\gene{TREM1} had the strongest differences between responders and non-responders at baseline in infliximab subcohort, 
-but did not reach significance before ($\log_2\text{\gls{FC}} = \num{0.29283535}$, $\gls{FDR}=\num{0.0595323}$)
+Here, \gene{TREM1} showed the strongest differences between responders and non-responders at baseline in the infliximab subcohort, 
+but did not reach significance before ($\log_2\text{\gls{FC}} = \num{0.29283535}$, $\text{\gls{FDR}}=\num{0.0595323}$)
 %      logFC  AveExpr          t    P.Value adj.P.Val      z.std
 % 0.29283535 7.668094  2.8665957 0.00429233 0.0595323  2.8558388
-nor after adjusting for cell composition ($\log_2\text{\gls{FC}} = \num{0.04625626}$, $\gls{FDR}=\num{0.9864125}$).
+nor after adjusting for cell composition ($\log_2\text{\gls{FC}} = \num{0.04625626}$, $\text{\gls{FDR}}=\num{0.9864125}$).
 % 0.04625626 7.668094  0.6661333 0.50560221 0.9864125  0.6657010
-The combined sample size in this study for the infliximab subcohort at baseline was is $n=145$ (\cref{fig:multipants_studyDay_boxplots}), so it is expected the power in this study is greater.
+The sample size in this study for the infliximab subcohort at baseline is $n=145$ (\cref{fig:multipants_studyDay_boxplots}), so it is expected the power in this study is greater.
 
 % TODO: confint not implemented in variancePartition for topTable on dream objects, and multiplicity adjustment is non-trivial, see \url{https://amstat.tandfonline.com/doi/abs/10.1198/016214504000001907}
 
@@ -1119,17 +1128,17 @@ The combined sample size in this study for the infliximab subcohort at baseline 
 \subsection{Post-induction gene expression associated with primary response}
 
 The same methodology applied at week 0 was applied at week 14 to identify differences in post-induction expression associated with primary response.
-A larger proportion of the transcriptome is differentially expressed between responders and non-responders at week 14: 
-1364 for the infliximab-only comparison, 
-1544 for the adalimumab-only comparison, 
-and 4841 pooling both drugs (\cref{fig:multipants_dge_volcano_week_14_R_N}).
+A larger proportion of the transcriptome was differentially expressed between responders and non-responders at week 14: 
+1364 genes for the infliximab-only comparison, 
+1544 genes for the adalimumab-only comparison, 
+and 4841 genes pooling both drugs (\cref{fig:multipants_dge_volcano_week_14_R_N}).
 No significant interactions between drug and response were detected at the per-gene level.
 Given that sample sizes at week 0 and week 14 are comparable (\cref{fig:multipants_studyDay_boxplots}), the overall signal-to-noise ratio is much stronger than at baseline.
 
-Adjusting for cell composition, 1320/1364, 1515/1544 and 4653/4841 genes have dampened effects;
+After adjusting for cell composition, 1320/1364, 1515/1544 and 4653/4841 genes had dampened effects;
 % \todo{Carl's comment: And does this include genes that are no longer significantly differentially expressed. I would find helpful to know how many genes are no longer eGenes, and how many remain eGenes but where the eQTL has a lower effect.}
 % NOTE: mag, damp, flip only counts signs, not signif
-and the numbers of significant genes drop to 379, 177, and 1302 for infliximab, adalimumab, and pooled analyses respectively.
+and the numbers of significant genes dropped to 379, 177, and 1302; for the infliximab, adalimumab, and pooled analyses respectively.
 This again suggests many effects are mediated by differences in immune cell composition between responders and non-responders.
 
 % TODO: add module names
@@ -1141,27 +1150,25 @@ suggesting there is per-cell up or downregulation on top of abundance changes of
 Modules related to antigen presentation (LI.M71, LI.M97.0, LI.M5.0),
 interferon (LI.M75, LI.M127, LI.M111.1),
 and dendritic cells (LI.M64, LI.M165)
-also appear among significantly downregulated modules after cell composition adjustment.
+also appeared among significantly downregulated modules after cell composition adjustment.
 Directions of effect for the most significant modules were largely consistent between drugs, 
-and there are few significant drug by response interaction effects
+and there were few significant drug by response interaction effects.
 This is in contrast to the baseline responder vs. non-responder comparison,
 where many of the strongest effects in the pooled analysis were driven by stronger effects in one drug.
 
-\gene{SIGLEC10} from the baseline analysis retains its significant association with primary response post-induction, 
+\gene{SIGLEC10} from the baseline analysis retained its significant association with primary response post-induction, 
 with the same direction of effect (adjusted $\log_2\text{\gls{FC}} = \num{0.36610032}$).
 % \todo{highlight a few more individual genes specific to this analysis too? not sure how to pick them at the moment.}
-Some genes previously proposed as baseline markers of response in gut mucosa: \gene{G0S2}, \gene{TNFAIP6}, \gene{S100A8} and \gene{S100A9} by \textcite{arijs2010PredictiveValueEpithelial}; and \gene{OSM} by \textcite{west2017OncostatinDrivesIntestinal},
-were differentially expressed in post-induction blood in this study.
+Some genes previously proposed as baseline markers of response in gut mucosa---\gene{G0S2}, \gene{TNFAIP6}, \gene{S100A8}, and \gene{S100A9} by \textcite{arijs2010PredictiveValueEpithelial}; and \gene{OSM} by \textcite{west2017OncostatinDrivesIntestinal}---were differentially expressed in post-induction blood in this study.
 The direction of effect for both sets of markers, downregulation in primary responders, also matches this study.
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_simple_C_3RI_3NI,C_3RA_3NA,C_3R_3N.pdf}
     \caption{
-        \textbf{Volcano plots of \gls{DGE} between primary responders and non-responders at week 14; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
+        \textbf{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 14; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
         Annotated genes include significant associations from this study and previously reported associations from \autoref{subsec:multiPANTS_intro_predicting_response}.
-        Dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        Dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_volcano_week_14_R_N}
 \end{figure}
@@ -1170,10 +1177,9 @@ The direction of effect for both sets of markers, downregulation in primary resp
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3RI_3NI,C_3RA_3NA,C_(3RI_3NI)_(3RA_3NA),C_3R_3N.cell_prop_correction_FALSE.pdf}
     \caption{
-        \textbf{Top modules differentially expressed between primary responders and non-responders at week 14, unadjusted for cell composition.}
-        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab-adalimumab difference and pooled analyses. 
-        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, unadjusted for cell composition.}
+        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
+        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_14_R_N_cellPropF}
 \end{figure}
@@ -1182,61 +1188,61 @@ The direction of effect for both sets of markers, downregulation in primary resp
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3RI_3NI,C_3RA_3NA,C_(3RI_3NI)_(3RA_3NA),C_3R_3N.cell_prop_correction_TRUE.pdf}
     \caption{
-        \textbf{Top modules differentially expressed between primary responders and non-responders at week 14, adjusted for cell composition.}
-        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab-adalimumab difference and pooled analyses. 
-        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at FDR = 0.05.
-        PR = primary responder.
+        \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, adjusted for cell composition.}
+        Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
+        The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_14_R_N_cellPropT}
 \end{figure}
 
 \subsection{Magnification of expression change from baseline to post-induction in responders}
 
-Given the stronger differences in expression between primary responders and non-responders at week 14 versus week 0,
+Given the stronger differences in expression between primary responders and non-responders at week 14 than week 0,
 I estimated the change in expression from week 0 to week 14 within the two groups, and also estimated the timepoint by response interaction.
-I perform only the pooled comparison here both to simplify the analysis, and because similarly to the within week 14 comparison, change from week 0 to week 14 was relatively consistent between drugs, with exceptions noted.
+I performed only the pooled comparison to simplify the analysis, and because like the within-week 14 comparison, change from week 0 to week 14 was relatively consistent between drugs, with exceptions noted.
 
 Without adjusting for cell composition,
-12862 genes were differentially expressed in primary responders at week 14 vs week 0 in the pooled analysis,
-8310 genes in primary non-responders,
-and 6320 genes had a significant interaction.
+\num{12862} genes were differentially expressed in primary responders comparing week 14 vs. week 0,
+\num{8310} genes in primary non-responders,
+and \num{6320} genes had a significant interaction between responders and non-responders.
 After adjusting for cell composition, 
-5572 genes were differentially expressed in primary responders,
-626 genes in primary non-responders,
-and 179 genes had a significant interaction.
+\num{5572} genes were differentially expressed in primary responders,
+\num{626} genes in primary non-responders,
+and \num{179} genes had a significant interaction.
 Of the genes differentially expressed between week 14 and week 0 in both primary responders and non-responders,
 and with a significant interaction between timepoint and response, 
-nearly all (4885/4891 unadjusted for cell composition, 31/32 adjusted) were magnified by primary response i.e.
-the same genes have larger fold-changes in the same direction for primary responders (\cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}).
+nearly all (\num{4885/4891} unadjusted for cell composition, \num{31/32} adjusted) were magnified by primary response,
+with the same genes having larger \glspl{FC} in the same direction for primary responders (\cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}).
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.logFC_C_3R_1R_vs_logFC_C_3N_1N.pdf}
     \caption{
         \textbf{Expression $\log_2\text{\gls{FC}}$ from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
-        for genes that are differentially expressed from week 0 to week 14 in both responders and non-responders, with a significantly different effect size in responders and non-responders.
+        for genes that differentially expressed from week 0 to week 14 in both responders and non-responders, 
+        with a significantly different effect size between responders and non-responders.
         }
         Results adjusted (right) and unadjusted (left) for cell proportions are shown.
-        Identity line shown by dashed line.
+        The identity line is shown by the dashed line.
         Most expression changes from week 0 to week 14 are magnified in primary responders, with a small proportion of changes in the opposite direction.
     }
     \label{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}
 \end{figure}
 
 % NOTE: choosing these to be present in both drugs and pooled
-The most significant modules that change from week 0 to week 14 in responders included
+The most significant modules that changed from week 0 to week 14 in responders included
 upregulation of B cell (LI.M47.0), plasma cell (LI.M156.0), and T cell activation (LI.M7.1);
-and downregulation of immune activation (LI.M37.0), monocyte (LI.M11.0), neutrophil (LI.M37.1) and TLR and inflammatory signalling (LI.M16) modules (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropF}).
+and downregulation of immune activation (LI.M37.0), monocyte (LI.M11.0), neutrophil (LI.M37.1), and TLR and inflammatory signalling (LI.M16) modules (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropF}).
 % Many of these are the same modules associated with response within the week 0 and week 14 timepoints.
-Many of these are the same modules associated with response within the week 14 timepoint, and in the same direction (\cref{fig:multipants_dge_panelPlot_week_14_R_N_cellPropF}),
+Many of these are the same modules associated with response within the week 14 timepoint, with concordant directions of effect between the two analyses (\cref{fig:multipants_dge_panelPlot_week_14_R_N_cellPropF}),
 suggesting that a change in expression of these gene sets from week 0 to week 14 is what leads to the difference between responders and non-responders at week 14.
 % TODO what about the week 0 timepoint? recheck it
-% \todo{Carl's comment: So one is more likely to be a responder if you are highly expressing genes in the gene-sets at baseline and/or you have a large up-regulation of these genes by week14?}
+% \todo{Carl's comment: So one is more likely to be a responder if you are highly expressing genes in the gene-sets at baseline and/or you have a large up-regulation of these genes by week 14?}
 
-Adjusting for cell composition decreases the significance of a majority of modules (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}),
-with T cell modules in the adalimumab-only analysis especially decreased.
-Magnification is also observed at the module level, with nearly all module effects aligned in the same direction in responders and non-responders, with significant interactions also in the same direction.
-In general, responders seem to experience greater changes in their gene expression from week 0 to week 14 due to the drug.
+Adjusting for cell composition decreased the significance of a majority of modules (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}),
+especially for T cell modules in the adalimumab-only analysis.
+Magnification was also observed at the module level, with nearly all module effects aligned in the same direction in responders and non-responders, with significant interactions also in the same direction.
+In general, responders seem to experience greater changes in their gene expression from week 0 to week 14, presumably due to the drug.
 
 \begin{figure}
     \centering
@@ -1245,7 +1251,7 @@ In general, responders seem to experience greater changes in their gene expressi
         \textbf{Top modules differentially expressed between week 14 and week 0, unadjusted for cell composition.}
         Columns show effects in primary responders (PR), non-responders (PNR), and the primary responder minus non-responder difference. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. 
-        Vertical dashed line shows significance threshold at FDR = 0.05.
+        Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropF}
 \end{figure}
@@ -1257,28 +1263,29 @@ In general, responders seem to experience greater changes in their gene expressi
         \textbf{Top modules differentially expressed between week 14 and week 0, adjusted for cell composition.}
         Columns show effects in primary responders (PR), non-responders (PNR), and the primary responder minus non-responder difference. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. 
-        Vertical dashed line shows significance threshold at FDR = 0.05.
+        Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
     }
     \label{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}
 \end{figure}
 
-\subsection{Interferon modules with opposing differential expression in responders and non-responders}
+\subsection{Interferon modules with opposing expression changes in responders and non-responders}
 \label{subsec:multipants_dge_opposing_interferon}
 
 \cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N} also contains genes that were downregulated from week 0 to week 14 in responders, but upregulated in non-responders (\enquote{flipped}).
 % TODO: unify terminology with ch3
-At the module level these opposing effects were most apparent after cell composition adjustment for 
-antiviral interferon signature (LI.M175), type I interferon response (LI.M127), and antigen presentation (LI.M95.0) (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}).
-I extended my module analysis to include modules from \autocite{chaussabel2008ModularAnalysisFramework} (prefixed \enquote{DC}).
-Although these modules are on the whole poorly annotated compared to modules from \autocite{li2013MolecularSignaturesAntibody}, interferon modules are annotated.
+At the module level, these flipped effects were apparent in the cell composition-adjusted analysis,
+for antiviral interferon signature (LI.M175), type I interferon response (LI.M127), and antigen presentation (LI.M95.0) modules (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}).
+I extended my gene set enrichment analyses to include modules from \textcite{chaussabel2008ModularAnalysisFramework} (prefixed \enquote{DC});
+although these modules are on the whole poorly annotated compared to modules from \textcite{li2013MolecularSignaturesAntibody}, interferon modules are well-annotated.
 % tmodHGtest FDR=\num{0.0001261719}
-\gene{STAT2}, \gene{GBP5}, and \gene{PARP14} from \cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N} are annotated into an interferon module (DC.M3.4).
-\gene{IFIT3} and \gene{GBP2} are also annotated into separate interferon modules (DC.M1.2, DC.M5.12).
-Adjusted for cell composition, these modules are all significantly upregulated at week 14 in non-responders only: 
-DC.M3.4 (FDR=\num{3.446797e-21}),
-DC.M1.2 (FDR=\num{9.492256e-16}),
-and DC.M5.12 (FDR=\num{1.355467e-13})
-(\cref{fig:multipants_dge_evidencePlots_C_3_1_Interferon}).
+\gene{STAT2}, \gene{GBP5}, and \gene{PARP14} from \cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N} are annotated into an interferon module, DC.M3.4.
+\gene{IFIT3} and \gene{GBP2} are also annotated into separate interferon modules, DC.M1.2 and DC.M5.12.
+Adjusted for cell composition, these modules were all significantly upregulated at week 14 in non-responders only (%
+    DC.M3.4, $\text{\gls{FDR}} = \num{3.446797e-21}$;
+    DC.M1.2, $\text{\gls{FDR}} = \num{9.492256e-16}$;
+    DC.M5.12, $\text{\gls{FDR}} = \num{1.355467e-13}$;
+    \cref{fig:multipants_dge_evidencePlots_C_3_1_Interferon}%
+).
 
 \begin{figure}
     \centering
@@ -1286,33 +1293,41 @@ and DC.M5.12 (FDR=\num{1.355467e-13})
     % TODO: only 8-9k genes
     % TODO: add module names
     \caption{
-        \textbf{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders.}
+        \textbf{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders (PNR), but not in primary responders (PR).}
         Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. 
         The ranks of genes in interferon-related modules are indicated by colored rug plots. 
         Colored curves show the cumulative fraction of genes in each module. 
         For non-responders, these modules are enriched for large ranks (large, positive $z$-statistics). 
         The area under the colored curves are the effect sizes (\glspl{AUC}). 
-        The null of randomly-distributed ranks is the grey diagonal line.
-        PR = primary responder, PNR = primary non-responder.
+        The null of randomly-distributed ranks is shown by the grey diagonal line.
     }
     \label{fig:multipants_dge_evidencePlots_C_3_1_Interferon}
 \end{figure}
 
 \subsection{Sustained expression differences between primary responders and non-responders during maintenance}
 
-As \gls{PANTS} is an observational study, it was able to include some patients who continued with anti-\gls{TNF} therapy
-even after meeting the definition of primary non-response at week 14.
-For both responders and non-responders, expression data was also available from blood samples around week 30 and week 54, and at additional visits scheduled in the event of secondary LOR.
+As \gls{PANTS} is an observational study, it was able to include patients who continued with anti-\gls{TNF} therapy even after meeting the definition of primary non-response at week 14.
+For both responders and non-responders, expression data was also available from blood samples around week 30 and week 54, and at additional visits scheduled in the event of secondary \gls{LOR}.
+To test for general differences in expression over time between responders and non-responders,
+I fit a natural cubic spline to the expression of each gene as a function of study day. 
+This analysis was performed only with drugs pooled due to lower sample sizes at later timepoints.
 
-I fit a natural cubic spline to the expression of each gene as a function of study day, and tested for general differences in expression over time between responders and non-responders.
-This analysis was performed only with drugs pooled due to lower sample sizes for later timepoints.
 Without adjusting for cell composition, 
-4426 genes were differentially expressed between responders and non-responders;
-210 genes were differentially expressed after adjustment.
-To identify distinct trajectories of expression over time, I hierarchically clustered those 210 genes by
-their mean expression in responders and non-responders at each timepoint, 
+\num{4426} genes were differentially expressed between responders and non-responders;
+\num{210} genes were differentially expressed after adjustment.
+To identify distinct trajectories of expression over time, I hierarchically clustered those \num{210} genes by their mean expression in responders and non-responders at each timepoint, 
 and determined the optimal number of clusters by the gap statistic method (\cref{fig:multipants_dge_spline_fviz_nbclust_gap_stat}).
 Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_trajectories}).
+%
+Many of the \num{210} genes had previously been identified as having significant differences in expression between responders and non-responders
+either within week 14, or for change in expression from week 0 to week 14.
+Cluster 1 contained mainly previously identified genes (\cref{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf});
+and was enriched for modules such as 
+myeloid cells and monocytes (LI.M81, hypergeometric test, $\text{\gls{FDR}} = \num{2.114861e-06}$),
+platelet activation (LI.M196, $\text{\gls{FDR}} = \num{1.347609e-05}$),
+immune activation (LI.M37.0, $\text{\gls{FDR}} = \num{1.435659e-04}$),
+and TLR and inflammatory signalling (LI.M16, $\text{\gls{FDR}} = \num{2.364913e-03}$).
+The spline analysis highlights that expression differences at week 14 are maintained at week 30 and week 54.
 
 \begin{figure}
     \centering
@@ -1320,8 +1335,7 @@ Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_tra
     \caption{
         \textbf{Gap statistic versus cluster number $k$.}
         Error bars derived from 500 bootstraps. 
-        The optimal number of clusters is defined as the smallest $k$ where Gap($k$) is greater than the lower bound of Gap($k+1$) \autocite{tibshirani2001EstimatingNumberClusters}.
-        Here, the optimal $k$ is six.
+        Here, the optimal number was $k=6$ by the \software{factoextra::fviz\_nbclust} \software{firstSEmax} criteria (\url{https://rpkgs.datanovia.com/factoextra/index.html}).
     }
     \label{fig:multipants_dge_spline_fviz_nbclust_gap_stat}
 \end{figure}
@@ -1331,39 +1345,28 @@ Six distinct clusters were proposed (\cref{fig:multipants_dge_spline_cluster_tra
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_trajectories.pdf}
     \caption{
         \textbf{Normalised expression over the timepoints for genes in the six identified clusters.}
-        Log scaled expression for each gene was standardised before clustering.
-        Error bars are the expression mean and standard deviation for the genes at each timepoint in primary responders and non-responders.
-        PR = primary responder, PNR = primary non-responder.
+        Log scale expression for each gene was standardised before clustering.
+        Error bars show the mean $\pm$ standard deviation for the genes at each timepoint in primary responders (PR) and non-responders (PNR).
     }
     \label{fig:multipants_dge_spline_cluster_trajectories}
 \end{figure}
-
-Many of these genes had previously been identified as having significant differences in expression between responders and non-responders
-either within week 14, or for change in expression from week 0 to week 14.
-Cluster 1 contained mainly previously identified genes (\cref{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}),
-and was enriched for modules including 
-myeloid cells and monocytes (LI.M81, hypergeometric test, FDR=\num{2.114861e-06}),
-platelet activation (LI.M196, FDR=\num{1.347609e-05}),
-immune activation (LI.M37.0, FDR=\num{1.435659e-04}),
-and TLR and inflammatory signalling (LI.M16, FDR=\num{2.364913e-03}).
-The spline analysis highlighted that expression differences at week 14 are maintained at week 30 and week 54.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_venns.pdf}
     \caption{
-        \textbf{Venn diagrams showing which genes in each spline cluster were also significant in the week 14 responder versus non-responder contrast (w14), or the interaction between week 0 to week 14 change and response status (w14-w0).}
+        \textbf{Venn diagrams showing which genes in each cluster were also significant in the week 14 responder versus non-responder contrast (w14), or had a significant interaction between week 0 to week 14 change and response status (w14 -- w0).}
     }
     \label{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}
 \end{figure}
 
-The highest proportion of genes uniquely identified as significant by the spline analysis were in cluster 2 (26/31) and cluster 4 (15/20).
-Cluster 2 was enriched in \autocite{li2013MolecularSignaturesAntibody} B cell modules (LI.M47.0, FDR=\num{1.525815e-06}; LI.M47.1, FDR=\num{4.531246e-05})
-previously identified as having a greater increase from week 0 to week 14 in primary responders versus primary non-responders (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}),
+The highest proportions of genes uniquely identified as significant by the spline analysis were in cluster 2 (26/31) and cluster 4 (15/20).
+Cluster 2 was enriched in \textcite{li2013MolecularSignaturesAntibody} B cell modules (LI.M47.0, $\text{\gls{FDR}} = \num{1.525815e-06}$; LI.M47.1, $\text{\gls{FDR}} = \num{4.531246e-05}$)
+previously identified as having a greater increase from week 0 to week 14 in primary responders than in primary non-responders (\cref{fig:multipants_dge_panelPlot_week_14_0_R_N_cellPropT}),
 matching the observed cluster trajectory.
-Cluster 4 was not enriched in any modules from \textcite{li2013MolecularSignaturesAntibody}, but is enriched for a B cell module (DC.M4.10, FDR=\num{0.001367196}) from \textcite{chaussabel2008ModularAnalysisFramework}.
+Cluster 4 was not enriched in any modules from \textcite{li2013MolecularSignaturesAntibody}, but was enriched for a B cell module (DC.M4.10, $\text{\gls{FDR}} = \num[scientific-notation = true]{0.001367196}$) from \textcite{chaussabel2008ModularAnalysisFramework}.
 Although no genes were significantly associated with response at week 0 (\cref{fig:multipants_dge_volcano_week_0_R_N}),
-the genes in cluster 4 are coordinately downregulated as a set in primary responders (CERNO test, p=\num{6.175642e-25}).
+the genes in cluster 4 were coordinately downregulated as a set in primary responders (CERNO test, $p=\num{6.175642e-25}$).
 
 % AL353807.3
 % STAT1
@@ -1374,28 +1377,29 @@ the genes in cluster 4 are coordinately downregulated as a set in primary respon
 % TAP1
 % APOL2
 % APOL1
-Cluster 3 is also of interest, enriched for type I interferon response (LI.M127, FDR=\num{0.005680666}) and interferon (DC.M3.4, FDR=\num{0.0005266239}) modules,
-as well as genes that contain putative transcription factor binding motifs for interferon regulatory factors \gene{IRF7} ({g:Profiler} term ID TF:M00453\_1, adj. p value=\num{0.0050514484}) 
-and \gene{IRF8} (TF:M11684\_1, adj. p value=\num{0.0077680709}; TF:M11685\_1, adj. p=\num{0.0103433288}).
+Cluster 3 was enriched for type I interferon response (LI.M127, $\text{\gls{FDR}} = \num{0.005680666}$) and interferon (DC.M3.4, $\text{\gls{FDR}} = \num[scientific-notation = true]{0.0005266239}$) modules,
+as well as genes that contain putative \gls{TF} binding motifs for interferon regulatory factors \gene{IRF7} ({g:Profiler} \autocite{raudvere2019ProfilerWebServer} term ID TF:M00453\_1, adj. $p=\num{0.0050514484}$) 
+and \gene{IRF8} (TF:M11684\_1, adj. $p=\num{0.0077680709}$; TF:M11685\_1, adj. $p=\num{0.0103433288}$).
 The cluster trajectory shows direction of expression change is opposing in responders and non-responders from week 0 to week 14, followed by sustained differences at week 30 and week 54.
 The trajectory and interferon-related gene set enrichments are consistent with those identified in \cref{subsec:multipants_dge_opposing_interferon}.
-Of the 9 genes in this cluster, 8 genes (\gene{STAT1}, \gene{BATF2}, \gene{GBP1}, \gene{GBP5}, \gene{IRF1}, \gene{TAP1}, \gene{APOL1}, \gene{APOL2})
-have significant interaction between week 0 to week 14 expression change and response status,
+Of the nine genes in this cluster, eight genes (\gene{STAT1}, \gene{BATF2}, \gene{GBP1}, \gene{GBP5}, \gene{IRF1}, \gene{TAP1}, \gene{APOL1}, \gene{APOL2})
+had significant interaction between week 0 to week 14 expression change and response status,
 whether or not correcting for cell composition.
 However, only \gene{GBP5} was differentially expressed from week 0 to week 14 in both responders and non-responders,
 and only when unadjusted for cell composition (\cref{fig:multipants_dge_logFC_C_3R_1R_vs_logFC_C_3N_1N}).
-This indicates that such small and opposite effects in responders and non-responders are best detected at a single-gene level in the interaction analysis that tests the difference,
-and in the spline analysis, with the support of additional data from week 30 and week 54.
+This indicates that small and opposite effects in responders and non-responders at the gene level are best detected 
+in the interaction analysis that explicitly tests the difference,
+and in the spline analysis with the support of additional data from week 30 and week 54.
 
-% TODO: add siglec 10 trend raw, and add to discussion
+% TODO: add SIGLEC10 plot, and add to discussion
     
-\subsection{Limited evidence for change in genetic architecture of gene expression over time}
+\subsection{Limited evidence for changes in genetic architecture of gene expression over time}
 
 Given the substantial changes in expression from baseline to post-induction after starting the drug, and the differing trajectories observed in responders and non-responders, 
 I performed \gls{eQTL} mapping to identity common genetic variants associated with expression that may contribute to these differences.
-Variants \textit{cis} (within \SI{1}{\mega b} of the TSS) to 15040 genes were tested for association.
+Variants \textit{cis} (within \SI{1}{\mega b} of the \gls{TSS}) to \num{15040} genes were tested for association.
 Mapping was performed within each timepoint (weeks 0, 14, 30, and 54),
-followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and control for multiple testing using \software{mashr}.
+followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and control for multiple testing using \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods}.
 
 % TODO
 % also drugs pooled due to much more power for eqtl required than DGE, may be inappropriate
@@ -1403,19 +1407,19 @@ followed by joint analysis of per-timepoint \gls{eQTL} summary statistics and co
 % TODO: see https://www.nature.com/articles/nature24277#Sec5
 % for classic U-curve for sharing
 
-The majority 11156/15040 (\percentage{0.74175531914}) of genes were eGenes (a gene with at least one significant \textit{cis}-\gls{eQTL}) in at least 1 timepoint (\gls{lfsr} < 0.05).
+The majority \num{11156/15040} (\percentage{0.74175531914}) of genes were eGenes (a gene with at least one significant \textit{cis}-\gls{eQTL}) in at least 1 timepoint ($\text{\gls{lfsr}} < 0.05$).
 The variant with the lowest \gls{lfsr} over all timepoints for each gene was 
 chosen as the lead variant (eSNP) for that gene.
-Most eSNPs were significant in multiple timepoints: 999 significant in 1 timepoint, 381 significant in 2 timepoints, 526 significant in 3 timepoints, 9250 significant in all 4 timepoints.
-I compared eSNP effect sizes between week 0 and each of weeks 14, 30 and 54,
-to identify \glspl{reQTL} with significant difference in effect versus baseline,
-as they may also explain changes in expression from baseline.
+Most eSNPs were significant at multiple timepoints: 
+\num{999} at one timepoint, \num{381} at two timepoints, \num{526} at three timepoints, and \num{9250} at all four timepoints.
+I compared eSNP effect sizes between week 0 and each of weeks 14, 30, and 54 to identify \glspl{reQTL} with a significant difference in effect versus baseline,
+as they may explain changes in expression from baseline.
 Most eSNPs were shared across timepoints;
-only six eSNPs-eGene pairs were significant at BH FDR < 0.05:
-with 1/6 for week 30 versus week 0 and 5/6 for week 54 versus week 0 (\cref{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}).
-Of the six pairs, \gene{NMI} and \gene{EPSTI1} both had magnified \gls{eQTL} effects at week 54 compared to week 0,
+only six eSNP-eGene pairs were significant \glspl{reQTL} (difference in betas \gls{BH} $\text{\gls{FDR}} < 0.05$):
+1/6 between week 30 and week 0, and 5/6 between week 54 and week 0 (\cref{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}).
+Of the six eGenes with \glspl{reQTL} between week 54 and week 0, \gene{NMI} and \gene{EPSTI1} both have magnified \gls{eQTL} effect sizes at week 54 compared to week 0,
 and both are annotated to contain putative binding motifs for \gene{IRF8} and \gene{IRF2} ({g:Profiler} term IDs TF:M11685\_1 and TF:M11665\_1).
-However, direct interpretation of these reQTLs is complicated by changing cell composition in bulk expression data (discussed in \cref{subsec:hird_reQTL_methods_cellTypeInteraction} and \cref{sec:discussion_bulkData}).
+However, direct interpretation of these \glspl{reQTL} is complicated by changing cell composition in bulk expression data (discussed in \cref{subsec:hird_reQTL_methods_cellTypeInteraction} and \cref{sec:discussion_bulkData}).
 
 % \begin{figure}
 %     \centering
@@ -1428,8 +1432,8 @@ However, direct interpretation of these reQTLs is complicated by changing cell c
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_dge_eqtl.pm_w30_vs_w0_and_w54_vs_w0}
     \caption{
-        \textbf{Week 30 and week 54 eQTL effect sizes vs baseline.}
-        Significant reQTLs at FDR 0.05 are labelled.
+        \textbf{Week 30 and week 54 \gls{eQTL} effect sizes vs. week 0.}
+        Significant \glspl{reQTL} at \gls{BH} $\text{\gls{FDR}} < 0.05$ are labelled.
     }
     \label{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}
 \end{figure}

@@ -874,13 +874,13 @@ At each of \num{13570} genes, at all \textit{cis}-variants within within $\pm \S
 % Like all Ensembl features the start of an exon is always less than or equal to the end of the exon, regardless of the strand it is on. The start of the transcript is the start of the first exon of a transcript on the forward strand or the end of the last exon of a transcript on the reverse strand. The start and end of a gene are defined to be the lowest start value of its transcripts and the highest end value respectively.
 \begin{equation}
     \begin{split}
-        y = 1 + \text{sex} + \sum_{i=1}^{4}{\text{\gls{PC}}_i} + \sum_{}^{3}{\text{xCell}} + \sum_{i=1}^{k}{\text{PEER}_i} + \beta x + \mathbf{u} + \epsilon
+        y = 1 + \text{sex} + \sum_{i=1}^{4}{\text{\gls{PC}}_i} + \sum_{}^{3}{\text{xCell}} + \sum_{i=1}^{k}{\text{PEER}_i} + \beta x + u + \epsilon
     \end{split}
     \label{eq:hird_reQTL_limix_model}
 \end{equation}
-% TODO: check mathbf for vector notation, add timepoint subscript
+% TODO: check when to use mathbf for vector notation, add timepoint subscript
 where the \gls{eQTL} effect size is the slope of the genotype fixed effect $\beta$, the average additive effect of the alternate allele \autocite{visscher2019Fisher1918Paper};
-and $\mathbf{u} \sim N(0, \sigma_g^2 K)$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix for variant $x$.
+and $u \sim N(0, \sigma_g^2 K)$ is a random effect with zero mean and covariance matrix proportional to the \gls{LOCO} kinship matrix for variant $x$.
 For chromosome X variants, no \gls{LOCO} matrix was available from LDAK, so the matrix for chromosome 1 was used.
 % TODO note stacking of kinship for day -7 repeated measures
 %
@@ -928,7 +928,7 @@ resulting in a strong subset of 45962 tests used to calculate data-driven covari
 %     \label{fig:hird_mashr_strongSubset_Z_mega}
 % \end{figure}
 
-The \software{mashr} model was trained on a random subset of \num{200000} tests, using the Exchangeable Z-scores model (assumes effects are independent of their standard errors, which performed better in GTEx data \autocite{urbut2018FlexibleStatisticalMethods}).
+The \software{mashr} model was trained on a random subset of \num{200000} tests, using the exchangeable $Z$ (EZ) model (assumes effects are independent of their standard errors, which performed better in GTEx data \autocite{urbut2018FlexibleStatisticalMethods}).
 % An alternative is to allow the effects to scale with standard error, so that effects with larger standard error tend to be larger.
 The correlation of null tests between conditions---critical to account for due to the repeated measures structure of the data---was estimated using \software{mashr::estimate\_null\_correlation}, which uses tests from the random subset that have small absolute $z$-scores.
 The fitted model was used as a prior to compute posterior effects and standard errors for all tests through shrinkage.
