@@ -689,7 +689,7 @@ which internally corrects for transcript length and GC composition by computing 
 Relative transcript abundances were summarised to Ensembl (release 90) gene-level count estimates using \software{tximport} (\texttt{scaledTPM} method, which scales Salmon \gls{TPM} values up to the library size \autocite{soneson2016DifferentialAnalysesRNAseq,love2018SwimmingDownstreamStatistical}) to improve statistical robustness and interpretability \autocite{soneson2016DifferentialAnalysesRNAseq}.
 % NOTE: in future, just combine technical replicates at the read level
 To combine technical replicates, as the sum of Poisson distributions remains Poisson-distributed, counts for technical replicates were summed for each sample.
-The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range \numrange{20.24}{39.14} million), representing a mean mapping rate of 80.73\% (range \SIrange{75.57}{90.10}{\percent}).
+The mean number of mapped read pairs per sample after summing was 27.09 million read pairs (range \numrange{20.24}{39.14} million), representing a mean mapping rate of \SI{80.73}{\percent} (range \SIrange{75.57}{90.10}{\percent}).
 These meet sequencing depth recommendations for \gls{DGE} experiments
 (e.g. diminishing returns after 10 million single-end reads \autocite{liu2014RNAseqDifferentialExpression}) 
 and mapping rate expectations 
@@ -749,7 +749,7 @@ Many of the genes in the reference transcriptome were not detectably expressed i
 % NOTE: no TMM was done before this CPM calculation
 Genes were filtered to require a minimum of 0.5 \gls{CPM} in at least \SI{20}{\percent} of samples.
 % NOTE: smallest library was 18.7M read pairs
-The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where 10-15 counts is a rule of thumb for considering a gene to be robustly expressed \autocite{chen2016ReadsGenesPathways,law2018RNAseqAnalysisEasy}.
+The 0.5 \gls{CPM} threshold was chosen to correspond to approximately 10 counts in the smallest library, where \numrange{10}{15} counts is a rule of thumb for considering a gene to be robustly expressed \autocite{chen2016ReadsGenesPathways,law2018RNAseqAnalysisEasy}.
 Genes were further filtered to require detection (non-zero expression) in at least \SI{95}{\percent} of samples to lessen the impact of low-expression outliers.
 The change in the distributions of gene expression among samples before and after filtering shows a substantial number of low expression genes are removed (\cref{fig:hird_rnaseq_cpm_filtering}).
 
@@ -759,7 +759,7 @@ The change in the distributions of gene expression among samples before and afte
     \caption{
         \textbf{Distribution of the proportion of samples in which genes were detected (non-zero expression).}
         Many genes are not detected in any samples (left-hand side). 
-        Vertical line shows 5\% threshold below which genes were discarded.
+        Vertical line shows \SI{5}{\percent} threshold below which genes were discarded.
     }
     \label{fig:hird_rnaseq_filtering_zeroProp}
 \end{figure}
@@ -1152,7 +1152,7 @@ Assuming that most genes are not differentially expressed with effect sizes dist
 % - Cauchy 2.5
 Heavy-tailed Cauchy priors have been proposed for effect size distributions in \gls{DGE} experiments to avoid over-shrinkage of true large effects in the tails \autocite{zhu2019HeavytailedPriorDistributions}.
 Since \software{bayesmeta} does not implement a Cauchy prior, to avoid over-shrinkage, I flatten the normal prior considerably by scaling up the standard deviation by a factor of 10: $N(0, (10\sigma)^2)$.
-This places a 95\% prior probability that effects are less extreme than approximately 20 times the observed $\sigma$, sufficient to allow for extreme fold-changes.
+This places a \SI{95}{\percent} prior probability that effects are less extreme than approximately 20 times the observed $\sigma$, sufficient to allow for extreme fold-changes.
 % NOTE:
 % The derivation here is qnorm(0.975, mean=0, sd=sqrt(100*1)) = 1*19.59964
 % Alternatively: pnorm(19.59964, mean=0, sd=sqrt(100*1)) - pnorm(-19.59964, mean=0, sd=sqrt(100*1)) = 0.95

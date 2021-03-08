@@ -126,9 +126,9 @@ A key determinant of how well the models in this thesis might correspond to real
 By encoding response as an independent variable, an assumption is made that it is a stable characteristic of an individual that is measured without error%
 \footnote{The regression framework can accommodate measurement error in the context of errors-in-variables models.}.
 This may not be an accurate assumption.
-Imagine a hypothetical drug or vaccine where 60\% of a sample of individuals have an observed response phenotype: \enquote{60\% of the time, it works every time}\footnote{Apatow, J., McKay, A. \& Ferrell, W. Anchorman: The Legend of Ron Burgundy (2004).}.
-This is compatible with a stable 60\% success rate in 100\% of individuals (variation in observed response is entirely due to chance);
-or a stable 100\% success rate in 60\% of individuals and 0\% in the other 40\% (response is highly personal)---most likely the truth is somewhere in between.
+Imagine a hypothetical drug or vaccine where \SI{60}{\percent} of a sample of individuals have an observed response phenotype: \enquote{\SI{60}{\percent} of the time, it works every time}\footnote{Apatow, J., McKay, A. \& Ferrell, W. Anchorman: The Legend of Ron Burgundy (2004).}.
+This is compatible with a stable \SI{60}{\percent} success rate in \SI{100}{\percent} of individuals (variation in observed response is entirely due to chance);
+or a stable \SI{100}{\percent} success rate in \SI{60}{\percent} of individuals and \SI{0}{\percent} in the other \SI{40}{\percent} (response is highly personal)---most likely the truth is somewhere in between.
 In the first scenario, it is difficult to imagine identifying robust baseline associations with response.
 This has been extensively discussed in the context of randomised controlled trials \autocite{senn2018StatisticalPitfallsPersonalized}, 
 but similar issues pertain to response definitions in observational studies.
@@ -301,7 +301,7 @@ where the number of potential predictors p dwarfs the sample size n.
 \textcite{efron2020PredictionEstimationAttribution} provides a fascinating case study on predicting prostate cancer status from expression array data (p=6033 genes) in 
 samples from 52 prostate cancer patients and 50 controls (n=102).
 After randomly splitting the data into training and test sets, each with 26 cancer patients and 25 controls,
-a random forest used to predict cancer status from gene expression recorded a 2\% test set error.
+a random forest used to predict cancer status from gene expression recorded a \SI{2}{\percent} test set error.
 Repeating over many random splits showed this high predictive performance was not an outlier.
 Random forests have embedded feature selection, assigning their predictors an importance score, 
 with a positive importance score indicating that a predictor was utilised by the model.
