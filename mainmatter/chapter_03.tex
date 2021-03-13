@@ -59,7 +59,8 @@ so it remains unknown whether robust genetic associations with antibody response
 % Adverse events genetics
 % Also, genetics of phenotypes such as adverse events have been studied e.g. \url{https://pubmed.ncbi.nlm.nih.gov/25344690/}, ollila2017GeneticsVaccinationrelatedNarcolepsy
 
-\subsection{\Glsfmtfullpl{reQTL} following influenza vaccination}
+% \subsection{\Glsfmtfullpl{reQTL} following influenza vaccination}
+\subsection{reQTLs induced by influenza vaccination}
 \label{subsec:hird_reQTL_following_influenza_vaccination}
 
 Host genetic variation could play a causal role in influenza vaccine response by altering the expression of genes as \glspl{eQTL}.
@@ -145,14 +146,15 @@ and pinpoint genes important to Pandemrix response.
 \section{Methods}
 \label{sec:hird_reQTL_methods}
 
-\subsection{Overall strategy for \glsfmtshort{reQTL} mapping}
+% \subsection{Overall strategy for \glsfmtshort{reQTL} mapping}
+\subsection{Overall strategy for reQTL mapping}
 \label{subsec:hird_reQTL_overall_strategy}
 
 A plethora of approaches to mapping \glspl{eQTL} with linear models exist; each approach has its own advantages, disadvantages, and assumptions.
 When the task is also to define \gls{reQTL} between multiple conditions, the diversity of possible approaches further multiplies.
 Here I will discuss aspects of the data and available methodologies that led to the final modelling strategy adopted in this chapter.
 
-\subsubsection{Adjusting for population structure using \glsfmtlongpl{LMM}}
+\subsubsection{Adjusting for population structure using linear mixed models}
 
 Population structure occurs when the samples in a study are not independent, but structured due to genetic relatedness.
 Genetic association studies assume that the individuals in a sample are unrelated (or at least sufficiently distantly related) \autocite{astle2009PopulationStructureCryptic,sillanpaa2011OverviewTechniquesAccount,sul2018PopulationStructureGenetic}.
@@ -387,7 +389,7 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % metafor manual
 % If, instead of the crude estimate, one wants to use a better apriori estimate, one can do so by passing this value via control=list(tau2.init=value)
 % Sidik-Jonkman estimator, also called the ‘model error variance estimator’, is implemented in metafor (SJ method).
-% Starts with an init estiamte of ri=sigma2i/tau2i i.e. ratio of study-specific and between-studies het variance, then updates.
+% Starts with an init estiamte of ri=sigma2i/tau2i i.e. ratio of study-specific and between-study het variance, then updates.
 % They recommend using Hedges [1], to init, but this is bad???
 % We use mode of gamma as an apriori estimate of tau.
 %
@@ -401,7 +403,7 @@ Unlike a test for difference implemented using a genotype-condition interaction 
 % 2.9.1.1.	Use eigenMT estimates to apply local Bonferroni per gene
 % 2.9.1.2.	Compute global BH FDR
 Within each timepoint, the \gls{HIRD} dataset includes expression measured by both array and \gls{RNAseq}.
-As discussed in \cref{subsubsec:hird_dge_meta_methodChoice}, it is difficult to directly estimate the between-studies heterogeneity when the number of studies is small, 
+As discussed in \cref{subsubsec:hird_dge_meta_methodChoice}, it is difficult to directly estimate the between-study heterogeneity when the number of studies is small, 
 thus Bayesian meta-analysis was preferred for combining array and \gls{RNAseq} \gls{DGE} estimates.
 % \todo{why I didn't just do a mega-analysis in chapter 2 then, given I haven't any evidence if it's better or worse than Bayesian meta-analysis in that context.}
 That method does not scale to \gls{eQTL} analysis, where the number of tests is large, in the order of thousands of tests per gene, versus the handful \gls{DGE} contrasts per gene performed in \cref{ch:hird_DGE}.
@@ -842,7 +844,8 @@ particularly in the context of \textit{cis}-\gls{eQTL} mapping where associated 
     \label{fig:hird_peer_corMatrix_v2_mega}
 \end{figure}
 
-\subsection{\glsfmtshort{eQTL} mapping per timepoint}
+% \subsection{\glsfmtshort{eQTL} mapping per timepoint}
+\subsection{eQTL mapping per timepoint}
 \label{subsec:hird_reQTL_limix}
 
 % 2.5.	Preprocess genotypes for limix
@@ -904,7 +907,8 @@ I settled on a final choice of $k=10$ factors for baseline, 5 factors for day 1,
     \label{fig:hird_neGenesvsPeerK}
 \end{figure}
 
-\subsection{Joint \glsfmtshort{eQTL} analysis across timepoints}
+% \subsection{Joint \glsfmtshort{eQTL} analysis across timepoints}
+\subsection{Joint eQTL analysis across timepoints}
 \label{subsec:hird_reQTL_mashr}
 
 % 2.10.	mashr
@@ -937,7 +941,7 @@ A condition-specific Bayesian measure of significance is returned:
 Note that \software{mashr} is the multiple-condition extension of \software{ashr} \autocite{stephens2016FalseDiscoveryRates}, 
 previously used in \cref{subsubsec:hird_dge_multipleTestingCorrection} for computing posterior effects and their significance in \gls{DGE} analyses.
 
-\subsection{Defining shared and response eQTLs}
+\subsection{Defining shared eQTLs and reQTLs}
 \label{subsec:hird_reQTL_methods_definingSharedAndreQTLs}
 
 Many of the tested variants for each gene will be in high \gls{LD}.
@@ -1218,7 +1222,9 @@ indicating most \gls{reQTL} effects were differences between pre- and post-vacci
     \centering
     \includegraphics[width=0.6\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.pairwise_reQTL_venn.pdf}
     \caption{
-        \textbf{\glspl{reQTL} were observed for 1154 unique eGenes, where the lead \glspl{eQTL} had a significant difference in beta between pairs of timepoints (nominal p < 0.05).}
+        \textbf{eGenes where the lead \gls{eQTL} was a \gls{reQTL} between a pair of timepoints.}
+        \glspl{reQTL} were observed for 1154 unique eGenes, 
+        defined by a significant difference in beta between timepoints (nominal $p < 0.05$).
     }
     \label{fig:hird_reQTL_pairwise_venn}
 \end{figure}
@@ -1289,7 +1295,7 @@ No significant enrichments were identified.
 
 \subsection{Exploring possible mechanisms generating reQTLs}
 
-\subsubsection{Differential gene expression of reQTL eGenes}
+\subsubsection{Differential expression of genes with reQTLs}
 
 As gene set analyses based on the effect sizes of \glspl{reQTL} at different timepoints had been largely uninformative,
 I considered whether \glspl{reQTL} could be characterised by shared mechanisms.
@@ -1354,7 +1360,7 @@ There is strong evidence that many post-vaccination \glspl{reQTL} are generated 
     \label{fig:hird_reQTL_ploteQTL_SH2D4A}
 \end{figure}
 
-\subsubsection{Genotype by cell type interaction effects}
+\subsubsection{Genotype by cell type abundance interaction effects}
 
 The presence of cell type-specific \gls{eQTL} effects combined with changes in cell abundance between timepoints was considered as an alternate explanation generating \glspl{reQTL}.
 Even if an eGene is not differentially expressed on average in bulk expression data, 

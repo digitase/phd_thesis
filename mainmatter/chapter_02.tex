@@ -279,7 +279,7 @@ The existence of temporally-stable and replicable signatures is, however, encour
 % 25. Jurchott, K. et al. (2016) Highly predictive model for a protective immune response to the A(H1N1)pdm2009 influenza strain after seasonal vaccination. PLoS One 11, e0150812
     % https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0150812
 
-\subsection{The \glsfmtfull{HIRD} study}
+\subsection{The Human Immune Response Dynamics (HIRD) cohort}
 
 For studies of seasonal influenza vaccines in adults, responses are heavily influenced by immunological memory built by past vaccination or infection with antigenically-similar strains \autocite{nakaya2012SystemsVaccinologyLearning,sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
 Dependence on exposure is reflected in high variability of baseline vaccine-specific antibody titres and memory B cell numbers \autocite{tsang2014GlobalAnalysesHuman}.
@@ -339,7 +339,8 @@ The strongest associations are seen at day 7, but significant module association
 
 \section{Methods}
 
-\subsection{Existing \glsfmtshort{HIRD} data and additional data generation}
+% \subsection{Existing \glsfmtshort{HIRD} data and additional data generation}
+\subsection{Existing HIRD data and additional data generation}
 \label{subsec:hird_dge_studyDesign}
 
 The design of the \gls{HIRD} study is described fully in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.
@@ -529,7 +530,8 @@ markers were filtered to \gls{MAF} \num{> 0.05} for computational efficiency.
 For each pair of samples with pairwise kinship coefficient \num{> 0.177} (first-degree relatives or closer), the sample with lower marker missingness was selected.
 After all filters, 169/176 samples and \num{549414/550601} markers remained.
 
-\subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
+% \subsection{Computing genotype \glsfmtlongpl{PC} as covariates for ancestry}
+\subsection{Computing genotype principal components as covariates for ancestry}
 \label{subsec:hird_dge_genotype_pc}
 
 As shown in \cref{tab:hird_table1}, the \gls{HIRD} cohort is multi-ethnic.
@@ -575,13 +577,14 @@ so the top four \glspl{PC} were retained as continuous covariates for ancestry d
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
     \caption{
-        \textbf{\gls{HIRD} samples (cyan) projected onto \gls{PC}1 and \gls{PC}2 axes defined by \gls{PCA} of HapMap 3 samples.}
+        \textbf{\gls{HIRD} samples (cyan) projected onto \gls{PC} axes defined by \gls{PCA} of HapMap 3 samples.}
         The first two \glspl{PC} separate individuals of European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left).
     }
     \label{fig:hird_genotype_pca_withHapmap}
 \end{figure}
 
-\subsection{\glsfmtshort{RNAseq} data generation}
+% \subsection{\glsfmtshort{RNAseq} data generation}
+\subsection{RNA-seq data generation}
 
 Total RNA was extracted from \glspl{PBMC} using the Qiagen RNeasy Mini kit, with on-column DNase treatment.
 RNA integrity was checked on the Agilent Bioanalyzer and mRNA libraries were prepared with the KAPA Stranded mRNA-Seq Kit (KK8421), which uses poly(A) selection.
@@ -656,7 +659,8 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 	\label{fig:fastqc_gc}
 \end{figure}
 
-\subsection{\glsfmtshort{RNAseq} quantification and preprocessing}
+% \subsection{\glsfmtshort{RNAseq} quantification and preprocessing}
+\subsection{RNA-seq quantification and preprocessing}
 \label{subsec:hird_dge_rnaseq_quantAndFilter}
 
 % 1.	Quantification (Salmon --libType ISR, which is equiv to TopHat -fr-firststrand with paired end data)
@@ -901,7 +905,8 @@ Finally, \software{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArray
     \label{fig:hird_array_boxplots_MaxMean}
 \end{figure}
 
-\subsection{\Glsfmtfull{DGE}}
+% \subsection{\Glsfmtfull{DGE}}
+\subsection{Differential gene expression (DGE)}
 
 \subsubsection{Platform and batch effects}
 \label{subsubsec:hird_dge_platform_and_batch_effects}
@@ -945,7 +950,8 @@ In practice, results from the analyses were not substantially affected by the ch
 % NOTE: this table contains manual edits
 \input{mainmatter/figures/chapter_02/compare_phenotype_by_platform.hird_batch_balance.tex}
 
-\subsubsection{Per-platform \glsfmtshort{DGE} model}
+% \subsubsection{Per-platform \glsfmtshort{DGE} model}
+\subsubsection{Per-platform DGE model}
 \label{subsubsec:hird_dge_per_platform_dge_model}
 
 As a meta-analysis was performed, \gls{DGE} analyses were restricted to the \num{13593} genes assayed by both the array and \gls{RNAseq} platforms.
@@ -1016,7 +1022,8 @@ From model 2, I defined contrasts for the \gls{TRI}, \gls{TRI}-day 1, and \gls{T
 Corresponding coefficients and standard errors for the contrasts were extracted from the \software{limma} models, 
 which represent effect size in units of $\log_2$ expression fold change per unit change in predictor value.
 
-\subsubsection{Choice of \glsfmtshort{DGE} meta-analysis method}
+% \subsubsection{Choice of \glsfmtshort{DGE} meta-analysis method}
+\subsubsection{Choice of DGE meta-analysis method}
 \label{subsubsec:hird_dge_meta_methodChoice}
 
 % While there is abundant literature on single-platform (e.g. \autocite{tseng2012ComprehensiveLiteratureReview}) methods [...]
@@ -1068,7 +1075,7 @@ In meta-analysis, the effects are combined with some weighting, commonly the inv
 
 The random-effects model assumes a distribution of true effects centered around a common mean $\mu$.
 Each of the $k$ studies estimates its own study-specific true effect size $\theta_i$.
-These are distributed around $\mu$ with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation: the between-studies heterogeneity.
+These are distributed around $\mu$ with variance $\tau^2$ (standard deviation $\tau$), representing an additional source of variation: the between-study heterogeneity.
 Then we have 
 $y_i \sim \mathcal{N}(\theta_i,\sigma^2_i)$ for the first level of variation,
 $\theta_i \sim \mathcal{N}(\mu,\tau^2)$ for the second level of variation,
@@ -1097,9 +1104,9 @@ Many estimators are available \autocite{veroniki2016MethodsEstimateBetweenstudy}
 In such circumstances, the most sensible approach may be to incorporate prior information about hyperparameters $\mu$ and $\tau$ in a Bayesian random-effects framework \autocite{chung2013NondegeneratePenalizedLikelihood,veroniki2016MethodsEstimateBetweenstudy,friede2017MetaanalysisFewSmall,seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
 For this study, I used the implementation in \software{bayesmeta} \autocite{rover2017BayesianRandomeffectsMetaanalysis}.
 
-\subsubsection{Prior for between-studies heterogeneity}
+\subsubsection{Prior for between-study heterogeneity}
 
-The choice of prior for between-studies heterogeneity $\tau$ is influential when $k$ is small \autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
+The choice of prior for between-study heterogeneity $\tau$ is influential when $k$ is small \autocite{seide2019LikelihoodbasedRandomeffectsMetaanalysis}.
 \textcite{gelman2006PriorDistributionsVariance} considers the case of $k=3$, showing that a flat prior places too much weight on implausibly large estimates of $\tau$, and recommends a weakly informative prior that acts to regularise the posterior distribution, constraining it away from implausible values.
 %
 % Gelman 
@@ -1218,7 +1225,8 @@ as control is for the proportion of positives expected to be false positives,
 which is scalable to multiple contrasts.
 % NOTE: see "13.3    Multiple Testing Across Contrasts", limma usersguide.pdf
 
-\subsection{Ranked gene set enrichment using \glsfmtlongpl{BTM}}
+% \subsection{Ranked gene set enrichment using \glsfmtlongpl{BTM}}
+\subsection{Ranked gene set enrichment using blood transcription modules}
 \label{subsec:hird_dge_geneSetEnrichment}
 
 % Other sets
@@ -1388,7 +1396,7 @@ Both the CD4\textsuperscript{+} T cell and plasma cell response are indications 
 
 \subsection{Expression associations with antibody response}
 
-\subsubsection{Detection of gene-level associations was hindered by between-platform heterogeneity}
+\subsubsection{Between-platform heterogeneity hinders detection of gene-level associations}
 
 Using only array expression data, \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} identified a set of 62 genes with day 7 expression associated with antibody response, 
 where response was defined as a binary phenotype based on 4-fold increases in \gls{HAI} or \gls{MN} titres from day -7 to day 63.
@@ -1451,7 +1459,7 @@ had unrealistic between-platform heterogeneity estimates of exactly zero (\cref{
     \label{fig:hird_DGE_sobolev2016hits_tauComparison}
 \end{figure}
 
-\subsubsection{Module level associations with antibody response}
+\subsubsection{Module-level associations with antibody response}
 
 Using effect sizes from the Bayesian meta-analysis,
 significant enrichments were detectable at the gene set level.

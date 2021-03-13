@@ -3,7 +3,8 @@
 %
 % multiPANTS DGE paper.
 
-\chapter{Transcriptomic associations with anti-\glsfmtshort{TNF} drug response in \glsfmtlong{CD} patients}
+% \chapter{Transcriptomic associations with anti-\glsfmtshort{TNF} drug response in \glsfmtlong{CD} patients}
+\chapter{Transcriptomic associations with anti-TNF drug response in Crohn's disease patients}
 \label{ch:multiPANTS}
 
 \textit{
@@ -22,7 +23,8 @@
 
 \section{Introduction}
 
-\subsection{\Glsfmtlong{CD} and \glsfmtlong{IBD}}
+% \subsection{\Glsfmtlong{CD} and \glsfmtlong{IBD}}
+\subsection{Crohn's disease and inflammatory bowel disease}
 
 % \1 <Description>
 \gls{CD} is a chronic inflammatory disease of the gastrointestinal tract.
@@ -58,7 +60,8 @@ The disease is progressive:
 within 10 years of diagnosis, approximately \SI{50}{\percent} of \gls{CD} patients develop further complications (strictures or penetrating lesions); within 20 years, approximately \SI{15}{\percent} will require surgical intervention \autocite{roda2020CrohnDisease}.
 Given the rising prevalence and large impact on quality of life, there is active research into developing treatment regimens with the goal of inducing complete mucosal healing \autocite{levin2016MechanismActionAntiTNF,roda2020CrohnDisease}.
 
-\subsection{Anti-\glsfmtshort{TNF} therapies for \glsfmtlong{CD}}
+% \subsection{Anti-\glsfmtshort{TNF} therapies for \glsfmtlong{CD}}
+\subsection{Anti-TNF therapies for Crohn's disease}
 
 % <What is TNF>
 \Gls{TNF}, also known by the archaic name \gls{TNF}\nobreakdash-\textalpha, is a proinflammatory cytokine produced mainly by immune cells such as monocytes, macrophages, \gls{NK} cells, T cells, and B cells.
@@ -95,7 +98,8 @@ In 2017, spending on adalimumab (Humira) in developed markets was estimated at 2
         % \3 \autocite{dhaens2011LondonPositionStatement}
         % \3 2018 <Infliximab and adalimumab for the treatment of Crohn's disease> \url{https://www.nice.org.uk/guidance/ta187}>: "1.2 Treatment as described in 1.1 should normally be started with the less expensive drug (taking into account drug administration costs, required dose and product price per dose). This may need to be varied for individual patients because of differences in the method of administration and treatment schedules."
 
-\subsection{Anti-\glsfmtshort{TNF} treatment failure}
+% \subsection{Anti-\glsfmtshort{TNF} treatment failure}
+\subsection{Anti-TNF treatment failure}
 
 Unfortunately, anti-\gls{TNF} therapy is not always effective at treating \gls{CD}.
 Various types of treatment failure can occur:
@@ -123,7 +127,8 @@ The best approach would be to predict whether a particular treatment will be req
 % TODO: e.g. dose optimisation, combination therapy with steroids or immunomodulators
 Reliable baseline prediction would be especially valuable for stratifying patients to specific therapies from treatment initiation.
 
-\subsection{Predicting response to anti-\glsfmtshortpl{TNF}}
+% \subsection{Predicting response to anti-\glsfmtshortpl{TNF}}
+\subsection{Predicting patient response to anti-TNFs}
 \label{subsec:multiPANTS_intro_predicting_response}
 
 Clinical variables reported to have associations with anti-\gls{TNF} response include age, disease duration, \gls{BMI}, smoking, \gls{CRP} levels, faecal calprotectin levels, serum drug concentrations, and anti-drug antibody concentrations.
@@ -208,7 +213,7 @@ with the aim of identifying common genetic variants controlling expression respo
 
 \section{Methods}
 
-\subsection{The PANTS cohort}
+\subsection{The Personalised Anti-TNF Therapy in Crohn's Disease (PANTS) cohort}
 
 % NOTE: cohort studies are observational
 \gls{PANTS} is a UK-wide, prospective, observational cohort study of response to anti-\gls{TNF} therapy in \gls{CD} patients, described in detail by \textcite{kennedy2019PredictorsAntiTNFTreatment}.
@@ -358,7 +363,8 @@ Primary non-responders were selected excluding patients known to be in remission
 Primary responders were selected from patients known to be in remission by week 30 or week 54.
 The primary non-responders and responders in the \gls{RNAseq} subcohort thus represent phenotypic extremes of response.
 
-\subsection{Library preparation and \glsfmtshort{RNAseq}}
+% \subsection{Library preparation and \glsfmtshort{RNAseq}}
+\subsection{Library preparation and RNA-seq}
 
 % From Mark:
 % Here is an extended version of the protocol, with highlighting of the portion on poly-A selection and subsequent depletion steps:
@@ -380,7 +386,7 @@ and RNA integrity assessed with the Agilent RNA ScreenTape assay (5067-5579, 506
 Library preparation was performed using the Kapa mRNA HyperPrep Kit, including enrichment for \gls{mRNA} using magnetic oligo-dT beads, depletion of \gls{rRNA} and globin \gls{mRNA} using the QIAseq FastSelect RNA Removal Kit, and adapter ligation with IDT xGEN Dual Index UMI adapters.
 Libraries were sequenced on the Illumina HiSeq 4000 with \SI{75}{\bp} paired-end reads.
 
-\subsection{RNAseq quantification and preprocessing}
+\subsection{RNA-seq quantification and preprocessing}
 
 A total of 1141 samples from 396 patients were sequenced to a median depth of \textapprox{20} million read pairs.
 Sequencing data was demultiplexed with Picard\footnote{\url{https://broadinstitute.github.io/picard/}}.
@@ -423,7 +429,8 @@ Globin genes and short \glspl{ncRNA} were removed.
 A total of \num{15511} genes remained after filtering.
 Finally, \glspl{CPM} were converted to the $\log_{2}$ scale, and precision weights to account for the expression mean-variance relationship were computed for each gene and sample using \software{variancePartition::voomWithDreamWeights} \autocite{hoffman2016VariancePartitionInterpretingDrivers}.
 
-\subsection{\Glsfmtlong{DGE}}
+% \subsection{\Glsfmtlong{DGE}}
+\subsection{Differential gene expression}
 
 \subsubsection{Variable selection by variance components analysis}
 \label{subsubsec:multiPANTS_var_selection}
@@ -819,12 +826,13 @@ Post-imputation, samples that were non-European, related ($\text{proportion iden
 \num{7503762} \glspl{SNP} remained after filtering.
 Genotypes were converted to dosages of the non-reference allele.
 
-\subsection{\Glsfmtlong{reQTL} mapping}
+% \subsection{\Glsfmtlong{reQTL} mapping}
+\subsection{reQTL mapping}
 
 The overall strategy and methods used were largely identical those to those used in \cref{ch:hird_reQTL}, laid out in \cref{sec:hird_reQTL_methods}.
 Differences are described below.
 
-\subsubsection{Computing genotype PCs}
+\subsubsection{Computing genotype principal components}
 
 Samples were projected onto \glspl{PC} defined by 1000 Genomes Project samples using \gls{SNP} weights from {akt}\footnote{\url{https://github.com/Illumina/akt}},
 confirming that samples were of European ancestry (\cref{fig:multipants_genotype_akt_1000g_pca}).
@@ -875,7 +883,7 @@ The selected numbers were 25, 20, 15, and 5 factors; for weeks 0, 14, 30, and 54
 Akin to \cref{subsec:hird_reQTL_LDAK}, \gls{LOCO} kinship matrices were computed on typed \glspl{SNP} for each chromosome using LDAK \autocite{speed2012ImprovedHeritabilityEstimation}.
 % The kinship matrix will be incorporated into the \gls{eQTL} model to adjust for fine-scale population structure.
 
-\subsubsection{Mapping \textit{cis}-\glsfmtshortpl{eQTL} in each timepoint separately}
+\subsubsection{Mapping eQTLs per timepoint}
 
 As in \cref{sec:hird_reQTL_methods},
 \glspl{eQTL} were mapped in each timepoint using a linear mixed model in {LIMIX} \autocite{lippert2014LIMIXGeneticAnalysis}.
@@ -921,7 +929,8 @@ known factors (response, drug, five scaled genotype \glspl{PC}, cell proportions
 and PEER hidden factors (timepoint-specific number of PEER factors selected in \cref{subsec:multiPANTS_reQTL_PEER}).
 A random intercept term was also included with mean zero and covariance matrix proportional to the \gls{LOCO} kinship matrix for the \gls{SNP}'s chromosome.
 
-\subsubsection{Joint \glsfmtshortpl{reQTL} mapping over all timepoints}
+% \subsubsection{Joint \glsfmtshortpl{reQTL} mapping over all timepoints}
+\subsubsection{Joint reQTL mapping over all timepoints}
 
 Analogously to \cref{sec:hird_reQTL_methods},
 summary statistics from per-timepoint mapping were input to \software{mashr} \autocite{urbut2018FlexibleStatisticalMethods} to map \glspl{eQTL} jointly over all timepoints.
@@ -958,7 +967,8 @@ Multiple testing for the number of genes was controlled using the \gls{BH} \gls{
 \section{Results}
 % \todo{what to put in results vs discussion. going with the pattern of providing enough info for the reader to intepret the data in the results, then doing a summary and my own interpretation in the discussion}
 
-\subsection{Longitudinal \glsfmtshort{RNAseq} data from the \glsfmtshort{PANTS} cohort}
+% \subsection{Longitudinal \glsfmtshort{RNAseq} data from the \glsfmtshort{PANTS} cohort}
+\subsection{Longitudinal RNA-seq data from the PANTS cohort}
 
 To define transcriptomic differences between primary responders and non-responders to anti-\gls{TNF} therapy in the \gls{PANTS} cohort, 
 I analysed whole blood \gls{RNAseq} gene expression measured at up to four timepoints per patient:
@@ -1195,7 +1205,7 @@ The direction of effect for both sets of markers, downregulation in primary resp
     \label{fig:multipants_dge_panelPlot_week_14_R_N_cellPropT}
 \end{figure}
 
-\subsection{Magnification of expression change from baseline to post-induction in responders}
+\subsection{Magnification of expression changes from baseline to post-induction in responders}
 
 Given the stronger differences in expression between primary responders and non-responders at week 14 than week 0,
 I estimated the change in expression from week 0 to week 14 within the two groups, and also estimated the timepoint by response interaction.
@@ -1355,7 +1365,11 @@ The spline analysis highlights that expression differences at week 14 are mainta
     \centering
     \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_venns.pdf}
     \caption{
-        \textbf{Venn diagrams showing which genes in each cluster were also significant in the week 14 responder versus non-responder contrast (w14), or had a significant interaction between week 0 to week 14 change and response status (w14 -- w0).}
+        \textbf{
+            Overlap of genes differentially expressed between responders and non-responders from the spline model,
+            the week 14 responder versus non-responder contrast (w14), 
+            and the interaction between week 0 to week 14 change and response status contrast (w14 -- w0).
+        }
     }
     \label{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}
 \end{figure}
