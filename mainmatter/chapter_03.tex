@@ -21,7 +21,7 @@
 \label{subsec:hird_reQTL_intro_geneticFactorsFluVaccine}
 
 Many human traits are heritable and complex---response to vaccination is no exception.
-Twin studies have demonstrated approximately \SIrange{30}{90}{\percent} heritability of antibody responses to many vaccines, including smallpox, hepatitis A and B, anthrax, pneumococcal, \textit{Haemophilus influenzae} type b (Hib), diphtheria-tetanus-pertussis (DTP), and Bacillus Calmette--Guérin (BCG) \autocite{mooney2013SystemsImmunogeneticsVaccines,oconnor2013CharacterizingVaccineResponses,newport2015GeneticRegulationInfant,brodin2015VariationHumanImmune}.
+Twin studies have demonstrated approximately \SIrange{30}{90}{\percent} heritability of antibody responses to many vaccines, including smallpox, hepatitis A and B, anthrax, pneumococcal, \textit{Haemophilus influenzae} type b (Hib), diphtheria-tetanus-pertussis (DTP), and bacillus Calmette--Guérin (BCG) \autocite{mooney2013SystemsImmunogeneticsVaccines,oconnor2013CharacterizingVaccineResponses,newport2015GeneticRegulationInfant,brodin2015VariationHumanImmune}.
 Candidate gene studies and \glspl{GWAS} have identified multiple genetic associations with antibody response \autocite{mooney2013SystemsImmunogeneticsVaccines,oconnor2013CharacterizingVaccineResponses,mentzer2015SearchingHumanGenetic,linnik2016ImpactHostGenetic}, 
 including replicated associations 
 for hepatitis B vaccine in a haplotype block in the \gls{HLA} region encompassing \gene{HLA-DR} and \gene{BTNL2},
@@ -113,7 +113,7 @@ Seven genes out of these 20 were involved in antigen transport, processing, or p
 \gene{NAPSA}, \gene{C1orf85}, \gene{GM2A}, \gene{SNX29}, \gene{FGD2}, \gene{TAP2}, and \gene{DYNLT1}.
 
 Critically, \textcite{franco2013IntegrativeGenomicAnalysis} recognised that just assessing overlap of multiple filtering criteria cannot infer the direction of causal relationships between genetic variation, expression and \gls{TRI}.
-They attempted a model comparison with the CIT \autocite{millstein2009DisentanglingMolecularRelationships} to resolve the directionality of association between expression and \gls{TRI}, 
+They attempted a model comparison with the CIT \autocite{millstein2009DisentanglingMolecularRelationships} method to resolve the directionality of association between expression and \gls{TRI}, 
 finding suggestive evidence of causal effect on \gls{TRI} mediated by expression at several \gls{eQTL}.
 Unfortunately, they also evaluated that the power of the CIT was only \textapprox{\SI{60}{\percent}} at their total sample size of $n=247$.
 Nevertheless, the study is proof of concept that integration of genotype, expression, and antibody response data in an \textit{in vivo} \gls{reQTL} framework can identify genes under genetic regulation likely to be involved in vaccine response.
@@ -213,7 +213,7 @@ A typical model form is:
 \end{equation}
 where random effect $u \sim N(0, \sigma_g^2 K)$
 has a variance-covariance matrix proportional to the genetic correlation between individuals: the kinship matrix $K$.
-% Since the SNPs are correlated, due to the major genome-wide diffrences in allele frequencies between the populations, this results in a correlation between the tested SNP and the noise term.
+% Since the SNPs are correlated, due to the major genome-wide differences in allele frequencies between the populations, this results in a correlation between the tested SNP and the noise term.
 This improves on \cref{eq:hird_reQTL_gwas_model_full} by recognising that the variants in $G$ are correlated.
 $\sigma_g^2$ is often called the (genetic) variance component; the larger it is, the more phenotypic variance is explained by genetic background \autocite{golan2018MixedModelsCaseControl}.
 Although \glspl{LMM} were originally developed in the context of animal breeding, where $K$ is computed from a known pedigree,
@@ -638,7 +638,7 @@ Finally, enrichment scores were standardised across timepoints, so that a score 
 
 % xCell estimates not proportions but enrichment scores
 As with actual cell type abundances, \software{xCell} enrichment scores are correlated (\cref{fig:hird_xCell_correlationMatrix}).
-% NOTE: multicollinearity does not bias the coefficents, but inflates standard errors
+% NOTE: multicollinearity does not bias the coefficients, but inflates standard errors
 Imprecise coefficient estimates due to multicollinearity may be a problem when these scores are included as independent variables in \gls{eQTL} models% 
 \footnote{
     High correlation between predictors is not necessary nor sufficient by itself to induce multicollinearity (predictors being linearly-related), but multiple correlation (how well predictors can be predicted as linear combinations of other predictors) does have an inverse relationship with the standard error of coefficient estimates \autocite{maddala1992IntroductionEconometrics}.
@@ -800,7 +800,7 @@ These scores can distinguish large changes in cell abundances between days, but 
 % 2.4.1.1.	Note this pipeline uses quantile normalized, rank INT transformed expression, as PEER input
 % 2.4.2.	Quantile normalize the samples with preprocessCore::normalize.quantiles
 % 2.4.2.1.	Causes the expressions of the samples to have the same empirical distribution
-% 2.4.2.2.	i.e. the the highest expression in each sample is set to the mean of the highest values of all samples, and in the case of no tied values, each sample’s expressions becomes a permutation of each other sample’s
+% 2.4.2.2.	i.e. the highest expression in each sample is set to the mean of the highest values of all samples, and in the case of no tied values, each sample’s expressions becomes a permutation of each other sample’s
 % 2.4.3.	Standardize expression of each gene with Rank-Based Inverse Normal Transformation
 % 2.4.3.1.	i.e. rank the expressions of a gene, then replace with values from the standard normal e.g. > rank.based.INT(1:5, c=3/8): [1] -1.1797611 -0.4972006  0.0000000  0.4972006  1.1797611
 % 2.4.4.	Setup and run PEER
@@ -1068,7 +1068,7 @@ As the additivity assumption no longer holds, a \textit{ceteris paribus} interpr
 as the effect of genotype holding cell type abundance constant depends on what value of cell type abundance you choose.
 % TODO: OVB by setting interaction coefficient to zero
 % http://consirt.osu.edu/wp-content/uploads/2014/10/CONSIRT-Working-Papers-Series-9-Mikucka_Sarracino_Dubrow.pdf
-% Most importantly, the figures document thatwrongly  omitting  an  interaction  term  (Figure  3)  can  bias  the  estimates  much  more  thanwrongly including an interaction term (Figure 4).
+% Most importantly, the figures document that wrongly  omitting  an  interaction  term  (Figure  3)  can  bias  the  estimates  much  more  than wrongly including an interaction term (Figure 4).
 One cannot adjust for modification just by including the main effect for cell type abundance;
 wrongly omitting a significant interaction term between cell abundance and genotype biases the estimation of the two main effects\footnote{When a variable that is the function of another explanatory variable is omitted, this is known as functional form misspecification in the field of econometrics, a special case of omitted variable bias. Also see \textcite{mikucka2015CostsBenefitsIncluding} for a review of bias caused by omitting significant interaction terms.}.
 % Also see:

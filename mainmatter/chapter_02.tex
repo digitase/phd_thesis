@@ -16,7 +16,7 @@
     I would like to thank 
     Adrian Hayday, for kindly extending the opportunity to collaborate on the HIRD cohort;
     Efstathios Theodoridis, for performing the RNA and DNA extractions;
-    Sean O'Farrel and Anna Lorenc, for providing the HIRD clinical, FACS, and antibody titre data, and for providing advice on the data formats;
+    Sean O'Farrell and Anna Lorenc, for providing the HIRD clinical, FACS, and antibody titre data, and for providing advice on the data formats;
     and the Wellcome Sanger Institute Sample Management and Pipelines teams, for performing the RNA-seq library preparation and sequencing, and the array genotyping.
 }
 
@@ -229,7 +229,7 @@ where interferon, complement, and inflammasome expression signatures measured \n
 Much has also been learnt from the study of vaccines with suboptimal efficacy in challenging populations: infants and the elderly, pregnant women, immunocompromised patients, ethnically-diverse populations, developing countries \autocite{cotugno2019OMICTechnologiesVaccine}.
 % TODO: what has been learnt?
 % Personalised: initial aim is optimise for challenging pops.
-% e.g. only trivalent injectable influenza vaccine avilable 10 years ago
+% e.g. only trivalent injectable influenza vaccine available 10 years ago
 % poland2018PersonalizedVaccinologyReview
 The field has not yet identified completely novel correlates for many vaccines, partially because protection itself can be difficult to measure.
 One promising system is the human challenge trial, applied by \textcite{vahey2010ExpressionGenesAssociated} to identify genes in the immunoproteasome pathway associated with protection from malaria challenge after adjuvanted RTS,S malaria vaccination.
@@ -975,7 +975,7 @@ In comparisons of array batch effect adjustment methods, ComBat performed favour
 However, where batches are unbalanced in terms of sample size \autocite{zhang2018AlternativeEmpiricalBayes} or distribution of study groups that have an impact on expression \autocite{nygaard2015MethodsThatRemove}, ComBat can overcorrect batch differences or bias estimates of group differences respectively.
 In our data, sample size and timepoint groups are fairly balanced between the two array batches (\cref{tab:hird_batch_balance}).
 The proportion of responders is not, but response status does not have as prominent an impact on global expression as timepoint (\cref{fig:hird_expression_pcs}).
-For the \gls{DGE} analyses in this chapter, I chose to model batches (array batch and \gls{RNAseq} pool) as fixed effects rather than pre-adjusting with Combat in a separate step, ensuring the \glspl{df} in the \gls{DGE} model were correct.
+For the \gls{DGE} analyses in this chapter, I chose to model batches (array batch and \gls{RNAseq} pool) as fixed effects rather than pre-adjusting with ComBat in a separate step, ensuring the \glspl{df} in the \gls{DGE} model were correct.
 In practice, results from the analyses were not substantially affected by the choice of whether to use a ComBat pre-adjustment or a fixed effect.
 %
 % https://support.bioconductor.org/p/72815/ "batch effect : comBat or blocking in limma ?"
@@ -1123,8 +1123,8 @@ The choice of fixed or random effects depends on whether it is tenable to assume
     % Formally, a sequence is exchangeable if its joint probability distribution is a symmetric function of its n arguments.
     % Intuitively it means we can swap around, or reorder, variables in the sequence without changing their joint distribution.
     % https://stats.stackexchange.com/questions/3520/can-someone-explain-the-concept-of-exchangeability
-    The required assumption is exchangability of study \emph{effects}, which informally states
-    % IID (independent, identically distributed) -> exchangability -> identically distributed
+    The required assumption is exchangeability of study \emph{effects}, which informally states
+    % IID (independent, identically distributed) -> exchangeability -> identically distributed
     effects are neither completely identical nor completely independent, but \enquote{similar} \autocite{higgins2009ReevaluationRandomeffectsMetaanalysis}.
 }.
 In the \gls{HIRD} data, there are $k=2$ studies: array and \gls{RNAseq}.
@@ -1175,7 +1175,7 @@ Small estimates of $\tau < 0.01$ were excluded, and a gamma distribution fit to 
 \subsubsection{Prior for effect size}
 
 While the choice of prior on $\tau$ is influential when $k$ is small, there is usually enough data to estimate the effect size $\mu$ such that any reasonable non-informative prior can be used \autocite{gelman2006PriorDistributionsVariance,friede2017MetaanalysisFewSmall}.
-% TODO why is this? is it having well powered studies? gelman is vague
+% TODO why is this? is it having well powered studies? Gelman is vague on this point
 \software{bayesmeta} implements both flat and normal priors for $\mu$.
 %
 % https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations
