@@ -19,16 +19,13 @@
 % - Double-spaced or one-and-a-half spaced (one-and-a-half recommended by general Cambridge guidelines).
 % - Single or double-sided printing (double-sided recommended by general Cambridge guidelines).
 
-% TODO: scan reference list typos
-% TODO: check hardbound thesis submission requirements
-
 % TODO: review and rewrite all TODOs to make them understandable in the future
 % TODO: remove unused graphics from the repo
 % TODO: disambiguate terminology: change "response" to "dependent variables", "predictors" to "explanatory variables"
 % TODO: harmonize terminology: check upregulation and increased expression are consistent in chapter 4 Results
 % TODO: process the notes for pre-post design analysis and basis functions
 % TODO: use \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{myfig.png} to scale based on width and height
-% TODO: convert all large numbers to use \num
+% TODO: fix incorrect display of compound names with a hyphen in bibliography
 % TODO: remove abbreviations not used more than twice
 % TODO: deeper spellcheck using a plugin
 
@@ -83,19 +80,24 @@
 %
 %    The \clearpage command ends the current page and causes all figures and
 %    tables that have so far appeared in the input to be printed.
+%
+% Order of frontmatter
+% Cambridge requires, in order: title page, original work declaration, abstract
+% Mori recommends: title page, dedication, abstract, acknowledgements, toc, lists of figures and tables, list of notation, preface
+%
 \include{./frontmatter/title_page}
 \include{./frontmatter/declaration}
-\include{./frontmatter/abstract}
 % \include{./frontmatter/dedication}
+\include{./frontmatter/abstract}
 \include{./frontmatter/epigraph}
 \include{./frontmatter/acknowledgements}
-\include{./frontmatter/toc}
 %TC:endignore
+\include{./frontmatter/toc}
 
 %
 % Mainmatter, including appendix
 %
-% \mainmatter turns on chapter numbering, resets page numbering and uses arabic numerals for page numbers;
+% \mainmatter turns on chapter numbering, resets page numbering and uses Arabic numerals for page numbers;
 \mainmatter
 % Intro
 \include{./mainmatter/chapter_01} 

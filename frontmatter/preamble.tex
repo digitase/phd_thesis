@@ -75,7 +75,12 @@
 
 % Automatically adds the bibliography and/or the index and/or the contents, etc.,
 % to the Table of Contents listing.
-\usepackage[nottoc]{tocbibind}
+%
+% nottoc: Disables the inclusion of the ToC.
+% notlot: Disables the inclusion of the List of Tables.
+% etc.
+% \usepackage[nottoc]{tocbibind}
+\usepackage[]{tocbibind}
 
 % Increase the value of tocdepth and secnumdepth. The tocdepth value determines
 % to which level the sectioning commands are printed in the ToC (they are always
