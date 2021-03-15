@@ -315,8 +315,10 @@ and exit visits were scheduled for when the next drug dose would have been.
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Study_Day_vs_Visit_Label.pdf}
-    \caption{
-        \textbf{Sample size and study day distribution for \gls{RNAseq} samples, stratified by timepoint and study group.}
+    \caption[
+        \captionshort{Sample size and study day distribution for \gls{PANTS} study \gls{RNAseq} samples, stratified by timepoint and study group.}
+    ]{
+        \textbf{Sample size and study day distribution for \gls{PANTS} study \gls{RNAseq} samples, stratified by timepoint and study group.}
         Windows from \textcite{kennedy2019PredictorsAntiTNFTreatment} for the four major \gls{PANTS} visits are colored in grey. 
         Samples mostly come from major visits, but a small number of \gls{LOR} and exit visit samples were included according to the criteria in \cref{subsubsec:multiPANTS_timepoints_def}.
     }
@@ -412,7 +414,9 @@ The number of samples per patient ranged from one to four, with a median of thre
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.Visit_Label_upset.pdf}
-    \caption{
+    \caption[
+        \captionshort{Distribution of \gls{RNAseq} samples from each patient among timepoints.}
+    ]{
         \textbf{Distribution of \gls{RNAseq} samples from each patient among timepoints.}
     }
     \label{fig:multipants_visits_upset}
@@ -464,7 +468,9 @@ The Houseman method uses differentially methylated regions between immune cell t
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/process_pheno.pheno_filtered_dge.ggcorrplot.pdf}
-    \caption{
+    \caption[
+        \captionshort{Correlation matrix of variables measured in \gls{PANTS} that were considered as potential predictor variables.}
+    ]{
         \textbf{Correlation matrix of variables measured in \gls{PANTS} that were considered as potential predictor variables.}
         NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4\textsuperscript{+} T cell, CD8 = CD8\textsuperscript{+} T cell.
     }
@@ -477,7 +483,10 @@ The Houseman method uses differentially methylated regions between immune cell t
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.prcomp.pdf}
-%     \caption{top 12 expression PCs of filtered expression data}
+%     \caption[
+%     ]{
+%         Top 12 expression PCs of filtered expression data
+%     }
 %     \label{fig:multipants_dream_prcomp}
 % \end{figure}
 
@@ -509,12 +518,14 @@ This is a crude approach, but the sample size is large compared to number of \gl
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.plotVarPart.pdf}
-    \caption{
+    \caption[
+        \captionshort{Variance components analysis showing the distribution of per-gene percentage of variance in expression explained by each variable.}
+    ]{
         \textbf{Variance components analysis showing the distribution of per-gene percentage of variance in expression explained by each variable.}
         Variables are ordered by the median of per-gene variance explained estimates.
         random\_numbers is a null drawn from the standard normal distribution.
         PANTS.ID = patient ID, NK = \gls{NK} cell, Gran = granulocyte, Mono = monocyte, Bcell = B cell, CD4T = CD4\textsuperscript{+} T cell, CD8 = CD8\textsuperscript{+} T cell.
-}
+    }
     \label{fig:multipants_varPart}
 \end{figure}
 
@@ -549,7 +560,10 @@ Throughout this chapter, I interpret the estimates from both sets of models acco
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.cell_type_proportion_vs_Study_Day.pdf}
-%     \caption{changes in cell proportions of 6 immune cell types over time}
+%     \caption[
+%     ]{
+%         Changes in cell proportions of 6 immune cell types over time
+%     }
 %     \label{fig:multipants_cell_type_proportion_vs_Study_Day}
 % \end{figure}
 
@@ -847,7 +861,9 @@ This should be sufficient to adjust for large-scale population structure, as the
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/pants_samples.sampleids_cleaned_to_lowercase.filtered.GRCh38.sorted.multiPANTS.projection_1000G_pca.pdf}
-    \caption{
+    \caption[
+        \captionshort{1000 Genomes Project (1000G) samples and PANTS samples projected onto 1000G genotype PC1 and PC2 axes, colored by (a) superpopulation and (b) population.}
+    ]{
         \textbf{1000 Genomes Project (1000G) samples and PANTS samples projected onto 1000G genotype PC1 and PC2 axes, colored by (a) superpopulation and (b) population.}
         1000G superpopulations: AFR = African, AMR = Ad Mixed American, EAS = East Asian, EUR = European, SAS = South Asian.
         1000G European populations: CEU = Utah Residents (CEPH) with Northern and Western European Ancestry, FIN = Finnish in Finland, GBR = British in England and Scotland, IBS = Iberian Population in Spain, TSI = Toscani in Italia.
@@ -870,7 +886,9 @@ The selected numbers were 25, 20, 15, and 5 factors; for weeks 0, 14, 30, and 54
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/count_eGenes.signif_eGenes_vs_PEER_n.dataset_multiPANTS.chr_1.pdf}
-    \caption{
+    \caption[
+        \captionshort{Number of eGenes on chromosome 1 vs. number of PEER factors included in \gls{eQTL} mapping as covariates.}
+    ]{
         \textbf{Number of eGenes on chromosome 1 vs. number of PEER factors included in \gls{eQTL} mapping as covariates.}
         \gls{FDR} computed with hierarchical Bonferroni-\gls{BH} \autocite{huang2018PowerFalseDiscovery} with significance threshold set at 0.05.
     }
@@ -1040,7 +1058,9 @@ For both gene-level and module-level comparisons of baseline expression between 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_simple_C_1RI_1NI,C_1RA_1NA,C_1R_1N.pdf}
-    \caption{
+    \caption[
+        \captionshort{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 0; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
+    ]{
         \textbf{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 0; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
         Annotated genes include significant associations from this study and previously reported associations from \autoref{subsec:multiPANTS_intro_predicting_response}.
         Dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1051,14 +1071,19 @@ For both gene-level and module-level comparisons of baseline expression between 
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000142512.SYMBOL_SIGLEC10.pdf}
-%     \caption{Unadjusted, normalised SIGLEC10 expression over time}
+%     \caption[
+%     ]{
+%         Unadjusted, normalised SIGLEC10 expression over time
+%     }
 %     \label{fig:multipants_dge_SIGLEC10}
 % \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.cell_prop_correction_FALSE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, unadjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, unadjusted for cell composition.}
         Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1069,7 +1094,9 @@ For both gene-level and module-level comparisons of baseline expression between 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_1RI_1NI,C_1RA_1NA,C_(1RI_1NI)_(1RA_1NA),C_1R_1N.cell_prop_correction_TRUE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, adjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 0, adjusted for cell composition.}
         Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1130,9 +1157,12 @@ The sample size in this study for the infliximab subcohort at baseline is $n=145
 
 % \begin{figure}
 %     \centering
-%     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.E_vs_Study_Day.GENEID_ENSG00000124731.SYMBOL_TREM1.pdf}
-%     \caption{Unadjusted, normalised TREM1 expression over time}
-%     \label{fig:multipants_dge_TREM1}
+%     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/dream.e_vs_study_day.geneid_ensg00000124731.symbol_trem1.pdf}
+%     \caption[
+%     ]{
+%         Unadjusted, normalised TREM1 expression over time
+%     }
+%     \label{fig:multipants_dge_trem1}
 % \end{figure}
 
 \subsection{Post-induction gene expression associated with primary response}
@@ -1175,7 +1205,9 @@ The direction of effect for both sets of markers, downregulation in primary resp
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.dge_result_volcano_simple_C_3RI_3NI,C_3RA_3NA,C_3R_3N.pdf}
-    \caption{
+    \caption[
+        \captionshort{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 14; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
+    ]{
         \textbf{Volcano plots of \gls{DGE} between primary responders (PR) and non-responders at week 14; unadjusted (top row) and adjusted (bottom row) for cell composition; for infliximab (IFX), adalimumab (ADA), or with both drugs pooled.}
         Annotated genes include significant associations from this study and previously reported associations from \autoref{subsec:multiPANTS_intro_predicting_response}.
         Dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1186,7 +1218,9 @@ The direction of effect for both sets of markers, downregulation in primary resp
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3RI_3NI,C_3RA_3NA,C_(3RI_3NI)_(3RA_3NA),C_3R_3N.cell_prop_correction_FALSE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, unadjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, unadjusted for cell composition.}
         Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1197,7 +1231,9 @@ The direction of effect for both sets of markers, downregulation in primary resp
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3RI_3NI,C_3RA_3NA,C_(3RI_3NI)_(3RA_3NA),C_3R_3N.cell_prop_correction_TRUE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, adjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between primary responders (PR) and non-responders at week 14, adjusted for cell composition.}
         Columns correspond to results from infliximab (IFX), adalimumab (ADA), infliximab minus adalimumab difference, and pooled analyses. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. Vertical dashed line shows significance threshold at $\text{\gls{FDR}} = 0.05$.
@@ -1227,10 +1263,17 @@ with the same genes having larger \glspl{FC} in the same direction for primary r
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.logFC_C_3R_1R_vs_logFC_C_3N_1N.pdf}
-    \caption{
-        \textbf{Expression $\log_2\text{\gls{FC}}$ from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
-        for genes that differentially expressed from week 0 to week 14 in both responders and non-responders, 
-        with a significantly different effect size between responders and non-responders.
+    \caption[
+        \captionshort{
+            Expression $\log_2\text{\gls{FC}}$ from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
+            for genes that differentially expressed from week 0 to week 14 in both responders and non-responders, 
+            with a significantly different effect size between responders and non-responders.
+        }
+    ]{
+        \textbf{
+            Expression $\log_2\text{\gls{FC}}$ from week 0 to week 14 in primary responders (PR) versus non-responders (PNR),
+            for genes that differentially expressed from week 0 to week 14 in both responders and non-responders, 
+            with a significantly different effect size between responders and non-responders.
         }
         Results adjusted (right) and unadjusted (left) for cell proportions are shown.
         The identity line is shown by the dashed line.
@@ -1257,7 +1300,9 @@ In general, responders seem to experience greater changes in their gene expressi
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3R_1R,C_3N_1N,C_(3R_1R)_(3N_1N).cell_prop_correction_FALSE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between week 14 and week 0, unadjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between week 14 and week 0, unadjusted for cell composition.}
         Columns show effects in primary responders (PR), non-responders (PNR), and the primary responder minus non-responder difference. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. 
@@ -1269,7 +1314,9 @@ In general, responders seem to experience greater changes in their gene expressi
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.tmodCERNO_panelplot_reversed_C_3R_1R,C_3N_1N,C_(3R_1R)_(3N_1N).cell_prop_correction_TRUE.pdf}
-    \caption{
+    \caption[
+        \captionshort{Top modules differentially expressed between week 14 and week 0, adjusted for cell composition.}
+    ]{
         \textbf{Top modules differentially expressed between week 14 and week 0, adjusted for cell composition.}
         Columns show effects in primary responders (PR), non-responders (PNR), and the primary responder minus non-responder difference. 
         The top 30 modules ranked by minimum \gls{FDR} in any column are shown. 
@@ -1302,7 +1349,9 @@ Adjusted for cell composition, these modules were all significantly upregulated 
     \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.evidencePlots_C_3_1_Interferon.pdf}
     % TODO: only 8-9k genes
     % TODO: add module names
-    \caption{
+    \caption[
+        \captionshort{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders (PNR), but not in primary responders (PR).}
+    ]{
         \textbf{\software{tmod} evidence plots showing interferon-related modules specifically upregulated from week 0 to week 14 in primary non-responders (PNR), but not in primary responders (PR).}
         Genes were ranked in ascending order by week 14 versus week 0 \gls{DGE} z-statistic. 
         The ranks of genes in interferon-related modules are indicated by colored rug plots. 
@@ -1342,7 +1391,9 @@ The spline analysis highlights that expression differences at week 14 are mainta
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_fviz_nbclust_gap_stat.pdf}
-    \caption{
+    \caption[
+        \captionshort{Gap statistic versus cluster number $k$.}
+    ]{
         \textbf{Gap statistic versus cluster number $k$.}
         Error bars derived from 500 bootstraps. 
         Here, the optimal number was $k=6$ by the \software{factoextra::fviz\_nbclust} \software{firstSEmax} criteria (\url{https://rpkgs.datanovia.com/factoextra/index.html}).
@@ -1353,7 +1404,9 @@ The spline analysis highlights that expression differences at week 14 are mainta
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_trajectories.pdf}
-    \caption{
+    \caption[
+        \captionshort{Normalised expression over the timepoints for genes in the six identified clusters.}
+    ]{
         \textbf{Normalised expression over the timepoints for genes in the six identified clusters.}
         Log scale expression for each gene was standardised before clustering.
         Error bars show the mean $\pm$ standard deviation for the genes at each timepoint in primary responders (PR) and non-responders (PNR).
@@ -1364,12 +1417,19 @@ The spline analysis highlights that expression differences at week 14 are mainta
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth,page=1]{mainmatter/figures/chapter_04/plot_gene_set_enrichment.spline_cluster_venns.pdf}
-    \caption{
+    \caption[
+        \captionshort{
+            Overlap of genes differentially expressed between responders and non-responders from the spline model,
+            the week 14 responder versus non-responder contrast (w14), 
+            and the interaction between week 0 to week 14 change and response status contrast (w14 -- w0).
+        }
+    ]{
         \textbf{
             Overlap of genes differentially expressed between responders and non-responders from the spline model,
             the week 14 responder versus non-responder contrast (w14), 
             and the interaction between week 0 to week 14 change and response status contrast (w14 -- w0).
         }
+        Clusters 2 and 4 largely contained genes identified as significant only by the spline model.
     }
     \label{fig:plot_gene_set_enrichment.spline_cluster_venns.pdf}
 \end{figure}
@@ -1438,15 +1498,17 @@ However, direct interpretation of these \glspl{reQTL} is complicated by changing
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/}
-%     \caption{}
+%     \caption[]{}
 %     \label{fig:multipants_dge_}
 % \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_dge_eqtl.pm_w30_vs_w0_and_w54_vs_w0}
-    \caption{
-        \textbf{Week 30 and week 54 \gls{eQTL} effect sizes vs. week 0.}
+    \caption[
+        \captionshort{Post-treatment \gls{eQTL} effect sizes at week 30 and week 54 compared to baseline effect sizes at week 0.}
+    ]{
+        \textbf{Post-treatment \gls{eQTL} effect sizes at week 30 and week 54 compared to baseline effect sizes at week 0.}
         Significant \glspl{reQTL} at \gls{BH} $\text{\gls{FDR}} < 0.05$ are labelled.
     }
     \label{fig:multipants_reQTL_pm_w30_vs_w0_and_w54_vs_w0}
@@ -1463,14 +1525,20 @@ However, direct interpretation of these \glspl{reQTL} is complicated by changing
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/plot_dge_eqtl.reQTL_clusters.pdf}
-%     \caption{Clustering of eQTL betas over the 4 visits}
+%     \caption[
+%     ]{
+%         Clustering of eQTL betas over the 4 visits
+%     }
 %     \label{fig:multipants_reQTL_clusters}
 % \end{figure}
 
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_04/reQTL_cluster_1_gene_sets_Screenshot 2020-09-04 at 00.18.57.png}
-%     \caption{gene set enrichment using gprofileR for cluster 1 genes}
+%     \caption[
+%     ]{
+%         Gene set enrichment using gprofileR for cluster 1 genes
+%     }
 %     \label{fig:multipants_reQTL_clusters_gprofiler}
 % \end{figure}
 

@@ -3,7 +3,7 @@
 %
 % Response eQTL-style HIRD paper
 
-\chapter{Genetic architecture of transciptomic response to Pandemrix vaccine}
+\chapter{Genetic architecture of transcriptomic response to Pandemrix vaccine}
 \label{ch:hird_reQTL}
 
 \textit{
@@ -27,7 +27,7 @@ including replicated associations
 for hepatitis B vaccine in a haplotype block in the \gls{HLA} region encompassing \gene{HLA-DR} and \gene{BTNL2},
 and for measles vaccine in an intron of a receptor known to interact with measles virus, \gene{CD46}.
 
-In contrast, \textcite{brodin2015VariationHumanImmune} found anti-\gls{HA} antibody responses to seasonal influenza vaccine in 105 adult twin pairs (median age \SI{44}{\year}) had no detectable heritabilty,
+In contrast, \textcite{brodin2015VariationHumanImmune} found anti-\gls{HA} antibody responses to seasonal influenza vaccine in 105 adult twin pairs (median age \SI{44}{\year}) had no detectable heritability,
 alongside a general decrease in heritability of most immune parameters with age.
 They posited 
 that the genetic contribution to response was overshadowed by environmental factors such as previous influenza vaccination or infection in adults, 
@@ -490,13 +490,15 @@ so I did not consider those steps in my simulations.
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_03/simulate_expression_transforms.pdf}
-    \caption{
+    \caption[
+        \captionshort{Simulating the effect of data transformation on \gls{reQTL} effects.}
+    ]{
         \textbf{Simulating the effect of data transformation on \gls{reQTL} effects.}
         Expression values on the log scale were simulated for 200 individuals (100 with each genotype) at a day 0 baseline and day 1 post-vaccination timepoint.
         Gene expression is upregulated at day 1 by $\log_2 \text{\gls{FC}} = 1$.
         Six scenarios were simulated with different gene-variant pairs (columns) corresponding to different \gls{eQTL} and/or \gls{reQTL} effects between day 1 and day 0;
         the size of the \gls{reQTL} effect (difference in beta between day 1 and day 0) was set to 0, 0, 1, 2, 1, and 3 for the six scenarios.
-        Gaussian noise with mean = 0 and SD = 0.1 was added.
+        Gaussian noise with mean = 0 and standard deviation = 0.1 was added.
         The top row is the ground truth.
         In following rows, a different transformation was applied within each row: a rank-based \gls{INT} (Blom offset for fractional ranks \autocite{beasley2009RankBasedInverseNormal,mccaw2020OperatingCharacteristicsRank}), standardising (centering and scaling), centering only, or scaling only.
         Highlighted pairs of scenario-transform combinations on each row represent false positives or negatives where the size of the relative \gls{reQTL} effects are no longer correct.
@@ -617,14 +619,20 @@ Finally, enrichment scores were standardised across timepoints, so that a score 
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_array.plots.pdf}
-%     \caption{Standardised xCell enrichment scores for seven \gls{PBMC} cell types in array samples.}
+%     \caption[
+%     ]{
+%         Standardised xCell enrichment scores for seven \gls{PBMC} cell types in array samples.
+%     }
 %     \label{fig:hird_xCell_scores_heatmap_array}
 % \end{figure}
 %
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
-%     \caption{Standardised xCell enrichment scores for seven \gls{PBMC} cell types in \gls{RNAseq} samples.}
+%     \caption[
+%     ]{
+%         Standardised xCell enrichment scores for seven \gls{PBMC} cell types in \gls{RNAseq} samples.
+%     }
 %     \label{fig:hird_xCell_scores_heatmap_rnaseq}
 % \end{figure}
 
@@ -665,8 +673,10 @@ Additionally, using the actual cell type scores rather than \glspl{PC} as covari
         \centering
         \includegraphics[width=1.0\textwidth,page=3]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
     \end{subfigure}
-    \caption{
-        \textbf{Correlation matrix of standarised xCell cell type enrichment scores in each dataset.}
+    \caption[
+        \captionshort{Correlation matrix of standardised \software{xCell} cell type enrichment scores in \gls{HIRD} array and \gls{RNAseq} datasets.}
+    ]{
+        \textbf{Correlation matrix of standardised \software{xCell} cell type enrichment scores in \gls{HIRD} array and \gls{RNAseq} datasets.}
         Rows and columns are hierarchically-clustered.
     }
     \label{fig:hird_xCell_correlationMatrix}
@@ -693,10 +703,10 @@ Additionally, using the actual cell type scores rather than \glspl{PC} as covari
         \centering
         \includegraphics[width=1.0\textwidth,page=10]{mainmatter/figures/chapter_03/get_xCell_estimates.dataset_rnaseq.plots.pdf}
     \end{subfigure}
-    \caption{
-        \textbf{
-            Contribution of each cell type score to each \gls{PC} dimension after \gls{PCA} of standardised \software{xCell} cell type enrichment scores. 
-        }
+    \caption[
+        \captionshort{Contribution of each cell type score to each \gls{PC} dimension after \gls{PCA} of standardised \software{xCell} cell type enrichment scores.}
+    ]{
+        \textbf{Contribution of each cell type score to each \gls{PC} dimension after \gls{PCA} of standardised \software{xCell} cell type enrichment scores.}
         Contribution is calculated as the squared correlation between a variable and a \gls{PC} (cos2), 
         scaled to the sum of cos2 for all variables with that \gls{PC}.
         High contributions indicate variables that are highly correlated with the \gls{PC}.
@@ -736,21 +746,23 @@ These scores can distinguish large changes in cell abundances between days, but 
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=6]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{Monocytes.}
+        \caption[]{Monocytes.}
     \end{subfigure}
     \bigskip\vfill
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=3]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{\gls{NK} cells.}
+        \caption[]{\gls{NK} cells.}
     \end{subfigure}
     \bigskip\vfill
     \begin{subfigure}[b]{0.43\textwidth}
         \centering
         \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_03/validate_xCell_estimates.cell_type_pairs.pdf}
-        \caption{Plasma cells.}
+        \caption[]{Plasma cells.}
     \end{subfigure}
-    \caption{
+    \caption[
+        \captionshort{Comparison of standardised \software{xCell} scores with normalised \gls{HIRD} \gls{FACS} measurements, for monocytes, \gls{NK} cells, and plasma cells.}
+    ]{
         \textbf{Comparison of standardised \software{xCell} scores with normalised \gls{HIRD} \gls{FACS} measurements, for monocytes, \gls{NK} cells, and plasma cells.}
         The comparisons are against the most comparable measurements available in the \gls{FACS} data of \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}: 
         CD14\textsuperscript{+} monocyte count,
@@ -833,7 +845,9 @@ particularly in the context of \textit{cis}-\gls{eQTL} mapping where associated 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/peer_plotting.mega_v2.pdf}
-    \caption{
+    \caption[
+        \captionshort{Correlation of known variables to the first 25 PEER factors estimated from the array and \gls{RNAseq} mega-analysis expression data at baseline.}
+    ]{
         \textbf{Correlation of known variables to the first 25 PEER factors estimated from the array and \gls{RNAseq} mega-analysis expression data at baseline.}
         The known factors provided to PEER were sex, four genotype \glspl{PC}, and monocyte, \gls{NK} cell and plasma cell \software{xCell} scores.
         PEER factors are not constrained to be orthogonal like \glspl{PC}, so correlations to known factors and other PEER factors are expected.
@@ -899,8 +913,10 @@ I settled on a final choice of $k=10$ factors for baseline, 5 factors for day 1,
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/count_eGenes.signif_eGenes_vs_PEER_n.dataset_mega.chr_chr1.pdf}
-    \caption{
-        \textbf{Number of significant genes with an \gls{eQTL} detected on chromosome 1, as a function of the number of PEER factors included as covariates.}
+    \caption[
+        \captionshort{Number of significant genes with an \gls{eQTL} detected on chromosome 1 as a function of the number of PEER factors included as covariates.}
+    ]{
+        \textbf{Number of significant genes with an \gls{eQTL} detected on chromosome 1 as a function of the number of PEER factors included as covariates.}
         \gls{FDR} computed with hierarchical Bonferroni-\gls{BH} \autocite{huang2018PowerFalseDiscovery} with significance threshold set at 0.05.
         The number of eGenes stabilises since higher number PEER factors explain less and less variance in expression, thus having less and less influence on the regression.
     }
@@ -928,7 +944,10 @@ resulting in a strong subset of 45962 tests used to calculate data-driven covari
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/mash_mega/mashr.strong_subset_zval_heatmap.cisDist_1e6.sampleAcThresh_15.randomSubsetN_200000.pdf}
-%     \caption{Clustering of within-timepoint Z scores in the strong mashr subset (random sample of 10000/45962 tests), confirming the presence of strong condition-specific effects.}
+%     \caption[
+%     ]{
+%         Clustering of within-timepoint Z scores in the strong mashr subset (random sample of 10000/45962 tests), confirming the presence of strong condition-specific effects.
+%     }
 %     \label{fig:hird_mashr_strongSubset_Z_mega}
 % \end{figure}
 
@@ -1019,10 +1038,10 @@ The numbers of \glspl{reQTL} were too low to assess their replication using this
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/compute_pi1.pi1_by_thresholds.pdf}
-    \caption{
-        \textbf{
-            Replication rate $\pi_1$ of \gls{HIRD} \glspl{eQTL} in GTEx whole blood \gls{eQTL} reference data.
-        }
+    \caption[
+        \captionshort{Replication rate $\pi_1$ of \gls{HIRD} \glspl{eQTL} in GTEx whole blood \gls{eQTL} reference data.}
+    ]{
+        \textbf{Replication rate $\pi_1$ of \gls{HIRD} \glspl{eQTL} in GTEx whole blood \gls{eQTL} reference data.}
         Three \gls{eQTL} analyses were run in \gls{HIRD}: array-only, \gls{RNAseq}-only, and a mega-analysis of the two datasets.
         The top panel shows $\pi_1$ replication in each analysis as a function of the significance threshold (\gls{lfsr}), with the shaded region showing the 5th--95th percentile range of 1000 bootstraps.
         Vertical line shows $\text{\gls{lfsr}} = 0.05$.
@@ -1206,9 +1225,11 @@ indicating most \gls{reQTL} effects were differences between pre- and post-vacci
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.upset.pdf}
-    \caption{
-        % at \num[detect-weight=true]{13570} genes in
+    \caption[
+        \captionshort{Summary of \gls{HIRD} \gls{eQTL} mapping from mega-analysis of array and \gls{RNAseq} expression data, binned by patterns of lead variant significance over the three timepoints.}
+    ]{
         \textbf{Summary of \gls{HIRD} \gls{eQTL} mapping from mega-analysis of array and \gls{RNAseq} expression data, binned by patterns of lead variant significance over the three timepoints.}
+        % at \num[detect-weight=true]{13570} genes in
         The most significant variant for each gene over all timepoints was chosen as the lead variant.
         Significant \glspl{eQTL} ($\text{\gls{lfsr}} < 0.05$) were found at \num{6887/13570} eGenes.
         These were classified as \glspl{reQTL} if there was a significant difference in beta (nominal $p < 0.05$) between any pair of timepoints,
@@ -1221,7 +1242,9 @@ indicating most \gls{reQTL} effects were differences between pre- and post-vacci
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.pairwise_reQTL_venn.pdf}
-    \caption{
+    \caption[
+        \captionshort{eGenes where the lead \gls{eQTL} was a \gls{reQTL} between a pair of timepoints.}
+    ]{
         \textbf{eGenes where the lead \gls{eQTL} was a \gls{reQTL} between a pair of timepoints.}
         \glspl{reQTL} were observed for 1154 unique eGenes, 
         defined by a significant difference in beta between timepoints (nominal $p < 0.05$).
@@ -1271,7 +1294,9 @@ whereas an opposite effect significant in both timepoints is unambiguous.
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_03/compare_dge_eqtl.z_sharing.vs.SNP_gene_TSS_dist.pdf}
-    \caption{
+    \caption[
+        \captionshort{\textit{z}-statistic for difference in beta post-vaccination versus baseline for shared and \glspl{reQTL}, against distance from the eGene \gls{TSS}.}
+    ]{
         \textbf{\textit{z}-statistic for difference in beta post-vaccination versus baseline for shared and \glspl{reQTL}, against distance from the eGene \gls{TSS}.}
         For each plot, all \glspl{eQTL} significant in either timepoint are shown.
         Shared \glspl{eQTL} can only have the shared effect type.
@@ -1341,7 +1366,9 @@ There is strong evidence that many post-vaccination \glspl{reQTL} are generated 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000138031,rs916485_SNP_chr2_24859404_T_C.pdf}
-    \caption{
+    \caption[
+        \captionshort{Expression and lead \gls{eQTL} of \gene{ADCY3} over study timepoints.}
+    ]{
         \textbf{Expression and lead \gls{eQTL} of \gene{ADCY3} over study timepoints.}
         Normalised array (top-left) and \gls{RNAseq} (top-right) expression before batch effect correction with ComBat and \gls{eQTL} mapping. 
         Bottom: \gls{eQTL} effects at each timepoint condition in the mega-analysis of array and \gls{RNAseq} data.
@@ -1352,7 +1379,9 @@ There is strong evidence that many post-vaccination \glspl{reQTL} are generated 
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/plot_dge_eqtl_genotypes.ENSG00000104611,rs7841346_SNP_chr8_20170963_C_A.pdf}
-    \caption{
+    \caption[
+        \captionshort{Expression and lead \gls{eQTL} of \gene{SH2D4A} over study timepoints.}
+    ]{
         \textbf{Expression and lead \gls{eQTL} of \gene{SH2D4A} over study timepoints.}
         Normalised array (top-left) and \gls{RNAseq} (top-right) expression before batch effect correction with ComBat.
         Bottom: \gls{eQTL} effects at each timepoint condition in the mega-analysis of array and \gls{RNAseq} data.
@@ -1399,7 +1428,9 @@ I have not yet examined which of the three cell abundance scores have the greate
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/lme4qtl.ENSG00000138031_Monocyte_baseline.pdf}
-    \caption{
+    \caption[
+        \captionshort{Effect of estimated monocyte abundance on \gene{ADCY3} expression at baseline, stratified by genotype at a day 1 \gene{ADCY3} \gls{reQTL}.}
+    ]{
         \textbf{Effect of estimated monocyte abundance on \gene{ADCY3} expression at baseline, stratified by genotype at a day 1 \gene{ADCY3} \gls{reQTL}.}
     }
     \label{fig:hird_reQTL_ADCY3_vs_monocyte_baseline}
@@ -1408,7 +1439,9 @@ I have not yet examined which of the three cell abundance scores have the greate
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/lme4qtl.ENSG00000138031_Monocyte_day1.pdf}
-    \caption{
+    \caption[
+        \captionshort{Effect of estimated monocyte abundance on \gene{ADCY3} expression at day 1, stratified by genotype at a day 1 \gene{ADCY3} \gls{reQTL}.}
+    ]{
         \textbf{Effect of estimated monocyte abundance on \gene{ADCY3} expression at day 1, stratified by genotype at a day 1 \gene{ADCY3} \gls{reQTL}.}
     }
     \label{fig:hird_reQTL_ADCY3_vs_monocyte_day1}
@@ -1444,9 +1477,11 @@ and to determine which among the correlated cell types expressing \gene{ADCY3} a
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/ADCY3_expression.png}
-    \caption{
+    \caption[
+        \captionshort{Expression of \gene{ADCY3} in sorted immune cell subsets.}
+    ]{
         \textbf{Expression of \gene{ADCY3} in sorted immune cell subsets.}
-        \textcite{schmiedel2018ImpactGeneticPolymorphisms}, 
+        Figure from \textcite{schmiedel2018ImpactGeneticPolymorphisms}, 
         \textit{DICE (database of immune cell expression, expression quantitative trait loci, and epigenomics)}, 
         \url{https://dice-database.org/genes/ADCY3}, accessed Nov 2020.
     }
@@ -1467,7 +1502,7 @@ As Bayesian colocalisation can be sensitive to the choice of priors,
 I performed a sensitivity analysis iterating over configurations of priors and other algorithm parameters, ranging from default to more stringent parameter values.
 Two stable clusters were identified across 100 configurations of parameters (\cref{fig:hird_reQTL_coloc_ADCY3_sensitivityPlotCustom}).
 A set of three traits---\gene{ADCY3} expression at \gls{HIRD} day 1, and in naive classical and non-classical monocytes---clustered in \textapprox{\SI{65}{\percent}} of tested configurations.
-A set of nine traits---\gls{IBD}, and expression in eight naive and memory CD4+ T cell subsets---clustered in \textapprox{\SI{90}{\percent}} of tested configurations.
+A set of nine traits---\gls{IBD}, and expression in eight naive and memory CD4\textsuperscript{+} T cell subsets---clustered in \textapprox{\SI{90}{\percent}} of tested configurations.
 The remaining traits did not robustly cluster with any other traits over the tested configurations,
 except for the rare inclusion of \gls{HIRD} baseline \gene{ADCY3} expression into the larger cluster for less stringent configurations.
 %
@@ -1518,7 +1553,9 @@ This is the scenario where monocyte abundance modifies the effect of genotype on
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.sensitivityPlot_custom.pdf}
-    \caption{
+    \caption[
+        \captionshort{Sensitivity analysis for multi-trait colocalisation at the \gene{ADCY3} locus.}
+    ]{
         \textbf{Sensitivity analysis for multi-trait colocalisation at the \gene{ADCY3} locus.}
         Colocalisation performed using {HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a $\pm \SI{500}{\kilo\bp}$ window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD}, for trait datasets described in \cref{subsec:hird_reQTL_coloc}.
         Heatmap shows the proportion of configurations in which two traits colocalise in the same cluster over 100 configurations of algorithm parameters
@@ -1532,7 +1569,9 @@ This is the scenario where monocyte abundance modifies the effect of genotype on
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_03/perform_coloc.gene_ENSG00000138031.locusPlot.pdf}
-    \caption{
+    \caption[
+        \captionshort{Multi-trait colocalisation at the \gene{ADCY3} locus.}
+    ]{
         \textbf{Multi-trait colocalisation at the \gene{ADCY3} locus.}
         Colocalisation performed using {HyPrColoc} \autocite{foley2019FastEfficientColocalization} in a $\pm \SI{500}{\kilo\bp}$ window around the lead variant for the day 1 \gene{ADCY3} \gls{reQTL} in \gls{HIRD} (vertical grey line).
         Traits are monocyte cell count (\textcite{astle2016AllelicLandscapeHuman}), \gene{ADCY3} expression in sorted immune cell subsets (\textcite{schmiedel2018ImpactGeneticPolymorphisms}), \gene{ADCY3} expression at \gls{HIRD} timepoints, and \gls{IBD} (\textcite{delange2017GenomewideAssociationStudy}).
@@ -1540,7 +1579,7 @@ This is the scenario where monocyte abundance modifies the effect of genotype on
         Traits in red and green represent two distinct clusters each hypothesised to be driven by a shared causal variant (vertical red and green lines).
         Non-colocalising traits are shown in black.
         Horizontal dashed lines show nominal $p = 0.05$.
-        Default values for priors and algorithm parameters used, except \texttt{prior.2} = 0.99.
+        Default values for priors and algorithm parameters used, except $\texttt{prior.2} = 0.99$.
     }
     \label{fig:hird_reQTL_coloc_ADCY3_locusPlot}
 \end{figure}

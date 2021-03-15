@@ -359,9 +359,11 @@ An overview of datasets is shown in \cref{fig:hird_design}.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/graphics_ashg19/hird_design-crop.pdf}
-    \caption{
-        \textbf{Overview of study data.}
-        The total \gls{HIRD} cohort size was 178 individuals.
+    \caption[
+        \captionshort{Overview of \gls{HIRD} study data.}
+    ]{
+        \textbf{Overview of \gls{HIRD} study data.}
+        The total cohort size was 178 individuals.
         % Individuals were vaccinated after day 0 sampling.
         Serum cytokines were quantified by 16-plex Luminex panel.
         Immune cell subsets were quantified by \gls{FACS}.
@@ -446,7 +448,9 @@ and remains qualitatively comparable to the original binary definition (\cref{fi
 
 \begin{figure}
     \includegraphics[width=0.95\textwidth]{mainmatter/figures/chapter_02/phenotype_data_setup.tri_comparison.pdf}
-    \caption{
+    \caption[
+        \captionshort{Antibody titre data and responder definitions.}
+    ]{
         \textbf{Antibody titre data and responder definitions.}
         % TODO: check n of these plots
         % Comparison of \gls{TRI} to \gls{HAI} (left column) and \gls{MN} (right column) titres and binary responder/non-responder status (colored) in 166 \gls{HIRD} individuals. 
@@ -463,7 +467,7 @@ and remains qualitatively comparable to the original binary definition (\cref{fi
 \end{figure} 
 
 Descriptive statistics for the 114 individuals with both gene expression and antibody titre data are presented in \cref{tab:hird_table1}.
-Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar (\pvalue{} = \num{0.1551}, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher (\pvalue{} = \num[scientific-notation=true]{0.0002098}, Levene's test), suggesting more extreme antibody response phenotypes are present (\cref{fig:hird_phenotypes_by_platform}).
+Although the proportion of responders between array (32/44) and \gls{RNAseq} (59/70) individuals is similar ($p = \num{0.1551}$, Fisher's exact test), the variance of \gls{TRI} in array individuals is higher ($p = \num[scientific-notation=true]{0.0002098}$, Levene's test), suggesting more extreme antibody response phenotypes are present (\cref{fig:hird_phenotypes_by_platform}).
 % NOTE:
 % Levene's test is just a t-test of the absolute values of the deviations of the data from their group means.
 % [...]
@@ -476,7 +480,12 @@ The cause of this is unknown---there is a possibility that individuals with more
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.pheno_boxplots.pdf}
-    \caption{\textbf{Distribution of \gls{TRI}, stratified by platform.}}
+    \caption[
+        \captionshort{Distribution of patient \glspl{TRI}, stratified by expression measurement platform.}
+    ]{
+        \textbf{Distribution of patient \glspl{TRI}, stratified by expression measurement platform.}
+        Points are colored by binary response status.
+    }
     \label{fig:hird_phenotypes_by_platform}
 \end{figure}
 
@@ -513,7 +522,9 @@ Using PLINK (v1.90b3w) \autocite{chang2015SecondgenerationPLINKRising}, genotype
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc2.pdf}
-    \caption{
+    \caption[
+        \captionshort{Sample filters for marker missingness and marker heterozygosity rate.}
+    ]{
         \textbf{Sample filters for marker missingness and marker heterozygosity rate.}
         Thresholds for missingness (\SI{1}{\percent}) and heterozygosity rate (mean $\pm$ 3 standard deviations) are shown by dashed lines.
     }
@@ -571,13 +582,15 @@ For non-genotyped individuals with expression data,
 The top \glspl{PC} indeed separate \gls{HIRD} samples by ancestry (\cref{fig:hird_genotype_pca_withHapmap}).
 % Thus, we expect that the theoretical covariance matrix (approximated by the sample covariance) will have K − 1 “large” eigenvalues, with the remainder small and reflecting the sampling variance.
 Significant \glspl{PC} with large eigenvalues unlikely to be due to sampling noise were selected by Tracy-Widom test \autocite{patterson2006PopulationStructureEigenanalysis}.
-The fourth \gls{PC} had an eigenvalue of \num{1.005305} (\pvalue{} = \num{0.0238744}), 
+The fourth \gls{PC} had an eigenvalue of \num{1.005305} ($p = \num{0.0238744}$), 
 so the top four \glspl{PC} were retained as continuous covariates for ancestry downstream.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/coreex_eQTLflu_20171204.gencall.smajor.impute_sex.qc3.pruned.hapmap_merged.flipped.pca.evec.pdf}
-    \caption{
-        \textbf{\gls{HIRD} samples (cyan) projected onto \gls{PC} axes defined by \gls{PCA} of HapMap 3 samples.}
+    \caption[
+        \captionshort{\gls{HIRD} samples projected onto \gls{PC} axes defined by \gls{PCA} of HapMap 3 samples.}
+    ]{
+        \textbf{\gls{HIRD} samples projected onto \gls{PC} axes defined by \gls{PCA} of HapMap 3 samples.}
         The first two \glspl{PC} separate individuals of European (CEU, upper-right) from Asian (CHB and JPT, lower-right) and African (YRI, lower-left).
     }
     \label{fig:hird_genotype_pca_withHapmap}
@@ -635,7 +648,9 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_base_sequence_quality_plot_1.pdf}
-    \caption{
+    \caption[
+        \captionshort{FastQC per-base sequence quality (Phred scores) versus read position for \gls{RNAseq} samples.}
+    ]{
         \textbf{FastQC per-base sequence quality (Phred scores) versus read position for \gls{RNAseq} samples.}
         Visualised with MultiQC \autocite{ewels2016MultiQCSummarizeAnalysis}.
     }
@@ -645,14 +660,19 @@ The unimodal GC-content distribution suggested negligible levels of non-human co
 % \begin{figure}
 %     \centering
 %     \includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_sequence_duplication_levels_plot_1.pdf}
-%     \caption{FastQC sequence duplication levels for \gls{HIRD} \gls{RNAseq} samples.}
+%     \caption[
+%     ]{
+%         FastQC sequence duplication levels for \gls{HIRD} \gls{RNAseq} samples.
+%     }
 %     \label{fig:hird_fastqc_seqDupe}
 % \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{mainmatter/figures/chapter_02/graphics_firstYearReport/fastqc/mqc_fastqc_per_sequence_gc_content_plot_Counts.pdf}
-    \caption{
+    \caption[
+        \captionshort{FastQC per-read GC distributions for \gls{RNAseq} samples.}
+    ]{
         \textbf{FastQC per-read GC distributions for \gls{RNAseq} samples.}
         Visualised with MultiQC \autocite{ewels2016MultiQCSummarizeAnalysis}.
 }
@@ -745,7 +765,11 @@ poly(A) selection and \gls{PBMC} isolation were deemed to have been efficient.
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.per_sample.short_ncRNA_globin_levels_hist.pdf}
-    \caption{\textbf{Distributions of removed short \gls{ncRNA} and globin counts as a proportion of total counts in \gls{RNAseq} samples.}}
+    \caption[
+        \captionshort{Distributions of removed short \gls{ncRNA} and globin counts as a proportion of total counts in \gls{RNAseq} samples.}
+    ]{
+        \textbf{Distributions of removed short \gls{ncRNA} and globin counts as a proportion of total counts in \gls{RNAseq} samples.}
+    }
     \label{fig:hird_shortncRNA_and_globins}
 \end{figure}
 
@@ -760,7 +784,9 @@ The change in the distributions of gene expression among samples before and afte
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth, page=1]{mainmatter/figures/chapter_02/rnaseq_data_setup.gene_zero_prop.pdf}
-    \caption{
+    \caption[
+        \captionshort{Distribution of the proportion of samples in which genes were detected (non-zero expression).}
+    ]{
         \textbf{Distribution of the proportion of samples in which genes were detected (non-zero expression).}
         Many genes are not detected in any samples (left-hand side). 
         Vertical line shows \SI{5}{\percent} threshold below which genes were discarded.
@@ -770,7 +796,9 @@ The change in the distributions of gene expression among samples before and afte
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/rnaseq_data_setup.sample_cpm_density_filtered.pdf}
-    \caption{
+    \caption[
+        \captionshort{Distributions of gene expression for \gls{RNAseq} samples before and after filtering low expression and non-detected genes.}
+    ]{
         \textbf{Distributions of gene expression for \gls{RNAseq} samples before and after filtering low expression and non-detected genes.}
         Vertical line shows \gls{CPM} = 0.5 threshold.
     }
@@ -859,8 +887,10 @@ These arrays were originally processed in two batches, the effect of which can b
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.pdf}
-    \caption{
-        \textbf{Distribution of raw foreground intensities for 173 \gls{HIRD} array samples.}
+    \caption[
+        \captionshort{Distribution of raw foreground intensities for \gls{HIRD} array samples ($n=173$).}
+    ]{
+        \textbf{Distribution of raw foreground intensities for \gls{HIRD} array samples ($n=173$).}
         Colored by array processing batch.
     }
     \label{fig:hird_array_boxplots_raw}
@@ -874,10 +904,10 @@ These arrays were originally processed in two batches, the effect of which can b
 % Does affine transformation, then glog2
 % An affine transformation is simply a shifting and scaling of the data.
 % The so-called glog2 (short for generalised logarithm) is a function that is like the logarithm (base 2) for large values (large compared to the amplitude of the background noise), but is less steep for smaller values.
-\software{VSN::normalizeVSN} \autocite{huber2002VarianceStabilizationApplied} was used to simultaneously perform 
+\software{VSN::normalizeVSN} \autocite{huber2002VarianceStabilizationApplied} was used for simultaneous 
 background correction, 
 between-array normalisation (affine transformation, centers and scales each array to control for systematic experimental factors), 
-and variance-stabilisation (generalised logarithm, similar to $\log_2$ with better performance for small values) of intensity values, 
+and variance-stabilisation of intensity values (generalised logarithm, similar to $\log_2$ with better performance for small values), 
 resulting in expression values on a $\log_2$ scale.
 As systematic experimental factors might differ between batches, requiring different centering and scaling factors, normalisation was performed per-batch, then the two batches were merged.
 
@@ -898,7 +928,9 @@ Finally, \software{limma::arrayWeightsQuick} \autocite{ritchie2006EmpiricalArray
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/array_data_setup.array_intensity_boxplots.MaxMean.pdf}
-    \caption{
+    \caption[
+        \captionshort{Distribution of per-sample expression estimates after normalisation and collapsing of probes to genes.}
+    ]{
         \textbf{Distribution of per-sample expression estimates after normalisation and collapsing of probes to genes.}
         Colored by array processing batch.
     }
@@ -928,8 +960,10 @@ Given the magnitude of the platform effect, I concluded that the appropriate app
 % https://github.com/matloff/regtools/blob/master/inst/ScalingInPCA.md?s=09
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/compare_phenotype_by_platform.E_pca.pdf}
-    \caption{
-        \textbf{First four standardised \glspl{PC} in the expression data, colored by array batch/\gls{RNAseq} pool (a, c), and timepoint (b, d) and binary response status (e, f).}
+    \caption[
+        \captionshort{First four standardised \glspl{PC} in the expression data, colored by array batch/\gls{RNAseq} pool (a, c), timepoint (b, d), and binary response status (e, f).}
+    ]{
+        \textbf{First four standardised \glspl{PC} in the expression data, colored by array batch/\gls{RNAseq} pool (a, c), timepoint (b, d), and binary response status (e, f).}
         Expression of each gene was standardised across samples within each platform before \gls{PCA}.
     }
     \label{fig:hird_expression_pcs}
@@ -1175,8 +1209,10 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=2]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{
-        \textbf{Gamma prior for $\tau$ (blue) used for \software{bayesmeta} analyses of the day 1 vs. baseline effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
+    \caption[
+        \captionshort{Gamma prior for $\tau$ (blue) used for \software{bayesmeta} analyses of the day 1 versus baseline effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
+    ]{
+        \textbf{Gamma prior for $\tau$ (blue) used for \software{bayesmeta} analyses of the day 1 versus baseline effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
         Genes with small estimates of $\tau < 0.01$ were excluded before distribution fitting.
         Empirical log-normal fit also shown (red).
         Distribution parameters are listed.
@@ -1186,12 +1222,14 @@ The tails of the non-scaled normal fit (black) are light compared to the Cauchy 
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/meta.bayesmeta.priors.coefName_d1.vs.d0.pdf}
-    \caption{
-        \textbf{Normal prior for $\mu$ (blue) used for \software{bayesmeta} analyses of the day 1 vs. baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
+    \caption[
+        \captionshort{Normal prior for $\mu$ (blue) used for \software{bayesmeta} analyses of the day 1 versus baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
+    ]{
+        \textbf{Normal prior for $\mu$ (blue) used for \software{bayesmeta} analyses of the day 1 versus baseline \gls{DGE} effect, compared to the empirical distribution of per-gene frequentist \software{metafor::rma.uni} estimates for $\tau$.}
         Genes with small estimates of $\tau < 0.01$ were excluded before distribution fitting.
         The original non-scaled normal fit is shown (black), as well as a Cauchy fit (red).
         Distribution parameters are listed.
-        Alternative estimate of the Normal standard deviation more robust to outliers using a quantile matching method from \software{DESeq2} \autocite{love2014ModeratedEstimationFold} is also shown.
+        An alternative estimate of the Normal standard deviation more robust to outliers using a quantile matching method from \software{DESeq2} \autocite{love2014ModeratedEstimationFold} is also given.
         In this case, it was comparable to the \gls{ML} estimate from \software{fitdistrplus}.
     }
     \label{fig:hird_dgeMeta_priors_mu}
@@ -1331,7 +1369,9 @@ Their expression clustered into three general patterns:
  
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/plot_dge_eqtl.heatmap_dge.pdf}
-    \caption{
+    \caption[
+        \captionshort{Normalised gene expression for 857 genes differentially expressed between any pair of timepoints ($\text{lfsr} < 0.05$, $\lvert\text{\gls{FC}}\rvert > 1.5$).}
+    ]{
         \textbf{Normalised gene expression for 857 genes differentially expressed between any pair of timepoints ($\text{lfsr} < 0.05$, $\lvert\text{\gls{FC}}\rvert > 1.5$).}
         Rows are genes; columns are samples.
         Genes were standardised within-platform, then hierarchically-clustered by Manhattan distance.
@@ -1374,7 +1414,9 @@ indicating the innate phase of response likely peaks in the first few days.
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.timepoint.pdf}
-    \caption{
+    \caption[
+        \captionshort{Transcriptomic modules up or downregulated between pairs of timepoints.}
+    ]{
         \textbf{Transcriptomic modules up or downregulated between pairs of timepoints.}
         The top ten most significant modules for each contrast are shown.
         Size of circle indicates absolute effect size (\gls{AUC}). 
@@ -1429,25 +1471,31 @@ had unrealistic between-platform heterogeneity estimates of exactly zero (\cref{
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth,page=1]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.effectSizeComparison.pdf}
-    \caption{
+    \caption[
+        \captionshort{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in frequentist random effects meta-analysis using \software{rma.uni} at $\text{\gls{BH} \gls{FDR}} < 0.05$.}
+    ]{
         \textbf{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in frequentist random effects meta-analysis using \software{rma.uni} at $\text{\gls{BH} \gls{FDR}} < 0.05$.}
-    Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
+        Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
     }
     \label{fig:hird_DGE_effectSizeComparisons_rma}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth,page=2]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.effectSizeComparison.pdf}
-    \caption{
+    \caption[
+        \captionshort{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in Bayesian random effects meta-analysis using \software{bayesmeta} at \software{ashr} $\text{\gls{lfsr}} < 0.05$.}
+    ]{
         \textbf{\gls{DGE} effect sizes ($\log_2\text{\gls{FC}}$) estimated in array versus \gls{RNAseq} samples, colored by significance in Bayesian random effects meta-analysis using \software{bayesmeta} at \software{ashr} $\text{\gls{lfsr}} < 0.05$.}
-    Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
+        Genes with day 7 expression associated with binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination} are circled for that contrast.
     }
     \label{fig:hird_DGE_effectSizeComparisons_bayesmeta}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth,page=1]{mainmatter/figures/chapter_02/plot_dge_eqtl.DGE.sobolev2016_d7R.vs.d7NR.tauComparison.pdf}
-    \caption{
+    \caption[
+        \captionshort{Estimates of between-platform heterogeneity $\tau$ from frequentist and Bayesian meta-analysis, for the 58 genes with a significant association between day 7 expression and binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.}
+    ]{
         \textbf{Estimates of between-platform heterogeneity $\tau$ from frequentist and Bayesian meta-analysis, for the 58 genes with a significant association between day 7 expression and binary responder/non-responder status in \textcite{sobolev2016AdjuvantedInfluenzaH1N1Vaccination}.}
         Dashed line is the identity line.
         Estimates from the frequentist method cover a wide range and can be zero.
@@ -1485,7 +1533,9 @@ and at day 7 (LI.M11.0, $\text{\gls{FDR}} = \num{5.541366e-10}$) (\cref{fig:hird
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{mainmatter/figures/chapter_02/compare_dge_eqtl.tmodDotPlot.DGE.TRI.pdf}
-    \caption{
+    \caption[
+        \captionshort{Gene expression modules associated with antibody response (\gls{TRI}).}
+    ]{
         \textbf{Gene expression modules associated with antibody response (\gls{TRI}).}
         Enrichments were performed with all timepoints pooled, and at each timepoint specifically.
         The top ten most significant modules for each contrast are shown.
