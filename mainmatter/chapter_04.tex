@@ -993,7 +993,7 @@ I analysed whole blood \gls{RNAseq} gene expression measured at up to four timep
 week 0 baseline before commencing anti-\gls{TNF} therapy, and weeks 14, 30 and 54 after commencing anti-\gls{TNF} therapy.
 % \todo{Some primary non-responders have loss of response samples. Not sure why.}
 After quality control, expression data was available for \num{15584} genes and 814 samples.
-These samples come from 324 patients, whose characteristics are shown in \cref{tab:multipants_table1}.
+These samples come from 324 patients, whose baseline characteristics are shown in \cref{tab:multipants_table1}.
 The proportion of primary non-responders is high (\SI[round-precision=1]{43.8}{\percent}) compared to the overall proportion in the \gls{PANTS} cohort (\SI[round-precision=1]{23.8}{\percent} \autocite{kennedy2019PredictorsAntiTNFTreatment}).
 This is due to sample selection for \gls{RNAseq} to balance the sample size for each combination of drug and primary response status.
 
@@ -1049,7 +1049,7 @@ The new modules that were most upregulated in the pooled analysis after adjustme
 such as MHC-TLR7-TLR8 cluster (LI.M146), antigen presentation (LI.M71, LI.M95.0), and myeloid cell enriched receptors and transporters (LI.M4.3).
 
 For downregulated modules before adjustment, I observed infliximab-specific effects for \gls{NK} cell (LI.M7.2) and T cell (LI.M7.0, LI.M7.1) modules.
-Adalimumab-specific effects were observed for plasma cell, B cell and immunoglobulin modules (LI.M156.0, LI.M156.0, LI.S3), and cell cycle and transcription modules (LI.M4.0, LI.M4.1).
+Adalimumab-specific effects were observed for plasma cell, B cell and immunoglobulin modules (LI.M156.0, LI.M156.1, LI.S3), and cell cycle and transcription modules (LI.M4.0, LI.M4.1).
 After adjustment, the significance of infliximab-specific modules was reduced, 
 but the significance of adalimumab-specific modules and the corresponding interaction effects was increased.
 % \todo{Carl's comment here: What happens to the significance of cell-type specific gene-sets when you condition on that cell-type. Do they uniformly decrease? Do you think this could mean that these signals (and others) are driven by differences in cell composition, but that you have cell composition imperfectly estimated and thus are not fully correcting for variance in cell composition?}
@@ -1888,7 +1888,7 @@ so it remains to be seen if such associations will be replicated in other cohort
 Large upcoming datasets with drug response phenotypes such as the 1000IBD project \autocite{imhann20191000IBDProjectMultiomics} will be invaluable for attempted replication of the associations found in \gls{PANTS}.
 Expression differences between responders and non-responders were more distinct at timepoints after the induction period.
 I found type I interferon genes were more upregulated post-treatment in non-responders,
-going against the general trend of magnified transcriptomic change in responders,
+going against the general trend of magnified transcriptomic change in responders.
 Given that type I interferon expression in blood has also been associated with anti-\gls{TNF} response in \gls{RA} patients,
 there may be an opportunity to consider the shared biology of anti-\gls{TNF} response in \gls{IBD} and \gls{RA}.
 % and other \glspl{IMID} treated with anti-\gls{TNF} drugs.
