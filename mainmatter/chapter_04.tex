@@ -512,7 +512,7 @@ so it was difficult to justify excluding all variables with lower median varianc
 Consequently, all non-null variables in \cref{fig:multipants_varPart} were selected as predictors in downstream models apart from \enquote{Ever\_Immunomodulator} 
 (whether the patient had ever had immunomodulator treatment), 
 as that variable had both low median variance explained and was correlated with baseline immunomodulator use.
-This is a crude approach, but the sample size is large compared to number of \glspl{df} lost by including predictors that may not be relevant for some genes.
+This is a crude approach, but the sample size is large compared to the number of \glspl{df} lost by including predictors that may not be relevant for some genes.
 % TODO: check robustness of DGE results to predictor set
 
 \begin{figure}
@@ -587,7 +587,7 @@ Like the variance components analysis models, these \gls{DGE} models were linear
 % \end{lstlisting}
 %
 \begin{equation}
-y = 0 + \beta_{trd} G_{trd} + \sum_{}^{9}{\beta_Z Z} + (\sum_{}^{5}{\beta_C C}) + u + v + \epsilon
+y = 0 + \beta_{G_{trd}} G_{trd} + \sum_{}^{9}{\beta_Z Z} + (\sum_{}^{5}{\beta_C C}) + u + v + \epsilon
 \label{eq:multiPANTS_dge_model}
 \end{equation}
 where:
@@ -622,7 +622,7 @@ most predictors above are modelled as fixed effects.
 Since \gls{RNAseq} plate and patient are nuisance variables with a large number of levels, they are modelled as random intercepts.
 A total of four sets of per-gene models were fit,
 with and without the cell proportion terms $\sum_{}^{5}{\beta_C C}$,
-and replacing $\beta_{trd} G_{trd}$ (separate drug models) with $\beta_{tr} G_{tr} + \beta_d d$ (pooled drug models) or not.
+and replacing $\beta_{G_{trd}} G_{trd}$ (separate drug models) with $\beta_{G_{tr}} G_{tr} + \beta_d d$ (pooled drug models) or not.
 % https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html#reml-vs.ml
 % You should use ML when comparing models that differ in their fixed effects
 % [...]
@@ -708,7 +708,7 @@ A basis matrix \autocite{perperoglou2019ReviewSplineFunction} was computed with 
 which is a matrix with 3 columns, each column being a transformation of the input, study day.
 The columns are fit in the regression model in place of study day to allow for non-linear effects of study day on expression.
 The model form used was as in \cref{eq:multiPANTS_dge_model},
-except with $\beta_{trd} G_{trd}$
+except with $\beta_{G_{trd}} G_{trd}$
 replaced by $\beta_r r + \sum_{}^{3}{\beta_b b} + \sum_{}^{3}{\beta_{rb} rb} + \beta_d d$,
 where $r$ is response status,
 $d$ is drug,
@@ -992,7 +992,7 @@ To define transcriptomic differences between primary responders and non-responde
 I analysed whole blood \gls{RNAseq} gene expression measured at up to four timepoints per patient:
 week 0 baseline before commencing anti-\gls{TNF} therapy, and weeks 14, 30 and 54 after commencing anti-\gls{TNF} therapy.
 % \todo{Some primary non-responders have loss of response samples. Not sure why.}
-After quality control, expression data was available for \num{15584} genes and 814 samples.
+After quality control, expression data was available for \num{15511} genes and 814 samples.
 These samples come from 324 patients, whose baseline characteristics are shown in \cref{tab:multipants_table1}.
 The proportion of primary non-responders is high (\SI[round-precision=1]{43.8}{\percent}) compared to the overall proportion in the \gls{PANTS} cohort (\SI[round-precision=1]{23.8}{\percent} \autocite{kennedy2019PredictorsAntiTNFTreatment}).
 This is due to sample selection for \gls{RNAseq} to balance the sample size for each combination of drug and primary response status.
@@ -1856,8 +1856,10 @@ there is no guarantee that simply excluding samples labelled as \gls{LOR} would 
 % A worst case hypothetical: assume that there are many more LOR samples in the PR group, since PNR precludes LOR. Differences observed between PR and PNR could just be due to dosing.
 %
 The best solution may to explicitly model measured serum drug levels as a covariate, where like cell proportions, it would likely act as a mediator of some associations with response.
-% Overall 319/840 missing corresponding drug levels.
-I did not do this as data missingness would reduce the sample size by about \SI{40}{\percent} in this study.
+% Of the 246 patients with a week 14 sample, there are 20 patients with no drug level measured at week 14.
+% However, there are other patients that have no week 14 sample at all.
+% Which in total cuts out 196/814 samples.
+I did not do this as data missingness would reduce the sample size by about \SI{24}{\percent} in this study.
 Finding a suitable normalisation of drug level for use in pooled drug analyses would also be challenging.
 Infliximab and adalimumab have differing pharmacokinetics; infliximab has higher peak concentrations, higher peak-trough ratios, and shorter half-life.
 The same serum concentrations of infliximab and adalimumab also have different biological effects due to differing therapeutic windows
